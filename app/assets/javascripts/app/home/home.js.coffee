@@ -1,9 +1,11 @@
-App.controller "HomeController", ["$scope", "Home", "Wish", ($scope, Home, Wish) ->
+App.controller "HomeController", ["$scope", "$rootScope", "Home", "Wish", ($scope, $rootScope, Home, Wish) ->
 
   Home.query().then (home) ->
     $scope.home = home
 
     $scope.home.financedIncomes = []
+
+    $rootScope.percentage = home.percentage
 
     for fi in [1..home.totallyFinancedIncomes]
       $scope.home.financedIncomes.push "#{fi}. Grundeinkommen mit 12.000€ per Crowdfunding finanziert!"
