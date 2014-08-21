@@ -826,8 +826,8 @@ ol.commentlist li:first-child {
     background: #fafafa;
 	border: 1px solid #ddd;
     color: #888;
-    -webkit-box-shadow: :inset 0 -1px 0 0 rgba(0,0,0,0.06);
-    box-shadow: :inset 0 -1px 0 0 rgba(0,0,0,0.06);
+    -webkit-box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.06);
+    box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.06);
     margin: -70px 0 0 100px;
     padding: 19px 22px 22px;
 }
