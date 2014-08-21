@@ -165,7 +165,6 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
 
 
     $scope.removeWish = (user_wish) ->
-      alert user_wish.id
       new Wish(
         id: user_wish.id
         forUser: 'user_'

@@ -18,7 +18,7 @@ class Api::UserWishesController < ApplicationController
 
   def update
     #current_user = User.first
-    current_user.user_wishes.where(wish_id:params[:id]).first.update_attributes(story: params[:story])
+    current_user.user_wishes.where(id:params[:id]).first.update_attributes(story: params[:story])
     render json: {:success => true}
   end
 
