@@ -1,6 +1,8 @@
 **.orig
 *.rbc
 .bundle
+config/initializers/mailjet.rb
+config/environments/development.rb
 capybara-*.html
 coverage/
 db/*.sqlite3
