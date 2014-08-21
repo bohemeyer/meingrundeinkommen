@@ -20,6 +20,15 @@ Rails.application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.delivery_method = :mailjet
 
+  config.action_mailer.smtp_settings = {
+   :address              => "",
+   :port                 => 587,
+   :user_name            => '',
+   :password             => '',
+   :authentication       => 'plain',
+   :enable_starttls_auto => false
+ }
+
   # use gmail in dev mode, sendgrid will be used in production
 
   config.assets.js_compressor = Uglifier.new(mangle: false)
