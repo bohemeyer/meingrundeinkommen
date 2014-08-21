@@ -1,0 +1,7 @@
+config:
+  from_address: micha@mein-grundeinkommen.de
+
+carriers:
+  vodafone-germany:
+    name: "Vodafone (Germany)""
+    value: "@vodafone-sms.de"

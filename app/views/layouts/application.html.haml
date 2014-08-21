@@ -1,0 +1,182 @@
+!!!
+/[if IE 8] <html class="ie ie8" ng-app="grundeinkommen">
+/[if IE 9] <html class="ie ie9" ng-app="grundeinkommen">
+/ [if gt IE 9]><!
+%html{"ng-app" => "grundeinkommen"}
+  / <![endif]
+  %head
+    %title Grundeinkommen
+    %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
+    / Google Fonts
+    /%link{href: "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800", rel: "stylesheet", type: "text/css"}/
+    //%link{href: "http://fonts.googleapis.com/css?family=Oswald:400,300,700", rel: "stylesheet", type: "text/css"}/
+    /%link{href: "http://fonts.googleapis.com/css?family=Lato:300,400,700", rel: "stylesheet", type: "text/css"}/
+
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+    / Favicons
+    %link{href: "assets/ico/favicon.ico", rel: "shortcut icon"}/
+    %link{href: "assets/ico/apple-touch-icon.png", rel: "apple-touch-icon"}/
+    %link{href: "assets/ico/apple-touch-icon-72.png", rel: "apple-touch-icon", sizes: "72x72"}/
+    %link{href: "assets/ico/apple-touch-icon-114.png", rel: "apple-touch-icon", sizes: "114x114"}/
+    %link{href: "assets/ico/apple-touch-icon-144.png", rel: "apple-touch-icon", sizes: "144x144"}/
+
+  %body.home-3{"ng-controller" => "AppCtrl"}
+    .wrap
+      / Header Start
+      %header#header{"ng-controller" => "HeaderCtrl"}
+        / Header Top Bar Start
+        / .top-bar
+        /   .slidedown.collapse
+        /     .container
+        /       .phone-email.pull-left
+        /         %a
+        /           %i.icon-phone
+        /           Call Us : +880 41 723 272
+        /           %span{"ng-show" => "main.current_user"}
+        /             %i.icon-envelope
+        /             Email : {{main.current_user.name}} ({{main.current_user.email}})
+        /       .pull-right
+        /         %ul.social.pull-left
+        /           %li.facebook
+        /             %a{href: "#"}
+        /               %i.icon-facebook
+        /           %li.twitter
+        /             %a{href: "#"}
+        /               %i.icon-twitter
+        /           %li.dribbble
+        /             %a{href: "#"}
+        /               %i.icon-dribbble
+        /           %li.linkedin
+        /             %a{href: "#"}
+        /               %i.icon-linkedin
+        /           %li.rss
+        /             %a{href: "#"}
+        /               %i.icon-rss
+        /         #search-form.pull-right
+        /           %form{action: "#", method: "get"}
+        /             %input.search-text-box{type: "text"}/
+        / Header Top Bar End
+        / Main Header Start
+        .main-header
+          .container
+            / TopNav Start
+            .topnav.navbar-header
+              %a.navbar-toggle.down-button{"data-target" => ".slidedown", "data-toggle" => "collapse"}
+                %i.icon-angle-down.icon-current
+            / TopNav End
+            / Logo Start
+            .logo.pull-left{:style=>'margin-top:-5px;'}
+
+              %a{href: "/", :style =>'font-weight:bold;'}
+                = image_tag 'logo.png', :height => 95
+
+
+            / Logo End
+            / Mobile Menu Start
+            .mobile.navbar-header
+              %a.navbar-toggle{"data-toggle" => "collapse", href: ".navbar-collapse"}
+                %i.icon-reorder.icon-2x
+            / Mobile Menu End
+            / Menu Start
+            %nav.collapse.navbar-collapse.menu
+              %ul.nav.navbar-nav.sf-menu
+                %li{id: "{{getStatus('/')}}"}
+                  %a{href: "/"}
+                    Start
+                %li{id: "{{getStatus('/info')}}"}
+                  %a{href: "/info"}
+                    So funktioniert's
+                %li{id: "{{getStatus('/support')}}"}
+                  %a{href: "/support", style: "padding-bottom: 25px;"}
+                    Unterstützen!
+                    .progress{:style=>'height:6px'}
+                      .progress-bar(aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: {{percentage}};font-size:6px;padding:0px;")
+
+
+                %li{"ng-hide" => "security.isAuthenticated()", :id => "{{getStatus('/register')}}"}
+                  %a{href: "/register"} Mitmachen
+
+                %li{"ng-show" => "security.isAuthenticated()", :id => "{{getStatus('/menschen/'+security.currentUser.id)}}"}
+                  %a.sf-with-ul.with_avatar{href: "/menschen/{{security.currentUser.id}}"}
+                    -#%i.icon-user
+                    .testimonial-image.pull-right
+                      %img{'ng-src' => "{{security.currentUser.avatar.avatar.url}}"}
+                    {{security.currentUser.name}}
+                    %span.sf-sub-indicator
+                      %i.icon-angle-down
+                  %ul
+                    %li
+                      %a.sf-with-ul{href: "/menschen/{{security.currentUser.id}}"} Profil anzeigen
+                    %li
+                      %a.sf-with-ul{href: "/menschen/{{security.currentUser.id}}?edit_profile=true"}
+                        %i.icon-pencil
+                        Profil bearbeiten
+                    %li
+                      %a.sf-with-ul{href: "#", "ng-click"=>"security.logout()"}
+                        %i.icon-power-off
+                        Abmelden
+
+                %li{"ng-hide" => "security.isAuthenticated()", :id => "{{getStatus('/login')}}"}
+                  %a{href: "/login"} Einloggen
+
+
+            / Menu End
+        / Main Header End
+      / Header End
+      / Content Start
+      #main.flip{"ng-view" => ""}
+      / Content End
+      / Footer Start
+      %footer#footer
+        / Footer Top Start
+        .footer-top
+          .container
+            .row
+              %section.col-lg-6.col-md-6.col-xs-12.col-sm-6.footer-one
+                %h3 Über das Projekt
+                %p
+                  "Mein Grundeinkommen" sammelt per Crowdfunding Geld für ein Bedingungsloses Grundeinkommen. Immer wenn 12.000€ zusammen sind, werden sie an eine Person ausgelost. Indem du deinen Internet-Einkauf über diese Seite beginnst, fließt eine Provision des Onlineshops direkt in den Grundeinkommens-Topf.
+              / %section.col-lg-3.col-md-3.col-xs-12.col-sm-3.footer-two
+              /   %h3 Twitter Stream
+              /   %ul#tweets
+              / %section.col-lg-3.col-md-3.col-xs-12.col-sm-3.footer-three
+              /   %h3 Contact Us
+              /   %ul.contact-us
+              /     %li
+              /       %i.icon-map-marker
+              /       %p
+              /         %strong Address:
+              /         250 Sher-E- Bangla Road,
+              /         %br/
+              /         Khulna, Bangladesh
+              /     %li
+              /       %i.icon-phone
+              /       %p
+              /         %strong Phone:
+              /         +880 41 723 272
+              /     %li
+              /       %i.icon-envelope
+              /       %p
+              /         %strong Email:
+              /         %a{href: "mailto:info@fifothemes.com"} info@fifothemes.com
+              / %section.col-lg-3.col-md-3.col-xs-12.col-sm-3.footer-four
+              /   %h3 Flickr Photostream
+              /   %ul#flickrfeed.thumbs
+        / Footer Top End
+        / Footer Bottom Start
+        .footer-bottom
+          .container
+            .row
+              .col-lg-6.col-md-6.col-xs-12.col-sm-6
+                \© Copyright 2014 by
+                = succeed "." do
+                  %a{href: "/impressum"} Verein "Mein Grundeinkommen"
+              .col-lg-6.col-md-6.col-xs-12.col-sm-6
+
+        / Footer Bottom End
+      / Scroll To Top
+      %a.scrollup{href: "#"}
+        %i.icon-angle-up
+    / Wrap End

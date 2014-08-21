@@ -1,0 +1,102 @@
+<div class="container margin-top-70">
+
+<div ng-include src="registered"></div>
+
+<div ng-hide="registered">
+
+ <div class="row">
+    <div class="col-md-12">
+
+  <div class="row">
+    <div class="col-md-12 text-center">
+
+      <div ng-show="just_confirmed">
+
+        <h2 style="margin-bottom:15px;">Super, E-Mail wurde bestätigt!</h2>
+
+        <i class="icon-check" style="color: #ddd;font-size: 150px;text-shadow: 1px 1px 0 black;"></i>
+      </div>
+
+      <h1 style="margin-bottom:0px">Schnell einloggen!</h1>
+      <h4 ng-hide="just_confirmed">Oder: <a href="/register">Neu hier</a>?</h4>
+    </div>
+    <div class="clearfix"></div>
+  </div>
+  <div class="row">
+      <div class="col-md-8 col-md-offset-2 col-xs-12 col-lg-6 col-lg-offset-3 col">
+
+
+
+
+                <form class="form-horizontal margin-top-30" ng-submit="login()" role="form" name="LoginForm" novalidate>
+
+
+              <alert ng-show="LoginForm.$error.serverMessage" type="warning">{{LoginForm.$error.serverMessage}}
+                <a href="#" ng-click="resend_link()" ng-show="show_resend_link">
+                  Bestätigungsmail erneut senden
+                </a>
+                <i ng-show="resend_status">{{resend_status}}</i>
+              </alert>
+
+              <div class="form-group" ng-class="{ 'has-error' : (LoginForm.email.$invalid && !LoginForm.email.$pristine) || (LoginForm.email.$error.serverMessage && !LoginForm.email.$pristine) }">
+                <label for="inputEmail3" class="col-sm-2 control-label">E-Mail</label>
+                <div class="col-sm-10 text-left">
+                  <input name="email" ng-model="login_user.email" type="email" class="form-control input-large" id="inputEmail3" placeholder="E-Mail-Adresse" required>
+                  <p ng-show="(LoginForm.email.$invalid || LoginForm.email.$error.required) && !LoginForm.email.$pristine" class="help-block">Bitte gib deine E-Mail-Adresse an.</p>
+                  <p ng-show="LoginForm.email.$error.serverMessage" class="help-block">{{LoginForm.email.$error.serverMessage}}</p>
+
+                </div>
+              </div>
+
+          <div ng-hide="forgot_pw">
+
+              <div class="form-group" ng-class="{ 'has-error' : LoginForm.password.$invalid && !LoginForm.password.$pristine }">
+                <label for="inputPassword3" class="col-sm-2 control-label">Passwort</label>
+                <div class="col-sm-10 text-left">
+                  <input name="password" ng-model="login_user.password" type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-minlength="4" required>
+                  <p ng-show="(LoginForm.password.$error.minlength || LoginForm.password.$error.required) && !LoginForm.password.$pristine" class="help-block">Bitte gibt dein Passwort ein.</p>
+                </div>
+              </div>
+              <div class="form-group text-left">
+                <div class="col-sm-offset-2 col-sm-10 text-left">
+                  <div class="checkbox">
+                    <label>
+                      <input name="remember_me" ng-model="login_user.remember_me" type="checkbox" > Eingeloggt bleiben?
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-special btn-color" data-ui-ladda="progress" ng-disabled="LoginForm.$invalid || submitted"><div class="spinner" ng-show="submitted">
+                      <div class="bounce1"></div>
+                      <div class="bounce2"></div>
+                      <div class="bounce3"></div>
+                    </div>
+                  <span ng-hide="submitted">Los jetzt!</span>
+                  </button>
+                  &nbsp;&nbsp;<a href="#" ng-click="forgot_pw_open()">Passwort vergessen?</a>
+                </div>
+              </div>
+
+          </div>
+
+            <div ng-show="forgot_pw">
+              <a href="#" ng-click="cancel_forgot_pw()" class="btn-grey btn-small btn-pad">Zurück</a>
+              <button type="button" ng-click="reset_password()" class="btn btn-special btn-color" ng-disabled="LoginForm.email.$invalid"><div class="spinner" ng-show="submitted_reset">
+                      <div class="bounce1"></div>
+                      <div class="bounce2"></div>
+                      <div class="bounce3"></div>
+                    </div>
+                    <span ng-hide="submitted_reset">Passwort zurücksetzen</span>
+                  </button>
+            </div>
+
+            </form>
+
+
+
+
+    <div class="clearfix"></div>
+</div>
+</div>

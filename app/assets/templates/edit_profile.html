@@ -1,0 +1,61 @@
+<div class="modal-header">
+    <h3 class="modal-title">Profil bearbeiten</h3>
+</div>
+<div class="modal-body">
+
+  <div class="row">
+      <div class="col-md-12 col">
+
+            <form class="form-horizontal" ng-submit="update_profile()" role="form" name="RegisterForm" novalidate>
+
+              <div class="form-group" ng-class="{ 'has-error' : RegisterForm.name.$invalid && !RegisterForm.name.$pristine }">
+                <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-10 text-left">
+                  <input name="name" ng-model="register_user.name" type="text" class="form-control" id="inputEmail3" placeholder="Vorname oder Nickname (öffentlich)" maxlength="40" required ng-minlength="2">
+                  <p ng-show="(RegisterForm.name.$error.minlength || RegisterForm.name.$error.required) && !RegisterForm.name.$pristine" class="help-block">Der Name ist erforderlich und muss mindestens 2 Zeichen lang sein.</p>
+
+                </div>
+              </div>
+              <div class="form-group" ng-class="{ 'has-error' : !RegisterForm.email.$pristine && (RegisterForm.email.$error.serverMessage || RegisterForm.email.$invalid) }">
+                <label for="inputEmail3" class="col-sm-2 control-label">E-Mail</label>
+                <div class="col-sm-10 text-left">
+                  <input name="email" ng-model="register_user.email" type="email" class="form-control" id="inputEmail3" placeholder="E-Mail-Adresse" required>
+                  <p ng-show="(RegisterForm.email.$invalid || RegisterForm.email.$error.required) && !RegisterForm.email.$pristine" class="help-block">Bitte gib eine gültige E-Mail-Adresse an</p>
+                  <p ng-show="RegisterForm.email.$error.serverMessage" class="help-block">{{RegisterForm.email.$error.serverMessage}}</p>
+
+                </div>
+
+              <div class="form-group text-left">
+                <div class="col-sm-offset-2 col-sm-10 text-left">
+                  <div class="checkbox">
+                    <label>
+                      <input name="newsletter" ng-model="register_user.newsletter" type="checkbox"> Bitte informiert mich immer wenn wieder ein Grundeinkommen ausgelost wird oder bei wichtigen Änderungen auf der Seite (kein Spam, max. 1x pro Woche, eher seltener). Jederzeit widerrufbar.
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-special btn-color" data-ui-ladda="progress" ng-disabled="RegisterForm.$invalid || submitted" data-style="expand-left"><div class="spinner" ng-show="submitted">
+                      <div class="bounce1"></div>
+                      <div class="bounce2"></div>
+                      <div class="bounce3"></div>
+                    </div>
+                  <span ng-hide="submitted">Änderungen speichern</span>
+                  </button>
+                </div>
+              </div>
+
+            </form>
+
+
+    <div class="clearfix"></div>
+
+  </div>
+</div>
+</div>
+
+<!-- <div class="modal-footer">
+    <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <button class="btn btn-warning" ng-click="cancel()">Abbrechen</button>
+</div> -->

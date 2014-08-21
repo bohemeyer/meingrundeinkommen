@@ -1,0 +1,74 @@
+Steuerbar testen mit einzelnen Usern
+	 - needs landingpage
+	 - datenschutz
+
+community online stellen auf neu.mein-grundeinkommen.de
+alte seite lassen. statt form, button führt zu mein-grundeinkommen.de/register
+
+	- need datenschutz, impressum, ssl
+
+-> emails stück für stück an menschen rausschicken
+	- needs mailjet
+
+
+mailing:
+	- english below
+	- neue community online! Sag öffentlich, was du mit einem Grundeinkommen tun würdest
+	- wann verlosung, 2 bge's zusammen
+	- steuerbar -> link zur erklärungsseite
+	- wenn jede 1€ gibt, haben wir 2 weitere grundeinkommen zusammen. -> verdoppelt chancen, mehr repräsentativ
+	- wer würde alles zur verlosungsparty kommen? -> fb link
+	- people who don't live in germany: click here and vote where in which country we launch the next campaign
+
+neu.mein-grundeikommen.de
+
+	Register Form:
+
+		- Vorname/Nick
+		- email
+		- passwort
+		[  ] Datenschutz gelesen und akzeptiert (PFLICHT)
+		[  ] Bitte informiert mich immer wenn wieder ein Grundeinkommen ausgelost wird oder bei wichtigen Änderungen auf der Seite (kein Spam, max. 1x pro Woche, eher seltener). Jederzeit widerrufbar
+
+
+	PROFIL
+
+		1. Was würdest du mit Grundeinkommen tun?
+		    if initial_wishes in cookie numeric && wish.count = 0-> schon anlegen (frontend)
+		    if initial_wishesin cookie numberic && wish.count > 0 -> ins textfeld eintragen
+
+		    if initial wishes from before (saved in user)
+
+			    -> create 100% exact matching (delete from initwishes)
+
+			    -> wishes with no matches
+			    als suggestion anzeigen + Ja, das würde ich (add) + Nee (delete both from initial_wishes)
+
+			    -> wishes with good matching (order by count desc, limit 2)
+			    1. match als suggestion anzeigen mit Bild
+			    "Suse und 75 weitere" würden ... + Ich auch (add + delete from initwishes) + Nee (show 2nd match & repeat) ODER: Nee (show initwish und dann wie -> wishes with no matches)
+
+
+		2. Gesicht zeigen!
+
+		3. Unterstützen (button zu startnext mit spendenbar - oder - Unterstützen ohne zu bezahlen! So funktionierts: Video | Button: "Jetzt kostenlos die Steuerbar installieren"
+
+		4. Wer bist du?
+		   defaults auswählbar machen
+		   eigene states hinzufügen
+		   häkchen: unchecked default - auf meinem Profil anzeigen
+		5. Am Gewinnspiel teilnehmen
+		   Das Gewinnspiel startet hier (am 01.09.) / (in den nächsten Tagen)
+		   Auslosung am 18.9.
+		   Warum erst am 1.9. -> rechtliches, abschätzbar wieviel zusammen kommt
+		   Wer kann teilnehmen?
+		   Wie wird verlost?
+
+		   ACHTUNG: HARTZ-4-HINWEIS
+
+		   Für alle, die noch keine Newsletter-check haben:
+		   [  ] Bitte informiert mich sobald die Verlosung beginnt und immer wenn wieder ein Grundeinkommen ausgelost wird oder bei wichtigen Änderungen auf der Seite (kein Spam, max. 1x pro Woche, eher seltener). Jederzeit widerrufbar
+
+SOBALD halbwegs CONTENT da is:
+- alte Seite offline, neue auf die hauptdomain, neu.meinbge umleiten auf hauptdomain
+
