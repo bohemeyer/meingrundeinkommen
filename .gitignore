@@ -5,6 +5,7 @@ config/initializers/mailjet.rb
 config/environments/development.rb
 capybara-*.html
 coverage/
+public/uploads/*
 db/*.sqlite3
 log
 pickle-email-*.html
