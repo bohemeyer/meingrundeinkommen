@@ -14,3 +14,7 @@ rerun.txt
 spec/tmp
 tmp
 vendor/bundle
+
+config/environments/development.rb
+
+config/initializers/mailjet.rb
