@@ -6,8 +6,14 @@ angular.module("content", ['ng-breadcrumbs'])
     .when "/info",
       templateUrl: "/assets/info.html"
       label: "So funktioniert's"
+    .when "/crowdbar",
+      templateUrl: "/assets/crowdbar.html"
+      label: "Die CrowdBar"
+    .when "/boost",
+       redirectTo: "/crowdbar"
     .when "/support",
-      templateUrl: "/assets/support.html"
-      label: "Unterstützen"
+      redirectTo: "/crowdbar"
+
+
 
 ]
