@@ -2658,3 +2658,70 @@ footer a,.contact-box:hover,#options li a.selected,header .top-bar,header .top-b
     top: -50px;
     height: 0px;
     }
+
+
+.suggestion_entry {
+     border-bottom: 1px dotted #cccccc;
+     min-width: 340px;
+     text-align: left;
+     cursor: pointer;
+     font-size: 20px;
+}
+
+.suggestion_entry > .btn-color {
+     margin-left: 10px;
+     margin-top: 4px;
+}
+
+.dropdown-menu a.suggestion_entry {
+     white-space: normal;
+}
+
+.dropdown-menu > li > a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    }
+
+.dropdown-menu > .active > a.suggestion_entry, .dropdown-menu > .active > a.suggestion_entry:hover {
+     background: none repeat scroll 0% 0% #66cc99;
+}
+
+a.suggestion_entry > .icon {
+    display: none;
+}
+a.suggestion_entry > .icon2 {
+    display: inline;
+}
+
+a.suggestion_entry:hover > .icon, .active > a.suggestion_entry > .icon {
+    display: inline;
+}
+a.suggestion_entry:hover > .icon2, .active > a.suggestion_entry > .icon2 {
+    display: none;
+}
+
+.listbox > li.suggestions {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #eee;
+    background-image: none;
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    font-size: 19px;
+    font-weight: bold;
+    min-height: 25px;
+    margin-top: -2px;
+    min-height: 25px;
+    padding-bottom: 5px;
+    padding-left: 24px;
+    padding-top: 5px;
+}
+
+.listbox li .edit_button {
+    opacity: 0.1;
+}
+.listbox li:hover .edit_button {
+    opacity: 1;
+}

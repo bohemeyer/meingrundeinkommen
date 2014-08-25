@@ -27,8 +27,8 @@ angular.module("grundeinkommen").factory "Security", [
 
       # Logout the current user and redirect
       logout: () ->
+        service.currentUser = null
         Auth.logout().then ((old_user) ->
-          service.currentUser = null
           return
         ), (error) ->
           console.log erro
@@ -45,6 +45,7 @@ angular.module("grundeinkommen").factory "Security", [
           service.currentUser = user unless user.error
           return
         ), (error) ->
+          service.currentUser = false
           console.log error
 
       is_own_profile: (profile_id) ->

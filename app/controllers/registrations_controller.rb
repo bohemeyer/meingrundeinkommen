@@ -15,7 +15,7 @@ class RegistrationsController < Devise::RegistrationsController
     if @user.update_attributes(account_update_params)
       render json: @user
     else
-      render json: @user.errors
+      render json: @user.errors, status: 403
     end
   end
 

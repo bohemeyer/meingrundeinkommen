@@ -36,6 +36,7 @@ Rails.application.routes.draw do
       member do
         get :states
         get :wishes
+        get :suggestions
       end
     end
     resource :homepages

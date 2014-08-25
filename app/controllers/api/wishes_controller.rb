@@ -61,6 +61,7 @@ class Api::WishesController < ApplicationController
         wish_id: wish.id,
         wish_url: Rack::Utils.escape(wish.text),
         wish: wish.conjugate,
+        text: wish.text,
         me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false),
         user:UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar)
       }

@@ -8,7 +8,7 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
       controller: "ProfileViewController"
       label: "Profil"
       resolve:
-        user: [
+        thisuser: [
           "User"
           "$route"
           (User, $route) ->
@@ -21,7 +21,8 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
 .controller "ProfileViewController", [
   "$scope"
   "Security"
-  "user"
+  "thisuser"
+  "User"
   "Wish"
   "$upload"
   "$http"
@@ -31,7 +32,7 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
   "$modal"
   "$routeParams"
 
-  ($scope, Security, user, Wish, $upload, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams) ->
+  ($scope, Security, user, UserModel, Wish, $upload, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams) ->
 
     $scope.user = user
     $scope.default_avatar = if user.avatar.avatar.url == '/assets/team/team-member.jpg' then true else false
@@ -61,6 +62,12 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
       if $cookies.initial_wishes && $cookies.initial_wishes != ''  && $cookies.initial_wishes != ';'
         $scope.wish_form.new_wish = $cookies.initial_wishes.replace(';','').replace(';','')
         $cookies.initial_wishes = '' if $scope.user_wishes.length > 0
+
+
+    UserModel.suggestions(user.id).then (suggestions) ->
+      $scope.suggestions = suggestions
+      console.log suggestions
+
 
     $scope.new_name = user.name
 
@@ -100,11 +107,14 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
       )
       return
 
-    EditProfileCtrl = ($scope, $modalInstance, $route) ->
+    EditProfileCtrl = ($scope, $modalInstance, $route, $location) ->
 
       $scope.register_user = user
+      $scope.delete_account_check = false
 
       $scope.update_profile = ->
+        $scope.submitted = true
+        $scope.serverMessage = false
         input =
           user: $scope.register_user
 
@@ -112,8 +122,23 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
         .success((data, status, headers, config) ->
           $modalInstance.dismiss "done"
           $route.reload()
+          $scope.submitted = false
         ).error (data, status, headers, config) ->
+          $scope.serverMessage = data.email
+          $scope.submitted = false
           return
+
+      $scope.delete_account = ->
+        input =
+          user:
+            id: user.id
+        $http.delete("/users.json", input)
+        .success( ->
+          Security.logout()
+          $modalInstance.dismiss "done"
+          $location.path("/")
+        )
+        return
 
       $scope.ok = ->
         $modalInstance.dismiss "done"
@@ -125,6 +150,27 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
 
     if $routeParams['edit_profile']
       $scope.open()
+
+
+
+    $scope.getSuggestions = (q) ->
+      Wish.suggestions(q).then (wishes) ->
+        r = []
+        angular.forEach wishes, (item) ->
+          r.push item.text
+        return r
+
+    $scope.me_too = (wish) ->
+      new Wish(
+        forUser: 'user_'
+        wish_id: wish.id
+      ).create()
+      .then(
+        $scope.suggestions.splice($scope.suggestions.indexOf(wish), 1)
+        $scope.user_wishes.push
+          text: wish.text
+      )
+
 
     $scope.addWish = ->
 
@@ -138,7 +184,7 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
         story: $scope.wish_form.story
       ).create()
       .then(
-        $scope.user_wishes.push
+        $scope.user_wishes.unshift
           text: $scope.wish_form.new_wish
           story: $scope.wish_form.story
         $scope.wish_form.new_wish = ""
