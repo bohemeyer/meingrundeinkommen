@@ -6,12 +6,12 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
   ($routeProvider, $locationProvider) ->
     $locationProvider.html5Mode true
     $routeProvider
-    .when "/",
+    .when "/start",
       templateUrl: "/assets/home.html"
       controller: "HomeController"
       label: "Startseite"
     .otherwise
-      redirectTo: "/"
+      redirectTo: "/start"
 ]
 
 
