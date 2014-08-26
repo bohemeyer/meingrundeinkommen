@@ -14,7 +14,15 @@ rerun.txt
 spec/tmp
 tmp
 vendor/bundle
-
 config/environments/development.rb
-
 config/initializers/mailjet.rb
+lib/tasks/data.rake
+public/startnext.json
+plan
+solr/
+config/sunspot.yml
+lib/tasks/data.rake
+
+plan
+
+public/startnext.json
