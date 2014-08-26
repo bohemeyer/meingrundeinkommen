@@ -22,7 +22,4 @@ plan
 solr/
 config/sunspot.yml
 lib/tasks/data.rake
-
-plan
-
-public/startnext.json
+lib/signups.rake
