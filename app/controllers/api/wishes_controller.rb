@@ -9,7 +9,26 @@ class Api::WishesController < ApplicationController
     wish = Wish.create(params.permit(:text)) if !wish
     user_wish = current_user.user_wishes.where(wish:wish)
     user_wish = current_user.user_wishes.create wish:wish, story:params[:story] if user_wish.blank?
-    render json: {user_wish: user_wish, wish: wish}
+
+    similar = Sunspot.more_like_this(wish) do
+      fields :text
+    end
+
+    #similar = wish.more_like_this.results[0].to_json
+
+    x = {
+      id: user_wish.id,
+      similar: similar.results[0..1],
+      others_count: UserWish.where(wish_id:wish.id).count - 1,
+      wish_id: wish.id,
+      story: user_wish.story,
+      text: wish.text,
+      wish_url: Rack::Utils.escape(wish.text),
+      wish: wish.conjugate,
+      me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false)
+    }
+
+    render json: x
   end
 
   def users
@@ -51,13 +70,22 @@ class Api::WishesController < ApplicationController
 
     base = UserWish
 
-    base = base.where(wish_id:Wish.where('text like ?', "%#{params[:q]}%").pluck(:id)) if params[:q]
+    if params[:q]
+      query = Wish.search do
+        fulltext params[:q]
+      end
+      if current_user
+        base = base.where(wish_id:query.results.map(&:id)).where.not(wish_id: current_user.user_wishes.map(&:wish_id))
+      else
+        base = base.where(wish_id:query.results.map(&:id))
+      end
+    end
 
-    x = base.group(:wish_id).limit(25).order('count_all desc').count.map do |id,count|
+    x= base.group(:wish_id).limit(10).order('count_all desc').count.map do |id, count|
       next if !id
       wish = Wish.where(id:id).first
       {
-        others_count:count - 1,
+        others_count:count,
         wish_id: wish.id,
         wish_url: Rack::Utils.escape(wish.text),
         wish: wish.conjugate,

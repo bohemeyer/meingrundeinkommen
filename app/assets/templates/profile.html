@@ -118,13 +118,14 @@
                <form ng-show="own_profile" ng-submit="addWish()" style="margin-top:-5px;margin-bottom:10px;">
 
         <input type="text" ng-model="wish_form.new_wish" style="height:50px;padding-left:10px;padding-right:10px;" font-size="25"
-				   placeholder="..." maxlength="100" typeahead="wish for wish in getSuggestions($viewValue)" typeahead-loading="loading" typeahead-template-url="suggestion_list.html">
+				   placeholder="..." maxlength="100" typeahead="wish as wish.text for wish in getSuggestions($viewValue)" typeahead-loading="loading" typeahead-template-url="suggestion_list.html">
+
 
         <script type="text/ng-template" id="suggestion_list.html">
           <a class="suggestion_entry">
               <i class="icon-chevron-right icon"></i>
               <i class="icon-lightbulb icon2"></i>
-              &nbsp;&nbsp;<span bind-html-unsafe="match.label | typeaheadHighlight:query"></span>
+              &nbsp;&nbsp;<span bind-html-unsafe="match.model.text | typeaheadHighlight:query"></span> <span ng-if="match.model.count > 1" style="color:#ccc;font-size:11px;" bind-html-unsafe="match.model.count"></span> <span ng-if="match.model.count > 1" style="color:#ccc;font-size:11px;">Leute würden das tun</span>
           </a>
         </script>
 

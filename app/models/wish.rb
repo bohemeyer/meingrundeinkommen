@@ -1,4 +1,8 @@
 class Wish < ActiveRecord::Base
+  searchable do
+    text :text, :more_like_this => true, :stored => true
+  end
+
   include ConjugationHelper
   has_many :user_wishes, :dependent => :destroy
   has_many :users, through: :user_wishes

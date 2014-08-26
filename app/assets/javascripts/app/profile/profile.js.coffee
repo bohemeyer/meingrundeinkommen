@@ -66,7 +66,6 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
 
     UserModel.suggestions(user.id).then (suggestions) ->
       $scope.suggestions = suggestions
-      console.log suggestions
 
 
     $scope.new_name = user.name
@@ -157,7 +156,9 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
       Wish.suggestions(q).then (wishes) ->
         r = []
         angular.forEach wishes, (item) ->
-          r.push item.text
+          r.push
+            text: item.text
+            count: item.othersCount
         return r
 
     $scope.me_too = (wish) ->
@@ -165,14 +166,16 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
         forUser: 'user_'
         wish_id: wish.id
       ).create()
-      .then(
+      .then (response) ->
         $scope.suggestions.splice($scope.suggestions.indexOf(wish), 1)
-        $scope.user_wishes.push
-          text: wish.text
-      )
+        $scope.user_wishes.push response
+
 
 
     $scope.addWish = ->
+
+      if $scope.wish_form.new_wish.count
+        $scope.wish_form.new_wish = $scope.wish_form.new_wish.text
 
       for wish in $scope.user_wishes
         if wish.text == $scope.wish_form.new_wish
@@ -183,13 +186,11 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
         text: $scope.wish_form.new_wish
         story: $scope.wish_form.story
       ).create()
-      .then(
-        $scope.user_wishes.unshift
-          text: $scope.wish_form.new_wish
-          story: $scope.wish_form.story
+      .then (response) ->
+        $scope.user_wishes.unshift response
         $scope.wish_form.new_wish = ""
         $scope.wish_form.story = ""
-      )
+
 
     $scope.editStory = (user_wish) ->
       $scope.edit_story = user_wish
