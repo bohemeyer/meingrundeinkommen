@@ -22,4 +22,4 @@ plan
 solr/
 config/sunspot.yml
 lib/tasks/data.rake
-lib/signups.rake
+lib/tasks/signups.rake
