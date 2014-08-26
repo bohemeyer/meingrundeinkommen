@@ -1,7 +1,3 @@
-Steuerbar testen mit einzelnen Usern
-	 - needs landingpage
-	 - datenschutz
-
 community online stellen auf neu.mein-grundeinkommen.de
 alte seite lassen. statt form, button führt zu mein-grundeinkommen.de/register
 
@@ -34,15 +30,17 @@ neu.mein-grundeikommen.de
 	PROFIL
 
 		1. Was würdest du mit Grundeinkommen tun?
-		    if initial_wishes in cookie numeric && wish.count = 0-> schon anlegen (frontend)
-		    if initial_wishesin cookie numberic && wish.count > 0 -> ins textfeld eintragen
+		    if initial_wishes in cookie numeric && wish.count = 0-> schon anlegen (frontend) und cookie löschen
+		    if initial_wishes in cookie numberic && wish.count > 0 -> ins textfeld eintragen
+
+		    suggestions:
 
 		    if initial wishes from before (saved in user)
 
-			    -> create 100% exact matching (delete from initwishes)
+			    -> create wish when 100% exact matching (delete from initwishes)
 
 			    -> wishes with no matches
-			    als suggestion anzeigen + Ja, das würde ich (add) + Nee (delete both from initial_wishes)
+			    als suggestion anzeigen + Ja, das würde ich (add) + Nee (delete  from initial_wishes und im frontend)
 
 			    -> wishes with good matching (order by count desc, limit 2)
 			    1. match als suggestion anzeigen mit Bild
