@@ -1,28 +1,34 @@
-App.controller "HomeController", ["$scope", "$rootScope", "Home", "Wish", ($scope, $rootScope, Home, Wish) ->
-
-  Home.query().then (home) ->
-    $scope.home = home
-
-    $scope.home.financedIncomes = []
-
-    $rootScope.percentage = home.percentage
-
-    for fi in [1..home.totallyFinancedIncomes]
-      $scope.home.financedIncomes.push "#{fi}. Grundeinkommen mit 12.000€ per Crowdfunding finanziert!"
-
-  CurrentDate = new Date()
-  Verlosung = new Date("September, 18, 2014")
-  DayCount = (Verlosung - CurrentDate) / (1000 * 60 * 60 * 24)
-  $scope.daysLeft = Math.round(DayCount)
-
+App.controller "HomeController", ["$scope", "$rootScope", "Wish", ($scope, $rootScope, Wish) ->
 
   Wish.query().then (wishes) ->
     $scope.wishes = wishes
 
+  Wish.latest().then (wishes) ->
+    $scope.latest_wishes = wishes
+
+
+  $scope.$watch 'current_page', ((nv) ->
+    Wish.query
+      page: nv
+    .then (wishes) ->
+      $scope.wishes = wishes
+    return
+  ), true
 
   $scope.video_content = 'video_preview.html'
 
   $scope.showvideo = () ->
     $scope.video_content = 'video.html'
 
-]
+  $scope.me_too = (wish) ->
+    new Wish(
+      forUser: 'user_'
+      wish_id: wish.wishId
+    ).create()
+    .then (response) ->
+      count_change = if !wish.meToo then 1 else -1
+      $scope.wishes[$scope.wishes.indexOf(wish)].othersCount += count_change
+      $scope.wishes[$scope.wishes.indexOf(wish)].meToo = !wish.meToo
+
+
+  ]

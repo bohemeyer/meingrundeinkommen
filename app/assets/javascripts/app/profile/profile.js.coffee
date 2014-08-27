@@ -1,4 +1,4 @@
-angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','matchMedia'])
+angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcrumbs','matchMedia'])
 .config [
   "$routeProvider"
   ($routeProvider) ->
@@ -24,6 +24,7 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
   "thisuser"
   "User"
   "Wish"
+  "State"
   "$upload"
   "$http"
   "breadcrumbs"
@@ -31,14 +32,52 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
   "screenSize"
   "$modal"
   "$routeParams"
+  "filterFilter"
 
-  ($scope, Security, user, UserModel, Wish, $upload, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams) ->
+  ($scope, Security, user, UserModel, Wish, State, $upload, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams, filterFilter) ->
 
     $scope.user = user
     $scope.default_avatar = if user.avatar.avatar.url == '/assets/team/team-member.jpg' then true else false
 
     $scope.mobile = screenSize.is('xs')
     $scope.largeScreen = screenSize.is('lg, md')
+
+    $scope.user_states = []
+
+    $scope.skip = []
+    $scope.currentTab = []
+    $scope.tabs = ['wishes', 'image', 'states', 'support', 'gewinnspiel']
+
+
+    $scope.initial_states = [
+      'Renter_in',
+      'Student_in',
+      'Kind',
+      'Frau',
+      'Mann',
+      'Elternteil',
+      'Unternehmer_in',
+      'Arbeitnehmer_in',
+      'Schüler_in',
+      'Sozialleistungsbeziehende_r',
+      'Arbeitslose_r',
+      'Künstler_in',
+      'Urheber_in',
+      'Sportler_in',
+      'Freiberufler_in',
+      'Alleinerziehende_r',
+      'Ehrenamtliche_r',
+      'Manager_in',
+      'Migrant_in',
+      'Mensch mit Behinderungen',
+      'Aussteiger_in',
+      'Akademiker_in',
+      'Wissenschaftler_in, Lehrende_r',
+      'Beamte_r',
+      'in sozialem Beruf tätig',
+      'in der Sozialverwaltung tätig'
+    ]
+
 
     # $scope.tabtype = if $scope.mobile then 'pills' else ''
     # $scope.verticaltabs = if $scope.mobile then 'true' else 'false'
@@ -48,6 +87,7 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
     #$scope.breadcrumbs = breadcrumbs
 
     $scope.wish_form = {}
+    $scope.state_form = {}
 
 
     $scope.$watch (->
@@ -64,12 +104,100 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
         $cookies.initial_wishes = '' if $scope.user_wishes.length > 0
 
 
+    #initialize default states
+    $scope.states = []
+    angular.forEach $scope.initial_states, (statename) ->
+      $scope.states.push
+        text: statename
+        visibility: false
+        selected: false
+        user_state_id: false
+        is_default_state: true
+
+
+    State.forUser(user.id).then (user_states) ->
+
+      angular.forEach user_states, (user_state) ->
+        is_default_state = false
+        angular.forEach $scope.states, (state,key) ->
+          if state.text == user_state.text
+            is_default_state = true
+            $scope.states[key].selected = true
+            $scope.states[key].visibility = user_state.visibility
+            $scope.states[key].user_state_id = user_state.userStateId
+        if !is_default_state
+          $scope.states.push
+            text: user_state.text
+            visibility: user_state.visibility
+            user_state_id: user_state.userStateId
+            selected: true
+            is_default_state: false
+
+
+    $scope.changeVisibility = (state) ->
+      if state.user_state_id
+        new State(
+          id: state.user_state_id
+          visibility: !state.visibility
+          forStatesUser: '_users'
+        ).update()
+
+    $scope.addCustomState = () ->
+      new_state =
+        text: $scope.state_form.new_custom_state
+        visibility: false
+        selected: true
+        is_default_state: false
+
+      new_state.forStatesUser = 's'
+      new State(new_state).create().then (response) ->
+        new_state.user_state_id = response.userStateId
+        $scope.states.push new_state
+        $scope.state_form.new_custom_state = ""
+
+    $scope.stateClicked = (state) ->
+
+      if !state.selected #ADD
+        state.forStatesUser = 's'
+        new State(state).create().then (response) ->
+          $scope.states[$scope.states.indexOf(state)].user_state_id = response.userStateId
+      else
+        if state.user_state_id #DELETE
+          #"/api/{{forUser}}state{{forStatesUser}}/{{id}}
+          new State(
+            id: state.user_state_id
+            forStatesUser: '_users'
+          ).delete().then ->
+            $scope.states[$scope.states.indexOf(state)].selected = false
+            $scope.states[$scope.states.indexOf(state)].user_state_id = false
+
+
+    $scope.$watch "states|filter:{selected:true}", ((nv) ->
+      $scope.user_states = nv.map((state) ->
+        state
+      )
+      return
+    ), true
+
+
     UserModel.suggestions(user.id).then (suggestions) ->
       $scope.suggestions = suggestions
 
 
     $scope.new_name = user.name
 
+    $scope.skip_section = (section) ->
+      $scope.skip[section] = true
+      angular.forEach $scope.tabs, (tabname,key) ->
+        if tabname == section
+          $scope.currentTab[$scope.tabs[key]] = false
+          $scope.currentTab[$scope.tabs[key + 1]] = true
+
+    $scope.setNewsletterFlag = () ->
+      $http.put("/users.json",
+        user:
+          newsletter: true
+      )
 
     $scope.onFileSelect = ($files) ->
 
@@ -89,7 +217,9 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
         ).success((data, status, headers, config) ->
           Security.requestCurrentUser()
           $scope.user.avatar.avatar.url = data.avatar.avatar.url
-          $scope.user.default_avatar = false
+          $scope.default_avatar = false
+          if $scope.currentTab.image
+            $scope.skip_section('image')
           return
         )
         i++
@@ -151,6 +281,9 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
       $scope.open()
 
 
+    $scope.getStateSuggestions = (q) ->
+      State.suggestions(q).then (states) ->
+        return states
 
     $scope.getSuggestions = (q) ->
       Wish.suggestions(q).then (wishes) ->
@@ -164,11 +297,18 @@ angular.module("profile", ["User","Wish","angularFileUpload",'ng-breadcrumbs','m
     $scope.me_too = (wish) ->
       new Wish(
         forUser: 'user_'
-        wish_id: wish.id
+        wish_id: wish.wishId
       ).create()
       .then (response) ->
-        $scope.suggestions.splice($scope.suggestions.indexOf(wish), 1)
-        $scope.user_wishes.push response
+        if $scope.own_profile
+          $scope.suggestions.splice($scope.suggestions.indexOf(wish), 1)
+          $scope.user_wishes.push response
+        else
+          if !response.meToo
+            $scope.user_wishes[$scope.user_wishes.indexOf(wish)].meToo = false
+            $scope.user_wishes[$scope.user_wishes.indexOf(wish)].othersCount -= 1
+          else
+            $scope.user_wishes[$scope.user_wishes.indexOf(wish)] = response
 
 
 

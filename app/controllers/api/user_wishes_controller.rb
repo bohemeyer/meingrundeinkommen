@@ -1,4 +1,5 @@
 class Api::UserWishesController < ApplicationController
+  include ActionView::Helpers::DateHelper
 
   def create
     #current_user = User.first
@@ -22,13 +23,30 @@ class Api::UserWishesController < ApplicationController
 
 
     else
-      params[:id] = params[:wish_id]
+      params[:id] =  current_user.user_wishes.where(:wish_id => params[:wish_id])
       destroy
     end
   end
 
   def index
-    render json:UserWish.limit(100).order('created_at desc')
+
+    x= UserWish.limit(10).order('created_at desc').map do |user_wish|
+      wish = Wish.where(id:user_wish.wish_id).first
+      {
+        others_count: UserWish.where(wish_id: user_wish.wish_id).count,
+        wish_id: wish.id,
+        wish_url: Rack::Utils.escape(wish.text),
+        wish: wish.conjugate,
+        story: user_wish.story,
+        text: wish.text,
+        time_ago: time_ago_in_words(user_wish.created_at),
+        me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false),
+        user: user_wish.user.slice(:name, :id, :avatar)
+      }
+    end
+
+    render json: x
+
   end
 
   def update

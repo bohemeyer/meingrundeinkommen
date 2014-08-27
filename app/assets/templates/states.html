@@ -1,0 +1,77 @@
+<div class="container margin-top-30">
+  <p align=justify>Wir wollen auf dieser Seite in Zukunft diskutieren, was Grundeinkommen für verschiedene Gruppen bedeuten würde. Hilf uns dabei, indem du hier kurz angibst, wozu du dich zählst. Du kannst unten auch beliebig viele eigene Definition angeben. Die Daten bleiben vollständig anonym, wenn du nichts anderes wählst.</p>
+   <div class="col-sm-offset-3 col-sm-9 text-left">
+    <h1 style="margin-top:10px;margin-bottom:5px;">Ich bin:</h1>
+  </div>
+  <div class="row">
+
+      <div class="col-md-12">
+
+            <form class="form-horizontal" ng-submit="addCustomState()" role="form" name="StatesForm" novalidate>
+
+
+<!--               <input
+    type="checkbox"
+    name="selectedFruits[]"
+    value="{{fruit.name}}"
+    ng-model="fruit.selected"
+  > {{fruit.name}} -->
+
+
+
+              <div class="form-group text-left">
+                <div class="col-sm-offset-3 col-sm-9 text-left">
+                  <div ng-repeat="state in states" class="checkbox" style="margin-bottom:20px;max-width:450px;">
+
+                    <div style="width:96px;margin-top:3px;" ng-show="state.selected" class="pull-right onoffswitch">
+                        <input ng-click="changeVisibility(state)" type="checkbox" name="onoffswitch[]" class="onoffswitch-checkbox" id="myonoffswitch_{{$index}}" ng-model="state.visibility" value="true">
+                        <label class="onoffswitch-label" for="myonoffswitch_{{$index}}">
+                        <span class="onoffswitch-inner"></span>
+                        <span class="onoffswitch-switch"></span>
+                        </label>
+                    </div>
+                    <label style="display: block; width: 350px;font-size: 18px;">
+
+                      <input type="checkbox"
+                          name="selectedStates[]"
+                          value="{{state.text}}"
+                          ng-model="state.selected"
+                          ng-click="stateClicked(state)"
+                          style="font-size: 18px;"
+                          > <div style="width:250px">{{state.text}}</div>
+
+                  </div>
+                    </label>
+
+                </div>
+              </div>
+
+
+              <div class="form-group" >
+                <label for="inputEmail3" class="col-sm-3 control-label">Ich bin außerdem:</label>
+                <div class="col-sm-5 text-left">
+                  <input autocomplete="off" name="new_state" ng-model="state_form.new_custom_state" type="text" class="form-control" placeholder="..." maxlength="50" typeahead="state for state in getStateSuggestions($viewValue)" typeahead-min-length="1">
+                </div>
+                <div class="col-sm-4 text-left">
+                  <input type="submit" class="btn btn-small btn-grey" value="Hinzufügen">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-5">
+                  <button type="button" ng-click="skip_section('states')" class="btn btn-special btn-color">
+                  <span>Speichern & Weiter</span>
+                  </button>
+                </div>
+                <div class="col-sm-offset-3 col-sm-5">
+                  <a href="#" ng-hide="user_states.lenght > 0" ng-click="skip_section('states')"><i class="icon-mail-forward"></i> überspringen</a>
+                </div>
+              </div>
+
+            </form>
+
+
+    <div class="clearfix"></div>
+
+</div>
+</div>

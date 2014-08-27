@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815071832) do
+ActiveRecord::Schema.define(version: 20140826171613) do
 
   create_table "state_users", force: true do |t|
     t.text     "story"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140815071832) do
     t.integer  "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "visibility", default: false
   end
 
   create_table "states", force: true do |t|

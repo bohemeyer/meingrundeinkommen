@@ -2722,6 +2722,81 @@ a.suggestion_entry:hover > .icon2, .active > a.suggestion_entry > .icon2 {
 .listbox li .edit_button {
     opacity: 0.1;
 }
-.listbox li:hover .edit_button {
+
+.listbox li .edit_button_hidden {
+    display:none;
+}
+
+.listbox li:hover .edit_button, .listbox li:hover .edit_button_hidden {
+    display: inline-block;
     opacity: 1;
+}
+
+
+
+.move_profile_container_top {
+  position:relative;top:-41px
+}
+
+        .onoffswitch {
+    position: relative; width: 96px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    }
+
+    .onoffswitch .radio label, .onoffswitch .checkbox label, .onoffswitch .radio label, .onoffswitch .checkbox label {
+    display: !important block;
+    }
+
+    .onoffswitch-checkbox {
+    display: none;
+    }
+    .onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 12px;
+    }
+    .onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+    }
+    .onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 14px; padding: 0; line-height: 14px;
+    font-size: 11px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    }
+    .onoffswitch-inner:before {
+    content: "öffentlich";
+    padding-left: 9px;
+    background-color: #66CC99; color: #FFFFFF;
+    }
+    .onoffswitch-inner:after {
+    content: "anonym";
+    padding-right: 9px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+    }
+    .onoffswitch-switch {
+    display: block; width: 18px; margin: 0px;
+    background: #FFFFFF;
+    border: 2px solid #999999; border-radius: 20px;
+    position: absolute; top: 0; bottom: 0; right: 78px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s;
+    }
+    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+    }
+    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+    }
+
+.checkbox .onoffswitch > label, .radio .onoffswitch > label {
+    display: block;
+}
+.checkbox .onoffswitch > label, .radio .onoffswitch > label {
+    display: block;
+}
+
+.btn-normal.disabled {
+    opacity: 0.5;
 }

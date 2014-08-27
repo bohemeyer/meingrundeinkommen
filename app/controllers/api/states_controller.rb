@@ -5,7 +5,7 @@ class Api::StatesController < ApplicationController
     state = State.where(text:params[:text]).first
     state = State.create(params.permit(:text)) if !state
     user_state = current_user.state_users.where(state:state)
-    user_state = current_user.state_users.create state:state, story:params[:story] if user_state.blank?
+    user_state = current_user.state_users.create state:state, visibility:params[:visibility] if user_state.blank?
     render json:user_state
   end
 
@@ -18,18 +18,11 @@ class Api::StatesController < ApplicationController
   end
 
   def index
-    base = StateUser
-    base = base.where(state_id:State.where('text like ?', "%#{params[:q]}%").pluck(:id)) if params[:q]
-    x = base.group(:state_id).limit(5).order('count_all desc').count.map do |id,count|
-      next if !id
-      state = State.where(id:id).first
-      {
-        count:count,
-        state:state.text,
-        user:StateUser.where(id:state.state_user_ids.sample).first.user_id
-      }
+
+    query = State.search do
+      fulltext params[:q]
     end
-    render json:x
+    render json:query.results.map(&:text)
   end
 
 

@@ -25,9 +25,26 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
   "$scope"
   "Security"
   "breadcrumbs"
-  ($scope, Security, breadcrumbs) ->
+  "Home"
+  ($scope, Security, breadcrumbs, Home) ->
     $scope.currentUser = Security.currentUser
     $scope.breadcrumbs = breadcrumbs
+
+    Home.query().then (home) ->
+      $scope.home = home
+
+      $scope.home.financedIncomes = []
+
+      $scope.percentage = home.percentage
+
+      for fi in [1..home.totallyFinancedIncomes]
+        $scope.home.financedIncomes.push "#{fi}. Grundeinkommen mit 12.000€ per Crowdfunding finanziert!"
+
+    CurrentDate = new Date()
+    Verlosung = new Date("September, 18, 2014")
+    DayCount = (Verlosung - CurrentDate) / (1000 * 60 * 60 * 24)
+    $scope.daysLeft = Math.round(DayCount)
+
     return
 ]
 

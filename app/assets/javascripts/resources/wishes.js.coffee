@@ -12,6 +12,9 @@ angular.module "Wish", ["rails"]
       Wish.query
         q: query
 
+    Wish.latest = (query) ->
+      Wish.query {},
+        forUser: 'user_'
 
     Wish.forUser = (user_id) ->
       Wish.query {},

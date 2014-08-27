@@ -1,6 +1,6 @@
 class Wish < ActiveRecord::Base
   searchable do
-    text :text, :more_like_this => true, :stored => true
+    text :text, :more_like_this => true
   end
 
   include ConjugationHelper

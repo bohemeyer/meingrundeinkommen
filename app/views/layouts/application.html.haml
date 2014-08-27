@@ -82,9 +82,12 @@
             / Menu Start
             %nav.collapse.navbar-collapse.menu
               %ul.nav.navbar-nav.sf-menu
-                %li{id: "{{getStatus('/')}}"}
-                  %a{href: "/"}
+                %li{id: "{{getStatus('/start')}}"}
+                  %a{href: "/start"}
                     Start
+                %li{id: "{{getStatus('/info')}}"}
+                  %a{href: "/start#waswaerewenn"}
+                    Was wäre wenn?
                 %li{id: "{{getStatus('/info')}}"}
                   %a{href: "/info"}
                     So funktioniert's

@@ -4,7 +4,12 @@ class Api::UsersController < ApplicationController
   before_filter :load_user, only:[:show,:states, :wishes]
 
   def states
-    render json: @user.states.includes(:state_users)
+    if current_user && @user == current_user
+      render json: @user.state_users
+    else
+      render json: @user.state_users.where(:visibility => true)
+    end
+    #render json: @user.states.includes(:state_users)
   end
 
   def wishes

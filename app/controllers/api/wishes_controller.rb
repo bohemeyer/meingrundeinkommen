@@ -5,20 +5,19 @@ class Api::WishesController < ApplicationController
   def create
     #current_user = User.first
     wish = Wish.where(text:params[:text]).first
-    #wish = Wish.find(:first, :conditions => ["lower(text) = ?", params[:text]])
     wish = Wish.create(params.permit(:text)) if !wish
     user_wish = current_user.user_wishes.where(wish:wish)
     user_wish = current_user.user_wishes.create wish:wish, story:params[:story] if user_wish.blank?
 
-    similar = Sunspot.more_like_this(wish) do
-      fields :text
-    end
+    # similar = Sunspot.more_like_this(wish) do
+    #   fields :text
+    # end
 
     #similar = wish.more_like_this.results[0].to_json
 
     x = {
       id: user_wish.id,
-      similar: similar.results[0..1],
+      #similar: similar.results[0..1],
       others_count: UserWish.where(wish_id:wish.id).count - 1,
       wish_id: wish.id,
       story: user_wish.story,
@@ -32,7 +31,7 @@ class Api::WishesController < ApplicationController
   end
 
   def users
-    render json:Wish.find(params[:id]).users
+    render json:Wish.find(params[:id]).users.order(:avatar => :desc)
   end
 
   def stories
@@ -70,10 +69,24 @@ class Api::WishesController < ApplicationController
 
     base = UserWish
 
+    page = params[:page].to_i || 1
+
     if params[:q]
       query = Wish.search do
         fulltext params[:q]
       end
+
+      # if query.hits.empty?
+      #   temp_wish = Wish.create!(text:params[:q])
+      #   if temp_wish.save!
+      #     query = Sunspot.more_like_this(temp_wish) do
+      #       fields :text
+      #     end
+      #   end
+      #   test = '>>>>'
+      #   temp_wish.destroy
+      # end
+
       if current_user
         base = base.where(wish_id:query.results.map(&:id)).where.not(wish_id: current_user.user_wishes.map(&:wish_id))
       else
@@ -81,7 +94,7 @@ class Api::WishesController < ApplicationController
       end
     end
 
-    x= base.group(:wish_id).limit(10).order('count_all desc').count.map do |id, count|
+    x= base.group(:wish_id).limit(8).offset(8*(page-1)).order('count_all desc').count.map do |id, count|
       next if !id
       wish = Wish.where(id:id).first
       {

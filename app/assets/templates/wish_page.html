@@ -1,1 +1,55 @@
-<h1>Mit Grundeinkommen würden {{users.length}} Menschen {{wish.theyText}}</h1>
+<breadcrumbs></breadcrumbs>
+<div class="container margin-top-70">
+	<div class="row">
+		<div class="col-md-6">
+			<h1>Mit einem <a href="#">Grundeinkommen</a> würden diese {{users.length}} Menschen <b>{{wish.wish.they}}</b></h1>
+
+			<a ng-click="me_too(wish)" href="#" class="btn-large btn-pad " ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}" style="width:90%;text-align:center">
+                     <span ng-show="wish.meToo">
+                        <i class="icon-check"></i> Du auch!
+                     </span>
+                     <span ng-hide="wish.meToo">
+                        <i class="icon-lightbulb"></i> Ich auch!
+                     </span>
+
+                   </a>
+
+		</div>
+		<div class="col-md-6">
+			<div ng-repeat="user in users | limitTo:40" class="testimonial-image "><a href="/menschen/{{user.id}}" popover-trigger="mouseenter" popover="{{user.name}}"><img alt="" ng-src="{{user.avatar.avatar.thumb.url}}"></a></div>
+		</div>
+	</div>
+	<h3 class="title">&nbsp;</h3>
+	<div class="row">
+		<div class="col-md-12">
+			<h2>Neueste Geschichten dazu</h2>
+			<ul class="listbox">
+               <li ng-repeat="story in stories" ng-animate="'animate'">
+                  <div class="pull-left" style=" padding-top: 10px;
+    text-align: center;
+    width: 91px;padding:5px;line-height:19px">
+                     <i class="icon-time"></i> vor {{wish.timeAgo}}
+                  </div>
+
+                  <div class="pull-left">
+                     <div class="testimonial-image "><img alt="" ng-src="{{story.user.avatar.avatar.thumb.url}}"></div>
+                  </div>
+
+
+                  <div class="textblock">
+                     <a href="/menschen/{{story.user.id}}">{{story.user.name}}</a>
+                     würde<br>
+
+                     <span style="font-size:18px"><b>{{story.wish.he}}</b></span>
+
+                    <p ng-show="story.story"><br>{{story.story}}
+                    </p>
+                  </div>
+
+               </li>
+
+             </ul>
+		</div>
+	</div>
+	<h3 class="title">&nbsp;</h3>
+</div>
