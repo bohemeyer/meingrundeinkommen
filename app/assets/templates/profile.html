@@ -1,0 +1,156 @@
+<div class="breadcrumb-wrapper">
+   <div class="container">
+      <div class="row" style="padding-bottom: 55px;">
+         <div class="col-md-12 text-center">
+            <img ng-if="own_profile && largeScreen && user_states.length == 0 && !skip.states" src="/assets/instructions.png">
+         </div>
+
+      </div>
+   </div>
+</div>
+
+<!-- Left Column -->
+
+<div class="container" ng-class="{move_profile_container_top: own_profile}">
+  <div class="col-md-4 text-center">
+
+  	<div ng-if="own_profile" class="testimonial-image-large" ng-file-select="onFileSelect($files)" ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="about-to-drop" accept="image/*" ng-class="{own_profile: own_profile}">
+		<img src="{{user.avatar.avatar.url}}">
+		<i style="font-size:100px;margin-top:-200px;margin-bottom:118px;margin-left:-0px" class="icon-plus show-on-drag" ng-class="{showit: user.is_default_avatar}"></i>
+	</div>
+
+	<div ng-if="!own_profile" class="testimonial-image-large">
+		<img src="{{user.avatar.avatar.url}}">
+	</div>
+
+
+	<h1 class="margin-top-20" style="margin-bottom:10px;">
+		<span ng-show="own_profile">Hallo {{user.name}}!</span>
+		<span ng-hide="own_profile">Hallo, ich bin
+		{{user.name}}!</span>
+	</h1>
+	<a ng-if="own_profile" href="#" ng-click="open()"><i class="icon-pencil"></i> Profil bearbeiten</a>
+  <ul>
+    <li ng-show="user_states"><b>Ich bin:</b></li>
+    <li ng-repeat="state in user_states">
+      <span ng-show="state.visibility">{{state.text}}</span>
+    </li>
+  </ul>
+
+    <div class="clearfix margin-top-30"></div>
+  </div>
+
+
+  <!-- Right Column -->
+
+  <div class="row" ng-if="own_profile && !largeScreen && user_states.length == 0 && !skip.states" style="padding-bottom:20px;">
+  	<div class="col-md-12 text-center">
+	  <img src="/assets/instructions.png">
+	  </div>
+	</div>
+  <div class="col-md-8">
+
+
+    <div ng-if="!own_profile" ng-include="'/assets/wishes.html'"></div>
+
+  <!-- Tabs -->
+
+    <tabset ng-if="own_profile" type='{{mobile ? "pills" : ""}}' vertical='{{mobile ? "true" : "false"}}'>
+
+      <!-- Was würdest du tun? -->
+
+      <tab heading="Ich würde...">
+	      <div ng-include="'/assets/wishes.html'"></div>
+	    </tab>
+
+      <!-- Avatar -->
+
+	    <tab  active="currentTab.image" disabled="user_wishes.length==0" heading="Gesicht zeigen" ng-if="default_avatar">
+
+        <img src="/assets/upload_avatar.png" class="margin-top-20" />
+        <br>
+        <div style="margin-left: 30px;
+    margin-top: -54px;
+    text-align: center;
+    width: 243px;">
+        oder:<br>
+        <div class="btn-color btn-normal" ng-file-select="onFileSelect($files)" accept="image/*"><i class="icon-upload"></i> Datei auswählen</div><br><br>
+        <a href="#" ng-click="skip_section('image')"><i class="icon-mail-forward"></i> überspringen</a>
+        </div>
+	    </tab>
+
+
+      <!-- Wer bist du? -->
+
+      <tab active="currentTab.states" disabled="user_wish.length==0 || (default_avatar && !skip.image)" heading="Ich bin...">
+
+        <div ng-include="'/assets/states.html'"></div>
+
+      </tab>
+
+
+      <!-- Unterstützen -->
+
+      <tab active="currentTab.support" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states)" heading="Unterstützen">
+
+        <div ng-include="'/assets/support.html'"></div>
+
+      </tab>
+
+      <!-- Gewinnspiel -->
+
+      <tab active="currentTab.gewinnspiel" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states) || !skip.support" heading="Gewinnspiel">
+
+        <div class="container margin-top-30">
+          <p align=justify>Alle vollständig finanzierten Grundeinkommen werden am 18. September 2014 an alle Teilnehmer_innen des Gewinnspiels verlost. Die Auslosung findet in Berlin statt und wird live per Video-Stream übertragen.</p>
+          <h2>Das Gewinnspiel beginnt am 5. September</h2>
+          <alert type="danger">Wenn du teilnehmen möchtest, müsstest du zwischen 5. und 17. September nochmal auf diese Seite kommen, um ein Teilnahme-Häkchen zu setzen.</alert>
+        <div ng-show="!user.newsletter">
+          <hr>
+            <div class="text-center"><h3>Gern erinnern wir dich per Mail:</h3></div>
+
+
+          <div class="form-group text-left">
+            <div class="col-sm-offset-1 col-sm-11 text-left">
+              <div class="checkbox">
+                <label>
+                  <input name="newsletter" ng-model="user.newsletter" type="checkbox" ng-click="setNewsletterFlag()"> Bitte informiert mich immer wenn wieder ein Grundeinkommen ausgelost wird oder bei wichtigen Änderungen auf der Seite (kein Spam, max. 1x pro Woche, eher seltener). Jederzeit widerrufbar.
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+
+        <div ng-show="user.newsletter">
+          <alert type="success"><i class="icon-envelope"></i> Wir erinnern dich rechtzeitig per Mail!</alert>
+        </div>
+
+
+
+
+
+      </tab>
+
+
+    </tabset>
+  </div>
+
+  <div class="clearfix"></div>
+
+</div>
+
+
+
+
+
+
+<!-- <div ng-show="own_profile">
+  <input ng-model="new_name">
+
+  <input type="button" ng-click="updateProfile()" value="Ändern">
+</div> -->
+
+
+
