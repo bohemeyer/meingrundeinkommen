@@ -20,7 +20,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def create
-    params['user']['sign_up_ip'] = request.env['REMOTE_ADDR']
+    params['user']['sign_up_ip'] = request.remote_ip
     if cookies[:sign_ups]
       signups = cookies[:sign_ups].to_i + 1
     else
