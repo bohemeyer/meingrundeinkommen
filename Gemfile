@@ -29,16 +29,16 @@ gem 'jquery-rails'
 gem 'mailjet'
 gem 'rmagick', :require => 'RMagick'
 gem 'sass-rails', '~> 4.0.0.rc1'
+gem 'sunspot_rails'
+gem 'sunspot_solr'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
-gem 'sunspot_rails'
 
 # production
 gem 'lograge'
 gem 'unicorn'
 
 group :development, :test do
-  gem 'progress_bar'
   gem 'awesome_print'
   gem 'brice'
   gem 'byebug'
@@ -46,8 +46,8 @@ group :development, :test do
   gem 'fabrication'
   gem 'faker'
   gem 'letter_opener'
+  gem 'progress_bar'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'simplecov'
-  gem 'sunspot_solr'
 end
