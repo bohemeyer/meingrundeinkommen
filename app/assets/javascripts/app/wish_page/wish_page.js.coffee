@@ -4,7 +4,7 @@ angular.module("wishpage", ["Wish",'ng-breadcrumbs'])
   ($routeProvider) ->
     $routeProvider
     .when "/mit-grundeinkommen-wuerde-ich/:wishUrl/:wishId",
-      templateUrl: "/assets/wish_page.html"
+      templateUrl: "/assets/community.html"
       controller: "WishPageViewController"
       label: "Vorhaben"
       resolve:
@@ -27,20 +27,38 @@ angular.module("wishpage", ["Wish",'ng-breadcrumbs'])
   "breadcrumbs"
 
   ($scope, Security, this_wish, Wish, $http, breadcrumbs) ->
+
+    $scope.render = 'wish_page'
+
     $scope.wish = this_wish
-    console.log this_wish
+
+
+    # breadcrumbs.breadcrumbs.unshift
+    #   label: 'Alle Vorhaben'
+    #   path: '/community'
+
     # breadcrumbs.options =
-    #   user.name + "s Profil"
+    #   "Ich würde " + this_wish.text
     # $scope.breadcrumbs = breadcrumbs
+
+    # console.log breadcrumbs
 
     Wish.users(this_wish.id).then (users) ->
       $scope.users = users
-      console.log users
     Wish.stories(this_wish.id).then (stories) ->
       $scope.stories = stories
-      console.log stories
     Wish.users_also_wish(this_wish.id).then (users_also_wish) ->
       $scope.users_also_wish  = users_also_wish
-      console.log users_also_wish
+
+
+    $scope.me_too = (wish) ->
+      new Wish(
+        forUser: 'user_'
+        wish_id: wish.wishId
+      ).create()
+      .then (response) ->
+        count_change = if !wish.meToo then 1 else -1
+        $scope.wish.count += count_change
+        $scope.wish.meToo = !wish.meToo
 
 ]
