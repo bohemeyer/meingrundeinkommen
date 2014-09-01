@@ -94,7 +94,9 @@
       <tab active="currentTab.support" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states)" heading="Unterstützen">
 
         <div ng-include="'/assets/support.html'"></div>
-
+        <div class="text-center">
+          <a class="btn-grey btn-small" ng-click="skip_section('support')"><i class="icon-mail-forward"></i> überspringen</a>
+        </div>
       </tab>
 
       <!-- Gewinnspiel -->
