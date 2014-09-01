@@ -15,20 +15,22 @@ angular.module("home", ["Wish"])
 
 .controller "HomeViewController", ["$scope", "$rootScope", "Wish", ($scope, $rootScope, Wish) ->
 
+  $scope.pagination = []
+
   Wish.query().then (wishes) ->
     $scope.wishes = wishes
 
   Wish.latest().then (wishes) ->
     $scope.latest_wishes = wishes
 
-
-  $scope.$watch 'current_page', ((nv) ->
+  $scope.$watch (->
+    $scope.pagination.current_page
+  ), (nv) ->
     Wish.query
       page: nv
     .then (wishes) ->
       $scope.wishes = wishes
     return
-  ), true
 
   $scope.video_content = 'video_preview.html'
 
