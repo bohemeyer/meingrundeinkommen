@@ -117,14 +117,10 @@ bedingungslos</li>
          <div class="slogan-content">
             <div class="col-md-12 text-center">
                <h2 class="slogan-title">In <span class="huge">{{daysLeft}}</span> Tagen werden die Grundeinkommen verlost.</h2>
-
+               <p>In einem Gewinnspiel. Melde dich hier an um am Gewinnspiel teilnehmen zu können:</p>
 
             <div class="get-started">
-                  <a ng-hide="main.current_user" href="/register" class="btn btn-special btn-color ">Ich will das Grundeinkommen haben!</a>
-
-                  <a ng-show="main.current_user && !main.current_user.participates_in_drawing" href="/menschen/{{main.current_user.id}}" class="btn btn-special btn-color ">Ich will das Grundeinkommen!</a>
-
-                     <a ng-show="main.current_user && main.current_user.participates_in_drawing" href="#" class="disabled btn btn-special btn-color"><i class="icon-check"></i> Du nimmst teil</a>
+                  <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color ">Ich will das Grundeinkommen haben!</a>
                </div>
 
             </div>

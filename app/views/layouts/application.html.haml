@@ -172,12 +172,24 @@
         .footer-bottom
           .container
             .row
-              .col-lg-6.col-md-6.col-xs-12.col-sm-6
+              .col-lg-9.col-md-9.col-xs-12.col-sm-9
                 \© Copyright 2014 by
                 = succeed "." do
                   %a{href: "/impressum"} Verein "Mein Grundeinkommen"
-              .col-lg-6.col-md-6.col-xs-12.col-sm-6
-
+                |
+                %a{href:"/impressum"} Impressum
+                |
+                %a{href:"/nutzungsbedingungen"} Nutzungsbedingungen
+                |
+                %a{href:"/datenschutz"} Datenschutz
+              .col-lg-3.col-md-3.col-xs-12.col-sm-3
+                %ul.social.social-icons-footer-bottom{:style => "margin-left: -120px;"}
+                  %li.facebook
+                    %a{"data-original-title" => "Facebook", "data-toggle" => "tooltip", :href => "http://www.facebook.com/MeinGrundeinkommen", :title => ""}
+                      %i.icon-facebook
+                  %li.twitter
+                    %a{"data-original-title" => "Twitter", "data-toggle" => "tooltip", :href => "http://www.twitter.com/meinbge", :title => ""}
+                      %i.icon-twitter
         / Footer Bottom End
       / Scroll To Top
       %a.scrollup{href: "#"}
