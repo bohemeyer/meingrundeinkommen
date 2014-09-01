@@ -132,130 +132,13 @@ bedingungslos</li>
             <div class="clearfix"></div>
          </div>
       </div>
-   </div>
-
-
-
-
-
-<div class="main-content">
-   <div class="container">
-      <div class="col-md-12">
+            <div class="col-md-12 margin-top-70">
                         <h3 class="title">&nbsp;</h3>
                         </div>
-      <div class="row text-center" style="margin-top:40px">
-
-
-
-         <h1><a name="waswaerewenn"></a><span class="huge">{{home.numberOfUsers}}</span> <br> Menschen erzählen hier, wie ein Grundeinkommen
-{{home.numberOfWishes}} Dinge in ihrem Leben verändern würde.</h1>
-      </div>
-
-
-      <div class="row">
-         <div class="col-md-12">
-            <div class="testimonial item">
-               <p style="text-align: center; font-weight:bold;font-size: 25px;background:#66cc99;color:white;">Mit einem Grundeinkommen würden...</p>
-               <div class="testimonials-arrow">
-               </div>
-            </div>
-
-            <ul class="listbox">
-               <li ng-repeat="wish in wishes">
-                  <div class="pull-left">
-                     <div class="testimonial-image "><img alt="" ng-src="{{wish.user.avatar.avatar.thumb.url}}"></div>
-
-                  </div>
-
-                   <a ng-click="me_too(wish)" href="#" class="btn-normal btn-pad pull-right" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
-                     <span ng-show="wish.meToo">
-                        <i class="icon-check"></i> Du auch!
-                     </span>
-                     <span ng-hide="wish.meToo">
-                        <i class="icon-lightbulb"></i> Ich auch!
-                     </span>
-
-                   </a>
-
-                   <a  href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}" class="edit_button_hidden btn-small btn-pad pull-right btn-grey"><i class="icon-angle-right"></i> ansehen
-                   </a>
-
-                  <div class="textblock"><a href="/menschen/{{wish.user.id}}">{{wish.user.name}}</a>
-                     <span ng-show="wish.othersCount > 0"> und <b>{{wish.othersCount}}</b> andere würden</span>
-
-                     <span ng-show="wish.othersCount == 0"> würde</span>
-
-                     <br><a style="font-size:18px" href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}">{{wish.othersCount == 0 ? wish.wish.he : wish.wish.they}}</a></div>
-
-               </li>
-
-            </ul>
-            <div class="text-center">
-               <a ng-hide="show_more_wishes" ng-click="show_more_wishes = true" href="#" class="btn-grey btn-small btn-pad">Mehr anzeigen</a>
-               <pagination ng-show="show_more_wishes" total-items="home.numberOfWishesRaw" ng-model="current_page" boundary-links="true" first-text="Anfang" next-text="Weiter" previous-text="Zurück" max-size="10" last-text="Ende" rotate="true"></pagination>
-            </div>
-
-         </div>
-
-      </div>
-
-      <h3 class="title">&nbsp;</h3>
-
-      <div class="row margin-top-30">
-         <div class="col-md-8 col-md-offset-2">
-            <div class="text-center"><h1>Das passiert gerade:</h1></div>
-
-            <ul class="listbox">
-               <li ng-repeat="wish in latest_wishes" ng-animate="'animate'">
-                  <div class="pull-left" style=" padding-top: 10px;
-    text-align: center;
-    width: 91px;padding:5px;line-height:19px">
-                     <i class="icon-time"></i> vor {{wish.timeAgo}}
-                  </div>
-
-                  <div class="pull-left">
-                     <div class="testimonial-image "><img alt="" ng-src="{{wish.user.avatar.avatar.thumb.url}}"></div>
-                  </div>
-
-
-                   <a ng-click="me_too(wish)" href="#" class="btn-normal btn-pad pull-right" ng-show="!own_profile" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
-                           <span ng-show="wish.meToo">
-                              <i class="icon-check"></i> Du auch!
-                           </span>
-                           <span ng-hide="wish.meToo">
-                              <i class="icon-lightbulb"></i> Ich auch!
-                           </span>
-
-                         </a>
-
-
-                  <div class="textblock">
-                     <a href="/menschen/{{wish.user.id}}">{{wish.user.name}}</a>
-                     würde<br>
-
-                     <a style="font-size:18px" href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}">{{wish.wish.he}}</a>
-
-                    <p ng-show="wish.story"><br>{{wish.story}}
-                    </p>
-                    <br>
-                    <span style="color:#ccc;font-size:11px;" ng-if="wish.othersCount > 0">
-                      {{wish.othersCount}} andere würden das auch
-                    </span>
-                  </div>
-
-               </li>
-
-             </ul>
-
-         </div>
-      </div>
-
-
-
-
-
-
-      </div>
    </div>
-</div>
+
+
+
+   <div ng-include="'/assets/community_home.html'"></div>
+
 <!-- Main Content end-->
