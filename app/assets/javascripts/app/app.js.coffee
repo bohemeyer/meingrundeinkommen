@@ -1,4 +1,4 @@
-window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','register','profile','wishpage','content','smoothScroll'])
+window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll'])
 
 .config [
   "$routeProvider"
@@ -6,10 +6,6 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
   ($routeProvider, $locationProvider) ->
     $locationProvider.html5Mode true
     $routeProvider
-    .when "/start",
-      templateUrl: "/assets/home.html"
-      controller: "HomeController"
-      label: "Startseite"
     .otherwise
       redirectTo: "/start"
 ]

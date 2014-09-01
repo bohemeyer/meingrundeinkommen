@@ -1,4 +1,19 @@
-App.controller "HomeController", ["$scope", "$rootScope", "Wish", ($scope, $rootScope, Wish) ->
+angular.module("home", ["Wish"])
+.config [
+  "$routeProvider"
+  ($routeProvider) ->
+    $routeProvider
+    .when "/start",
+      templateUrl: "/assets/home.html"
+      controller: "HomeViewController"
+      label: "Startseite"
+    .when "/community",
+      templateUrl: "/assets/community.html"
+      controller: "HomeViewController"
+      label: "Was wäre wenn?"
+]
+
+.controller "HomeViewController", ["$scope", "$rootScope", "Wish", ($scope, $rootScope, Wish) ->
 
   Wish.query().then (wishes) ->
     $scope.wishes = wishes
