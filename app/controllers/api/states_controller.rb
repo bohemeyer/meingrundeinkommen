@@ -22,7 +22,18 @@ class Api::StatesController < ApplicationController
     query = State.search do
       fulltext params[:q]
     end
-    render json:query.results.map(&:text)
+
+
+    if current_user
+      r = []
+      query.results.each do |result|
+        r << result.text if !current_user.state_users.map(&:state_id).include?(result.id)
+      end
+    else
+      r = query.results.map(&:text)
+    end
+
+    render json: r
   end
 
 
