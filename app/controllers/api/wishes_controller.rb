@@ -72,24 +72,16 @@ class Api::WishesController < ApplicationController
     base = UserWish
 
     page = params[:page].to_i || 1
+    limit = 8
 
     if params[:q]
+      params[:q] = params[:q].gsub(/ich würde/i,'')
+      limit = 5
       query = Wish.search do
         fulltext params[:q] do
           minimum_match 1
         end
       end
-
-      # if query.hits.empty?
-      #   temp_wish = Wish.create!(text:params[:q])
-      #   if temp_wish.save!
-      #     query = Sunspot.more_like_this(temp_wish) do
-      #       fields :text
-      #     end
-      #   end
-      #   test = '>>>>'
-      #   temp_wish.destroy
-      # end
 
       if current_user
         base = base.where(wish_id:query.results.map(&:id)).where.not(wish_id: current_user.user_wishes.map(&:wish_id))
@@ -98,7 +90,7 @@ class Api::WishesController < ApplicationController
       end
     end
 
-    x= base.group(:wish_id).limit(8).offset(8*(page-1)).order('count_all desc').count.map do |id, count|
+    x= base.group(:wish_id).limit(limit).offset(limit*(page-1)).order('count_all desc').count.map do |id, count|
       next if !id
       wish = Wish.where(id:id).first
       {
@@ -108,9 +100,18 @@ class Api::WishesController < ApplicationController
         wish: wish.conjugate,
         text: wish.text,
         me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false),
-        user:UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar)
+        user:UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar),
+        create: false
       }
     end
+
+    if params[:q] && !Wish.where(text:params[:q]).first
+      x << {
+        text: params[:q],
+        create: true
+      }
+    end
+
     render json:x
   end
 

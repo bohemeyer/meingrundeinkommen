@@ -2668,6 +2668,10 @@ footer a,.contact-box:hover,#options li a.selected,header .top-bar,header .top-b
      font-size: 20px;
 }
 
+.suggestion_entry.new_entry {
+    border-top: 2px solid black;
+}
+
 .suggestion_entry > .btn-color {
      margin-left: 10px;
      margin-top: 4px;

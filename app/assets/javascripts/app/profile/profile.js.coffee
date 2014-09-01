@@ -292,7 +292,13 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
           r.push
             text: item.text
             count: item.othersCount
+            create: item.create
+        console.log r
         return r
+
+    $scope.selectedSuggestion = (item) ->
+      $scope.wish_form.new_wish = item.text
+      $scope.hide_popover = true
 
     $scope.me_too = (wish) ->
       new Wish(
@@ -313,6 +319,8 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
 
 
     $scope.addWish = ->
+
+      $scope.hide_popover = false
 
       if $scope.wish_form.new_wish.count
         $scope.wish_form.new_wish = $scope.wish_form.new_wish.text

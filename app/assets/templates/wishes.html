@@ -84,24 +84,28 @@
          <form ng-show="own_profile" ng-submit="addWish()" style="margin-top:-5px;margin-bottom:10px;">
 
   <input type="text" ng-model="wish_form.new_wish" style="height:50px;padding-left:10px;padding-right:10px;" font-size="25"
-	   placeholder="..." maxlength="100" typeahead="wish as wish.text for wish in getSuggestions($viewValue)" typeahead-loading="loading" typeahead-template-url="suggestion_list.html">
+	   placeholder="..." maxlength="100" typeahead="wish as wish.text for wish in getSuggestions($viewValue)" typeahead-editable="false" typeahead-loading="loading" typeahead-on-select="selectedSuggestion($item)" typeahead-template-url="suggestion_list.html">
 
 
   <script type="text/ng-template" id="suggestion_list.html">
-    <a class="suggestion_entry">
-        <i class="icon-chevron-right icon"></i>
-        <i class="icon-lightbulb icon2"></i>
+    <a class="suggestion_entry" ng-class="{new_entry: match.model.create}">
+        <i ng-if="!match.model.create" class="icon-chevron-right icon"></i>
+        <i ng-if="!match.model.create" class="icon-lightbulb icon2"></i>
+        <i ng-if="match.model.create" class="icon-plus"></i>
         &nbsp;&nbsp;<span bind-html-unsafe="match.model.text | typeaheadHighlight:query"></span> <span ng-if="match.model.count > 1" style="color:#ccc;font-size:11px;" bind-html-unsafe="match.model.count"></span> <span ng-if="match.model.count > 1" style="color:#ccc;font-size:11px;">Leute würden das tun</span>
+
+          <span ng-if="match.model.create" style="color:#666;font-size:11px;font-weight:bold">neu anlegen <span ng-show="match.model.text.length > 20" style="font-size:10px;font-weight:normal;opacity:0.7">({{100 - match.model.text.length}} Zeichen übrig)</span></span>
+
     </a>
   </script>
 
-  <div style="display:inline-block;min-width:120px;text-align:left">
+  <div style="display:inline-block;min-width:120px;text-align:left" popover-trigger="mouseenter" popover-title="Bitte tipp dein Vorhaben ins Textfeld ein und wähle einen der Vorschläge aus (mit der Maus oder mit Enter). Danach kannst du hier auf 'Ja!' klicken." popover="{{hide_popover ? '' : 'info'}}">
     <i ng-show="loading" class="icon-spin icon-refresh"></i>
     <input class="btn btn-special btn-grey" ng-disabled="!wish_form.new_wish" type="submit" value="Ja!" style="margin-top:-6px">
   </div>
 
 
-  <span style="font-size:12px;font-weight:normal;opacity:0.7" ng-show="wish_form.new_wish.length > 0"><br>{{100 - wish_form.new_wish.length}} Zeichen übrig</span>
+
   <br>
   <div ng-show="wish_form.new_wish.length > 5" style="font-size: 16px" class="text-center">
     <b>Willst du mehr dazu sagen?</b><br>
@@ -113,4 +117,7 @@
 
 
 </div>
+
+<div class="text-center" style="margin-top:5px;color:#333;"><b>Hinweis:</b> Was du mit dem Grundeinkommen tun würdest hat <u>keinen</u> Einfluss auf deine Gewinnchancen. Grundeinkommen ist BEDINGUNGSLOS und geht davon aus, dass <i>du</i> am besten weißst, was gut für dich ist. Aber wir freuen uns natürlich über eine ehrliche Antwort.</div>
+
 <a href="#" ng-show="user_wishes.count == 0" ng-click="skip_section('wishes')"><i class="icon-mail-forward"></i> Überspringen</a>
