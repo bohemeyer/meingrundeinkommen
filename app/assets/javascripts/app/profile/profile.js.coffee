@@ -293,7 +293,6 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
             text: item.text
             count: item.othersCount
             create: item.create
-        console.log r
         return r
 
     $scope.selectedSuggestion = (item) ->
