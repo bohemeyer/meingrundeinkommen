@@ -1,6 +1,8 @@
 class UserWishSerializer < ActiveModel::Serializer
   include ConjugationHelper
-  attributes :id, :story, :text, :he_text, :user_wish_id, :user_name, :created_at
+  include ActionView::Helpers::DateHelper
+
+  attributes :id, :story, :text, :he_text, :user_wish_id, :user, :time_ago, :created_at
 
   def id
     object.wish.try(:id)
@@ -14,8 +16,12 @@ class UserWishSerializer < ActiveModel::Serializer
     object.wish.try(:text)
   end
 
-  def user_name
-    object.user.try(:name)
+  def user
+    object.user.slice(:name,:id,:avatar) if object.user
+  end
+
+  def time_ago
+    time_ago_in_words(object.created_at)
   end
 
   def he_text

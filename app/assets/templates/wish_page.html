@@ -1,8 +1,7 @@
-<breadcrumbs></breadcrumbs>
 <div class="container margin-top-70">
 	<div class="row">
 		<div class="col-md-6">
-			<h1>Mit einem <a href="#">Grundeinkommen</a> würden diese {{users.length}} Menschen <b>{{wish.wish.they}}</b></h1>
+			<h1>Mit einem <a href="#">Grundeinkommen</a> würden diese {{wish.count}} Menschen <b>{{wish.wish.they}}</b></h1>
 
 			<a ng-click="me_too(wish)" href="#" class="btn-large btn-pad " ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}" style="width:90%;text-align:center">
                      <span ng-show="wish.meToo">
@@ -21,18 +20,18 @@
 	</div>
 	<h3 class="title">&nbsp;</h3>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12" ng-if="stories">
 			<h2>Neueste Geschichten dazu</h2>
 			<ul class="listbox">
                <li ng-repeat="story in stories" ng-animate="'animate'">
                   <div class="pull-left" style=" padding-top: 10px;
     text-align: center;
     width: 91px;padding:5px;line-height:19px">
-                     <i class="icon-time"></i> vor {{wish.timeAgo}}
+                     <i class="icon-time"></i> vor {{story.timeAgo}}
                   </div>
 
                   <div class="pull-left">
-                     <div class="testimonial-image "><img alt="" ng-src="{{story.user.avatar.avatar.thumb.url}}"></div>
+                     <div class="testimonial-image "><img alt="" ng-src="{{story.user.avatar.thumb.url}}"></div>
                   </div>
 
 

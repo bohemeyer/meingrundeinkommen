@@ -52,8 +52,10 @@ class Api::WishesController < ApplicationController
 
   def show
     wish = Wish.find(params[:id])
+    count = UserWish.where(wish_id:wish.id).count
     x = {
-      others_count: UserWish.where(id:wish.id).count - 1,
+      count: count,
+      others_count: count -1,
       wish_id: wish.id,
       id: wish.id,
       text: wish.text,
@@ -73,7 +75,9 @@ class Api::WishesController < ApplicationController
 
     if params[:q]
       query = Wish.search do
-        fulltext params[:q]
+        fulltext params[:q] do
+          minimum_match 1
+        end
       end
 
       # if query.hits.empty?
