@@ -1,0 +1,1114 @@
+/**
+ * * * * * * * * * * * * * * * * * * * * *
+ * * DELICIOUS THEME STYLESHEET* * * * * *
+ * * TABLE OF CONTENTS * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * *
+ * * * * * * * * * * * * * * * * * * * * *
+ * 1. CSS RESET
+ * 2. HEADER SECTION
+ * 3. GENERAL SECTION STYLES
+ * 4. SECTION TYPO & DETAILS
+ * 5. SEPARATORS AND TRIANGLES
+ * 6. ICON COLUMNS
+ * 7. BUTTONS
+ * 8. REVIEWS
+ * 9. SCREENS
+ * 10. DEMO
+ * 11. FORMS
+ * 12. FOOTER
+ * * * * * * * * * * * * * * * * * * * * */
+
+/**
+ * MAIN COLORS
+ * green           = #66cc99
+ * alternate green = #5cadad
+ */
+
+/**
+ *
+ *
+ * 1. CSS RESET
+ *
+ *
+ */
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code,
+del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var,
+b, i,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section, summary,
+time, mark, audio, video {
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+}
+body {
+    line-height:1;
+    background: #fff;
+    font-family: 'Lato', sans-serif;
+    color: #999;
+
+}
+html {
+
+}
+article,aside,details,figcaption,figure,
+footer,header,hgroup,menu,nav,section {
+    display:block;
+}
+nav ul {
+    list-style:none;
+}
+blockquote, q {
+    quotes:none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content:'';
+    content:none;
+}
+a {
+    margin:0;
+    padding:0;
+    font-size:100%;
+    vertical-align:baseline;
+    background:transparent;
+    text-decoration: none;
+    color: #66cc99;
+    transition: color 0.3s;
+    -webkit-transition: color 0.3s;
+}
+a:hover {
+    color: #5cadad;
+}
+ins {
+    background-color:#ff9;
+    color:#000;
+    text-decoration:none;
+}
+mark {
+    background-color:#ff9;
+    color:#000;
+    font-style:italic;
+    font-weight:bold;
+}
+del {
+    text-decoration: line-through;
+}
+abbr[title], dfn[title] {
+    border-bottom:1px dotted;
+    cursor:help;
+}
+table {
+    border-collapse:collapse;
+    border-spacing:0;
+}
+hr {
+    display:block;
+    height:1px;
+    border:0;
+    border-top:1px solid #cccccc;
+    margin:1em 0;
+    padding:0;
+}
+input, select {
+    vertical-align:middle;
+}
+
+h1, h2 {
+    color: #666;
+}
+
+h1 {font-size: 42px;}
+h2 {font-size: 34px;}
+h3 {font-size: 28px;}
+h4 {font-size: 22px;}
+h5 {font-size: 16px;}
+h6 {font-size: 8px;}
+
+p {
+    margin: 5px 0;
+    line-height: 22px;
+}
+
+
+/**
+ *
+ *
+ * 2. HEADER SECTION (menu&slider)
+ *
+ *
+ */
+#topContainer {
+    width: 100%;
+    position: fixed;
+    background: url('../img/background.jpg') no-repeat center;
+    background-size: cover;
+    top: 0;
+    z-index: 1;
+}
+
+#contentWrapper {
+    position: relative;
+    z-index: 10;
+    top: 0px;
+    transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+}
+
+
+#navigationWrap {
+    position: relative;
+    margin: 100px 0 50px;
+    width: 100%;
+}
+
+.menuWrap {
+    text-align: right;
+}
+
+.mainMenu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    margin-top: 50px;
+}
+
+.mainMenu li {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.mainMenu li a {
+    color: #fff;
+    line-height: 14px;
+    padding: 10px 20px;
+    text-decoration: none;
+    background: transparent;
+    -webkit-border-radius: 350px;
+    -moz-border-radius: 350px;
+    border-radius: 350px;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+}
+
+.menuActive a {
+    color: #5cadad !important;
+    background: #fff !important;
+}
+
+.mainMenu li a:hover {
+    color: #5cadad;
+    background: #fff;
+}
+
+#followMenu {
+    width: 100%;
+    position: fixed;
+    background: #f7f7f7;
+    background-size: cover;
+    padding: 30px 0;
+    z-index: 20;
+    overflow: hidden;
+    display: none;
+    text-align: center;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+#followMenu .mainMenu li a {
+    color: #ccc;
+}
+
+#followMenu .mainMenu li a:hover, #followMenu .mainMenu .menuActive a{
+    background: #66cc99 !important;
+    color: #fff !important;
+}
+
+#followMenu img {
+    max-height: 100%;
+    height: 50px;
+}
+
+#followMenu .mainMenu {
+    margin: 0 auto;
+
+}
+
+.sliderText {
+    font-size: 45px;
+    line-height: 65px;
+    color: #fff;
+    font-weight: 100;
+}
+
+.sliderText span{
+    font-weight: 300;
+}
+
+.sliderButtonWrap {
+}
+
+.sliderButtonWrap a {
+    margin: 0px 15px;
+}
+
+.ls-bottom-nav-wrapper {
+    bottom: 30%;
+    right: 48%;
+    position: absolute !important;
+}
+
+.ls-bottom-slidebuttons a {
+    /*display: block !important;*/
+}
+
+#responsiveMenuToggle {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    z-index: 20;
+    padding: 10px;
+    font-size: 30px;
+    background: #66cc99;
+    display: none;
+}
+
+#responsiveMenuToggle {
+    cursor: pointer;
+    color: #fff;
+}
+
+/**
+ *
+ *
+ * 3. GENERAL SECTION STYLES
+ *
+ *
+ */
+
+.section-small {
+    padding: 50px 0 50px;
+}
+
+.section-80-130 {
+    padding: 80px 0 130px;
+}
+
+.section-80-80 {
+    padding: 80px 0 130px;
+}
+
+.section-160-160 {
+    padding: 160px 0 160px;
+}
+
+.section-160-30 {
+    padding: 160px 0 30px;
+}
+
+.whiteBgSection {
+    background: #fff;
+    position: relative;
+}
+
+.grayBgSection {
+    position: relative;
+    background: #f5f5f5;
+}
+
+.textureBgSection {
+    position: relative;
+    /*background-attachment:fixed;*/
+    background-size: cover;
+    background-color: #fff;
+    background-position: 0 0;
+}
+
+
+/**
+ *
+ *
+ * 4. SECTION TYPO & DETAILS
+ *
+ *
+ */
+.sectionTitle, .sectionDescription{
+    text-align: center;
+}
+
+.sectionTitle {
+    font-size: 50px;
+    line-height: 60px;
+    font-weight: 100;
+}
+
+.sectionDescription {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 300;
+}
+
+.titleSeparator {
+    width: 40px;
+    height: 4px;
+    margin: 20px auto;
+    background: #66cc99;
+}
+
+.grayBgSection, .whiteBgSection {
+    color: #999999;
+}
+
+.textureBgSection {
+    color: #fff;
+}
+
+.textureBgSection .sectionTitle, .textureBgSection .sectionDescription {
+    color: #fff;
+}
+
+.textureBgSection .titleSeparator {
+    background: #fff;
+}
+
+.hide-desktop {
+    display: none;
+}
+
+
+/**
+ *
+ *
+ * 5. SEPARATORS AND TRIANGLES
+ *
+ *
+ */
+ .separator40 {
+    height: 40px;
+}
+.separator80 {
+    height: 80px;
+}
+
+.separator160 {
+    height: 80px;
+}
+
+.alignTextCenter {
+    text-align: center;
+}
+
+.triangleTop {
+    position: absolute;
+    top: -160px;
+    width: 100%;
+    height: 160px;
+    display: block;
+    z-index: 99;
+}
+
+.triangleBottom {
+    position: absolute;
+    bottom: -160px;
+    width: 100%;
+    height: 160px;
+    display: block;
+    z-index: 99;
+}
+
+
+/**
+ *
+ * 6. ICON COLUMNS
+ *
+ */
+/*center icon col*/
+.iconColWrap {
+    text-align: center;
+}
+
+.iconColWrap i.fa {
+    min-width: 30px;
+    font-size: 32px;
+    border: 2px solid #66cc99;
+    color: #66cc99;
+    padding: 40px;
+    background: transparent;
+    -webkit-border-radius: 350px;
+    -moz-border-radius: 350px;
+    border-radius: 350px;
+    cursor: default;
+    transition: background 0.3s, color 0.3s;
+    -webkit-transition: background 0.3s, color 0.3s;
+    transform: translate3d(0px, 0px, 0px);
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    margin-bottom: 35px;
+}
+
+.iconColWrap:hover i.fa, .iconColWrap i.fa.highlighted {
+    color: #fff;
+    background: #66cc99;
+}
+
+.iconColWrap h2 {
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 28px;
+    transition: color 0.3s;
+    -webkit-transition: color 0.3s;
+}
+
+.iconColWrap:hover h2 {
+    color: #66cc99;
+}
+
+
+.iconColWrap p {
+    font-size: 16px;
+    color: #999999;
+    font-weight: 300;
+    line-height: 22px;
+}
+
+/*right icon col*/
+.iconRightColWrap {
+    transform: translate(0, 0) translate3d(0px, 0px, 0px);
+    -webkit-transform: translate(0, 0) translate3d(0px, 0px, 0px);
+    transition: transform 0.3s;
+    -webkit-transition: -webkit-transform 0.3s;
+    margin-bottom: 40px;
+}
+
+.iconRightColWrap:hover {
+    transform: translate(-10px, 0);
+    -webkit-transform: translate(-10px, 0);
+}
+
+.rightColTextWrap {
+    float: right;
+    text-align: right;
+    max-width: 70%;
+    margin-right: 20px;
+}
+
+.iconRightColWrap i.fa {
+    font-size: 32px;
+    border: 2px solid #66cc99;
+    color: #66cc99;
+    padding: 25px;
+    background: transparent;
+    -webkit-border-radius: 350px;
+    -moz-border-radius: 350px;
+    border-radius: 350px;
+    cursor: default;
+    transition: background 0.3s, color 0.3s;
+    -webkit-transition: background 0.3s, color 0.3s;
+    float: right;
+    min-width: 30px;
+    text-align: center;
+}
+
+.iconRightColWrap:hover i.fa, .iconRightColWrap i.fa.highlighted {
+    color: #fff;
+    background: #66cc99;
+}
+
+.iconRightColWrap h2 {
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 10px;
+    line-height: 28px;
+    transition: color 0.3s;
+    -webkit-transition: color 0.3s;
+}
+
+.iconRightColWrap:hover h2 {
+    color: #66cc99;
+}
+
+
+.iconRightColWrap p {
+    font-size: 16px;
+    color: #999999;
+    font-weight: 300;
+    line-height: 22px;
+}
+
+/*left icon col*/
+.iconLeftColWrap {
+    transform: translate(0, 0) translate3d(0px, 0px, 0px);
+    -webkit-transform: translate(0, 0) translate3d(0px, 0px, 0px);
+    transition: transform 0.3s;
+    -webkit-transition: -webkit-transform 0.3s;
+    margin-bottom: 40px;
+}
+
+.iconLeftColWrap:hover {
+    transform: translate(10px, 0);
+    -webkit-transform: translate(10px, 0);
+}
+
+.leftColTextWrap {
+    float: left;
+    text-align: left;
+    max-width: 70%;
+    margin-left: 20px;
+}
+
+.iconLeftColWrap i.fa {
+    font-size: 32px;
+    border: 2px solid #66cc99;
+    color: #66cc99;
+    padding: 25px;
+    background: transparent;
+    -webkit-border-radius: 350px;
+    -moz-border-radius: 350px;
+    border-radius: 350px;
+    cursor: default;
+    transition: background 0.3s, color 0.3s;
+    -webkit-transition: background 0.3s, color 0.3s;
+    float: left;
+    min-width: 30px;
+    text-align: center;
+}
+
+.iconLeftColWrap:hover i.fa, .iconLeftColWrap i.fa.highlighted {
+    color: #fff;
+    background: #66cc99;
+}
+
+.iconLeftColWrap h2 {
+    font-size: 24px;
+    color: #666;
+    margin-bottom: 10px;
+    line-height: 28px;
+    transition: color 0.3s;
+    -webkit-transition: color 0.3s;
+}
+
+.iconLeftColWrap:hover h2 {
+    color: #66cc99;
+}
+
+.iconLeftColWrap p {
+    font-size: 16px;
+    color: #999999;
+    font-weight: 300;
+    line-height: 22px;
+}
+
+/**
+ *
+ * 7. BUTTONS
+ *
+ */
+.buttonBig, .dlButton {
+    font-size: 30px;
+    line-height: 30px;
+    color: #fff;
+    text-decoration: none;
+    padding: 18px 35px;
+    border: 2px solid #fff;
+    -webkit-border-radius: 350px;
+    -moz-border-radius: 350px;
+    border-radius: 350px;
+    transform: translate3d(0px, 0px, 0px);
+    display: inline-block;
+    background-color:transparent;
+    transition: color 0.3s, background-color 0.3s !important;
+    -webkit-transition: color 0.3s, background-color 0.3s !important;
+}
+
+.buttonBig.green {
+    color: #66cc99;
+    border: 2px solid #66cc99;
+}
+
+.buttonBig:hover, .dlButton:hover {
+    background: #fff;
+    color: #5cadad;
+}
+
+.buttonBig.green:hover {
+    color: #fff;
+    background: #66cc99;
+
+}
+
+.dlButton {
+    font-size: 24px;
+    text-align: left;
+    padding: 8px 35px 8px 15px;
+    margin: 0 15px;
+    z-index: 5;
+    position: relative;
+}
+
+.dlButton i {
+    float: left;
+    font-size: 34px;
+    margin-right: 18px;
+    margin-top: 4px;
+}
+
+.dlButton .dlButtonWrap {
+    font-size: 14px;
+    float: right;
+}
+
+.dlButton .dlButtonSmall {
+    font-size: 24px;
+}
+
+
+/**
+ *
+ *
+ * 8. REVIEWS
+ *
+ *
+ */
+.testWrapper {
+    overflow: hidden;
+}
+
+.revViewport {
+    width: 10000px;
+    position: relative;
+    transform: translate(0px, 0px) translate3d(0px, 0px, 0px);
+    -webkit-transform: translate(0px, 0px) translate3d(0px, 0px, 0px);
+    transition: transform 0.8s;
+    -webkit-transition: -webkit-transform 0.8s;
+}
+
+.revWrap {
+    display: block;
+    float: left;
+    opacity: 0;
+    transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+}
+
+.revWrapActive {
+    opacity: 1 !important;
+}
+
+.revLeft {
+    float: left;
+    width: 100px;
+    max-width: 100px;
+    position: relative;
+}
+
+.revRight {
+    float: right;
+    width: 600px;
+    position: relative;
+}
+
+
+.revCustomer {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    position: relative;
+}
+
+.revBubble {
+    background: #fff;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    padding: 30px 40px;
+}
+
+
+.arrowLeftRev {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right:10px solid #fff;
+    position: absolute;
+    left: -10px;
+    top: 45px;
+}
+
+.revText {
+    color: #66cc99;
+    font-weight: 300;
+    font-size: 30px;
+    line-height: 38px;
+    margin-bottom: 10px;
+}
+
+.revAuthor {
+    font-size: 18px;
+    line-height: 28px;
+    color: #999999;
+}
+
+.revStars {
+    vertical-align: middle;
+    margin-left: 8px;
+}
+
+#revsNavi {
+    text-align: center;
+    margin: 60px auto 0;
+}
+
+.revBullet {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background: transparent;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.revBulletActive {
+    background: #fff;
+    cursor: default;
+}
+
+
+/**
+ *
+ *
+ * 9. SCREENS
+ *
+ *
+ */
+.screenImg {
+    background: #fff;
+    padding: 8px;
+    border: 1px solid #e6e6e6;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    transition: border-color 0.4s;
+    -webkit-transition: border-color 0.4s;
+    max-width: 261px;
+}
+
+.screenImg:hover {
+    border-color: #66CC99;
+}
+
+#screensViewportWrap {
+    position: relative;
+}
+
+#screensOfHide {
+    overflow: hidden;
+}
+
+#screensWrap {
+    text-align: center;
+}
+
+#screensWrapOuter {
+    width: 10000px;
+    position: relative;
+    transform: translate(0px, 0px) translate3d(0px, 0px, 0px);
+    -webkit-transform: translate(0px, 0px) translate3d(0px, 0px, 0px);
+    transition: transform 0.5s;
+    -webkit-transition: -webkit-transform 0.5s;
+}
+
+.screen-item {
+    /*max-width: 20%;*/
+    /*margin: 0 2% 30px;*/
+}
+
+.screen-item img {
+    display: block;
+}
+
+#screensWrap span {
+    margin-top: 30px;
+    font-size: 16px;
+    line-height: 20px;
+    display: inline-block;
+}
+
+.screensFilters {
+    text-align: center;
+    margin: 0 auto 20px !important;
+}
+
+.btnstyle, button, input[type="submit"] {
+    text-transform: uppercase;
+    background: #fff;
+    border: 2px solid #cccccc;
+    color: #999;
+    font-weight: 500;
+    margin: 0 5px;
+    padding: 8px 20px;
+    -webkit-border-radius: 45px;
+    -moz-border-radius: 45px;
+    border-radius: 45px;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s, background 0.3s, border-color 0.3s;
+    -webkit-transition: color 0.3s, background 0.3s, border-color 0.3s;
+    outline: 0 transparent;
+}
+
+.btnstyle:hover, button.active, button:hover, input[type="submit"]:hover {
+    color: #fff;
+    background: #66CC99;
+    border-color: #66CC99;
+}
+
+.screensArrows {
+    position: absolute;
+    top: 50%;
+    font-size: 32px;
+    margin-top: -30px;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    border: 2px solid #cccccc;
+    padding: 5px 15px;
+    line-height: 32px;
+    color: #cccccc;
+    transition: color 0.3s, background 0.3s, border-color 0.3s;
+    -webkit-transition: color 0.3s, background 0.3s, border-color 0.3s;
+    opacity: 0.5;
+    z-index: 5;
+}
+
+.screensArrows i {
+    cursor: default;
+}
+
+.screensArrowsActive, .screensArrowsActive i {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.screensArrowsActive:hover {
+    color: #fff;
+    border-color: #fff;
+    background: #66CC99;
+}
+
+#screensLeftAr i {
+    margin-right: 2px;
+}
+
+#screensRightAr i {
+    margin-left: 2px;
+}
+
+#screensLeftAr {
+    left: -80px;
+}
+
+#screensRightAr {
+    right: -80px;
+}
+
+.screenImg {
+    min-height: 495px;
+}
+
+/**
+ *
+ *
+ * 10. DEMO
+ *
+ *
+ */
+.embed-container { position: relative; padding-bottom: 56.25%; padding-top: 30px; height: 0; overflow: hidden; max-width: 100%; height: auto; }
+.embed-container iframe, .embed-container object,
+.embed-container embed { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+.floatingPhone {
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    right: 0;
+    bottom: -100px;
+
+    background: url('../img/demoimg/phone2.png') no-repeat;
+    background-position: 0% 100%;
+    background-size: cover;
+
+}
+
+
+/**
+ *
+ *
+ * 11. FORMS
+ *
+ *
+ */
+input:not([type=submit])  {
+    width: 85%;
+    font-size: 16px;
+    margin-bottom: 20px;
+    padding: 15px 16px;
+    border: 2px solid #cccccc;
+    -webkit-border-radius: 45px;
+    -moz-border-radius: 45px;
+    border-radius: 45px;
+    color: #666;
+    transition: border-color 0.6s;
+    -webkit-transition: border-color 0.6s;
+}
+
+textarea {
+    width: 85%;
+    padding: 15px 16px;
+    font-size: 16px;
+    resize: vertical;
+    margin-bottom: 20px;
+    border: 2px solid #cccccc;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    color: #666;
+    font-family: 'Lato', sans-serif;
+    transition: border-color 0.6s;
+    -webkit-transition: border-color 0.6s;
+}
+
+
+input:focus, textarea:focus {
+    outline: 0 transparent;
+    border-color: #66CC99;
+}
+
+input[type="submit"]  {
+    font-size: 18px;
+    padding: 15px 50px;
+    margin: 0;
+    color: #66CC99;
+    border-color: #66CC99;
+}
+
+.del-fa {
+    font-size: 26px;
+    border: 2px solid #66CC99;
+    color: #66CC99;
+    padding: 12px;
+    min-width: 26px;
+    text-align: center;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+#formSubmitMessage {
+    margin: 20px 0;
+}
+
+.fa-form-wait {
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.footerContact td {
+    vertical-align: middle;
+    padding-bottom: 20px;
+}
+
+.iconTd {
+    width: 25%;
+}
+
+/**
+ *
+ *
+ * 12. FOOTER
+ *
+ *
+ */
+.footer {
+    width: 100%;
+    background: url('../img/background.jpg') no-repeat center;
+    background-size: cover;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+}
+
+.footer p {
+    font-size: 14px;
+    color: #fff;
+    line-height: 24px;
+}
+
+.footer i.fa {
+    font-size: 26px;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 13px;
+    min-width: 26px;
+    background: transparent;
+    -webkit-border-radius: 350px;
+    -moz-border-radius: 350px;
+    border-radius: 350px;
+    transition: background 0.3s, color 0.3s;
+    -webkit-transition: background 0.3s, color 0.3s;
+    transform: translate3d(0px, 0px, 0px);
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    margin: 0px 10px;
+    text-align: center;
+}
+
+.footer i.fa:hover {
+    color: #66cc99;
+    background: #fff;
+}
+
+.footer p a {
+    color: #99ffcc;
+}
+
+
+.bigsocial i.fa {
+    font-size: 50px;
+    border: 2px solid #66cc99;
+    color: #66cc99;
+    padding: 13px;
+    min-width: 50px;
+    background: transparent;
+    -webkit-border-radius: 350px;
+    -moz-border-radius: 350px;
+    border-radius: 350px;
+    transition: background 0.3s, color 0.3s;
+    -webkit-transition: background 0.3s, color 0.3s;
+    transform: translate3d(0px, 0px, 0px);
+    -webkit-transform: translate3d(0px, 0px, 0px);
+    margin: 0px 10px;
+    text-align: center;
+}
+
+.bigsocial i.fa:hover {
+    color: #fff;
+    background: #66cc99;
+}

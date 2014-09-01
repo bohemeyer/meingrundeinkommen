@@ -1,0 +1,582 @@
+.row {
+    margin: 0 auto; 
+    width: 1170px;
+    position: relative;
+}
+
+.inner-wrapper {
+    clear: both;
+    display: inline;
+    float: left;
+    padding: 0 0px 0 0px;
+    position: relative;
+    width: 1170px;
+}
+
+.container {
+    clear: both;
+    float: left;
+    margin: 0;
+    width: 100%;    
+}
+
+.one-col, .two-col, .three-col, .four-col, .five-col, .six-col, .seven-col, .eight-col, .nine-col, .ten-col, .eleven-col, .twelve-col {
+    clear: none;
+    display: inline;
+    float: left;
+    margin: 0 18px 0 0;
+    padding: 0;
+    position: relative;
+}
+
+.one-col {
+    width: 81px;
+}
+
+.two-col {
+    width: 180px;
+}
+
+.three-col {
+    width: 279px;
+}
+
+.four-col {
+    width: 378px;
+}
+
+.five-col {
+    width: 477px;
+}
+
+.six-col {
+    width: 576px;
+}
+
+.seven-col {
+    width: 675px;
+}
+
+.eight-col, .revWrap {
+    width: 774px;
+}
+
+.nine-col {
+    width: 873px;
+}
+
+.ten-col {
+    width: 972px;
+}
+
+.eleven-col {
+    width: 1071px;
+}
+
+.twelve-col {
+    width: 1170px;
+    margin-right: 0;
+}
+
+.prefix-one {
+    margin-left: 99px;
+}
+
+.prefix-two {
+    margin-left: 198px;
+}
+
+.prefix-three {
+    margin-left: 297px;
+}
+
+.prefix-four {
+    margin-left: 396px;
+}
+
+.prefix-five {
+    margin-left: 495px;
+}
+
+.prefix-six {
+    margin-left: 594px;
+}
+
+.prefix-seven {
+    margin-left: 693px;
+}
+
+.prefix-eight {
+    margin-left: 792px;
+}
+
+.prefix-nine {
+    margin-left: 891px;
+}
+
+.prefix-ten {
+    margin-left: 990px;
+}
+
+.prefix-eleven {
+    margin-left: 1089px;
+}
+
+.suffix-one {
+    margin-right: 117px;
+}
+
+.suffix-two {
+    margin-right: 216px;
+}
+
+.suffix-three {
+    margin-right: 315px;
+}
+
+.suffix-four {
+    margin-right: 414px;
+}
+
+.suffix-five {
+    margin-right: 513px;
+}
+
+.suffix-six {
+    margin-right: 612px;
+}
+
+.suffix-seven {
+    margin-right: 711px;
+}
+
+.suffix-eight {
+    margin-right: 810px;
+}
+
+.suffix-nine {
+    margin-right: 909px;
+}
+
+.suffix-ten {
+    margin-right: 1008px;
+}
+
+.suffix-eleven {
+    margin-right: 1107px;
+}
+
+.clear { /* Useful generic clearing class. */
+    clear: both;
+}
+
+.last-col {
+    margin-right: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+@media only screen and (min-width : 1171px) {
+    .fmshown {
+        display: block !important;
+    }
+}
+@media only screen 
+and (min-width : 1170px) 
+and (max-width : 1350px) 
+{
+    .screensArrows {
+        margin-top: 0;
+        top: -60px;
+    }
+
+    #screensLeftAr {
+        left: 00px;
+    }
+
+    #screensRightAr {
+        right: 20px;
+    }
+}
+
+@media only screen 
+and (min-width : 768px) 
+and (max-width : 1170px) 
+{
+    .row {
+        width: 734px;
+    }
+
+    .one-col, .two-col, .three-col, .four-col, .five-col, .six-col, .seven-col, .eight-col, .nine-col, .ten-col, .eleven-col, .twelve-col {
+        clear: none;
+        display: inline;/* IE double margin fix. Feel free to move this to your IE specific stylesheets. */
+        float: left;
+        margin: 0 10px 0 0;
+        padding: 0;
+        position: relative;
+    }
+
+    #navigationWrap {
+        margin: 10px 0 50px;
+    }
+
+    #screensOfHide{
+        width: 576px;
+        margin: 0 auto;
+    }
+
+    #screensLeftAr {
+        left: 20px;
+    }
+
+    #screensRightAr {
+        right: 20px;
+    }
+
+    .one-col {
+        width: 52px;
+    }
+
+    .two-col {
+        width: 114px;
+    }
+
+    .three-col {
+        width: 176px;
+    }
+
+    .four-col {
+        width: 238px;
+    }
+
+    .five-col {
+        width: 300px;
+    }
+
+    .six-col {
+        width: 362px;
+    }
+
+    .seven-col {
+        width: 424px;
+    }
+
+    .eight-col, .revWrap {
+        width: 486px;
+    }
+
+    .nine-col {
+        width: 548px;
+    }
+
+    .ten-col {
+        width: 610px;
+    }
+
+    .eleven-col {
+        width: 672px;
+    }
+
+    .twelve-col {
+        width: 734px;
+        margin-right: 0;
+    }
+
+    .prefix-one {
+        margin-left: 62px;
+    }
+
+    .prefix-two {
+        margin-left: 124px;
+    }
+
+    .prefix-three {
+        margin-left: 186px;
+    }
+
+    .prefix-four {
+        margin-left: 248px;
+    }
+
+    .prefix-five {
+        margin-left: 310px;
+    }
+
+    .prefix-six {
+        margin-left: 372px;
+    }
+
+    .prefix-seven {
+        margin-left: 434px;
+    }
+
+    .prefix-eight {
+        margin-left: 496px;
+    }
+
+    .prefix-nine {
+        margin-left: 558px;
+    }
+
+    .prefix-ten {
+        margin-left: 620px;
+    }
+
+    .prefix-eleven {
+        margin-left: 682px;
+    }
+
+    .suffix-one {
+        margin-right: 72px;
+    }
+
+    .suffix-two {
+        margin-right: 134px;
+    }
+
+    .suffix-three {
+        margin-right: 196px;
+    }
+
+    .suffix-four {
+        margin-right: 258px;
+    }
+
+    .suffix-five {
+        margin-right: 320px;
+    }
+
+    .suffix-six {
+        margin-right: 382px;
+    }
+
+    .suffix-seven {
+        margin-right: 444px;
+    }
+
+    .suffix-eight {
+        margin-right: 506px;
+    }
+
+    .suffix-nine {
+        margin-right: 568px;
+    }
+
+    .suffix-ten {
+        margin-right: 630px;
+    }
+
+    .suffix-eleven {
+        margin-right: 692px;
+    }
+
+    .last-col {
+        margin-right: 0;
+    }
+
+    #navigationWrap .three-col {
+        width: 100%;
+        display: block;
+        text-align: center;
+        float: none;    
+    }
+
+    #navigationWrap .nine-col {
+        width: 100%;
+        display: none;
+        text-align: center;
+        float: none;    
+    }
+
+    .rightColTextWrap, .leftColTextWrap {
+        max-width: 50%;
+    }
+
+    .revLeft {
+        width: 70px;
+        max-width: 70px;
+    }
+
+    .revRight {
+        width: 350px;
+    }
+
+    .triangleTop {
+        position: absolute;
+        top: -80px;
+        width: 100%;
+        height: 80px;
+        display: block;  
+        z-index: 99; 
+    }
+
+    .triangleBottom {
+        position: absolute;
+        bottom: -80px;
+        width: 100%;
+        height: 80px;
+        display: block;
+        z-index: 99;
+    }
+
+     .hide-tablet {
+        display: none;
+    }
+
+    #followMenu {
+        overflow-y: scroll;
+    }
+
+    #followMenu .mainMenu li {
+        display: block;
+        margin: 30px 0;
+    }
+    
+    #followMenu .mainMenu li a {
+        color: #666666;      
+    }
+
+    #responsiveMenuToggle {
+        display: block;
+    }
+
+    .fmToggled {
+        display: block !important;
+    }
+}
+
+@media only screen 
+and (max-width : 767px) {
+    .row {
+        width: 100%;
+        min-width: 279px;
+    }
+
+    #navigationWrap {
+        margin: 10px 0 20px;
+    }
+
+    .one-col, .two-col, .three-col, .four-col, .five-col, .six-col, .seven-col, .eight-col, .nine-col, .ten-col, .eleven-col, .twelve-col{
+        clear: both;
+        display: block;
+        float: none;
+        margin: 0 0px 20px 0;
+        padding: 0;
+        position: relative;
+        width: 100%;
+    }
+
+    #screensLeftAr {
+        left: 20px;
+    }
+
+    #screensRightAr {
+        right: 20px;
+    }
+
+    #screensOfHide{
+        width: 279px;
+        margin: 0 auto;
+
+    }
+
+    .revWrap {
+        max-width: 279px;
+    } 
+
+    #navigationWrap .three-col {
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+
+    #navigationWrap .nine-col {
+        display: none;      
+    }
+
+    .iconRightColWrap, .iconLeftColWrap {
+        text-align: center;
+    }
+
+    .rightColTextWrap, .leftColTextWrap {
+        max-width: 100%;
+        float: none;
+        text-align: center;
+        margin: 10px 0 0;
+    }
+
+    .iconRightColWrap i.fa, .iconLeftColWrap i.fa {
+        float: none;
+    }
+    
+    .triangleTop, .triangleBottom {
+        display: none;
+    }
+
+    .revLeft {
+        width: 10%;
+        max-width: 10%;
+    }
+
+    .revRight {
+        width: 80%;
+    }
+    .revBubble {
+        padding: 10px;
+    }
+
+    .screen-item span {
+        display: block !important;
+    }
+
+    #screensContainer button {
+        display: block;
+        clear: both;
+        margin: 0 auto 20px;
+    }
+
+    .ls-bottom-nav-wrapper {
+        bottom: 0%;
+    }
+
+    .hide-mobile {
+        display: none;
+    }
+    #followMenu {
+        overflow-y: scroll;
+    }
+    #followMenu .mainMenu li {
+        display: block;
+        margin: 30px 0;
+    }
+    #followMenu .mainMenu li a {
+        color: #666666;      
+    }
+
+    #responsiveMenuToggle {
+        display: block;
+    }
+
+    .fmToggled {
+        display: block !important;
+    }
+}
+
+@media only screen 
+and (max-width : 480px) 
+{
+    .screensArrows {
+        margin-top: 0;
+        top: -60px;
+    }
+
+    #screensLeftAr {
+        left: 00px;
+    }
+
+    #screensRightAr {
+        right: 20px;
+    }
+}
