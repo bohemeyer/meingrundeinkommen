@@ -82,13 +82,14 @@ class Api::WishesController < ApplicationController
 
     base = UserWish
 
-    page = params.permit(:page) ? params.permit(:page).to_i : 1
+    p = params.permit(:page, :q)
 
-    q = params.permit(:q)
+    page = p.page ? p.page.to_i : 1
 
     limit = 8
 
-    if q
+    if p.q
+      q = p.q
       q = q.gsub(/ich würde/i,'')
       limit = 5
       query = Wish.search do
