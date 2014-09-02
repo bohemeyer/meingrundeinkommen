@@ -26,6 +26,11 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
     $scope.currentUser = Security.currentUser
     $scope.breadcrumbs = breadcrumbs
 
+    $scope.browser = {}
+    isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
+    $scope.browser.isFirefox = typeof InstallTrigger isnt "undefined" # Firefox 1.0+
+    $scope.browser.isChrome = !!window.chrome and not isOpera # Chrome 1+
+
     Home.query().then (home) ->
       $scope.home = home
 

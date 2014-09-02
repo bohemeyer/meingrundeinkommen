@@ -2804,3 +2804,36 @@ a.suggestion_entry:hover > .icon2, .active > a.suggestion_entry > .icon2 {
 .btn-normal.disabled {
     opacity: 0.5;
 }
+
+.text-center-sm,
+.text-center-md,
+.text-center-lg,
+.text-right-sm,
+.text-right-md,
+.text-right-lg { text-align: inherit; }
+
+/* Define xs styles after defaults so they take precedence */
+.text-center-xs { text-align: center; }
+.text-right-xs { text-align: right; }
+
+/* Small grid */
+@media (min-width: 768px) {
+  .text-center-sm, .text-center-xs { text-align: center; }
+  .text-left-sm, .text-left-xs { text-align: left; }
+}
+
+/* Medium grid */
+@media (min-width: 992px) {
+  .text-center-md, .text-center-sm, .text-center-xs { text-align: center; }
+  .text-left-md, .text-left-sm, .text-left-xs { text-align: left; }
+}
+
+/* Large grid */
+@media (min-width: 1200px) {
+  .text-center-lg, .text-center-md, .text-center-sm, .text-center-xs {
+    text-align: center;
+  }
+  .text-left-lg, .text-left-md, .text-left-sm, .text-left-xs {
+    text-align: left;
+  }
+}

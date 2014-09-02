@@ -87,9 +87,9 @@ bedingungslos</li>
 
                </div>
 
-               <h2 class="slogan-title">Noch {{daysLeft}} Tage bis zum nächsten Ziel:</h2>
+               <h2 class="slogan-title margin-top-30">Noch {{daysLeft}} Tage bis zum nächsten Ziel:</h2>
 
-               <div class="progress" style="font-size: 15px;font-weight: 600;line-height: 40px;">
+               <div class="progress margin-top-20" style="font-size: 15px;font-weight: 600;line-height: 40px;">
 
                   <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
                      <span ng-hide="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
@@ -98,8 +98,27 @@ bedingungslos</li>
 
                </div>
 
-                  <a href="http://www.startnext.de/mein-grundeinkommen" class="btn btn-special btn-color"><i class="icon-heart"></i> Jetzt unterstützen!</a>
+                  <a href="http://www.startnext.de/mein-grundeinkommen" class="btn btn-special btn-color btn-large margin-top-20"><i class="icon-heart"></i> Jetzt unterstützen!</a>
 
+               <h1 style="margin-bottom:0;" class="margin-top-70">...oder unterstützen <u>ohne zu bezahlen</u></h1> <p>Mit der CrowdBar fließt aus jedem deiner Online-Einkäufe Geld ins nächste Grundeinkommen.<br>
+Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
+  <div ng-click="video_content2='video2.html'" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:20px;margin-bottom: 40px;max-width:800px;width:80%;display:inline-block;">
+     <div ng-include src="video_content2 ? video_content2 : 'video_preview2.html'"></div>
+  </div>
+<div collapse="isCollapsed">
+  <a class="btn-grey btn-normal" ng-click="isCollapsed = !isCollapsed"><i class="icon-caret-down"></i> CrowdBar - so geht's</a>
+</div>
+<div class="col-md-offset-3 col-md-6" collapse="!isCollapsed">
+   <div ng-include="'/assets/crowdbar_install.html'"></div>
+</div>
+
+
+      <script type="text/ng-template" id="video_preview2.html">
+         <a href="#"><img src="/assets/crowdbar_videopreview.jpg"></a>
+      </script>
+      <script type="text/ng-template" id="video2.html">
+         <iframe width="100%" height="350" src="http://www.youtube.com/embed/tcd7NiotGWg?autoplay=1" frameborder="0" allowfullscreen></iframe>
+      </script>
 
 
 
