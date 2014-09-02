@@ -107,8 +107,8 @@ module ConjugationHelper
 
 
 
-        #text = has_name_prefix?(text) ? " sich" + text : text if prefix
-        text = !has_name_prefix?(text) ? " sich" + text : text if prefix
+        text = has_name_prefix?(text) ? " sich " + text : text if prefix
+        text = !has_name_prefix?(text) ? " sich " + text : text if prefix
 
       elsif person == :they || person == :they2
 

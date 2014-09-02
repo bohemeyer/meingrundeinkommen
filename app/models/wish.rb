@@ -12,5 +12,5 @@ class Wish < ActiveRecord::Base
   def conjugate
     [:me,:he,:they].inject({}) { |mem, var| mem[var] = conjugate_sentence(text, var); mem }
   end
-
+#text, person = :me, comma=true, prefix = true, gender = :male, add_space = false)
 end
