@@ -20,7 +20,7 @@ angular.module("login", [
 
   $scope.login_user =
     email: if $routeParams['email'] then $routeParams['email'] else ''
-    password: 'lalalaldsgew'
+    password: ''
     remember_me: false
 
   $scope.forgot_pw_open = ->

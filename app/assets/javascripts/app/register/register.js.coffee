@@ -27,7 +27,7 @@ angular.module("register", [
 
   $scope.register_user =
     email: if $routeParams.email then $routeParams.email else ''
-    password: 'lalalaldsgew'
+    password: ''
     name: if $routeParams.name then $routeParams.name else ''
     datenschutz: null
     newsletter: null
