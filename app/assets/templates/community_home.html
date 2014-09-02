@@ -5,7 +5,7 @@
 
 
 
-         <h1><a name="waswaerewenn"></a><span class="huge">{{home.numberOfUsers}}</span> <br> Menschen erzählen hier, wie ein Grundeinkommen
+         <h1><span class="huge">{{home.numberOfUsers}}</span> <br> Menschen erzählen hier, wie ein <span class="infolink" ng-click="bge_info()">Grundeinkommen</span>
 {{home.numberOfWishes}} Dinge in ihrem Leben verändern würde.</h1>
       </div>
 
@@ -35,7 +35,7 @@
 
                    </a>
 
-                   <a  href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}" class="edit_button_hidden btn-small btn-pad pull-right btn-grey"><i class="icon-angle-right"></i> ansehen
+                   <a  href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}" class="edit_button_hidden btn-normal btn-pad pull-right btn-grey"><i class="icon-angle-right"></i> ansehen
                    </a>
 
                   <div class="textblock"><a href="/menschen/{{wish.user.id}}">{{wish.user.name}}</a>
@@ -61,30 +61,19 @@
 
       <div class="row margin-top-30">
          <div class="col-md-10 col-md-offset-1">
-            <div class="text-center"><h1>Das passiert gerade:</h1></div>
+            <div class="text-center"><h1><i class="icon-time"></i> Das passiert gerade:</h1></div>
 
             <ul class="listbox">
                <li ng-repeat="wish in latest_wishes" ng-animate="'animate'">
-                  <div class="pull-left" style=" padding-top: 10px;
-    text-align: center;
-    width: 91px;padding:5px;line-height:19px">
+                  <div class="pull-right" style=" padding-top: 10px;
+    text-align: left;
+    width: 150px;padding:5px;line-height:24px;font-size:20px;">
                      <i class="icon-time"></i> vor {{wish.timeAgo}}
                   </div>
 
                   <div class="pull-left">
                      <div class="testimonial-image "><img alt="" ng-src="{{wish.user.avatar.avatar.thumb.url}}"></div>
                   </div>
-
-
-                   <a ng-click="me_too(wish)" href="#" class="btn-normal btn-pad pull-right" ng-show="!own_profile" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
-                           <span ng-show="wish.meToo">
-                              <i class="icon-check"></i> Du auch!
-                           </span>
-                           <span ng-hide="wish.meToo">
-                              <i class="icon-lightbulb"></i> Ich auch!
-                           </span>
-
-                         </a>
 
 
                   <div class="textblock">

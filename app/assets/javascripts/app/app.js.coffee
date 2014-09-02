@@ -22,7 +22,8 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
   "Security"
   "breadcrumbs"
   "Home"
-  ($scope, Security, breadcrumbs, Home) ->
+  "$modal"
+  ($scope, Security, breadcrumbs, Home, $modal) ->
     $scope.currentUser = Security.currentUser
     $scope.breadcrumbs = breadcrumbs
 
@@ -30,6 +31,13 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
     isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
     $scope.browser.isFirefox = typeof InstallTrigger isnt "undefined" # Firefox 1.0+
     $scope.browser.isChrome = !!window.chrome and not isOpera # Chrome 1+
+
+    $scope.bge_info = () ->
+      modalInstance = $modal.open(
+        templateUrl: "/assets/was_ist_grundeinkommen.html"
+        size: 'md'
+      )
+      return
 
     Home.query().then (home) ->
       $scope.home = home

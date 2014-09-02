@@ -1,26 +1,16 @@
 <div class="container margin-top-30">
-  <p align=justify>Wir wollen auf dieser Seite in Zukunft diskutieren, was Grundeinkommen für verschiedene Gruppen bedeuten würde. Hilf uns dabei, indem du hier kurz angibst, wozu du dich zählst. Du kannst unten auch beliebig viele eigene Definition angeben. Die Daten bleiben vollständig anonym, wenn du nichts anderes wählst.</p>
-   <div class="col-sm-offset-3 col-sm-9 text-left">
-    <h1 style="margin-top:10px;margin-bottom:5px;">Ich bin:</h1>
-  </div>
+  <p class="well" align=justify>Wir wollen auf dieser Seite in Zukunft diskutieren, was Grundeinkommen für verschiedene Gruppen bedeuten würde. Hilf uns dabei, indem du hier kurz angibst, wozu du dich zählst. Du kannst unten auch beliebig viele eigene Definition angeben. Die Daten bleiben vollständig anonym, wenn du nichts anderes wählst.</p>
   <div class="row">
 
-      <div class="col-md-12">
 
             <form class="form-horizontal" ng-submit="addCustomState()" role="form" name="StatesForm" novalidate>
 
 
-<!--               <input
-    type="checkbox"
-    name="selectedFruits[]"
-    value="{{fruit.name}}"
-    ng-model="fruit.selected"
-  > {{fruit.name}} -->
-
-
-
               <div class="form-group text-left">
-                <div class="col-sm-offset-3 col-sm-9 text-left">
+                <div class="col-sm-3 text-center">
+                  <h1 class="title" style="margin-top:10px;margin-bottom:5px;">Ich bin:</h1>
+                </div>
+                <div class="col-sm-9 text-left margin-top-20">
                   <div ng-repeat="state in states" class="checkbox" style="margin-bottom:20px;max-width:450px;">
 
                     <div style="width:96px;margin-top:3px;" ng-show="state.selected" class="pull-right onoffswitch">
@@ -74,5 +64,5 @@
 
     <div class="clearfix"></div>
 
-</div>
+
 </div>

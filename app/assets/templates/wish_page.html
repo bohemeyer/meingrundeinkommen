@@ -1,7 +1,7 @@
 <div class="container margin-top-70">
 	<div class="row">
 		<div class="col-md-6">
-			<h1>Mit einem <a href="#">Grundeinkommen</a> würden diese {{wish.count}} Menschen <b>{{wish.wish.they}}</b></h1>
+			<h1>Mit einem <a href="#" class="infolink" ng-click="bge_info()">Grundeinkommen</a> würden diese {{wish.count}} Menschen <b>{{wish.wish.they}}</b></h1>
 
 			<a ng-click="me_too(wish)" href="#" class="btn-large btn-pad " ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}" style="width:90%;text-align:center">
                      <span ng-show="wish.meToo">
@@ -12,6 +12,7 @@
                      </span>
 
                    </a>
+      <a href="/support" class="btn-small btn-grey btn-pad " style="width:90%;text-align:center"><i class="icon-heart"></i> Das will ich ihnen ermöglichen!</a>
 
 		</div>
 		<div class="col-md-6">
@@ -51,4 +52,46 @@
 		</div>
 	</div>
 	<h3 class="title">&nbsp;</h3>
+  <div class="row">
+         <div class="col-md-12">
+            <h2>Menschen, die {{wish.wish.they}} würden, würden außerdem:</h2>
+
+            <ul class="listbox">
+               <li ng-repeat="wish in users_also_wish | limitTo: limit_wishes ? 25 : 5">
+                  <div class="pull-left">
+                     <div class="testimonial-image "><img alt="" ng-src="{{wish.user.avatar.avatar.thumb.url}}"></div>
+
+                  </div>
+
+                   <a ng-click="me_too(wish)" href="#" class="btn-normal btn-pad pull-right" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
+                     <span ng-show="wish.meToo">
+                        <i class="icon-check"></i> Du auch!
+                     </span>
+                     <span ng-hide="wish.meToo">
+                        <i class="icon-lightbulb"></i> Ich auch!
+                     </span>
+
+                   </a>
+
+                   <a  href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}" class="edit_button_hidden btn-normal btn-pad pull-right btn-grey"><i class="icon-angle-right"></i> ansehen
+                   </a>
+
+                  <div class="textblock"><a href="/menschen/{{wish.user.id}}">{{wish.user.name}}</a>
+                     <span ng-show="wish.othersCount > 0"> und <b>{{wish.othersCount}}</b> andere würden</span>
+
+                     <span ng-show="wish.othersCount == 0"> würde</span>
+
+                     <br><a style="font-size:18px" href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}">{{wish.wish.they}}</a></div>
+
+               </li>
+
+            </ul>
+            <div class="text-center">
+               <a ng-hide="show_more_wishes" ng-click="limit_wishes = !limit_wishes" href="#" class="btn-grey btn-small btn-pad"><i ng-class="{'icon-caret-down': !limit_wishes, 'icon-caret-up': limit_wishes}"></i> <span ng-show="limit_wishes">Weniger</span><span ng-show="!limit_wishes">Mehr</span> anzeigen</a>
+
+            </div>
+
+         </div>
+
+      </div>
 </div>

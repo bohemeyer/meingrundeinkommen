@@ -2837,3 +2837,8 @@ a.suggestion_entry:hover > .icon2, .active > a.suggestion_entry > .icon2 {
     text-align: left;
   }
 }
+
+
+.infolink {
+    cursor:pointer;border-bottom: 1px dotted #bbb;display:inline-block;
+}

@@ -41,7 +41,7 @@
               <div class="form-group" ng-class="{ 'has-error' : (LoginForm.email.$invalid && !LoginForm.email.$pristine) || (LoginForm.email.$error.serverMessage && !LoginForm.email.$pristine) }">
                 <label for="inputEmail3" class="col-sm-2 control-label">E-Mail</label>
                 <div class="col-sm-10 text-left">
-                  <input name="email" ng-model="login_user.email" type="email" class="form-control input-large" id="inputEmail3" placeholder="E-Mail-Adresse" required>
+                  <input name="email" ng-model="login_user.email" type="email" class="form-control input-large" id="inputEmail3" required>
                   <p ng-show="(LoginForm.email.$invalid || LoginForm.email.$error.required) && !LoginForm.email.$pristine" class="help-block">Bitte gib deine E-Mail-Adresse an.</p>
                   <p ng-show="LoginForm.email.$error.serverMessage" class="help-block">{{LoginForm.email.$error.serverMessage}}</p>
 
@@ -53,7 +53,7 @@
               <div class="form-group" ng-class="{ 'has-error' : LoginForm.password.$invalid && !LoginForm.password.$pristine }">
                 <label for="inputPassword3" class="col-sm-2 control-label">Passwort</label>
                 <div class="col-sm-10 text-left">
-                  <input name="password" ng-model="login_user.password" type="password" class="form-control" id="inputPassword3" placeholder="Password" ng-minlength="4" required>
+                  <input name="password" ng-model="login_user.password" type="password" class="form-control" id="inputPassword3" placeholder="Passwort" ng-minlength="4" required>
                   <p ng-show="(LoginForm.password.$error.minlength || LoginForm.password.$error.required) && !LoginForm.password.$pristine" class="help-block">Bitte gibt dein Passwort ein.</p>
                 </div>
               </div>
