@@ -25,8 +25,10 @@ angular.module("wishpage", ["Wish",'ng-breadcrumbs'])
   "Wish"
   "$http"
   "breadcrumbs"
+  "$cookies"
+  "$location"
 
-  ($scope, Security, this_wish, Wish, $http, breadcrumbs) ->
+  ($scope, Security, this_wish, Wish, $http, breadcrumbs, $cookies, $location) ->
 
     $scope.render = 'wish_page'
 
@@ -52,13 +54,21 @@ angular.module("wishpage", ["Wish",'ng-breadcrumbs'])
 
 
     $scope.me_too = (wish) ->
-      new Wish(
-        forUser: 'user_'
-        wish_id: wish.wishId
-      ).create()
-      .then (response) ->
-        count_change = if !wish.meToo then 1 else -1
-        $scope.wish.count += count_change
-        $scope.wish.meToo = !wish.meToo
+      if Security.currentUser
+        new Wish(
+          forUser: 'user_'
+          wish_id: wish.wishId
+        ).create()
+        .then (response) ->
+          count_change = if !wish.meToo then 1 else -1
+          if wish.wishId == this_wish.id
+            $scope.wish.count += count_change
+            $scope.wish.meToo = !wish.meToo
+          else
+            #$scope.wish.count += count_change
+            #$scope.wish.meToo = !wish.meToo
+      else
+        $cookies.initial_wishes = wish.text
+        $location.path( "/register")
 
 ]

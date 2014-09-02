@@ -13,7 +13,7 @@ angular.module("home", ["Wish"])
       label: "Was wäre wenn?"
 ]
 
-.controller "HomeViewController", ["$scope", "$rootScope", "Wish", ($scope, $rootScope, Wish) ->
+.controller "HomeViewController", ["$scope", "$rootScope", "Wish", "$modal", "$cookies", "$location", "Security", ($scope, $rootScope, Wish, $modal, $cookies, $location, Security) ->
 
   $scope.pagination = []
 
@@ -32,20 +32,24 @@ angular.module("home", ["Wish"])
       $scope.wishes = wishes
     return
 
+
   $scope.video_content = 'video_preview.html'
 
   $scope.showvideo = () ->
     $scope.video_content = 'video.html'
 
   $scope.me_too = (wish) ->
-    new Wish(
-      forUser: 'user_'
-      wish_id: wish.wishId
-    ).create()
-    .then (response) ->
-      count_change = if !wish.meToo then 1 else -1
-      $scope.wishes[$scope.wishes.indexOf(wish)].othersCount += count_change
-      $scope.wishes[$scope.wishes.indexOf(wish)].meToo = !wish.meToo
-
+    if Security.currentUser
+      new Wish(
+        forUser: 'user_'
+        wish_id: wish.wishId
+      ).create()
+      .then (response) ->
+        count_change = if !wish.meToo then 1 else -1
+        $scope.wishes[$scope.wishes.indexOf(wish)].othersCount += count_change
+        $scope.wishes[$scope.wishes.indexOf(wish)].meToo = !wish.meToo
+    else
+      $cookies.initial_wishes = wish.text
+      $location.path( "/register")
 
   ]
