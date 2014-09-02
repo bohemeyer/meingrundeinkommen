@@ -21,16 +21,16 @@ class RegistrationsController < Devise::RegistrationsController
 
   def create
 
-    params['user']['sign_up_ip'] = request.remote_ip
+    account_create_params = devise_parameter_sanitizer.sanitize(:sign_up)
+
+    #account_create_params['sign_up_ip'] = request.remote_ip
     if cookies[:sign_ups]
       signups = cookies[:sign_ups].to_i + 1
     else
       signups = 1
     end
     cookies[:sign_ups] = signups
-    params['user']['number_of_signups'] = signups
-
-    account_create_params = devise_parameter_sanitizer.sanitize(:sign_up)
+    #account_create_params['number_of_signups'] = signups
 
     super
   end
