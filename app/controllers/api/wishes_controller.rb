@@ -82,14 +82,17 @@ class Api::WishesController < ApplicationController
 
     base = UserWish
 
-    page = params[:page].to_i || 1
+    page = params.permit(:page) ? params.permit(:page).to_i : 1
+
+    q = params.permit(:q)
+
     limit = 8
 
-    if params[:q]
-      params[:q] = params[:q].gsub(/ich würde/i,'')
+    if q
+      q = q.gsub(/ich würde/i,'')
       limit = 5
       query = Wish.search do
-        fulltext params[:q] do
+        fulltext q do
           minimum_match 1
         end
       end
@@ -116,9 +119,9 @@ class Api::WishesController < ApplicationController
       }
     end
 
-    if params[:q] && !Wish.where(text:params[:q]).first
+    if q && !Wish.where(text:q).first
       x << {
-        text: params[:q],
+        text: q,
         create: true
       }
     end
