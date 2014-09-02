@@ -32,10 +32,11 @@ class Api::UserWishesController < ApplicationController
 
     x= UserWish.limit(10).order('updated_at desc').map do |user_wish|
       wish = Wish.where(id:user_wish.wish_id).first
+      next if !wish
       {
         id: user_wish.id,
         others_count: UserWish.where(wish_id: user_wish.wish_id).count,
-        wish_id: wish.id,
+        wish_id: user_wish.wish_id,
         wish_url: Rack::Utils.escape(wish.text),
         wish: wish.conjugate,
         story: user_wish.story,
