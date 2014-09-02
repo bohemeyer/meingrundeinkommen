@@ -33,8 +33,9 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
   "$modal"
   "$routeParams"
   "filterFilter"
+  "$location"
 
-  ($scope, Security, user, UserModel, Wish, State, $upload, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams, filterFilter) ->
+  ($scope, Security, user, UserModel, Wish, State, $upload, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams, filterFilter, $location) ->
 
     $scope.user = user
     $scope.default_avatar = if user.avatar.avatar.url == '/assets/team/team-member.jpg' then true else false
@@ -291,7 +292,7 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
         angular.forEach wishes, (item) ->
           r.push
             text: item.text
-            count: item.othersCount
+            count: item.count
             create: item.create
         return r
 
@@ -300,22 +301,25 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
       $scope.hide_popover = true
 
     $scope.me_too = (wish) ->
-      new Wish(
-        forUser: 'user_'
-        wish_id: wish.wishId
-      ).create()
-      .then (response) ->
-        if $scope.own_profile
-          $scope.suggestions.splice($scope.suggestions.indexOf(wish), 1)
-          $scope.user_wishes.push response
-        else
-          if !response.meToo
-            $scope.user_wishes[$scope.user_wishes.indexOf(wish)].meToo = false
-            $scope.user_wishes[$scope.user_wishes.indexOf(wish)].othersCount -= 1
+      if Security.currentUser
+        new Wish(
+          forUser: 'user_'
+          wish_id: wish.wishId
+        ).create()
+        .then (response) ->
+          if $scope.own_profile
+            $scope.suggestions.splice($scope.suggestions.indexOf(wish), 1)
+            $scope.user_wishes.push response
           else
-            $scope.user_wishes[$scope.user_wishes.indexOf(wish)] = response
+            if !response.meToo
+              $scope.user_wishes[$scope.user_wishes.indexOf(wish)].meToo = false
+              $scope.user_wishes[$scope.user_wishes.indexOf(wish)].othersCount -= 1
+            else
+              $scope.user_wishes[$scope.user_wishes.indexOf(wish)] = response
 
-
+      else
+        $cookies.initial_wishes = wish.text
+        $location.path( "/register")
 
     $scope.addWish = ->
 

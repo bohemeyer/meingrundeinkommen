@@ -35,7 +35,7 @@ class Api::WishesController < ApplicationController
   end
 
   def stories
-    render json:Wish.find(params[:id]).user_wishes.where('story is not null').order('created_at desc')
+    render json:Wish.find(params[:id]).user_wishes.where('story is not null and story != ""').order('created_at desc')
   end
 
   def states
@@ -106,7 +106,8 @@ class Api::WishesController < ApplicationController
       next if !id
       wish = Wish.where(id:id).first
       {
-        others_count:count,
+        others_count:count-1,
+        count: count,
         wish_id: wish.id,
         wish_url: Rack::Utils.escape(wish.text),
         wish: wish.conjugate,
