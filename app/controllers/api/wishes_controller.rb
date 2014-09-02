@@ -46,7 +46,18 @@ class Api::WishesController < ApplicationController
 
   def wishes
     user_ids = Wish.find(params[:id]).user_ids
-    r = Wish.select("wishes.id, wishes.text, count(wishes.id) as ccc").joins(:user_wishes).where('user_wishes.user_id'=>user_ids).group(:wish_id).limit(25).order('ccc desc')
+    r = Wish.select("wishes.id, wishes.text, count(wishes.id) as ccc").joins(:user_wishes).where('user_wishes.user_id'=>user_ids).group(:wish_id).limit(25).order('ccc desc').map do |wish|
+      next if wish.id == params[:id]
+      {
+        others_count: UserWish.where(wish_id:wish.id).count - 1,
+        wish_id: wish.id,
+        wish_url: Rack::Utils.escape(wish.text),
+        wish: wish.conjugate,
+        text: wish.text,
+        me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false),
+        user:UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar)
+      }
+    end
     render json:r
   end
 
