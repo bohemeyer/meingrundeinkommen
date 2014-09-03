@@ -98,12 +98,17 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
       $scope.own_profile = newVal
       return
 
+
     Wish.forUser(user.id).then (wishes) ->
       $scope.user_wishes = wishes
 
-      if $cookies.initial_wishes && $cookies.initial_wishes != ''  && $cookies.initial_wishes != ';'
-        $scope.wish_form.new_wish = $cookies.initial_wishes.replace(';','').replace(';','')
-        $cookies.initial_wishes = '' if $scope.user_wishes.length > 0
+      if $scope.own_profile && wishes && wishes.length == 0 && $cookies.initial_wishes && $cookies.initial_wishes != ''  && $cookies.initial_wishes != ';'
+        new Wish(
+          text: $cookies.initial_wishes.replace(';','').replace(';','')
+        ).create()
+        .then (response) ->
+          $scope.user_wishes.unshift response
+          $cookies.initial_wishes = ''
 
 
     #initialize default states
