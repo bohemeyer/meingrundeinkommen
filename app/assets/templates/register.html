@@ -32,7 +32,7 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">E-Mail</label>
                 <div class="col-sm-10 text-left">
                   <input name="email" ng-model="register_user.email" type="email" class="form-control" id="inputEmail3" placeholder="E-Mail-Adresse" required>
-                  <p ng-show="(RegisterForm.email.$invalid || RegisterForm.email.$error.required) && !RegisterForm.email.$pristine" class="help-block">Bitte gib eine gültige E-Mail-Adresse an</p>
+                  <p ng-show="(RegisterForm.email.$invalid || RegisterForm.email.$error.required) && !RegisterForm.email.$pristine" class="help-block">Bitte gib eine gültige E-Mail-Adresse an.</p>
                   <p ng-show="RegisterForm.email.$error.serverMessage" class="help-block">{{RegisterForm.email.$error.serverMessage}}</p>
 
                 </div>
@@ -41,7 +41,7 @@
                 <label for="inputPassword3" class="col-sm-2 control-label">Passwort</label>
                 <div class="col-sm-10 text-left">
                   <input name="password" ng-model="register_user.password" type="password" class="form-control" id="inputPassword3" placeholder="Passwort" ng-minlength="4" required>
-                  <p ng-show="(RegisterForm.password.$error.minlength || RegisterForm.password.$error.required) && !RegisterForm.password.$pristine" class="help-block">Bitte gibt ein Passwort von mindestens 4 Zeichen länge an</p>
+                  <p ng-show="(RegisterForm.password.$error.minlength || RegisterForm.password.$error.required) && !RegisterForm.password.$pristine" class="help-block">Bitte gib ein Passwort mit mindestens 4 Zeichen länge an</p>
                 </div>
               </div>
               <div class="form-group text-left"  ng-class="{ 'has-error' : RegisterForm.datenschutz.$invalid }">
@@ -59,7 +59,7 @@
                 <div class="col-sm-offset-2 col-sm-10 text-left">
                   <div class="checkbox">
                     <label>
-                      <input name="newsletter" ng-model="register_user.newsletter" type="checkbox"> Bitte informiert mich über weitere Verlosungstermine und bei wichtigen Änderungen auf der Seite.
+                      <input name="newsletter" ng-model="register_user.newsletter" type="checkbox"> Bitte informiert mich per E-Mail über weitere Verlosungstermine und bei wichtigen Änderungen auf der Seite.
                     </label>
                   </div>
                 </div>
