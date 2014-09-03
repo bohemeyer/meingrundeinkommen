@@ -1,5 +1,6 @@
 <div class="margin-top-30 text-center">
  <h2>Hilf mit, das {{home.totallyFinancedIncomes + 1}}. Grundeinkommen zu finanzieren!</h2>
+ <p>Noch {{daysLeft}} Tage Zeit!</p>
   <div class="progress" style="font-size: 15px;font-weight: 600;line-height: 40px;">
 
      <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
@@ -11,7 +12,7 @@
   <h3 style="margin-bottom:15px;">Per Crowdfunding:</h3>
   <a href="http://www.startnext.de/mein-grundeinkommen" class="btn btn-special btn-color"><i class="icon-heart"></i> Jetzt unterstützen!</a>
 
-  <h2 style="margin-bottom:0;" class="margin-top-30">...oder unterstützen <u>ohne Extrakosten</u></h2> <h3>mit deinen nächsten Online-Einkäufen:</h3>
+  <h2 style="margin-bottom:0;" class="margin-top-30">...oder unterstützen <u>ohne zu bezahlen</u></h2> <h3>mit deinen nächsten Online-Einkäufen:</h3>
   <div ng-click="video_content='video.html'" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:20px;margin-bottom: 40px;max-width:800px;width:80%;display:inline-block;">
      <div ng-include src="video_content ? video_content : 'video_preview.html'"></div>
   </div>
@@ -22,10 +23,8 @@
       <script type="text/ng-template" id="video.html">
          <iframe width="100%" height="350" src="http://www.youtube.com/embed/tcd7NiotGWg?autoplay=1" frameborder="0" allowfullscreen></iframe>
       </script>
-<div collapse="isCollapsed">
-  <a class="btn-grey btn-normal" ng-click="isCollapsed = !isCollapsed"><i class="icon-caret-down"></i> CrowdBar - so geht's</a>
-</div>
-<div class="col-md-offset-2 col-md-8" collapse="!isCollapsed">
+
+<div class="col-md-offset-2 col-md-8">
    <div ng-include="'/assets/crowdbar_install.html'"></div>
 </div>
 

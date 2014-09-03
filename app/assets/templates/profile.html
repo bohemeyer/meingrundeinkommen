@@ -55,7 +55,7 @@
 
   <!-- Tabs -->
 
-    <tabset ng-if="own_profile" type='{{mobile ? "pills" : ""}}' vertical='{{mobile ? "true" : "false"}}'>
+    <tabset id="tabs" ng-if="own_profile" type='{{mobile ? "pills" : ""}}' vertical='{{mobile ? "true" : "false"}}'>
 
       <!-- Was würdest du tun? -->
 
@@ -67,7 +67,7 @@
 
 	    <tab  active="currentTab.image" disabled="user_wishes.length==0" heading="Gesicht zeigen" ng-if="default_avatar">
 
-        <img src="/assets/upload_avatar2.png" class="margin-top-20" />
+        <img src="/assets/upload_avatar.png" class="margin-top-20" />
         <br>
         <div style="margin-left: 30px;
     margin-top: -54px;
@@ -75,7 +75,7 @@
     width: 243px;">
         oder:<br>
         <div class="btn-color btn-normal" ng-file-select="onFileSelect($files)" accept="image/*"><i class="icon-upload"></i> Datei auswählen</div><br><br>
-        <a href="#" ng-click="skip_section('image')"><i class="icon-mail-forward"></i> überspringen</a>
+        <a href="#" ng-click="skip_section('image')" scroll-to="tabs"><i class="icon-mail-forward"></i> überspringen</a>
         </div>
 	    </tab>
 
@@ -96,13 +96,16 @@
         <div ng-include="'/assets/support.html'"></div>
         <div class="text-center">
           <br>
-          <a class="btn-grey btn-small" ng-click="skip_section('support')"><i class="icon-mail-forward"></i> Unterstützen überspringen</a>
+          <a class="btn-grey btn-small" ng-click="skip_section('support')"  scroll-to="tabs"><i class="icon-mail-forward"></i> Unterstützen überspringen</a>
         </div>
       </tab>
 
       <!-- Gewinnspiel -->
 
-      <tab active="currentTab.gewinnspiel" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states) || !skip.support" heading="Gewinnspiel">
+      <tab active="currentTab.gewinnspiel" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states) || !skip.support">
+         <tab-heading popover-placement="bottom" popover="{{ user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states) || !skip.support ? 'Bitte erst die vorherigen Schritte durchlaufen bzw. dort auf \'überspringen\' klicken.' : ''}}" popover-trigger="mouseenter">
+          Gewinnspiel
+         </tab-heading>
 
         <div class="container margin-top-30">
           <p align=justify>Alle vollständig finanzierten Grundeinkommen werden am 18. September 2014 an alle Teilnehmer_innen des Gewinnspiels verlost. Die Auslosung findet in Berlin statt und wird live per Video-Stream übertragen.</p>

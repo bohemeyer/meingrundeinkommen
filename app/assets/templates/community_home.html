@@ -12,14 +12,9 @@
 
       <div class="row">
          <div class="col-md-12">
-            <div class="testimonial item">
-               <p style="text-align: center; font-weight:bold;font-size: 25px;background:#66cc99;color:white;">Mit einem Grundeinkommen würden...</p>
-               <div class="testimonials-arrow">
-               </div>
-            </div>
 
             <ul class="listbox">
-               <li ng-repeat="wish in wishes">
+               <li ng-repeat="wish in wishes" ng-show="wish.text">
                   <div class="pull-left">
                      <div class="testimonial-image "><img alt="" ng-src="{{wish.user.avatar.avatar.thumb.url}}"></div>
 
@@ -64,7 +59,7 @@
             <div class="text-center"><h1><i class="icon-time"></i> Das passiert gerade:</h1></div>
 
             <ul class="listbox">
-               <li ng-repeat="wish in latest_wishes" ng-animate="'animate'">
+               <li ng-repeat="wish in latest_wishes" ng-show="wish.text">
                   <div class="pull-right" style=" padding-top: 10px;
     text-align: left;
     width: 150px;padding:5px;line-height:24px;font-size:20px;">

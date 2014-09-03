@@ -21,9 +21,20 @@
 	</div>
 	<h3 class="title">&nbsp;</h3>
 	<div class="row">
+    <p class="text-center" ng-if="stories.length == 0"><i>bisher keine Geschichten dazu.</i></p>
 		<div class="col-md-12" ng-if="stories">
 			<h2>Neueste Geschichten dazu</h2>
-			<ul class="listbox">
+
+<!--
+
+      <div ng-if="wish.me_too" style="margin-left:10px;margin-bottom: 20px;">
+                <textarea style="width:90%;min-height:60px;margin-top:10px;margin-bottom:10px" ng-model="wish.edited_story"></textarea><br>
+                <a href="#" class="btn btn-small btn-color" ng-click="updateStory(wish)"><i class="icon-check"></i> Speichern</a>
+                <a href="#" class="btn btn-small btn-grey" ng-click="cancelStoryEditing(wish)"><i class="icon-reply"></i> Abbrechen</a>
+              </div> -->
+
+
+      <ul class="listbox">
                <li ng-repeat="story in stories" ng-animate="'animate'">
                   <div class="pull-left" style=" padding-top: 10px;
     text-align: center;
@@ -52,9 +63,9 @@
 		</div>
 	</div>
 	<h3 class="title">&nbsp;</h3>
-  <div class="row">
+  <div class="row" ng-if="users_also_wish.length > 0">
          <div class="col-md-12">
-            <h2>Menschen, die {{wish.wish.they}} würden, würden außerdem:</h2>
+            <h2 class="text-center">Menschen, die {{wish.wish.they}} würden, würden außerdem:</h2>
 
             <ul class="listbox">
                <li ng-repeat="wish in users_also_wish | limitTo: limit_wishes ? 25 : 5">
@@ -87,7 +98,7 @@
 
             </ul>
             <div class="text-center">
-               <a ng-hide="show_more_wishes" ng-click="limit_wishes = !limit_wishes" href="#" class="btn-grey btn-small btn-pad"><i ng-class="{'icon-caret-down': !limit_wishes, 'icon-caret-up': limit_wishes}"></i> <span ng-show="limit_wishes">Weniger</span><span ng-show="!limit_wishes">Mehr</span> anzeigen</a>
+               <a ng-show="users_also_wish.length > 5" ng-click="limit_wishes = !limit_wishes" href="#" class="btn-grey btn-small btn-pad"><i ng-class="{'icon-caret-down': !limit_wishes, 'icon-caret-up': limit_wishes}"></i> <span ng-show="limit_wishes">Weniger</span><span ng-show="!limit_wishes">Mehr</span> anzeigen</a>
 
             </div>
 
