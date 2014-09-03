@@ -92,7 +92,7 @@
         <i ng-if="!match.model.create" class="icon-chevron-right icon"></i>
         <i ng-if="!match.model.create" class="icon-lightbulb icon2"></i>
         <i ng-if="match.model.create" class="icon-plus"></i>
-        &nbsp;&nbsp;<span bind-html-unsafe="match.model.text | typeaheadHighlight:query"></span> <span ng-if="match.model.count > 1" style="color:#ccc;font-size:11px;" bind-html-unsafe="match.model.count"></span> <span ng-if="match.model.count > 1" style="color:#ccc;font-size:11px;">Leute würden das tun</span>
+        &nbsp;&nbsp;<span bind-html-unsafe="match.model.text | typeaheadHighlight:query"></span> <span ng-if="match.model.count > 1" style="color:#ccc;font-size:11px;" bind-html-unsafe="match.model.count"></span> <span ng-if="match.model.count > 1" style="color:#ccc;font-size:11px;">Menschen würden das tun</span>
 
           <span ng-if="match.model.create" style="color:#666;font-size:11px;font-weight:bold">neu anlegen <span ng-show="match.model.text.length > 20" style="font-size:10px;font-weight:normal;opacity:0.7">({{100 - match.model.text.length}} Zeichen übrig)</span></span>
 
@@ -112,7 +112,7 @@
   <div ng-show="wish_form.new_wish.length > 5" style="font-size: 16px" class="text-center">
 
     <b>Willst du mehr dazu sagen?</b><br>
-    <textarea style="width:90%;height:100px;margin-bottom:10px;" ng-model="wish_form.story" placeholder="Hier kannst du dein Vorhaben ausführlich beschreiben, begründen oder dafür begeistern."></textarea>
+    <textarea style="width:90%;height:100px;margin-bottom:10px;" ng-model="wish_form.story" placeholder="Hier kannst du dein Vorhaben ausführlich beschreiben, begründen oder andere für dein Vorhaben begeistern."></textarea>
   </div>
 	</form>
 
@@ -122,5 +122,6 @@
 </div>
 
 <div ng-show="own_profile" class="text-center" style="margin-top:5px;"><p style="color:#ccc;"><br>Die Antwort auf die Frage, was du mit deinem Grundeinkommen tun würdest, hat keinen Einfluss auf deine Gewinnchancen. Grundeinkommen ist bedingungslos und geht davon aus, dass du am besten weißt, was gut für dich ist. Aber wir freuen uns natürlich über eine ehrliche Antwort.</p></div>
+
 
 <a href="#" ng-show="user_wishes.count == 0" ng-click="skip_section('wishes')"><i class="icon-mail-forward" scroll-to="tabs"></i> überspringen</a>
