@@ -20,6 +20,7 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
 
 .controller "ProfileViewController", [
   "$scope"
+  "$rootScope"
   "Security"
   "thisuser"
   "User"
@@ -35,7 +36,7 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
   "filterFilter"
   "$location"
 
-  ($scope, Security, user, UserModel, Wish, State, $upload, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams, filterFilter, $location) ->
+  ($scope, $rootScope, Security, user, UserModel, Wish, State, $upload, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams, filterFilter, $location) ->
 
     $scope.user = user
     $scope.default_avatar = if user.avatar.avatar.url == '/assets/team/team-member.jpg' then true else false
@@ -181,9 +182,11 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
     ), true
 
 
-    UserModel.suggestions(user.id).then (suggestions) ->
-      $scope.suggestions = suggestions
+    $scope.load_suggestions = ->
+      UserModel.suggestions(user.id).then (suggestions) ->
+        $scope.suggestions = suggestions
 
+    $scope.load_suggestions()
 
     $scope.new_name = user.name
 
@@ -298,7 +301,6 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
 
     $scope.selectedSuggestion = (item) ->
       $scope.wish_form.new_wish = item.text
-      $scope.hide_popover = true
 
     $scope.me_too = (wish) ->
       if Security.currentUser
@@ -323,9 +325,7 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
 
     $scope.addWish = ->
 
-      $scope.hide_popover = false
-
-      if $scope.wish_form.new_wish.count
+      if $scope.wish_form.new_wish.text
         $scope.wish_form.new_wish = $scope.wish_form.new_wish.text
 
       for wish in $scope.user_wishes
@@ -341,6 +341,7 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
         $scope.user_wishes.unshift response
         $scope.wish_form.new_wish = ""
         $scope.wish_form.story = ""
+        $scope.load_suggestions()
 
 
     $scope.editStory = (user_wish) ->
