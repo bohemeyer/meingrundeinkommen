@@ -29,18 +29,21 @@ bedingungslos</li>
                </div>
 
                <script type="text/ng-template" id="video_preview.html">
-                  <a href="#"><img src="/assets/ichgross.jpg"></a>
+                  <a href="#"><img src="/assets/videopreview1.jpg"></a>
                </script>
                <script type="text/ng-template" id="video.html">
-                  <iframe width="100%" height="300" src="http://www.youtube.com/embed/iLTv8gFw15E?autoplay=1" frameborder="0" allowfullscreen></iframe>
+                  <iframe width="100%" height="300" src="http://www.youtube.com/embed/QJQcVFHOz5Y?autoplay=1" frameborder="0" allowfullscreen></iframe>
                </script>
 
 
             </div>
             <div class="col-md-6">
                <h1 class="title_headline">Was würde passieren,<br> wenn es plötzlich Grundeinkommen gäbe?</h1>
+               <!-- <p>
+                  "Mein Grundeinkommen" sammelt per Crowdfunding Geld für ein <span ng-click="bge_info()" class="infolink">Bedingungsloses Grundeinkommen</span>. Immer wenn 12.000€ zusammen sind, werden sie an eine Person ausgelost.
+               </p> -->
                <a class="btn-large btn-grey btn-pad" scroll-to="support">Probieren wir es aus!</a>
-               <a class="btn-normal btn-grey btn-pad" ng-click="bge_info()">Was ist das 'Grundeinkommen'?</a>
+               <!-- <a class="btn-normal btn-grey btn-pad" ng-click="bge_info()">Was ist das 'Grundeinkommen'?</a> -->
             </div>
             <div class="clearfix"></div>
          </div>
@@ -80,16 +83,18 @@ bedingungslos</li>
       </div>
       <div class="row" style="padding-top: 0px;">
 
-            <div class="col-md-12 text-center">
-               <div class="progress" ng-repeat="fi in home.financedIncomes">
+<!--                <div class="progress" ng-repeat="fi in home.financedIncomes">
 
                            <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><i class="icon-check"></i> {{fi}}</div>
 
                </div>
 
+ -->
+            <div class="col-md-12 text-center">
+
                <h2 class="slogan-title margin-top-30">Noch {{daysLeft}} Tage bis zum nächsten Ziel:</h2>
 
-               <div class="progress margin-top-20" style="font-size: 15px;font-weight: 600;line-height: 40px;">
+               <div class="progress margin-top-20" style="font-size: 25px;font-weight: 600;line-height: 37px;">
 
                   <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
                      <span ng-hide="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
@@ -98,7 +103,7 @@ bedingungslos</li>
 
                </div>
 
-                  <a href="http://www.startnext.de/mein-grundeinkommen" class="btn btn-special btn-color btn-large margin-top-20"><i class="icon-heart"></i> Jetzt unterstützen!</a>
+                  <a href="http://www.startnext.de/mein-grundeinkommen" class="btn btn-special btn-color btn-large margin-top-30"><i class="icon-heart"></i> Jetzt unterstützen!</a>
 
                <h1 style="margin-bottom:0;" class="margin-top-70">...oder unterstützen <u>ohne zu bezahlen</u></h1> <p>Mit der CrowdBar fließt aus jedem deiner Online-Einkäufe Geld ins nächste Grundeinkommen.<br>
 Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
@@ -136,10 +141,10 @@ Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
          <div class="slogan-content">
             <div class="col-md-12 text-center">
                <h2 class="slogan-title">In <span class="huge">{{daysLeft}}</span> Tagen werden die Grundeinkommen verlost.</h2>
-               <p>In einem Gewinnspiel. Melde dich hier an um am Gewinnspiel teilnehmen zu können:</p>
+               <p>In einem Gewinnspiel. Melde dich hier an um am Gewinnspiel teilzunehmen:</p>
 
             <div class="get-started">
-                  <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color ">Ich will das Grundeinkommen haben!</a>
+                  <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color btn-large">Ich will das Grundeinkommen haben!</a>
                </div>
 
             </div>
