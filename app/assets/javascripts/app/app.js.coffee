@@ -1,4 +1,4 @@
-window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll'])
+window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll','angulartics','angulartics.google.analytics'])
 
 .config [
   "$routeProvider"
@@ -50,7 +50,7 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
         $scope.home.financedIncomes.push "#{fi}. Grundeinkommen mit 12.000€ per Crowdfunding finanziert!"
 
     CurrentDate = new Date()
-    Verlosung = new Date("September, 18, 2014")
+    Verlosung = new Date("September, 19, 2014")
     DayCount = (Verlosung - CurrentDate) / (1000 * 60 * 60 * 24)
     $scope.daysLeft = Math.round(DayCount)
 
@@ -62,7 +62,9 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
   "Security"
   "$location"
   ($scope,Security,$location) ->
+
     $scope.security = Security
+
     $scope.getStatus = (path) ->
       if $location.path() == path
         "current"
