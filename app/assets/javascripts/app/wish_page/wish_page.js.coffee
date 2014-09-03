@@ -65,8 +65,12 @@ angular.module("wishpage", ["Wish",'ng-breadcrumbs'])
             $scope.wish.count += count_change
             $scope.wish.meToo = !wish.meToo
           else
-            #$scope.wish.count += count_change
-            #$scope.wish.meToo = !wish.meToo
+            if !response.meToo
+              $scope.users_also_wish[$scope.users_also_wish.indexOf(wish)].meToo = false
+              $scope.users_also_wish[$scope.users_also_wish.indexOf(wish)].othersCount -= 1
+            else
+              $scope.users_also_wish[$scope.users_also_wish.indexOf(wish)].meToo = true
+              $scope.users_also_wish[$scope.users_also_wish.indexOf(wish)].othersCount += 1
       else
         $cookies.initial_wishes = wish.text
         $location.path( "/register")

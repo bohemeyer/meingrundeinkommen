@@ -104,10 +104,13 @@
     <input class="btn btn-special btn-grey" ng-disabled="!wish_form.new_wish" type="submit" value="Ja!" style="margin-top:-6px" analytics-on="click" analytics-event="Vorhaben hinzugefügt">
   </div>
 
+  <div class="text-center" ng-show="(!wish_form.new_wish || wish_form.new_wish.length == 0)">
+    <span style="font-size:16px;font-weight:normal;"> Gar nich so einfach zu beantworten, was? <br>Hol dir <a href="/community">Inspiration von den anderen {{home.numberOfUsers}} Mitgliedern</a>!</span>
+  </div>
 
 
-  <br>
   <div ng-show="wish_form.new_wish.length > 5" style="font-size: 16px" class="text-center">
+
     <b>Willst du mehr dazu sagen?</b><br>
     <textarea style="width:90%;height:100px;margin-bottom:10px;" ng-model="wish_form.story" placeholder="Hier kannst du dein Vorhaben ausführlich beschreiben, begründen oder dafür begeistern."></textarea>
   </div>
@@ -118,6 +121,6 @@
 
 </div>
 
-<div ng-show="own_profile" class="text-center" style="margin-top:5px;color:#333;"><b>Hinweis:</b> Was du mit dem Grundeinkommen tun würdest hat <u>keinen</u> Einfluss auf deine Gewinnchancen. Grundeinkommen ist BEDINGUNGSLOS und geht davon aus, dass <i>du</i> am besten weißst, was gut für dich ist. Aber wir freuen uns natürlich über eine ehrliche Antwort.</div>
+<div ng-show="own_profile" class="text-center" style="margin-top:5px;"><p style="color:#ccc;"><br>Die Antwort auf die Frage, was du mit deinem Grundeinkommen tun würdest, hat keinen Einfluss auf deine Gewinnchancen. Grundeinkommen ist bedingungslos und geht davon aus, dass du am besten weißt, was gut für dich ist. Aber wir freuen uns natürlich über eine ehrliche Antwort.</p></div>
 
 <a href="#" ng-show="user_wishes.count == 0" ng-click="skip_section('wishes')"><i class="icon-mail-forward" scroll-to="tabs"></i> überspringen</a>

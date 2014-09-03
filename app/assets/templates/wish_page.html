@@ -25,15 +25,6 @@
 		<div class="col-md-12" ng-if="stories">
 			<h2>Neueste Geschichten dazu</h2>
 
-<!--
-
-      <div ng-if="wish.me_too" style="margin-left:10px;margin-bottom: 20px;">
-                <textarea style="width:90%;min-height:60px;margin-top:10px;margin-bottom:10px" ng-model="wish.edited_story"></textarea><br>
-                <a href="#" class="btn btn-small btn-color" ng-click="updateStory(wish)"><i class="icon-check"></i> Speichern</a>
-                <a href="#" class="btn btn-small btn-grey" ng-click="cancelStoryEditing(wish)"><i class="icon-reply"></i> Abbrechen</a>
-              </div> -->
-
-
       <ul class="listbox">
                <li ng-repeat="story in stories" ng-animate="'animate'">
                   <div class="pull-left" style=" padding-top: 10px;
@@ -43,15 +34,13 @@
                   </div>
 
                   <div class="pull-left">
-                     <div class="testimonial-image "><img alt="" ng-src="{{story.user.avatar.thumb.url}}"></div>
+                     <div class="testimonial-image "><img alt="" ng-src="{{story.user.avatar.avatar.thumb.url}}"></div>
                   </div>
 
 
                   <div class="textblock">
                      <a href="/menschen/{{story.user.id}}">{{story.user.name}}</a>
-                     würde<br>
-
-                     <span style="font-size:18px"><b>{{story.wish.he}}</b></span>
+                     <b>würde {{story.heText}}</b>
 
                     <p ng-show="story.story"><br>{{story.story}}
                     </p>
