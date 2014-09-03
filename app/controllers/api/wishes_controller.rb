@@ -46,9 +46,10 @@ class Api::WishesController < ApplicationController
 
   def wishes
     user_ids = Wish.find(params[:id]).user_ids
-    r = Wish.select("wishes.id, wishes.text, count(wishes.id) as ccc").joins(:user_wishes).where('user_wishes.user_id'=>user_ids).group(:wish_id).limit(25).order('ccc desc').map do |wish|
-      next if wish.id == params[:id]
-      {
+    r = []
+    Wish.select("wishes.id, wishes.text, count(wishes.id) as ccc").joins(:user_wishes).where('user_wishes.user_id'=>user_ids).where.not('wishes.id' => params[:id]).group(:wish_id).limit(25).order('ccc desc').map do |wish|
+      next if !wish
+      r << {
         others_count: UserWish.where(wish_id:wish.id).count - 1,
         wish_id: wish.id,
         wish_url: Rack::Utils.escape(wish.text),
@@ -102,10 +103,13 @@ class Api::WishesController < ApplicationController
       end
     end
 
-    x= base.group(:wish_id).limit(limit).offset(limit*(page-1)).order('count_all desc').count.map do |id, count|
+    x= []
+
+    base.group(:wish_id).limit(limit).offset(limit*(page-1)).order('count_all desc').count.map do |id, count|
       next if !id
       wish = Wish.where(id:id).first
-      {
+      next if !wish
+      x << {
         others_count:count-1,
         count: count,
         wish_id: wish.id,
