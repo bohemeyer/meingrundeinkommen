@@ -2774,7 +2774,7 @@ a.suggestion_entry:hover > .icon2, .active > a.suggestion_entry > .icon2 {
     background-color: #66CC99; color: #FFFFFF;
     }
     .onoffswitch-inner:after {
-    content: "anonym";
+    content: "privat";
     padding-right: 9px;
     background-color: #EEEEEE; color: #999999;
     text-align: right;
