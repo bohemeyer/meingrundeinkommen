@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-
   devise_for :users, :controllers => { registrations: 'registrations', confirmations: 'confirmations', passwords: 'passwords' }
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -13,6 +12,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     resources :registrations
+    resources :questions
     resources :todos
     resources :states do
       member do

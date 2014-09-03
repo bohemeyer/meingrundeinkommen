@@ -1,0 +1,34 @@
+<div class="container margin-top-70">
+
+<form ng-submit="askQuestion()" style="margin-top:-5px;margin-bottom:10px;">
+	<div style="text-align: center; font-weight:bold;font-size: 25px;background:#66cc99;color:white;border-radius: 5px;box-shadow:1p 1px 1px black;border:1px solid white;">
+
+		Frage stellen / Antwort finden
+
+
+  <input type="text" ng-model="question.$" style="height:50px;padding-left:10px;padding-right:10px;" font-size="25"
+	   placeholder="Stell hier deine Frage" maxlength="250">
+
+	<i ng-show="loading" class="icon-spin icon-refresh"></i>
+
+
+  </div>
+
+  <div ng-show="questions.length == 0">
+  	<input class="btn btn-special btn-grey" type="submit" value="Frage stellen" style="margin-top:-6px">
+  </div>
+
+  <accordion close-others="true">
+    <accordion-group ng-repeat="question in questions | filter:question">
+        <accordion-heading>
+            {{question.text}}
+        </accordion-heading>
+        {{question.answer}}
+    </accordion-group>
+  </accordion>
+
+
+
+</form>
+
+</div>
