@@ -39,24 +39,52 @@ class Api::UsersController < ApplicationController
 
   def suggestions
     if current_user
-      user_ids = []
-      current_user.user_wishes.each do |user_wish|
-        user_ids << Wish.find(user_wish.wish_id).user_ids if user_wish.wish_id
-      end
-      r = []
-      Wish.select("wishes.id, wishes.text, count(wishes.id) as ccc").where.not(id: current_user.user_wishes.map(&:wish_id)).joins(:user_wishes).where('user_wishes.user_id'=>user_ids).group(:wish_id).limit(25).order('ccc desc').map do |wish|
-        next if !wish
-        r << {
-          id: wish.id,
-          others_count: UserWish.where(wish_id:wish.id).count - 1,
-          text: wish.text,
-          wish_id: wish.id,
-          wish_url: Rack::Utils.escape(wish.text),
-          user: UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar)
-        }
+
+      # iwishes = []
+      # if current_user.initial_wishes
+      #   current_user.initial_wishes.split(';').each do |w|
+      #     w = w.strip
+      #     w = w.gsub(/ich würde/i,'')
+      #     w = w.gsub(/ich wuerde/i,'')
+      #     iwishes << w if !w.empty? && w.length > 3 && w.length < 101
+      #   end
+      # end
+
+      # if !iwishes.empty?
+
+      #   iwishes.each do |w|
+      #     wish = Wish.where(:text => w).first
+      #     if wish
+      #     query = Wish.search do
+      #       fulltext params[:q] do
+      #         minimum_match 1
+      #       end
+      #     end
+
+      #   end
+
+      # else
+
+        user_ids = []
+        current_user.user_wishes.each do |user_wish|
+          user_ids << Wish.find(user_wish.wish_id).user_ids if user_wish.wish_id
+        end
+        r = []
+        Wish.select("wishes.id, wishes.text, count(wishes.id) as ccc").where.not(id: current_user.user_wishes.map(&:wish_id)).joins(:user_wishes).where('user_wishes.user_id'=>user_ids).group(:wish_id).limit(25).order('ccc desc').map do |wish|
+          next if !wish
+          r << {
+            id: wish.id,
+            others_count: UserWish.where(wish_id:wish.id).count - 1,
+            text: wish.text,
+            wish_id: wish.id,
+            wish_url: Rack::Utils.escape(wish.text),
+            user: UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar)
+          }
+        end
+
       end
       render json:r
-    end
+    #end
   end
 
 
