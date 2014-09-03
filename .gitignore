@@ -21,3 +21,5 @@ solr/
 spec/tmp
 tmp
 vendor/bundle
+
+mailings/launch-beta.html
