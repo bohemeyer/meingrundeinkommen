@@ -75,7 +75,7 @@
     width: 243px;">
         oder:<br>
         <div class="btn-color btn-normal" ng-file-select="onFileSelect($files)" accept="image/*"><i class="icon-upload"></i> Datei auswählen</div><br><br>
-        <a href="#" ng-click="skip_section('image')" scroll-to="tabs"><i class="icon-mail-forward"></i> überspringen</a>
+        <a href="#" ng-click="skip_section('image')" analytics-on="click" analytics-event="Bildupload übersprungen" scroll-to="tabs"><i class="icon-mail-forward"></i> überspringen</a>
         </div>
 	    </tab>
 
@@ -96,7 +96,7 @@
         <div ng-include="'/assets/support.html'"></div>
         <div class="text-center">
           <br>
-          <a class="btn-grey btn-small" ng-click="skip_section('support')"  scroll-to="tabs"><i class="icon-mail-forward"></i> Unterstützen überspringen</a>
+          <a class="btn-grey btn-small" ng-click="skip_section('support')"  scroll-to="tabs" analytics-on="click" analytics-event="Unterstützen übersprungen"><i class="icon-mail-forward"></i> Unterstützen überspringen</a>
         </div>
       </tab>
 
@@ -120,7 +120,7 @@
             <div class="col-sm-offset-1 col-sm-11 text-left">
               <div class="checkbox">
                 <label>
-                  <input name="newsletter" ng-model="user.newsletter" type="checkbox" ng-click="setNewsletterFlag()"> Bitte informiert mich immer wenn wieder ein Grundeinkommen ausgelost wird oder bei wichtigen Änderungen auf der Seite (kein Spam, max. 1x pro Woche, eher seltener). Jederzeit widerrufbar.
+                  <input name="newsletter" ng-model="user.newsletter" type="checkbox" ng-click="setNewsletterFlag()" analytics-on="click" analytics-event="Newsletter abboniert (im Gewinnspieltab)"> Bitte informiert mich immer wenn wieder ein Grundeinkommen ausgelost wird oder bei wichtigen Änderungen auf der Seite (kein Spam, max. 1x pro Woche, eher seltener). Jederzeit widerrufbar.
                 </label>
               </div>
             </div>

@@ -20,7 +20,7 @@
 
                   </div>
 
-                   <a ng-click="me_too(wish)" href="#" class="btn-normal btn-pad pull-right" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
+                   <a ng-click="me_too(wish)" analytics-on="click" analytics-event="geklickt: Ich auch (Startseite)" href="#" class="btn-normal btn-pad pull-right" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
                      <span ng-show="wish.meToo">
                         <i class="icon-check"></i> Du auch!
                      </span>

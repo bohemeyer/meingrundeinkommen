@@ -14,7 +14,7 @@
                <i class="icon-pencil"></i>
              </a>
 
-             <a ng-click="me_too(wish)" href="#" class="btn-normal btn-pad pull-right" ng-show="!own_profile" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
+             <a ng-click="me_too(wish)" analytics-on="click" analytics-event="geklickt: Ich auch (Profilseite von jmd anderes)" href="#" class="btn-normal btn-pad pull-right" ng-show="!own_profile" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
                      <span ng-show="wish.meToo">
                         <i class="icon-check"></i> Du auch!
                      </span>
@@ -49,7 +49,7 @@
                <div class="testimonial-image "><img alt="" ng-src="{{wish.user.avatar.avatar.thumb.url}}"></div>
             </div>
 
-             <a ng-click="me_too(wish)" href="#" class="btn-color btn-small btn-pad pull-right">
+             <a ng-click="me_too(wish)" analytics-on="click" analytics-event="geklickt: Ich auch (Vorschläge auf Profil)" href="#" class="btn-color btn-small btn-pad pull-right">
                <i class="icon-lightbulb"></i> Ich auch!
              </a>
 
@@ -101,7 +101,7 @@
 
   <div style="display:inline-block;min-width:120px;text-align:left" >
     <i ng-show="loading" class="icon-spin icon-refresh"></i>
-    <input class="btn btn-special btn-grey" ng-disabled="!wish_form.new_wish" type="submit" value="Ja!" style="margin-top:-6px">
+    <input class="btn btn-special btn-grey" ng-disabled="!wish_form.new_wish" type="submit" value="Ja!" style="margin-top:-6px" analytics-on="click" analytics-event="Vorhaben hinzugefügt">
   </div>
 
 

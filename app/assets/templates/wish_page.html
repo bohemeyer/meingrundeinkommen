@@ -3,7 +3,7 @@
 		<div class="col-md-6">
 			<h1>Mit einem <a href="#" class="infolink" ng-click="bge_info()">Grundeinkommen</a> würden diese {{wish.count}} Menschen <b>{{wish.wish.they}}</b></h1>
 
-			<a ng-click="me_too(wish)" href="#" class="btn-large btn-pad " ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}" style="width:90%;text-align:center">
+			<a ng-click="me_too(wish)" analytics-on="click" analytics-event="geklickt: Ich auch (Vorhaben-Seite oben)" href="#" class="btn-large btn-pad " ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}" style="width:90%;text-align:center">
                      <span ng-show="wish.meToo">
                         <i class="icon-check"></i> Du auch!
                      </span>
@@ -74,7 +74,7 @@
 
                   </div>
 
-                   <a ng-click="me_too(wish)" href="#" class="btn-normal btn-pad pull-right" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
+                   <a ng-click="me_too(wish)" analytics-on="click" analytics-event="geklickt: Ich auch (Vorhaben-Seite unten)" href="#" class="btn-normal btn-pad pull-right" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
                      <span ng-show="wish.meToo">
                         <i class="icon-check"></i> Du auch!
                      </span>

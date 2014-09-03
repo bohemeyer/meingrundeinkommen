@@ -10,10 +10,10 @@
 
   </div>
   <h3 style="margin-bottom:15px;">Per Crowdfunding:</h3>
-  <a href="http://www.startnext.de/mein-grundeinkommen" class="btn btn-special btn-color"><i class="icon-heart"></i> Jetzt unterstützen!</a>
+  <a href="http://www.startnext.de/mein-grundeinkommen" analytics-on="click" analytics-event="Link zu Startnext geklickt" class="btn btn-special btn-color"><i class="icon-heart"></i> Jetzt unterstützen!</a>
 
   <h2 style="margin-bottom:0;" class="margin-top-30">...oder unterstützen <u>ohne zu bezahlen</u></h2> <h3>mit deinen nächsten Online-Einkäufen:</h3>
-  <div ng-click="video_content='video.html'" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:20px;margin-bottom: 40px;max-width:800px;width:80%;display:inline-block;">
+  <div ng-click="video_content='video.html'"  analytics-on="click" analytics-event="Play CrowdBar Video" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:20px;margin-bottom: 40px;max-width:800px;width:80%;display:inline-block;">
      <div ng-include src="video_content ? video_content : 'video_preview.html'"></div>
   </div>
 

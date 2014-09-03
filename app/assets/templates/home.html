@@ -23,7 +23,7 @@ bedingungslos</li>
       <div class="container">
          <div class="row">
             <div class="col-md-6">
-               <div ng-click="showvideo()" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:10px;margin-bottom: 40px;">
+               <div ng-click="showvideo()" analytics-on="click" analytics-event="Play Home Video" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:10px;margin-bottom: 40px;">
                   <div ng-include src="video_content"></div>
 
                </div>
@@ -97,21 +97,21 @@ bedingungslos</li>
                <div class="progress margin-top-20" style="font-size: 25px;font-weight: 600;line-height: 37px;">
 
                   <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
-                     <span ng-hide="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
+                     <span ng-hide="home.percentageRaw < 50"><i class="icon-time"></i> {{home.acmount}} von 12.000€</span>
                   </div>
                      <span ng-show="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
 
                </div>
 
-                  <a href="http://www.startnext.de/mein-grundeinkommen" class="btn btn-special btn-color btn-large margin-top-30"><i class="icon-heart"></i> Jetzt unterstützen!</a>
+                  <a href="http://www.startnext.de/mein-grundeinkommen"  analytics-on="click" analytics-event="Link zu Startnext geklickt" class="btn btn-special btn-color btn-large margin-top-30"><i class="icon-heart"></i> Jetzt unterstützen!</a>
 
                <h1 style="margin-bottom:0;" class="margin-top-70">...oder unterstützen <u>ohne zu bezahlen</u></h1> <p>Mit der CrowdBar fließt aus jedem deiner Online-Einkäufe Geld ins nächste Grundeinkommen.<br>
 Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
-  <div ng-click="video_content2='video2.html'" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:20px;margin-bottom: 40px;max-width:800px;width:80%;display:inline-block;">
+  <div ng-click="video_content2='video2.html'" analytics-on="click" analytics-event="Play CrowdBar Video" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:20px;margin-bottom: 40px;max-width:800px;width:80%;display:inline-block;">
      <div ng-include src="video_content2 ? video_content2 : 'video_preview2.html'"></div>
   </div>
 <div collapse="isCollapsed">
-  <a class="btn-grey btn-normal" ng-click="isCollapsed = !isCollapsed"><i class="icon-caret-down"></i> CrowdBar - so geht's</a>
+  <a class="btn-grey btn-normal" ng-click="isCollapsed = !isCollapsed" analytics-on="click" analytics-event="CrowdBar-Erklärung geöffnet"><i class="icon-caret-down"></i> CrowdBar - so geht's</a>
 </div>
 <div class="col-md-offset-3 col-md-6" collapse="!isCollapsed">
    <div ng-include="'/assets/crowdbar_install.html'"></div>
@@ -144,7 +144,7 @@ Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
                <p>In einem Gewinnspiel. Melde dich hier an um am Gewinnspiel teilzunehmen:</p>
 
             <div class="get-started">
-                  <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color btn-large">Ich will das Grundeinkommen haben!</a>
+                  <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color btn-large" analytics-on="click" analytics-event="geklickt: Ich will das Grundeinkommen haben">Ich will das Grundeinkommen haben!</a>
                </div>
 
             </div>
