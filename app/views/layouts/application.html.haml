@@ -62,9 +62,6 @@
         .main-header
           .container
             / TopNav Start
-            .topnav.navbar-header
-              %a.navbar-toggle.down-button{"data-target" => ".slidedown", "data-toggle" => "collapse"}
-                %i.icon-angle-down.icon-current
             / TopNav End
             / Logo Start
             .logo.pull-left{:style=>'margin-top:-5px;'}
@@ -76,11 +73,11 @@
             / Logo End
             / Mobile Menu Start
             .mobile.navbar-header
-              %a.navbar-toggle{"data-toggle" => "collapse", href: ".navbar-collapse"}
+              %a.navbar-toggle{ 'ng-click' => "toggleMenu = !toggleMenu", href: "#{}"}
                 %i.icon-reorder.icon-2x
             / Mobile Menu End
             / Menu Start
-            %nav.collapse.navbar-collapse.menu
+            %nav.menu.navbar-collapse{"collapse" => "!toggleMenu"}
               %ul.nav.navbar-nav.sf-menu
                 %li{id: "{{getStatus('/start')}}"}
                   %a{href: "/start"}
@@ -129,7 +126,7 @@
         / Main Header End
       / Header End
       / Content Start
-      #main.flip{"ng-view" => ""}
+      #main.flip{"ng-view" => "", :autoscroll=>"true"}
       / Content End
       / Footer Start
       %footer#footer
@@ -140,7 +137,7 @@
               %section.col-lg-6.col-md-6.col-xs-12.col-sm-6.footer-one
                 %h3 Über das Projekt
                 %p
-                  "Mein Grundeinkommen" sammelt per Crowdfunding Geld für ein Bedingungsloses Grundeinkommen. Immer wenn 12.000€ zusammen sind, werden sie an eine Person ausgelost. Indem du deinen Internet-Einkauf über diese Seite beginnst, fließt eine Provision des Onlineshops direkt in den Grundeinkommens-Topf.
+                  "Mein Grundeinkommen" sammelt per Crowdfunding Geld für ein Bedingungsloses Grundeinkommen. Immer wenn 12.000€ zusammen sind, werden sie an eine Person ausgelost.
               / %section.col-lg-3.col-md-3.col-xs-12.col-sm-3.footer-two
               /   %h3 Twitter Stream
               /   %ul#tweets
@@ -195,3 +192,10 @@
       %a.scrollup{href: "#"}
         %i.icon-angle-up
     / Wrap End
+    :javascript
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-52190726-1', 'auto');
