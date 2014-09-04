@@ -52,7 +52,7 @@ class Api::UserWishesController < ApplicationController
         wish: wish.conjugate,
         story: user_wish.story,
         text: wish.text,
-        time_ago: time_ago_in_words(user_wish.created_at),
+        time_ago: time_ago_in_words(user_wish.updated_at),
         me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false),
         user: user_wish.user.slice(:name, :id, :avatar)
       }
