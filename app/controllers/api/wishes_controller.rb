@@ -109,6 +109,8 @@ class Api::WishesController < ApplicationController
       next if !id
       wish = Wish.where(id:id).first
       next if !wish
+      user = wish.users.where.not('users.avatar' => nil).sample if !params[:q]
+      user = wish.users.sample if !user
       x << {
         others_count:count-1,
         count: count,
@@ -117,7 +119,8 @@ class Api::WishesController < ApplicationController
         wish: wish.conjugate,
         text: wish.text,
         me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false),
-        user:UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar),
+        #user:UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar),
+        user: user.slice(:name, :id, :avatar),
         create: false
       }
     end
