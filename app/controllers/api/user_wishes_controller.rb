@@ -8,6 +8,11 @@ class Api::UserWishesController < ApplicationController
       current_user.wishes << wish
       user_wish = current_user.user_wishes.last
 
+    if params[:remove_initial_wish]
+      User.find(current_user.id).update_attributes(initial_wishes: current_user.initial_wishes.sub!(params[:remove_initial_wish], ''))
+    end
+
+
       x = {
         id: user_wish.id,
         others_count: UserWish.where(wish_id:wish.id).count - 1,

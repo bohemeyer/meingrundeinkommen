@@ -49,13 +49,19 @@
                <div class="testimonial-image "><img alt="" ng-src="{{wish.user.avatar.avatar.thumb.url}}"></div>
             </div>
 
+
+
+            <a ng-if="wish.suggestion && wish.suggestion.isSimilarOnly" ng-click="use_original_instead_of_suggested(wish)" href="#" class="btn-grey btn-small btn-pad pull-right">
+               <i class="icon-mail-forward"></i> meine Formulierung
+             </a>
+
              <a ng-click="me_too(wish)" analytics-on="click" analytics-event="geklickt: Ich auch (Vorschläge auf Profil)" href="#" class="btn-color btn-small btn-pad pull-right">
                <i class="icon-lightbulb"></i> Ich auch!
              </a>
 
 
             <div class="textblock">
-              <a style="font-size:18px" href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}">...{{wish.text}}</a>
+              <a style="font-size:18px" href="{{wish.wishUrl ? '/mit-grundeinkommen-wuerde-ich/' + wish.wishUrl + '/' + wish.wishId : '#'}}">...{{wish.text}}</a>
 
               <p ng-show="edit_story != wish">{{wish.story}}
               </p>
@@ -65,9 +71,17 @@
                 <a href="#" class="btn btn-small btn-grey" ng-click="cancelStoryEditing(wish)"><i class="icon-reply"></i> Abbrechen</a>
               </div>
               <div>
-               sagt <b>{{wish.user.name}}</b>
-               <span ng-if="wish.othersCount > 0">und
-               <a  href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}"><b>{{wish.othersCount}}</b> andere</a></span>
+
+               <span ng-show="wish.suggestion && wish.suggestion.isSimilarOnly">
+                basierend auf deiner Formulierung bei der Voranmeldung
+               </span>
+               <span ng-show="wish.suggestion && !wish.suggestion.isSimilarOnly">
+                wie bei der Voranmeldung angegeben
+               </span>
+
+               <span ng-hide="wish.suggestion">sagt <b>{{wish.user.name}}</b></span>
+               <span ng-if="!wish.suggestion && wish.othersCount > 0">und
+               <a ng-hide="wish.suggestion" href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}"><b>{{wish.othersCount}}</b> andere</a></span>
               </div>
             </div>
 

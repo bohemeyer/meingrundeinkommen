@@ -307,16 +307,34 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
     $scope.selectedSuggestion = (item) ->
       $scope.wish_form.new_wish = item.text
 
+    $scope.use_original_instead_of_suggested = (wish) ->
+      $scope.suggestions[$scope.suggestions.indexOf(wish)] =
+        text: wish.suggestion.isSuggestionFor
+        suggestion:
+          isSuggestionFor: wish.suggestion.isSuggestionFor
+        user: user
+
     $scope.me_too = (wish) ->
       if Security.currentUser
-        new Wish(
-          forUser: 'user_'
-          wish_id: wish.wishId
-        ).create()
+        remove_initial_wish = if wish.suggestion then wish.suggestion.isSuggestionFor else false
+        if wish.wishId
+          resource = new Wish(
+            forUser: 'user_'
+            wish_id: wish.wishId
+            remove_initial_wish: remove_initial_wish
+          )
+        else
+          resource = new Wish(
+            text: wish.text
+            remove_initial_wish: remove_initial_wish
+          )
+
+        resource.create()
         .then (response) ->
           if $scope.own_profile
             $scope.suggestions.splice($scope.suggestions.indexOf(wish), 1)
             $scope.user_wishes.push response
+            $scope.load_suggestions()
           else
             if !response.meToo
               $scope.user_wishes[$scope.user_wishes.indexOf(wish)].meToo = false

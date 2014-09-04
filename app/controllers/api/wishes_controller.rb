@@ -9,11 +9,9 @@ class Api::WishesController < ApplicationController
     user_wish = current_user.user_wishes.where(wish:wish)
     user_wish = current_user.user_wishes.create wish:wish, story:params[:story] if user_wish.blank?
 
-    # similar = Sunspot.more_like_this(wish) do
-    #   fields :text
-    # end
-
-    #similar = wish.more_like_this.results[0].to_json
+    if params[:remove_initial_wish]
+      User.find(current_user.id).update_attributes(initial_wishes: current_user.initial_wishes.sub!(params[:remove_initial_wish], ''))
+    end
 
     x = {
       id: user_wish.id,
