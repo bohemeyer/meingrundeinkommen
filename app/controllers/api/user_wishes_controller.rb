@@ -9,7 +9,12 @@ class Api::UserWishesController < ApplicationController
       user_wish = current_user.user_wishes.last
 
     if params[:remove_initial_wish]
-      User.find(current_user.id).update_attributes(initial_wishes: current_user.initial_wishes.sub!(params[:remove_initial_wish], ''))
+      sugg = Suggestion.where(:email => current_user.email).first
+      if sugg
+        initial_wishes = sugg.initial_wishes
+        initial_wishes_new = initial_wishes.sub!(params[:remove_initial_wish], '')
+        Suggestion.find(sugg.id).update_attributes(initial_wishes: initial_wishes_new )
+      end
     end
 
 

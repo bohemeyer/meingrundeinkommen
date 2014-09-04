@@ -42,8 +42,11 @@ class Api::UsersController < ApplicationController
       r = []
 
       iwishes = []
-      if current_user.initial_wishes
-        current_user.initial_wishes.split(';').each do |w|
+
+      initial_wishes = Suggestion.where(:email => current_user.email).first
+
+      if initial_wishes
+        initial_wishes.initial_wishes.split(';').each do |w|
           n = w
           n = n.strip
           n = n.gsub(/ich würde/i,'')
