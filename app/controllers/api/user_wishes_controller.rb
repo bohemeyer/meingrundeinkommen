@@ -41,7 +41,7 @@ class Api::UserWishesController < ApplicationController
       next if !wish
       x << {
         id: user_wish.id,
-        others_count: UserWish.where(wish_id: user_wish.wish_id).count,
+        others_count: UserWish.where(wish_id: user_wish.wish_id).count - 1,
         wish_id: user_wish.wish_id,
         wish_url: Rack::Utils.escape(wish.text),
         wish: wish.conjugate,
