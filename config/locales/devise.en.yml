@@ -19,7 +19,7 @@ en:
       unconfirmed: "Du musst Deinen Account bestätigen, bevor Du fortfahren kannst. [[resend_link]]"
     mailer:
       confirmation_instructions:
-        subject: "Bitte bestätigen Deine E-Mail-Adresse"
+        subject: "Bitte bestätige Deine E-Mail-Adresse"
       reset_password_instructions:
         subject: "Anleitung um Dein Passwort zurückzusetzen"
       unlock_instructions:
