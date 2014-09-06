@@ -1,4 +1,4 @@
-angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcrumbs','matchMedia'])
+angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'ng-breadcrumbs','matchMedia'])
 .config [
   "$routeProvider"
   ($routeProvider) ->
@@ -26,6 +26,7 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
   "User"
   "Wish"
   "State"
+  "Chance"
   "$upload"
   "$http"
   "breadcrumbs"
@@ -36,7 +37,7 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
   "filterFilter"
   "$location"
 
-  ($scope, $rootScope, Security, user, UserModel, Wish, State, $upload, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams, filterFilter, $location) ->
+  ($scope, $rootScope, Security, user, UserModel, Wish, State, Chance, $upload, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams, filterFilter, $location) ->
 
     $scope.user = user
     $scope.default_avatar = if user.avatar.avatar.url == '/assets/team/team-member.jpg' then true else false
@@ -365,6 +366,50 @@ angular.module("profile", ["User","Wish","State","angularFileUpload",'ng-breadcr
         $scope.wish_form.new_wish = ""
         $scope.wish_form.story = ""
         $scope.load_suggestions()
+
+    $scope.sanitizeChances = ->
+      adult = false
+      angular.forEach $scope.user.chances, (chance) ->
+        if !chance.isChild
+          adult = true
+      if !adult
+        $scope.user.chances.unshift(
+          isChild: false
+          dob_year: 1975
+          dob_month: 1
+          dob_day: 1
+        )
+
+    $scope.sanitizeChances()
+
+    $scope.addChild = ->
+      $scope.user.chances.push(
+        isChild: true
+        dob_year: 2000
+        dob_month: 1
+        dob_day: 1
+      )
+
+    $scope.saveChance = (c) ->
+
+      chance = c
+      chance.dob = c.dob_year + '-' + c.dob_month + '-' + c.dob_day
+      chance.is_child = c.isChild
+
+      new Chance(chance).create()
+      .then (response) ->
+        $scope.user.chances[$scope.user.chances.indexOf(chance)] = response.chance
+        $scope.sanitizeChances()
+
+
+    $scope.removeChance = (chance) ->
+      if chance.id
+        new Chance(
+          id: chance.id
+        ).delete()
+      $scope.user.chances.splice($scope.user.chances.indexOf(chance), 1)
+      $scope.sanitizeChances()
+
 
 
     $scope.editStory = (user_wish) ->

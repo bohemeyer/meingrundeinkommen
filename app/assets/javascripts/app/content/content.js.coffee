@@ -33,6 +33,8 @@ angular.module("content", ['ng-breadcrumbs'])
       label: "Datenschutz"
     .when "/datenschutz",
       redirectTo: "/info/datenschutz"
+    .when "/gewinnspielbedingungen",
+      templateUrl: "/assets/gewinnspielbedingungen.html"
 
 
 ]

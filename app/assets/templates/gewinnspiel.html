@@ -1,0 +1,87 @@
+<H1>Gewinne ein Jahr lang Grundeinkommen!</H1>
+<p>
+	<alert type="warning">Alle vollständig finanzierten Grundeinkommen werden am 18. September 2014 als Gewinnspiel verlost. Wie das funktioniert erfährst du in den <a href="/gewinnspielbedingungen">Gewinnspielbedingungen</a>. Die Auslosung wird übrigens live per Videostream übertragen.</alert>
+</p>
+<h3>Hier kannst du noch bis zum 17. September 2014 um 23:59 Uhr am Gewinnspiel teilnehmen:</h3>
+
+<ul>
+	<li ng-repeat="chance in user.chances | orderBy:chance.isChild">
+		<div ng-if="chance.id" class="margin-top-30">
+			<h3 ng-if="!chance.isChild"><i class="icon-check"></i> Du nimmst an der Verlosung teil!</h3>
+			<h3 ng-if="chance.isChild"><i class="icon-check"></i> Du nimmst für dein Kind an der Verlosung teil!</h3>
+			<div style="padding-left:30px;">
+			<p>
+				<b>Vollständiger Name (wie auf Ausweis):</b> {{chance.fullName}}
+				<br>
+				<b>Geburtsdatum:</b> {{chance.dob}}
+				<span ng-if="!chance.isChild">
+				<!-- <br>
+				<b>Land:</b> {{chance.country_id}}
+				<br>
+				<b>Ort:</b> {{chance.city}} -->
+				</span>
+			</p>
+			<a href="#" ng-click="removeChance(chance)"><i class="icon-remove"></i> nicht mehr teilnehmen</a>
+			</div>
+		</div>
+		<div ng-if="!chance.id" class="margin-top-30">
+
+			<div  ng-show="!chance.isChild" class="checkbox">
+                    <div class="form-group">
+                    <label>
+                      <input
+                      ng-model="chance.iwant" value="true" type="checkbox"> Ich möchte ein Grundeinkommen von 12.000€ gewinnen und nehmen deshalb am Gewinnspiel teil.
+                    </label>
+                  </div>
+              </div>
+
+			<form ng-show="chance.iwant || chance.isChild" class="form-horizontal" ng-submit="saveChance(chance)" role="form"novalidate>
+
+              <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Vollst. Name</label>
+                <div class="col-sm-10 text-left">
+                  <input name="name" ng-model="chance.full_name" type="text" class="form-control" id="inputEmail3" placeholder="wie auf dem Ausweis" maxlength="50" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label for="inputEmail4" class="col-sm-2 control-label">Geburtsdatum</label>
+                <div class="col-sm-3 text-left">
+                  <input name="dob" ng-model="chance.dob_day" type="number" class="form-control" ng-required="true" placeholder="Tag" min="1" max="31" required>
+                </div>
+                <div class="col-sm-3 text-left">
+                  <input name="dob" ng-model="chance.dob_month" type="number" class="form-control" ng-required="true" placeholder="Monat" min="1" max="12" required>
+                </div>
+                <div class="col-sm-4 text-left">
+                  <input name="dob" ng-model="chance.dob_year" type="number" class="form-control" ng-required="true" placeholder="Jahr" min="1900" max="2014" required>
+                </div>
+              </div>
+
+              <div class="form-group text-left" style="margin-top:-20px;">
+                <div class="col-sm-offset-2 col-sm-10 text-left">
+                  <div class="checkbox">
+                    <label>
+                      <input name="publication"
+                      ng-model="chance.confirmed_publication" value="true" type="checkbox"> Ich stimme den <a href="/gewinnspielbedingungen">Gewinnspielbedingungen</a> zu. Insbesondere bin ich im Gewinnfall mit der Veröffentlichung des Links zu meiner <a href="/menschen/{{user.id}}">Profilseite</a> einverstanden.
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+                  <button type="submit" class="btn btn-special btn-color" >
+                 	Speichern
+                  </button>
+                  <button ng-if="chance.isChild" type="button" class="btn btn-special btn-grey" ng-click="removeChance(chance)">
+                 	Abbrechen
+                  </button>
+                </div>
+              </div>
+
+			</form>
+		</div>
+		<hr>
+	</li>
+	<li><a href="#" ng-click="addChild()" class=" btn btn-special btn-grey btn-small"><i class="icon-plus"></i> Mein Kind hinzufügen</a></li>
+</ul>
