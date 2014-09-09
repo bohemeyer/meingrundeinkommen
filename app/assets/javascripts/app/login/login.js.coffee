@@ -38,6 +38,10 @@ angular.module("login", [
       serverMessage = $parse("LoginForm.$error.serverMessage")
       serverMessage.assign $scope, 'Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Dein Passwort zurücksetzen kannst.'
       $scope.submitted_reset = false
+    ).error((response) ->
+      serverMessage = $parse("LoginForm.$error.serverMessage")
+      serverMessage.assign $scope, "Du bist noch gar nicht registriert. Bitte registrier dich neu indem du im Menü ganz oben auf 'Mitmachen' klickst."
+      $scope.submitted_reset = false
     )
 
   $scope.resend_link = ->
