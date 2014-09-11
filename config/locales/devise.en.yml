@@ -13,7 +13,7 @@ en:
       invalid: "Ungültige Anmeldedaten."
       invalid_token: "Der Anmelde-Token ist ungültig."
       locked: "Dein Account ist gesperrt."
-      not_found_in_database: "E-Mail-Adresse oder Passwort ungültig."
+      not_found_in_database: "E-Mail-Adresse oder Passwort ungültig. Bist du überhaupt schon registriert?"
       timeout: "Deine Sitzung ist abgelaufen, bitte melde Dich erneut an."
       unauthenticated: "Du musst Dich anmelden oder registrieren, bevor Du fortfahren kannst."
       unconfirmed: "Du musst Deinen Account bestätigen, bevor Du fortfahren kannst. [[resend_link]]"
@@ -50,7 +50,7 @@ en:
       unlocked: "Dein Account wurde entsperrt. Du bist jetzt angemeldet."
   errors:
     messages:
-      taken: "Du bist schon registriert. Du kannst dich einfach einloggen, indem du auf 'Mitmachen' klickst"
+      taken: "Du bist schon registriert. Du kannst dich einfach einloggen, indem du auf 'Einloggen' klickst"
       already_confirmed: "wurde bereits bestätigt"
       confirmation_period_expired: "muss innerhalb %{period} bestätigt werden, bitte fordere einen neuen Link an"
       expired: "ist abgelaufen, bitte neu anfordern"
