@@ -99,6 +99,10 @@ ul,li,ol {
     padding: 0;
 }
 
+ul.styled {
+    list-style: disc;
+}
+
 a:hover,a:focus {
     text-decoration: none;
     outline: none;
@@ -2658,3 +2662,187 @@ footer a,.contact-box:hover,#options li a.selected,header .top-bar,header .top-b
     top: -50px;
     height: 0px;
     }
+
+
+.suggestion_entry {
+     border-bottom: 1px dotted #cccccc;
+     min-width: 340px;
+     text-align: left;
+     cursor: pointer;
+     font-size: 20px;
+}
+
+.suggestion_entry.new_entry {
+    border-top: 2px solid black;
+}
+
+.suggestion_entry > .btn-color {
+     margin-left: 10px;
+     margin-top: 4px;
+}
+
+.dropdown-menu a.suggestion_entry {
+     white-space: normal;
+}
+
+.dropdown-menu > li > a {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    }
+
+.dropdown-menu > .active > a.suggestion_entry, .dropdown-menu > .active > a.suggestion_entry:hover {
+     background: none repeat scroll 0% 0% #66cc99;
+}
+
+a.suggestion_entry > .icon {
+    display: none;
+}
+a.suggestion_entry > .icon2 {
+    display: inline;
+}
+
+a.suggestion_entry:hover > .icon, .active > a.suggestion_entry > .icon {
+    display: inline;
+}
+a.suggestion_entry:hover > .icon2, .active > a.suggestion_entry > .icon2 {
+    display: none;
+}
+
+.listbox > li.suggestions {
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-color: #eee;
+    background-image: none;
+    background-origin: padding-box;
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: auto auto;
+    font-size: 19px;
+    font-weight: bold;
+    min-height: 25px;
+    margin-top: -2px;
+    min-height: 25px;
+    padding-bottom: 5px;
+    padding-left: 24px;
+    padding-top: 5px;
+}
+
+.listbox li .edit_button {
+    opacity: 0.1;
+}
+
+.listbox li .edit_button_hidden {
+    display:none;
+}
+
+.listbox li:hover .edit_button, .listbox li:hover .edit_button_hidden {
+    display: inline-block;
+    opacity: 1;
+}
+
+
+
+.move_profile_container_top {
+  position:relative;top:-41px
+}
+
+        .onoffswitch {
+    position: relative; width: 96px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+    }
+
+    .onoffswitch .radio label, .onoffswitch .checkbox label, .onoffswitch .radio label, .onoffswitch .checkbox label {
+    display: !important block;
+    }
+
+    .onoffswitch-checkbox {
+    display: none;
+    }
+    .onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 12px;
+    }
+    .onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    -moz-transition: margin 0.3s ease-in 0s; -webkit-transition: margin 0.3s ease-in 0s;
+    -o-transition: margin 0.3s ease-in 0s; transition: margin 0.3s ease-in 0s;
+    }
+    .onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 14px; padding: 0; line-height: 14px;
+    font-size: 11px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+    }
+    .onoffswitch-inner:before {
+    content: "öffentlich";
+    padding-left: 9px;
+    background-color: #66CC99; color: #FFFFFF;
+    }
+    .onoffswitch-inner:after {
+    content: "privat";
+    padding-right: 9px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+    }
+    .onoffswitch-switch {
+    display: block; width: 18px; margin: 0px;
+    background: #FFFFFF;
+    border: 2px solid #999999; border-radius: 20px;
+    position: absolute; top: 0; bottom: 0; right: 78px;
+    -moz-transition: all 0.3s ease-in 0s; -webkit-transition: all 0.3s ease-in 0s;
+    -o-transition: all 0.3s ease-in 0s; transition: all 0.3s ease-in 0s;
+    }
+    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+    }
+    .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+    }
+
+.checkbox .onoffswitch > label, .radio .onoffswitch > label {
+    display: block;
+}
+.checkbox .onoffswitch > label, .radio .onoffswitch > label {
+    display: block;
+}
+
+.btn-normal.disabled {
+    opacity: 0.5;
+}
+
+.text-center-sm,
+.text-center-md,
+.text-center-lg,
+.text-right-sm,
+.text-right-md,
+.text-right-lg { text-align: inherit; }
+
+/* Define xs styles after defaults so they take precedence */
+.text-center-xs { text-align: center; }
+.text-right-xs { text-align: right; }
+
+/* Small grid */
+@media (min-width: 768px) {
+  .text-center-sm, .text-center-xs { text-align: center; }
+  .text-left-sm, .text-left-xs { text-align: left; }
+}
+
+/* Medium grid */
+@media (min-width: 992px) {
+  .text-center-md, .text-center-sm, .text-center-xs { text-align: center; }
+  .text-left-md, .text-left-sm, .text-left-xs { text-align: left; }
+}
+
+/* Large grid */
+@media (min-width: 1200px) {
+  .text-center-lg, .text-center-md, .text-center-sm, .text-center-xs {
+    text-align: center;
+  }
+  .text-left-lg, .text-left-md, .text-left-sm, .text-left-xs {
+    text-align: left;
+  }
+}
+
+
+.infolink {
+    cursor:pointer;border-bottom: 1px dotted #bbb;display:inline-block;
+}

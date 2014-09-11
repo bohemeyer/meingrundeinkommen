@@ -6,6 +6,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  #chances
+  has_many :chances, :dependent => :destroy
+
   #   # the participations in user_todos:
   has_many :user_wishes, :dependent => :destroy
   has_many :wishes, through: :user_wishes

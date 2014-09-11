@@ -8,6 +8,10 @@
 
             <form class="form-horizontal" ng-submit="update_profile()" role="form" name="RegisterForm" novalidate>
 
+              <alert ng-show="serverMessage" type="warning">{{serverMessage}}
+              </alert>
+
+
               <div class="form-group" ng-class="{ 'has-error' : RegisterForm.name.$invalid && !RegisterForm.name.$pristine }">
                 <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
                 <div class="col-sm-10 text-left">
@@ -29,7 +33,7 @@
                 <div class="col-sm-offset-2 col-sm-10 text-left">
                   <div class="checkbox">
                     <label>
-                      <input name="newsletter" ng-model="register_user.newsletter" type="checkbox"> Bitte informiert mich immer wenn wieder ein Grundeinkommen ausgelost wird oder bei wichtigen Änderungen auf der Seite (kein Spam, max. 1x pro Woche, eher seltener). Jederzeit widerrufbar.
+                      <input name="newsletter" ng-model="register_user.newsletter" type="checkbox">  Bitte informiert mich per E-Mail über weitere Verlosungstermine und bei wichtigen Änderungen auf der Seite.
                     </label>
                   </div>
                 </div>
@@ -47,6 +51,25 @@
               </div>
 
             </form>
+
+
+            <hr>
+
+            <h3>Konto löschen</h3>
+
+            <div class="form-group text-left">
+                <div class="col-sm-offset-2 col-sm-10 text-left">
+                  <div class="checkbox">
+                    <label>
+                      <input name="delete_account_check" ng-model="delete_account_check" type="checkbox"> Ja, ich will mein Nutzungs-Konto bei euch unwiderruflich löschen.
+
+                      <p ng-show="delete_account_check">
+                        <button ng-click="delete_account()" style="background:red" class="btn btn-special btn-red">Konto jetzt löschen</button>
+                      </p>
+                    </label>
+                  </div>
+                </div>
+              </div>
 
 
     <div class="clearfix"></div>

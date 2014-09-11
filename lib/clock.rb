@@ -1,6 +1,5 @@
 require 'clockwork'
 require 'httparty'
-require 'debugger'
 
 module Clockwork
 

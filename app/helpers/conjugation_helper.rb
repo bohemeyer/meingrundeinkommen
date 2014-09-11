@@ -97,8 +97,8 @@ module ConjugationHelper
         text = text.gsub(/^mir\s/i, " ") #replaces first mir with sich
 
 
-        text = text.gsub(/^mich\s/i, " ") #replaces first mich with sich
-        text = text.gsub(/^mir\s/i, " ") #replaces first mir with sich
+        text = text.gsub(/^mich\s/i, "sich ") #replaces first mich with sich
+        text = text.gsub(/^mir\s/i, "sich ") #replaces first mir with sich
 
         pronoun = gender == :male ? "ihn" : "sie"
         text = text.gsub(/\smich\s/i, " #{pronoun} ").gsub(/\smich$/i, " #{pronoun}") #replaces other mich with ihn/sie
@@ -107,8 +107,10 @@ module ConjugationHelper
 
 
 
-        #text = has_name_prefix?(text) ? " sich" + text : text if prefix
-        text = !has_name_prefix?(text) ? " sich" + text : text if prefix
+        #text = has_name_prefix?(text) ? text : text if prefix
+        #text = has_name_prefix?(text) ? text : text #if prefix
+
+
 
       elsif person == :they || person == :they2
 

@@ -8,6 +8,14 @@ angular.module "Wish", ["rails"]
       name: "wish"
     )
 
+    Wish.suggestions = (query) ->
+      Wish.query
+        q: query
+
+    Wish.latest = (query) ->
+      Wish.query {},
+        forUser: 'user_'
+
     Wish.forUser = (user_id) ->
       Wish.query {},
         forUser: 'users/' + user_id + '/'

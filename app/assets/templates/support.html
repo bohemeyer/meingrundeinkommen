@@ -1,32 +1,31 @@
-<div class="fullwidthbanner-container">
-   <div class="fullwidthbanner rslider">
-      <div class="container">
-         <div class="row">
-            <div class="col-md-6">
-                           	<div style="box-shadow: 0px 0px 10px black;
-border: 2px solid white;
-border-radius: 5px;
-overflow: hidden;background:black;margin-top:10px;margin-bottom: 40px;background:white;padding:50px;padding-top:70px;padding-bottom:70px;text-align:center">
-	<img src="http://skin2.ztat.net/s/xry/zalando/img/MAIN/logos/shops/schuhe.jpg">
+<div class="margin-top-30 text-center">
+ <h2>Hilf mit, das {{home.totallyFinancedIncomes + 1}}. Grundeinkommen zu finanzieren!</h2>
+ <p>Noch {{daysLeft}} Tage Zeit!</p>
+  <div class="progress" style="font-size: 15px;font-weight: 600;line-height: 40px;">
+
+     <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
+        <span ng-hide="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
+     </div>
+        <span ng-show="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
+
+  </div>
+  <h3 style="margin-bottom:15px;">Per Crowdfunding:</h3>
+  <a href="http://www.startnext.de/mein-grundeinkommen" analytics-on="click" analytics-event="Link zu Startnext geklickt" class="btn btn-special btn-color"><i class="icon-heart"></i> Jetzt unterstützen!</a>
+
+  <h2 style="margin-bottom:0;" class="margin-top-30">...oder unterstützen <u>ohne zu bezahlen</u></h2> <h3>mit deinen nächsten Online-Einkäufen:</h3>
+  <div ng-click="video_content='video.html'"  analytics-on="click" analytics-event="Play CrowdBar Video" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:20px;margin-bottom: 40px;max-width:800px;width:80%;display:inline-block;">
+     <div ng-include src="video_content ? video_content : 'video_preview.html'"></div>
+  </div>
+
+      <script type="text/ng-template" id="video_preview.html">
+         <a href="#"><img src="/assets/crowdbar_videopreview.jpg"></a>
+      </script>
+      <script type="text/ng-template" id="video.html">
+         <iframe width="100%" height="350" src="//www.youtube.com/embed/tcd7NiotGWg?autoplay=1" frameborder="0" allowfullscreen></iframe>
+      </script>
+
+<div class="col-md-offset-2 col-md-8">
+   <div ng-include="'/assets/crowdbar_install.html'"></div>
 </div>
 
-               <script type="text/ng-template" id="video_preview.html">
-                  <a href="#"><img src="/assets/ichgross.jpg"></a>
-               </script>
-               <script type="text/ng-template" id="video.html">
-                  <iframe width="100%" height="300" src="http://www.youtube.com/embed/iLTv8gFw15E?autoplay=1" frameborder="0" allowfullscreen></iframe>
-               </script>
-
-
-            </div>
-            <div class="col-md-6">
-               <h1 class="title_headline">Einkaufen und damit Grundeinkommen unterstützen - ohne Mehrkosten:</h1>
-               <a class="btn-large btn-grey btn-pad" scroll-to="support"><i class="icon-arrow-right"></i> Weiter zu zalando</a><br>
-               <a href="http://www.mein-grundeinkommen.de/support" style="color:white;display:block;margin-left:10px;">So funktioniert's</a>
-
-            </div>
-            <div class="clearfix"></div>
-         </div>
-      </div>
-   </div>
 </div>

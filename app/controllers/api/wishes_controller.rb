@@ -5,19 +5,40 @@ class Api::WishesController < ApplicationController
   def create
     #current_user = User.first
     wish = Wish.where(text:params[:text]).first
-    #wish = Wish.find(:first, :conditions => ["lower(text) = ?", params[:text]])
     wish = Wish.create(params.permit(:text)) if !wish
     user_wish = current_user.user_wishes.where(wish:wish)
     user_wish = current_user.user_wishes.create wish:wish, story:params[:story] if user_wish.blank?
-    render json: {user_wish: user_wish, wish: wish}
+
+    if params[:remove_initial_wish]
+      sugg = Suggestion.where(:email => current_user.email).first
+      if sugg
+        initial_wishes = sugg.initial_wishes
+        initial_wishes_new = initial_wishes.sub!(params[:remove_initial_wish], '')
+        Suggestion.find(sugg.id).update_attributes(initial_wishes: initial_wishes_new )
+      end
+    end
+
+    x = {
+      id: user_wish.id,
+      #similar: similar.results[0..1],
+      others_count: UserWish.where(wish_id:wish.id).count - 1,
+      wish_id: wish.id,
+      story: user_wish.story,
+      text: wish.text,
+      wish_url: Rack::Utils.escape(wish.text),
+      wish: wish.conjugate,
+      me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false)
+    }
+
+    render json: x
   end
 
   def users
-    render json:Wish.find(params[:id]).users
+    render json:Wish.find(params[:id]).users.order(:avatar => :desc)
   end
 
   def stories
-    render json:Wish.find(params[:id]).user_wishes.where('story is not null').order('created_at desc')
+    render json:Wish.find(params[:id]).user_wishes.where('story is not null and story != ""').order('created_at desc')
   end
 
   def states
@@ -28,14 +49,28 @@ class Api::WishesController < ApplicationController
 
   def wishes
     user_ids = Wish.find(params[:id]).user_ids
-    r = Wish.select("wishes.id, wishes.text, count(wishes.id) as ccc").joins(:user_wishes).where('user_wishes.user_id'=>user_ids).group(:wish_id).limit(25).order('ccc desc')
+    r = []
+    Wish.select("wishes.id, wishes.text, count(wishes.id) as ccc").joins(:user_wishes).where('user_wishes.user_id'=>user_ids).where.not('wishes.id' => params[:id]).group(:wish_id).limit(25).order('ccc desc').map do |wish|
+      next if !wish
+      r << {
+        others_count: UserWish.where(wish_id:wish.id).count - 1,
+        wish_id: wish.id,
+        wish_url: Rack::Utils.escape(wish.text),
+        wish: wish.conjugate,
+        text: wish.text,
+        me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false),
+        user:UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar)
+      }
+    end
     render json:r
   end
 
   def show
     wish = Wish.find(params[:id])
+    count = UserWish.where(wish_id:wish.id).count
     x = {
-      others_count: UserWish.where(id:wish.id).count - 1,
+      count: count,
+      others_count: count -1,
       wish_id: wish.id,
       id: wish.id,
       text: wish.text,
@@ -51,20 +86,55 @@ class Api::WishesController < ApplicationController
 
     base = UserWish
 
-    base = base.where(wish_id:Wish.where('text like ?', "%#{params[:q]}%").pluck(:id)) if params[:q]
+    page = params[:page] ? params[:page].to_i : 1
 
-    x = base.group(:wish_id).limit(25).order('count_all desc').count.map do |id,count|
+    limit = 8
+
+    if params[:q]
+      params[:q] = params[:q].gsub(/ich würde/i,'')
+      limit = 5
+      query = Wish.search do
+        fulltext params[:q] do
+          minimum_match 1
+        end
+      end
+
+      if current_user
+        base = base.where(wish_id:query.results.map(&:id)).where.not(wish_id: current_user.user_wishes.map(&:wish_id))
+      else
+        base = base.where(wish_id:query.results.map(&:id))
+      end
+    end
+
+    x= []
+
+    base.group(:wish_id).limit(limit).offset(limit*(page-1)).order('count_all desc').count.map do |id, count|
       next if !id
       wish = Wish.where(id:id).first
-      {
-        others_count:count - 1,
+      next if !wish
+      user = wish.users.where.not('users.avatar' => nil).sample if !params[:q]
+      user = wish.users.sample if !user
+      x << {
+        others_count:count-1,
+        count: count,
         wish_id: wish.id,
         wish_url: Rack::Utils.escape(wish.text),
         wish: wish.conjugate,
+        text: wish.text,
         me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false),
-        user:UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar)
+        #user:UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar),
+        user: user.slice(:name, :id, :avatar),
+        create: false
       }
     end
+
+    if params[:q] && !Wish.where(text:params[:q]).first
+      x << {
+        text: params[:q],
+        create: true
+      }
+    end
+
     render json:x
   end
 

@@ -19,7 +19,7 @@ en:
       unconfirmed: "Du musst Deinen Account bestätigen, bevor Du fortfahren kannst. [[resend_link]]"
     mailer:
       confirmation_instructions:
-        subject: "Bitte bestätigen Deine E-Mail-Adresse"
+        subject: "Bitte bestätige Deine E-Mail-Adresse"
       reset_password_instructions:
         subject: "Anleitung um Dein Passwort zurückzusetzen"
       unlock_instructions:
@@ -50,7 +50,7 @@ en:
       unlocked: "Dein Account wurde entsperrt. Du bist jetzt angemeldet."
   errors:
     messages:
-      taken: "E-Mail-Adresse ist bereits vergeben."
+      taken: "Du bist schon registriert. Du kannst dich einfach einloggen, indem du auf 'Mitmachen' klickst"
       already_confirmed: "wurde bereits bestätigt"
       confirmation_period_expired: "muss innerhalb %{period} bestätigt werden, bitte fordere einen neuen Link an"
       expired: "ist abgelaufen, bitte neu anfordern"

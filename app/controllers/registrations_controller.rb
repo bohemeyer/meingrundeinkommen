@@ -15,19 +15,23 @@ class RegistrationsController < Devise::RegistrationsController
     if @user.update_attributes(account_update_params)
       render json: @user
     else
-      render json: @user.errors
+      render json: @user.errors, status: 403
     end
   end
 
   def create
-    params['user']['sign_up_ip'] = request.env['REMOTE_ADDR']
+
+    account_create_params = devise_parameter_sanitizer.sanitize(:sign_up)
+
+    #account_create_params['sign_up_ip'] = request.remote_ip
     if cookies[:sign_ups]
       signups = cookies[:sign_ups].to_i + 1
     else
       signups = 1
     end
     cookies[:sign_ups] = signups
-    params['user']['number_of_signups'] = signups
+    #account_create_params['number_of_signups'] = signups
+
     super
   end
 

@@ -23,8 +23,10 @@ class Api::HomepagesController < ApplicationController
 
     homepage_data = {
       :number_of_users => number_with_precision(User.count, precision: 0, delimiter: '.'),
+      :number_of_wishes => number_with_precision(UserWish.count, precision: 0, delimiter: '.'),
+      :number_of_wishes_raw => UserWish.count,
       :amount => number_with_precision(cached_amount % 12000, precision: 0, separator: ',', delimiter: '.'),
-      :totally_financed_incomes => (cached_amount / 12000).round_down(0).round(0),
+      :totally_financed_incomes => (cached_amount / 12000 - 0.5).round(0),
       :percentage => number_to_percentage((cached_amount % 12000) / 120, precision: 0),
       :percentage_raw => (cached_amount % 12000) / 120,
       #:days_left => days_left,

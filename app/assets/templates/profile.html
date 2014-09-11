@@ -1,18 +1,17 @@
 <div class="breadcrumb-wrapper">
-               <div class="container">
-                  <div class="row" style="padding-bottom: 55px;">
-                     <div class="col-md-12 text-center">
-                        <img ng-if="own_profile && largeScreen" src="/assets/instructions.png">
-                     </div>
+   <div class="container">
+      <div class="row" style="padding-bottom: 55px;">
+         <div class="col-md-12 text-center">
+            <img ng-if="own_profile && largeScreen && user_states.length == 0 && !skip.states" src="/assets/instructions.png">
+         </div>
 
-                  </div>
-               </div>
-            </div>
+      </div>
+   </div>
+</div>
 
+<!-- Left Column -->
 
-
-
-<div class="container" style="position:relative;top:-41px">
+<div class="container" ng-class="{move_profile_container_top: own_profile}">
   <div class="col-md-4 text-center">
 
   	<div ng-if="own_profile" class="testimonial-image-large" ng-file-select="onFileSelect($files)" ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="about-to-drop" accept="image/*" ng-class="{own_profile: own_profile}">
@@ -31,87 +30,133 @@
 		{{user.name}}!</span>
 	</h1>
 	<a ng-if="own_profile" href="#" ng-click="open()"><i class="icon-pencil"></i> Profil bearbeiten</a>
-  	<div class="clearfix margin-top-20"></div>
+  <ul>
+    <li ng-show="user_states"><b>Ich bin:</b></li>
+    <li ng-repeat="state in user_states">
+      <span ng-show="state.visibility">{{state.text}}</span>
+    </li>
+  </ul>
+
+    <div class="clearfix margin-top-30"></div>
   </div>
 
-  <div class="row" ng-if="own_profile && !largeScreen" style="padding-bottom:20px;">
+
+  <!-- Right Column -->
+
+  <div class="row" ng-if="own_profile && !largeScreen && user_states.length == 0 && !skip.states" style="padding-bottom:20px;">
   	<div class="col-md-12 text-center">
 	  <img src="/assets/instructions.png">
 	  </div>
 	</div>
   <div class="col-md-8">
-  	<tabset type='{{mobile ? "pills" : ""}}' vertical='{{mobile ? "true" : "false"}}'>
-	    <tab heading="Was würdest du tun?">
-	      <div class="margin-top-20">
-	    	<h2>Mit Grundeinkommen würde ich...</h2>
-
-            <ul class="listbox">
-               <li ng-repeat="wish in user_wishes" ng-animate="'animate'">
-                  <div class="pull-left">
-                     <div class="testimonial-image "><img alt="" ng-src="{{user.avatar.avatar.url}}"></div>
-                  </div>
-
-                   <a ng-click="removeWish(wish)" ng-if="edit_story != wish" href="#" class="btn-grey btn-small btn-pad pull-right">
-                     <i class="icon-trash"></i>
-                   </a>
-                   <a ng-if="edit_story != wish" ng-click="editStory(wish)" href="#" class="btn-grey btn-small btn-pad pull-right">
-                     <i class="icon-pencil"></i>
-                   </a>
 
 
-                  <div class="textblock">
-                  	<a style="font-size:18px" href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}">...{{wish.text}}</a>
+    <div ng-if="!own_profile" ng-include="'/assets/wishes.html'"></div>
 
-                    <p ng-show="edit_story != wish">{{wish.story}}
-                    </p>
-                    <div ng-if="edit_story == wish" style="margin-left:10px;margin-bottom: 20px;">
-                      <textarea style="width:90%;min-height:60px;margin-top:10px;margin-bottom:10px" ng-model="wish.edited_story"></textarea><br>
-                      <a href="#" class="btn btn-small btn-color" ng-click="updateStory(wish)"><i class="icon-check"></i> Speichern</a>
-                      <a href="#" class="btn btn-small btn-grey" ng-click="cancelStoryEditing(wish)"><i class="icon-reply"></i> Abbrechen</a>
-                    </div>
-                    <div ng-if="wish.othersCount > 0">
-                  	 <a  href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}"><b>{{wish.othersCount}}</b> Andere</a> würden das auch
-                    </div>
-                  </div>
+  <!-- Tabs -->
 
-               </li>
+    <tabset id="tabs" ng-if="own_profile" type='{{mobile ? "pills" : ""}}' vertical='{{mobile ? "true" : "false"}}'>
 
-            </ul>
+      <!-- Was würdest du tun? -->
 
-            <div style="text-align: center; font-weight:bold;font-size: 25px;background:#66cc99;color:white;border-radius: 5px;box-shadow:1p 1px 1px black;border:1px solid white;">
+      <tab heading="Ich würde...">
+	      <div ng-include="'/assets/wishes.html'"></div>
+	    </tab>
 
-              <div class="testimonials-arrow">
-               </div>
+      <!-- Avatar -->
 
-              <div ng-if="user_wishes.length > 0" style="margin-top:-10px;margin-bottom:10px;">Außerdem würde ich...</div>
-               <form ng-show="own_profile" ng-submit="addWish()" style="margin-top:-5px;margin-bottom:10px;">
+	    <tab  active="currentTab.image" disabled="user_wishes.length==0" heading="Gesicht zeigen" ng-if="default_avatar">
 
-        <input type="text" ng-model="wish_form.new_wish" style="height:50px;padding-left:10px;padding-right:10px;" font-size="25"
-				   placeholder="...">
-				<input class="btn btn-special btn-grey" ng-disabled="!wish_form.new_wish" type="submit" value="Ja!" style="margin-top:-6px">
+        <img src="/assets/upload_avatar.png" class="margin-top-20" />
         <br>
-        <div ng-show="wish_form.new_wish.length > 5" style="font-size: 16px" class="text-center">
-          <b>Willst du mehr dazu sagen?</b><br>
-          <textarea style="width:90%;height:100px;margin-bottom:10px;" ng-model="wish_form.story" placeholder="Hier kannst du dein Vorhaben ausführlich beschreiben, begründen oder dafür begeistern."></textarea>
+        <div style="margin-left: 30px;
+    margin-top: -54px;
+    text-align: center;
+    width: 243px;">
+        oder:<br>
+        <div class="btn-color btn-normal" ng-file-select="onFileSelect($files)" accept="image/*"><i class="icon-upload"></i> Datei auswählen</div><br><br>
+        <a href="#" ng-click="skip_section('image')" analytics-on="click" analytics-event="Bildupload übersprungen" scroll-to="tabs"><i class="icon-mail-forward"></i> überspringen</a>
         </div>
-				</form>
+	    </tab>
 
+
+      <!-- Wer bist du? -->
+
+      <tab active="currentTab.states" disabled="user_wish.length==0 || (default_avatar && !skip.image)" heading="Ich bin...">
+
+        <div ng-include="'/assets/states.html'"></div>
+
+      </tab>
+
+
+      <!-- Unterstützen -->
+
+      <tab active="currentTab.support" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states)" heading="Unterstützen">
+
+        <div ng-include="'/assets/support.html'"></div>
+        <div class="text-center">
+          <br>
+          <a class="btn-grey btn-small" ng-click="skip_section('support')"  scroll-to="tabs" analytics-on="click" analytics-event="Unterstützen übersprungen"><i class="icon-mail-forward"></i> Unterstützen überspringen</a>
+        </div>
+      </tab>
+
+      <!-- Gewinnspiel -->
+
+      <tab active="currentTab.gewinnspiel" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states) || !skip.support">
+         <tab-heading popover-placement="bottom" popover="{{ user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states) || !skip.support ? 'Bitte erst die vorherigen Schritte durchlaufen bzw. dort auf \'überspringen\' klicken.' : ''}}" popover-trigger="mouseenter">
+          Gewinnspiel
+         </tab-heading>
+
+        <div class="container margin-top-30">
+
+          <div ng-include="'/assets/gewinnspiel.html'"></div>
+
+
+
+<!--
+           <p align=justify>Alle vollständig finanzierten Grundeinkommen werden am 18. September 2014 an alle Teilnehmenden des Gewinnspiels verlost. Die Auslosung findet in Berlin statt und wird live per Video-Stream übertragen.</p>
+          <h2>Das Gewinnspiel beginnt am 6. September</h2>
+          <alert type="danger">Wenn du teilnehmen möchtest, dann schau unbedingt zwischen dem 6. und 17. September hier noch einmal vorbei, um dich für das Gewinnspiel offiziell zu registrieren.</alert>
+        <div ng-show="!user.newsletter">
+          <hr>
+            <div class="text-center"><h3>Gern erinnern wir dich per Mail:</h3></div>
+
+
+          <div class="form-group text-left">
+            <div class="col-sm-offset-1 col-sm-11 text-left">
+              <div class="checkbox">
+                <label>
+                  <input name="newsletter" ng-model="user.newsletter" type="checkbox" ng-click="setNewsletterFlag()" analytics-on="click" analytics-event="Newsletter abboniert (im Gewinnspieltab)"> Bitte informiert mich per E-Mail über weitere Verlosungstermine und bei wichtigen Änderungen auf der Seite.
+                </label>
+              </div>
             </div>
+          </div>
+        </div>
+
+        <hr>
+
+        <div ng-show="user.newsletter">
+          <alert type="success"><i class="icon-envelope"></i> Wir erinnern dich rechtzeitig per Mail!</alert>
+        </div>
+ -->
 
 
-		  </div>
-	    </tab>
-	    <tab heading="Gesicht zeigen" ng-if="default_avatar">
-	    	<div class="button" ng-file-select="onFileSelect($files)" accept="image/*">Auswählen</div>
-	    </tab>
-	    <tab heading="Wer bist du?">Long Labeled Justified content</tab>
-	    <tab heading="Unterstützen" ng-if="!default_avatar">Long Labeled Justified content</tab>
-	    <tab heading="Gewinnspiel">Long Labeled Justified content</tab>
-	  </tabset>
+      </div>
+
+      </tab>
+
+
+    </tabset>
+<div class="clearfix"></div>
+      <div ng-if="own_profile" class="row text-center margin-top-70">
+  <div class="col-md-12">
+  <hr>
+  <h3>Brauchst du Hilfe?</h3>
+  <div>
+    <p>Vielleicht hilft dieses Video. Ansonsten schreib mir eine <a href="mailto:support@mein-grundeinkommen.de">Mail</a>.</p>
+    <iframe width="100%" height="300" src="//www.youtube.com/embed/7XTt5HukC_4" frameborder="0" allowfullscreen></iframe>
   </div>
-
-  <div class="clearfix"></div>
-
+</div>
 </div>
 
 
@@ -119,11 +164,7 @@
 
 
 
-<!-- <div ng-show="own_profile">
-  <input ng-model="new_name">
 
-  <input type="button" ng-click="updateProfile()" value="Ändern">
-</div> -->
+</div>
 
-
-
+</div>

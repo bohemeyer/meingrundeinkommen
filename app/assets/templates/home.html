@@ -23,27 +23,27 @@ bedingungslos</li>
       <div class="container">
          <div class="row">
             <div class="col-md-6">
-               <div ng-click="showvideo()" style="box-shadow: 0px 0px 10px black;
-border: 2px solid white;
-border-radius: 5px;
-overflow: hidden;background:black;margin-top:10px;margin-bottom: 40px;">
+               <div ng-click="showvideo()" analytics-on="click" analytics-event="Play Home Video" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:10px;margin-bottom: 40px;">
                   <div ng-include src="video_content"></div>
 
                </div>
 
                <script type="text/ng-template" id="video_preview.html">
-                  <a href="#"><img src="/assets/ichgross.jpg"></a>
+                  <a href="#"><img src="/assets/videopreview1.jpg"></a>
                </script>
                <script type="text/ng-template" id="video.html">
-                  <iframe width="100%" height="300" src="http://www.youtube.com/embed/iLTv8gFw15E?autoplay=1" frameborder="0" allowfullscreen></iframe>
+                  <iframe width="100%" height="300" src="//www.youtube.com/embed/QJQcVFHOz5Y?autoplay=1" frameborder="0" allowfullscreen></iframe>
                </script>
 
 
             </div>
             <div class="col-md-6">
                <h1 class="title_headline">Was würde passieren,<br> wenn es plötzlich Grundeinkommen gäbe?</h1>
+               <!-- <p>
+                  "Mein Grundeinkommen" sammelt per Crowdfunding Geld für ein <span ng-click="bge_info()" class="infolink">Bedingungsloses Grundeinkommen</span>. Immer wenn 12.000€ zusammen sind, werden sie an eine Person ausgelost.
+               </p> -->
                <a class="btn-large btn-grey btn-pad" scroll-to="support">Probieren wir es aus!</a>
-               <a class="btn-normal btn-grey btn-pad" ng-click="open()">Was ist das 'Grundeinkommen'?</a>
+               <!-- <a class="btn-normal btn-grey btn-pad" ng-click="bge_info()">Was ist das 'Grundeinkommen'?</a> -->
             </div>
             <div class="clearfix"></div>
          </div>
@@ -83,16 +83,18 @@ overflow: hidden;background:black;margin-top:10px;margin-bottom: 40px;">
       </div>
       <div class="row" style="padding-top: 0px;">
 
-            <div class="col-md-12 text-center">
-               <div class="progress" ng-repeat="fi in home.financedIncomes">
+<!--                <div class="progress" ng-repeat="fi in home.financedIncomes">
 
                            <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><i class="icon-check"></i> {{fi}}</div>
 
                </div>
 
-               <h2 class="slogan-title">Noch {{daysLeft}} Tage bis zum nächsten Ziel:</h2>
+ -->
+            <div class="col-md-12 text-center">
 
-               <div class="progress" style="font-size: 15px;font-weight: 600;line-height: 40px;">
+               <h2 class="slogan-title margin-top-30">Noch {{daysLeft}} Tage bis zum nächsten Ziel:</h2>
+
+               <div class="progress margin-top-20" style="font-size: 25px;font-weight: 600;line-height: 37px;">
 
                   <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
                      <span ng-hide="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
@@ -101,8 +103,27 @@ overflow: hidden;background:black;margin-top:10px;margin-bottom: 40px;">
 
                </div>
 
-                  <a href="http://www.startnext.de/mein-grundeinkommen" class="btn btn-special btn-color"><i class="icon-heart"></i> Jetzt unterstützen!</a>
+                  <a href="http://www.startnext.de/mein-grundeinkommen"  analytics-on="click" analytics-event="Link zu Startnext geklickt" class="btn btn-special btn-color btn-large margin-top-30"><i class="icon-heart"></i> Jetzt unterstützen!</a>
 
+               <h1 style="margin-bottom:0;" class="margin-top-70">...oder unterstützen <u>ohne zu bezahlen</u></h1> <p>Mit der CrowdBar fließt aus jedem deiner Online-Einkäufe Geld ins nächste Grundeinkommen.<br>
+Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
+  <div ng-click="video_content2='video2.html'" analytics-on="click" analytics-event="Play CrowdBar Video" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:20px;margin-bottom: 40px;max-width:800px;width:80%;display:inline-block;">
+     <div ng-include src="video_content2 ? video_content2 : 'video_preview2.html'"></div>
+  </div>
+<div collapse="isCollapsed">
+  <a class="btn-grey btn-normal" href="#" ng-click="isCollapsed = !isCollapsed"><i class="icon-caret-down"></i> CrowdBar - so geht's</a>
+</div>
+<div class="col-md-offset-3 col-md-6" collapse="!isCollapsed">
+   <div ng-include="'/assets/crowdbar_install.html'"></div>
+</div>
+
+
+      <script type="text/ng-template" id="video_preview2.html">
+         <a href="#"><img src="/assets/crowdbar_videopreview.jpg"></a>
+      </script>
+      <script type="text/ng-template" id="video2.html">
+         <iframe width="100%" height="350" src="//www.youtube.com/embed/tcd7NiotGWg?autoplay=1" frameborder="0" allowfullscreen></iframe>
+      </script>
 
 
 
@@ -120,14 +141,10 @@ overflow: hidden;background:black;margin-top:10px;margin-bottom: 40px;">
          <div class="slogan-content">
             <div class="col-md-12 text-center">
                <h2 class="slogan-title">In <span class="huge">{{daysLeft}}</span> Tagen werden die Grundeinkommen verlost.</h2>
-
+               <p>In einem <a href="/gewinnspielbedingungen">Gewinnspiel</a>. Melde dich hier an um am Gewinnspiel teilzunehmen:</p>
 
             <div class="get-started">
-                  <a ng-hide="main.current_user" href="/register" class="btn btn-special btn-color ">Ich will das Grundeinkommen haben!</a>
-
-                  <a ng-show="main.current_user && !main.current_user.participates_in_drawing" href="/menschen/{{main.current_user.id}}" class="btn btn-special btn-color ">Ich will das Grundeinkommen!</a>
-
-                     <a ng-show="main.current_user && main.current_user.participates_in_drawing" href="#" class="disabled btn btn-special btn-color"><i class="icon-check"></i> Du nimmst teil</a>
+                  <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color btn-large" analytics-on="click" analytics-event="geklickt: Ich will das Grundeinkommen haben">Ich will das Grundeinkommen haben!</a>
                </div>
 
             </div>
@@ -135,73 +152,13 @@ overflow: hidden;background:black;margin-top:10px;margin-bottom: 40px;">
             <div class="clearfix"></div>
          </div>
       </div>
-   </div>
-
-
-
-
-
-<div class="main-content">
-   <div class="container">
-      <div class="col-md-12">
+            <div class="col-md-12 margin-top-70">
                         <h3 class="title">&nbsp;</h3>
                         </div>
-      <div class="row text-center" style="margin-top:40px">
-
-
-
-         <h1><span class="huge">{{home.numberOfUsers}}</span> <br> Menschen erzählen hier, wie ein Grundeinkommen
-ihr Leben verändern würde.</h1>
-      </div>
-
-
-      <div class="row">
-         <div class="col-md-12">
-            <div class="testimonial item">
-               <p style="text-align: center; font-weight:bold;font-size: 25px;background:#66cc99;color:white;">Mit einem Grundeinkommen würden...</p>
-               <div class="testimonials-arrow">
-               </div>
-            </div>
-
-            <ul class="listbox">
-               <li ng-repeat="wish in wishes">
-                  <div class="pull-left">
-                     <div class="testimonial-image "><img alt="" ng-src="{{wish.user.avatar.avatar.thumb.url}}"></div>
-
-                  </div>
-
-                   <a ng-click="me_too(wish)" href="#" class="btn-color btn-small btn-pad pull-right" ng-class="{disabled: wish.meToo}">
-                     <span ng-show="wish.meToo">
-                        <i class="icon-check"></i> Du auch!
-                     </span>
-                     <span ng-hide="wish.meToo">
-                        Ich auch!
-                     </span>
-
-                   </a>
-
-                  <div class="textblock"><a href="/profiles/{{wish.user.id}}">{{wish.user.name}}</a>
-                     <span ng-show="wish.othersCount > 0"> und <b>{{wish.othersCount}}</b> andere würden</span>
-
-                     <span ng-show="wish.othersCount == 0"> würde</span>
-
-                     <br><a style="font-size:18px" href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}">{{wish.othersCount == 0 ? wish.wish.he : wish.wish.they}}</a></div>
-
-               </li>
-
-            </ul>
-
-
-         </div>
-
-      </div>
-
-
-      <a href="/conditions" class="btn-grey btn-small btn-pad">Mehr anzeigen</a>
-
-
-
-      </div>
    </div>
-</div>
+
+
+
+   <div ng-include="'/assets/community_home.html'"></div>
+
 <!-- Main Content end-->

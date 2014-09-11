@@ -1,5 +1,5 @@
 class StateUserSerializer < ActiveModel::Serializer
-  attributes :id, :story, :text, :user_state_id
+  attributes :id, :story, :text, :visibility, :user_state_id
 
   def id
     object.state.id

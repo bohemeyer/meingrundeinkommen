@@ -1,0 +1,141 @@
+<div class="margin-top-30">
+	<h2>Mit <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> würde ich...</h2>
+
+      <ul class="listbox">
+         <li ng-repeat="wish in user_wishes" ng-if="wish.text">
+            <div class="pull-left">
+               <div class="testimonial-image "><img alt="" ng-src="{{user.avatar.avatar.url}}"></div>
+            </div>
+
+             <a ng-click="removeWish(wish)" ng-if="edit_story != wish && own_profile" href="#" class="btn-grey btn-small btn-pad pull-right edit_button" popover="Löschen" popover-trigger="mouseenter">
+               <i class="icon-trash"></i>
+             </a>
+             <a ng-if="edit_story != wish && own_profile" ng-click="editStory(wish)" href="#" class="btn-grey btn-small btn-pad pull-right edit_button" popover="Beschreibungstext ändern" popover-trigger="mouseenter">
+               <i class="icon-pencil"></i>
+             </a>
+
+             <a ng-click="me_too(wish)" analytics-on="click" analytics-event="geklickt: Ich auch (Profilseite von jmd anderes)" href="#" class="btn-normal btn-pad pull-right" ng-show="!own_profile" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
+                     <span ng-show="wish.meToo">
+                        <i class="icon-check"></i> Du auch!
+                     </span>
+                     <span ng-hide="wish.meToo">
+                        <i class="icon-lightbulb"></i> Ich auch!
+                     </span>
+
+                   </a>
+
+
+            <div class="textblock">
+            	<a style="font-size:18px" href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}">...{{wish.text}}</a>
+
+              <p ng-show="edit_story != wish">{{wish.story}}
+              </p>
+              <div ng-if="edit_story == wish" style="margin-left:10px;margin-bottom: 20px;">
+                <textarea style="width:90%;min-height:60px;margin-top:10px;margin-bottom:10px" ng-model="wish.edited_story"></textarea><br>
+                <a href="#" class="btn btn-small btn-color" ng-click="updateStory(wish)"><i class="icon-check"></i> Speichern</a>
+                <a href="#" class="btn btn-small btn-grey" ng-click="cancelStoryEditing(wish)"><i class="icon-reply"></i> Abbrechen</a>
+              </div>
+              <span style="color:#ccc;font-size:11px;" ng-if="wish.othersCount > 0">
+            	 {{wish.othersCount}} andere auch
+              </span>
+            </div>
+
+         </li>
+
+         <li ng-if="own_profile && suggestions.length > 0" class="suggestions"><i class="icon-circle-arrow-down"></i> Vorschläge</li>
+
+         <li ng-if="own_profile" ng-repeat="wish in suggestions | limitTo:5" ng-animate="'animate'">
+            <div class="pull-left">
+               <div class="testimonial-image "><img alt="" ng-src="{{wish.user.avatar.avatar.thumb.url}}"></div>
+            </div>
+
+
+
+            <a ng-if="wish.suggestion && wish.suggestion.isSimilarOnly" ng-click="use_original_instead_of_suggested(wish)" href="#" class="btn-grey btn-small btn-pad pull-right">
+               <i class="icon-mail-forward"></i> meine Formulierung
+             </a>
+
+             <a ng-click="me_too(wish)" analytics-on="click" analytics-event="geklickt: Ich auch (Vorschläge auf Profil)" href="#" class="btn-color btn-small btn-pad pull-right">
+               <i class="icon-lightbulb"></i> Ich auch!
+             </a>
+
+
+            <div class="textblock">
+              <a style="font-size:18px" href="{{wish.wishUrl ? '/mit-grundeinkommen-wuerde-ich/' + wish.wishUrl + '/' + wish.wishId : '#'}}">...{{wish.text}}</a>
+
+              <p ng-show="edit_story != wish">{{wish.story}}
+              </p>
+              <div ng-if="edit_story == wish" style="margin-left:10px;margin-bottom: 20px;">
+                <textarea style="width:90%;min-height:60px;margin-top:10px;margin-bottom:10px" ng-model="wish.edited_story"></textarea><br>
+                <a href="#" class="btn btn-small btn-color" ng-click="updateStory(wish)"><i class="icon-check"></i> Speichern</a>
+                <a href="#" class="btn btn-small btn-grey" ng-click="cancelStoryEditing(wish)"><i class="icon-reply"></i> Abbrechen</a>
+              </div>
+              <div>
+
+               <span ng-show="wish.suggestion && wish.suggestion.isSimilarOnly">
+                basierend auf deiner Formulierung bei der Voranmeldung
+               </span>
+               <span ng-show="wish.suggestion && !wish.suggestion.isSimilarOnly">
+                wie bei der Voranmeldung angegeben
+               </span>
+
+               <span ng-hide="wish.suggestion">sagt <b>{{wish.user.name}}</b></span>
+               <span ng-if="!wish.suggestion && wish.othersCount > 0">und
+               <a ng-hide="wish.suggestion" href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}"><b>{{wish.othersCount}}</b> andere</a></span>
+              </div>
+            </div>
+
+         </li>
+
+      </ul>
+
+      <div ng-if="own_profile" style="text-align: center; font-weight:bold;font-size: 25px;background:#66cc99;color:white;border-radius: 5px;box-shadow:1p 1px 1px black;border:1px solid white;">
+
+        <div class="testimonials-arrow">
+         </div>
+
+        <div ng-if="user_wishes.length > 0" style="margin-top:-10px;margin-bottom:10px;">Außerdem würde ich...</div>
+         <form ng-show="own_profile" ng-submit="addWish()" style="margin-top:-5px;margin-bottom:10px;">
+
+  <input type="text" ng-model="wish_form.new_wish" style="height:50px;padding-left:10px;padding-right:10px;" font-size="25"
+	   placeholder="..." maxlength="100" typeahead="wish as wish.text for wish in getSuggestions($viewValue)" typeahead-loading="loading" typeahead-template-url="suggestion_list.html">
+
+
+  <script type="text/ng-template" id="suggestion_list.html">
+    <a class="suggestion_entry" ng-class="{new_entry: match.model.create}">
+        <i ng-if="!match.model.create" class="icon-chevron-right icon"></i>
+        <i ng-if="!match.model.create" class="icon-lightbulb icon2"></i>
+        <i ng-if="match.model.create" class="icon-plus"></i>
+        &nbsp;&nbsp;<span bind-html-unsafe="match.model.text | typeaheadHighlight:query"></span> <span ng-if="match.model.count > 1" style="color:#ccc;font-size:11px;" bind-html-unsafe="match.model.count"></span> <span ng-if="match.model.count > 1" style="color:#ccc;font-size:11px;">Menschen würden das tun</span>
+
+          <span ng-if="match.model.create" style="color:#666;font-size:11px;font-weight:bold">neu anlegen <span ng-show="match.model.text.length > 20" style="font-size:10px;font-weight:normal;opacity:0.7">({{100 - match.model.text.length}} Zeichen übrig)</span></span>
+
+    </a>
+  </script>
+
+  <div style="display:inline-block;min-width:120px;text-align:left" >
+    <i ng-show="loading" class="icon-spin icon-refresh"></i>
+    <input class="btn btn-special btn-grey" ng-disabled="!wish_form.new_wish" type="submit" value="Ja!" style="margin-top:-6px" analytics-on="click" analytics-event="Vorhaben hinzugefügt">
+  </div>
+
+  <div class="text-center" ng-show="(!wish_form.new_wish || wish_form.new_wish.length == 0)">
+    <span style="font-size:16px;font-weight:normal;"> Gar nich so einfach zu beantworten, was? <br>Hol dir <a href="/community">Inspiration von den anderen {{home.numberOfUsers}} Mitgliedern</a>!</span>
+  </div>
+
+
+  <div ng-show="wish_form.new_wish.length > 5" style="font-size: 16px" class="text-center">
+
+    <b>Willst du mehr dazu sagen?</b><br>
+    <textarea style="width:90%;height:100px;margin-bottom:10px;" ng-model="wish_form.story" placeholder="Hier kannst du dein Vorhaben ausführlich beschreiben, begründen oder andere für dein Vorhaben begeistern."></textarea>
+  </div>
+	</form>
+
+      </div>
+
+
+</div>
+
+<div ng-show="own_profile" class="text-center" style="margin-top:5px;"><p style="color:#ccc;"><br>Die Antwort auf die Frage, was du mit deinem Grundeinkommen tun würdest, hat keinen Einfluss auf deine Gewinnchancen. Grundeinkommen ist bedingungslos und geht davon aus, dass du am besten weißt, was gut für dich ist. Aber wir freuen uns natürlich über eine ehrliche Antwort.</p></div>
+
+
+<a href="#" ng-show="user_wishes.count == 0" ng-click="skip_section('wishes')"><i class="icon-mail-forward" scroll-to="tabs"></i> überspringen</a>

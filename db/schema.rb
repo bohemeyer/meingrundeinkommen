@@ -11,7 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815071832) do
+ActiveRecord::Schema.define(version: 20140905235031) do
+
+  create_table "chances", force: true do |t|
+    t.string   "full_name"
+    t.date     "dob"
+    t.boolean  "is_child"
+    t.integer  "country_id"
+    t.string   "city"
+    t.boolean  "confirmed_publication"
+    t.integer  "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "chances", ["user_id"], name: "index_chances_on_user_id"
+
+  create_table "questions", force: true do |t|
+    t.string   "text"
+    t.text     "answer"
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "state_users", force: true do |t|
     t.text     "story"
@@ -19,10 +42,18 @@ ActiveRecord::Schema.define(version: 20140815071832) do
     t.integer  "state_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "visibility", default: false
   end
 
   create_table "states", force: true do |t|
     t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "suggestions", force: true do |t|
+    t.string   "email"
+    t.text     "initial_wishes"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
