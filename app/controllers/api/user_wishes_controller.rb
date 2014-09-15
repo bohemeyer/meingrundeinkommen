@@ -58,6 +58,22 @@ class Api::UserWishesController < ApplicationController
       }
     end
 
+    users = User.where.not('users.avatar' => nil).sample(30)
+
+    users.each do |user|
+      wish = user.wishes.sample
+      x << {
+        others_count: UserWish.where(wish_id: wish.id).count - 1,
+        wish_id: wish.id,
+        wish_url: Rack::Utils.escape(wish.text),
+        wish: wish.conjugate,
+        text: wish.text,
+        me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false),
+        user: user.slice(:name, :id, :avatar)
+      }
+    end
+
+
     render json: x
 
   end

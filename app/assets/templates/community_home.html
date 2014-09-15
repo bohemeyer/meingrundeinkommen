@@ -3,11 +3,52 @@
    <div class="container">
       <div class="row text-center">
 
-
-
          <h1><span class="huge">{{home.numberOfUsers}}</span> <br> Menschen erzählen hier, wie ein <span class="infolink" ng-click="bge_info()">Grundeinkommen</span>
 {{home.numberOfWishes}} Dinge in ihrem Leben verändern würde.</h1>
       </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="slogan bottom-pad-small" style="padding:0">
+   <!-- <div class="container"> -->
+
+      <carousel interval="2000">
+        <slide ng-repeat="portrait in portraits">
+          <div style="height:100%;width:100%;position:absolute;opacity: 0.3; filter: alpha(opacity=30);z-index:0;">
+            <div style="background:url('{{portrait.user.avatar.avatar.url}}');background-size:100% auto;background-position:50% 30%;height:100%;width:100%"></div>
+          </div>
+          <div style="padding:20px;padding-bottom:50px;z-index:1;position:relative;">
+            <div class="testimonial-image-medium">
+              <a href="/menschen/{{portrait.user.id}}">
+                <img src="{{portrait.user.avatar.avatar.url}}">
+              </a>
+            </div>
+            <a href="/menschen/{{portrait.user.id}}">{{portrait.user.name}}</a> würde<br>
+            <a style="font-size:18px" href="/mit-grundeinkommen-wuerde-ich/{{portrait.wishUrl}}/{{portrait.wishId}}">{{portrait.wish.he}}</a>
+            <br>
+            <a ng-click="me_too(portrait)" href="#" class="btn-normal btn-pad" ng-class="{disabled: portrait.meToo, 'btn-grey': portrait.meToo, 'btn-color': !portrait.meToo}">
+                       <span ng-show="portrait.meToo">
+                          <i class="icon-check"></i> Du auch!
+                       </span>
+                       <span ng-hide="portrait.meToo">
+                          <i class="icon-lightbulb"></i> Ich auch!
+                       </span>
+                     </a>
+
+          </div>
+        </slide>
+    </carousel>
+
+   <!-- </div> -->
+</div>
+
+
+
+<div class="main-content">
+   <div class="container">
 
 
       <div class="row">
@@ -27,7 +68,6 @@
                      <span ng-hide="wish.meToo">
                         <i class="icon-lightbulb"></i> Ich auch!
                      </span>
-
                    </a>
 
                    <a  href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}" class="edit_button_hidden btn-normal btn-pad pull-right btn-grey"><i class="icon-angle-right"></i> ansehen

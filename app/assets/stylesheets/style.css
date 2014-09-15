@@ -1442,6 +1442,19 @@ a.prev.disabled,a.next.disabled {
 	padding:4px;
 }
 
+.testimonial-image-medium {
+    margin: 3px;
+}
+
+.testimonial-image-medium img {
+    border-radius: 100px;
+    height: 200px !important;
+    width: 200px !important;
+    border:1px solid #ddd;
+    padding:4px;
+}
+
+
 .testimonial-image-large {
     margin: 3px;
 }
