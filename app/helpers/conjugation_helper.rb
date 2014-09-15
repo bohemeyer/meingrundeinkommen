@@ -71,23 +71,23 @@ module ConjugationHelper
 
       elsif person == :he
 
-        pronoun = gender == :male ? "sein" : "ihr"
+        pronoun = gender == :male ? "sein/ihr" : "ihr"
         text = text.gsub(/^mein\s/i, "#{pronoun} ").gsub(/\smein\s/i, " #{pronoun} ").gsub(/\smein$/i, " #{pronoun}") #replaces mein with sein/ihr
-        pronoun = gender == :male ? "seine" : "ihre"
+        pronoun = gender == :male ? "seine/ihre" : "ihre"
         text = text.gsub(/^meine\s/i, "#{pronoun} ").gsub(/\smeine\s/i, " #{pronoun} ").gsub(/\smeine$/i, " #{pronoun}") #replaces meine with seine/ihre
-        pronoun = gender == :male ? "seinen" : "ihren"
+        pronoun = gender == :male ? "seinen/ihren" : "ihren"
         text = text.gsub(/^meinen\s/i, "#{pronoun} ").gsub(/\smeinen\s/i, " #{pronoun} ").gsub(/\smeinen$/i, " #{pronoun}") #replaces meinen with seinen/ihren
-        pronoun = gender == :male ? "seinem" : "ihrem"
+        pronoun = gender == :male ? "seinem/ihrem" : "ihrem"
         text = text.gsub(/^meinem\s/i, "#{pronoun} ").gsub(/\smeinem\s/i, " #{pronoun} ").gsub(/\smeinem$/i, " #{pronoun}") #replaces meinem with seinem/ihrem
-        pronoun = gender == :male ? "seiner" : "ihrer"
+        pronoun = gender == :male ? "seiner/ihrer" : "ihrer"
         text = text.gsub(/^meiner\s/i, "#{pronoun} ").gsub(/\smeiner\s/i, " #{pronoun} ").gsub(/\smeiner$/i, " #{pronoun}") #replaces meiner with seiner/ihrer
-        pronoun = gender == :male ? "seines" : "ihres"
+        pronoun = gender == :male ? "seines/ihres" : "ihres"
         text = text.gsub(/^meines\s/i, "#{pronoun} ").gsub(/\smeines\s/i, " #{pronoun} ").gsub(/\smeines$/i, " #{pronoun}") #replaces meines with seines/ihres
 
-        pronoun = gender == :male ? "ihm" : "ihr"
+        pronoun = gender == :male ? "ihm/ihr" : "ihr"
         text = text.gsub(/^(dass|daß)\smir\s/i, "dass #{pronoun} ")
         text = text.gsub(/^,\s(dass|daß)\smir\s/i, ", dass #{pronoun} ")
-        pronoun = gender == :male ? "ihn" : "sie"
+        pronoun = gender == :male ? "ihn/sie" : "sie"
         text = text.gsub(/^(dass|daß)\smich\s/i, "dass #{pronoun} ")
         text = text.gsub(/^,\s(dass|daß)\smich\s/i, ", dass #{pronoun} ")
 
@@ -100,9 +100,9 @@ module ConjugationHelper
         text = text.gsub(/^mich\s/i, "sich ") #replaces first mich with sich
         text = text.gsub(/^mir\s/i, "sich ") #replaces first mir with sich
 
-        pronoun = gender == :male ? "ihn" : "sie"
+        pronoun = gender == :male ? "ihn/sie" : "sie"
         text = text.gsub(/\smich\s/i, " #{pronoun} ").gsub(/\smich$/i, " #{pronoun}") #replaces other mich with ihn/sie
-        pronoun = gender == :male ? "ihm" : "ihr"
+        pronoun = gender == :male ? "ihm/ihr" : "ihr"
         text = text.gsub(/\smir\s/i, " #{pronoun} ").gsub(/\smir$/i, " #{pronoun}") #replaces other mir with ihm/ihr
 
 
