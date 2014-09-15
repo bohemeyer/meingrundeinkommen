@@ -1,4 +1,4 @@
-angular.module("home", ["Wish"])
+angular.module("home", ["Wish","timer"])
 .config [
   "$routeProvider"
   ($routeProvider) ->
@@ -21,7 +21,8 @@ angular.module("home", ["Wish"])
     $scope.wishes = wishes
 
   Wish.latest().then (wishes) ->
-    $scope.latest_wishes = wishes
+    $scope.latest_wishes = wishes[0..9]
+    $scope.portraits = wishes[15..39]
 
   $scope.$watch (->
     $scope.pagination.current_page
