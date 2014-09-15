@@ -50,7 +50,7 @@ body.boxed {
 }
 
 .navbar-collapse.collapse {
-    display: none !important;
+    display: none;
     height: auto !important;
     overflow: visible !important;
     padding-bottom: 0;
