@@ -55,6 +55,10 @@ angular.module("login", [
     )
 
   $scope.login = ->
+    if $scope.forgot_pw
+      return $scope.reset_password()
+
+
     $scope.submitted = true
     $scope.show_resend_link = false
 
