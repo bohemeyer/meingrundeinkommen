@@ -94,9 +94,10 @@
       <tab active="currentTab.support" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states)" heading="Unterstützen">
 
         <div ng-include="'/assets/support.html'"></div>
+
         <div class="text-center">
-          <br>
-          <a class="btn-grey btn-small" ng-click="skip_section('support')"  scroll-to="tabs" analytics-on="click" analytics-event="Unterstützen übersprungen"><i class="icon-mail-forward"></i> Unterstützen überspringen</a>
+          <hr>
+          <a class="btn-grey btn-small" ng-click="skip_section('support')"  scroll-to="tabs" analytics-on="click" analytics-event="übersprungen"><i class="icon-mail-forward"></i> überspringen</a>
         </div>
       </tab>
 
@@ -104,7 +105,7 @@
 
       <tab active="currentTab.gewinnspiel" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states) || !skip.support">
          <tab-heading popover-placement="bottom" popover="{{ user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states) || !skip.support ? 'Bitte erst die vorherigen Schritte durchlaufen bzw. dort auf \'überspringen\' klicken.' : ''}}" popover-trigger="mouseenter">
-          Gewinnspiel
+          <i class="icon-flag-checkered"></i> Gewinnspiel
          </tab-heading>
 
         <div class="container margin-top-30">
