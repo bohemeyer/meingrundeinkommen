@@ -47,8 +47,11 @@ angular.module("home", ["Wish","timer"])
       ).create()
       .then (response) ->
         count_change = if !wish.meToo then 1 else -1
-        $scope.wishes[$scope.wishes.indexOf(wish)].othersCount += count_change
-        $scope.wishes[$scope.wishes.indexOf(wish)].meToo = !wish.meToo
+        if $scope.wishes[$scope.wishes.indexOf(wish)]
+          $scope.wishes[$scope.wishes.indexOf(wish)].othersCount += count_change
+          $scope.wishes[$scope.wishes.indexOf(wish)].meToo = !wish.meToo
+        if $scope.portraits[$scope.portraits.indexOf(wish)]
+          $scope.portraits[$scope.portraits.indexOf(wish)].meToo = !wish.meToo
     else
       $cookies.initial_wishes = wish.text
       $location.path( "/register")
