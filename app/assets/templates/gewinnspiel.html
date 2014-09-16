@@ -40,6 +40,7 @@
                       <input
                       ng-model="chance.iwant" value="true" type="checkbox"> Ich möchte ein Grundeinkommen von 12.000€ gewinnen und nehmen deshalb am Gewinnspiel teil.
                     </label>
+
                   </div>
               </div>
 
@@ -49,6 +50,7 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">Vollst. Name</label>
                 <div class="col-sm-10 text-left">
                   <input name="name" ng-model="chance.full_name" type="text" class="form-control" id="inputEmail3" placeholder="wie auf dem Ausweis" maxlength="50" required>
+                  <alert ng-show="chance_errors.fullName">{{chance_errors.fullName}}</alert>
                 </div>
               </div>
 
@@ -63,6 +65,7 @@
                 <div class="col-sm-4 text-left">
                   <input name="dob" ng-model="chance.dob_year" type="number" class="form-control" ng-required="true" placeholder="Jahr" min="1900" max="2014" required>
                 </div>
+                <alert ng-show="chance_errors.dob">{{chance_errors.dob}}</alert>
               </div>
 
               <div class="form-group text-left" style="margin-top:-20px;">
@@ -72,6 +75,7 @@
                       <input name="publication"
                       ng-model="chance.confirmed_publication" value="true" type="checkbox"> Ich stimme den <a href="/gewinnspielbedingungen">Gewinnspielbedingungen</a> zu. Insbesondere bin ich im Gewinnfall mit der Veröffentlichung des Links zu meiner <a href="/menschen/{{user.id}}">Profilseite</a> einverstanden.
                     </label>
+                    <alert ng-show="chance_errors.confirmedPublication">Häkchen muss angeklickt sein.</alert>
                   </div>
                 </div>
               </div>

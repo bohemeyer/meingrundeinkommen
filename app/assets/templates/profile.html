@@ -93,6 +93,8 @@
 
       <tab active="currentTab.support" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states)" heading="Unterstützen">
 
+        <div class="margin-top-30 text-center"><a href="#" ng-click="skip_section('support')"><i class="icon-mail-forward"></i> nicht unterstützen & weiter zum Gewinnspiel</a></div>
+
         <div ng-include="'/assets/support.html'"></div>
 
         <div class="text-center">

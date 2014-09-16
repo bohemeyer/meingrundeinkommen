@@ -392,14 +392,18 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
 
     $scope.saveChance = (c) ->
 
+      $scope.chance_errors = []
       chance = c
       chance.dob = c.dob_year + '-' + c.dob_month + '-' + c.dob_day
       chance.is_child = c.isChild
 
       new Chance(chance).create()
       .then (response) ->
-        $scope.user.chances[$scope.user.chances.indexOf(chance)] = response.chance
-        $scope.sanitizeChances()
+        if response.errors
+          $scope.chance_errors = response.errors
+        else
+          $scope.user.chances[$scope.user.chances.indexOf(chance)] = response.chance
+          $scope.sanitizeChances()
 
 
     $scope.removeChance = (chance) ->
