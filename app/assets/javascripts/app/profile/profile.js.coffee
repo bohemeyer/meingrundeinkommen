@@ -117,7 +117,7 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
     angular.forEach $scope.initial_states, (statename) ->
       $scope.states.push
         text: statename
-        visibility: false
+        visibility: true
         selected: false
         user_state_id: false
         is_default_state: true
@@ -153,7 +153,7 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
     $scope.addCustomState = () ->
       new_state =
         text: $scope.state_form.new_custom_state
-        visibility: false
+        visibility: true
         selected: true
         is_default_state: false
 
