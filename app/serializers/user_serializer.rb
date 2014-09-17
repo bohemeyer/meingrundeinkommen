@@ -13,7 +13,11 @@ class UserSerializer < ActiveModel::Serializer
     if object == current_user
       object.chances.order(:is_child => :asc)
     else
-      []
+      r = []
+      object.chances.each do |c|
+        r << c.slice(:code,:is_child)
+      end
+      r
     end
   end
 

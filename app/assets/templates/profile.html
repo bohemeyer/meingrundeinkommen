@@ -30,12 +30,28 @@
 		{{user.name}}!</span>
 	</h1>
 	<a ng-if="own_profile" href="#" ng-click="open()"><i class="icon-pencil"></i> Mitgliedsdaten ändern</a>
+  <hr>
+
+  <ul>
+    <li ng-show="user.chances"><b>Losnummer:</b></li>
+    <li ng-repeat="chance in user.chances">
+      <div class="well big">{{chance.code}}<div style="font-size:12px;font-weight:normal;" ng-show="chance.isChild">(für ein Kind)</div></div>
+    </li>
+  </ul>
+
+  <hr>
+
   <ul>
     <li ng-show="user_states"><b>Ich bin:</b></li>
     <li ng-repeat="state in user_states">
       <span ng-show="state.visibility">{{state.text}}</span>
     </li>
   </ul>
+
+
+
+
+
 
     <div class="clearfix margin-top-30"></div>
   </div>
