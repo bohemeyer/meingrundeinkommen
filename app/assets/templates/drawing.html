@@ -1,0 +1,12 @@
+<div class="container">
+  <form ng-submit="submitDrawing()">
+	<div class="row" ng-repeat="(key, d) in drawings">
+		<h1>{{key+1}}. Aulosung</h1>
+		<input type="text" maxlength="1" ng-model="diget.value" ng-repeat="diget in d.digets">
+		<alert ng-if="d.niete">NIETE</alert>
+		Number: {{d.number}}
+		<hr>
+	</div>
+	<input type="submit" class="btn btn-large btn-color" value="Speichern">
+  </form>
+</div>

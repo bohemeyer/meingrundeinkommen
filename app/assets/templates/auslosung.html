@@ -1,0 +1,241 @@
+
+<!-- Slider Start-->
+<div class="fullwidthbanner-container" style="padding-bottom:10px;padding-top:50px;">
+   <div class="fullwidthbanner rslider">
+      <div class="container">
+        <div class="col-md-12 text-center">
+
+        <a class="btn btn-grey btn-pad">So funktioniert die Auslosung</a>
+
+<h4 style="color:white">Die Auslosung in Berlin - jetzt im hier Livestream</h4>
+<h1 class="title_headline">Wer gewinnt die ersten 4 Grundeinkommen?</h1>
+        </div>
+
+         <div class="row">
+            <div class="col-md-6">
+               <div ng-click="showvideo()" analytics-on="click" analytics-event="Play Home Video" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:10px;margin-bottom: 40px;">
+                  <iframe width="100%" height="300" src="//www.youtube.com/embed/QJQcVFHOz5Y" frameborder="0" allowfullscreen></iframe>
+
+               </div>
+
+
+            </div>
+            <div class="col-md-6">
+
+
+
+
+
+               <a class="twitter-timeline" href="https://twitter.com/meinbge" data-widget-id="511672998932144129">Tweets von @meinbge</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+
+
+            </div>
+            <div class="clearfix"></div>
+         </div>
+
+      </div>
+   </div>
+</div>
+<!-- Slider End-->
+<!-- Slogan Start-->
+<div class="slogan bottom-pad-small" style="padding-top:30px">
+   <div class="container">
+
+
+      <div class="row text-center">
+
+        <h1>Das 1. Grundeinkommen geht an:</h1>
+
+        <div class="col-md-12  text-center">
+
+            <div>Losnummer:</div>
+            <br><div class="row">
+             <span class="well huge">1</span>
+             <span class="well huge">2</span>
+             <span class="well huge" style="border:2px solid red;"><i class="icon-refresh"></i></span>
+             <span class="well huge">-</span>
+             <span class="well huge">-</span>
+            </div>
+            <br>
+            (Deine Losnummer: 5 - 3 - 9 - 0 - 4)
+
+        </div>
+
+      </div>
+
+   </div>
+</div>
+
+       <div class="row text-center margin-top-70">
+
+        <h1>Die Gewinner_innen</h2>
+
+        <div class="col-md-3">
+
+          <div class="testimonial-image-medium">
+              <a href="/menschen/{{portrait.user.id}}">
+                <img src="{{portrait.user.avatar.avatar.url}}">
+              </a>
+            </div>
+            <a href="/menschen/{{portrait.user.id}}">{{portrait.user.name}}</a>
+
+        </div>
+
+        <div class="col-md-3">
+
+          <div class="testimonial-image-medium">
+              <a href="/menschen/{{portrait.user.id}}">
+                <img src="{{portrait.user.avatar.avatar.url}}">
+              </a>
+            </div>
+            <a href="/menschen/{{portrait.user.id}}">{{portrait.user.name}}</a>
+
+        </div>
+
+        <div class="col-md-3">
+
+          <div class="testimonial-image-medium">
+              <a href="/menschen/{{portrait.user.id}}">
+                <img src="{{portrait.user.avatar.avatar.url}}">
+              </a>
+            </div>
+            <a href="/menschen/{{portrait.user.id}}">{{portrait.user.name}}</a>
+
+        </div>
+
+
+      </div>
+
+
+            <div class="col-md-3 text-right">
+               &nbsp;
+            </div>
+            <div class="col-xs-4 text-right">
+               <h1 class="huge">{{home.supporter}} &nbsp;<i class="icon-user"></i></h1>
+            </div>
+            <div class="col-md-5" style="text-align:left;">
+               <h2 class="slogan-title">Menschen<br>haben schon</h2>
+            </div>
+<div class="clearfix"></div>
+            <div class="col-md-3 text-right">
+               &nbsp;
+            </div>
+
+            <div class="col-xs-4 text-right">
+               <h1 class="huge">{{home.totallyFinancedIncomes}} &nbsp;<i class="icon-check"></i></h1>
+            </div>
+
+            <div class="col-md-5" style="text-align:left;">
+               <h2 class="slogan-title">Grundeinkommen<br>finanziert!</h2>
+
+            </div>
+            <div class="clearfix"></div>
+
+      </div>
+      <div class="row" style="padding-top: 0px;">
+
+<!--                <div class="progress" ng-repeat="fi in home.financedIncomes">
+
+                           <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><i class="icon-check"></i> {{fi}}</div>
+
+               </div>
+
+ -->
+            <div class="col-md-12 text-center">
+
+               <h2 class="slogan-title margin-top-30">
+
+                <timer end-time="1411088399000">Noch {{days}} Tage, {{hours}} Stunden, {{minutes}} Minuten und {{seconds}} Sekunden<br>bis zum nächsten Ziel:</timer>
+
+              </h2>
+
+               <div class="progress margin-top-20" style="font-size: 25px;font-weight: 600;line-height: 37px;">
+
+                  <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
+                     <span ng-hide="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
+                  </div>
+                     <span ng-show="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
+
+               </div>
+
+                  <a href="http://www.startnext.de/mein-grundeinkommen"  analytics-on="click" analytics-event="Link zu Startnext geklickt" class="btn btn-special btn-color btn-large margin-top-30"><i class="icon-heart"></i> Jetzt unterstützen!</a>
+
+               <h1 style="margin-bottom:0;" class="margin-top-70">...oder unterstützen <u>ohne zu bezahlen</u></h1> <p>Mit der CrowdBar fließt aus jedem deiner Online-Einkäufe Geld ins nächste Grundeinkommen.<br>
+Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
+  <div ng-click="video_content2='video2.html'" analytics-on="click" analytics-event="Play CrowdBar Video" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:20px;margin-bottom: 40px;max-width:800px;width:80%;display:inline-block;">
+     <div ng-include src="video_content2 ? video_content2 : 'video_preview2.html'"></div>
+  </div>
+<div collapse="isCollapsed">
+  <a class="btn-grey btn-normal" href="#" ng-click="isCollapsed = !isCollapsed"><i class="icon-caret-down"></i> CrowdBar - so geht's</a>
+</div>
+<div class="col-md-offset-3 col-md-6" collapse="!isCollapsed">
+   <div ng-include="'/assets/crowdbar_install.html'"></div>
+</div>
+
+
+      <script type="text/ng-template" id="video_preview2.html">
+         <a href="#"><img src="/assets/crowdbar_videopreview.jpg"></a>
+      </script>
+      <script type="text/ng-template" id="video2.html">
+         <iframe width="100%" height="350" src="//www.youtube.com/embed/tcd7NiotGWg?autoplay=1" frameborder="0" allowfullscreen></iframe>
+      </script>
+
+
+
+            <div class="clearfix"></div>
+         </div>
+      </div>
+
+
+
+
+
+   <div class="container">
+      <div class="row">
+         <div class="slogan-content">
+            <div class="col-md-12 text-center">
+               <h2 class="slogan-title">Am <span class="huge">18.9.</span> werden die Grundeinkommen verlost.</h2>
+               <p>In einem <a href="/gewinnspielbedingungen">Gewinnspiel</a>. Melde dich hier an um am Gewinnspiel teilzunehmen:</p>
+
+                <div class="get-started">
+                  <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color btn-large" analytics-on="click" analytics-event="geklickt: Ich will das Grundeinkommen haben">Ich will das Grundeinkommen haben!</a>
+                </div>
+
+                <div class="row text-left margin-top-70">
+                  <div class="col-md-6">
+                    <h3 class="title"><i class="icon-glass"></i> Verlosungsparty in Berlin</h3>
+                    <div class="well text-center">
+                      <!-- <p>Sei dabei! Am 18. September ab 17 Uhr in Berlin-Neukölln</p> -->
+                      <a class="btn btn-special btn-grey" href="https://www.facebook.com/events/1458456897747639">Teilnehmen!</a>
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                    <h3 class="title"><i class="icon-youtube-play"></i> Verlosung im Video-Livestream</h3>
+                    <div class="well text-center">
+                      <!-- <p>Die Auslosungsparty wird im Video-Livestream ab 17 Uhr übertragen.</p> -->
+                      <a class="btn btn-special btn-grey disabled" href="#"><timer end-time="1411088399000">Noch {{hours + 24 * days}} Stunden und {{minutes}} Minuten</timer></a>
+                    </div>
+                  </div>
+
+                </div>
+
+
+
+            </div>
+
+            <div class="clearfix"></div>
+         </div>
+      </div>
+            <div class="col-md-12 margin-top-70">
+                        <h3 class="title">&nbsp;</h3>
+                        </div>
+   </div>
+
+
+
+   <div ng-include="'/assets/community_home.html'"></div>
+
+<!-- Main Content end-->

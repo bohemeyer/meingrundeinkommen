@@ -35,6 +35,10 @@ angular.module("content", ['ng-breadcrumbs'])
       redirectTo: "/info/datenschutz"
     .when "/gewinnspielbedingungen",
       templateUrl: "/assets/gewinnspielbedingungen.html"
+    .when "/auslosung",
+      templateUrl: "/assets/auslosung.html"
+    .when "/live",
+      redirectTo: "/auslosung"
 
 
 ]
