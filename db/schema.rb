@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140905235031) do
+ActiveRecord::Schema.define(version: 20140917224143) do
 
   create_table "chances", force: true do |t|
     t.string   "full_name"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20140905235031) do
     t.integer  "country_id"
     t.string   "city"
     t.boolean  "confirmed_publication"
-    t.integer  "code"
+    t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"

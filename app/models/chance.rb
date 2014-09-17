@@ -6,4 +6,6 @@ class Chance < ActiveRecord::Base
 
 	validates_presence_of :full_name, :dob
 
+	validates_uniqueness_of :code
+
 end
