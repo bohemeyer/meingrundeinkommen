@@ -14,9 +14,11 @@ namespace :chances do
           chars.each do |c4|
             i = i + 1
             puts "#{i} - #{c1}#{c2}#{c3}#{c4}"
-            chance = Chance.where(:code => nil || '').sample
-            chance.code = "#{c1}#{c2}#{c3}#{c4}"
-            chance.save!
+            chance = Chance.where(:code => nil).sample
+            if chance
+              chance.code = "#{c1}#{c2}#{c3}#{c4}"
+              chance.save!
+            end
           end
         end
       end
