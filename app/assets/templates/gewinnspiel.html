@@ -1,4 +1,36 @@
-<H1>Gewinne ein Jahr lang Grundeinkommen!</H1>
+<div class="container margin-top-30">
+          <p align=justify>Die ersten 4 Grundeinkommen werden am 18. September verlost. Das Gewinnspiel dafür ist schon beendet.</p>
+          <h2>Bald verlosen wir das 5. Grundeinkommen!</h2>
+          <alert type="danger">Wenn du teilnehmen möchtest, dann schau unbedingt nochmal auf dieser Seite vorbei, um dich für das Gewinnspiel offiziell zu registrieren. Das Gewinnspiel beginnt, sobald das 5. Grundeinkommen vollständig finanziert ist.</alert>
+        <div ng-show="!user.newsletter">
+          <hr>
+            <div class="text-center"><h3>Gern erinnern wir dich per Mail:</h3></div>
+
+
+          <div class="form-group text-left">
+            <div class="col-sm-offset-1 col-sm-11 text-left">
+              <div class="checkbox">
+                <label>
+                  <input name="newsletter" ng-model="user.newsletter" type="checkbox" ng-click="setNewsletterFlag()" analytics-on="click" analytics-event="Newsletter abboniert (im Gewinnspieltab)"> Bitte informiert mich per E-Mail über weitere Verlosungstermine und bei wichtigen Änderungen auf der Seite.
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <hr>
+
+        <div ng-show="user.newsletter">
+          <alert type="success"><i class="icon-envelope"></i> Wir erinnern dich rechtzeitig per Mail!</alert>
+        </div>
+
+
+
+      </div>
+
+
+
+<!-- <H1>Gewinne ein Jahr lang Grundeinkommen!</H1>
 <p>
 	<p >Alle vollständig finanzierten Grundeinkommen werden am 18. September 2014 als Gewinnspiel verlost. Wie das funktioniert erfährst du in den <a href="/gewinnspielbedingungen">Gewinnspielbedingungen</a>. Die Auslosung wird übrigens live per Videostream übertragen.</p>
 </p>
@@ -26,7 +58,7 @@
 				<!-- <br>
 				<b>Land:</b> {{chance.country_id}}
 				<br>
-				<b>Ort:</b> {{chance.city}} -->
+				<b>Ort:</b> {{chance.city}}
 				</span>
 			</p>
 			<a href="#" ng-click="removeChance(chance)"><i class="icon-remove"></i> ändern / nicht mehr teilnehmen</a>
@@ -96,4 +128,4 @@
 		<hr>
 	</li>
 	<li><a href="#" ng-click="addChild()" class=" btn btn-special btn-grey btn-small"><i class="icon-plus"></i> Mein Kind hinzufügen</a></li>
-</ul>
+</ul>-->
