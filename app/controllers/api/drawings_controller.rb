@@ -26,12 +26,12 @@ require 'json'
         if number.size == 3
           data[i][:potentials] = []
           characters.each do |n|
-            if Chance.where(:code => "#{number}#{n}".to_i).present?
-              user = Chance.where(:code => "#{number}#{n}".to_i).first.user
+            if Chance.where(:code => "#{number}#{n}").present?
+              user = Chance.where(:code => "#{number}#{n}").first.user
             else
               user = :niete
             end
-            data[i][:potentials] << user
+            data[i][:potentials][n] = user
           end
         else
           data[i][:potentials] = false

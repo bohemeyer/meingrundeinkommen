@@ -65,8 +65,8 @@
 
             <div ng-show="current_drawing.potentials">
               <h2>Wer gewinnt?</h2>
-              <div class="pull-left" ng-repeat="(key, p) in current_drawing.potentials">
-                {{key}} - {{p.name}}
+              <div class="pull-left col-md-2" ng-repeat="(key, p) in current_drawing.potentials">
+                <span class="big">{{key}}</span> <div class="testimonial-image"><a href="/menschen/{{p.id}}" popover-trigger="mouseenter" popover="{{p.name}}"><img alt="" ng-src="{{user.avatar.avatar.thumb.url}}"></a></div> <b>{{p.name}}</b>
               </div>
             </div>
 
@@ -86,7 +86,7 @@
 
           <div class="testimonial-image-medium">
               <a href="/menschen/{{d.user.id}}">
-                <img src="{{d.user.avatar.avatar.url}}">
+                <img src="{{d.user.avatar.url}}">
               </a>
             </div>
             <a href="/menschen/{{d.user.id}}">{{d.user.name}}</a>
