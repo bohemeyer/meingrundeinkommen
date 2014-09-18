@@ -23,12 +23,7 @@
             <div class="col-md-6">
 
 
-
-
-<a class="twitter-timeline" href="https://twitter.com/meinbge" data-widget-id="511672998932144129">Tweets von @meinbge</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
-
+                <iframe frameborder="0" src="/twitter.html" width="100%" height="600"></iframe>
 
 
 
@@ -63,6 +58,7 @@
             <h3 style="margin-bottom:0px;margin-top:10px;" ng-repeat="o in own_codes" class="margin-top-20"><span ng-if="!o.isChild">Deine </span>Losnummer<span ng-if="o.isChild"> deines Kindes</span>: {{o.code}}</h3>
 
 
+
             <div ng-show="current_drawing.potentials">
               <h2>Wer gewinnt?</h2>
               <div class="row">
@@ -91,7 +87,12 @@
 
         <h1>Die Gewinner_innen *</h2>
           <p>* alles ohne Gewähr</p>
-
+          <div class="row text-center">
+            <div class="col-md-6 col-md-offset-3">
+          <p><b>Hast du gewonnen?</b> Dann ruf am besten sofort auf der Verlosungsparty an, damit wir dich interviewen können. Per Telefon: 030 / 6483 5996
+            oder per Skype: mein.grundeinkommen</p>
+          </div>
+        </div>
         <div ng-if="d.done" class="col-md-3" ng-repeat="d in drawings">
 
           <div class="testimonial-image-medium">
