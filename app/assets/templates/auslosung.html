@@ -43,7 +43,7 @@
 <!-- Slogan Start-->
 
 
-<div ng-hide="current_drawing.done" class="slogan bottom-pad-small" style="padding-top:30px">
+<div ng-hide="current_drawing.done && current_drawing_key < 4" class="slogan bottom-pad-small" style="padding-top:30px">
    <div class="container">
 
 
@@ -65,9 +65,11 @@
 
             <div ng-show="current_drawing.potentials">
               <h2>Wer gewinnt?</h2>
-              <div class="pull-left col-md-2" ng-repeat="(key, p) in current_drawing.potentials">
+              <div class="row"><div class="col-md-2" ng-repeat="(key, p) in current_drawing.potentials">
                 <span class="big">{{key}}</span> <div class="testimonial-image"><a href="/menschen/{{p.id}}" popover-trigger="mouseenter" popover="{{p.name}}"><img alt="" ng-src="{{p.avatar.thumb.url}}"></a></div> <a href="/menschen/{{p.id}}">{{p.name}}<span ng-if="p=='niete'">NIETE</span>
               </div>
+              <div class="clearfix"></div>
+            </div>
             </div>
 
         </div>
