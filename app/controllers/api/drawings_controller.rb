@@ -24,14 +24,14 @@ require 'json'
         data[i][:number] = number
 
         if number.size == 3
-          data[i][:potentials] = []
+          data[i][:potentials] = {}
           characters.each do |n|
             if Chance.where(:code => "#{number}#{n}").present?
               user = Chance.where(:code => "#{number}#{n}").first.user
             else
               user = :niete
             end
-            data[i][:potentials][n] = user
+            data[i][:potentials]["#{n}"] = user
           end
         else
           data[i][:potentials] = false
