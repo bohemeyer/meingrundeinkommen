@@ -17,6 +17,27 @@ bedingungslos</li>
   </div>
 </script>
 
+<!--
+<div style="margin-bottom:0;" ng-hide="hide_announcement" class="well">
+        <div class="container">
+          <div class="col-md-6 text-left">
+            <span style="font-size:25px;">Heute werden die ersten 4 Grundeinkommen verlost!</span>
+            <br>
+            Um 17 Uhr auf einer öffentlichen Party in Berlin
+          </div>
+          <div class="col-md-6">
+            <a style="margin-right:20px;" href="https://www.facebook.com/events/1458456897747639" class="margin-top-20 btn btn-special btn-small btn-grey">
+              <i class="icon-glass"></i>
+              Party-Infos
+            </a>
+            <a href="/live" class="margin-top-20 btn btn-special btn-color">
+              <i class="icon-youtube-play"></i>
+              Live-Übertragung
+            </a>
+          </div>
+        </div>
+      </div> -->
+
 <!-- Slider Start-->
 <div class="fullwidthbanner-container">
    <div class="fullwidthbanner rslider">
@@ -63,7 +84,7 @@ bedingungslos</li>
                <h1 class="huge">{{home.supporter}} &nbsp;<i class="icon-user"></i></h1>
             </div>
             <div class="col-md-5" style="text-align:left;">
-               <h2 class="slogan-title">Menschen<br>haben schon</h2>
+               <h2 class="slogan-title">Menschen<br>haben bisher</h2>
             </div>
 <div class="clearfix"></div>
             <div class="col-md-3 text-right">
@@ -93,9 +114,7 @@ bedingungslos</li>
             <div class="col-md-12 text-center">
 
                <h2 class="slogan-title margin-top-30">
-
-                <timer end-time="1411088399000">Noch {{days}} Tage, {{hours}} Stunden, {{minutes}} Minuten und {{seconds}} Sekunden<br>bis zum nächsten Ziel:</timer>
-
+                Jetzt sammeln wir fürs {{home.totallyFinancedIncomes + 1}}. Grundeinkommen:
               </h2>
 
                <div class="progress margin-top-20" style="font-size: 25px;font-weight: 600;line-height: 37px;">
@@ -144,32 +163,12 @@ Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
       <div class="row">
          <div class="slogan-content">
             <div class="col-md-12 text-center">
-               <h2 class="slogan-title">Am <span class="huge">18.9.</span> werden die Grundeinkommen verlost.</h2>
-               <p>In einem <a href="/gewinnspielbedingungen">Gewinnspiel</a>. Melde dich hier an um am Gewinnspiel teilzunehmen:</p>
+               <h2 class="slogan-title"><span class="huge">Du</span> kannst das Grundeinkommen gewinnen!</h2>
+               <p>Sobald das {{home.totallyFinancedIncomes + 1}}. Grundeinkommen finanziert ist, wird es hier verlost. <br>In einem Gewinnspiel. Melde dich hier an, um teilzunehmen:</p>
 
                 <div class="get-started">
                   <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color btn-large" analytics-on="click" analytics-event="geklickt: Ich will das Grundeinkommen haben">Ich will das Grundeinkommen haben!</a>
                 </div>
-
-                <div class="row text-left margin-top-70">
-                  <div class="col-md-6">
-                    <h3 class="title"><i class="icon-glass"></i> Verlosungsparty in Berlin</h3>
-                    <div class="well text-center">
-                      <!-- <p>Sei dabei! Am 18. September ab 17 Uhr in Berlin-Neukölln</p> -->
-                      <a class="btn btn-special btn-grey" href="https://www.facebook.com/events/1458456897747639">Teilnehmen!</a>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <h3 class="title"><i class="icon-youtube-play"></i> Verlosung im Video-Livestream</h3>
-                    <div class="well text-center">
-                      <!-- <p>Die Auslosungsparty wird im Video-Livestream ab 17 Uhr übertragen.</p> -->
-                      <a class="btn btn-special btn-grey disabled" href="#"><timer end-time="1411088399000">Noch {{hours + 24 * days}} Stunden und {{minutes}} Minuten</timer></a>
-                    </div>
-                  </div>
-
-                </div>
-
-
 
             </div>
 
