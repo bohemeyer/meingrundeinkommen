@@ -2,7 +2,8 @@
   <form ng-submit="submitDrawing()">
 	<div class="row" ng-repeat="(key, d) in drawings">
 		<h1>{{key+1}}. Aulosung</h1>
-		<input type="text" maxlength="1" ng-model="diget.value" ng-repeat="diget in d.digets">
+		<input size="1" type="text" maxlength="1" ng-model="diget.value" ng-repeat="diget in d.digets">
+		<input type="checkbox" ng-click="submitDrawing()" ng-model="d.done" value="true">
 		<alert ng-if="d.niete">NIETE</alert>
 		Number: {{d.number}}
 		<hr>

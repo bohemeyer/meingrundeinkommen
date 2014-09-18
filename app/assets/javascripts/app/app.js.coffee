@@ -1,4 +1,4 @@
-window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll','angulartics','angulartics.google.analytics','faq','draw'])
+window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll','angulartics','angulartics.google.analytics','faq','draw','drawfrontend'])
 
 .config [
   "$routeProvider"
@@ -96,6 +96,7 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
   "breadcrumbs"
   "Home"
   "$modal"
+
   ($scope, Security, breadcrumbs, Home, $modal) ->
     $scope.currentUser = Security.currentUser
     $scope.breadcrumbs = breadcrumbs

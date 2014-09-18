@@ -7,7 +7,7 @@
 
         <a class="btn btn-grey btn-pad">So funktioniert die Auslosung</a>
 
-<h4 style="color:white">Die Auslosung in Berlin - jetzt im hier Livestream</h4>
+<h4 style="color:white">Die Auslosung in Berlin - heute hier im Livestream</h4>
 <h1 class="title_headline">Wer gewinnt die ersten 4 Grundeinkommen?</h1>
         </div>
 
@@ -41,26 +41,34 @@
 </div>
 <!-- Slider End-->
 <!-- Slogan Start-->
-<div class="slogan bottom-pad-small" style="padding-top:30px">
+
+
+<div ng-hide="current_drawing.done" class="slogan bottom-pad-small" style="padding-top:30px">
    <div class="container">
 
 
       <div class="row text-center">
 
-        <h1>Das 1. Grundeinkommen geht an:</h1>
+        <h1>Das {{current_drawing_key+1}}. Grundeinkommen geht an:</h1>
 
         <div class="col-md-12  text-center">
 
             <div>Losnummer:</div>
-            <br><div class="row">
-             <span class="well huge">1</span>
-             <span class="well huge">2</span>
-             <span class="well huge" style="border:2px solid red;"><i class="icon-refresh"></i></span>
-             <span class="well huge">-</span>
-             <span class="well huge">-</span>
+            <alert ng-if="current_drawing.niete && current_drawing.number.length > 2">NIETE</alert>
+            <br><div class="margin-top-30 row">
+             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets" class="well huge">{{diget.value}}<i ng-if="!diget.value" class="icon-refresh" style="color:#ccc"></i></span>
+
             </div>
             <br>
-            (Deine Losnummer: 5 - 3 - 9 - 0 - 4)
+            <h3 style="margin-bottom:0px;margin-top:10px;" ng-repeat="o in own_codes" class="margin-top-20"><span ng-if="!o.isChild">Deine </span>Losnummer<span ng-if="o.isChild"> deines Kindes</span>: {{o.code}}</h3>
+
+
+            <div ng-show="current_drawing.potentials">
+              <h2>Wer gewinnt?</h2>
+              <div class="pull-left" ng-repeat="(key, p) in current_drawing.potentials">
+                {{key}} - {{p.name}}
+              </div>
+            </div>
 
         </div>
 
@@ -68,41 +76,24 @@
 
    </div>
 </div>
+  </div>
 
        <div class="row text-center margin-top-70">
 
         <h1>Die Gewinner_innen</h2>
 
-        <div class="col-md-3">
+        <div ng-if="d.done" class="col-md-3" ng-repeat="d in drawings">
 
           <div class="testimonial-image-medium">
-              <a href="/menschen/{{portrait.user.id}}">
-                <img src="{{portrait.user.avatar.avatar.url}}">
+              <a href="/menschen/{{d.user.id}}">
+                <img src="{{d.user.avatar.avatar.url}}">
               </a>
             </div>
-            <a href="/menschen/{{portrait.user.id}}">{{portrait.user.name}}</a>
-
-        </div>
-
-        <div class="col-md-3">
-
-          <div class="testimonial-image-medium">
-              <a href="/menschen/{{portrait.user.id}}">
-                <img src="{{portrait.user.avatar.avatar.url}}">
-              </a>
-            </div>
-            <a href="/menschen/{{portrait.user.id}}">{{portrait.user.name}}</a>
-
-        </div>
-
-        <div class="col-md-3">
-
-          <div class="testimonial-image-medium">
-              <a href="/menschen/{{portrait.user.id}}">
-                <img src="{{portrait.user.avatar.avatar.url}}">
-              </a>
-            </div>
-            <a href="/menschen/{{portrait.user.id}}">{{portrait.user.name}}</a>
+            <a href="/menschen/{{d.user.id}}">{{d.user.name}}</a>
+            <div>
+            Losnummer:</div>
+            <div style="margin-top:35px;margin-bottom:35px">
+            <span style="margin-left:3px;font-size:15px" ng-repeat="diget in d.digets" class="well big">{{diget.value}}</span></div>
 
         </div>
 
@@ -110,45 +101,14 @@
       </div>
 
 
-            <div class="col-md-3 text-right">
-               &nbsp;
-            </div>
-            <div class="col-xs-4 text-right">
-               <h1 class="huge">{{home.supporter}} &nbsp;<i class="icon-user"></i></h1>
-            </div>
-            <div class="col-md-5" style="text-align:left;">
-               <h2 class="slogan-title">Menschen<br>haben schon</h2>
-            </div>
-<div class="clearfix"></div>
-            <div class="col-md-3 text-right">
-               &nbsp;
-            </div>
-
-            <div class="col-xs-4 text-right">
-               <h1 class="huge">{{home.totallyFinancedIncomes}} &nbsp;<i class="icon-check"></i></h1>
-            </div>
-
-            <div class="col-md-5" style="text-align:left;">
-               <h2 class="slogan-title">Grundeinkommen<br>finanziert!</h2>
-
-            </div>
-            <div class="clearfix"></div>
-
-      </div>
-      <div class="row" style="padding-top: 0px;">
-
-<!--                <div class="progress" ng-repeat="fi in home.financedIncomes">
-
-                           <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><i class="icon-check"></i> {{fi}}</div>
-
-               </div>
-
- -->
+<hr>
+<div class="container">
             <div class="col-md-12 text-center">
 
                <h2 class="slogan-title margin-top-30">
 
-                <timer end-time="1411088399000">Noch {{days}} Tage, {{hours}} Stunden, {{minutes}} Minuten und {{seconds}} Sekunden<br>bis zum nächsten Ziel:</timer>
+                Hast du nicht gewonnen?<br>
+                Vielleicht klappt's beim 5. Grundeinkommen:
 
               </h2>
 
@@ -197,29 +157,12 @@ Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
       <div class="row">
          <div class="slogan-content">
             <div class="col-md-12 text-center">
-               <h2 class="slogan-title">Am <span class="huge">18.9.</span> werden die Grundeinkommen verlost.</h2>
-               <p>In einem <a href="/gewinnspielbedingungen">Gewinnspiel</a>. Melde dich hier an um am Gewinnspiel teilzunehmen:</p>
+
+               <h2 class="slogan-title"><span class="huge">Du</span> kannst das Grundeinkommen gewinnen!</h2>
+               <p>Sobald das {{home.totallyFinancedIncomes + 1}}. Grundeinkommen finanziert ist, wird es hier verlost. <br>In einem Gewinnspiel. Melde dich hier an, um teilzunehmen:</p>
 
                 <div class="get-started">
                   <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color btn-large" analytics-on="click" analytics-event="geklickt: Ich will das Grundeinkommen haben">Ich will das Grundeinkommen haben!</a>
-                </div>
-
-                <div class="row text-left margin-top-70">
-                  <div class="col-md-6">
-                    <h3 class="title"><i class="icon-glass"></i> Verlosungsparty in Berlin</h3>
-                    <div class="well text-center">
-                      <!-- <p>Sei dabei! Am 18. September ab 17 Uhr in Berlin-Neukölln</p> -->
-                      <a class="btn btn-special btn-grey" href="https://www.facebook.com/events/1458456897747639">Teilnehmen!</a>
-                    </div>
-                  </div>
-                  <div class="col-md-6">
-                    <h3 class="title"><i class="icon-youtube-play"></i> Verlosung im Video-Livestream</h3>
-                    <div class="well text-center">
-                      <!-- <p>Die Auslosungsparty wird im Video-Livestream ab 17 Uhr übertragen.</p> -->
-                      <a class="btn btn-special btn-grey disabled" href="#"><timer end-time="1411088399000">Noch {{hours + 24 * days}} Stunden und {{minutes}} Minuten</timer></a>
-                    </div>
-                  </div>
-
                 </div>
 
 
@@ -234,8 +177,4 @@ Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
                         </div>
    </div>
 
-
-
-   <div ng-include="'/assets/community_home.html'"></div>
-
-<!-- Main Content end-->
+</div>
