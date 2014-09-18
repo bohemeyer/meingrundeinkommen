@@ -12,13 +12,21 @@ require 'json'
           number += "#{d[:value]}"
         end
 
-        data[i][:niete] =  Chance.where(:code => number).first.user.present? ? false : true
+        if Chance.where("code LIKE ?", "#{number}%").present?
+          data[i][:niete] =  false
+          if number.size == 4
+            data[i][:user] = Chance.where(:code => number).first.user
+          end
+        else
+          data[i][:niete] = true
+        end
+
         data[i][:number] = number
 
         if number.size == 3
           data[i][:potentials] = []
           characters.each do |n|
-            if Chance.where(:code => "#{number}#{n}".to_i).first.user.present?
+            if Chance.where(:code => "#{number}#{n}".to_i).present?
               user = Chance.where(:code => "#{number}#{n}".to_i).first.user
             else
               user = :niete
@@ -27,10 +35,6 @@ require 'json'
           end
         else
           data[i][:potentials] = false
-        end
-
-        if number.size == 4
-          data[i][:user] = Chance.where(:code => number).first.user
         end
 
       end
