@@ -5,7 +5,7 @@
       <div class="container">
         <div class="col-md-12 text-center">
 
-        <a class="btn btn-grey btn-pad">So funktioniert die Auslosung</a>
+        <a class="btn btn-grey btn-pad" ng-click="verlosung_erklaert()">So funktioniert die Auslosung</a>
 
 <h4 style="color:white">Die Auslosung in Berlin - heute hier im Livestream</h4>
 <h1 class="title_headline">Wer gewinnt die ersten 4 Grundeinkommen?</h1>
@@ -25,9 +25,9 @@
 
 
 
-
-               <a class="twitter-timeline" href="https://twitter.com/meinbge" data-widget-id="511672998932144129">Tweets von @meinbge</a>
+<a class="twitter-timeline" href="https://twitter.com/meinbge" data-widget-id="511672998932144129">Tweets von @meinbge</a>
 <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
 
 
 
@@ -89,7 +89,8 @@
 
        <div class="row text-center margin-top-70">
 
-        <h1>Die Gewinner_innen</h2>
+        <h1>Die Gewinner_innen *</h2>
+          <p>* alles ohne Gewähr</p>
 
         <div ng-if="d.done" class="col-md-3" ng-repeat="d in drawings">
 

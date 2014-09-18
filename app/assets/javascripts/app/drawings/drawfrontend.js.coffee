@@ -13,8 +13,16 @@ angular.module("drawfrontend", ['ng-breadcrumbs'])
   "$http"
   "$timeout"
   "Security"
+  "$modal"
 
-  ($scope, $http, $timeout, Security) ->
+  ($scope, $http, $timeout, Security, $modal) ->
+
+    $scope.verlosung_erklaert = () ->
+      modalInstance = $modal.open(
+        templateUrl: "/assets/verlosung_erklaert.html"
+        size: 'md'
+      )
+      return
 
     if Security.currentUser
       $scope.own_codes = Security.currentUser.chances
