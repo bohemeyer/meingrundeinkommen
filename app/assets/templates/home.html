@@ -18,7 +18,7 @@ bedingungslos</li>
 </script>
 
 
-<div style="margin-bottom:0;" ng-hide="hide_announcement" class="well">
+<!-- <div style="margin-bottom:0;" ng-hide="hide_announcement" class="well">
         <div class="container">
           <div class="col-md-6 text-left">
             <span style="font-size:25px;">Heute werden die ersten 4 Grundeinkommen verlost!</span>
@@ -36,7 +36,7 @@ bedingungslos</li>
             </a>
           </div>
         </div>
-      </div>
+      </div> -->
 
 <!-- Slider Start-->
 <div class="fullwidthbanner-container">
@@ -158,6 +158,30 @@ Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
 
 
 
+<div class="row text-center margin-top-70">
+
+        <h1>Die Gewinner_innen *</h2>
+          <p>* alles ohne Gewähr</p>
+
+        <div ng-if="d.done" class="col-md-3" ng-repeat="d in drawings">
+
+          <div class="testimonial-image-medium">
+              <a href="/menschen/{{d.user.id}}">
+                <img src="{{d.user.avatar.url}}">
+              </a>
+            </div>
+            <a href="/menschen/{{d.user.id}}">{{d.user.name}}</a>
+            <div>
+            Losnummer:</div>
+            <div style="margin-top:35px;margin-bottom:35px">
+            <span style="margin-left:3px;font-size:15px" ng-repeat="diget in d.digets" class="well big">{{diget.value}}</span></div>
+
+        </div>
+
+
+      </div>
+
+ <h3 class="title">&nbsp;</h3>
 
    <div class="container">
       <div class="row">

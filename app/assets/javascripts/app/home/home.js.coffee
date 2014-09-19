@@ -13,7 +13,11 @@ angular.module("home", ["Wish","timer"])
       label: "Was wäre wenn?"
 ]
 
-.controller "HomeViewController", ["$scope", "$rootScope", "Wish", "$modal", "$cookies", "$location", "Security", ($scope, $rootScope, Wish, $modal, $cookies, $location, Security) ->
+.controller "HomeViewController", ["$scope", "$rootScope", "Wish", "$modal", "$cookies", "$location", "Security", "$http", ($scope, $rootScope, Wish, $modal, $cookies, $location, Security, $http) ->
+
+  $http.get("/drawings.json").success((response) ->
+    $scope.drawings = response
+  )
 
   $scope.pagination = []
 
@@ -55,5 +59,6 @@ angular.module("home", ["Wish","timer"])
     else
       $cookies.initial_wishes = wish.text
       $location.path( "/register")
+
 
   ]
