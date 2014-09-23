@@ -113,6 +113,39 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
       )
       return
 
+    $scope.support = {}
+    $scope.support.amount = 33
+    $scope.support.payment_method = 'paypal'
+    $scope.support.equals_bi = ''
+
+    $scope.support.set_equals_bi = (nv) ->
+      r = nv + '€ entsprechen '
+      if nv > 32
+        r += Math.floor((nv / 33)) + ' Tag'
+        if nv > 65
+          r += 'en'
+      hours = Math.floor((nv % 33) / 1.375)
+      if nv == 1
+        r += '20 Minuten'
+      if hours > 0
+        if nv > 32
+          r += ' und'
+        r += ' ' + hours + ' Stunden'
+      r += ' Grundeinkommen'
+      $scope.support.equals_bi = r
+
+
+    $scope.support.set_equals_bi($scope.support.amount)
+
+
+
+    $scope.support_bank = () ->
+      modalInstance = $modal.open(
+        templateUrl: "/assets/bank.html"
+        size: 'md'
+      )
+      return
+
     Home.query().then (home) ->
       $scope.home = home
 
