@@ -9,8 +9,54 @@
         <span ng-show="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
 
   </div>
-  <h3 style="margin-bottom:15px;">Per Crowdfunding:</h3>
-  <a href="http://www.startnext.de/mein-grundeinkommen" analytics-on="click" analytics-event="Link zu Startnext geklickt" class="btn btn-special btn-color"><i class="icon-heart"></i> Jetzt unterstützen!</a>
+
+  <form class="form-inline" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+
+                  <INPUT TYPE="hidden" name="charset" value="utf-8">
+                  <input type="hidden" name="cmd" value="_xclick">
+                  <input type="hidden" name="business" value="micha@mein-grundeinkommen.de">
+                  <input type="hidden" name="item_name" value="Beitrag zum Grundeinkommen">
+                  <input type="hidden" name="currency_code" value="EUR">
+
+                  <div class="form-group" style="">
+                    <!-- <label for="supportamount">Mein Beitrag:</label> -->
+                    <div style="width:200px;" class="input-group">
+                      <input class="form-control input-lg" id="supportamount" width="4" min="1" max="12000" type="number" ng-model="support.amount" name="amount" ng-change = "support.set_equals_bi(support.amount)"
+                      tooltip="{{support.equals_bi}}" tooltip-trigger="focus" tooltip-placement="bottom">
+                      <div class="input-group-addon">€</div>
+                    </div>
+
+                         <!-- <label for="supportamount">Mein Beitrag:</label> -->
+                    <div class="input-group">
+                      <select style="width:200px;margin-top:10px;" class="form-control" id="payment_method" ng-model="support.payment_method">
+                        <option value="paypal" selected>Paypal</option>
+                        <option value="bank">Überweisung</option>
+                        <option value="paypal_l">Lastschrift (über Paypal)</option>
+                        <option value="paypal_k">Kreditkarte (über Paypal)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <br>
+
+                  <input ng-hide="support.payment_method == 'bank'" type="submit" class="btn btn-special btn-color btn-large" style="margin-top:20px;" value="Jetzt unterstützen!">
+
+                  <a href="#" ng-show="support.payment_method == 'bank'" ng-click="support_bank()" class="btn btn-special btn-color btn-large" style="margin-top:20px;">Jetzt unterstützen!</a>
+
+
+
+
+                  <!-- <div
+                  slider
+                  ng-model="test"
+                  floor="1"
+                  ceiling="1000"
+                  step="1"
+                  precision="0"
+                  stretch="5"
+                  ></div> -->
+
+                  </form>
 
   <h2 style="margin-bottom:0;" class="margin-top-30">...oder unterstützen <u>ohne zu bezahlen</u></h2> <h3>mit deinen nächsten Online-Einkäufen:</h3>
   <div ng-click="video_content='video.html'"  analytics-on="click" analytics-event="Play CrowdBar Video" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:20px;margin-bottom: 40px;max-width:800px;width:80%;display:inline-block;">
