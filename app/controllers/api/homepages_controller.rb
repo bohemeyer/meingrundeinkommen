@@ -17,7 +17,7 @@ class Api::HomepagesController < ApplicationController
   	cached_data = File.open("public/startnext.json") do |file|
       JSON.parse(file.read)
     end
-    cached_amount = cached_data["project"]["funding_status"] - 4300
+    cached_amount = cached_data["project"]["funding_status"]
     #days_left = (Date.today - Date.parse(cached_data["project"]["end_date"])).to_i / 1.day
     supporter = cached_data["project"]["supporters_count"]
 
