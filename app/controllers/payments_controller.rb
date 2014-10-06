@@ -61,6 +61,8 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
     http.read_timeout = 60
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     http.use_ssl = true
+    Rails.logger.info uri.request_uri
+    Rails.logger.info raw
     response = http.post(uri.request_uri, raw,
                          'Content-Length' => "#{raw.size}",
                          'User-Agent' => "My custom user agent"
