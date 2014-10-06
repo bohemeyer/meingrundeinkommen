@@ -56,7 +56,7 @@ class Api::HomepagesController < ApplicationController
     total_amount = crowdfunding_amount + own_funding_paypal + own_funding + crowdbar_amount
 
     #Prognose:
-    last_synced_day = Support.where(:payment_completed => true).order(created_at: :desc).limit(1).first
+    last_synced_day = Support.where(:payment_completed => true, :payment_method => 'crowdbar').order(created_at: :desc).limit(1).first
     prediction = {}
     temp_q = Support.where(:created_at => (last_synced_day.created_at - 9.days).beginning_of_day..last_synced_day.created_at.end_of_day, :payment_method => :crowdbar)
     prediction[:avg_daily_commission] = temp_q.sum(:amount_for_income) / 10
