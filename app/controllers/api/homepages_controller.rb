@@ -22,14 +22,14 @@ class Api::HomepagesController < ApplicationController
     #days_left = (Date.today - Date.parse(cached_data["project"]["end_date"])).to_i / 1.day
     #supporter = cached_data["project"]["supporters_count"]
 
-    crowdfunding_supporter = 2901 + 58 + 10  #startnext + untracked paypal + kto
-    crowdfunding_amount = 50630.52 + 1854.92 + 249.25 #startnext + untracked paypal + kto
+    crowdfunding_supporter = 2901 + 140 + 16  #startnext + untracked paypal + kto
+    crowdfunding_amount = 50630.52 + 3058.85 + 360.25 #startnext + untracked paypal + kto
 
-    own_supporter = Support.count #where payment_completed
+    own_supporter = Support.where(:payment_completed => true).count #where payment_completed
 
     supporter = crowdfunding_supporter + own_supporter
 
-    own_funding_paypal_q = Support.where("payment_method LIKE ?","paypal%") #where payment_completed
+    own_funding_paypal_q = Support.where("payment_completed IS NOT NULL AND payment_method LIKE ?","paypal%",)
 
     own_funding_paypal = own_funding_paypal_q.sum(:amount_for_income)
     own_funding_paypal -= own_funding_paypal * 0.019
@@ -37,7 +37,7 @@ class Api::HomepagesController < ApplicationController
 
     # own_funding_paypal = own_funding_paypal / 1.19
 
-    own_funding = Support.where(:payment_method => :bank).sum(:amount_for_income) #where payment_completed
+    own_funding = Support.where("payment_method = 'bank' AND payment_completed IS NOT NULL").sum(:amount_for_income)
 
     # own_funding = own_funding / 1.19
 
@@ -64,10 +64,7 @@ class Api::HomepagesController < ApplicationController
     prediction[:date] = Time.now + (prediction[:days].to_i).days
 
 
-
-
-
-    amount_internal = Support.sum(:amount_internal)
+    amount_internal = Support.where(:payment_completed => true).sum(:amount_internal)
 
     homepage_data = {
       :number_of_users => number_with_precision(User.count, precision: 0, delimiter: '.'),
