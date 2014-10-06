@@ -4,7 +4,7 @@ class Api::SupportsController < ApplicationController
     support = Support.create(params.permit(:amount_total, :amount_for_income, :amount_internal, :payment_method, :recurring))
 
     if current_user
-      support.nickname = current_user.nickname
+      support.nickname = current_user.name
       support.email = current_user.email
     end
 
