@@ -12,7 +12,10 @@
 
   </div>
 
-<div ng-include="/assets/support_crowdfund_form.html"></div>
+<div ng-show="support_now" ng-include="'/assets/support_crowdfund_form.html'"></div>
+
+<a href="#" ng-hide="support_now" ng-click="support_now = true" class="btn btn-special btn-color btn-large" style="margin-top:20px;"><i class="icon-plus"></i> Ich will unterstützen!</a>
+                  <br>
 
   <h2 style="margin-bottom:0;" class="margin-top-30">...oder unterstützen <u>ohne zu bezahlen</u></h2> <p>Mit der CrowdBar fließt aus jedem deiner Online-Einkäufe Geld ins nächste Grundeinkommen.<br>
 Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
