@@ -6,7 +6,9 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
 
   def create
     #ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "method called", :body => "").deliver
+    Rails.logger.info 'method called'
     response = validate_IPN_notification(request.raw_post)
+    Rails.logger.info response
     case response
       when "VERIFIED"
         Rails.logger.info 'verified'
