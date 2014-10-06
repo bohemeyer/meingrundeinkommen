@@ -5,16 +5,16 @@ require "net/http"
 protect_from_forgery :except => [:create] #Otherwise the request from PayPal wouldn't make it to the controller
 
   def create
-    ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "method called", :body => "").deliver
+    #ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "method called", :body => "").deliver
     response = validate_IPN_notification(request.raw_post)
     case response
       when "VERIFIED"
-        ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "verified", :body => "").deliver
+        #ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "verified", :body => "").deliver
         support = Support.find(params[:custom]) if params[:custom]
         if support
-          ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "support found", :body => support.to_s).deliver
-          if support.payment_method != 'bank' && params[:paymentStatus] == 'Completed'
-            ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "conditions true", :body => "").deliver
+          #ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "support found", :body => support.to_s).deliver
+          if support.payment_method != 'bank' && params[:payment_status] == 'Completed'
+            #ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "conditions true", :body => "").deliver
             support.payment_completed = true
             support.email = params[:payer_email] if !support.email && params[:payer_email]
             support.nickname = params[:first_name] if !support.nickname && params[:first_name]
@@ -22,7 +22,7 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
             support.country = params[:address_country] if params[:address_country]
             support.save
 
-            ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "updated support", :body => support.to_s).deliver
+            #ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "updated support", :body => support.to_s).deliver
 
             # pp_params = params
             # pp_params.cmd = '_notify-validate'
@@ -36,7 +36,7 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
         # process payment
       when "INVALID"
         # log for investigation
-        ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "invalid :(", :body => "").deliver
+        #ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "invalid :(", :body => "").deliver
       else
         # error
       end
