@@ -63,6 +63,6 @@ module Clockwork
 
   end
 
-  every(1.hours, 'check crowdbar stats')
+  every(12.hours, 'check crowdbar stats')
 
 end
