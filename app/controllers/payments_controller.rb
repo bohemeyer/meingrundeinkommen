@@ -9,11 +9,14 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
     response = validate_IPN_notification(request.raw_post)
     case response
       when "VERIFIED"
+        puts 'verified'
         #ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "verified", :body => "").deliver
-        support = Support.find(params[:custom]) if params[:custom]
+        support = Support.find(params[:custom].to_i) if params[:custom]
         if support
+          puts support
           #ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "support found", :body => support.to_s).deliver
           if support.payment_method != 'bank' && params[:payment_status] == 'Completed'
+            puts 'conditions ok'
             #ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "conditions true", :body => "").deliver
             support.payment_completed = true
             support.email = params[:payer_email] if !support.email && params[:payer_email]
@@ -22,6 +25,7 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
             support.country = params[:address_country] if params[:address_country]
             support.save
 
+            puts support
             #ActionMailer::Base.mail(:from => "micha@mein-grundeinkommen.de", :to => "micha@mein-grundeinkommen.de", :subject => "updated support", :body => support.to_s).deliver
 
             # pp_params = params
