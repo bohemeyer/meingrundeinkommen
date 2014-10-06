@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: {format: :json} do
     resources :registrations
     resources :chances
+    resources :supports
     resources :drawings
     resources :questions
     resources :todos
@@ -44,6 +45,7 @@ Rails.application.routes.draw do
     resource :homepages
   end
   resources :users
+  resources :payments
 
   # Catch all missing templates
   get 'assets/*page' => redirect('assets/missing.html')

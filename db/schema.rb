@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140917224143) do
+ActiveRecord::Schema.define(version: 20140922183344) do
 
   create_table "chances", force: true do |t|
     t.string   "full_name"
@@ -54,6 +54,28 @@ ActiveRecord::Schema.define(version: 20140917224143) do
   create_table "suggestions", force: true do |t|
     t.string   "email"
     t.text     "initial_wishes"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "supports", force: true do |t|
+    t.string   "nickname"
+    t.string   "email"
+    t.string   "firstname"
+    t.string   "lastname"
+    t.float    "amount_total"
+    t.float    "amount_internal"
+    t.float    "amount_for_income"
+    t.string   "company"
+    t.string   "street"
+    t.string   "zip"
+    t.string   "city"
+    t.string   "country"
+    t.string   "payment_method"
+    t.boolean  "payment_completed"
+    t.text     "comment"
+    t.boolean  "anonymous"
+    t.boolean  "recurring"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

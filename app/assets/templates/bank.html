@@ -1,16 +1,49 @@
 <div class="container" style="padding:50px;">
 <h1>Vielen Dank!</h1>
 
-<p>Bitte überweise deine Unterstützung auf folgendes Konto:</p>
-<p class="alert">
-	<b>Empfänger</b>: Verein "Mein Grundeinkommen"<br>
-	<b>Konto-Nr</b>: 1165313800<br>
-	<b>Bankleitzahl</b>: 43060967<br>
-	<b>Bank</b>: GLS Gemeinschaftsbank<br>
+<p>Bitte überweise deine Unterstützung von <b>{{supported.support_amount}}€</b> auf folgendes Konto:</p>
+<div class="alert">
+	<table>
+		<tr>
+			<td>
+				<b>Empfänger</b>:
+			</td>
+			<td>Verein "Mein Grundeinkommen"</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Betreff</b></td>
+			<td>Unterstützung Nr. {{supported.support_id}}</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Konto-Nr</b>:
+			</td>
+			<td>
+				1165313800
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Bankleitzahl</b>: &nbsp;</td>
+			<td>43060967</td>
+		</tr>
+		<tr>
+			<td>
+				<b>Bank</b>:
+			</td>
+			<td>GLS Gemeinschaftsbank
+			</td>
+		</tr>
+	</table>
 	<br>
 	<i>oder:</i><br>
 	<b>IBAN</b>: DE76430609671165313800<br>
 	<b>BIC</b>: GENODEM1GLSGENODEM1GLS
 
+</div>
+
+<p class="text-center">
+	<a class="btn-normal btn-color" href="#" ng-click="close()">Schließen</a>
 </p>
 </div>

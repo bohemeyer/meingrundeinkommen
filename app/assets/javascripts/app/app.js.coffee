@@ -1,4 +1,4 @@
-window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll','angulartics','angulartics.google.analytics','faq','draw','drawfrontend'])
+window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll','angulartics','angulartics.google.analytics','faq','draw','drawfrontend', 'Support'])
 
 .config [
   "$routeProvider"
@@ -96,8 +96,9 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
   "breadcrumbs"
   "Home"
   "$modal"
+  "Support"
 
-  ($scope, Security, breadcrumbs, Home, $modal) ->
+  ($scope, Security, breadcrumbs, Home, $modal, Support) ->
     $scope.currentUser = Security.currentUser
     $scope.breadcrumbs = breadcrumbs
 
@@ -115,8 +116,39 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
 
     $scope.support = {}
     $scope.support.amount = 33
-    $scope.support.payment_method = 'paypal'
+    $scope.support.donate = true
+    $scope.support.cmd = '_xclick'
+    $scope.support.payment_method = 'bank'
     $scope.support.equals_bi = ''
+    $scope.support.support_id = ''
+
+
+    $scope.support.create = ->
+      $scope.support.submitted = true
+
+      support = $scope.support
+
+      internal = (support.amount * 0.1).toFixed(2)
+
+      new Support(
+        amount_total: support.amount
+        amount_for_income: if support.donate then support.amount - internal else support.amount
+        amount_internal: if support.donate then internal else 0
+        payment_method: support.payment_method
+        recurring: support.cmd == '_xclick-subscriptions'
+      ).create()
+      .then (response) ->
+        if response.errors
+          $scope.support.submitted = false
+          $scope.support.errors = response.errors
+        else
+          $scope.support.support_id = response.support.id
+          $scope.support.support_amount = response.support.amountTotal
+          if support.payment_method == 'bank'
+            $scope.support.submitted = false
+            $scope.support_bank($scope.support)
+          else
+            document.paypal_form.submit()
 
     $scope.support.set_equals_bi = (nv) ->
       r = nv + '€ entsprechen '
@@ -138,13 +170,23 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
     $scope.support.set_equals_bi($scope.support.amount)
 
 
+    $scope.crowdbar_verify = () ->
+      if window.document.getElementById('main')
+        alert 'verified'
 
-    $scope.support_bank = () ->
+    $scope.support_bank = (support) ->
       modalInstance = $modal.open(
         templateUrl: "/assets/bank.html"
+        controller: "SupportBankCtrl"
         size: 'md'
+        resolve:
+          items: ->
+            support
       )
       return
+
+
+
 
     Home.query().then (home) ->
       $scope.home = home
@@ -191,34 +233,12 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
 
 
 
+angular.module("grundeinkommen").controller "SupportBankCtrl", ($scope, $modalInstance, items) ->
+  $scope.supported = items
+
+  $scope.close = ->
+    $modalInstance.dismiss('cancel')
+
+  return
 
 
-
-
-
-# angular.module("grundeinkommen").controller "HeaderCtrl", [
-#   "$scope"
-#   "$location"
-#   "$route"
-#   "security"
-#   "breadcrumbs"
-#   "notifications"
-#   "httpRequestTracker"
-#   ($scope, $location, $route, security, breadcrumbs, notifications, httpRequestTracker) ->
-#     $scope.location = $location
-#     $scope.breadcrumbs = breadcrumbs
-#     $scope.isAuthenticated = security.isAuthenticated
-#     $scope.isAdmin = security.isAdmin
-#     $scope.home = ->
-#       if security.isAuthenticated()
-#         $location.path "/dashboard"
-#       else
-#         $location.path "/projectsinfo"
-#       return
-
-#     $scope.isNavbarActive = (navBarPath) ->
-#       navBarPath is breadcrumbs.getFirst().name
-
-#     $scope.hasPendingRequests = ->
-#       httpRequestTracker.hasPendingRequests()
-# ]
