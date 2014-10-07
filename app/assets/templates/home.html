@@ -105,13 +105,7 @@ bedingungslos</li>
       </div>
       <div class="row margin-top-50" style="padding-top: 0px;">
 
-<!--                <div class="progress" ng-repeat="fi in home.financedIncomes">
 
-                           <div class="progress-bar" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"><i class="icon-check"></i> {{fi}}</div>
-
-               </div>
-
- -->
             <div class="col-md-12 text-center">
 
                <h2 class="slogan-title">
@@ -137,10 +131,6 @@ bedingungslos</li>
                   <br>
                   ...oder unterstützen <u>ohne zu bezahlen</u>: <a href="/support">So geht's</a>
 
-
-
-
-
             <div class="clearfix"></div>
          </div>
       </div>
@@ -153,16 +143,24 @@ bedingungslos</li>
          <div class="slogan-content">
             <div class="col-md-12 text-center">
                <h1 class="slogan-title"><span class="huge">Du</span> kannst 1 Jahr Grundeinkommen gewinnen!</h1>
-               <h3>Am <b>15. November</b> wird das 5. Grundeinkommen verlost</h3>
-               <!-- <h3 class="title text-left"><b>So nimmst du am Gewinnspiel teil:</b></h3>
+               <h3>Am <b>15. November</b> wird das 5. Grundeinkommen verlost.</h3>
+               Weitere Infos folgenden in den nächsten Tagen.<br><br>
+
+<!--                <alert ng-if="security.currentUser && !participation.participates" type="danger"><h1><i class="icon-warning"></i> Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1><a href="/menschen/{{security.currentUser.id}}?gewinnspiel=true" class="btn-grey btn-normal" scroll-to="tabs">Ich will aber teilnehmen!</a></alert>
+
+               <alert ng-if="security.currentUser && participation.participates" type="success"><h1><i class="icon-check"></i> Du nimmst an der nächsten Verlosung teil.</h1><a href="/menschen/{{security.currentUser.id}}?gewinnspiel=true" class="btn-grey btn-small" scroll-to="tabs">Details / Teilnahme bearbeiten</a></alert>
+
+        <div ng-hide="security.currentUser">
+                 <h3 class="title text-left">&nbsp;</h3>
+               <img src="/assets/so_nimmst_du_teil.gif">
               <accordion close-others="true">
                 <accordion-group >
                   <accordion-heading>
-                    <i class="icon-magic"></i> 1. Die CrowdBar installieren
+                    <img ng-src="{{participation.crowdbar && '/assets/step_ok.gif' || '/assets/step_1.gif'}}"> Die CrowdBar installieren
                   </accordion-heading>
-                  <p>Die CrowdBar ist eine kostenlose Erweiterung für deinen Browser mit der das Grundeinkommen finanziert wird. <a href="#">So funktioniert's</a></p>
+                  <p>Die CrowdBar ist eine kostenlose Erweiterung für deinen Browser mit der das Grundeinkommen finanziert wird. <a href="#" ng-click="crowdbar_info()">So funktioniert's</a></p>
                     <div ng-show="browser.isChrome || browser.isFirefox">
-                       <a href="http://www.crowdbar.org" analytics-on="click" analytics-event="CrowdBar installiert" class="btn-normal btn-color"><i class="icon-magic"></i> Jetzt installieren</a>
+                       <a href="http://www.crowdbar.org" target="_blank" analytics-on="click" analytics-event="CrowdBar installiert" class="btn-normal btn-color"><i class="icon-magic"></i> Jetzt installieren</a>
                     </div>
                     <alert ng-show="!browser.isChrome && !browser.isFirefox">Nur für Firefox- und Chrome-Browser verfügbar.<br>
               <b><u>Aber</u></b> du kannst den Onlineshop deiner Wahl vor deinem Einkauf <a href="https://bar.mein-grundeinkommen.de/shops">in dieser Liste</a> auswählen und so auch beitragen.</alert>
@@ -171,7 +169,7 @@ bedingungslos</li>
 
                 <accordion-group>
                   <accordion-heading>
-                    <i class="icon-magic"></i> 2. Auf dieser Seite mitmachen
+                    <img src="/assets/step_2.gif"> Auf dieser Seite mitmachen
                   </accordion-heading>
                   <p>kostenlos anmelden und sagen, was Du mit einem Grundeinkommen tun würdest!</p>
                       <a href="/register" class="btn-normal btn-color">Mitmachen</a>
@@ -181,20 +179,20 @@ bedingungslos</li>
 
                 <accordion-group>
                   <accordion-heading>
-                    <i class="icon-magic"></i> 3. Am Gewinnspiel teilnehmen
+                    <img src="/assets/step_3.gif"> Am Gewinnspiel teilnehmen
                   </accordion-heading>
                   <p>musste machen</p>
 
                 </accordion-group>
+
+        </div>
+
  -->
 
 
-
-
-
-<!--                 <div class="get-started">
+                <div class="get-started">
                   <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color btn-large" analytics-on="click" analytics-event="geklickt: Ich will das Grundeinkommen haben">Ich will das Grundeinkommen haben!</a>
-                </div> -->
+                </div>
 
             </div>
 
