@@ -36,28 +36,19 @@ module Clockwork
         new_data = { :payment_method => 'crowdbar', :amount_total => average_amount, :amount_for_income => (average_amount * 0.9).round(2), :amount_internal => (average_amount - (average_amount * 0.9)).round(2) , :payment_completed => latest_sync_date.strftime('%Y-%m-%d') < date ? false : true , :created_at => "#{date} 00:00:00" }
         old = Support.where("payment_method = ? AND DATE(created_at) = ?", 'crowdbar', date)
 
-        if old.empty?
-          i = 0
-          while i < sales do
-            Support.create(new_data)
-            i +=1
-          end
-        else
-          if old.count != sales
+        if old.count > sales
+          Support.delete(old.limit(old.count - sales).map(&:id))
+          old.update_all(new_data)
+        end
 
-            if old.count > sales
-              Support.delete(old.limit(old.count - sales).map(&:id))
-            else #old.count < sales
-            new_n = sales - old.count
-              n = 0
-              while n < new_n do
-                Support.create(new_data)
-                puts n
-                n +=1
-              end
-            end
-            old.update_all(new_data)
+        if old.count < sales
+          new_n = sales - old.count
+          n = 0
+          while n < new_n do
+            Support.create(new_data)
+            n +=1
           end
+          old.update_all(new_data)
         end
 
       end
