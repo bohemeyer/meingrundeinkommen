@@ -22,8 +22,8 @@ class Api::HomepagesController < ApplicationController
     #days_left = (Date.today - Date.parse(cached_data["project"]["end_date"])).to_i / 1.day
     #supporter = cached_data["project"]["supporters_count"]
 
-    crowdfunding_supporter = 2901 + 140 + 16  #startnext + untracked paypal + kto
-    crowdfunding_amount = 50630.52 + 3058.85 + 360.25 #startnext + untracked paypal + kto
+    crowdfunding_supporter = 2901 + 140 + 18  #startnext + untracked paypal + kto
+    crowdfunding_amount = 50630.52 + 3058.85 + 380.25 #startnext + untracked paypal + kto
 
     own_supporter = Support.where(:payment_completed => true).count #where payment_completed
 
