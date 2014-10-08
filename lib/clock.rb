@@ -14,8 +14,6 @@ module Clockwork
 
     if sales
 
-      Support.where(:payment_method => 'crowdbar').destroy_all
-
       sync_times = []
       CSV.parse(last_syn_file, :headers => true).each do |sync|
         sync_times << sync[1]
@@ -25,6 +23,7 @@ module Clockwork
 
       CSV.parse(sales, :headers => true).each do |day|
         date = day[0]
+        puts date
         sales = day[1].to_i
         commission = 0
         CSV.parse(commissions, :headers => true).each do |commission_day|
@@ -34,11 +33,31 @@ module Clockwork
 
         average_amount = (commission / sales).round(2)
 
-        i = 0
-        while i < sales do
-          puts "#{date} - #{latest_sync_date.strftime('%Y-%m-%d') < date ? false : true}"
-          Support.create(:payment_method => 'crowdbar', :amount_total => average_amount, :amount_for_income => (average_amount * 0.9).round(2), :amount_internal => (average_amount - (average_amount * 0.9)).round(2) , :payment_completed => latest_sync_date.strftime('%Y-%m-%d') < date ? false : true , :created_at => "#{date} 00:00:00")
-          i +=1
+        new_data = { :payment_method => 'crowdbar', :amount_total => average_amount, :amount_for_income => (average_amount * 0.9).round(2), :amount_internal => (average_amount - (average_amount * 0.9)).round(2) , :payment_completed => latest_sync_date.strftime('%Y-%m-%d') < date ? false : true , :created_at => "#{date} 00:00:00" }
+        old = Support.where("payment_method = ? AND DATE(created_at) = ?", 'crowdbar', date)
+
+        if old.empty?
+          i = 0
+          while i < sales do
+            Support.create(new_data)
+            i +=1
+          end
+        else
+          if old.count != sales
+
+            if old.count > sales
+              Support.delete(old.limit(old.count - sales).map(&:id))
+            else #old.count < sales
+            new_n = sales - old.count
+              n = 0
+              while n < new_n do
+                Support.create(new_data)
+                puts n
+                n +=1
+              end
+            end
+            old.update_all(new_data)
+          end
         end
 
       end
@@ -63,6 +82,6 @@ module Clockwork
 
   end
 
-  every(12.hours, 'check crowdbar stats')
+  every(1.hours, 'check crowdbar stats')
 
 end
