@@ -5,23 +5,28 @@ require "net/http"
 protect_from_forgery :except => [:create] #Otherwise the request from PayPal wouldn't make it to the controller
 
   def create
-    response = validate_IPN_notification(request.raw_post)
+    response = validate_IPN_notification(request.raw_post, (params[:test_ipn] &&  == 1)  ? true : false )
     case response
       when "VERIFIED"
+        Rails.logger.info "VERIFIED"
         support = Support.find(params[:custom].to_i) if params[:custom]
         if support
-          if support.payment_method != 'bank' && params[:payment_status] == 'Completed'
+          Rails.logger.info support
+          if params[:payment_status] == 'Completed'
+            Rails.logger "completed"
             support.payment_completed = true
             support.email = params[:payer_email] if !support.email && params[:payer_email]
             support.nickname = params[:first_name] if !support.nickname && params[:first_name]
             support.city = params[:address_city] if params[:address_city]
             support.country = params[:address_country] if params[:address_country]
             support.save
+            Rails.logger.info support
           end
         end
       when "INVALID"
+        Rails.logger.info "invalid"
       else
-        # error
+        Rails.logger.info "error"
       end
 
     render :nothing => true
@@ -31,8 +36,9 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
 
 
   protected
-  def validate_IPN_notification(raw)
+  def validate_IPN_notification(raw, test)
     uri = URI.parse('https://www.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
+    uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate') if test
     http = Net::HTTP.new(uri.host, uri.port)
     http.open_timeout = 60
     http.read_timeout = 60
