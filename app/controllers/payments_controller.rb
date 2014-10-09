@@ -5,7 +5,7 @@ require "net/http"
 protect_from_forgery :except => [:create] #Otherwise the request from PayPal wouldn't make it to the controller
 
   def create
-    response = validate_IPN_notification(request.raw_post, (params[:test_ipn] &&  == 1)  ? true : false )
+    response = validate_IPN_notification(request.raw_post, (params[:test_ipn] && params[:test_ipn] == 1)  ? true : false )
     case response
       when "VERIFIED"
         #Rails.logger.info "VERIFIED"
