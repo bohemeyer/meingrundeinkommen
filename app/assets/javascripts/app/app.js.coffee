@@ -148,7 +148,9 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
             $scope.support.submitted = false
             $scope.support_bank($scope.support)
           else
+            document.getElementById('support_id').value = response.support.id
             document.paypal_form.submit()
+
 
     $scope.support.set_equals_bi = (nv) ->
       r = nv + '€ entsprechen '
