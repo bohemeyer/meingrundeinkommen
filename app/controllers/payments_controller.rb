@@ -11,7 +11,7 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
         Rails.logger.info "VERIFIED"
         support = Support.find(params[:custom].to_i) if params[:custom]
         if support
-          Rails.logger.info support
+          Rails.logger.info support.payment_completed
           if params[:payment_status] == 'Completed'
             support.payment_completed = true
             support.email = params[:payer_email] if !support.email && params[:payer_email]
@@ -19,7 +19,9 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
             support.city = params[:address_city] if params[:address_city]
             support.country = params[:address_country] if params[:address_country]
             support.save
-            Rails.logger.info support
+            Rails.logger.info support.payment_completed
+            support_test = Support.find(params[:custom].to_i)
+            Rails.logger.info support_test.payment_completed
           end
         end
       when "INVALID"
