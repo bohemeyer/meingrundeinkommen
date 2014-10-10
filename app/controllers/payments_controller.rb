@@ -13,7 +13,6 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
         if support
           Rails.logger.info support
           if params[:payment_status] == 'Completed'
-            Rails.logger "completed"
             support.payment_completed = true
             support.email = params[:payer_email] if !support.email && params[:payer_email]
             support.nickname = params[:first_name] if !support.nickname && params[:first_name]
