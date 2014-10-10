@@ -8,25 +8,25 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
     response = validate_IPN_notification(request.raw_post, (params[:test_ipn] && params[:test_ipn] == 1)  ? true : false )
     case response
       when "VERIFIED"
-        #Rails.logger.info "VERIFIED"
+        Rails.logger.info "VERIFIED"
         support = Support.find(params[:custom].to_i) if params[:custom]
         if support
-          #Rails.logger.info support
+          Rails.logger.info support
           if params[:payment_status] == 'Completed'
-            #Rails.logger "completed"
+            Rails.logger "completed"
             support.payment_completed = true
             support.email = params[:payer_email] if !support.email && params[:payer_email]
             support.nickname = params[:first_name] if !support.nickname && params[:first_name]
             support.city = params[:address_city] if params[:address_city]
             support.country = params[:address_country] if params[:address_country]
             support.save
-            #Rails.logger.info support
+            Rails.logger.info support
           end
         end
       when "INVALID"
-        #Rails.logger.info "invalid"
+        Rails.logger.info "invalid"
       else
-        #Rails.logger.info "error"
+        Rails.logger.info "error"
       end
 
     render :nothing => true
@@ -44,8 +44,8 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
     http.read_timeout = 60
     http.verify_mode = OpenSSL::SSL::VERIFY_NONE
     http.use_ssl = true
-    #Rails.logger.info uri.request_uri
-    #Rails.logger.info raw
+    Rails.logger.info uri.request_uri
+    Rails.logger.info raw
     response = http.post(uri.request_uri, raw,
                          'Content-Length' => "#{raw.size}",
                          'User-Agent' => "My custom user agent"
