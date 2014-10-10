@@ -39,6 +39,7 @@ protect_from_forgery :except => [:create] #Otherwise the request from PayPal wou
   def validate_IPN_notification(raw, test)
     uri = URI.parse('https://www.paypal.com/cgi-bin/webscr?cmd=_notify-validate')
     uri = URI.parse('https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_notify-validate') if test
+    Rails.logger.info uri.host
     http = Net::HTTP.new(uri.host, uri.port)
     http.open_timeout = 60
     http.read_timeout = 60
