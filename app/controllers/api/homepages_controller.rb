@@ -59,7 +59,9 @@ class Api::HomepagesController < ApplicationController
     last_synced_day = Support.where(:payment_completed => true, :payment_method => 'crowdbar').order(created_at: :desc).limit(1).first
     prediction = {}
     temp_q = Support.where(:created_at => (last_synced_day.created_at - 9.days).beginning_of_day..last_synced_day.created_at.end_of_day, :payment_method => :crowdbar)
-    prediction[:avg_daily_commission] = temp_q.sum(:amount_for_income) / 10
+    temp_q2 = Support.where(:created_at => (Time.now - 11.days).beginning_of_day..(Time.now - 2.days).end_of_day, :payment_completed => true).where.not(:payment_method => :crowdbar)
+
+    prediction[:avg_daily_commission] = (temp_q.sum(:amount_for_income) + temp_q2.sum(:amount_for_income)) / 10
     prediction[:days] = ((12000 - (total_amount % 12000)) / prediction[:avg_daily_commission]).round
     prediction[:date] = Time.now + (prediction[:days].to_i).days
 
