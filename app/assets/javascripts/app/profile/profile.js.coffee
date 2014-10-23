@@ -44,12 +44,13 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
 
     $scope.mobile = screenSize.is('xs')
     $scope.largeScreen = screenSize.is('lg, md')
+    $scope.smallScreen = screenSize.is('sm, xs')
 
     $scope.user_states = []
 
     $scope.skip = []
     $scope.currentTab = []
-    $scope.tabs = ['wishes', 'image', 'states', 'support', 'gewinnspiel']
+    $scope.tabs = ['wishes', 'image', 'states', 'gewinnspiel', 'crowdbar']
 
 
     $scope.initial_states = [
@@ -290,6 +291,16 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
     if $routeParams['edit_profile']
       $scope.open()
 
+    if $routeParams['gewinnspiel']
+      $scope.currentTab.gewinnspiel = true
+
+    if $routeParams['crowdbar']
+      $scope.currentTab.crowdbar = true
+
+    $scope.jumpToFirstTab = ->
+      $scope.currentTab = []
+      $scope.currentTab.wishes = true
+
 
     $scope.getStateSuggestions = (q) ->
       State.suggestions(q).then (states) ->
@@ -369,9 +380,12 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
 
     $scope.sanitizeChances = ->
       adult = false
+      participates = false
       angular.forEach $scope.user.chances, (chance) ->
         if !chance.isChild
           adult = true
+        if chance.id
+          participates = true
       if !adult
         $scope.user.chances.unshift(
           isChild: false
@@ -379,6 +393,8 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
           dob_month: 1
           dob_day: 1
         )
+      if $scope.participation
+        $scope.participation.participates = participates
 
     $scope.sanitizeChances()
 
@@ -404,6 +420,7 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
         else
           $scope.user.chances[$scope.user.chances.indexOf(chance)] = response.chance
           $scope.sanitizeChances()
+          $scope.participation.participates = true
 
 
     $scope.removeChance = (chance) ->
@@ -414,6 +431,19 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
       $scope.user.chances.splice($scope.user.chances.indexOf(chance), 1)
       $scope.sanitizeChances()
 
+    $scope.gewinnspielbedingungen = () ->
+      modalInstance = $modal.open(
+        templateUrl: "/assets/gewinnspielbedingungen.html"
+        size: 'lg'
+      )
+      return
+
+    $scope.datenschutz = () ->
+      modalInstance = $modal.open(
+        templateUrl: "/assets/gewinnspielbedingungen_datenschutz_modal.html"
+        size: 'lg'
+      )
+      return
 
 
     $scope.editStory = (user_wish) ->
@@ -441,4 +471,30 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
         forUser: 'user_'
       ).delete()
       $scope.user_wishes.splice($scope.user_wishes.indexOf(user_wish), 1)
+
+
+    $scope.open_crowdbar_test_modal = () ->
+      modalInstance = $modal.open(
+        templateUrl: "/assets/crowdbar_check.html"
+        controller: "CrowdbarModalCtrl"
+        resolve:
+          items: ->
+            $scope.home
+          browser: ->
+            $scope.browser
+        size: 'lg'
+      )
+
+      modalInstance.result.then ->
+        $scope.participation.has_crowdbar = $scope.participation.crowdbar_test()
+      ,
+      ->
+        $scope.participation.has_crowdbar = $scope.participation.crowdbar_test()
+
+      return
+
+
+    if $routeParams['crowdbar_install']
+      $scope.skip_section('gewinnspiel')
+      $scope.open_crowdbar_test_modal()
 ]

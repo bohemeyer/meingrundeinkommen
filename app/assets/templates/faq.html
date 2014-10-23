@@ -1,33 +1,56 @@
 <div class="container margin-top-70">
 
+  <h1 class="text-center">Du fragst - Micha antwortet</h1>
+
+  <h3 class="text-center">Wählen einen Themenbereich und tipp deine Frage ins Textfeld. Entweder du findest eine vorhandene Frage oder </h3>
+
+
+  <tabset>
+    <tab heading="Das Projekt" select="tab('projekt')"></tab>
+    <tab heading="Grundeinkommen" select="tab('grundeinkommen')"></tab>
+    <tab heading="Crowdfunding" select="tab('crowdfunding')"></tab>
+    <tab heading="CrowdBar" select="tab('crowdbar')"></tab>
+    <tab heading="Website/Hilfe" select="tab('community')"></tab>
+    <tab heading="Verlosung" select="tab('verlosung')"></tab>
+    <tab heading="Über uns" select="tab('person')"></tab>
+    <!-- <tab heading="Sonstiges" select="tab(null)"></tab> -->
+  </tabset>
+
 <form ng-submit="askQuestion()" style="margin-top:-5px;margin-bottom:10px;">
-	<div style="text-align: center; font-weight:bold;font-size: 25px;background:#66cc99;color:white;border-radius: 5px;box-shadow:1p 1px 1px black;border:1px solid white;">
-
-		Frage stellen / Antwort finden
+	<div style="text-align: center; font-weight:bold;font-size: 25px;background:white;color:black;border-radius: 5px;box-shadow:1p 1px 1px black;border:2px solid #ddd;">
 
 
-  <input type="text" ng-model="question.$" style="height:50px;padding-left:10px;padding-right:10px;" font-size="25"
-	   placeholder="Stell hier deine Frage" maxlength="250">
 
-	<i ng-show="loading" class="icon-spin icon-refresh"></i>
+    <div class="form-group pull-left">
+      <div class="input-group">
+        <div class="input-group-addon"><i class="icon-search"></i></div>
+        <input type="text" ng-model="question.$" style="height:50px;padding-left:10px;padding-right:10px;" font-size="25"
+       placeholder="Stell hier deine Frage" maxlength="250">
+      </div>
+    </div>
 
+    <a class="btn-large btn-color" href="#"><i class="icon-question"></i> Diese Frage jetzt stellen!</a>
 
-  </div>
+  	<i ng-show="loading" class="icon-spin icon-refresh"></i>
 
-  <div ng-show="questions.length == 0">
-  	<input class="btn btn-special btn-grey" type="submit" value="Frage stellen" style="margin-top:-6px">
-  </div>
+    <div class="clearfix"></div>
+
+<div class="text-left">
+
+    <h3 class="title">&nbsp;</h3>
 
   <accordion close-others="true">
-    <accordion-group ng-repeat="question in questions | filter:question">
+    <accordion-group ng-repeat="question in questions | orderBy:'-votes' | search:question.$ | filter:{category:current_tab}">
         <accordion-heading>
-            {{question.text}}
+            {{question.text}} ({{question.votes}}) <a href="#" ng-click="up(question)" class="btn-small btn-grey"><i class="icon-plus-round"></i>Will ich wissen</a>
         </accordion-heading>
         {{question.answer}}
     </accordion-group>
   </accordion>
 
+ </div>
 
+ </div>
 
 </form>
 

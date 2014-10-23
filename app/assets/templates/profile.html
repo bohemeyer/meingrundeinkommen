@@ -1,12 +1,11 @@
 <div class="breadcrumb-wrapper">
    <div class="container">
       <div class="row" style="padding-bottom: 55px;">
-         <div class="col-md-12 text-center">
-            <img ng-if="own_profile && largeScreen && user_states.length == 0 && !skip.states" src="/assets/instructions.png">
-         </div>
-
+      <div class="col-md-12 text-center"> </div>
+        <div style="height:150px;" ng-show="largeScreen && own_profile && (!participation.participates || !participation.has_crowdbar)"></div>
       </div>
    </div>
+
 </div>
 
 <!-- Left Column -->
@@ -53,7 +52,11 @@
 
 
 
-    <div class="clearfix margin-top-30"></div>
+    <div class="clearfix margin-top-30">
+      <hr ng-if="smallScreen"></div>
+
+
+
   </div>
 
 
@@ -61,7 +64,7 @@
 
   <div class="row" ng-if="own_profile && !largeScreen && user_states.length == 0 && !skip.states" style="padding-bottom:20px;">
   	<div class="col-md-12 text-center">
-	  <img src="/assets/instructions.png">
+
 	  </div>
 	</div>
   <div class="col-md-8">
@@ -75,13 +78,16 @@
 
       <!-- Was würdest du tun? -->
 
-      <tab heading="Ich würde...">
+      <tab active="currentTab.wishes">
+        <tab-heading>
+          <i class="icon-check" ng-if="user_wishes.length > 0"></i> Ich würde...
+        </tab-heading>
 	      <div ng-include="'/assets/wishes.html'"></div>
 	    </tab>
 
       <!-- Avatar -->
 
-	    <tab  active="currentTab.image" disabled="user_wishes.length==0" heading="Gesicht zeigen" ng-if="default_avatar">
+	    <tab  active="currentTab.image" ng-if="default_avatar">
 
         <img src="/assets/upload_avatar.png" class="margin-top-20" />
         <br>
@@ -98,32 +104,24 @@
 
       <!-- Wer bist du? -->
 
-      <tab active="currentTab.states" disabled="user_wish.length==0 || (default_avatar && !skip.image)" heading="Ich bin...">
+      <tab active="currentTab.states">
+
+        <tab-heading>
+          <i class="icon-check" ng-if="user_states.length > 0"></i> Ich bin...
+        </tab-heading>
 
         <div ng-include="'/assets/states.html'"></div>
 
       </tab>
 
 
-      <!-- Unterstützen -->
+      <tab active="currentTab.gewinnspiel">
+         <tab-heading>
 
-      <tab active="currentTab.support" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states)" heading="Unterstützen">
+         <img src="/assets/instructions.png" style="left: -185px;bottom: 50px;max-width: 300px;position: absolute;"  ng-if="!participation.participates && largeScreen">
 
-        <div class="margin-top-30 text-center"><a href="#" ng-click="skip_section('support')"><i class="icon-mail-forward"></i> nicht unterstützen & weiter zum Gewinnspiel</a></div>
-
-        <div ng-include="'/assets/support.html'"></div>
-
-        <div class="text-center">
-          <hr>
-          <a class="btn-grey btn-small" ng-click="skip_section('support')"  scroll-to="tabs" analytics-on="click" analytics-event="übersprungen"><i class="icon-mail-forward"></i> überspringen</a>
-        </div>
-      </tab>
-
-      <!-- Gewinnspiel -->
-
-      <tab active="currentTab.gewinnspiel" disabled="user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states) || !skip.support">
-         <tab-heading popover-placement="bottom" popover="{{ user_wish.length==0 || (default_avatar && !skip.image) || (user_states.length == 0 && !skip.states) || !skip.support ? 'Bitte erst die vorherigen Schritte durchlaufen bzw. dort auf \'überspringen\' klicken.' : ''}}" popover-trigger="mouseenter">
-          <i class="icon-flag-checkered"></i> Gewinnspiel
+          <i class="icon-check" ng-if="participation.participates"></i>
+          Verlosung
          </tab-heading>
 
         <div class="container margin-top-30">
@@ -132,33 +130,52 @@
 
 
 
-<!--
-           <p align=justify>Alle vollständig finanzierten Grundeinkommen werden am 18. September 2014 an alle Teilnehmenden des Gewinnspiels verlost. Die Auslosung findet in Berlin statt und wird live per Video-Stream übertragen.</p>
-          <h2>Das Gewinnspiel beginnt am 6. September</h2>
-          <alert type="danger">Wenn du teilnehmen möchtest, dann schau unbedingt zwischen dem 6. und 17. September hier noch einmal vorbei, um dich für das Gewinnspiel offiziell zu registrieren.</alert>
-        <div ng-show="!user.newsletter">
-          <hr>
-            <div class="text-center"><h3>Gern erinnern wir dich per Mail:</h3></div>
 
 
-          <div class="form-group text-left">
-            <div class="col-sm-offset-1 col-sm-11 text-left">
-              <div class="checkbox">
-                <label>
-                  <input name="newsletter" ng-model="user.newsletter" type="checkbox" ng-click="setNewsletterFlag()" analytics-on="click" analytics-event="Newsletter abboniert (im Gewinnspieltab)"> Bitte informiert mich per E-Mail über weitere Verlosungstermine und bei wichtigen Änderungen auf der Seite.
-                </label>
-              </div>
+      </div>
+
+      </tab>
+
+      <!-- Crowdbar -->
+
+      <tab active="currentTab.crowdbar">
+         <tab-heading>
+
+         <img src="/assets/doublechances.png" style="left: -154px;bottom: 50px;max-width: 300px;position: absolute;"  ng-if="!participation.has_crowdbar && participation.participates && largeScreen">
+
+          <i class="icon-check" ng-if="participation.participates && participation.has_crowdbar"></i> Chancen verdoppeln
+         </tab-heading>
+
+        <div class="container margin-top-30">
+
+          <div class="text-center margin-top-20">
+
+            <div ng-if="!participation.has_crowdbar">
+              <h2 class="margin-top-20"><span class="infolink" ng-click="crowdbar_info()">CrowdBar</span> installieren & Gewinnchance verdoppeln</h2>
+              <p>Die CrowdBar ist eine kostenlose Erweiterung für deinen Browser.</p>
+             <div class="margin-top-30">
+             <a ng-if="browser.isChrome || browser.isFirefox" class="btn-color btn-large" ng-click="crowdbar_install()">Jetzt installieren</a>
+             <a class="btn-grey btn-large" ng-click="crowdbar_info()" style="margin-top:-8px">So funktioniert's</a>
+             </div>
+             <br>
+             <small><a href="#"  ng-if="browser.isChrome || browser.isFirefox" ng-click="open_crowdbar_test_modal()">Ich hab die CrowdBar schon installiert.</a></small>
+            </div>
+
+            <div ng-if="participation.has_crowdbar">
+
+              <h1><i class="icon-thumbs-up"></i> Du hast die CrowdBar installiert!</h1>
+              <hr>
+              <h3 ng-if="participation.participates">Du hast damit doppelte Gewinnchancen und erhältst am Tag der Verlosung die doppelte Anzahl an Losnummern!</h3>
+
+              <h3 ng-if="!participation.participates">Sobald du an der <a href="#" ng-click="skip_section('states')">Verlosung teilnimmst</a> hast du doppelte Gewinnchancen und erhältst am Tag der Verlosung die doppelte Anzahl an Losnummern!</h3>
+
+              <p class="well">Du kannst jetzt und jederzeit in Hunderten von Onlineshops einkaufen und damit das nächste Grundeinkommen unterstützen:
+                <br><br>
+                <a href="https://bar.mein-grundeinkommen.de/shops" class="btn-normal btn-color">Shops anzeigen</a>
+              </p>
+
             </div>
           </div>
-        </div>
-
-        <hr>
-
-        <div ng-show="user.newsletter">
-          <alert type="success"><i class="icon-envelope"></i> Wir erinnern dich rechtzeitig per Mail!</alert>
-        </div>
- -->
-
 
       </div>
 
@@ -167,7 +184,8 @@
 
     </tabset>
 <div class="clearfix"></div>
-      <div ng-if="own_profile" class="row text-center margin-top-70">
+
+<!-- <div ng-if="own_profile" class="row text-center margin-top-70">
   <div class="col-md-12">
   <hr>
   <h3>Brauchst du Hilfe?</h3>
@@ -176,7 +194,7 @@
     <iframe width="100%" height="300" src="//www.youtube.com/embed/7XTt5HukC_4" frameborder="0" allowfullscreen></iframe>
   </div>
 </div>
-</div>
+</div> -->
 
 
 

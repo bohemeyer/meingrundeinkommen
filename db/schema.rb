@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140922183344) do
+ActiveRecord::Schema.define(version: 20141023174618) do
 
   create_table "chances", force: true do |t|
-    t.string   "full_name"
     t.date     "dob"
     t.boolean  "is_child"
     t.integer  "country_id"
@@ -24,8 +23,12 @@ ActiveRecord::Schema.define(version: 20140922183344) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "code2"
   end
 
+  add_index "chances", ["first_name", "last_name", "dob"], name: "index_chances_on_first_name_and_last_name_and_dob", unique: true
   add_index "chances", ["user_id"], name: "index_chances_on_user_id"
 
   create_table "questions", force: true do |t|
@@ -34,6 +37,7 @@ ActiveRecord::Schema.define(version: 20140922183344) do
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "votes",      default: 1
   end
 
   create_table "state_users", force: true do |t|
@@ -119,6 +123,7 @@ ActiveRecord::Schema.define(version: 20140922183344) do
     t.string   "avatar"
     t.boolean  "datenschutz",            default: false
     t.boolean  "newsletter",             default: false
+    t.boolean  "has_crowdbar",           default: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

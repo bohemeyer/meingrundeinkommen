@@ -1,7 +1,7 @@
 class Api::ChancesController < ApplicationController
 
   def create
-    chance = current_user.chances.create(params.permit(:full_name, :dob, :is_child, :country_id, :city, :confirmed_publication))
+    chance = current_user.chances.create(params.permit(:first_name, :last_name, :dob, :is_child, :country_id, :city, :confirmed_publication))
     if chance.valid?
       chance.save!
       render json: {:chance => chance}

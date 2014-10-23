@@ -1,0 +1,56 @@
+<div class="modal-header text-right">
+    <a class="icon-remove" href="#" ng-click="close()">&nbsp;</a>
+</div>
+
+<div class="modal-body text-center" style="padding:50px;" >
+{{participation}}
+  <div ng-if="!reload">
+
+	<h1>CrowdBar installiert?</h1>
+
+	<h3>Dann hier klicken:</h3>
+	<a href="#" ng-click="test_for_crowdbar()" class="btn-large btn-color"><i class="icon-gear"></i> Installation überprüfen</a>
+	<br><br>
+
+	<a href="http://www.crowdbar.org" target="_blank">Nochmal installieren</a>
+	<br>
+	<a href="/info/faq?topic=crowdbar">Hilfe lesen oder eine Frage stellen</a>
+
+  </div>
+
+  <div ng-if="reload">
+
+  	<div ng-if="!crowdbar_not_found && !crowdbar_found">
+
+  		<h1>CrowdBar wird gesucht...<h1>
+
+  		<div class="progress margin-top-20">
+          <div class="progress-bar colored" role="progressbar" style="width: {{progress}}%;"></div>
+        </div>
+
+  	</div>
+
+  	<div ng-if="crowdbar_not_found">
+
+  		<h1>CrowdBar nicht gefunden</h1>
+
+  		<a href="#" ng-click="test_for_crowdbar()" class="btn-large btn-color"><i class="icon-gear"></i> Nochmal überprüfen</a>
+
+		<a href="http://www.crowdbar.org" class="btn-large btn-color" target="_blank">Nochmal installieren</a>
+		<br><br>
+		<a href="/info/faq?topic=crowdbar">Hilfe lesen oder eine Frage stellen</a>
+
+  	</div>
+
+  	<div ng-if="crowdbar_found">
+  		<h1><i class="icon-thumbs-up"></i> CrowdBar installiert!</h1>
+  		<hr>
+  		<h3>Du hast jetzt doppelte Gewinnchancen und erhältst am Tag der Verlosung die doppelte Anzahl an Losnummern!</h3>
+  		<hr>
+  		<p>Danke, dass du bereit bist mit der CrowdBar für die nächsten Grundeinkommen beizutragen.</p>
+  		<a href="#" ng-click="close()" class="btn-large btn-color margin-top-20">Fertig!</a>
+  	</div>
+
+  </div>
+
+</div>

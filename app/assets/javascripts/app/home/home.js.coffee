@@ -1,4 +1,4 @@
-angular.module("home", ["Wish","timer"])
+angular.module("home", ["Wish","Support"])
 .config [
   "$routeProvider"
   ($routeProvider) ->
@@ -13,13 +13,34 @@ angular.module("home", ["Wish","timer"])
       label: "Was wäre wenn?"
 ]
 
-.controller "HomeViewController", ["$scope", "$rootScope", "Wish", "$modal", "$cookies", "$location", "Security", "$http", ($scope, $rootScope, Wish, $modal, $cookies, $location, Security, $http) ->
+.controller "HomeViewController", ["$scope", "$rootScope", "Wish", "$modal", "$cookies", "$location", "Security", "$http", "$routeParams", "Support", ($scope, $rootScope, Wish, $modal, $cookies, $location, Security, $http, $routeParams, Support) ->
+
+  if $routeParams.thanks_for_support
+    Support.get($routeParams.thanks_for_support).then (support) ->
+      modalInstance = $modal.open(
+        templateUrl: "/assets/thanks_for_support.html"
+        controller: "SupportBankCtrl"
+        size: 'md'
+        resolve:
+          items: ->
+            support
+      )
+      return
 
   $http.get("/drawings.json").success((response) ->
     $scope.drawings = response
   )
 
+  TDay = new Date("November, 15, 2014")
+  CurrentDate = new Date()
+  DayCount = (TDay-CurrentDate)/(1000*60*60*24)
+  $scope.days_left = Math.round(DayCount)
+
+
   $scope.pagination = []
+
+  $http.get("https://api.startnext.de/v1.1/projects/15645/updates/?limit=3&client_id=82142814552425").success (data, status, headers, config) ->
+    $scope.news = data.projectupdates
 
   Wish.query().then (wishes) ->
     $scope.wishes = wishes

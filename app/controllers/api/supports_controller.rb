@@ -10,18 +10,24 @@ class Api::SupportsController < ApplicationController
 
     if support.valid?
       support.save!
-      render json: {:support => support}
+      render json: support
     else
       render json: {:errors => support.errors}
     end
   end
 
-  def index
-    #where anonymous == false and comment true
+  def update
+    Support.find(params[:id]).update_attributes(:comment => params[:comment], :nickname => params[:nickname])
+    render json: 'success'
   end
 
-  def update
-    #Support.find(params[:id]).update_attributes()
+  def index
+    render json: Support.where('comment is not null and payment_completed is not null').limit(30).order(:updated_at => :desc)
   end
+
+  def show
+    render json: Support.find(params[:id])
+  end
+
 
 end

@@ -1,0 +1,9 @@
+    <p>Die CrowdBar ist eine kostenlose Erweiterung für deinen Browser<br> mit der das Grundeinkommen finanziert wird. <a href="#" ng-click="crowdbar_info()">So funktioniert's</a></p>
+                    <div ng-show="browser.isChrome || browser.isFirefox">
+                       <a href="http://www.crowdbar.org" target="_blank" analytics-on="click" analytics-event="CrowdBar installiert" class="btn-normal btn-color"><i class="icon-magic"></i> Jetzt installieren</a>
+                        <br>Nach dem Installieren:<br>
+                        <a href="?gewinnspiel=true" class="btn-small btn-grey" onclick="javascript:location.reload();"><i class="icon-gear"></i> CrowdBar prüfen</a>
+
+                    </div>
+                    <alert ng-show="!browser.isChrome && !browser.isFirefox">Nur für Firefox- und Chrome-Browser verfügbar. Für Safari ab 1. November 2014<br>
+              <b><u>Aber</u></b> du kannst den Onlineshop deiner Wahl vor deinem Einkauf <a href="https://bar.mein-grundeinkommen.de/shops">in dieser Liste</a> auswählen und so auch beitragen.</alert>

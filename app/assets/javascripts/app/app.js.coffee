@@ -15,77 +15,78 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
   RailsResourceProvider.rootWrapping(false)
 
 
-#TODO decorate selectDirective (see binding "change" for `Single()` and `Multiple()`)
-.config([
-  "$provide"
-  ($provide) ->
-    inputDecoration = [
-      "$delegate"
-      "inputsWatcher"
-      ($delegate, inputsWatcher) ->
-        linkDecoration = (scope, element, attrs, ngModel) ->
-          handler = undefined
-          if attrs.type is "checkbox"
-            inputsWatcher.registerInput handler = ->
-              value = element[0].checked
-              ngModel.$setViewValue value  if value and ngModel.$viewValue isnt value
-              return
+# #TODO decorate selectDirective (see binding "change" for `Single()` and `Multiple()`)
+# .config([
+#   "$provide"
+#   ($provide) ->
+#     inputDecoration = [
+#       "$delegate"
+#       "inputsWatcher"
+#       ($delegate, inputsWatcher) ->
+#         linkDecoration = (scope, element, attrs, ngModel) ->
+#           if ngModel
+#             handler = undefined
+#             if attrs.type is "checkbox"
+#               inputsWatcher.registerInput handler = ->
+#                 value = element[0].checked
+#                 ngModel.$setViewValue value  if value and ngModel.$viewValue isnt value
+#                 return
 
-          else if attrs.type is "radio"
-            inputsWatcher.registerInput handler = ->
-              value = attrs.value
-              ngModel.$setViewValue value  if element[0].checked and ngModel.$viewValue isnt value
-              return
+#             else if attrs.type is "radio"
+#               inputsWatcher.registerInput handler = ->
+#                 value = attrs.value
+#                 ngModel.$setViewValue value  if element[0].checked and ngModel.$viewValue isnt value
+#                 return
 
-          else
-            inputsWatcher.registerInput handler = ->
-              value = element.val()
-              ngModel.$setViewValue value  if (ngModel.$viewValue isnt `undefined` or value isnt "") and ngModel.$viewValue isnt value
-              return
+#             else
+#               inputsWatcher.registerInput handler = ->
+#                 value = element.val()
+#                 ngModel.$setViewValue value  if (ngModel.$viewValue isnt `undefined` or value isnt "") and ngModel.$viewValue isnt value
+#                 return
 
-          scope.$on "$destroy", ->
-            inputsWatcher.unregisterInput handler
-            return
+#             scope.$on "$destroy", ->
+#               inputsWatcher.unregisterInput handler
+#               return
 
-          link.apply this, [].slice.call(arguments, 0)
-          return
-        directive = $delegate[0]
-        link = directive.link
-        directive.compile = compile = (element, attrs, transclude) ->
-          linkDecoration
+#             link.apply this, [].slice.call(arguments, 0)
+#           return
+#         directive = $delegate[0]
+#         link = directive.link
+#         directive.compile = compile = (element, attrs, transclude) ->
+#           linkDecoration
 
-        delete directive.link
+#         delete directive.link
 
-        return $delegate
-    ]
-    $provide.decorator "inputDirective", inputDecoration
-    $provide.decorator "textareaDirective", inputDecoration
-]).factory "inputsWatcher", [
-  "$interval"
-  "$rootScope"
-  ($interval, $rootScope) ->
-    execHandlers = ->
-      i = 0
-      l = handlers.length
+#         return $delegate
+#     ]
+#     $provide.decorator "inputDirective", inputDecoration
+#     $provide.decorator "textareaDirective", inputDecoration
+# ]).factory "inputsWatcher", [
+#   "$interval"
+#   "$rootScope"
+#   ($interval, $rootScope) ->
+#     execHandlers = ->
+#       i = 0
+#       l = handlers.length
 
-      while i < l
-        handlers[i]()
-        i++
-      return
-    INTERVAL_MS = 500
-    promise = undefined
-    handlers = []
-    return (
-      registerInput: registerInput = (handler) ->
-        promise = $interval(execHandlers, INTERVAL_MS)  if handlers.push(handler) is 1
-        return
+#       while i < l
+#         handlers[i]()
+#         i++
+#       return
+#     INTERVAL_MS = 500
+#     promise = undefined
+#     handlers = []
+#     return (
+#       registerInput: registerInput = (handler) ->
+#         promise = $interval(execHandlers, INTERVAL_MS)  if handlers.push(handler) is 1
+#         return
 
-      unregisterInput: unregisterInput = (handler) ->
-        handlers.splice handlers.indexOf(handler), 1
-        $interval.cancel promise  if handlers.length is 0
-        return
-    )
-]
+#       unregisterInput: unregisterInput = (handler) ->
+#         handlers.splice handlers.indexOf(handler), 1
+#         $interval.cancel promise  if handlers.length is 0
+#         return
+#     )
+# ]
 
 
 #################################################
@@ -97,9 +98,15 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
   "Home"
   "$modal"
   "Support"
+  "$timeout"
+  "$interval"
+  "$routeParams"
+  "$location"
+  "$http"
 
-  ($scope, Security, breadcrumbs, Home, $modal, Support) ->
-    $scope.currentUser = Security.currentUser
+  ($scope, Security, breadcrumbs, Home, $modal, Support, $timeout, $interval, $routeParams, $location, $http) ->
+    $scope.security = Security
+
     $scope.breadcrumbs = breadcrumbs
 
     $scope.browser = {}
@@ -107,12 +114,71 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
     $scope.browser.isFirefox = typeof InstallTrigger isnt "undefined" # Firefox 1.0+
     $scope.browser.isChrome = !!window.chrome and not isOpera # Chrome 1+
 
+    $scope.participation = {}
+
+    if !angular.isDefined(periodical_crowdbar_test)
+      periodical_crowdbar_test = $interval(->
+        $scope.participation.has_crowdbar = $scope.participation.crowdbar_test()
+        #console.log "test: #{$scope.participation.has_crowdbar}"
+        if $scope.security.currentUser
+          #console.log "db: #{$scope.security.currentUser.has_crowdbar}"
+          input =
+            user: $scope.security.currentUser
+          input.user.has_crowdbar = $scope.participation.has_crowdbar
+          $http.put("/users.json", input)
+
+        return
+      , 30000)
+
+
+    $timeout ->
+      $scope.participation.has_crowdbar = $scope.participation.crowdbar_test()
+      $scope.participation.participates = if $scope.security.currentUser and $scope.security.currentUser.chances.length > 0 then true else false
+    ,
+    1000
+
+    $scope.participation.crowdbar_test = () ->
+      return if window.document.getElementById('crowd_bar_verified') then true else false
+
     $scope.bge_info = () ->
       modalInstance = $modal.open(
         templateUrl: "/assets/was_ist_grundeinkommen.html"
         size: 'md'
       )
       return
+
+    $scope.crowdbar_info = () ->
+      modalInstance = $modal.open(
+        templateUrl: "/assets/crowdbar_modal.html"
+        controller: "CrowdbarModalCtrl"
+        resolve:
+          items: ->
+            $scope.home
+          browser: ->
+            $scope.browser
+        size: 'lg'
+      )
+      return
+
+    $scope.crowdbar_install = () ->
+      form = document.createElement("form");
+      form.method = "GET";
+      form.action = "http://www.crowdbar.org";
+      form.target = "_blank"
+      document.body.appendChild(form)
+      form.submit()
+      $location.path("/menschen/#{$scope.security.currentUser.id}").search(
+        crowdbar_install: true
+      )
+
+
+
+    Support.query().then (supports) ->
+      result = []
+      if supports.length > 2
+        while (supports.length > 0)
+          result.push(supports.splice(0, 3))
+        $scope.supports = result
 
     $scope.support = {}
     $scope.support.amount = 33
@@ -142,13 +208,18 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
           $scope.support.submitted = false
           $scope.support.errors = response.errors
         else
-          $scope.support.support_id = response.support.id
-          $scope.support.support_amount = response.support.amountTotal
+          $scope.support.support_id = response.id
+          $scope.support.return_url = "https://www.mein-grundeinkommen.de/start?thanks_for_support=" + response.id
+          $scope.support.support_amount = response.amountTotal
+          $scope.support.avatar = response.avatar
+          $scope.support.nickname = response.nickname
+
           if support.payment_method == 'bank'
             $scope.support.submitted = false
             $scope.support_bank($scope.support)
           else
-            document.getElementById('support_id').value = response.support.id
+            document.getElementById('support_id').value = response.id
+            document.getElementById('return_url').value = "https://www.mein-grundeinkommen.de/start?thanks_for_support=" + response.id
             document.paypal_form.submit()
 
 
@@ -172,15 +243,11 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
     $scope.support.set_equals_bi($scope.support.amount)
 
 
-    $scope.crowdbar_verify = () ->
-      if window.document.getElementById('main')
-        alert 'verified'
-
     $scope.support_bank = (support) ->
       modalInstance = $modal.open(
         templateUrl: "/assets/bank.html"
         controller: "SupportBankCtrl"
-        size: 'md'
+        size: 'sm'
         resolve:
           items: ->
             support
@@ -235,12 +302,68 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
 
 
 
-angular.module("grundeinkommen").controller "SupportBankCtrl", ($scope, $modalInstance, items) ->
+angular.module("grundeinkommen").controller "SupportBankCtrl", ($scope, $modalInstance, items, Support) ->
   $scope.supported = items
+
+  console.log items
+  $scope.close = ->
+    $modalInstance.dismiss('cancel')
+
+  $scope.save_comment = (id,nickname,comment) ->
+    new Support(
+      id: id
+      comment: comment
+      nickname: nickname
+    ).update().then ->
+      $modalInstance.dismiss('cancel')
+
+
+  return
+
+
+angular.module("grundeinkommen").controller "CrowdbarModalCtrl", ($scope, $modalInstance, items, browser, $location, $timeout, $interval) ->
+
+  $scope.daily_comm = Math.round(items.prediction.avgDailyCommissionCrowdbar)
+  $scope.browser = browser
+
+  console.log $scope.participation
+
+  if $location.search().reload
+    $scope.reload = true
+    $scope.crowdbar_not_found = false
+    $scope.crowdbar_found = false
+    $scope.progress = 0
+
+    progress = $interval(->
+      if $scope.progress >= 100
+        $scope.crowdbar_not_found = !$scope.has_crowdbar()
+        $scope.crowdbar_found = $scope.has_crowdbar()
+        $interval.cancel(progress)
+      else
+        $scope.progress += 2
+      return
+    , 100)
+
+  $scope.has_crowdbar = () ->
+    if window.document.getElementById('crowd_bar_verified') then true else false
+
+  $scope.test_for_crowdbar = () ->
+    $location.search(
+      crowdbar_install: true
+      reload: true
+    )
+
+    $timeout ->
+      location.reload()
+    ,
+    100
 
   $scope.close = ->
     $modalInstance.dismiss('cancel')
 
   return
+
+
+
 
 

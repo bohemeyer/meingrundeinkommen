@@ -4,7 +4,10 @@
 
 <input type="text" name="custom" ng-model="support.support_id" id="support_id" style="display:none;">
 
+<INPUT TYPE="text" NAME="return" ng-model="support.return_url" id="return_url" style="display:none;">
+
 <input type="text" name="a3" ng-model="support.amount" style="display:none;">
+
 <input type="hidden" name="p3" value="1">
 <input type="hidden" name="t3" value="M">
 
@@ -15,18 +18,18 @@
 
 <div class="form-group text-center" style="">
   <!-- <label for="supportamount">Mein Beitrag:</label> -->
-  <div style="width:200px;margin-left: auto;margin-right: auto;margin-bottom:5px;" class="input-group">
+  <div ng-hide="support.payment_method == 'flattr'" style="width:200px;margin-left: auto;margin-right: auto;margin-bottom:5px;" class="input-group">
     <input class="form-control input-lg" id="supportamount" width="4" min="1" max="12000" type="number" ng-model="support.amount" name="amount" ng-change = "support.set_equals_bi(support.amount)">
     <div class="input-group-addon">€</div>
   </div>
 
-  <div class="well">{{support.equals_bi}}</div>
-
-  <label><input type="radio" ng-click="support.payment_method = 'bank'" ng-model="support.cmd" name="cmd" value="_xclick" checked> einmalig </label>
-  &nbsp;&nbsp;<label><input ng-click="support.payment_method = 'paypal_k'" ng-model="support.cmd" type="radio" name="cmd" value="_xclick-subscriptions"> monatlich</label>
+  <div ng-hide="support.payment_method == 'flattr'">{{support.equals_bi}}</div>
+<div class="margin-top-20">
+  <label ng-hide="support.payment_method == 'flattr'"><input type="radio" ng-click="support.payment_method = 'bank'" ng-model="support.cmd" name="cmd" value="_xclick" checked> einmalig </label>
+  &nbsp;&nbsp;<label ng-hide="support.payment_method == 'flattr'"><input ng-click="support.payment_method = 'paypal_k'" ng-model="support.cmd" type="radio" name="cmd" value="_xclick-subscriptions"> monatlich</label>
 <br>
-<label style="font-weight:normal"><input type="checkbox" ng-model="support.donate"> davon 10% ({{(support.amount * 0.1).toFixed(2)}}€) an den Verein spenden</label>
-
+<label ng-hide="support.payment_method == 'flattr'" style="font-weight:normal"><input type="checkbox" ng-model="support.donate"> davon 10% ({{(support.amount * 0.1).toFixed(2)}}€) an den Verein spenden</label>
+</div>
 
        <!-- <label for="supportamount">Mein Beitrag:</label> -->
   <div class="input-group" style="width:200px;margin-top:10px;margin-left: auto;margin-right: auto">
@@ -35,13 +38,21 @@
       <option value="paypal" ng-if="support.cmd == '_xclick'">Paypal</option>
       <option value="paypal_l" ng-if="support.cmd == '_xclick'">Lastschrift (über Paypal)</option>
       <option value="paypal_k" ng-selected="support.cmd != '_xclick'">Kreditkarte (über Paypal)</option>
+      <option value="flattr" ng-if="support.cmd == '_xclick'">Flattr</option>
     </select>
   </div>
-  <small ng-hide="support.payment_method == 'bank'">abzüglich {{(0.35 + support.amount * 0.019).toFixed(2)}}€ Paypal-Gebühren
+  <small ng-hide="support.payment_method == 'bank' || support.payment_method == 'flattr'">abzüglich {{(0.35 + support.amount * 0.019).toFixed(2)}}€ Paypal-Gebühren
   <br></small>
 
+  <div class="well text-center" ng-show="support.payment_method == 'flattr'">
+    <h4>Klicke hier um das Grundeinkommen mit Flattr zu unterstützen:<h4>
+      <a href="https://flattr.com/submit/auto?user_id=michaxberg&url=http://www.mein-grundeinkommen.de&title=Mein%20Grundeinkommen" class="btn btn-special btn-color btn-large" target="_blank">
+        <i class="icon-heart"></i> Jetzt unterstützen!
+      </a>
+  </div>
 
-<a href="#" ng-click="support.create()" class="btn btn-special btn-color btn-large" style="margin-top:20px;" ng-disabled="support.submitted"><div class="spinner" ng-show="support.submitted">
+
+<a ng-hide="support.payment_method == 'flattr'" href="#" ng-click="support.create()" class="btn btn-special btn-color btn-large" style="margin-top:20px;" ng-disabled="support.submitted"><div class="spinner" ng-show="support.submitted">
     <div class="bounce1"></div>
     <div class="bounce2"></div>
     <div class="bounce3"></div>

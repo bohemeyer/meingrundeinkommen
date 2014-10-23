@@ -1,3 +1,12 @@
 class SupportSerializer < ActiveModel::Serializer
-  attributes :id, :user, :firstname, :lastname, :amount, :amount_internal, :email, :company, :street, :zip, :city, :country, :payment_method, :comment, :anonymous, :recurring, :recurring_period, :string
+  attributes :id, :nickname, :comment, :amount_total, :avatar
+
+  def avatar
+  	u = User.find_by_email(object.email)
+  	if u && u.avatar
+	  return u.avatar
+	else
+	  return false
+	 end
+  end
 end

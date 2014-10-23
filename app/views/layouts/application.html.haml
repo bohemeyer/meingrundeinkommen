@@ -87,7 +87,7 @@
                     Was wäre wenn?
                 / %li{id: "{{getStatus('/info/faq')}}"}
                 /   %a{href: "/info/faq"}
-                /     So funktioniert's
+                /     Info
                 %li{id: "{{getStatus('/support')}}"}
                   %a{href: "/support", style: "padding-bottom: 25px;"}
                     Unterstützen!
@@ -172,13 +172,14 @@
           .container
             .row
               .col-lg-9.col-md-9.col-xs-12.col-sm-9
-                \© Copyright 2014 by
-                = succeed "." do
-                  %a{href: "/impressum"} Verein "Mein Grundeinkommen"
+                \© 2014
+                %a{href: "/impressum"} Verein "Mein Grundeinkommen"
                 |
                 %a{href:"/impressum"} Impressum
                 |
                 %a{href:"/nutzungsbedingungen"} Nutzungsbedingungen
+                |
+                %a{href:"/gewinnspielbedingungen"} Gewinnspielbedingungen
                 |
                 %a{href:"/datenschutz"} Datenschutz
               .col-lg-3.col-md-3.col-xs-12.col-sm-3

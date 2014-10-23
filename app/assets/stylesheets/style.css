@@ -1830,17 +1830,23 @@ input:focus, textarea:focus {
 
 
 /* Accordion */
+
+.panel-title, .panel.panel-default {
+    border: 0px !important;
+}
 .accordionMod .panel-heading .accordion-toggle {
     position: relative;
     cursor: pointer;
     margin: 0;
     padding: 10px 45px;
+    border: 0 !important;
 }
 
 .accordion-body,.panel-heading {
     background: #fff;
     border-radius: 3px;
     padding: 0;
+    border: 0 !important;
 }
 
 .accordionMod .panel-heading .accordion-toggle .icon:before {
@@ -1863,6 +1869,7 @@ input:focus, textarea:focus {
     color: #fff;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+    border: 0 !important;
 }
 
 .contact-box,.contact-box i,.contact-box p,.contact-box h3 {
@@ -2834,6 +2841,9 @@ a.suggestion_entry:hover > .icon2, .active > a.suggestion_entry > .icon2 {
 .text-center-sm,
 .text-center-md,
 .text-center-lg,
+.text-left-sm,
+.text-left-md,
+.text-left-lg,
 .text-right-sm,
 .text-right-md,
 .text-right-lg { text-align: inherit; }
@@ -2841,6 +2851,7 @@ a.suggestion_entry:hover > .icon2, .active > a.suggestion_entry > .icon2 {
 /* Define xs styles after defaults so they take precedence */
 .text-center-xs { text-align: center; }
 .text-right-xs { text-align: right; }
+.text-left-xs { text-align: left; }
 
 /* Small grid */
 @media (min-width: 768px) {
@@ -2871,4 +2882,12 @@ a.suggestion_entry:hover > .icon2, .active > a.suggestion_entry > .icon2 {
 
 .infolink {
     cursor:pointer;border-bottom: 1px dotted #bbb;display:inline-block;
+}
+
+.days_left {
+    border: 2px solid #fff;
+border-radius: 5px;
+padding: 7px;
+box-shadow: 0px 0px 1px black;
+text-shadow: 1px 1px 0px #000;
 }

@@ -1,9 +1,17 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :avatar, :newsletter, :chances
+  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar
 
   def email
     if object == current_user
       object.email
+    else
+      ''
+    end
+  end
+
+  def has_crowdbar
+    if object == current_user
+      object.has_crowdbar
     else
       ''
     end
@@ -15,7 +23,7 @@ class UserSerializer < ActiveModel::Serializer
     else
       r = []
       object.chances.each do |c|
-        r << c.slice(:code,:is_child)
+        r << c.slice(:code,:code2,:is_child)
       end
       r
     end

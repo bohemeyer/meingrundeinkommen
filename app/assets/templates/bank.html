@@ -1,7 +1,11 @@
 <div class="container" style="padding:50px;">
 <h1>Vielen Dank!</h1>
+<!-- <h3>Wegen tollen Menschen wie dir ist dieses Projekt überhaupt nur möglich.</h3>
+ -->
+<h3 class="title">&nbsp;</h3>
 
-<p>Bitte überweise deine Unterstützung von <b>{{supported.support_amount}}€</b> auf folgendes Konto:</p>
+
+<i class="icon-arrow-right pull-left huge"></i> <h1> Bitte überweise die <br><b>{{supported.support_amount}}€</b> auf folgendes Konto:</h1>
 <div class="alert">
 	<table>
 		<tr>
@@ -39,11 +43,36 @@
 	<br>
 	<i>oder:</i><br>
 	<b>IBAN</b>: DE76430609671165313800<br>
-	<b>BIC</b>: GENODEM1GLSGENODEM1GLS
+	<b>BIC</b>: GENODEM1GLS
 
 </div>
 
+<h3 class="title">&nbsp;</h3>
+
+
+<i class="icon-bullhorn pull-left huge"></i>
+
+<h2>Warum hast du "Mein Grundeinkommen" mit Geld unterstützt?</h2>
+<p>(ist optional und wird veröffentlicht, sobald dein Geld eingegangen ist)</p>
+
+<div class="row">
+	<div ng-if="supported.avatar" class="testimonial-image pull-left" style="margin:10px;">
+	  <img src="{{supported.avatar.avatar.url}}">
+	</div>
+	<label>Dein Name: &nbsp;<input type="text" ng-model="supported.nickname" placeholder="Dein Name"></label><br>
+	<textarea maxlength="200" style="width:80%;min-height:60px;margin-top:10px;margin-bottom:10px" ng-model="supported.comment" placeholder="Dein Grund"></textarea>
+</div>
+
 <p class="text-center">
-	<a class="btn-normal btn-color" href="#" ng-click="close()">Schließen</a>
+	<a class="btn-large btn-color" href="#" ng-click="save_comment(supported.support_id,supported.nickname,supported.comment)"><i class="icon-bullhorn" ng-click></i> Sagen!</a>
 </p>
+
+</div>
+
+<div class="modal-footer">
+
+<p class="text-right">
+	<a class="btn-small btn-grey" href="#" ng-click="close()">Schließen</a>
+</p>
+
 </div>

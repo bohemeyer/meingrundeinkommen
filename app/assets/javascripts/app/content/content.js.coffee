@@ -16,6 +16,11 @@ angular.module("content", ['ng-breadcrumbs'])
     .when "/boost",
       redirectTo: "/support"
     .when "/support",
+      controller: [
+        "$scope"
+        ($scope) ->
+          $scope.daily_comm = Math.round($scope.home.prediction.avgDailyCommissionCrowdbar)
+      ]
       templateUrl: "/assets/crowdbar.html"
       label: "Die CrowdBar"
     .when "/info/impressum",

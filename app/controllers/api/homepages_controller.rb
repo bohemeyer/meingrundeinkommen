@@ -12,9 +12,9 @@ end
 class Api::HomepagesController < ApplicationController
 
   def show
-  	#User.destroy_all
+    #User.destroy_all
 
-  	#cached_data = File.open("public/startnext.json") do |file|
+    #cached_data = File.open("public/startnext.json") do |file|
     #  JSON.parse(file.read)
     #end
     #cached_amount = cached_data["project"]["funding_status"]
@@ -25,7 +25,7 @@ class Api::HomepagesController < ApplicationController
     crowdfunding_supporter = 2901 + 140 + 18  #startnext + untracked paypal + kto
     crowdfunding_amount = 50630.52 + 3058.85 + 380.25 #startnext + untracked paypal + kto
 
-    own_supporter = Support.where(:payment_completed => true).count #where payment_completed
+    own_supporter = Support.where(:payment_completed => true).count
 
     supporter = crowdfunding_supporter + own_supporter
 
@@ -35,16 +35,9 @@ class Api::HomepagesController < ApplicationController
     own_funding_paypal -= own_funding_paypal * 0.019
     own_funding_paypal -= own_funding_paypal_q.count * 0.19
 
-    # own_funding_paypal = own_funding_paypal / 1.19
-
     own_funding = Support.where("payment_method = 'bank' AND payment_completed IS NOT NULL").sum(:amount_for_income)
 
-    # own_funding = own_funding / 1.19
-
     #read crowdbar file
-    crowdbar_day_before = 0#xx
-
-    crowdbar_yesterday = 0#yy
 
     crowdbar_amount = Support.where(:payment_method => :crowdbar).sum(:amount_for_income)
 
@@ -60,8 +53,8 @@ class Api::HomepagesController < ApplicationController
     prediction = {}
     temp_q = Support.where(:created_at => (last_synced_day.created_at - 9.days).beginning_of_day..last_synced_day.created_at.end_of_day, :payment_method => :crowdbar)
     temp_q2 = Support.where(:created_at => (Time.now - 11.days).beginning_of_day..(Time.now - 2.days).end_of_day, :payment_completed => true).where.not(:payment_method => :crowdbar)
-
     prediction[:avg_daily_commission] = (temp_q.sum(:amount_for_income) + temp_q2.sum(:amount_for_income)) / 10
+    prediction[:avg_daily_commission_crowdbar] = temp_q.sum(:amount_for_income) / 10
     prediction[:days] = ((12000 - (total_amount % 12000)) / prediction[:avg_daily_commission]).round
     prediction[:date] = Time.now + (prediction[:days].to_i).days
 
@@ -79,7 +72,8 @@ class Api::HomepagesController < ApplicationController
       #:days_left => days_left,
       :supporter => number_with_precision(supporter, precision: 0, delimiter: '.'),
       :amount_internal => amount_internal,
-      :prediction => prediction
+      :prediction => prediction,
+      :supports => Support.where(:comment => true, :payment_completed => false).order(:created_at => :desc).limit(12)
     }
     render json: homepage_data
   end
