@@ -85,7 +85,7 @@
               </div>
               <alert ng-show="chance_errors.dob">{{chance_errors.dob}}</alert>
 
-              <div class="form-group">
+              <div class="form-group" ng-if="!chance.isChild">
                 <label for="inputEmail12" class="col-sm-2 control-label">Postleitzahl</label>
                 <div class="col-sm-10 text-left">
                   <input name="city" ng-model="chance.city" type="text" class="form-control" id="inputEmail12" placeholder="freiwillige Angabe" maxlength="5" required>

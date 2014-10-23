@@ -14,7 +14,7 @@ angular.module("login", [
     $location.path( "/menschen/" + Security.currentUser.id )
 
   $scope.just_confirmed = if $routeParams['confirmed'] then $routeParams['confirmed'] else ''
-  $scope.confirmation_error = if $routeParams['confirmation_error'] then $routeParams['email'] else false
+  $scope.confirmation_error = if $routeParams['confirmation_error'] then true else false
   $scope.show_resend_link = false
   $scope.resend_status = false
   $scope.forgot_pw = false
