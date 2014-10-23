@@ -10,6 +10,10 @@
   <div class="row">
     <div class="col-md-12 text-center">
 
+      <alert class="danger" ng-if="confirmation_error"><h1>Hoppla!</h1>
+        Es gab einen blöden Fehler, der selten Auftritt. Ich muss deine E-Mail-Adresse manuell freischalten. Könntest du mir dafür bitte von deiner Mailadresse ({{confirmation_error}}) aus eine E-Mail an <a href="mailto:support@mein-grundeinkommen.de">support@mein-grundeinkommen.de</a> mit dem Betreff "Freischalten" schicken? Sorry!
+      </alert>
+
       <div ng-show="just_confirmed">
 
         <h2 style="margin-bottom:15px;">Super, deine E-Mail-Adresse wurde bestätigt!</h2>
