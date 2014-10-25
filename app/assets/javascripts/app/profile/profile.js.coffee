@@ -407,7 +407,7 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
       )
 
     $scope.saveChance = (c) ->
-
+      $scope.submitted = true
       $scope.chance_errors = []
       chance = c
       chance.dob = c.dob_year + '-' + c.dob_month + '-' + c.dob_day
@@ -415,6 +415,7 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
 
       new Chance(chance).create()
       .then (response) ->
+        $scope.submitted = false
         if response.errors
           $scope.chance_errors = response.errors
         else

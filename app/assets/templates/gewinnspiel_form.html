@@ -107,12 +107,8 @@
 
               <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                  <button type="submit" class="btn btn-special btn-color" >
-                 	Speichern & Teilnehmen
-                  </button>
-                  <button ng-if="chance.isChild" type="button" class="btn btn-special btn-grey" ng-click="removeChance(chance)">
-                 	Abbrechen
-                  </button>
+                  <input type="submit" class="btn btn-special btn-color" value="Speichern & Teilnehmen"  ng-disabled="submitted">
+                  <input ng-if="chance.isChild" type="button" class="btn btn-special btn-grey" value="Abbrechen" ng-click="removeChance(chance)" ng-disabled="submitted">
                 </div>
               </div>
 
