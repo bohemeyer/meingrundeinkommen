@@ -11,6 +11,10 @@ class RegistrationsController < Devise::RegistrationsController
       account_update_params.delete("password_confirmation")
     end
 
+    if account_update_params[:has_crowdbar] == true && !current_user.chances.empty?
+      Chance.where(:user_id => current_user.id).update_all(:crowdbar_verified => true)
+    end
+
     @user = User.find(current_user.id)
     if @user.update_attributes(account_update_params)
       render json: @user

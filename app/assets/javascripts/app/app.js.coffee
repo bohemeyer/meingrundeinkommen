@@ -15,82 +15,6 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
   RailsResourceProvider.rootWrapping(false)
 
 
-# #TODO decorate selectDirective (see binding "change" for `Single()` and `Multiple()`)
-# .config([
-#   "$provide"
-#   ($provide) ->
-#     inputDecoration = [
-#       "$delegate"
-#       "inputsWatcher"
-#       ($delegate, inputsWatcher) ->
-#         linkDecoration = (scope, element, attrs, ngModel) ->
-#           if ngModel
-#             handler = undefined
-#             if attrs.type is "checkbox"
-#               inputsWatcher.registerInput handler = ->
-#                 value = element[0].checked
-#                 ngModel.$setViewValue value  if value and ngModel.$viewValue isnt value
-#                 return
-
-#             else if attrs.type is "radio"
-#               inputsWatcher.registerInput handler = ->
-#                 value = attrs.value
-#                 ngModel.$setViewValue value  if element[0].checked and ngModel.$viewValue isnt value
-#                 return
-
-#             else
-#               inputsWatcher.registerInput handler = ->
-#                 value = element.val()
-#                 ngModel.$setViewValue value  if (ngModel.$viewValue isnt `undefined` or value isnt "") and ngModel.$viewValue isnt value
-#                 return
-
-#             scope.$on "$destroy", ->
-#               inputsWatcher.unregisterInput handler
-#               return
-
-#             link.apply this, [].slice.call(arguments, 0)
-#           return
-#         directive = $delegate[0]
-#         link = directive.link
-#         directive.compile = compile = (element, attrs, transclude) ->
-#           linkDecoration
-
-#         delete directive.link
-
-#         return $delegate
-#     ]
-#     $provide.decorator "inputDirective", inputDecoration
-#     $provide.decorator "textareaDirective", inputDecoration
-# ]).factory "inputsWatcher", [
-#   "$interval"
-#   "$rootScope"
-#   ($interval, $rootScope) ->
-#     execHandlers = ->
-#       i = 0
-#       l = handlers.length
-
-#       while i < l
-#         handlers[i]()
-#         i++
-#       return
-#     INTERVAL_MS = 500
-#     promise = undefined
-#     handlers = []
-#     return (
-#       registerInput: registerInput = (handler) ->
-#         promise = $interval(execHandlers, INTERVAL_MS)  if handlers.push(handler) is 1
-#         return
-
-#       unregisterInput: unregisterInput = (handler) ->
-#         handlers.splice handlers.indexOf(handler), 1
-#         $interval.cancel promise  if handlers.length is 0
-#         return
-#     )
-# ]
-
-
-#################################################
-
 .controller "AppCtrl", [
   "$scope"
   "Security"
@@ -125,8 +49,8 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
           input =
             user: $scope.security.currentUser
           input.user.has_crowdbar = $scope.participation.has_crowdbar
-          $http.put("/users.json", input)
-
+          $http.put("/users.json", input).then (r) ->
+            $scope.participation.double_chances = if $scope.participation.participates and r.chances and !r.chances[0].ignore_double_chance then true else false
         return
       , 30000)
 
@@ -134,6 +58,7 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
     $timeout ->
       $scope.participation.has_crowdbar = $scope.participation.crowdbar_test()
       $scope.participation.participates = if $scope.security.currentUser and $scope.security.currentUser.chances.length > 0 then true else false
+      $scope.participation.double_chances = if $scope.participation.participates && $scope.security.currentUser.chances[0].crowdbar_verified && !$scope.security.currentUser.chances[0].ignoreDoubleChance then true else false
     ,
     1000
 
@@ -356,7 +281,7 @@ angular.module("grundeinkommen").controller "CrowdbarModalCtrl", ($scope, $modal
     $timeout ->
       location.reload()
     ,
-    100
+    500
 
   $scope.close = ->
     $modalInstance.dismiss('cancel')

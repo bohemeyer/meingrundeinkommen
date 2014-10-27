@@ -32,7 +32,7 @@
 
 
 
-                <form class="form-horizontal margin-top-30" ng-submit="login()" role="form" name="LoginForm" novalidate>
+                <form class="form-horizontal margin-top-30" autofill-submit="login()" role="form" name="LoginForm" novalidate>
 
 
               <alert ng-show="LoginForm.$error.serverMessage" type="warning">{{LoginForm.$error.serverMessage}}
@@ -45,7 +45,7 @@
               <div class="form-group" ng-class="{ 'has-error' : (LoginForm.email.$invalid && !LoginForm.email.$pristine) || (LoginForm.email.$error.serverMessage && !LoginForm.email.$pristine) }">
                 <label for="inputEmail3" class="col-sm-2 control-label">E-Mail</label>
                 <div class="col-sm-10 text-left">
-                  <input name="email" ng-model="login_user.email" type="email" class="form-control input-large" id="inputEmail3" required>
+                  <input autofill name="email" ng-model="login_user.email" type="email" class="form-control input-large" id="inputEmail3" required>
                   <p ng-show="(LoginForm.email.$invalid || LoginForm.email.$error.required) && !LoginForm.email.$pristine" class="help-block">Bitte gib deine E-Mail-Adresse an.</p>
                   <p ng-show="LoginForm.email.$error.serverMessage" class="help-block">{{LoginForm.email.$error.serverMessage}}</p>
 
@@ -57,7 +57,7 @@
               <div class="form-group" ng-class="{ 'has-error' : LoginForm.password.$invalid && !LoginForm.password.$pristine }">
                 <label for="inputPassword3" class="col-sm-2 control-label">Passwort</label>
                 <div class="col-sm-10 text-left">
-                  <input name="password" ng-model="login_user.password" type="password" class="form-control" id="inputPassword3" ng-minlength="4" required>
+                  <input autofill name="password" ng-model="login_user.password" type="password" class="form-control" id="inputPassword3" ng-minlength="4" required autocomplete='off'>
                   <p ng-show="(LoginForm.password.$error.minlength || LoginForm.password.$error.required) && !LoginForm.password.$pristine" class="help-block">Bitte gibt dein Passwort ein.</p>
                 </div>
               </div>

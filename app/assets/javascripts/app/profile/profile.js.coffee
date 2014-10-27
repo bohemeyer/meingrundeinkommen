@@ -422,6 +422,8 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
           $scope.user.chances[$scope.user.chances.indexOf(chance)] = response.chance
           $scope.sanitizeChances()
           $scope.participation.participates = true
+          $scope.participation.double_chances = if ($scope.user.chances[0].crowdbarVerified || $scope.participation.crowdbar_test()) && !$scope.user.chances[0].ignoreDoubleChance then true else false
+          $scope.save_crowdbar_verified_to_db() if $scope.participation.crowdbar_test()
 
 
     $scope.removeChance = (chance) ->
@@ -488,11 +490,20 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
 
       modalInstance.result.then ->
         $scope.participation.has_crowdbar = $scope.participation.crowdbar_test()
+        $scope.save_crowdbar_verified_to_db() if $scope.participation.crowdbar_test()
       ,
       ->
         $scope.participation.has_crowdbar = $scope.participation.crowdbar_test()
-
+        $scope.save_crowdbar_verified_to_db() if $scope.participation.crowdbar_test()
       return
+
+    $scope.save_crowdbar_verified_to_db = () ->
+      $http.put("/users.json",
+        user:
+          id: user.id
+          has_crowdbar: true
+      ).then (r) ->
+        $scope.participation.double_chances = if !r.ignore_double_chance then true else false
 
 
     if $routeParams['crowdbar_install']

@@ -10,12 +10,12 @@ en:
     failure:
       already_authenticated: "Du bist bereits angemeldet."
       inactive: "Dein Account ist nicht aktiv."
-      invalid: "Ungültige Anmeldedaten."
+      invalid: "Ungültige Anmeldedaten. (Wenn dein Browser das Passwort vorausgefüllt hat, versuche es händisch einzugeben)"
       invalid_token: "Der Anmelde-Token ist ungültig."
       locked: "Dein Account ist gesperrt."
       not_found_in_database: "E-Mail-Adresse oder Passwort ungültig. Bist du überhaupt schon registriert?"
       timeout: "Deine Sitzung ist abgelaufen, bitte melde Dich erneut an."
-      unauthenticated: "Du musst Dich anmelden oder registrieren, bevor Du fortfahren kannst."
+      unauthenticated: "Du musst Dich anmelden oder registrieren, bevor Du fortfahren kannst. (Wenn dein Browser das Passwort vorausgefüllt hat, versuche es händisch einzugeben)"
       unconfirmed: "Du musst Deinen Account bestätigen, bevor Du fortfahren kannst. [[resend_link]]"
     mailer:
       confirmation_instructions:

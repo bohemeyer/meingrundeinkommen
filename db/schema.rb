@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141023174618) do
+ActiveRecord::Schema.define(version: 20141026121533) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -26,10 +26,34 @@ ActiveRecord::Schema.define(version: 20141023174618) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "code2"
+    t.boolean  "crowdbar_verified",     default: false
+    t.boolean  "ignore_double_chance",  default: false
   end
 
   add_index "chances", ["first_name", "last_name", "dob"], name: "index_chances_on_first_name_and_last_name_and_dob", unique: true
   add_index "chances", ["user_id"], name: "index_chances_on_user_id"
+
+  create_table "follows", force: true do |t|
+    t.string   "follower_type"
+    t.integer  "follower_id"
+    t.string   "followable_type"
+    t.integer  "followable_id"
+    t.datetime "created_at"
+  end
+
+  add_index "follows", ["followable_id", "followable_type"], name: "fk_followables"
+  add_index "follows", ["follower_id", "follower_type"], name: "fk_follows"
+
+  create_table "likes", force: true do |t|
+    t.string   "liker_type"
+    t.integer  "liker_id"
+    t.string   "likeable_type"
+    t.integer  "likeable_id"
+    t.datetime "created_at"
+  end
+
+  add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables"
+  add_index "likes", ["liker_id", "liker_type"], name: "fk_likes"
 
   create_table "questions", force: true do |t|
     t.string   "text"

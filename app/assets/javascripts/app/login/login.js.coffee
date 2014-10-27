@@ -1,5 +1,5 @@
 angular.module("login", [
-
+  "autofill-directive"
 ]).config [
   "$routeProvider"
   ($routeProvider) ->
