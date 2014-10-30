@@ -1,3 +1,34 @@
 <div class="container">
-<div ng-include="'/assets/support.html'"></div>
+
+
+<div class="margin-top-70 text-center">
+
+	<i class="icon-heart huge"></i><br>
+
+ <h2>Hilf mit, das {{home.totallyFinancedIncomes + 1}}. Grundeinkommen zu finanzieren!</h2>
+
+  <div class="progress" style="font-size: 15px;font-weight: 600;line-height: 40px;">
+
+     <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
+        <span ng-hide="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
+     </div>
+        <span ng-show="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
+
+  </div>
+
+
+
+  <div class="margin-top-30">
+	  <div ng-include="'/assets/crowdbar_explain.html'" ></div>
+	</div>
+
+  <hr class="margin-top-30">
+
+  <div ng-show="support_now" ng-include="'/assets/support_crowdfund_form.html'"></div>
+
+	<a href="#" ng-hide="support_now" ng-click="support_now = true" class="btn btn-special btn-color btn-large" style="margin-top:20px;"><i class="icon-plus"></i> Ich will direkt mit Geld unterstützen!</a>
+
+</div>
+
+
 </div>
