@@ -37,6 +37,7 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
     isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
     $scope.browser.isFirefox = typeof InstallTrigger isnt "undefined" # Firefox 1.0+
     $scope.browser.isChrome = !!window.chrome and not isOpera # Chrome 1+
+    $scope.browser.isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0
 
     $scope.participation = {}
 
