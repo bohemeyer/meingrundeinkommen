@@ -17,19 +17,17 @@
   </tabset>
 
 <form ng-submit="askQuestion()" style="margin-top:-5px;margin-bottom:10px;">
-	<div style="text-align: center; font-weight:bold;font-size: 25px;background:white;color:black;border-radius: 5px;box-shadow:1p 1px 1px black;border:2px solid #ddd;">
+	<div style="text-align: center; font-weight:bold;font-size: 25px;background:white;color:black;border-radius: 5px;box-shadow:1p 1px 1px black;border:2px solid #ddd;" class="text-center">
 
 
 
-    <div class="form-group pull-left">
-      <div class="input-group">
-        <div class="input-group-addon"><i class="icon-search"></i></div>
-        <input type="text" ng-model="question.$" style="height:50px;padding-left:10px;padding-right:10px;" font-size="25"
+
+        <input type="text" ng-model="question.$" style="height:50px;padding-left:10px;padding-right:10px;margin:20px;width:70%" font-size="25"
        placeholder="Stell hier deine Frage" maxlength="250">
-      </div>
-    </div>
 
-    <a class="btn-large btn-color" href="#"><i class="icon-question"></i> Diese Frage jetzt stellen!</a>
+    <br>
+
+    <a class="btn-large btn-color" href="#">Diese Frage jetzt stellen!</a>
 
   	<i ng-show="loading" class="icon-spin icon-refresh"></i>
 
@@ -39,12 +37,18 @@
 
     <h3 class="title">&nbsp;</h3>
 
-  <accordion close-others="true">
+  <accordion close-others="true" class="listbox">
     <accordion-group ng-repeat="question in questions | orderBy:'-votes' | search:question.$ | filter:{category:current_tab}">
         <accordion-heading>
-            {{question.text}} ({{question.votes}}) <a href="#" ng-click="up(question)" class="btn-small btn-grey"><i class="icon-plus-round"></i>Will ich wissen</a>
+          <div style="margin: 0px 20px;padding-bottom:15px;border-bottom: 1px solid #ddd;">
+            <a href="#" ng-click="up(question)" class="btn-small btn-grey pull-right"><i class="icon-plus-round"></i>Will ich wissen</a>
+            {{question.text}}<br><small>{{question.votes}} Leute fragen das</small>
+          </div>
         </accordion-heading>
-        {{question.answer}}
+        <div style="margin-left:20px;margin-top:0px;padding: 50px;padding-top:0px;border-bottom: 2px solid #666;font-size:13px;font-weight:normal;">
+          {{question.answer}}
+          <span ng-if="!question.answer">Bisher wurde diese Frage noch nicht beantwortet. Aber deine Wunsch nach Beantwortung wurde gespeichert und ich beeile mich so schnell wie Möglich zu antworten.</span>
+        </div>
     </accordion-group>
   </accordion>
 
