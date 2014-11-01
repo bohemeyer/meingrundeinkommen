@@ -24,6 +24,7 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
   ($scope, Question, $cookieStore, $sce) ->
 
     $scope.current_tab = 'projekt'
+    $scope.categories = ['projekt','grundeinkommen','crowdfunding','crowdbar','community','verlosung','person']
     $scope.question = {}
 
     Question.query().then (questions) ->

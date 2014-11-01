@@ -54,6 +54,8 @@
 
           <div ng-if="security.currentUser && security.currentUser.id == 1">
 
+            <select ng-model="question.category" ng-options="o as o for o in categories" ng-change="answer(question)"></select>
+
             <a href="#" ng-click="answer(question)" class="btn-small btn-grey pull-right"><i class="icon-pencil"></i> Beantworten</a>
 
             <textarea ng-model="question.answer" style="min-width:100%;min-height:300px;"></texarea>
