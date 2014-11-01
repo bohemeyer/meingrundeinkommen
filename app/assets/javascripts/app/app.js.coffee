@@ -1,4 +1,4 @@
-window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll','angulartics','angulartics.google.analytics','faq','draw','drawfrontend', 'Support'])
+window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll','angulartics','angulartics.google.analytics','faq','draw','drawfrontend', 'Support','djds4rce.angular-socialshare'])
 
 .config [
   "$routeProvider"
@@ -220,8 +220,10 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
 
 .run [
   "Security"
-  (Security) ->
+  "$FB"
+  (Security, $FB) ->
     Security.requestCurrentUser()
+    $FB.init('1410947652520230')
 ]
 
 

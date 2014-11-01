@@ -2,7 +2,7 @@
 /[if IE 8] <html class="ie ie8" ng-app="grundeinkommen">
 /[if IE 9] <html class="ie ie9" ng-app="grundeinkommen">
 / [if gt IE 9]><!
-%html{"ng-app" => "grundeinkommen"}
+%html{"ng-app" => "grundeinkommen", "xmlns:fb" => "http://ogp.me/ns/fb#"}
   / <![endif]
   %head
     %title Mein Grundeinkommen
@@ -12,8 +12,11 @@
     //%link{href: "http://fonts.googleapis.com/css?family=Oswald:400,300,700", rel: "stylesheet", type: "text/css"}/
     /%link{href: "http://fonts.googleapis.com/css?family=Lato:300,400,700", rel: "stylesheet", type: "text/css"}/
 
+    %meta{property: "og:image", content: "/assets/fbshare.png"}
+
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
+    = javascript_include_tag "http://platform.twitter.com/widgets.js"
     = csrf_meta_tags
     / Favicons
     %link{href: "assets/ico/favicon.ico", rel: "shortcut icon"}/
@@ -127,6 +130,23 @@
       / Header End
       / Content Start
       / %alert{:type=>'danger'}
+
+      .well{"ng-if" => "security.currentUser", :style => "margin-bottom:0;"}
+        .container
+          .col-md-6.text-left
+            %span{:style => "font-size:25px;"} Gönn' es deinen Freunden!
+            %br/
+            Teile "Mein Grundeinkommen" mit ihnen.
+          .col-md-6.text-right
+            %a.facebookShare{"data-shares" => "shares", "data-url" => "http://www.mein-grundeinkommen.de?a", :facebook => "", :style => "display:inline-block;"}
+
+            .btn.btn-small.btn-grey{:style => "padding-bottom: 2px;padding-right: 0;padding-top: 7px;"}
+
+              %a{"data-count" => "horizontal", "data-lang" => "en", "data-size" => "medium", "data-text" => "Ein Jahr lang Grundeinkommen ausprobieren", "data-url" => "http://www.mein-grundeinkommen.de", "data-via" => "meinbge", :twitter => ""}
+
+            %a.btn.btn-small.btn-grey{:href => "mailto:?subject=Ein%20Jahr%20Grundeinkommen%20bekommen&body=Hallo%2C%0A%0Aich%20mache%20bei%20%22Mein%20Grundeinkommen%22%20mit%2C%20die%20wollen%20ausprobieren%2C%20wie%20sich%20ein%20Bedingungsloses%20Grundeinkommen%20auf%20die%20Menschen%20auswirkt%20und%20haben%20daf%C3%BCr%20Geld%20gesammelt.%20Bald%20wird%20das%20n%C3%A4chste%20Grundeinkommen%20f%C3%BCr%20ein%20Jahr%20verlost%20und%20alle%20k%C3%B6nnen%20sich%20kostenlos%20daf%C3%BCr%20anmelden.%20Ist%20das%20was%20f%C3%BCr%20dich%3F%0A%0Awww.mein-grundeinkommen.de"}
+              %i.icon-envelope
+              per E-Mail
 
       #main.flip{"ng-view" => "", :autoscroll=>"true"}
       / Content End
