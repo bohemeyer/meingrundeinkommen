@@ -8,11 +8,19 @@ class Api::QuestionsController < ApplicationController
     render json: question if question.save
   end
 
+  def destroy
+    Question.find(params[:id]).destroy
+    render json: true
+  end
 
   def update
     q = Question.find(params[:id])
-    q.update_attributes(:votes => q.votes + 1) if params[:up]
-    #q.update_attributes(:votes => q.votes - 1) if params[:down]
+    if params[:up]
+      q.update_attributes(:votes => q.votes + 1)
+    end
+    if current_user.id == 1
+      q.update_attributes(params.permit(:text,:category,:answer))
+    end
     render json: q
   end
 

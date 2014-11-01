@@ -10,22 +10,43 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
 
 ]
 
+.filter "unsafe", ($sce) ->
+  (val) ->
+    $sce.trustAsHtml val
+
+
 .controller "FAQController", [
   "$scope"
   "Question"
   "$cookieStore"
+  "$sce"
 
-  ($scope, Question, $cookieStore) ->
+  ($scope, Question, $cookieStore, $sce) ->
 
     $scope.current_tab = 'projekt'
     $scope.question = {}
 
+    Question.query().then (questions) ->
+      $scope.questions = questions
+
+    $scope.delete = (q) ->
+      new Question(
+        id: q.id
+      ).delete().then ->
+        $scope.questions.splice($scope.questions.indexOf(q), 1)
+
+    $scope.answer = (q) ->
+      new Question(
+        id: q.id
+        answer: q.answer
+        category: q.category
+      ).update().then (response) ->
+        $scope.questions[$scope.questions.indexOf(q)] = response
+
+
     $scope.tab = (tab) ->
       $scope.current_tab = tab
       $scope.question.$ = ''
-
-    Question.query().then (questions) ->
-      $scope.questions = questions
 
     $scope.up = (q) ->
       if !$scope.has_been_voted_for(q.id)

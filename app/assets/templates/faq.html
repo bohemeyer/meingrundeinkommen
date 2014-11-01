@@ -2,7 +2,7 @@
 
   <h1 class="text-center">Du fragst - Micha antwortet</h1>
 
-  <h3 class="text-center">Wählen einen Themenbereich und tipp deine Frage ins Textfeld. Entweder du findest eine vorhandene Frage oder </h3>
+  <h3 class="text-center">Wählen einen Themenbereich und tipp deine Frage ins Textfeld. Entweder du findest eine vorhandene Frage oder du stellste eine neue:</h3>
 
 
   <tabset>
@@ -42,11 +42,25 @@
         <accordion-heading>
           <div style="margin: 0px 20px;padding-bottom:15px;border-bottom: 1px solid #ddd;">
             <a href="#" ng-click="up(question)" class="btn-small btn-grey pull-right"><i class="icon-plus-round"></i>Will ich wissen</a>
+
+            <a ng-if="security.currentUser && security.currentUser.id == 1" href="#" ng-click="delete(question)" class="btn-small btn-grey pull-right"><i class="icon-trash"></i>Löschen</a>
+
             {{question.text}}<br><small>{{question.votes}} Leute fragen das</small>
           </div>
         </accordion-heading>
         <div style="margin-left:20px;margin-top:0px;padding: 50px;padding-top:0px;border-bottom: 2px solid #666;font-size:13px;font-weight:normal;">
-          {{question.answer}}
+
+          <div ng-bind-html="question.answer | unsafe"></div>
+
+          <div ng-if="security.currentUser && security.currentUser.id == 1">
+
+            <a href="#" ng-click="answer(question)" class="btn-small btn-grey pull-right"><i class="icon-pencil"></i> Beantworten</a>
+
+            <textarea ng-model="question.answer" style="min-width:100%;min-height:300px;"></texarea>
+
+
+          </div>
+
           <span ng-if="!question.answer">Bisher wurde diese Frage noch nicht beantwortet. Aber deine Wunsch nach Beantwortung wurde gespeichert und ich beeile mich so schnell wie Möglich zu antworten.</span>
         </div>
     </accordion-group>
