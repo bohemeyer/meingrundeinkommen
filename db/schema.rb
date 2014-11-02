@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141026121533) do
+ActiveRecord::Schema.define(version: 20141102031226) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -148,6 +148,9 @@ ActiveRecord::Schema.define(version: 20141026121533) do
     t.boolean  "datenschutz",            default: false
     t.boolean  "newsletter",             default: false
     t.boolean  "has_crowdbar",           default: false
+    t.string   "browser"
+    t.string   "os"
+    t.boolean  "crowdbar_not_found",     default: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

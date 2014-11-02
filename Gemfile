@@ -34,6 +34,7 @@ gem 'sunspot_solr'
 gem 'turbolinks'
 gem 'uglifier', '>= 1.3.0'
 gem 'strip_attributes'
+gem 'browser'
 
 # production
 gem 'lograge'

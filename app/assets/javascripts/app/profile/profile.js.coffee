@@ -489,19 +489,31 @@ angular.module("profile", ["User","Wish","Chance","State","angularFileUpload",'n
       )
 
       modalInstance.result.then ->
-        $scope.participation.has_crowdbar = $scope.participation.crowdbar_test()
-        $scope.save_crowdbar_verified_to_db() if $scope.participation.crowdbar_test()
+        r = $scope.participation.crowdbar_test()
+        $scope.participation.has_crowdbar = r
+        $scope.save_crowdbar_verified_to_db() if r
+        $scope.save_crowdbar_problem_to_db() if !r
       ,
       ->
-        $scope.participation.has_crowdbar = $scope.participation.crowdbar_test()
-        $scope.save_crowdbar_verified_to_db() if $scope.participation.crowdbar_test()
+        r = $scope.participation.crowdbar_test()
+        $scope.participation.has_crowdbar = r
+        $scope.save_crowdbar_verified_to_db() if r
+        $scope.save_crowdbar_problem_to_db() if !r
       return
+
+    $scope.save_crowdbar_problem_to_db = () ->
+      $http.put("/users.json",
+        user:
+          id: user.id
+          crowdbar_not_found: true
+      )
 
     $scope.save_crowdbar_verified_to_db = () ->
       $http.put("/users.json",
         user:
           id: user.id
           has_crowdbar: true
+          crowdbar_not_found: false
       ).then (r) ->
         $scope.participation.double_chances = if !r.ignore_double_chance then true else false
 
