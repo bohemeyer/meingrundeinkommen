@@ -48,6 +48,8 @@ class Api::HomepagesController < ApplicationController
 
     total_amount = crowdfunding_amount + own_funding_paypal + own_funding + crowdbar_amount
 
+    crowdbar_users = User.where(:has_crowdbar => true).count
+
     #Prognose:
     last_synced_day = Support.where(:payment_completed => true, :payment_method => 'crowdbar').order(created_at: :desc).limit(1).first
     prediction = {}
@@ -71,6 +73,7 @@ class Api::HomepagesController < ApplicationController
       :percentage_raw => (total_amount % 12000) / 120,
       #:days_left => days_left,
       :supporter => number_with_precision(supporter, precision: 0, delimiter: '.'),
+      :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.'),
       :amount_internal => amount_internal,
       :prediction => prediction,
       :supports => Support.where(:comment => true, :payment_completed => false).order(:created_at => :desc).limit(12)

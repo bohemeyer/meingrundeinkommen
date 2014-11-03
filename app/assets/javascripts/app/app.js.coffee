@@ -252,6 +252,7 @@ angular.module("grundeinkommen").controller "SupportBankCtrl", ($scope, $modalIn
 angular.module("grundeinkommen").controller "CrowdbarModalCtrl", ($scope, $modalInstance, items, browser, $location, $timeout, $interval) ->
 
   $scope.daily_comm = Math.round(items.prediction.avgDailyCommissionCrowdbar)
+  $scope.crowdbar_users = items.crowdbarUsers
   $scope.browser = browser
 
   console.log $scope.participation

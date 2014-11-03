@@ -11,6 +11,7 @@ angular.module("content", ['ng-breadcrumbs'])
         "$scope"
         ($scope) ->
           $scope.daily_comm = Math.round($scope.home.prediction.avgDailyCommissionCrowdbar)
+          $scope.crowdbar_users = $scope.home.crowdbarUsers
       ]
       templateUrl: "/assets/crowdbar.html"
       label: "Die CrowdBar"
@@ -26,6 +27,7 @@ angular.module("content", ['ng-breadcrumbs'])
         "$scope"
         ($scope) ->
           $scope.daily_comm = Math.round($scope.home.prediction.avgDailyCommissionCrowdbar)
+          $scope.crowdbar_users = $scope.home.crowdbarUsers
       ]
       templateUrl: "/assets/support.html"
       label: "Unterstützen"
