@@ -25,9 +25,11 @@ class Api::HomepagesController < ApplicationController
     crowdfunding_supporter = 2901 + 140 + 18  #startnext + untracked paypal + kto
     crowdfunding_amount = 50630.52 + 3058.85 + 380.25 #startnext + untracked paypal + kto
 
-    own_supporter = Support.where(:payment_completed => true).count
+    own_supporter = Support.where(:payment_completed => true).where.not(:payment_method => :crowdbar).count
 
-    supporter = crowdfunding_supporter + own_supporter
+    crowdbar_users = User.where(:has_crowdbar => true).count
+
+    supporter = crowdfunding_supporter + own_supporter + crowdbar_users
 
     own_funding_paypal_q = Support.where("payment_completed IS NOT NULL AND payment_method LIKE ?","paypal%",)
 
@@ -47,8 +49,6 @@ class Api::HomepagesController < ApplicationController
       #crowdbar_amount = crowdbar_yesterday
 
     total_amount = crowdfunding_amount + own_funding_paypal + own_funding + crowdbar_amount
-
-    crowdbar_users = User.where(:has_crowdbar => true).count
 
     #Prognose:
     last_synced_day = Support.where(:payment_completed => true, :payment_method => 'crowdbar').order(created_at: :desc).limit(1).first
