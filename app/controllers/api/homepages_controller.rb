@@ -74,6 +74,7 @@ class Api::HomepagesController < ApplicationController
       #:days_left => days_left,
       :supporter => number_with_precision(supporter, precision: 0, delimiter: '.'),
       :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.'),
+      :crowdbar_amount => crowdbar_amount,
       :amount_internal => amount_internal,
       :prediction => prediction,
       :supports => Support.where(:comment => true, :payment_completed => false).order(:created_at => :desc).limit(12)
