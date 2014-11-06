@@ -39,8 +39,13 @@ angular.module("home", ["Wish","Support"])
 
   $scope.pagination = []
 
-  $http.get("https://api.startnext.de/v1.1/projects/15645/updates/?limit=3&client_id=82142814552425").success (data, status, headers, config) ->
-    $scope.news = data.projectupdates
+  $http.get("https://api.startnext.de/v1.1/projects/15645/updates/?limit=5&client_id=82142814552425").success (data, status, headers, config) ->
+    $scope.news = []
+    i = 0
+    angular.forEach data.projectupdates, (p) ->
+      if !p.supporter_only
+        i = i + 1
+        $scope.news.push p if i < 4
 
   Wish.query().then (wishes) ->
     $scope.wishes = wishes
