@@ -18,8 +18,11 @@ class Api::SupportsController < ApplicationController
 
   def update
     s = Support.find(params[:id])
-    s.update_attributes(:comment => params[:comment], :nickname => params[:nickname])
-    s.update_attributes(:payment_completed => params[:payment_completed]) if current_user && current_user.id == 1 and params[:admin]
+    if current_user && current_user.id == 1 and params[:admin]
+      s.update_attributes(:payment_completed => params[:payment_completed])
+    else
+      s.update_attributes(:comment => params[:comment], :nickname => params[:nickname])
+    end
     render json: s
   end
 
