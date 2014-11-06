@@ -160,7 +160,7 @@ class Api::UsersController < ApplicationController
 
     if @user == current_user
       current_user.browser = "#{browser.name} #{browser.full_version}"
-      current_user.os = browser.platform
+      current_user.os = browser.platform.to_s
       current_user.os += ", mobile" if browser.mobile?
       current_user.os += ", tablet" if browser.tablet?
       current_user.save
