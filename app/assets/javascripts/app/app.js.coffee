@@ -1,4 +1,4 @@
-window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll','angulartics','angulartics.google.analytics','faq','draw','drawfrontend', 'Support','djds4rce.angular-socialshare'])
+window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Devise','sticky','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll','angulartics','angulartics.google.analytics','faq','draw','drawfrontend', 'Support','djds4rce.angular-socialshare','admin'])
 
 .config [
   "$routeProvider"

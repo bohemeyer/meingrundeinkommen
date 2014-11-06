@@ -1,5 +1,5 @@
 class SupportSerializer < ActiveModel::Serializer
-  attributes :id, :nickname, :comment, :amount_total, :avatar
+  attributes :id, :nickname, :comment, :amount_total, :avatar, :payment_completed
 
   def avatar
   	u = User.find_by_email(object.email)

@@ -1,0 +1,32 @@
+<div class="container margin-top-30">
+<div ng-if="security.currentUser && security.currentUser.id == 1">
+	<h1>Bank-Supports</h1>
+
+	<div class="well text-center">
+		<i class="icon-search big"></i> <input type="text" class="big" ng-model="search">
+	</div>
+
+	<table class="table">
+		<tr>
+			<td>ID</td>
+			<td>Name</td>
+			<td>Amount Total</td>
+			<td>Comment</td>
+			<td>Completed?</td>
+		</tr>
+
+		<tr ng-repeat="support in supports | filter:search">
+			<td>{{support.id}}</td>
+			<td>{{support.nickname}}</td>
+			<td>{{support.amountTotal}}</td>
+			<td><!-- <div ng-if="support.avatar" class="testimonial-image pull-left">
+                    <img src="{{support.avatar.avatar.thumb.url}}">
+                </div>  --><textarea ng-model="support.comment"></textarea></td>
+			<td>
+				<a href="#" ng-if="!support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-grey">Bestätigen</a>
+				<a href="#" ng-if="support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-color"><i class="icon-check"></i></a>
+			</td>
+		</tr>
+	</table>
+</div>
+</div>

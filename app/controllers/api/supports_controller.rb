@@ -17,12 +17,18 @@ class Api::SupportsController < ApplicationController
   end
 
   def update
-    Support.find(params[:id]).update_attributes(:comment => params[:comment], :nickname => params[:nickname])
-    render json: 'success'
+    s = Support.find(params[:id])
+    s.update_attributes(:comment => params[:comment], :nickname => params[:nickname])
+    s.update_attributes(:payment_completed => params[:payment_completed]) if current_user && current_user.id == 1 and params[:admin]
+    render json: s
   end
 
   def index
-    render json: Support.where('comment is not null and payment_completed is not null').limit(30).order(:updated_at => :desc)
+    if current_user.id == 1 and params[:admin]
+      render json: Support.where(:payment_method => :bank).order(:id => :desc)
+    else
+      render json: Support.where('comment is not null and payment_completed is not null').limit(30).order(:updated_at => :desc)
+    end
   end
 
   def show
