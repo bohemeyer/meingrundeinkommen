@@ -27,7 +27,7 @@ class Api::SupportsController < ApplicationController
   end
 
   def index
-    if current_user.id == 1 and params[:admin]
+    if current_user && current_user.id == 1 and params[:admin]
       render json: Support.where(:payment_method => :bank).order(:id => :desc)
     else
       render json: Support.where('comment is not null and payment_completed is not null').limit(30).order(:updated_at => :desc)
