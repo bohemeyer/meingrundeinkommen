@@ -63,6 +63,9 @@ class Api::HomepagesController < ApplicationController
 
     amount_internal = Support.where(:payment_completed => true).sum(:amount_internal)
 
+    number_of_participants = Chance.count()
+
+
     homepage_data = {
       :number_of_users => number_with_precision(User.count, precision: 0, delimiter: '.'),
       :number_of_wishes => number_with_precision(UserWish.count, precision: 0, delimiter: '.'),
@@ -77,6 +80,7 @@ class Api::HomepagesController < ApplicationController
       :crowdbar_amount => crowdbar_amount,
       :amount_internal => amount_internal,
       :prediction => prediction,
+      :number_of_participants => number_with_precision(number_of_participants, precision: 0, delimiter: '.'),
       :supports => Support.where(:comment => true, :payment_completed => false).order(:created_at => :desc).limit(12)
     }
     render json: homepage_data
