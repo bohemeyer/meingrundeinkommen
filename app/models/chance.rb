@@ -22,6 +22,12 @@ class Chance < ActiveRecord::Base
 	end
 
 	def validate_birthday
+
+	  if !self.dob
+	    errors.add(:dob, "Bitte gib bei Tag, Monat und Jahr nur Ziffern, keine Buchstaben, ein.")
+	  	return false
+	  end
+
 	  if self.is_child && self.dob < DateTime.new(2014,11,15) - 18.years
 	      errors.add(:dob, "Du kannst nur für dein Kind teilnehmen, wenn es am Tag des Gewinnspielendes das 18. Lebensjahr noch nicht vollendet hat. Dein Kind ist alt genug und kann eigenständig (mit einem eigenen Profil) am Gewinnspiel teilnehmen.")
 	      return false
