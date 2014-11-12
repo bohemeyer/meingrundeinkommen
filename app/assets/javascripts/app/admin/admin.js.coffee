@@ -80,7 +80,7 @@ angular.module("admin", ["Support", "Registration"])
           Das Passwort lautet:
           #{response.pw}
 
-          Du kannst dieses Passwort in deinen Profileinstellungen jederzeit ändern.
+          Du kannst das Passwort wieder ändern indem du dich ausloggst, und auf meinbge.de/login?email=#{user.email} auf <Passwort vergessen> klickst. Du erhältst dann eine Mail mit der du dein Passwort ändern kannst.
 
           Liebe Grüße,
 
