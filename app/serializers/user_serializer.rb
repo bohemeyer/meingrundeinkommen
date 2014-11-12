@@ -1,16 +1,24 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar
+  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar, :confirmed_at
 
   def email
-    if object == current_user
+    if (current_user && object == current_user) || (current_user && current_user.id == 1)
       object.email
     else
       ''
     end
   end
 
+  def confirmed_at
+    if (current_user && object == current_user) || (current_user && current_user.id == 1)
+      object.confirmed_at
+    else
+      ''
+    end
+  end
+
   def has_crowdbar
-    if object == current_user
+    if (current_user && object == current_user) || (current_user && current_user.id == 1)
       object.has_crowdbar
     else
       ''
@@ -18,7 +26,7 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def chances
-    if object == current_user
+    if (current_user && object == current_user) || (current_user && current_user.id == 1)
       object.chances.order(:is_child => :asc)
     else
       r = []

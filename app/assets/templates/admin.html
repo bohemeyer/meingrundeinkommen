@@ -1,5 +1,37 @@
 <div class="container margin-top-30">
 <div ng-if="security.currentUser && security.currentUser.id == 1">
+
+
+	<h1>User</h1>
+
+	<div class="well text-center">
+		<i class="icon-search big"></i> <input type="text" class="big" ng-model="u.search" ng-change="search_for_user()">
+	</div>
+
+	<table class="table" ng-show="users.length > 0">
+		<tr>
+			<td>ID</td>
+			<td>Name</td>
+			<td>E-Mail</td>
+			<td>Verlosung</td>
+			<td>Confirmed</td>
+			<td>Reset Password</td>
+		</tr>
+
+		<tr ng-repeat="user in users">
+			<td>{{user.id}}</td>
+			<td>{{user.name}}</td>
+			<td>{{user.email}}</td>
+			<td>{{user.chances.length}}</td>
+			<td>{{user.confirmedAt}} <a href="#" ng-click="confirm(user)" class="btn btn-normal btn-color">Confirm</a></td>
+			<td>{{user.pw}}<a href="#" ng-click="reset_pw(user)" class="btn btn-normal btn-grey">Set Password</a></td>
+		</tr>
+	</table>
+
+
+
+	<h3 class="title"></h3>
+
 	<h1>Bank-Supports</h1>
 
 	<div class="well text-center">
