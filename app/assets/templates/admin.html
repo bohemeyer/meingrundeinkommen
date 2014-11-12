@@ -14,8 +14,10 @@
 			<td>Name</td>
 			<td>E-Mail</td>
 			<td>Verlosung</td>
+			<td>Crowdbar</td>
 			<td>Confirmed</td>
 			<td>Reset Password</td>
+			<td>Delete</td>
 		</tr>
 
 		<tr ng-repeat="user in users">
@@ -23,8 +25,10 @@
 			<td>{{user.name}}</td>
 			<td>{{user.email}}</td>
 			<td>{{user.chances.length}}</td>
+			<td>{{user.hasCrowdbar}}</td>
 			<td>{{user.confirmedAt}} <a href="#" ng-click="confirm(user)" class="btn btn-normal btn-color">Confirm</a></td>
 			<td>{{user.pw}}<a href="#" ng-click="reset_pw(user)" class="btn btn-normal btn-grey">Set Password</a></td>
+			<td><a href="#" ng-click="delete_user(user)" class="btn btn-normal btn-grey">Delete</a></td>
 		</tr>
 	</table>
 

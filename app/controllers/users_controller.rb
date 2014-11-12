@@ -20,4 +20,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy
+    if current_user && current_user.id == 1
+      User.find(params[:id]).destroy
+      render :nothing => true, :status => 200
+    end
+  end
+
 end

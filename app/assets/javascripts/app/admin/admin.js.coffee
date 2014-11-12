@@ -35,6 +35,17 @@ angular.module("admin", ["Support", "Registration"])
       ).then (users) ->
         $scope.users = users
 
+
+    $scope.delete_user = (user) ->
+      if confirm('wirklich?')
+        new Registration(
+          id: user.id
+          admin: true
+        ).delete()
+        .then () ->
+          $scope.users.splice($scope.users.indexOf(user), 1)
+
+
     $scope.confirm = (user) ->
       if confirm('wirklich?')
         new Registration(
