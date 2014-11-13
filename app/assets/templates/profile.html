@@ -154,11 +154,16 @@
               <h2 class="margin-top-20"><span class="infolink" ng-click="crowdbar_info()">CrowdBar</span> installieren & Gewinnchance verdoppeln</h2>
               <p>Die CrowdBar ist eine kostenlose Erweiterung für deinen Browser.</p>
              <div class="margin-top-30">
-             <a ng-if="browser.isChrome || browser.isFirefox" class="btn-color btn-large" ng-click="crowdbar_install()">Jetzt installieren</a>
+
+             <a ng-if="browser.isChrome" class="btn-color btn-large" ng-click="crowdbar_install('https://chrome.google.com/webstore/detail/crowdbar/lhinknkceoifkecnmmlgnelmdipmbcdn')">Jetzt installieren</a>
+             <a ng-if="browser.isFirefox" class="btn-color btn-large" ng-click="crowdbar_install('https://addons.mozilla.org/de/firefox/addon/mein-grundeinkommen-crowdbar/')">Jetzt installieren</a>
+             <a ng-if="browser.isSafari" class="btn-color btn-large" ng-click="crowdbar_install('http://bar.mein-grundeinkommen.de/extension/crowd_bar/crowd_bar.safariextz')">Jetzt herunterladen</a>
+
+
              <a class="btn-grey btn-large" ng-click="crowdbar_info()" style="margin-top:-8px">So funktioniert's</a>
              </div>
              <br>
-             <small><a href="#"  ng-if="browser.isChrome || browser.isFirefox" ng-click="open_crowdbar_test_modal()">Ich hab die CrowdBar schon installiert.</a></small>
+             <small><a href="#"  ng-if="browser.isChrome || browser.isFirefox || browser.isSafari" ng-click="open_crowdbar_test_modal()">Ich hab die CrowdBar schon installiert.</a></small>
             </div>
 
             <div ng-if="participation.has_crowdbar">

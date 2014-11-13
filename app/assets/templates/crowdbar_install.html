@@ -5,9 +5,14 @@
    <div class="col-md-9 text-left-lg">
       <h2 style="margin-bottom:10px;">1. CrowdBar installieren</h2>
       <p>Die CrowdBar ist eine Erweiterung für deinen Browser.</p>
-      <div ng-show="browser.isChrome || browser.isFirefox || browser.isSafari">
-         <a href="http://www.crowdbar.org" target="_blank" analytics-on="click" analytics-event="CrowdBar installiert" class="btn-normal btn-color"><i class="icon-magic"></i> Jetzt installieren</a>
-      </div>
+
+      <a ng-show="browser.isChrome" href="https://chrome.google.com/webstore/detail/crowdbar/lhinknkceoifkecnmmlgnelmdipmbcdn" target="_blank" class="btn-normal btn-color"><i class="icon-magic"></i> Jetzt installieren</a>
+
+      <a ng-show="browser.isFirefox"  href="https://addons.mozilla.org/de/firefox/addon/mein-grundeinkommen-crowdbar/" target="_blank" class="btn-normal btn-color"><i class="icon-magic"></i> Jetzt installieren</a>
+
+      <a ng-show="browser.isSafari" href="http://bar.mein-grundeinkommen.de/extension/crowd_bar/crowd_bar.safariextz" target="_blank" class="btn-normal btn-color"><i class="icon-magic"></i> Jetzt herunterladen</a>
+
+
       <alert ng-show="!browser.isChrome && !browser.isFirefox && !browser.isSafari">Nur für Firefox-, Chrome- und Safari-Browser verfügbar.<br><br>
 <b><u>Aber</u></b> du kannst den Onlineshop deiner Wahl vor deinem Einkauf <a href="https://bar.mein-grundeinkommen.de/shops">in dieser Liste</a> auswählen und so auch beitragen.</alert>
    </div>

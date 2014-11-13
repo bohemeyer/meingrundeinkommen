@@ -34,10 +34,12 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
     $scope.breadcrumbs = breadcrumbs
 
     $scope.browser = {}
+    ua = navigator.userAgent.match(/chrome|firefox|safari|opera|msie|trident|iPad|iPhone|iPod/i)[0].toLowerCase()
     isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
     $scope.browser.isFirefox = typeof InstallTrigger isnt "undefined" # Firefox 1.0+
     $scope.browser.isChrome = !!window.chrome and not isOpera # Chrome 1+
-    $scope.browser.isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0
+    $scope.browser.isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 && !(ua == "iPad" || ua == "iPhone" || ua == "iPod")
+
 
     $scope.participation = {}
 
@@ -86,10 +88,10 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
       )
       return
 
-    $scope.crowdbar_install = () ->
+    $scope.crowdbar_install = (url) ->
       form = document.createElement("form");
       form.method = "GET";
-      form.action = "http://www.crowdbar.org";
+      form.action = url;
       form.target = "_blank"
       document.body.appendChild(form)
       form.submit()
@@ -269,7 +271,7 @@ angular.module("grundeinkommen").controller "CrowdbarModalCtrl", ($scope, $modal
         $scope.crowdbar_found = $scope.has_crowdbar()
         $interval.cancel(progress)
       else
-        $scope.progress += 2
+        $scope.progress += 5
       return
     , 100)
 
