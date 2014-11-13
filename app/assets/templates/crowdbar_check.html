@@ -33,7 +33,17 @@
   	<div ng-if="crowdbar_not_found">
 
   		<h1>CrowdBar nicht gefunden.</h1>
-      <h3><b><u>Was meistens hilft:</u></b></h3>
+
+
+      <a ng-if="browser.isChrome" href="https://www.youtube.com/watch?v=TkVIGt90aPM" class="btn-normal btn-color" target="_blank"><i class="icon-youtube-play"></i> Hilfe-Video angucken</a>
+
+      <a ng-if="browser.isFirefox" href="https://www.youtube.com/watch?v=7QvXzZaVULA" class="btn-normal btn-color" target="_blank"><i class="icon-youtube-play"></i> Hilfe-Video angucken</a>
+
+      <a ng-if="browser.isSafari" href="https://www.youtube.com/watch?v=EP-yDuysN18" class="btn-normal btn-color" target="_blank"><i class="icon-youtube-play"></i> Hilfe-Video angucken</a>
+
+
+
+      <h3 class="margin-top-20"><b><u>Was meistens hilft:</u></b></h3>
 
        <accordion close-others="true">
         <accordion-group heading="Browser-Chronik einschalten (So geht's)">

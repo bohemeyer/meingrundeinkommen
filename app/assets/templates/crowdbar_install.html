@@ -9,8 +9,14 @@
       <a ng-show="browser.isChrome" href="https://chrome.google.com/webstore/detail/crowdbar/lhinknkceoifkecnmmlgnelmdipmbcdn" target="_blank" class="btn-normal btn-color"><i class="icon-magic"></i> Jetzt installieren</a>
 
       <a ng-show="browser.isFirefox"  href="https://addons.mozilla.org/de/firefox/addon/mein-grundeinkommen-crowdbar/" target="_blank" class="btn-normal btn-color"><i class="icon-magic"></i> Jetzt installieren</a>
-
+      <br>
       <a ng-show="browser.isSafari" href="http://bar.mein-grundeinkommen.de/extension/crowd_bar/crowd_bar.safariextz" target="_blank" class="btn-normal btn-color"><i class="icon-magic"></i> Jetzt herunterladen</a>
+
+      <a ng-if="browser.isChrome" href="https://www.youtube.com/watch?v=TkVIGt90aPM" target="_blank"><i class="icon-youtube-play"></i> Hilfe-Video angucken</a>
+
+     <a ng-if="browser.isFirefox" href="https://www.youtube.com/watch?v=7QvXzZaVULA" target="_blank"><i class="icon-youtube-play"></i> Hilfe-Video angucken</a>
+
+     <a ng-if="browser.isSafari" href="https://www.youtube.com/watch?v=EP-yDuysN18" target="_blank"><i class="icon-youtube-play"></i> Hilfe-Video angucken</a>
 
 
       <alert ng-show="!browser.isChrome && !browser.isFirefox && !browser.isSafari">Nur für Firefox-, Chrome- und Safari-Browser verfügbar.<br><br>

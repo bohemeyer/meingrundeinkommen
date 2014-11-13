@@ -163,7 +163,15 @@
              <a class="btn-grey btn-large" ng-click="crowdbar_info()" style="margin-top:-8px">So funktioniert's</a>
              </div>
              <br>
-             <small><a href="#"  ng-if="browser.isChrome || browser.isFirefox || browser.isSafari" ng-click="open_crowdbar_test_modal()">Ich hab die CrowdBar schon installiert.</a></small>
+             <small><a href="#"  ng-if="browser.isChrome || browser.isFirefox || browser.isSafari" ng-click="open_crowdbar_test_modal()">Ich hab die CrowdBar schon installiert.</a>
+              <br>
+              <a ng-if="browser.isChrome" href="https://www.youtube.com/watch?v=TkVIGt90aPM" target="_blank"><i class="icon-youtube-play"></i> Hilfe-Video angucken</a>
+
+              <a ng-if="browser.isFirefox" href="https://www.youtube.com/watch?v=7QvXzZaVULA" target="_blank"><i class="icon-youtube-play"></i> Hilfe-Video angucken</a>
+
+              <a ng-if="browser.isSafari" href="https://www.youtube.com/watch?v=EP-yDuysN18" target="_blank"><i class="icon-youtube-play"></i> Hilfe-Video angucken</a>
+
+             </small>
             </div>
 
             <div ng-if="participation.has_crowdbar">
