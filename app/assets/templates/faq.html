@@ -4,7 +4,6 @@
 
   <h3 class="text-center">Wählen einen Themenbereich und tipp deine Frage ins Textfeld. Entweder du findest eine vorhandene Frage oder du stellste eine neue:</h3>
 
-
   <tabset>
     <tab heading="Das Projekt" select="tab('projekt')"></tab>
     <tab heading="Grundeinkommen" select="tab('grundeinkommen')"></tab>
@@ -16,7 +15,7 @@
     <!-- <tab heading="Sonstiges" select="tab(null)"></tab> -->
   </tabset>
 
-<form ng-submit="askQuestion()" style="margin-top:-5px;margin-bottom:10px;">
+<form style="margin-top:-5px;margin-bottom:10px;">
 	<div style="text-align: center; font-weight:bold;font-size: 25px;background:white;color:black;border-radius: 5px;box-shadow:1p 1px 1px black;border:2px solid #ddd;" class="text-center">
 
 
@@ -27,7 +26,7 @@
 
     <br>
 
-    <input type="submit" class="btn-large btn-color" value="Diese Frage jetzt stellen!">
+    <a href="#" class="btn-large btn-color" ng-click="askQuestion()" > Diese Frage jetzt stellen!</a>
 
   	<i ng-show="loading" class="icon-spin icon-refresh"></i>
 
