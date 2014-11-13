@@ -37,9 +37,8 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
     ua = navigator.userAgent.match(/chrome|firefox|safari|opera|msie|trident|iPad|iPhone|iPod/i)[0].toLowerCase()
     isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
     $scope.browser.isFirefox = typeof InstallTrigger isnt "undefined" # Firefox 1.0+
-    $scope.browser.isChrome = !!window.chrome and not isOpera # Chrome 1+
-    $scope.browser.isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 && !(ua == "iPad" || ua == "iPhone" || ua == "iPod")
-
+    $scope.browser.isChrome = !!window.chrome and not isOpera && !(ua == "ipad" || ua == "iphone" || ua == "ipod") # Chrome 1+
+    $scope.browser.isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 && !(ua == "ipad" || ua == "iphone" || ua == "ipod")
 
     $scope.participation = {}
 
