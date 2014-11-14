@@ -14,10 +14,19 @@ namespace :chances do
           chars.each do |c4|
             i = i + 1
             puts "#{i} - #{c1}#{c2}#{c3}#{c4}"
-            chance = Chance.where(:code => nil).sample
-            if chance
-              chance.code = "#{c1}#{c2}#{c3}#{c4}"
-              chance.save!
+
+            code_type = []
+            code_type << :code  if Chance.where(:code  => nil).count > 0
+            code_type << :code2 if Chance.where(:code2 => nil, :crowdbar_verified => true).count > 0
+
+            unless code_type.empty?
+              code_type = code_type.sample
+              chance = Chance.where(:code => nil).sample if code_type == :code
+              chance = Chance.where(:code2 => nil, :crowdbar_verified => true).sample if code_type == :code2
+              if chance
+                chance[code_type] = "#{c1}#{c2}#{c3}#{c4}"
+                chance.save!
+              end
             end
           end
         end
