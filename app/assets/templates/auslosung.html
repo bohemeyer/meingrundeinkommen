@@ -5,30 +5,17 @@
       <div class="container">
         <div class="col-md-12 text-center">
 
-        <a class="btn btn-grey btn-pad" ng-click="verlosung_erklaert()">So funktioniert die Auslosung</a>
 
-<h4 style="color:white">Die Auslosung in Berlin - heute hier im Livestream</h4>
-<h1 class="title_headline">Wer gewinnt die ersten 4 Grundeinkommen?</h1>
+<h4 style="color:white">Die Auslosung in <a style="color:white" class="infolink" href="https://www.facebook.com/events/376506499170475/?fref=ts">Berlin</a> - heute hier im Livestream</h4>
+<h1 class="title_headline">Wer gewinnt das 5. Grundeinkommen?</h1>
         </div>
 
-         <div class="row">
-            <div class="col-md-6">
+         <div class="row text-center" style="margin-bottom:50px;">
 
-
-               <a href="http://www.ustream.tv/channel/mein-grundeinkommen" class="btn btn-special btn-color btn-large">Zum Video-Livestream
-               </a>
-
-
-            </div>
-            <div class="col-md-6">
-
-
-                <iframe frameborder="0" src="/twitter.html" width="100%" height="600"></iframe>
-
-
-
-            </div>
-            <div class="clearfix"></div>
+               <a href="http://www.ustream.tv/channel/michel22" class="btn btn-special btn-color btn-large margin-top-30" style="box-shadow:0px 0px 30px 15px white">Zum Video-Livestream
+               </a><br>
+               <a class="btn btn-grey btn-pad" ng-click="verlosung_erklaert()">So funktioniert die Auslosung</a>
+           <div class="clearfix"></div>
          </div>
 
       </div>
@@ -38,28 +25,48 @@
 <!-- Slogan Start-->
 
 
-<div ng-hide="current_drawing.done || current_drawing_key > 3" class="slogan bottom-pad-small" style="padding-top:30px">
+<div class="slogan bottom-pad-small" style="padding-top:30px">
    <div class="container">
 
 
       <div class="row text-center">
 
-        <h1>Das {{current_drawing_key+1}}. Grundeinkommen geht an:</h1>
+        <h1>Das 5. Grundeinkommen geht an*:</h1>
 
         <div class="col-md-12  text-center">
 
-            <div>Losnummer:</div>
+          <div ng-if="current_drawing.user">
+            <div class="testimonial-image-medium">
+              <a href="/menschen/{{current_drawing.user.id}}">
+                <img src="{{current_drawing.user.avatar.url}}">
+              </a>
+            </div>
+            <a href="/menschen/{{current_drawing.user.id}}">{{current_drawing.user.name}}</a>
+          </div>
+            <br>
+            <div class="margin-top:30">Losnummer:</div>
+            <br>
             <alert ng-if="current_drawing.niete && current_drawing.number.length > 2">NIETE</alert>
             <br><div class="margin-top-30 row">
              <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets" class="well huge">{{diget.value}}<i ng-if="!diget.value" class="icon-refresh" style="color:#ccc"></i></span>
 
             </div>
             <br>
-            <h3 style="margin-bottom:0px;margin-top:10px;" ng-repeat="o in own_codes" class="margin-top-20"><span ng-if="!o.isChild">Deine </span>Losnummer<span ng-if="o.isChild"> deines Kindes</span>: {{o.code}}</h3>
+            <br>
+            <p>* alles ohne Gewähr</p>
+            <br>
+          <div class="row text-center">
+            <div class="col-md-6 col-md-offset-3">
+          <p><b>Hast du gewonnen?</b> Dann ruf am besten sofort auf der Verlosungsparty an, damit wir dich interviewen können. Per Telefon: 030 / 6483 5996
+            oder per Skype: mein.grundeinkommen</p>
+          </div>
+        </div>
+
+            <!-- <h3 style="margin-bottom:0px;margin-top:10px;" ng-repeat="o in own_codes" class="margin-top-20"><span ng-if="!o.isChild">Deine </span>Losnummer<span ng-if="o.isChild"> deines Kindes</span>: {{o.code}}</h3> -->
 
 
 
-            <div ng-show="current_drawing.potentials">
+            <!-- <div ng-show="current_drawing.potentials">
               <h2>Wer gewinnt?</h2>
               <div class="row">
                 <div class="col-md-2" ng-repeat="(key, p) in current_drawing.potentials">
@@ -73,7 +80,7 @@
                 </div>
               <div class="clearfix"></div>
             </div>
-            </div>
+            </div> -->
 
         </div>
 
@@ -83,33 +90,7 @@
 </div>
   </div>
 
-       <div class="row text-center margin-top-70">
 
-        <h1>Die Gewinner_innen *</h2>
-          <p>* alles ohne Gewähr</p>
-          <div class="row text-center">
-            <div class="col-md-6 col-md-offset-3">
-          <p><b>Hast du gewonnen?</b> Dann ruf am besten sofort auf der Verlosungsparty an, damit wir dich interviewen können. Per Telefon: 030 / 6483 5996
-            oder per Skype: mein.grundeinkommen</p>
-          </div>
-        </div>
-        <div ng-if="d.done" class="col-md-3" ng-repeat="d in drawings">
-
-          <div class="testimonial-image-medium">
-              <a href="/menschen/{{d.user.id}}">
-                <img src="{{d.user.avatar.url}}">
-              </a>
-            </div>
-            <a href="/menschen/{{d.user.id}}">{{d.user.name}}</a>
-            <div>
-            Losnummer:</div>
-            <div style="margin-top:35px;margin-bottom:35px">
-            <span style="margin-left:3px;font-size:15px" ng-repeat="diget in d.digets" class="well big">{{diget.value}}</span></div>
-
-        </div>
-
-
-      </div>
 
 
 <hr>
@@ -132,7 +113,7 @@
 
                </div>
 
-                  <a href="http://www.startnext.de/mein-grundeinkommen"  analytics-on="click" analytics-event="Link zu Startnext geklickt" class="btn btn-special btn-color btn-large margin-top-30"><i class="icon-heart"></i> Jetzt unterstützen!</a>
+                  <a href="/support"  analytics-on="click" analytics-event="Link zu Startnext geklickt" class="btn btn-special btn-color btn-large margin-top-30"><i class="icon-heart"></i> Jetzt unterstützen!</a>
 
                <h1 style="margin-bottom:0;" class="margin-top-70">...oder unterstützen <u>ohne zu bezahlen</u></h1> <p>Mit der CrowdBar fließt aus jedem deiner Online-Einkäufe Geld ins nächste Grundeinkommen.<br>
 Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>

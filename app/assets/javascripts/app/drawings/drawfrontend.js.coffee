@@ -38,7 +38,7 @@ angular.module("drawfrontend", ['ng-breadcrumbs'])
       timer.then (->
         console.log "Timer resolved!"
 
-        $http.get("/drawings.json").success((response) ->
+        $http.get("/currentdrawing.json").success((response) ->
           $scope.drawings = response
 
           current_drawing_key = 0

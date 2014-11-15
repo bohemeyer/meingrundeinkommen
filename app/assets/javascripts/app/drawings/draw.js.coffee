@@ -60,7 +60,7 @@ angular.module("draw", ["Drawing",'ng-breadcrumbs'])
 
 
     $scope.loadDrawings = ->
-      $http.get("/drawings.json").success((response) ->
+      $http.get("/currentdrawing.json").success((response) ->
         $scope.drawings = response
       )
 
