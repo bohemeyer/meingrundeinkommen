@@ -2,7 +2,7 @@ class Api::DrawingsController < ApplicationController
 require 'json'
 
   def create
-    #if current_user && current_user.id = 1
+    if current_user && current_user.id = 1
       characters = ['1','2','3','4','5','6','A','B']
       data = params[:d]
 
@@ -51,7 +51,7 @@ require 'json'
 
       render json: data
 
-    #end
+    end
 
   end
 
