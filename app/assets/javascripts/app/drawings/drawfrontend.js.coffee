@@ -42,9 +42,9 @@ angular.module("drawfrontend", ['ng-breadcrumbs'])
           $scope.drawings = response
 
           current_drawing_key = 0
-          angular.forEach $scope.drawings, (d) ->
-            if d.done
-              current_drawing_key = current_drawing_key + 1
+          #angular.forEach $scope.drawings, (d) ->
+          #  if d.done
+          #    current_drawing_key = current_drawing_key + 1
           $scope.current_drawing = $scope.drawings[current_drawing_key]
           $scope.current_drawing_key = current_drawing_key
 
