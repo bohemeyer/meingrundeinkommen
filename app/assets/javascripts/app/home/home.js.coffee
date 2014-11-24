@@ -1,4 +1,4 @@
-angular.module("home", ["Wish","Support"])
+angular.module("home", ["Wish","Support","Winner"])
 .config [
   "$routeProvider"
   ($routeProvider) ->
@@ -13,7 +13,7 @@ angular.module("home", ["Wish","Support"])
       label: "Was wäre wenn?"
 ]
 
-.controller "HomeViewController", ["$scope", "$rootScope", "Wish", "$modal", "$cookies", "$location", "Security", "$http", "$routeParams", "Support", ($scope, $rootScope, Wish, $modal, $cookies, $location, Security, $http, $routeParams, Support) ->
+.controller "HomeViewController", ["$scope", "$rootScope", "Wish", "$modal", "$cookies", "$location", "Security", "$http", "$routeParams", "Support", "Winner", ($scope, $rootScope, Wish, $modal, $cookies, $location, Security, $http, $routeParams, Support, Winner) ->
 
   if $routeParams.thanks_for_support
     Support.get($routeParams.thanks_for_support).then (support) ->
@@ -27,9 +27,8 @@ angular.module("home", ["Wish","Support"])
       )
       return
 
-  $http.get("/drawings.json").success((response) ->
-    $scope.drawings = response
-  )
+  Winner.query().then (winners) ->
+    $scope.winners = winners
 
   TDay = new Date("November, 15, 2014")
   CurrentDate = new Date()

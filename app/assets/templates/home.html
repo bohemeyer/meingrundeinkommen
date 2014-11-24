@@ -93,49 +93,10 @@
 </div>
 
 
-<div class="slogan bottom-pad-small" id="support" style="padding-bottom:50px;margin-bottom:0px;">
+<!-- <div class="slogan bottom-pad-small" id="support" style="padding-bottom:50px;margin-bottom:0px;">
 
-      <div class="container" id="olga">
-
-
-      <div class="row text-center">
-
-        <h1>Das 5. Grundeinkommen ging an an*:</h1>
-
-        <div class="col-md-12  text-center">
-
-          <div>
-            <div class="testimonial-image-medium">
-              <a href="/menschen/24228">
-                <img src="/assets/team/team-member.jpg">
-              </a>
-            </div>
-            <a href="/menschen/24228">Das 8-jährige Kind von Olga</a>
-          </div>
-            <br>
-            <div class="margin-top:30">mit der Losnummer:</div>
-            <br>
-            <br><div class="margin-top-30 row">
-            <span class="well huge " style="margin-left:10px;">4</span>
-            <span class="well huge " style="margin-left:10px;">4</span>
-            <span class="well huge " style="margin-left:10px;">5</span>
-            <span class="well huge " style="margin-left:10px;">5</span>
-            <span class="well huge " style="margin-left:10px;">2</span>
-
-
-            </div>
-            <br>
-            <br>
-            <p>* noch ohne Gewähr</p>
-            <br>
-
-        </div>
-
-      </div>
-
-   </div>
-
-</div>
+???????????????????????????????????
+</div> -->
 
   <div class="container">
       <div class="row margin-top-50" style="padding-top: 0px;">
@@ -385,22 +346,37 @@ möchte und ich hoffe, dass ich in einem Jahr möglichst viel schaffen werde.“
 <div class="row text-center margin-top-70">
 
         <h1 style="margin-bottom:10px;">Diese Menschen</h2>
-          <h3>haben die ersten <b>4</b> Grundeinkommen gewonnen:</h3>
+          <h3>haben die ersten <b>{{winners.length}}</b> Grundeinkommen gewonnen:</h3>
 
-        <div ng-if="d.done" class="col-md-3" ng-repeat="d in drawings">
+        <div class="col-md-4" ng-repeat="d in winners">
 
           <div class="testimonial-image-medium">
-              <a href="/menschen/{{d.user.id}}">
-                <img src="{{d.user.avatar.url}}">
+              <a href="/menschen/{{d.id}}">
+                <img src="{{d.avatar.url}}">
               </a>
             </div>
-            <a href="/menschen/{{d.user.id}}">{{d.user.name}}</a>
-            <!-- <div>
-            Losnummer:</div>
-            <div style="margin-top:35px;margin-bottom:35px">
-            <span style="margin-left:3px;font-size:15px" ng-repeat="diget in d.digets" class="well big">{{diget.value}}</span></div> -->
-
+            <a href="/menschen/{{d.id}}">{{d.name}}</a>
         </div>
+
+
+        <div class="col-md-4" ng-if="!security.currentUser">
+          <div class="testimonial-image-medium">
+              <a href="/login">
+                <img src="/assets/team/team-member.jpg">
+              </a>
+            </div>
+            <a href="/login">Du?</a>
+        </div>
+
+        <div class="col-md-4" ng-if="security.currentUser">
+          <div class="testimonial-image-medium">
+              <a href="/menschen/{{security.currentUser.id}}">
+                <img src="{{security.currentUser.avatar.avatar.url}}">
+              </a>
+            </div>
+            <a href="/menschen/{{security.currentUser.id}}?gewinnspiel">Und beim nächsten Mal Du?</a>
+        </div>
+
 
       </div>
       <div class="margin-top-70">

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     end
     resources :user_wishes
     resources :state_users
+    resources :winners
     resources :users do
       member do
         get :states
