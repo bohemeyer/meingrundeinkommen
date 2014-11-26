@@ -23,7 +23,7 @@ Rails.application.configure do
     :user_name => "admin@mein-grundeinkommen.de",
     :password  => "W_8cahHMZNbr66JjX_-zYw", # SMTP password is any valid API key
     :authentication => 'login', # Mandrill supports 'plain' or 'login'
-    :domain => 'mein-grundeinkommen.de', # your domain to identify your server when connecting
+    :domain => 'meinbge.de', # your domain to identify your server when connecting
   }
 
   # Full error reports are disabled and caching is turned on.
