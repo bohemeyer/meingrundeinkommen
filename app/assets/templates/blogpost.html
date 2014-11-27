@@ -4,13 +4,9 @@
  <div class="posts-block col-lg-9 col-md-9 col-sm-8 col-xs-12 bottom-pad">
 
   <article class="post hentry">
-     <div class="post-image">
-        <span class="img-hover" style="opacity: 0;"></span>
-        <span class="fullscreen" style="top: 65%; opacity: 0;"><i class="fa fa-search"></i></span>
-        <img alt="" src="{{post.featured_image.attachment_meta.sizes['large'].url}}">
-     </div>
+
      <header class="post-header">
-        <h3 class="content-title">{{post.title}}</h3>
+        <h1 class="content-title">{{post.title}}</h1>
         <div class="blog-entry-meta">
            <div class="blog-entry-meta-date">
               <i class="fa fa-clock-o"></i>
@@ -25,12 +21,19 @@
               <a href="#">Web Design</a>,
               <a href="#">Branding</a>
            </div> -->
-           <!-- <div class="blog-entry-meta-comments">
+           <div class="blog-entry-meta-comments">
               <i class="fa fa-comments"></i>
-              <a class="blog-entry-meta-comments" href="#">3 comments</a>
-           </div> -->
+              <a class="blog-entry-meta-comments" href="#" scroll-to ="comments">{{comments.length}} Kommentare</a>
+           </div>
         </div>
      </header>
+
+     <div class="post-image">
+        <span class="img-hover" style="opacity: 0;"></span>
+        <span class="fullscreen" style="top: 65%; opacity: 0;"><i class="fa fa-search"></i></span>
+        <img alt="" src="{{post.featured_image.attachment_meta.sizes['large'].url}}">
+     </div>
+
      <div class="post-content">
         <div class="post-content" ng-bind-html="post.content | unsafe">
        </div>
