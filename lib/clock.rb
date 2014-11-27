@@ -59,13 +59,15 @@ module Clockwork
 
       end
 
+    end
+
 
     if job == "cache.news"
 
       response = HTTParty.get('http://blog.meinbge.de/wp-json/posts')
 
       File.open("../public/news.json", "w+") do |f|
-        f.write(jresponse)
+        f.write(response)
       end
 
     end
