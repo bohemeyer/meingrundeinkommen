@@ -421,10 +421,14 @@ möchte und ich hoffe, dass ich in einem Jahr möglichst viel schaffen werde.“
                            <li ng-repeat="article in news">
 
                               <div class="col-lg-4">
-                                 <small><i class="icon-calendar"></i> {{article.created * 1000 | date:'dd.MM.yyyy'}}</small>
-                                 <h4><a href="https://www.startnext.de/mein-grundeinkommen/blog/?bid={{article.id}}">{{article.title}}</a></h4>
-                                 <p>{{article.text | limitTo : 150}}...</p>
-                                 <a href="https://www.startnext.de/mein-grundeinkommen/blog/?bid={{article.id}}">Weiter lesen <i class="icon-arrow-right"></i></a>
+                                <div class="post-image">
+                                  <a href="/blog/{{article.ID}}"><img src="{{article.featured_image.attachment_meta.sizes['post-thumbnail'].url}}" alt="">
+                                  </a>
+                                </div>
+                                 <small><i class="icon-calendar"></i> {{article.date | date:'dd.MM.yyyy'}}</small>
+                                 <h4><a href="/blog/{{article.ID}}">{{article.title}}</a></h4>
+                                 <div ng-bind-html="article.excerpt | unsafe"></div>
+                                 <a href="/blog/{{article.ID}}">Weiter lesen <i class="icon-arrow-right"></i></a>
                               </div>
                            </li>
 

@@ -1,0 +1,63 @@
+<div class="comment-wrapper">
+   <h3 class="title">Kommentare</h3>
+   <div class="clearfix"></div>
+   <div class="comments-sec">
+      <ol class="commentlist">
+
+         <li ng-repeat="comment in comments">
+            <div class="comment">
+               <div class="avatar">
+                  <a href="/menschen/{{comment.userId}}">
+                  <img ng-if="!comment.avatar" src="/assets/team/team-member.jpg" alt="">
+                  <img ng-if="comment.avatar" src="{{comment.avatar}}" alt="">
+               </a>
+               </div>
+               <div class="comment-des">
+                  <div class="arrow-comment">
+                  </div>
+                  <div class="comment-by">
+                     <strong><a href="/menschen/{{comment.userId}}">{{comment.name}}</a></strong><span class="date">{{comment.createdAt | date:'dd.MM.yyyy'}}</span><!-- <span class="reply"><a href="#"><i class="fa fa-reply"></i> Reply</a></span> -->
+                  </div>
+                  <p ng-if="!comment.blank">
+                     {{comment.text}}
+                  </p>
+                  <textarea ng-if="comment.blank" style="width:100%;min-height:70px;" ng-model="comment.text"></textarea>
+                     <br><br>
+                     <a href="#" ng-if="comment.blank" ng-click="add_comment()" class="btn-color btn">Abschicken</a>
+               </div>
+               <div class="clearfix">
+               </div>
+            </div>
+            <!-- <ol class="childlist">
+               <li>
+                  <div id="3" class="comment">
+                     <div class="avatar">
+                        <img src="/assets/team/team-member.jpg" alt="">
+                     </div>
+                     <div class="comment-des">
+                        <div class="arrow-comment">
+                        </div>
+                        <div class="comment-by">
+                           <strong>Admin</strong><span class="date">July 30, 2013</span><span class="reply"><a href="#"><i class="fa fa-reply"></i> Reply</a></span>
+                        </div>
+                        <p>
+                           Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                        </p>
+                     </div>
+                     <div class="clearfix">
+                     </div>
+                  </div>
+               </li>
+            </ol> -->
+            <div class="clearfix">
+            </div>
+         </li>
+
+      </ol>
+   </div>
+   <div class="clearfix">
+   </div>
+</div>
+<!-- Comments Section End -->
+<div class="divider"></div>
+<!-- Reply Section Start -->

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141124123713) do
+ActiveRecord::Schema.define(version: 20141126230307) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -32,6 +32,18 @@ ActiveRecord::Schema.define(version: 20141124123713) do
 
   add_index "chances", ["first_name", "last_name", "dob"], name: "index_chances_on_first_name_and_last_name_and_dob", unique: true
   add_index "chances", ["user_id"], name: "index_chances_on_user_id"
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.text     "text"
+    t.string   "static_name"
+    t.string   "static_avatar"
+    t.string   "name"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "follows", force: true do |t|
     t.string   "follower_type"

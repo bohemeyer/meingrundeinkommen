@@ -1,0 +1,29 @@
+<div class="row">
+       <div class="testimonials widget">
+          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+             <div class="testimonials-title">
+                <h3 class="title">Unterstützen</h3>
+             </div>
+
+             <div class="well text-center">
+             	<i class="icon-heart huge"></i><br>
+
+ <h3>Hilf mit, das {{home.totallyFinancedIncomes + 1}}. Grundeinkommen zu finanzieren!</h3>
+
+  <div class="progress" style="font-size: 15px;font-weight: 600;line-height: 40px;">
+
+     <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
+        <span ng-hide="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
+     </div>
+        <span ng-show="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
+
+  </div>
+
+
+<a href="/support" class="btn btn-color">Jetzt Unterstützen</a>
+
+             </div>
+
+
+       </div>
+    </div>
