@@ -9,9 +9,11 @@ angular.module("content", ['ng-breadcrumbs'])
     .when "/crowdbar",
       controller: [
         "$scope"
-        ($scope) ->
-          $scope.daily_comm = Math.round($scope.home.prediction.avgDailyCommissionCrowdbar)
-          $scope.crowdbar_users = $scope.home.crowdbarUsers
+        "Home"
+        ($scope, Home) ->
+          Home.query().then (home) ->
+            $scope.daily_comm = Math.round(home.prediction.avgDailyCommissionCrowdbar)
+            $scope.crowdbar_users = home.crowdbarUsers
       ]
       templateUrl: "/assets/crowdbar.html"
       label: "Die CrowdBar"
