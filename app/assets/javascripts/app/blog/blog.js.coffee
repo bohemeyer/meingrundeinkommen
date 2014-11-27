@@ -26,7 +26,7 @@ angular.module("blog", ['ng-breadcrumbs','Comment'])
     $scope.comments = []
     $scope.new_comment = ""
     query = {}
-    url = "http://blog.meinbge.de/wp-json/posts"
+    url = "//blog.meinbge.de/wp-json/posts"
     #url += "?" + serializeQuery(query)  if serializeQuery(query)
     $http.get(url).success (data) ->
       $scope.posts = data

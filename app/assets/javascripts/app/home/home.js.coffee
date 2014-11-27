@@ -38,7 +38,7 @@ angular.module("home", ["Wish","Support","Winner"])
 
   $scope.pagination = []
 
-  url = "http://blog.meinbge.de/wp-json/posts"
+  url = "//blog.meinbge.de/wp-json/posts"
   $http.get(url).success (data) ->
     $scope.news = []
     i = 0
