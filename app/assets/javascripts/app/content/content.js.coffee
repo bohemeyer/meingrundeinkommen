@@ -22,6 +22,8 @@ angular.module("content", ['ng-breadcrumbs'])
       controller: "CrowdBarInstallController"
     .when "/crowdfunding",
       redirectTo: "/support"
+    .when "/100",
+      redirectTo: "/blog/39"
     .when "/boost",
       redirectTo: "/support"
     .when "/support",
