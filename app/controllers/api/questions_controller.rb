@@ -18,7 +18,7 @@ class Api::QuestionsController < ApplicationController
     if params[:up]
       q.update_attributes(:votes => q.votes + 1)
     end
-    if current_user.id == 1
+    if current_user.admin?
       q.update_attributes(params.permit(:text,:category,:answer))
     end
     render json: q

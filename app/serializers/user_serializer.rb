@@ -1,8 +1,8 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar, :confirmed_at
+  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar, :confirmed_at, :admin
 
   def email
-    if (current_user && object == current_user) || (current_user && current_user.id == 1)
+    if (current_user && object == current_user) || (current_user && current_user.admin?)
       object.email
     else
       ''
@@ -10,7 +10,7 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def confirmed_at
-    if (current_user && object == current_user) || (current_user && current_user.id == 1)
+    if (current_user && object == current_user) || (current_user && current_user.admin?)
       object.confirmed_at
     else
       ''
@@ -18,7 +18,7 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def has_crowdbar
-    if (current_user && object == current_user) || (current_user && current_user.id == 1)
+    if (current_user && object == current_user) || (current_user && current_user.admin?)
       object.has_crowdbar
     else
       ''
@@ -26,7 +26,7 @@ class UserSerializer < ActiveModel::Serializer
   end
 
   def chances
-    if (current_user && object == current_user) || (current_user && current_user.id == 1)
+    if (current_user && object == current_user) || (current_user && current_user.admin?)
       object.chances.order(:is_child => :asc)
     else
       r = []
@@ -42,6 +42,14 @@ class UserSerializer < ActiveModel::Serializer
       object.newsletter
     else
       ''
+    end
+  end
+
+  def admin
+    if current_user && object == current_user && current_user.admin?
+      true
+    else
+      false
     end
   end
 

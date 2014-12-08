@@ -41,11 +41,11 @@
         <accordion-heading>
           <div style="margin: 0px 20px;padding-bottom:15px;border-bottom: 1px solid #ddd;">
 
-            <i class="big icon-star float-left" ng-if="security.currentUser && security.currentUser.id == 1 && !question.answer"></i>
+            <i class="big icon-star float-left" ng-if="security.currentUser && security.currentUser.admin && !question.answer"></i>
 
             <a href="#" ng-click="up(question)" class="btn-small btn-grey pull-right"><i class="icon-plus-round"></i>Will ich wissen</a>
 
-            <a ng-if="security.currentUser && security.currentUser.id == 1" href="#" ng-click="delete(question)" class="btn-small btn-grey pull-right"><i class="icon-trash"></i>Löschen</a>
+            <a ng-if="security.currentUser && security.currentUser.admin" href="#" ng-click="delete(question)" class="btn-small btn-grey pull-right"><i class="icon-trash"></i>Löschen</a>
 
             {{question.text}}<br><small>{{question.votes}} Leute fragen das</small>
           </div>
@@ -54,7 +54,7 @@
 
           <div ng-bind-html="question.answer | unsafe"></div>
 
-          <div ng-if="security.currentUser && security.currentUser.id == 1">
+          <div ng-if="security.currentUser && security.currentUser.admin">
 
             <select ng-model="question.category" ng-options="o as o for o in categories" ng-change="answer(question)"></select>
 

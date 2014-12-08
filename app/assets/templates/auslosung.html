@@ -46,9 +46,9 @@
             <br>
             <div class="margin-top:30">Losnummer:</div>
             <br>
-            <alert ng-if="(current_drwaing.done || (security.currentUser && security.currentUser.id == 1)) || current_drawing.niete && current_drawing.number.length > 2">NIETE</alert>
+            <alert ng-if="(current_drwaing.done || (security.currentUser && security.currentUser.admin)) || current_drawing.niete && current_drawing.number.length > 2">NIETE</alert>
             <br><div class="margin-top-30 row">
-             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets" class="well huge"><span ng-if="current_drawing.done || (security.currentUser && security.currentUser.id == 1)">{{diget.value}}</span><i ng-if="!diget.value || (!current_drawing.done && !(security.currentUser && security.currentUser.id == 1))" class="icon-refresh" style="color:#ccc"></i></span>
+             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets" class="well huge"><span ng-if="current_drawing.done || (security.currentUser && security.currentUser.admin)">{{diget.value}}</span><i ng-if="!diget.value || (!current_drawing.done && !(security.currentUser && security.currentUser.admin))" class="icon-refresh" style="color:#ccc"></i></span>
 
             </div>
             <br>

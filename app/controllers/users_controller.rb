@@ -2,13 +2,13 @@ class UsersController < ApplicationController
   respond_to :json
 
   def index
-    if params[:admin] && current_user && current_user.id == 1
+    if params[:admin] && current_user && current_user.admin?
       render json: User.where("email LIKE ? OR name LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%").limit(10)
     end
   end
 
   def update
-  	if params[:admin] && current_user && current_user.id == 1
+  	if params[:admin] && current_user && current_user.admin?
       @user = User.find(params[:id])
       @user.skip_confirmation! if params[:confirm_user]
       if params[:reset_pw]
@@ -21,7 +21,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if current_user && current_user.id == 1
+    if current_user && current_user.admin?
       User.find(params[:id]).destroy
       render :nothing => true, :status => 200
     end
