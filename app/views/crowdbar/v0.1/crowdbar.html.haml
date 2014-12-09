@@ -1,0 +1,71 @@
+#crwdbr
+  .container
+    .row
+      .col-xs-2.col-sm-2.col-md-1
+        #boostBar_logo
+          %a.refresh{:href => "https://www.mein-grundeinkommen.de/?cb_ref_shop_id=#{@shop_id}", :target=>"_blank"}
+
+      .col-md-2.hidden-sm.hidden-xs
+        %nav.menu
+          %ul.nav.navbar-nav.sf-menu
+            %li
+              %a.progress_container.text-center.refresh{:href => "https://www.mein-grundeinkommen.de/support?cb_ref_shop_id=#{@shop_id}", :target=>"_blank"}
+                3.256 von 12.000€
+                .progress
+                  .progress-bar{:style => "width: 89%;"}
+
+
+      .col-md-2.col-sm-3.hidden-xs
+        %div{:style => "margin-top: 3px;text-align: left;color: #fff;"}
+          .pull-left{:style => "font-size: 54px;margin-top: -18px;margin-right: 8px;color: #fff;padding-top: 4px;padding-left: 6px;padding-right: 5px;height: 65px;"}>
+            %b 3
+          Tage zur Verlosung
+          %br/
+          %a{:href=>"http://www.mein-grundeinkommen.de", :target=>"_blank", :style => "margin-top: 2px;padding: 0px;"} Teilnehmen
+
+          / .popover.bottom{:style=>'display:none'}
+          /   .arrow
+          /   %h3.popover-title Title
+          /   .popover-content
+          /     %p lala
+
+
+      .col-xs-9.col-sm-5.col-lg-4.text-center
+        %a.btn.pull-right.losing.btn-warning#crowdbar_support_button{:href => "https://bar.mein-grundeinkommen.de/referals/new?referal%5Bshop_id%5D=#{@shop_id}&tag=x#{@user ? "&mgeuid=#{@user.id}" : ''}"}
+          %b
+            Mit diesem Einkauf unterstützen
+        .handarrow.losing.pull-right.hidden-xs.hidden-sm
+
+        #boostBar_boosting.boosting{:style=>'display:none'}
+          #boostBar_checkmark
+            %div
+              ✔
+          Crowdbar aktiv!
+
+        / #placeholder_for_support_button
+
+      .hidden-xs.col-sm-1.col-lg-2
+        - if @user
+          %nav.menu.pull-right.personal
+            %ul.nav.navbar-nav.sf-menu
+              %li
+                %a.refresh.sf-with-ul.with_avatar.ng-binding{:href => "https://www.mein-grundeinkommen.de/menschen/#{@user.id}?cb_ref_shop_id=#{@shop_id}", :target=>"_blank"}
+                  .testimonial-image.pull-right
+                    %img{:src => "https://www.mein-grundeinkommen.de#{@user.avatar.thumb.url}", :target=>"_blank"}/
+                  %span.pull-left.visible-lg{:style=>"font-size:12px"}= @user.name[0..10]
+                %ul
+                  %li
+                    %a.refresh.sf-with-ul{:href => "https://www.mein-grundeinkommen.de/menschen/#{@user.id}?cb_ref_shop_id=#{@shop_id}", :target=>"_blank"} Profil anzeigen
+                  %li
+                    %a.refresh.sf-with-ul{:href => "https://www.mein-grundeinkommen.de/menschen/#{@user.id}?edit_profile=true&cb_ref_shop_id=#{@shop_id}", :target=>"_blank"}
+                      %i.icon-pencil
+                      Profil bearbeiten
+                  %li
+                    %a.refresh.sf-with-ul#crowdbarlogout{:href => "#"}
+                      %i.icon-power-off
+                      Abmelden
+        - else
+          %a.btn.btn-default.refresh{:href=>"https://www.mein-grundeinkommen.de/login",:target=>"_blank",:style=>"margin-top:7px"} Einloggen
+
+      .col-xs-1
+        %a#boostBar_close{:title => "Crowdbar schließen", :href => ""}

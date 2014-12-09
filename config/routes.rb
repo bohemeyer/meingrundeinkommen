@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   root 'websites#show'
 
   namespace :api, defaults: {format: :json} do
+    resource :crowdbar
     resources :registrations
     resources :chances
     resources :comments
