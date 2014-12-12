@@ -51,7 +51,7 @@ angular.module('djds4rce.angular-socialshare', [])
     },
     transclude: true,
     template: '<div class="btn btn-small btn-grey">' +
-      '<i class="icon-facebook"></i> &nbsp; Facebook' +
+      '<i class="fa fa-facebook"></i> &nbsp; Facebook' +
     '</div>' +
     '<div class="facebookCount">' +
       '<div class="pluginCountButton pluginCountNum">' +

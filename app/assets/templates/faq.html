@@ -28,7 +28,7 @@
 
     <a href="#" class="btn-large btn-color" ng-click="askQuestion()" > Diese Frage jetzt stellen!</a>
 
-  	<i ng-show="loading" class="icon-spin icon-refresh"></i>
+  	<i ng-show="loading" class="icon-spin fa fa-refresh"></i>
 
     <div class="clearfix"></div>
 
@@ -41,11 +41,11 @@
         <accordion-heading>
           <div style="margin: 0px 20px;padding-bottom:15px;border-bottom: 1px solid #ddd;">
 
-            <i class="big icon-star float-left" ng-if="security.currentUser && security.currentUser.admin && !question.answer"></i>
+            <i class="big fa fa-star float-left" ng-if="security.currentUser && security.currentUser.admin && !question.answer"></i>
 
-            <a href="#" ng-click="up(question)" class="btn-small btn-grey pull-right"><i class="icon-plus-round"></i>Will ich wissen</a>
+            <a href="#" ng-click="up(question)" class="btn-small btn-grey pull-right"><i class="fa fa-plus"></i> Will ich wissen</a>
 
-            <a ng-if="security.currentUser && security.currentUser.admin" href="#" ng-click="delete(question)" class="btn-small btn-grey pull-right"><i class="icon-trash"></i>Löschen</a>
+            <a ng-if="security.currentUser && security.currentUser.admin" href="#" ng-click="delete(question)" class="btn-small btn-grey pull-right"><i class="fa fa-trash"></i>Löschen</a>
 
             {{question.text}}<br><small>{{question.votes}} Leute fragen das</small>
           </div>
@@ -58,7 +58,7 @@
 
             <select ng-model="question.category" ng-options="o as o for o in categories" ng-change="answer(question)"></select>
 
-            <a href="#" ng-click="answer(question)" class="btn-small btn-grey pull-right"><i class="icon-pencil"></i> Beantworten</a>
+            <a href="#" ng-click="answer(question)" class="btn-small btn-grey pull-right"><i class="fa fa-pencil"></i> Beantworten</a>
 
             <textarea ng-model="question.answer" style="min-width:100%;min-height:300px;"></texarea>
 

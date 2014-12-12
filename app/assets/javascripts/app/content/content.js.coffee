@@ -16,7 +16,7 @@ angular.module("content", ['ng-breadcrumbs'])
             $scope.crowdbar_users = home.crowdbarUsers
       ]
       templateUrl: "/assets/crowdbar.html"
-      label: "Die CrowdBar"
+      label: "Die Crowdbar"
     .when "/crowdbar/install",
       templateUrl: "/assets/crowdbar.html"
       controller: "CrowdBarInstallController"
@@ -33,7 +33,7 @@ angular.module("content", ['ng-breadcrumbs'])
           $scope.daily_comm = Math.round($scope.home.prediction.avgDailyCommissionCrowdbar)
           $scope.crowdbar_users = $scope.home.crowdbarUsers
       ]
-      templateUrl: "/assets/support.html"
+      templateUrl: "/assets/crowdbar.html"
       label: "Unterstützen"
     .when "/info/impressum",
       templateUrl: "/assets/impressum.html"

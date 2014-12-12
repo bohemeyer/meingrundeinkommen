@@ -16,7 +16,7 @@
 
     = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
     = javascript_include_tag "application", "data-turbolinks-track" => true
-    = javascript_include_tag "//platform.twitter.com/widgets.js"
+    =# javascript_include_tag "//platform.twitter.com/widgets.js"
     = csrf_meta_tags
     / Favicons
     %link{href: "assets/ico/favicon.ico", rel: "shortcut icon"}/
@@ -77,7 +77,7 @@
             / Mobile Menu Start
             .mobile.navbar-header
               %a.navbar-toggle{ 'ng-click' => "toggleMenu = !toggleMenu", href: "#{}"}
-                %i.icon-reorder.icon-2x
+                %i.fa.fa-reorder.icon-2x
             / Mobile Menu End
             / Menu Start
             %nav.menu.navbar-collapse{"collapse" => "!toggleMenu"}
@@ -85,9 +85,9 @@
                 %li{id: "{{getStatus('/start')}}"}
                   %a{href: "/start"}
                     Start
-                %li{id: "{{getStatus('/community')}}"}
-                  %a{href: "/community"}
-                    Was wäre wenn?
+                / %li{id: "{{getStatus('/community')}}"}
+                /   %a{href: "/community"}
+                /     Was wäre wenn?
                 %li{id: "{{getStatus('/blog')}}"}
                   %a{href: "/blog"}
                     Blog
@@ -111,17 +111,17 @@
                       %img{'ng-src' => "{{security.currentUser.avatar.avatar.url}}"}
                     {{security.currentUser.name}}
                     %span.sf-sub-indicator
-                      %i.icon-angle-down
+                      %i.fa.fa-angle-down
                   %ul
                     %li
                       %a.sf-with-ul{href: "/menschen/{{security.currentUser.id}}"} Profil anzeigen
                     %li
                       %a.sf-with-ul{href: "/menschen/{{security.currentUser.id}}?edit_profile=true"}
-                        %i.icon-pencil
+                        %i.fa.fa-pencil
                         Profil bearbeiten
                     %li
                       %a.sf-with-ul{href: "#", "ng-click"=>"security.logout()"}
-                        %i.icon-power-off
+                        %i.fa.fa-power-off
                         Abmelden
 
                 %li{"ng-hide" => "security.isAuthenticated()", :id => "{{getStatus('/login')}}"}
@@ -134,22 +134,22 @@
       / Content Start
       / %alert{:type=>'danger'}
 
-      .well{"ng-if" => "security.currentUser", :style => "margin-bottom:0;"}
-        .container
-          .col-md-6.text-left
-            %span{:style => "font-size:25px;"} Gönn' es deinen Freunden!
-            %br/
-            Teile "Mein Grundeinkommen" mit ihnen.
-          .col-md-6.text-right
-            %a.facebookShare{"data-shares" => "shares", "data-url" => "http://www.mein-grundeinkommen.de?fbshare", :facebook => "", :style => "display:inline-block;"}
+      / .well{"ng-if" => "security.currentUser", :style => "margin-bottom:0;"}
+      /   .container
+      /     .col-md-6.text-left
+      /       %span{:style => "font-size:25px;"} Gönn' es deinen Freunden!
+      /       %br/
+      /       Teile "Mein Grundeinkommen" mit ihnen.
+      /     .col-md-6.text-right
+      /       %a.facebookShare{"data-shares" => "shares", "data-url" => "http://www.mein-grundeinkommen.de?fbshare", :facebook => "", :style => "display:inline-block;"}
 
-            .btn.btn-small.btn-grey{:style => "padding-bottom: 2px;padding-right: 0;padding-top: 7px;"}
+      /       .btn.btn-small.btn-grey{:style => "padding-bottom: 2px;padding-right: 0;padding-top: 7px;"}
 
-              %a{"data-count" => "horizontal", "data-lang" => "en", "data-size" => "medium", "data-text" => "Ein Jahr lang Grundeinkommen ausprobieren", "data-url" => "http://www.mein-grundeinkommen.de", "data-via" => "meinbge", :twitter => ""}
+      /         %a{"data-count" => "horizontal", "data-lang" => "en", "data-size" => "medium", "data-text" => "Ein Jahr lang Grundeinkommen ausprobieren", "data-url" => "http://www.mein-grundeinkommen.de", "data-via" => "meinbge", :twitter => ""}
 
-            %a.btn.btn-small.btn-grey{:href => "mailto:?subject=Ein%20Jahr%20Grundeinkommen%20bekommen&body=Hallo%2C%0A%0Aich%20mache%20bei%20%22Mein%20Grundeinkommen%22%20mit%2C%20die%20wollen%20ausprobieren%2C%20wie%20sich%20ein%20Bedingungsloses%20Grundeinkommen%20auf%20die%20Menschen%20auswirkt%20und%20haben%20daf%C3%BCr%20Geld%20gesammelt.%20Bald%20wird%20das%20n%C3%A4chste%20Grundeinkommen%20f%C3%BCr%20ein%20Jahr%20verlost%20und%20alle%20k%C3%B6nnen%20sich%20kostenlos%20daf%C3%BCr%20anmelden.%20Ist%20das%20was%20f%C3%BCr%20dich%3F%0A%0Awww.mein-grundeinkommen.de"}
-              %i.icon-envelope
-              per E-Mail
+      /       %a.btn.btn-small.btn-grey{:href => "mailto:?subject=Ein%20Jahr%20Grundeinkommen%20bekommen&body=Hallo%2C%0A%0Aich%20mache%20bei%20%22Mein%20Grundeinkommen%22%20mit%2C%20die%20wollen%20ausprobieren%2C%20wie%20sich%20ein%20Bedingungsloses%20Grundeinkommen%20auf%20die%20Menschen%20auswirkt%20und%20haben%20daf%C3%BCr%20Geld%20gesammelt.%20Bald%20wird%20das%20n%C3%A4chste%20Grundeinkommen%20f%C3%BCr%20ein%20Jahr%20verlost%20und%20alle%20k%C3%B6nnen%20sich%20kostenlos%20daf%C3%BCr%20anmelden.%20Ist%20das%20was%20f%C3%BCr%20dich%3F%0A%0Awww.mein-grundeinkommen.de"}
+      /         %i.fa.fa-envelope
+      /         per E-Mail
 
       #main.flip{"ng-view" => "", :autoscroll=>"true"}
       / Content End
@@ -209,14 +209,14 @@
                 %ul.social.social-icons-footer-bottom{:style => "margin-left: -120px;"}
                   %li.facebook
                     %a{"data-original-title" => "Facebook", "data-toggle" => "tooltip", :href => "http://www.facebook.com/MeinGrundeinkommen", :title => ""}
-                      %i.icon-facebook
+                      %i.fa.fa-facebook
                   %li.twitter
                     %a{"data-original-title" => "Twitter", "data-toggle" => "tooltip", :href => "http://www.twitter.com/meinbge", :title => ""}
-                      %i.icon-twitter
+                      %i.fa.fa-twitter
         / Footer Bottom End
       / Scroll To Top
       %a.scrollup{href: "#"}
-        %i.icon-angle-up
+        %i.fa.fa-angle-up
     / Wrap End
     :javascript
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

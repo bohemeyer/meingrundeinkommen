@@ -10,6 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require font-awesome
  *= require bootstrap
  *= require ie
  *= require style
@@ -17,6 +18,6 @@
  *= require team-member
  *= require theme-responsive
  *= require colors/green
- *= require font-awesome
+
 
  */

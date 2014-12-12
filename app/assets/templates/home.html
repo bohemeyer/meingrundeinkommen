@@ -49,7 +49,7 @@
                </p> -->
                <a class="btn-large btn-grey btn-pad" scroll-to="support">
                 <!-- Probieren wir es aus! -->
-                Probiere es aus! <i class="icon-caret-down"></i>
+                Probiere es aus! <i class="fa fa-caret-down"></i>
                </a>
                <!-- <a class="btn-normal btn-grey btn-pad" ng-click="bge_info()">Was ist das 'Grundeinkommen'?</a> -->
             </div>
@@ -61,29 +61,29 @@
 <!-- Slider End-->
 <!-- Slogan Start-->
 <div class="slogan bottom-pad-small" id="support" style="padding-bottom:80px;margin-bottom:50px;">
-   <div class="container" style="padding-bottom:50px;">
+   <div class="container">
       <div class="row text-center">
 
-            <div class="col-md-1">&nbsp;</div>
+            <div class="col-sm-1">&nbsp;</div>
 
-            <div class="col-md-4 text-right-lg text-right-md">
+            <div class="col-sm-5 text-right-sm">
                <h1 class="huge" style="margin-bottom:0">{{home.supporter}}</h1>
             </div>
-            <div class="col-md-4 text-left-lg text-left-md">
-               <i class="icon-group huge">&nbsp;</i> <h2 class="slogan-title">Menschen<br>haben bisher</h2>
+            <div class="col-sm-6 text-left-sm">
+               <h2 class="slogan-title">Menschen<br>haben bisher</h2>
             </div>
 
 
 <div class="clearfix"></div>
 
-            <div class="col-md-1">&nbsp;</div>
+            <div class="col-sm-1">&nbsp;</div>
 
-            <div class="col-md-4 text-right-lg text-right-md">
+            <div class="col-sm-5 text-right-sm">
                <h1 class="huge"  style="margin-bottom:0">{{home.totallyFinancedIncomes}}</h1>
             </div>
 
-            <div class="col-md-4 text-left-lg text-left-md">
-               <i class="icon-check huge">&nbsp;</i> <h2 class="slogan-title"><span class="infolink" ng-click="bge_info()">Grundeinkommen</span><br>finanziert!</h2>
+            <div class="col-sm-6 text-left-sm">
+               <h2 class="slogan-title"><span class="infolink" ng-click="bge_info()">Grundeinkommen</span><br>finanziert!</h2>
 
             </div>
             <div class="clearfix"></div>
@@ -111,25 +111,27 @@
                <div class="progress margin-top-20" style="font-size: 25px;font-weight: 600;line-height: 37px;">
 
                   <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
-                     <span ng-hide="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
+                     <span ng-hide="home.percentageRaw < 50">{{home.amount}} von 12.000€</span>
                   </div>
 
                   <div class="progress-bar" role="progressbar" style="width: {{support.amount/12000*100}}%;padding:0;" ng-show="support && support.amount > 0">
                   </div>
 
-                     <span ng-show="home.percentageRaw < 50"><i class="icon-time"></i> {{home.amount}} von 12.000€</span>
+                     <span ng-show="home.percentageRaw < 50">{{home.amount}} von 12.000€</span>
 
                </div>
 
-                  <div ng-show="support_now" ng-include="'/assets/support_crowdfund_form.html'"></div>
+                  <!-- <div ng-show="support_now" ng-include="'/assets/support_crowdfund_form.html'"></div> -->
 
-                  <a href="#" ng-hide="support_now" ng-click="support_now = true" class="btn btn-normal btn-color btn-large" style="margin-top:20px;">Ich will unterstützen!</a>
+                  <!-- <a href="#" ng-hide="support_now" ng-click="support_now = true" class="btn btn-normal btn-color btn-large" style="margin-top:20px;">Ich will unterstützen!</a> -->
+
+                  <a href="/support" ng-hide="support_now" class="btn btn-normal btn-color btn-large" style="margin-top:20px;">Ich will unterstützen!</a>
 
                 <!-- <h4><i class="icon-lightbulb"></i> Unterstützen ohne zu bezahlen: <a href="#" class="btn-grey btn-small" ng-click="crowdbar_info()">So geht's</a></h4> -->
 
 
 
-      <carousel interval="3000" class="margin-top-30" id="all_supports">
+      <!-- <carousel interval="3000" class="margin-top-30" id="all_supports">
          <slide ng-repeat="group in supports">
 
           <div class="row">
@@ -154,7 +156,7 @@
           </div>
 
         </slide>
-    </carousel>
+    </carousel> -->
 
 
             <div class="clearfix"></div>
@@ -163,69 +165,99 @@
    </div>
 </div>
 
+<div id="bge100">
+  <a href="https://www.betterplace.org/de/projects/23920-next-stop-100-grundeinkommen-hilf-uns-dabei">
+    <img src="/assets/100bge-button.png" id="bge100button" >
+    <img src="/assets/100bge.png">
+  </a>
+</div>
 
 
 
+<div class="container margin-top-70" id="winners"  style="padding-top:30px">
+<div class="row text-center margin-top-70">
+
+        <h1 style="margin-bottom:10px;">Diese Menschen</h2>
+          <h3>haben die ersten <span class="big"><b>{{winners.length}}</b></span> Grundeinkommen gewonnen:</h3>
 
 
 
+        <div class="row margin-top-70">
+             <div ng-repeat="d in winners" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
+                <div class="content-box ch-item">
+                  <div class="ch-info-wrap">
+                      <div class="testimonial-image-sm">
+                          <a href="/menschen/{{d.id}}">
+                            <img src="{{d.avatar.avatar.url}}">
+                        </div>
+                      </div>
+                   <div class="content-box-info text-left">
+                      <h3 style="margin-bottom:5px"><a href="/menschen/{{d.id}}">{{d.name}}</a></h3>
 
+                      <div ng-switch="d.name">
 
+                        <p ng-switch-when="Robin">
+                           ist 8 Jahre alt. Als er von seinem Gewinn erfuhr fragte er: "Krieg ich jetzt jeden Monat ein Buch?" <a href="/blog/10">Lies seine Geschichte</a>
+                        </p>
 
-
-
-<div class="container" id="chris">
-       <div class="slogan-content margin-top-70">
-
-
-          <div class="row">
-
-              <div class="col-md-3 text-center">
-                <div class="testimonial-image-medium">
-                  <a href="/menschen/21152">
-                    <img src="/uploads/user/avatar/21152/smile2.jpg">
-                  </a>
+                        <p ng-switch-when="Christoph">
+                           hat dank Grundeinkommen seinen Job im Callcenter gekündigt und wird nun Erzieher! <a href="/blog/13">Lies seine Geschichte</a>
+                        </p>
+                        <p ng-switch-default>
+                           Erhält seit 1. Oktober 1.000€ monatliches Grundeinkommen. <a href="/menschen/{{d.id}}">Vorhaben ansehen</a>
+                        </p>
+                      </div>
+                   </div>
                 </div>
-                <a href="/menschen/21152">Christoph</a>
-              </div>
+             </div>
 
-              <div class="col-md-9">
-                <h2 style="margin-bottom:5px;">Christoph hat das 2. Grundeinkommen gewonnen</h2>
-                <h4>und will <a href="/mit-grundeinkommen-wuerde-ich/könnte+meine+Erzieherausbildung+anfangen+und+nicht+im+Callcenter+arbeiten/26170">seine Erzieherausbildung anfangen und nicht mehr im Callcenter arbeiten</a></h4>
 
-                <blockquote>
-                  „Seit ich weiß, dass ich das Grundeinkommen gewonnen habe, hat sich doch schon
+             <div ng-if="!security.currentUser" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
+                <div class="content-box ch-item">
+                  <div class="ch-info-wrap">
+                      <div class="testimonial-image-sm">
+                          <a href="/register">
+                            <img src="/assets/team/team-member.jpg">
+                        </div>
+                      </div>
+                   <div class="content-box-info text-left">
+                      <h3 style="margin-bottom:5px"><a href="/register">Und ab Februar Du?</a></h3>
 
-ganz schön viel in meinem Leben verändert. Ich bin innerlich sehr ruhig und gelassen
+                           Ende Januar wird das 6. Grundeinkommen verlost. Du kannst es gewinnen. <a href="/register">Jetzt teilnehmen</a></a>
+                        </p>
+                   </div>
+                </div>
+             </div>
 
-geworden. Ich freue mich jeden Morgen wahnsinnig aufzustehen, auch wenn ich noch ein
 
-bisschen einen Job mache, den ich eigentlich nicht machen möchte. Ich bin wahnsinnig
+             <div ng-if="security.currentUser" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
+                <div class="content-box ch-item">
+                  <div class="ch-info-wrap">
+                      <div class="testimonial-image-sm">
+                          <a href="/menschen/{{security.currentUser.id}}?gewinnspiel">
+                            <img src="{{security.currentUser.avatar.avatar.url}}">
+                        </div>
+                      </div>
+                   <div class="content-box-info text-left">
+                      <h3 style="margin-bottom:5px"><a href="/menschen/{{security.currentUser.id}}?gewinnspiel">Und ab Februar Du?</a></h3>
 
-glücklich und fühle mich voller Tatendrang, vor allem da ich weiß, dass ich jetzt die
-
-Sachen angehen kann, die mir am Herzen liegen und ich mir keine Sorgen machen muss,
-
-wo am Monatsanfang das Geld auf meinem Konto herkommen soll, zumindest für ein
-
-ganzes Jahr =) . Ich habe im Moment wahnsinnig viele Ideen, was ich gerne noch so tun
-
-möchte und ich hoffe, dass ich in einem Jahr möglichst viel schaffen werde.“ <a href="/blog/13">... weiterlesen</a>
-                </blockquote>
-
-              </div>
-
-          </div>
-
+                           Ende Januar wird das 6. Grundeinkommen verlost. Du kannst es gewinnen. <a href="/menschen/{{security.currentUser.id}}?gewinnspiel">Jetzt teilnehmen</a></a>
+                        </p>
+                   </div>
+                </div>
+             </div>
 
         </div>
+
+      </div>
 
 </div>
 
 
 
 
-<div class="fullwidthbanner-container margin-top-70" style="padding-bottom:80px">
+
+<div class="fullwidthbanner-container" style="padding-bottom:80px">
    <div class="fullwidthbanner rslider">
       <div class="container">
          <div class="row text-center">
@@ -240,21 +272,21 @@ möchte und ich hoffe, dass ich in einem Jahr möglichst viel schaffen werde.“
 <!--             <h2 style="color:white"><span class="huge">{{home.numberOfParticipants}}</span> Menschen nehmen bereits teil</h2> -->
 
 
-              <!-- <div ng-if="security.currentUser">
-                <alert ng-if="!participation.participates" type="warning"><h1>Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1>
+              <div ng-if="security.currentUser">
+                <!-- <alert ng-if="!participation.participates" type="warning"><h1>Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1>
                   <a class="btn-large btn-color" href="/menschen/{{security.currentUser.id}}?gewinnspiel=true">Ich will aber teilnehmen!</a>
-                </alert>
+                </alert> -->
 
 
 
-                <a ng-if="participation.participates" class="btn-large btn-color " href="/menschen/{{security.currentUser.id}}?gewinnspiel=true" style="box-shadow:0px 0px 40px 10px white"><i class="icon-check"></i> Du nimmst an der Verlosung teil!</a>
+                <!-- <a ng-if="participation.participates" class="btn-large btn-color " href="/menschen/{{security.currentUser.id}}?gewinnspiel=true" style="box-shadow:0px 0px 40px 10px white"><i class="fa fa-check"></i> Du nimmst an der Verlosung teil!</a> -->
 
-                <br><a ng-if="!participation.has_crowdbar" href="/menschen/{{security.currentUser.id}}?crowdbar" class="margin-top-20 btn-normal btn-grey"><i class="icon-plus"></i> &nbsp; Meine Gewinnchance verdoppeln</a>
+                <!-- <br><a ng-if="!participation.has_crowdbar" href="/menschen/{{security.currentUser.id}}?crowdbar" class="margin-top-20 btn-normal btn-grey"><i class="icon-plus"></i> &nbsp; Meine Gewinnchance verdoppeln</a> -->
 
-              </div> -->
+              </div>
 
               <div ng-if="!security.currentUser">
-                <a class="btn-large btn-color margin-top-20" style="box-shadow:0px 0px 30px 15px white" scroll-to="youcan">Ich will teilnehmen <i class="icon-caret-down"></i></a>
+                <a href="/register" class="btn-large btn-color margin-top-20" style="box-shadow:0px 0px 30px 15px white">Ich will teilnehmen</i></a>
               </div>
             </div>
 
@@ -269,12 +301,12 @@ möchte und ich hoffe, dass ich in einem Jahr möglichst viel schaffen werde.“
   </div>
 </div>
 
-
+<!--
    <div class="container" id="youcan"  ng-if="!security.currentUser">
       <div class="row">
          <div class="slogan-content ">
             <div class="col-md-12 text-center">
-              <!--  <h1 class="slogan-title"><span class="huge">Du</span><br>kannst 1 Jahr <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> gewinnen!</h1> -->
+              <!--  <h1 class="slogan-title"><span class="huge">Du</span><br>kannst 1 Jahr <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> gewinnen!</h1>
 
 
         <div ng-hide="security.currentUser">
@@ -321,7 +353,7 @@ möchte und ich hoffe, dass ich in einem Jahr möglichst viel schaffen werde.“
         </div>
 <hr>
         <h4 class=" text-center margin-top-30">Du glaubst, du brauchst kein <span class="infolink" ng-click="bge_info()">Grundeinkommen</span>? <a href="/blog/30">Vielleicht stimmt dich das hier um</a>!</h4>
-
+ -->
         <!-- <h4 class=" text-center">Alle Fragen zur Verlosung <a href="#">werden hier beantwortet</a>.</h4> -->
 
 
@@ -342,68 +374,11 @@ möchte und ich hoffe, dass ich in einem Jahr möglichst viel schaffen werde.“
    </div>
 
 
-<div class="slogan bottom-pad-small" id="winners"  style="padding-top:30px">
-<div class="row text-center margin-top-70">
-
-        <h1 style="margin-bottom:10px;">Diese Menschen</h2>
-          <h3>haben die ersten <b>{{winners.length}}</b> Grundeinkommen gewonnen:</h3>
-
-        <div class="col-md-4" ng-repeat="d in winners">
-
-          <div class="testimonial-image-medium">
-              <a href="/menschen/{{d.id}}">
-                <img src="{{d.avatar.avatar.url}}">
-              </a>
-            </div>
-            <a href="/menschen/{{d.id}}">{{d.name}}</a>
-        </div>
-
-
-        <div class="col-md-4" ng-if="!security.currentUser">
-          <div class="testimonial-image-medium">
-              <a href="/login">
-                <img src="/assets/team/team-member.jpg">
-              </a>
-            </div>
-            <a href="/login">Du?</a>
-        </div>
-
-        <div class="col-md-4" ng-if="security.currentUser">
-          <div class="testimonial-image-medium">
-              <a href="/menschen/{{security.currentUser.id}}">
-                <img src="{{security.currentUser.avatar.avatar.url}}">
-              </a>
-            </div>
-            <a href="/menschen/{{security.currentUser.id}}?gewinnspiel">Und beim nächsten Mal Du?</a>
-        </div>
-
-
-      </div>
-      <div class="margin-top-70">
-        <h4 class=" text-center"><a href="/blog/19">So geht's mit den Gewinnenden weiter...</a></h4>
-      </div>
-</div>
 
 
 
-<div class="container">
-  <div class="main-content">
-     <div class="container">
-        <div class="row text-center">
-           Und alle anderen?
-           <h1><span class="huge">{{home.numberOfUsers}}</span> <br> Menschen erzählen hier, wie ein <span class="infolink" ng-click="bge_info()">Grundeinkommen</span>
-  {{home.numberOfWishes}} Dinge in ihrem Leben verändern würde.</h1>
+<div ng-include="'/assets/community_home.html'"></div>
 
-          <a class="btn-large btn-color" href="/community">Ansehen</a>
-
-        </div>
-
-      </div>
-    </div>
-  </div>
-
-
-</div>
 
 
   <div class="container" id="news">
@@ -425,10 +400,10 @@ möchte und ich hoffe, dass ich in einem Jahr möglichst viel schaffen werde.“
                                   <a href="/blog/{{article.ID}}"><img src="{{article.featured_image.attachment_meta.sizes['post-thumbnail'].url}}" alt="">
                                   </a>
                                 </div>
-                                 <small><i class="icon-calendar"></i> {{article.date | date:'dd.MM.yyyy'}}</small>
+                                 <small><i class="fa fa-calendar"></i> {{article.date | date:'dd.MM.yyyy'}}</small>
                                  <h4><a href="/blog/{{article.ID}}">{{article.title}}</a></h4>
                                  <div ng-bind-html="article.excerpt | unsafe"></div>
-                                 <a href="/blog/{{article.ID}}">Weiter lesen <i class="icon-arrow-right"></i></a>
+                                 <a href="/blog/{{article.ID}}">Weiter lesen <i class="fa fa-arrow-right"></i></a>
                               </div>
                            </li>
 
@@ -443,9 +418,9 @@ möchte und ich hoffe, dass ich in einem Jahr möglichst viel schaffen werde.“
                   <div class="row text-center">
                     <h2>Alle Neuigkeiten, alle Verlosungstermine:</h2>
 
-                    <a href="http://www.facebook.com/MeinGrundeinkommen" title="" class="btn-large btn-grey btn-pad"><i class="huge icon-facebook"></i> &nbsp;&nbsp;&nbsp;Mein Grundeinkommen bei Facebook</a>
+                    <a href="http://www.facebook.com/MeinGrundeinkommen" title="" class="btn-large btn-grey btn-pad"><i class="big fa fa-facebook"></i> &nbsp;&nbsp;&nbsp;Mein Grundeinkommen bei Facebook</a>
 
-                    <a href="http://www.twitter.com/meinbge" title="" class="btn-large btn-grey btn-pad"><i class="huge icon-twitter"></i> &nbsp;&nbsp;&nbsp;Mein Grundeinkommen bei Twitter</a>
+                    <a href="http://www.twitter.com/meinbge" title="" class="btn-large btn-grey btn-pad"><i class="big fa fa-twitter"></i> &nbsp;&nbsp;&nbsp;Mein Grundeinkommen bei Twitter</a>
                   </div>
 
 
