@@ -5470,7 +5470,7 @@ td.hidden-xs {
 
 @media (min-width: 768px) and (max-width: 991px) {
   .hidden-xs {
-    display: block !important;
+    display: none !important;
   }
   tr.hidden-xs {
     display: table-row !important;
@@ -5560,7 +5560,7 @@ td.hidden-sm {
 }
 
 .hidden-md {
-  display: block !important;
+  display: none !important;
 }
 
 tr.hidden-md {
@@ -5574,7 +5574,7 @@ td.hidden-md {
 
 @media (min-width: 768px) and (max-width: 991px) {
   .hidden-md {
-    display: block !important;
+    display: none !important;
   }
   tr.hidden-md {
     display: table-row !important;
@@ -5600,7 +5600,7 @@ td.hidden-md {
 
 @media (min-width: 1200px) {
   .hidden-md {
-    display: block !important;
+    display: none !important;
   }
   tr.hidden-md {
     display: table-row !important;

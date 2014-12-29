@@ -1,0 +1,28 @@
+
+<!-- FACEBOOK -->
+
+<a ng-if="share_goal == 'crowdbar'" facebook="" class="facebookShare" data-shares="shares" data-url="http://www.mein-grundeinkommen.de/crowdbar?fbshare" style="display:inline-block;">
+</a>
+
+<a ng-if="!share_goal" facebook="" class="facebookShare" data-shares="shares" data-url="http://www.mein-grundeinkommen.de?fbshare" style="display:inline-block;">
+</a>
+
+<!-- TWITTER -->
+
+<div class="btn btn-small btn-grey" style="padding-bottom: 2px;padding-right: 0;padding-top: 7px;">
+  <a  ng-if="share_goal == 'crowdbar'" twitter="" data-count="horizontal" data-lang="en" data-size="medium" data-text="Grundeinkommen Pilotprojekt kostenlos mitfinanzieren mit der @crowdbar" data-url="http://www.mein-grundeinkommen.de/crowdbar" data-via="meinbge"></a>
+
+  <a  ng-if="!share_goal" twitter="" data-count="horizontal" data-lang="en" data-size="medium" data-text="Ein Jahr lang Grundeinkommen ausprobieren" data-url="http://www.mein-grundeinkommen.de/" data-via="meinbge"></a>
+</div>
+
+<!-- MAIL -->
+
+<a ng-if="!share_goal" class="btn btn-small btn-grey" href="mailto:?subject=Ein%20Jahr%20Grundeinkommen%20bekommen&body=Hallo%2C%0A%0Aich%20mache%20bei%20%22Mein%20Grundeinkommen%22%20mit%2C%20die%20wollen%20ausprobieren%2C%20wie%20sich%20ein%20Bedingungsloses%20Grundeinkommen%20auf%20die%20Menschen%20auswirkt%20und%20haben%20daf%C3%BCr%20Geld%20gesammelt.%20Bald%20wird%20das%20n%C3%A4chste%20Grundeinkommen%20f%C3%BCr%20ein%20Jahr%20verlost%20und%20alle%20k%C3%B6nnen%20sich%20kostenlos%20daf%C3%BCr%20anmelden.%20Ist%20das%20was%20f%C3%BCr%20dich%3F%0A%0Awww.mein-grundeinkommen.de">
+  <i class="fa fa-envelope"></i>
+  per E-Mail
+</a>
+
+<a ng-if="share_goal == 'crowdbar'" class="btn btn-small btn-grey" href="mailto:?subject=Pilotprojekt%20Grundeinkommen%20kostenlos%20unterst%C3%BCtzen&body=Hallo%2C%0A%0Aich%20mache%20bei%20%22Mein%20Grundeinkommen%22%20mit%2C%20die%20wollen%20ausprobieren%2C%20wie%20sich%20ein%20Bedingungsloses%20Grundeinkommen%20auf%20die%20Menschen%20auswirkt%20und%20haben%20daf%C3%BCr%20Geld%20gesammelt.%20Bald%20wird%20das%20n%C3%A4chste%20Grundeinkommen%20f%C3%BCr%20ein%20Jahr%20verlost%20und%20alle%20k%C3%B6nnen%20sich%20kostenlos%20daf%C3%BCr%20anmelden.%0A%0AFinanziert%20wird%20dieses%20Experiment%20per%20Crowdfunding%20und%20durch%20eine%20coole%20Erweiterung%20f%C3%BCr%20den%20Browser%2C%20die%20-%20ohne%20Kosten%20-%20bei%20Online-Eink%C3%A4ufen%20ein%20paar%20Euro%20ins%20n%C3%A4chste%20Grundeinkommen%20flie%C3%9Fen%20l%C3%A4sst.%20Ich%20hab%20das%20Ding%20installiert.%0A%0AVielleicht%20ist%20das%20ja%20auch%20was%20f%C3%BCr%20dich%3F%0A%0Awww.mein-grundeinkommen.de%2Fcrowdbar">
+  <i class="fa fa-envelope"></i>
+  per E-Mail
+</a>

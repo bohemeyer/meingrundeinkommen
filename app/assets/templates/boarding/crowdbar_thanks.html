@@ -1,0 +1,30 @@
+<div class="container margin-top-70" style="margin-bottom:100px">
+	<div class="row">
+		<div class="col-sm-5 text-right-sm text-center-xs">
+			<div class="testimonial-image-large" style="display:inline-block">
+			    <div class="hi5"></div>
+			</div>
+		</div>
+		<div class="col-sm-7 text-left-sm text-center-xs">
+				<h1>High Five!</h1>
+				<h3>Du kannst ab jetzt in <a target="_blank" href="http://bar.mein-grundeinkommen.de/shops">diesen Shops</a> mit der Crowdbar einkaufen. </h3>
+			    <h3>Erzähl deinen Bekannten davon:</h3>
+			    <div ng-include="'/assets/share.html'" ng-init="share_goal = 'crowdbar'"></div>
+				<hr>
+
+				<div ng-switch="next_step_is">
+					<div ng-switch-when="crowdcard">
+						<h2>Kennst du schon die neue Crowdcard? Sie ist die Crowdbar für echte Ladengeschäfte</h2>
+						<a href="#" class="btn btn-large btn-color" ng-click="next_step()">Mehr erfahren!</a>
+					</div>
+					<div ng-switch-when="donate">
+						<h2>Wir wollen nächstes Jahr 100 Grundeinkommen verlosen. Damit wir das schaffen, brauchen wir neben viele Crowdbars auch direkt deine Hilfe:</h2>
+						<a href="#" class="btn btn-large btn-color" ng-click="next_step()">Mehr erfahren</a>
+					</div>
+
+				</div>
+
+		</div>
+
+		</div>
+</div>

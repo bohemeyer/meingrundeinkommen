@@ -1,4 +1,41 @@
-<div class="container">
+<tabset id="tabs" justified="true" style="padding:10px;padding-top:30px;">
+
+      <!-- Was würdest du tun? -->
+
+      <tab active="tabs.crowdbar">
+        <tab-heading>
+           Crowdbar
+        </tab-heading>
+        <div style="padding-top:10px;" ng-include="'/assets/boarding/crowdbar.html'"></div>
+      </tab>
+
+      <tab active="tabs.crowdcard">
+        <tab-heading>
+           Crowdcard
+        </tab-heading>
+        <div style="padding-top:10px;" ng-include="'/assets/boarding/crowdcard.html'"></div>
+      </tab>
+
+      <tab active="tabs.crowdfund">
+        <tab-heading>
+           Direkt Geld geben
+        </tab-heading>
+        <div ng-include="'/assets/boarding/crowdfund.html'"></div>
+      </tab>
+
+      <tab active="tabs.donate">
+        <tab-heading>
+           Spenden
+        </tab-heading>
+        <div ng-include="'/assets/boarding/donate.html'"></div>
+      </tab>
+
+
+
+</tabset>
+
+
+<!-- <div class="container">
 <div class="margin-top-70 text-center">
 
 	<i class="icon-heart huge"></i><br>
@@ -28,3 +65,4 @@
 
 </div>
 </div>
+ -->

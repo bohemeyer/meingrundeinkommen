@@ -1,11 +1,13 @@
-angular.module("grundeinkommen").factory "Security", [
+angular.module "Security", ["Flag"]
+.factory "Security", [
   "$http"
   "$q"
   "$location"
   "Auth"
+  "Flag"
   "$cookies"
   "$window"
-  ($http, $q, $location, Auth, $cookies, $window) ->
+  ($http, $q, $location, Auth, Flag, $cookies, $window) ->
 
     # The public API of the service
     service =
@@ -13,7 +15,7 @@ angular.module("grundeinkommen").factory "Security", [
       # Attempt to authenticate a user by the given email and password
       login: (credentials) ->
         Auth.login(credentials).then (response) ->
-          service.currentUser = response unless response.error
+          service.user = response unless response.error
           return response
         , (error) ->
           return error.data
@@ -27,7 +29,7 @@ angular.module("grundeinkommen").factory "Security", [
 
       # Logout the current user and redirect
       logout: () ->
-        service.currentUser = null
+        service.user = null
         Auth.logout().then ((old_user) ->
           return
         ), (error) ->
@@ -36,29 +38,58 @@ angular.module("grundeinkommen").factory "Security", [
         return
 
 
-      currentUser: null
+      user: null
 
 
       # Ask the backend to see if a user is already authenticated - this may be from a previous session.
       requestCurrentUser: ->
         Auth.currentUser().then ((user) ->
-          service.currentUser = user unless user.error
-          return
+          service.user = user unless user.error
+          return user
         ), (error) ->
-          service.currentUser = false
+          service.user = false
           console.log error
 
       is_own_profile: (profile_id) ->
-        if this.currentUser && this.currentUser.id == profile_id then true else false
+        if this.user && this.user.id == profile_id then true else false
+
+      is_default_avatar: ->
+        if service.user.avatar.avatar.url == '/assets/team/team-member.jpg' then true else false
 
       # Is the current user authenticated?
       isAuthenticated: ->
-        !!service.currentUser
+        !!service.user
 
+      setFlag: (name, value) ->
+        if service.isAuthenticated
+          new Flag(
+            name: name
+            value: value
+          ).create().then (flag) ->
+            service.user.flags[name] = value
+
+      incFlag: (name) ->
+        if service.isAuthenticated
+          new Flag(
+            id: 1
+            name: name
+            increment: true
+          ).update().then (flag) ->
+            if service.user.flags[name]
+              service.user.flags[name] = flag.value
+            else
+              service.user.flags[name] = 1
+
+      getFlag: (name) ->
+        if service.isAuthenticated
+          #todo: get all flags from server
+          # Flag.query().then (flags) ->
+          #   service.user.flags = flags
+          if service.user.flags[name] then service.user.flags[name] else false
 
       # Is the current user an adminstrator?
       isAdmin: ->
-        !!(service.currentUser and service.currentUser.admin)
+        !!(service.user and service.user.admin)
 
     return service
 ]

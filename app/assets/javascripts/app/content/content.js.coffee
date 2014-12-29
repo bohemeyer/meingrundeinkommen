@@ -6,34 +6,32 @@ angular.module("content", ['ng-breadcrumbs'])
     .when "/info",
       templateUrl: "/assets/info.html"
       label: "So funktioniert's"
+
     .when "/crowdbar",
-      controller: [
-        "$scope"
-        "Home"
-        ($scope, Home) ->
-          Home.query().then (home) ->
-            $scope.daily_comm = Math.round(home.prediction.avgDailyCommissionCrowdbar)
-            $scope.crowdbar_users = home.crowdbarUsers
-      ]
-      templateUrl: "/assets/crowdbar.html"
-      label: "Die Crowdbar"
+      redirectTo: "/support/crowdbar"
+
     .when "/crowdbar/install",
-      templateUrl: "/assets/crowdbar.html"
-      controller: "CrowdBarInstallController"
+      redirectTo: "/support/crowdbar"
+
     .when "/crowdfunding",
-      redirectTo: "/support"
+      redirectTo: "/support/crowdfund"
+
+    .when "/crowdfund",
+      redirectTo: "/support/crowdfund"
+
+    .when "/crowdcard",
+      redirectTo: "/support/crowdcard"
+
     .when "/100",
-      redirectTo: "/blog/39"
-    .when "/boost",
-      redirectTo: "/support"
+      redirectTo: "/support/donate"
+
     .when "/support",
-      controller: [
-        "$scope"
-        ($scope) ->
-          $scope.daily_comm = Math.round($scope.home.prediction.avgDailyCommissionCrowdbar)
-          $scope.crowdbar_users = $scope.home.crowdbarUsers
-      ]
-      templateUrl: "/assets/crowdbar.html"
+      redirectTo: "/support/crowdbar"
+
+    .when "/support/:support_type",
+      reloadOnSearch: false
+      controller: "SupportController"
+      templateUrl: "/assets/support.html"
       label: "Unterstützen"
     .when "/info/impressum",
       templateUrl: "/assets/impressum.html"
@@ -54,20 +52,4 @@ angular.module("content", ['ng-breadcrumbs'])
       templateUrl: "/assets/gewinnspielbedingungen.html"
     .when "/live",
       redirectTo: "/auslosung"
-
-
-]
-
-.controller "CrowdBarInstallController", [
-  () ->
-    isOpera = !!window.opera or navigator.userAgent.indexOf(" OPR/") >= 0
-    # Opera 8.0+ (UA detection to detect Blink/v8-powered Opera)
-    isFirefox = typeof InstallTrigger isnt "undefined" # Firefox 1.0+
-    isSafari = Object::toString.call(window.HTMLElement).indexOf("Constructor") > 0
-    # At least Safari 3+: "[object HTMLElementConstructor]"
-    isChrome = !!window.chrome and not isOpera # Chrome 1+
-    isIE = false or !!document.documentMode #@cc_on!@
-    # At least IE6
-    window.location.href = "https://bar.mein-grundeinkommen.de/extension/crowd_bar/crowd_bar.xpi"  if isFirefox
-    window.location.href = "https://chrome.google.com/webstore/detail/crowdbar/lhinknkceoifkecnmmlgnelmdipmbcdn"  if isChrome
 ]

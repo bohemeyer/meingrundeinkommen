@@ -1,0 +1,205 @@
+<div id="crowdcard_background">
+
+  <div ng-controller="CrowdcardsController" style="height:100%">
+
+	<div class="row">
+		<div class="col-sm-4 col-md-5 col-lg-6">
+			&nbsp;
+		</div>
+		<div class="col-sm-8 col-md-7 col-lg-6 col-xs-12" id="crowdcard_overlay">
+
+			<div ng-show="show_faq && !show_form" class="container margin-top-30">
+
+				<a href="#" ng-click="show_faq = false"><i class="fa fa-arrow-left margin-top-30"></i> zurück</a>
+        <hr>
+
+        <h4>So funktioniert's</h4><p>Die Crowdcard ist eine Bonuskarte von Payback, die wir 10.000 mal kopiert haben, so dass alle auf ein einziges Konto sammeln. Deine Einkäufe sind anonym weil alle die gleiche Karte verwenden.</p>
+
+
+        <p>Die von uns allen gesammelten Payback-Punkte (ca. 1% des Einkaufswerts) heben wir in bar ab und legen sie auf das Grundeinkommenskonto.</p>
+
+        <div class="text-center">
+          <img src="/assets/crowdcard-preview.png" style="margin:15px;">
+        </div>
+
+        <p>Je häufiger du die Crowdcard einsetzt, desto schneller können wir neue Grundeinkommen verlosen.</p>
+
+        <p>Welche Gechäfte mitmachen findest du <a href="https://www.payback.de/pb/partner/id/16380/" target="_blank">hier</a>.</p>
+
+
+        <h4 class="margin-top-30">Was kostet mich das?</h4><p>
+        Der Einsatz der Crowdcard ist kostenlos. Die Payback-Punkte zahlt das Unternehmen bei dem du einkaufst.</p>
+
+        <h4 class="margin-top-30">Wo ist der Haken?</h4><p>
+        Es gibt keinen. Solange Payback die Nutzung der Karte durch uns toleriert, können wir gemeinsam schneller noch mehr Grundeinkommen sammeln.</p>
+
+
+
+				<a ng-click="show_form = true" class="btn btn-large btn-color">Mitmachen</a>
+
+			</div>
+
+
+
+
+
+			<div ng-show="show_form" class="container margin-top-30">
+
+				<a href="#" ng-click="show_form = false"><i class="fa fa-arrow-left"></i> zurück</a>
+
+        <hr>
+
+        <h3 class="margin-top-30">Die Crowdcard befindet sich im Druck (noch 2 Wochen)</h3>
+
+
+
+
+             <div class="form-group col-sm-12">
+
+                      <label style="padding-top: 14px;display:block;margin-left:15px;">
+                          <input ng-if="!current.user.flags.NotifiyMeWhenCrowdcardReady" ng-model="current.user.flags.NotifyMeWhenCrowdcardReady" ng-change="current.setFlag('NotifiyMeWhenCrowdcardReady',true);steps.done=true" value="true" type="checkbox" style="width:30px;height:30px;margin-right:10px;float:left;">
+                          <h4 ng-if="!current.user.flags.NotifiyMeWhenCrowdcardReady">Sagt mir per E-Mail Bescheid, wenn es soweit ist</h4>
+
+                        <h4 ng-if="current.user.flags.NotifiyMeWhenCrowdcardReady"><i class="fa fa-check"></i>&nbsp; Wir sagen dir Bescheid, wenn die Crowdcard da ist.</h4>
+
+                      </label>
+
+
+                    </div>
+
+
+              <div class="form-group col-sm-12">
+                      <label style="padding-top: 14px;display:block;margin-left:15px;">
+                        <input ng-if="!crowdcard_ordered" ng-change="current.setFlag('SendCrowdcardToMe',current.user.flags.SendCrowdcardToMe)" ng-model="current.user.flags.SendCrowdcardToMe" value="true" type="checkbox" style="width:30px;height:30px;margin-right:10px;float:left;">
+                        <h4 ng-if="!crowdcard_ordered">Ich will unter den ersten sein! Schickt sie mir zu!</h4>
+                        <h4 ng-if="crowdcard_ordered"><i class="fa fa-check"></i>&nbsp; Wir schicken dir die Crowdcard im Januar zu.
+                        </h4>
+                      </label>
+
+                    </div>
+
+
+
+              <form ng-if="current.user.flags.SendCrowdcardToMe && !crowdcard_ordered" class="form-horizontal margin-top-30" ng-submit="saveCrowdcard(crowdcard)" role="form" novalidate>
+
+<!--                 <div class="text-right">
+                  <small><a href="#" ng-click="datenschutz()"><i class="icon-info"></i> Warum soll ich diese Angaben machen?</a></small>
+                </div> -->
+
+                <div class="form-group">
+                  <label for="inputEmail8" class="col-sm-2 control-label">Name</label>
+                  <div class="col-sm-5 text-left">
+                    <input name="name" ng-model="crowdcard.first_name" type="text" class="form-control" id="inputEmail8" placeholder="Vorname" maxlength="50" required>
+                    <alert ng-show="crowdcard_errors.firstName">{{crowdcard_errors.firstName}}</alert>
+                  </div>
+                  <div class="col-sm-5 text-left">
+                    <input name="name" ng-model="crowdcard.last_name" type="text" class="form-control" id="inputEmail3" placeholder="Nachname" maxlength="50" required>
+                    <alert ng-show="crowdcard_errors.lastName">{{crowdcard_errors.lastName}}</alert>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label for="inputEmail4" class="col-sm-2 control-label">Straße</label>
+                  <div class="col-sm-6 text-left">
+                    <input name="street" ng-model="crowdcard.street" type="text" class="form-control" ng-required="true" placeholder="Straße" maxlength="50"  required>
+                    <alert ng-show="crowdcard_errors.street">{{crowdcard_errors.street}}</alert>
+                  </div>
+
+                  <div class="col-sm-4 text-left">
+                    <input name="house_number" ng-model="crowdcard.house_number" type="text" class="form-control" ng-required="true" placeholder="Hausnummer" maxlength="10" required>
+                    <alert ng-show="crowdcard_errors.houseNumber">{{crowdcard_errors.houseNumber}}</alert>
+                  </div>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label for="inputEmail12" class="col-sm-2 control-label">PLZ</label>
+                  <div class="col-sm-4 text-left">
+                    <input name="zip_code" ng-model="crowdcard.zip_code" type="text" class="form-control" id="inputEmail12" placeholder="Postleitzahl" maxlength="5" required>
+                    <alert ng-show="crowdcard_errors.zipCode">{{crowdcard_errors.zipCode}}</alert>
+                  </div>
+                  <div class="col-sm-6 text-left">
+                    <input name="city" ng-model="crowdcard.city" type="text" class="form-control" id="inputEmail12" placeholder="Ort" maxlength="40" required>
+                    <alert ng-show="crowdcard_errors.city">{{crowdcard_errors.city}}</alert>
+                  </div>
+                </div>
+
+
+                <div class="form-group">
+                  <label for="inputEmail12" class="col-sm-8 control-label">Zusätzliche Karten zum Verschenken: </label>
+                  <div class="col-sm-4 text-left">
+                    <select name="number_of_cards" ng-model="crowdcard.number_of_cards" class="form-control" id="inputEmail12" required>
+                      <option value="1">keine</option>
+                      <option value="2">1</option>
+                      <option value="3">2</option>
+                      <option value="4">3</option>
+                      <option value="5">4</option>
+                      <option value="6">5</option>
+                      <option value="7">6</option>
+                      <option value="8">7</option>
+                      <option value="9">8</option>
+                      <option value="10">9</option>
+                      <option value="11">10</option>
+                    </select>
+                    </div>
+                  </div>
+
+
+                <div class="form-group">
+                  <div class="col-sm-offset-2 col-sm-10">
+                    <input type="submit" class="btn btn-special btn-color" value="Karte zusenden lassen"  ng-disabled="submitted">
+                    <input ng-if="chance.isChild" type="button" class="btn btn-special btn-grey" value="Abbrechen" ng-click="removeChance(chance)" ng-disabled="submitted">
+                  </div>
+                </div>
+
+        </form>
+
+
+
+              <div class="form-group col-sm-12">
+                      <label  style="padding-top: 14px;display:block;margin-left:15px;">
+                        <input ng-model="current.user.flags.PrintOutCrowdcard" ng-change="current.setFlag('PrintOutCrowdcard',current.user.flags.PrintOutCrowdcard)" value="true" type="checkbox" style="width:30px;height:30px;margin-right:10px;float:left;">
+                        <h4>Crowdcard sofort nutzen und jetzt selbst ausdrucken</h4>
+                      </label>
+
+                      <a href="/crowdcard.pdf" target="_blank" ng-click="current.incFlag('NumberOfCrowdcardDownloads');steps.done=true" ng-show="current.user.flags.PrintOutCrowdcard" class="btn btn-color" style="margin-left:50px;margin-top:10px">Jetzt ausdrucken</a>
+
+
+                    </div>
+
+
+              <div ng-if="browser.ua == 'iphone' || browser.ua == 'ipad'" class="form-group col-sm-12">
+                      <label style="padding-top: 14px;display:block;margin-left:15px;">
+                        <input ng-model="current.user.flags.DownloadPassbook" ng-change="current.setFlag('DownloadPassbook',current.user.flags.DownloadPassbook)" value="true" type="checkbox" style="width:30px;height:30px;margin-right:10px;float:left;">
+                        <h4>Karte jetzt für Apple Passbook herunterladen</h4>
+                      </label>
+
+                      <a href="http://meinbge.herokuapp.com" target="_blank" ng-click="current.incFlag('NumberOfPassbookDownloads');steps.done=true" ng-show="current.user.flags.DownloadPassbook" class="btn btn-color" style="margin-left:50px;margin-top:10px">Jetzt herunterladen</a>
+
+                    </div>
+
+			</div>
+
+
+
+			<div ng-hide="show_form || show_faq" class="container text-center margin-top-70">
+				<h1>Punkte sammeln fürs Grundeinkommen!</h1>
+
+				<h3>Die Crowdcard macht aus deinen Einkäufen bei Rewe, dm, Aral und vielen weiteren Grundeinkommen.</h3>
+
+				<a ng-click="show_form = true; current.incFlag('ClickedCrowdcardMitmachen')" class="btn btn-large btn-color">Mitmachen</a>
+
+				<h2 class="margin-top-30">einfach. anonym. kostenlos.</h2>
+
+
+				<h4><a ng-click="show_faq = true" href="#"><u>So funktioniert's</u></a></h4>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+
+</div>

@@ -9,6 +9,12 @@ class User < ActiveRecord::Base
   #chances
   has_many :chances, :dependent => :destroy
 
+  has_many :supports
+  has_many :flags
+
+  scope :with_flag, lambda {|flag, value| joins(:flags).where("flags.name = ? and flags.value_boolean = ?", flag, value)}
+
+
   #   # the participations in user_todos:
   has_many :user_wishes, :dependent => :destroy
   has_many :wishes, through: :user_wishes

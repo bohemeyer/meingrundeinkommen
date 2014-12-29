@@ -11,7 +11,6 @@
 // about supported directives.
 //
 
-//= require turbolinks
 //= require services/angular-file-upload-shim.min
 //= require angular
 //= require angular-ui-bootstrap

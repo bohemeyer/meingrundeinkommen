@@ -1,7 +1,12 @@
-<div class="row">
+<div class="row" style="margin-bottom:100px">
       <div class="col-md-6 col-md-offset-3 text-center">
-       <i class="icon-envelope" style="color: #ddd;font-size: 250px;text-shadow: 1px 1px 0 black;"></i>
-       <h1>Bitte E-Mails überprüfen</h>
-       <h3>Wir haben dir einen Bestätigungslink per Mail an {{register_user.email}} zugeschickt. Bitte kurz draufklicken, dann geht es los!</h3>
+
+       <h3 ng-if="trigger == 'participates'">Fast geschafft...</h3>
+       <i class="fa fa-envelope" style="color: #ddd;font-size: 200px;text-shadow: 1px 1px 0 black;"></i>
+       <h1>Bitte bestätige <br>deine Mail-Adresse <span ng-if="trigger == 'participates'">um teilzunehmen</span></h1>
+       <h3>Wir haben dir einen Bestätigungslink an <b>{{current.user.email}}</b> geschickt.</h3>
+       <hr>
+       <p><b>Nicht angekommen?</b><br>Im Spam-Ordner gucken oder <a href="#" ng-click="resend_link()" ng-hide="resending_mail">E-Mail erneut anfordern</a><span ng-show="resending_mail">... wird gesendet ...</span>.</p>
+       <p class="small"><b>Mail kommt trotzdem nicht an?</b><br> Sende uns von {{current.user.email}} eine E-Mail an <a href="mailto:support@mein-grundeinkommen.de?subject=Bitte%20freischalten">support@mein-grundeinkommen.de</a> mit dem Betreff 'Bitte freischalten'</p>
       </div>
     </div>

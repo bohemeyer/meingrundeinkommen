@@ -1,0 +1,138 @@
+<script type="text/ng-template" id="buttons.html">
+  <a ng-show="browser.isChrome" ng-click="crowdbar_install()" href="https://chrome.google.com/webstore/detail/crowdbar/lhinknkceoifkecnmmlgnelmdipmbcdn" target="_blank" class="btn-large btn-color">Jetzt installieren</a>
+
+  <a ng-show="browser.isFirefox" ng-click="crowdbar_install()" href="https://addons.mozilla.org/de/firefox/addon/mein-grundeinkommen-crowdbar/" target="_blank" class="btn-large btn-color">Jetzt installieren</a>
+
+  <a ng-show="browser.isSafari" ng-click="crowdbar_install()" href="http://bar.mein-grundeinkommen.de/extension/crowd_bar/crowd_bar.safariextz" target="_blank" class="btn-large btn-color">Jetzt herunterladen</a>
+</script>
+
+<div id="crowdbar_background">
+	<div class="row">
+    <div ng-controller="CrowdbarController">
+		<div class="col-sm-6 col-xs-12" id="crowdbar_overlay">
+  			<div ng-show="show_faq && !show_form" class="container margin-top-30">
+
+  				<a href="#" ng-click="show_faq = false"><i class="fa fa-arrow-left"></i> zurück</a>
+
+          <hr>
+
+          <h3>So funktioniert's</h3>
+           <p>Die Crowdbar ist eine anonyme und kostenlose Erweiterung für deinen Internet-Browser. Nachdem du sie installiert hast bekommst du bei <a href="http://bar.mein-grundeinkommen.de/shops" target="_blank">allen teilnehmenden Internetshops</a> die Möglichkeit deinen Einkauf über unseren Werbelink zu tätigen.</br>Dafür zahlen uns die Onlineshops eine Provision (ca. 5%), die wir für das Grundeinkommen verwenden.
+            <br>
+            <a class="btn-color btn" href="#" ng-click="video_content='video.html'">Erklärvideo ansehen</a>
+          </p>
+
+
+          <h3>Warum machen die Shops das?</h3>
+          <p>Onlineshops sind immer auf neue Kundschaft angewiesen. Deshalb zahlen sie Webseiten, die neue Kunden bringen, eine Werbeprovision. Wenn du über die Crowdbar benutzt, wissen die Shops, dass du über uns auf sie aufmerksam geworden bist und belohnen uns dafür.</p>
+
+          <h3>Werden Daten von mir übermittelt?</h3>
+          <p>Nein. Die Crowdbar prüft lediglich, ob du dich gerade auf einem Partnershop befindest oder nicht. Wann, wie oft oder wie lange du dort bist erfahren wir nicht. Wir wissen auch nicht, was du gekauft hast oder in welchem Shop du eingekauft hast. Die Quelltexte der Crowdbar sind öffentlich, so dass es auch keine heimliche Datenübermittlung geben kann.</p>
+
+          <h3>Wird mein Browser dadurch langsam?</h3>
+          <p>Nein. Die Crowdbar ist winzig und wird in wenigen Millisekunden ausgeführt, so dass es kein Mensch bemerkt.</p>
+
+          <h3>Gibt es irgendwelche versteckten Kosten oder einen Haken?</h3>
+          <p>Nein. Wenn du die Crowdbar nicht nutzt, dann verdient der Onlineshop einfach mehr. Du kannst also entscheiden, wem du es mehr gönnst :)</p>
+
+          <a class="btn-color btn margin-top-30" href="/info/faq" target="_blank">Häufige Fragen lesen und stellen</a>
+          <hr>
+          <div ng-include="'buttons.html'"></div>
+
+  			</div>
+
+
+
+  			<div ng-hide="show_form || show_faq" class="container text-center margin-top-70">
+  				<h1>Die Crowdbar macht aus deinem Online-Einkauf Grundeinkommen</h1>
+
+  				<h3>Ganz ohne Extrakosten für dich.</h3>
+
+          <div ng-include="'buttons.html'"></div>
+
+
+
+  				<h2 class="margin-top-30">schnell. sicher. kostenlos.</h2>
+
+
+
+  				<h4><a ng-click="show_faq = true" href="#"><u>So funktioniert's</u></a></h4>
+
+  <h3 odometer="crowdbar_users" class="prettybig margin-top-30" style="margin-bottom:3px"></h3>
+
+
+  <br>Crowdbar-Nutzende <br> erwirtschaften täglich:<br>
+
+  <h3 class="float-right prettybig odometer odometer-auto-theme" style="margin-right:10px"><div class="odometer-inside">
+    <span class="odometer-digit"><span class="odometer-digit-spacer">€</span><span class="odometer-digit-inner"><span class="odometer-ribbon"><span class="odometer-ribbon-inner"><span class="odometer-value">€</span></span></span></span></span>
+  </div>
+  </h3><h3 odometer="daily_comm" class="prettybig"></h3>
+
+  <!--
+          <div class=" text-center margin-top-70" style="background: url('/assets/crowdcard/overlay.png');
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: inset 1px 1px 5px black;">
+                 <h1 class="big" style="margin-bottom:0"><i class="icon-group"></i> 5.234</h1>
+              <h5 style="margin-bottom:0">Nutzer erwirtschaften täglich</h5>
+                 <h1 class="big" style="margin-bottom:0"><i class="icon-heart"></i> 183€</h1>
+              <h5 >für's nächste Grundeinkommen</h5>
+     </div> -->
+
+
+
+  			</div>
+
+      </div>
+
+
+      <div class="col-sm-6 col-xs-0" style="min-height:800px" ng-click="video_content= video_content ? '' : 'video.html'" >
+
+
+        <div class="row margin-top-50">
+          <div class="col-sm-1 col-md-3">&nbsp;</div>
+          <div class="col-sm-10 col-md-6">
+            <carousel interval="4000" class="margin-top-30" id="all_supports">
+               <slide ng-repeat="cb in testimonials">
+
+                    <div class="text-left" style="padding:8px;height:120px;font-size:12px;overflow:hidden;line-height:16px;">
+                      <div class="testimonial-image pull-left">
+                            <img ng-src="{{cb.user.avatar.avatar.thumb.url}}">
+                          </div>
+                      <b><a href="/menschen/{{cb.user.id}}">{{cb.user.name}}</a> benutzt die Crowdbar:</b><br>
+                      <div style="margin-left:70px;">
+                      „{{cb.comment}}“
+                      </div>
+                    </div>
+
+
+                </div>
+
+              </slide>
+            </carousel>
+          </div>
+          <div class="col-sm-1 col-md-3">&nbsp;</div>
+          <div class="clearfix">
+        </div>
+
+
+        <div class="container margin-top-50">
+         <div ng-include src="video_content ? video_content : ''">
+         </div>
+        </div>
+
+
+      </div>
+
+
+
+
+
+        <script type="text/ng-template" id="video.html">
+           <iframe width="100%" height="350" src="//www.youtube.com/embed/tcd7NiotGWg?autoplay=1" frameborder="0" allowfullscreen></iframe>
+        </script>
+
+    </div>
+	</div>
+  </div>
+</div>

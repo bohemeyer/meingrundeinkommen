@@ -27,7 +27,7 @@ class Api::HomepagesController < ApplicationController
 
     own_supporter = Support.where(:payment_completed => true).where.not(:payment_method => :crowdbar).count
 
-    crowdbar_users = User.where(:has_crowdbar => true).count
+    crowdbar_users = User.with_flag('hasCrowdbar',true).count
 
     supporter = crowdfunding_supporter + own_supporter + crowdbar_users
 
