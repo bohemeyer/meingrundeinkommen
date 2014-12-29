@@ -166,7 +166,7 @@ class Api::UsersController < ApplicationController
       current_user.save
     end
 
-    render json: @user
+    render json: @user, scope: current_user ? current_user : false
   end
 
   def load_user

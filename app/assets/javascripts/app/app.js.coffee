@@ -4,7 +4,9 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
   "$routeProvider"
   "$locationProvider"
   ($routeProvider, $locationProvider) ->
-    $locationProvider.html5Mode true
+    $locationProvider.html5Mode
+      enabled: true
+      requireBase: false
     $routeProvider
     .otherwise
       redirectTo: "/start"
@@ -47,8 +49,9 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
 
     Crowdbar.verify().then (has_crowdbar) ->
       $scope.participation.has_crowdbar = has_crowdbar
-      $scope.current.setFlag('hasCrowdbar',has_crowdbar)
-      $scope.participation.participates = if $scope.current.user and $scope.current.user.chances.length > 0 then true else false
+      if $scope.current.user
+        $scope.current.setFlag('hasCrowdbar',has_crowdbar)
+        $scope.participation.participates = if $scope.current.user.chances.length > 0 then true else false
 
 
     #STATS

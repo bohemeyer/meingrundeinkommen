@@ -12,7 +12,7 @@ class Api::FlagsController < ApplicationController
 				existing.update_attribute(:value_boolean, true)  if format != :value_boolean && params[:value]
 				existing.update_attribute(:value_boolean, false) if format != :value_boolean && !params[:value]
 			end
-			render :json => {value: existing.display}
+			render :json => { value: existing.display }
 		end
 	end
 
