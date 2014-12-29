@@ -58,8 +58,6 @@ angular.module "State", ["rails"]
 
     $scope.user_states = []
     $scope.state_form = {}
-    $scope.current.user.states = []
-
 
     if $scope.own_profile && !$scope.user
       $scope.user = $scope.current.user

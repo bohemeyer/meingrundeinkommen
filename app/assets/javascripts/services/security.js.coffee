@@ -1,4 +1,4 @@
-angular.module "Security", ["Flag"]
+angular.module "Security", ["Devise","Flag"]
 .factory "Security", [
   "$http"
   "$q"
