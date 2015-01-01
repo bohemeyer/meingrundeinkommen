@@ -8,7 +8,7 @@ class CreateCrowdcards < ActiveRecord::Migration
       t.text :house_number
       t.text :zip_code
       t.text :city
-      t.text :country, :default => 'de'
+      t.text :country#, :default => 'de'
       t.integer :number_of_cards, :default => 1
       t.timestamps
     end
