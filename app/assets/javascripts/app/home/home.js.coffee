@@ -44,9 +44,6 @@ angular.module("home", ["Wish","Support","Winner","rails"])
       if i % 3 == 0
         row++
         i = 0
-    console.log $scope.winners
-
-
 
   TDay = new Date("November, 15, 2014")
   CurrentDate = new Date()
