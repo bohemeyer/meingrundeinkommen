@@ -8,9 +8,9 @@ angular.module("register", [
       controller: "RegisterViewController"
 ]
 
-.controller "RegisterViewController", RegisterViewController = ($rootScope, $scope, $http, $location, $cookies, Security, $parse, $modal, $routeParams) ->
+.controller "RegisterViewController", RegisterViewController = ($auth, $rootScope, $scope, $location, $cookies, Session, $parse, $modal, $routeParams) ->
 
-  if Security.isAuthenticated()
+  if $scope.current.user
     $location.path( "/boarding")
 
   $scope.registered = false
@@ -47,41 +47,24 @@ angular.module("register", [
       datenschutz: $scope.register_user.datenschutz
       newsletter: $scope.register_user.newsletter
 
+    $auth.submitRegistration(credentials)
 
-    Security.register(credentials).then ((response) ->
+    $rootScope.$on 'auth:registration-email-error', (e, response, deferred) ->
+      for fieldName of response.errors
+        serverMessage = $parse("RegisterForm." + fieldName + ".$error.serverMessage")
+        #$scope.RegisterForm.$setValidity fieldName, false, $scope.RegisterForm
+        serverMessage.assign $scope, response.errors[fieldName][0]
 
-      if response.errors
-        for fieldName of response.errors
-          serverMessage = $parse("RegisterForm." + fieldName + ".$error.serverMessage")
-          #$scope.RegisterForm.$setValidity fieldName, false, $scope.RegisterForm
-          serverMessage.assign $scope, response.errors[fieldName][0]
-      else
-        Security.login(credentials).then ((response) ->
-          $location.path( "/boarding" ).search('trigger', 'registered') if response.id && !response.error
-          return
-        )
-        #$scope.registered = "assets/checkmail.html"
+    $rootScope.$on 'auth:registration-email-success', (e, response, deferred) ->
+      $auth.submitLogin(credentials)
 
-      $scope.submitted = false
+    $scope.$on 'auth:login-success', (e, response, deferred) ->
+      if response.user.id
+        $scope.current.setCurrentUser(response.user)
+        $location.path( "/boarding" ).search('trigger', 'registered')
 
-      return
-    ), (x) ->
-      return
-    return
 
-  $scope.open = (template) ->
-    modalInstance = $modal.open(
-      templateUrl: "/assets/" + template + ".html"
-      controller: ModalInstanceCtrl
-      size: 'lg'
-    )
-    return
+  $scope.submitted = false
 
-  ModalInstanceCtrl = ($scope, $modalInstance) ->
-  $scope.ok = ->
-    $modalInstance.close
-    return
+  return
 
-  $scope.cancel = ->
-    $modalInstance.dismiss "cancel"
-    return

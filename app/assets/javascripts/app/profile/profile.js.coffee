@@ -13,7 +13,7 @@ angular.module("profile", ["User","Wish","Chance","State","Avatar",'ng-breadcrum
           "$route"
           (User, $route) ->
             User.get($route.current.params.userId).then (user) ->
-              user
+              user.user
         ]
 
 ]
@@ -21,7 +21,6 @@ angular.module("profile", ["User","Wish","Chance","State","Avatar",'ng-breadcrum
 .controller "ProfileViewController", [
   "$scope"
   "$rootScope"
-  "Security"
   "thisuser"
   "User"
   "$http"
@@ -33,12 +32,13 @@ angular.module("profile", ["User","Wish","Chance","State","Avatar",'ng-breadcrum
   "filterFilter"
   "$location"
 
-  ($scope, $rootScope, Security, user, UserModel, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams, filterFilter, $location) ->
+  ($scope, $rootScope, user, UserModel, $http, breadcrumbs, $cookies, screenSize, $modal,  $routeParams, filterFilter, $location) ->
 
     # $scope.flagtest = (key, value) ->
     #   $scope.current.setFlag key, value
 
     $scope.user = user
+    $scope.own_profile = $scope.current.is_own_profile(user.id)
 
     #todo: put in current user service
     $scope.default_avatar = if $scope.current && $scope.current.is_own_profile(user.id) && $scope.current.is_default_avatar() then true else false
@@ -58,11 +58,11 @@ angular.module("profile", ["User","Wish","Chance","State","Avatar",'ng-breadcrum
       Profil: user.name + "s Profil"
     #$scope.breadcrumbs = breadcrumbs
 
-    $scope.$watch (->
-      Security.is_own_profile(user.id)
-    ), (newVal, oldVal) ->
-      $scope.own_profile = newVal
-      return
+    # $scope.$watch (->
+    #   $scope.current.is_own_profile(user.id)
+    # ), (newVal, oldVal) ->
+    #   $scope.own_profile = newVal
+    #   return
 
     $scope.new_name = user.name
 
@@ -116,7 +116,7 @@ angular.module("profile", ["User","Wish","Chance","State","Avatar",'ng-breadcrum
             id: user.id
         $http.delete("/users.json", input)
         .success( ->
-          Security.logout()
+          $scope.current.logout()
           $modalInstance.dismiss "done"
           $location.path("/")
         )

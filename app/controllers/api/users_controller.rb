@@ -5,9 +5,9 @@ class Api::UsersController < ApplicationController
 
   def states
     if current_user && @user == current_user
-      render json: @user.state_users
+      render json: @user.state_users, serializer: false
     else
-      render json: @user.state_users.where(:visibility => true)
+      render json: @user.state_users.where(:visibility => true), serializer: false
     end
     #render json: @user.states.includes(:state_users)
   end
@@ -33,7 +33,7 @@ class Api::UsersController < ApplicationController
         #user: UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar)
       }
     end
-    render json:x
+    render json: x, serializer: false
   end
 
 
@@ -151,7 +151,7 @@ class Api::UsersController < ApplicationController
         }
       end
 
-      render json:r
+      render json:r, serializer: false
     end
   end
 
@@ -171,6 +171,10 @@ class Api::UsersController < ApplicationController
 
   def load_user
     @user = User.find(params[:id])
+  end
+
+  def default_serializer_options
+    { each_serializer: UserSerializer } # I use each_serializer instead of serializer because it's rendering a collection.
   end
 
 end

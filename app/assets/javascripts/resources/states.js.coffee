@@ -59,7 +59,7 @@ angular.module "State", ["rails"]
     $scope.user_states = []
     $scope.state_form = {}
 
-    if $scope.own_profile && !$scope.user
+    if $scope.current.own_profile && !$scope.user
       $scope.user = $scope.current.user
 
     #initialize default states
@@ -71,7 +71,6 @@ angular.module "State", ["rails"]
         selected: false
         user_state_id: false
         is_default_state: true
-
 
     State.forUser($scope.user.id).then (user_states) ->
       $scope.current.user.states = user_states if $scope.own_profile
@@ -137,8 +136,6 @@ angular.module "State", ["rails"]
                   $scope.current.user.states.splice($scope.current.user.states.indexOf(ustate),1)
             $scope.states[$scope.states.indexOf(state)].selected = false
             $scope.states[$scope.states.indexOf(state)].user_state_id = false
-
-      console.log $scope.current.user.states
 
     $scope.getStateSuggestions = (q) ->
       State.suggestions(q).then (states) ->

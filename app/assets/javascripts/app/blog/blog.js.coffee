@@ -21,8 +21,7 @@ angular.module("blog", ['ng-breadcrumbs','Comment'])
   "$http"
   "$routeParams"
   "Comment"
-  "Security"
-  ($scope, $http, $routeParams, Comment, Security) ->
+  ($scope, $http, $routeParams, Comment) ->
     $scope.comments = []
     $scope.new_comment = ""
     query = {}
@@ -57,11 +56,11 @@ angular.module("blog", ['ng-breadcrumbs','Comment'])
         $scope.add_commentable()
 
     $scope.add_commentable = () ->
-      if Security.currentUser
+      if $scope.current.user
         $scope.comments.unshift
           createdAt: Date.new
-          name: Security.currentUser.name
-          avatar: Security.currentUser.avatar.avatar.url
+          name: $scope.current.user.name
+          avatar: $scope.current.user.avatar.avatar.url
           blank: true
           text: ""
 

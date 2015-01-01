@@ -20,7 +20,6 @@ angular.module("wishpage", ["Wish",'ng-breadcrumbs'])
 
 .controller "WishPageViewController", [
   "$scope"
-  "Security"
   "this_wish"
   "Wish"
   "$http"
@@ -28,7 +27,7 @@ angular.module("wishpage", ["Wish",'ng-breadcrumbs'])
   "$cookies"
   "$location"
 
-  ($scope, Security, this_wish, Wish, $http, breadcrumbs, $cookies, $location) ->
+  ($scope, this_wish, Wish, $http, breadcrumbs, $cookies, $location) ->
 
     $scope.render = 'wish_page'
 
@@ -54,7 +53,7 @@ angular.module("wishpage", ["Wish",'ng-breadcrumbs'])
 
 
     $scope.me_too = (wish) ->
-      if Security.currentUser
+      if $scope.current.user
         new Wish(
           forUser: 'user_'
           wish_id: wish.wishId

@@ -1,33 +1,43 @@
-window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Security','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll','faq','draw','drawfrontend', 'Support','djds4rce.angular-socialshare','admin','blog','boarding','Crowdbar','Crowdcard'])
+window.App = angular.module('grundeinkommen', ['ng-token-auth','ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Session','ngCookies','login','reset_password','home','register','profile','wishpage','content','smoothScroll','faq','draw','drawfrontend', 'Support','djds4rce.angular-socialshare','admin','blog','boarding','Crowdbar','Crowdcard'])
 
 .config [
   "$routeProvider"
   "$locationProvider"
-  ($routeProvider, $locationProvider) ->
+  "$authProvider"
+  "RailsResourceProvider"
+  ($routeProvider, $locationProvider, $authProvider, RailsResourceProvider) ->
     $locationProvider.html5Mode
       enabled: true
       requireBase: false
     $routeProvider
     .otherwise
       redirectTo: "/start"
+    $authProvider.configure
+      apiUrl: "/api"
+    RailsResourceProvider.rootWrapping(false)
 ]
-
-
-.config (RailsResourceProvider) ->
-  RailsResourceProvider.rootWrapping(false)
-
 
 .controller "AppCtrl", [
   "$scope"
-  "Security"
+  "Session"
   "breadcrumbs"
   "Home"
   "Crowdbar"
   "$location"
+  "$window"
 
-  ($scope, Security, breadcrumbs, Home, Crowdbar, $location) ->
+  ($scope, Session, breadcrumbs, Home, Crowdbar, $location, $window) ->
 
-    $scope.current = Security
+    $scope.current = Session
+
+
+    $scope.$on 'auth:validation-success', (event, response, deferred) ->
+      $scope.current.setCurrentUser(response.user)
+
+    $scope.$on 'auth:logout-success', (event, response, deferred) ->
+      $scope.current.logoutUser()
+      $window.location.reload()
+
 
     $scope.breadcrumbs = breadcrumbs
 
@@ -76,9 +86,8 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
 #################################################
 
 .run [
-  "Security"
+  "Session"
   "$FB"
-  (Security, $FB) ->
-    Security.requestCurrentUser()
+  (Session, $FB) ->
     $FB.init('1410947652520230')
 ]

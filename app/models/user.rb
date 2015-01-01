@@ -1,10 +1,14 @@
 class User < ActiveRecord::Base
-  mount_uploader :avatar, AvatarUploader
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable#, :omniauthable
+
+  include DeviseTokenAuth::Concerns::User
+
+  mount_uploader :avatar, AvatarUploader
+
 
   #chances
   has_many :chances, :dependent => :destroy
@@ -27,6 +31,6 @@ class User < ActiveRecord::Base
   #validates_presence_of   :avatar
   validates_integrity_of  :avatar
   validates_processing_of :avatar
-  validates :datenschutz, inclusion: [true]
+  #validates :datenschutz, inclusion: [true]
 
 end

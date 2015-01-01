@@ -16,7 +16,7 @@
 
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
-    = javascript_include_tag "//platform.twitter.com/widgets.js"
+
     = csrf_meta_tags
     / Favicons
     %link{href: "assets/ico/favicon.ico", rel: "shortcut icon"}/
@@ -24,6 +24,7 @@
     %link{href: "assets/ico/apple-touch-icon-72.png", rel: "apple-touch-icon", sizes: "72x72"}/
     %link{href: "assets/ico/apple-touch-icon-114.png", rel: "apple-touch-icon", sizes: "114x114"}/
     %link{href: "assets/ico/apple-touch-icon-144.png", rel: "apple-touch-icon", sizes: "144x144"}/
+    =# javascript_include_tag "//platform.twitter.com/widgets.js"
 
   %body.home-3{"ng-controller" => "AppCtrl"}
     .wrap{"ng-class"=>"{'full_height' : getStatus('/boarding') == 'current'}"}
@@ -96,7 +97,7 @@
                         %i.fa.fa-pencil
                         Daten bearbeiten
                     %li
-                      %a.sf-with-ul{href: "#", "ng-click"=>"current.logout()"}
+                      %a.sf-with-ul{href: "#", "ng-click"=>"signOut()"}
                         %i.fa.fa-power-off
                         Abmelden
 
@@ -109,6 +110,7 @@
         %i.fa.fa-refresh.fa-spin.big
         / %div.text-center.margin-top-30{style: "width:150px;margin-left: auto;margin-right: auto;"}
         / %progressbar.active.small{:value => "100",:style=>"height:10px;"}
+
 
       #main{"ng-view" => "", :autoscroll=>"true"}
       / Content End

@@ -19,7 +19,7 @@ angular.module("home", ["Wish","Support","Winner","rails"])
       label: "Was wäre wenn?"
 ]
 
-.controller "HomeViewController", ["$scope", "$rootScope", "Wish", "$modal", "$cookies", "$location", "Security", "$http", "$routeParams", "Support", "Winner", ($scope, $rootScope, Wish, $modal, $cookies, $location, Security, $http, $routeParams, Support, Winner) ->
+.controller "HomeViewController", ["$scope", "$rootScope", "Wish", "$modal", "$cookies", "$location", "$http", "$routeParams", "Support", "Winner", ($scope, $rootScope, Wish, $modal, $cookies, $location, $http, $routeParams, Support, Winner) ->
 
   if $routeParams.thanks_for_support
     Support.get($routeParams.thanks_for_support).then (support) ->
@@ -83,7 +83,7 @@ angular.module("home", ["Wish","Support","Winner","rails"])
     $scope.video_content = 'video.html'
 
   $scope.me_too = (wish) ->
-    if Security.currentUser
+    if $scope.current.user
       new Wish(
         forUser: 'user_'
         wish_id: wish.wishId

@@ -11,6 +11,11 @@ gem 'jbuilder', '~> 1.2'
 
 # authentication/authorization
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-facebook'
+#gem 'omniauth-google-oauth2'
+gem 'omniauth-twitter'
+gem 'devise_token_auth'
 gem 'bcrypt-ruby'
 
 # misc

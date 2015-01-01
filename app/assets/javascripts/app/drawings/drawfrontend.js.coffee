@@ -12,10 +12,9 @@ angular.module("drawfrontend", ['ng-breadcrumbs'])
   "$scope"
   "$http"
   "$timeout"
-  "Security"
   "$modal"
 
-  ($scope, $http, $timeout, Security, $modal) ->
+  ($scope, $http, $timeout, $modal) ->
 
     $scope.verlosung_erklaert = () ->
       modalInstance = $modal.open(
@@ -24,8 +23,8 @@ angular.module("drawfrontend", ['ng-breadcrumbs'])
       )
       return
 
-    if Security.currentUser
-      $scope.own_codes = Security.currentUser.chances
+    if $scope.current.user
+      $scope.own_codes = $scope.current.user.chances
 
     myLoop = ->
 

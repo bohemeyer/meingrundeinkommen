@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141225223140) do
+ActiveRecord::Schema.define(version: 20141229150910) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -197,6 +197,9 @@ ActiveRecord::Schema.define(version: 20141225223140) do
     t.boolean  "crowdbar_not_found",     default: false
     t.integer  "winner",                 default: 0
     t.boolean  "admin",                  default: false
+    t.string   "provider",               default: "",    null: false
+    t.string   "uid",                    default: "",    null: false
+    t.text     "tokens"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

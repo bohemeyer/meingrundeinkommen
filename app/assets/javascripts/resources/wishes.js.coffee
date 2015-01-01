@@ -44,7 +44,7 @@ angular.module "Wish", ["rails"]
 
     $scope.wish_form = {}
 
-    if $scope.own_profile && !$scope.user
+    if $scope.current.own_profile && !$scope.user
       $scope.user = $scope.current.user
 
     Wish.forUser($scope.user.id).then (wishes) ->

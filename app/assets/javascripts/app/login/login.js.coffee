@@ -8,9 +8,9 @@ angular.module("login", [
       controller: "LoginViewController"
 ]
 
-.controller "LoginViewController", LoginViewController = ($rootScope, $routeParams, $scope, $http, $location, Security, $parse) ->
+.controller "LoginViewController", LoginViewController = ($auth, $rootScope, $routeParams, $scope, $location, $parse) ->
 
-  if Security.isAuthenticated()
+  if $scope.current.user
     $location.path( "/boarding" )
 
   $scope.just_confirmed = if $routeParams['confirmed'] then $routeParams['confirmed'] else ''
@@ -31,29 +31,29 @@ angular.module("login", [
     $scope.forgot_pw = false
 
   $scope.reset_password = ->
-    $scope.submitted_reset = true
-    $http.post('/users/password.json',
-      user:
-        email: $scope.login_user.email
-    ).success((response) ->
-      serverMessage = $parse("LoginForm.$error.serverMessage")
-      serverMessage.assign $scope, 'Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Dein Passwort zurücksetzen kannst.'
-      $scope.submitted_reset = false
-    ).error((response) ->
-      serverMessage = $parse("LoginForm.$error.serverMessage")
-      serverMessage.assign $scope, "Du bist noch gar nicht registriert. Bitte registrier dich neu indem du im Menü ganz oben auf 'Mitmachen' klickst."
-      $scope.submitted_reset = false
-    )
+    # $scope.submitted_reset = true
+    # $http.post('/users/password.json',
+    #   user:
+    #     email: $scope.login_user.email
+    # ).success((response) ->
+    #   serverMessage = $parse("LoginForm.$error.serverMessage")
+    #   serverMessage.assign $scope, 'Du erhältst in wenigen Minuten eine E-Mail mit der Anleitung, wie Du Dein Passwort zurücksetzen kannst.'
+    #   $scope.submitted_reset = false
+    # ).error((response) ->
+    #   serverMessage = $parse("LoginForm.$error.serverMessage")
+    #   serverMessage.assign $scope, "Du bist noch gar nicht registriert. Bitte registrier dich neu indem du im Menü ganz oben auf 'Mitmachen' klickst."
+    #   $scope.submitted_reset = false
+    # )
 
   $scope.resend_link = ->
-    $scope.resend_status = 'Bitte warten...'
-    $http.post('/users/confirmation.json',
-      user:
-        email: $scope.login_user.email
-    ).success((response) ->
-      $scope.registered = "assets/checkmail.html"
-      $scope.register_user.email = $scope.login_user.email
-    )
+    # $scope.resend_status = 'Bitte warten...'
+    # $http.post('/users/confirmation.json',
+    #   user:
+    #     email: $scope.login_user.email
+    # ).success((response) ->
+    #   $scope.registered = "assets/checkmail.html"
+    #   $scope.register_user.email = $scope.login_user.email
+    # )
 
   $scope.login = ->
     if $scope.forgot_pw
@@ -64,19 +64,21 @@ angular.module("login", [
     $scope.show_resend_link = false
 
     # Try to login
-    Security.login($scope.login_user).then ((response) ->
-      $location.path( "/boarding" ) if response.id && !response.error
-      return
-    )
+    $auth.submitLogin($scope.login_user)
 
-    $scope.$on('devise:unauthorized', (event, xhr, deferred) ->
+    $rootScope.$on 'auth:login-success', (e, response, deferred) ->
+      if response.user.id
+        $scope.current.setCurrentUser(response.user)
+        $location.path( "/boarding" )
+
+    $rootScope.$on 'auth:login-error', (event, xhr, deferred) ->
+      console.log xhr
       $scope.show_resend_link = false
-      if xhr.data.error
+      if xhr.errors
         serverMessage = $parse("LoginForm.$error.serverMessage")
-        if xhr.data.error.indexOf('[[resend_link]]') > -1
+        if xhr.errors[0].indexOf('[[resend_link]]') > -1
           $scope.show_resend_link = true
-        serverMessage.assign $scope, xhr.data.error.replace('[[resend_link]]','')
+        serverMessage.assign $scope, xhr.errors[0].replace('[[resend_link]]','')
         $scope.submitted = false
-    )
 
     return
