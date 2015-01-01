@@ -65,7 +65,7 @@ class UserSerializer < ActiveModel::Serializer
     if (current_user && object == current_user) || (current_user && current_user.admin?)
       object.states
     else
-      object.states.where(:visibility => true)
+      object.states.where('state_users.visibility' => true)
     end
   end
 
