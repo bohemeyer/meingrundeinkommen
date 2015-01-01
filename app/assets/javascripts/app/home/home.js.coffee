@@ -34,15 +34,19 @@ angular.module("home", ["Wish","Support","Winner","rails"])
 
   Winner.query().then (winners) ->
     $scope.winners = []
+    $scope.number_of_winners = winners.length
     row = 0
-    i = 1
+    i = 0
     angular.forEach winners, (winner) ->
       i++
       $scope.winners[row] = [] if !$scope.winners[row]
       $scope.winners[row].push winner
       if i % 3 == 0
         row++
-        i = 1
+        i = 0
+    console.log $scope.winners
+
+
 
   TDay = new Date("November, 15, 2014")
   CurrentDate = new Date()

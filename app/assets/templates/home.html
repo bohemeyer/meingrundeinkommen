@@ -185,7 +185,7 @@
 <div class="row text-center margin-top-70">
 
         <h1 style="margin-bottom:10px;">Diese Menschen</h2>
-          <h3>haben die ersten <span class="big"><b>{{winners.length}}</b></span> Grundeinkommen gewonnen:</h3>
+          <h3>haben die ersten <span class="big"><b>{{number_of_winners}}</b></span> Grundeinkommen gewonnen:</h3>
 
 
 
@@ -219,7 +219,7 @@
              </div>
 
 
-             <div ng-if="!current.user" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
+             <div ng-if="!current.user && $index == winners.length - 1" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
                 <div class="content-box ch-item">
                   <div class="ch-info-wrap">
                       <div class="testimonial-image-sm">
@@ -237,7 +237,7 @@
              </div>
 
 
-             <div ng-if="current.user" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
+             <div ng-if="current.user && $index == winners.length - 1" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
                 <div class="content-box ch-item">
                   <div class="ch-info-wrap">
                       <div class="testimonial-image-sm">
