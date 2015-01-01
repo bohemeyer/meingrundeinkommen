@@ -11,7 +11,7 @@ angular.module("register", [
 .controller "RegisterViewController", RegisterViewController = ($rootScope, $scope, $http, $location, $cookies, Security, $parse, $modal, $routeParams) ->
 
   if Security.isAuthenticated()
-    $location.path( "/menschen/" + Security.currentUser.id )
+    $location.path( "/boarding")
 
   $scope.registered = false
   $scope.submitted = false
@@ -56,7 +56,11 @@ angular.module("register", [
           #$scope.RegisterForm.$setValidity fieldName, false, $scope.RegisterForm
           serverMessage.assign $scope, response.errors[fieldName][0]
       else
-        $scope.registered = "assets/checkmail.html"
+        Security.login(credentials).then ((response) ->
+          $location.path( "/boarding" ).search('trigger', 'registered') if response.id && !response.error
+          return
+        )
+        #$scope.registered = "assets/checkmail.html"
 
       $scope.submitted = false
 

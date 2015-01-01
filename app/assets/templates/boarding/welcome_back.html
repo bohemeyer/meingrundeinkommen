@@ -1,0 +1,47 @@
+
+<div class="container text-center" style="padding:40px">
+
+	<div class="text-center">
+	<div class="testimonial-image-sm">
+        <img src="{{user.avatar.avatar.url}}">
+	  </div>
+	 </div>
+
+	<h1>Willkommen zurück, {{user.name}}!</h1>
+
+	<div ng-switch="next_step" class="text-center">
+
+		<h3 ng-switch-when="confirm">
+			Bestätige doch bitte noch deine E-Mail-Adresse, damit du an den Verlosungen teilnehmen kannst.
+		</h3>
+
+		<h3 ng-switch-when="avatar">
+			Wir wollen zeigen, wie bunt und vielfältig eine Gesellschaft mit Grundeinkommen wäre. Du kannst dazu beitragen, indem du ein Profilbild hochlädst.
+		</h3>
+
+		<h3 ng-switch-when="gewinnspiel_question">
+			Die Anmeldung zur Verlosung des 6. Grundeinkommens hat begonnen. Nimm jetzt teil!
+		</h3>
+
+		<h3 ng-switch-when="crowdbar">
+			{{crowdbar_users}} Menschen benutzen bereits die Crowdbar und finanzieren damit den Großteil der Grundeinkommen. Um 100 Grundeinkommen zu verlosen brauchen wir mindestens 24.000 Crowdbars. <hr><b>Vielleicht hast du ja auch Lust kostenlos mitzuhelfen?</b>
+		</h3>
+
+		<h3 ng-switch-when="crowdcard">
+			Es gibt etwas Neues: Die Crowdcard ist eine Bonuskarte, mit der du in vielen Ladengeschäften für das nächste Grundeinkommen mitsammeln kannst. Komplett anonym. Gern schicken wir dir eine Karte per Post zu!
+		</h3>
+
+		<h3 ng-switch-when="donate">
+			Aus einer kleinen Idee ist ein großes Projekt geworden, an dem viele Menschen ehrenamtlich mitarbeiten. Um 100 Grundeinkommen zu schaffen wollen und müssen wir professioneller werden. Dafür brauchen wir deine Unterstützung!
+		</h3>
+
+
+	</div>
+
+
+
+	<div class="text-center">
+	<a ng-click="$close(cancel)" href="#" class="text-center btn btn-large btn-color">Los geht's</a>
+</div>
+
+</div>

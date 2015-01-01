@@ -29,8 +29,8 @@ class Api::UsersController < ApplicationController
         wish_url: Rack::Utils.escape(wish.text),
         wish: wish.conjugate,
         story: user_wish.story,
-        me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false),
-        user: UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar)
+        me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false)
+        #user: UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar)
       }
     end
     render json:x

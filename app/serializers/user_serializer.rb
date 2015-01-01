@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar, :confirmed_at, :admin
+  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar, :wishes, :states, :crowdcards, :confirmed_at, :admin, :flags
 
   def email
     if (current_user && object == current_user) || (current_user && current_user.admin?)
@@ -50,6 +50,34 @@ class UserSerializer < ActiveModel::Serializer
       true
     else
       false
+    end
+  end
+
+  def crowdcards
+    if (current_user && object == current_user) || (current_user && current_user.admin?)
+      object.crowdcards
+    else
+      ''
+    end
+  end
+
+  def states
+    if (current_user && object == current_user) || (current_user && current_user.admin?)
+      object.states
+    else
+      object.states.where(:visibility => true)
+    end
+  end
+
+  def flags
+    if (current_user && object == current_user) || (current_user && current_user.admin?)
+      r = {}
+      object.flags.each do |flag|
+        r[flag.name] = flag.display
+      end
+      r
+    else
+      ''
     end
   end
 

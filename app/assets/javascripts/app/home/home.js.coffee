@@ -1,4 +1,10 @@
-angular.module("home", ["Wish","Support","Winner"])
+angular.module("home", ["Wish","Support","Winner","rails"])
+.factory "Home", ["railsResourceFactory", (f) ->
+  f(
+    url: "/api/homepages"
+    name: "homepage"
+  )
+]
 .config [
   "$routeProvider"
   ($routeProvider) ->
@@ -17,18 +23,26 @@ angular.module("home", ["Wish","Support","Winner"])
 
   if $routeParams.thanks_for_support
     Support.get($routeParams.thanks_for_support).then (support) ->
-      modalInstance = $modal.open(
-        templateUrl: "/assets/thanks_for_support.html"
-        controller: "SupportBankCtrl"
-        size: 'md'
-        resolve:
-          items: ->
-            support
-      )
-      return
+      Support.thanks_for_support(support)
+
+  # Support.query().then (supports) ->
+  #   result = []
+  #   if supports.length > 2
+  #     while (supports.length > 0)
+  #       result.push(supports.splice(0, 3))
+  #     $scope.supports = result
 
   Winner.query().then (winners) ->
-    $scope.winners = winners
+    $scope.winners = []
+    row = 0
+    i = 1
+    angular.forEach winners, (winner) ->
+      i++
+      $scope.winners[row] = [] if !$scope.winners[row]
+      $scope.winners[row].push winner
+      if i % 3 == 0
+        row++
+        i = 1
 
   TDay = new Date("November, 15, 2014")
   CurrentDate = new Date()

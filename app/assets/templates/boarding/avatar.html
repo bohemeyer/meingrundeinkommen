@@ -1,0 +1,35 @@
+<div class="container">
+  <div ng-controller="AvatarController">
+	<h1 class="margin-top-70 text-center">Gesicht zeigen fürs Grundeinkommen</h1>
+	<h4 class="text-center" ng-hide="steps.done">Lade ein Profilfoto hoch</h4>
+
+	<div class="row margin-top-30">
+		<div class="" ng-class="{'col-sm-5 text-right': !steps.done, 'col-sm-12 text-center' : steps.done}">
+
+			<div class="testimonial-image-large" ng-file-select="onFileSelect($files)" ng-file-drop="onFileSelect($files)" ng-file-drag-over-class="about-to-drop" accept="image/*">
+					<img src="{{current.user.avatar.avatar.url}}">
+					<i style="font-size:100px;margin-top:-200px;margin-bottom:118px;margin-right:100px" class="fa fa-plus show-on-drag"></i>
+
+
+			</div>
+			<div  ng-show="steps.done">
+				<h1>Du schöner Mensch!</h1>
+				<a ng-click="next_step()" class="btn btn-color btn-large">weiter</a>
+			</div>
+
+		</div>
+		<div class="col-sm-7" ng-hide="steps.done">
+
+
+				<img src="/assets/upload_avatar.png" class="hidden-xs margin-top-20" />
+		        <br>
+		        <div style="margin-left: 30px;
+		    margin-top: -54px;
+		    text-align: center;
+		    width: 243px;">
+		        <span class="hidden-xs"> oder:</span><br>
+		        <div class="btn-color btn-normal" ng-file-select="onFileSelect($files)" accept="image/*"><i class="fa fa-upload"></i> Datei auswählen</div><br><br>
+			</div>
+		</div>
+	</div>
+</div>

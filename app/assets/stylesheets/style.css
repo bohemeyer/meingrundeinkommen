@@ -38,6 +38,10 @@ h1.title_headline {
     font-size: 80px;
 }
 
+.prettybig {
+    font-size: 60px;
+}
+
 .big {
     font-weight: bold;
     font-size: 40px;
@@ -494,8 +498,9 @@ h2.title {
 /* Main Content */
 #main {
     background-color: #fff;
-	padding: 0 0 80px;
+	padding: 0 0 0px;
     padding-top: 70px;
+    height: 100%;
 }
 
 .home #main, .home-2 #main, .home-3 #main, .page-services #main, .about #main {
@@ -1477,13 +1482,35 @@ a.prev.disabled,a.next.disabled {
     margin: 3px;
 }
 
-.testimonial-image-large img {
+
+.testimonial-image-large img, .testimonial-image-large .hi5 {
     border-radius: 150px;
     height: 300px !important;
     width: 300px !important;
     border:1px solid #ddd;
     padding:4px;
 }
+
+@-webkit-keyframes highfive {
+  0% {
+    background-image: url('/assets/lowfive.jpg');
+  }
+  50% {
+    background-image: url('/assets/high5.jpg');
+  }
+}
+
+.testimonial-image-large .hi5 {
+    background-size: 300px;
+    background: url('/assets/high5.jpg');
+    -webkit-animation-name: highfive;
+      -webkit-animation-duration: 2s;
+      -webkit-animation-iteration-count: 2;
+      -webkit-animation-direction: alternate;
+      -webkit-animation-timing-function: steps(1, end);
+}
+
+
 
 
 .testimonial-image-large.about-to-drop img, .testimonial-image-large.own_profile:hover img {
@@ -1498,6 +1525,7 @@ a.prev.disabled,a.next.disabled {
 .testimonial-image-large.about-to-drop .show-on-drag, .testimonial-image-large.own_profile:hover .show-on-drag {
     display: block;
 }
+
 
 .show-on-hover {
     display:none;
@@ -2603,6 +2631,10 @@ footer a,.contact-box:hover,#options li a.selected,header .top-bar,header .top-b
     margin-top: 70px;
 }
 
+.margin-bottom-70 {
+    margin-bottom: 70px;
+}
+
 .margin-top-20 {
     margin-top: 20px;
 }
@@ -2910,4 +2942,77 @@ text-shadow: 1px 1px 0px #000;
 position: absolute;
 margin-left: -173px;
 margin-top: -15px;
+}
+
+#boarding_footer {
+    position: fixed;
+width: 100%;
+padding: 7px;
+background: #F4F4F4;
+bottom: 0px;
+box-shadow: -1px -1px 3px #ccc;
+}
+
+#crowdcard_background {
+    background: url('/assets/crowdcard/background.jpg');
+width: 100%;
+/*min-height: 800px;*/
+height: 100%;
+height: 100%;
+background-repeat: no-repeat;
+background-position: inherit;
+background-size: cover;
+}
+
+#crowdcard_background > div > .row{
+height: 100%;
+}
+
+
+#crowdcard_overlay {
+height: 200%;
+background-image: url('/assets/crowdcard/overlay.png');
+background-size: contain;
+padding-bottom: 50px;
+}
+
+
+#crowdcard_overlay *, #crowdbar_overlay * {
+color: white;
+text-shadow: 2px 2px 3px black;
+    }
+#crowdcard_overlay input, #crowdcard_overlay select, #crowdbar_overlay input, #crowdbar_overlay select {
+    color: black;
+    text-shadow: none;
+}
+
+
+
+    #crowdbar_background {
+    background: url('/assets/crowdbar/background.jpg');
+width: 100%;
+min-height: 100%;
+height: 100%;
+background-repeat: no-repeat;
+background-position: inherit;
+background-size: cover;
+}
+
+#crowdbar_background > .row, #crowdbar_background > .row > div {
+height: 100%;
+}
+
+
+#crowdbar_overlay {
+height: 100%;
+background-image: url('/assets/crowdcard/overlay.png');
+background-size: contain;
+}
+
+html,body{height:100%;}
+
+.wrap.full_height {
+    height: 100%;
+    overflow: scroll;
+    border: 10px solid white;
 }

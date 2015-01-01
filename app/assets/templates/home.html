@@ -40,6 +40,7 @@
 
             </div>
             <div class="col-md-6">
+
                <h1 class="title_headline">
               Was würde passieren,<br>wenn Du plötzlich <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> hättest?
               <!--   Was würde passieren,<br> wenn es plötzlich Grundeinkommen gäbe? -->
@@ -173,8 +174,14 @@
 </div>
 
 
+<div class="margin-top-70 text-center">
+  Erzähl deinen Leuten von uns:
+  <div ng-include="'/assets/share.html'"></div>
+</div>
+<hr>
 
-<div class="container margin-top-70" id="winners"  style="padding-top:30px">
+
+<div class="container margin-top-30" id="winners"  style="padding-top:30px">
 <div class="row text-center margin-top-70">
 
         <h1 style="margin-bottom:10px;">Diese Menschen</h2>
@@ -182,8 +189,8 @@
 
 
 
-        <div class="row margin-top-70">
-             <div ng-repeat="d in winners" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
+        <div class="row margin-top-70" ng-repeat="winners_row in winners">
+             <div ng-repeat="d in winners_row" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
                 <div class="content-box ch-item">
                   <div class="ch-info-wrap">
                       <div class="testimonial-image-sm">
@@ -212,7 +219,7 @@
              </div>
 
 
-             <div ng-if="!security.currentUser" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
+             <div ng-if="!current.user" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
                 <div class="content-box ch-item">
                   <div class="ch-info-wrap">
                       <div class="testimonial-image-sm">
@@ -230,18 +237,18 @@
              </div>
 
 
-             <div ng-if="security.currentUser" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
+             <div ng-if="current.user" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
                 <div class="content-box ch-item">
                   <div class="ch-info-wrap">
                       <div class="testimonial-image-sm">
-                          <a href="/menschen/{{security.currentUser.id}}?gewinnspiel">
-                            <img src="{{security.currentUser.avatar.avatar.url}}">
+                          <a href="/boarding?trigger=wants_to_participate">
+                            <img src="{{current.user.avatar.avatar.url}}">
                         </div>
                       </div>
                    <div class="content-box-info text-left">
-                      <h3 style="margin-bottom:5px"><a href="/menschen/{{security.currentUser.id}}?gewinnspiel">Und ab Februar Du?</a></h3>
+                      <h3 style="margin-bottom:5px"><a href="/boarding?trigger=wants_to_participate">Und ab Februar Du?</a></h3>
 
-                           Ende Januar wird das 6. Grundeinkommen verlost. Du kannst es gewinnen. <a href="/menschen/{{security.currentUser.id}}?gewinnspiel">Jetzt teilnehmen</a></a>
+                           Ende Januar wird das 6. Grundeinkommen verlost. Du kannst es gewinnen. <a href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen</a></a>
                         </p>
                    </div>
                 </div>
@@ -272,20 +279,20 @@
 <!--             <h2 style="color:white"><span class="huge">{{home.numberOfParticipants}}</span> Menschen nehmen bereits teil</h2> -->
 
 
-              <div ng-if="security.currentUser">
-                <!-- <alert ng-if="!participation.participates" type="warning"><h1>Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1>
-                  <a class="btn-large btn-color" href="/menschen/{{security.currentUser.id}}?gewinnspiel=true">Ich will aber teilnehmen!</a>
-                </alert> -->
+              <div ng-if="current.user">
+                <alert ng-if="!participation.participates" type="warning"><h1>Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1>
+                  <a class="btn-large btn-color" href="/boarding?trigger=wants_to_participate">Ich will aber teilnehmen!</a>
+                </alert>
 
 
 
-                <!-- <a ng-if="participation.participates" class="btn-large btn-color " href="/menschen/{{security.currentUser.id}}?gewinnspiel=true" style="box-shadow:0px 0px 40px 10px white"><i class="fa fa-check"></i> Du nimmst an der Verlosung teil!</a> -->
+                <a ng-if="participation.participates" class="btn-large btn-color " href="/menschen/{{current.user.id}}?gewinnspiel=true" style="box-shadow:0px 0px 40px 10px white"><i class="fa fa-check"></i> Du nimmst an der Verlosung teil!</a>
 
-                <!-- <br><a ng-if="!participation.has_crowdbar" href="/menschen/{{security.currentUser.id}}?crowdbar" class="margin-top-20 btn-normal btn-grey"><i class="icon-plus"></i> &nbsp; Meine Gewinnchance verdoppeln</a> -->
+                <!-- <br><a ng-if="!participation.has_crowdbar" href="/menschen/{{current.user.id}}?crowdbar" class="margin-top-20 btn-normal btn-grey"><i class="icon-plus"></i> &nbsp; Meine Gewinnchance verdoppeln</a> -->
 
               </div>
 
-              <div ng-if="!security.currentUser">
+              <div ng-if="!current.user">
                 <a href="/register" class="btn-large btn-color margin-top-20" style="box-shadow:0px 0px 30px 15px white">Ich will teilnehmen</i></a>
               </div>
             </div>
@@ -302,14 +309,14 @@
 </div>
 
 <!--
-   <div class="container" id="youcan"  ng-if="!security.currentUser">
+   <div class="container" id="youcan"  ng-if="!current.user">
       <div class="row">
          <div class="slogan-content ">
             <div class="col-md-12 text-center">
               <!--  <h1 class="slogan-title"><span class="huge">Du</span><br>kannst 1 Jahr <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> gewinnen!</h1>
 
 
-        <div ng-hide="security.currentUser">
+        <div ng-hide="current.user">
                  <h3 class="title text-left">&nbsp;</h3>
                <img src="/assets/so_nimmst_du_teil.gif">
               <accordion close-others="true">
@@ -360,7 +367,7 @@
 
 
                <!--  <div class="get-started">
-                  <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color btn-large" analytics-on="click" analytics-event="geklickt: Ich will das Grundeinkommen haben">Ich will das Grundeinkommen haben!</a>
+                  <a ng-hide="current.user" href="/register" class="btn btn-special btn-color btn-large" analytics-on="click" analytics-event="geklickt: Ich will das Grundeinkommen haben">Ich will das Grundeinkommen haben!</a>
                 </div> -->
 
             </div>

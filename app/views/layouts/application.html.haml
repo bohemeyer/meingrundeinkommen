@@ -14,9 +14,9 @@
 
     %meta{property: "og:image", content: "https://www.mein-grundeinkommen.de/assets/fbshare.png"}
 
-    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
-    = javascript_include_tag "application", "data-turbolinks-track" => true
-    =# javascript_include_tag "//platform.twitter.com/widgets.js"
+    = stylesheet_link_tag    "application", media: "all"
+    = javascript_include_tag "application"
+    = javascript_include_tag "//platform.twitter.com/widgets.js"
     = csrf_meta_tags
     / Favicons
     %link{href: "assets/ico/favicon.ico", rel: "shortcut icon"}/
@@ -26,43 +26,10 @@
     %link{href: "assets/ico/apple-touch-icon-144.png", rel: "apple-touch-icon", sizes: "144x144"}/
 
   %body.home-3{"ng-controller" => "AppCtrl"}
-    .wrap
+    .wrap{"ng-class"=>"{'full_height' : getStatus('/boarding') == 'current'}"}
       / Header Start
-      %header#header{"ng-controller" => "HeaderCtrl"}
-        / Header Top Bar Start
-        / .top-bar
-        /   .slidedown.collapse
-        /     .container
-        /       .phone-email.pull-left
-        /         %a
-        /           %i.icon-phone
-        /           Call Us : +880 41 723 272
-        /           %span{"ng-show" => "main.current_user"}
-        /             %i.icon-envelope
-        /             Email : {{main.current_user.name}} ({{main.current_user.email}})
-        /       .pull-right
-        /         %ul.social.pull-left
-        /           %li.facebook
-        /             %a{href: "#"}
-        /               %i.icon-facebook
-        /           %li.twitter
-        /             %a{href: "#"}
-        /               %i.icon-twitter
-        /           %li.dribbble
-        /             %a{href: "#"}
-        /               %i.icon-dribbble
-        /           %li.linkedin
-        /             %a{href: "#"}
-        /               %i.icon-linkedin
-        /           %li.rss
-        /             %a{href: "#"}
-        /               %i.icon-rss
-        /         #search-form.pull-right
-        /           %form{action: "#", method: "get"}
-        /             %input.search-text-box{type: "text"}/
-        / Header Top Bar End
-        / Main Header Start
-        .main-header
+      %header#header
+        .main-header{"ng-hide"=>"getStatus('/boarding') == 'current'"}
           .container
             / TopNav Start
             / TopNav End
@@ -76,8 +43,8 @@
             / Logo End
             / Mobile Menu Start
             .mobile.navbar-header
-              %a.navbar-toggle{ 'ng-click' => "toggleMenu = !toggleMenu", href: "#{}"}
-                %i.fa.fa-reorder.icon-2x
+              %a.navbar-toggle{ 'ng-click' => "toggleMenu = !toggleMenu", href: ""}
+                %i.fa.fa-reorder.icon-2x.big
             / Mobile Menu End
             / Menu Start
             %nav.menu.navbar-collapse{"collapse" => "!toggleMenu"}
@@ -101,60 +68,52 @@
                       .progress-bar(aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: {{percentage}};font-size:6px;padding:0px;")
 
 
-                %li{"ng-hide" => "security.isAuthenticated()", :id => "{{getStatus('/register')}}"}
+                %li{"ng-hide" => "current.isAuthenticated()", :id => "{{getStatus('/register')}}"}
                   %a{href: "/register"} Mitmachen
 
-                %li{"ng-show" => "security.isAuthenticated()", :id => "{{getStatus('/menschen/'+security.currentUser.id)}}"}
-                  %a.sf-with-ul.with_avatar{href: "/menschen/{{security.currentUser.id}}"}
-                    -#%i.icon-user
+                / %li{"ng-show" => "current.isAuthenticated()", :id => "{{getStatus('/boarding')}}"}
+                /   %a{href: "/boarding"} Gewinnen
+
+                %li{"ng-show" => "current.isAuthenticated()", :id => "{{getStatus('/menschen/'+current.user.id)}}"}
+                  %a.sf-with-ul.with_avatar.hidden-xs.hidden-sm{href: "/menschen/{{current.user.id}}"}
                     .testimonial-image.pull-right
-                      %img{'ng-src' => "{{security.currentUser.avatar.avatar.url}}"}
-                    {{security.currentUser.name}}
+                      %img{'ng-src' => "{{current.user.avatar.avatar.url}}"}
+                    {{current.user.name}}
                     %span.sf-sub-indicator
                       %i.fa.fa-angle-down
+                  %a.sf-with-ul.with_avatar.visible-xs.visible-sm{href: "/menschen/{{current.user.id}}"}
+                    .testimonial-image.pull-right
+                      %img{'ng-src' => "{{current.user.avatar.avatar.url}}"}
                   %ul
                     %li
-                      %a.sf-with-ul{href: "/menschen/{{security.currentUser.id}}"} Profil anzeigen
+                      %a.sf-with-ul{href: "/menschen/{{current.user.id}}?gewinnspiel"} Verlosung
                     %li
-                      %a.sf-with-ul{href: "/menschen/{{security.currentUser.id}}?edit_profile=true"}
+                      %a.sf-with-ul{href: "/menschen/{{current.user.id}}"} Ich würde ...
+                    %li
+                      %a.sf-with-ul{href: "/menschen/{{current.user.id}}?states"} Ich bin ...
+                    %li
+                      %a.sf-with-ul{href: "/menschen/{{current.user.id}}?edit_profile=true"}
                         %i.fa.fa-pencil
-                        Profil bearbeiten
+                        Daten bearbeiten
                     %li
-                      %a.sf-with-ul{href: "#", "ng-click"=>"security.logout()"}
+                      %a.sf-with-ul{href: "#", "ng-click"=>"current.logout()"}
                         %i.fa.fa-power-off
                         Abmelden
 
-                %li{"ng-hide" => "security.isAuthenticated()", :id => "{{getStatus('/login')}}"}
+                %li{"ng-hide" => "current.isAuthenticated()", :id => "{{getStatus('/login')}}"}
                   %a{href: "/login"} Einloggen
 
 
-            / Menu End
-        / Main Header End
-      / Header End
-      / Content Start
-      / %alert{:type=>'danger'}
 
-      / .well{"ng-if" => "security.currentUser", :style => "margin-bottom:0;"}
-      /   .container
-      /     .col-md-6.text-left
-      /       %span{:style => "font-size:25px;"} Gönn' es deinen Freunden!
-      /       %br/
-      /       Teile "Mein Grundeinkommen" mit ihnen.
-      /     .col-md-6.text-right
-      /       %a.facebookShare{"data-shares" => "shares", "data-url" => "http://www.mein-grundeinkommen.de?fbshare", :facebook => "", :style => "display:inline-block;"}
+      .margin-top-70.margin-bottom-70.text-center.ng-hide{"ng-show" => "show_spinner"}
+        %i.fa.fa-refresh.fa-spin.big
+        / %div.text-center.margin-top-30{style: "width:150px;margin-left: auto;margin-right: auto;"}
+        / %progressbar.active.small{:value => "100",:style=>"height:10px;"}
 
-      /       .btn.btn-small.btn-grey{:style => "padding-bottom: 2px;padding-right: 0;padding-top: 7px;"}
-
-      /         %a{"data-count" => "horizontal", "data-lang" => "en", "data-size" => "medium", "data-text" => "Ein Jahr lang Grundeinkommen ausprobieren", "data-url" => "http://www.mein-grundeinkommen.de", "data-via" => "meinbge", :twitter => ""}
-
-      /       %a.btn.btn-small.btn-grey{:href => "mailto:?subject=Ein%20Jahr%20Grundeinkommen%20bekommen&body=Hallo%2C%0A%0Aich%20mache%20bei%20%22Mein%20Grundeinkommen%22%20mit%2C%20die%20wollen%20ausprobieren%2C%20wie%20sich%20ein%20Bedingungsloses%20Grundeinkommen%20auf%20die%20Menschen%20auswirkt%20und%20haben%20daf%C3%BCr%20Geld%20gesammelt.%20Bald%20wird%20das%20n%C3%A4chste%20Grundeinkommen%20f%C3%BCr%20ein%20Jahr%20verlost%20und%20alle%20k%C3%B6nnen%20sich%20kostenlos%20daf%C3%BCr%20anmelden.%20Ist%20das%20was%20f%C3%BCr%20dich%3F%0A%0Awww.mein-grundeinkommen.de"}
-      /         %i.fa.fa-envelope
-      /         per E-Mail
-
-      #main.flip{"ng-view" => "", :autoscroll=>"true"}
+      #main{"ng-view" => "", :autoscroll=>"true"}
       / Content End
       / Footer Start
-      %footer#footer
+      %footer#footer{"ng-hide"=>"getStatus('/boarding') == 'current'"}
         / Footer Top Start
         .footer-top
           .container

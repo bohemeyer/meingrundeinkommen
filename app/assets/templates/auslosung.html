@@ -46,9 +46,9 @@
             <br>
             <div class="margin-top:30">Losnummer:</div>
             <br>
-            <alert ng-if="(current_drwaing.done || (security.currentUser && security.currentUser.admin)) || current_drawing.niete && current_drawing.number.length > 2">NIETE</alert>
+            <alert ng-if="(current_drawing.done || (current.user && current.user.admin)) || current_drawing.niete && current_drawing.number.length > 2">NIETE</alert>
             <br><div class="margin-top-30 row">
-             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets" class="well huge"><span ng-if="current_drawing.done || (security.currentUser && security.currentUser.admin)">{{diget.value}}</span><i ng-if="!diget.value || (!current_drawing.done && !(security.currentUser && security.currentUser.admin))" class="icon-refresh" style="color:#ccc"></i></span>
+             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets" class="well huge"><span ng-if="current_drawing.done || (current.user && current.user.admin)">{{diget.value}}</span><i ng-if="!diget.value || (!current_drawing.done && !(current.user && current.user.admin))" class="icon-refresh" style="color:#ccc"></i></span>
 
             </div>
             <br>
@@ -154,7 +154,7 @@ Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
                <p>Sobald das {{home.totallyFinancedIncomes + 1}}. Grundeinkommen finanziert ist, wird es hier verlost. <br>In einem Gewinnspiel. Melde dich hier an, um teilzunehmen:</p>
 
                 <div class="get-started">
-                  <a ng-hide="security.currentUser" href="/register" class="btn btn-special btn-color btn-large" analytics-on="click" analytics-event="geklickt: Ich will das Grundeinkommen haben">Ich will das Grundeinkommen haben!</a>
+                  <a ng-hide="current.user" href="/register" class="btn btn-special btn-color btn-large" analytics-on="click" analytics-event="geklickt: Ich will das Grundeinkommen haben">Ich will das Grundeinkommen haben!</a>
                 </div>
 
 

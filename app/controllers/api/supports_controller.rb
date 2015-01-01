@@ -30,7 +30,11 @@ class Api::SupportsController < ApplicationController
     if current_user && current_user.admin? and params[:admin]
       render json: Support.where('payment_method = "bank" or payment_method like "paypal%"').order(:id => :desc)
     else
-      render json: Support.where('comment is not null and payment_completed is not null').limit(30).order(:updated_at => :desc)
+      if params[:crowdbar]
+        render json: Support.where("comment is not null and payment_method = 'crowdbar'").limit(20)
+      else
+        render json: Support.where('comment is not null and payment_completed is not null').limit(30).order(:updated_at => :desc)
+      end
     end
   end
 

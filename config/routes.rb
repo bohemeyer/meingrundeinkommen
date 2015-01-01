@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     resource :crowdbar
+    resources :crowdcards
+    resources :flags
+    resources :notifications
     resources :registrations
     resources :chances
     resources :comments

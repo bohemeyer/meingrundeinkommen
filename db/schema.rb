@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141208171600) do
+ActiveRecord::Schema.define(version: 20141225223140) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20141208171600) do
     t.string   "code2"
     t.boolean  "crowdbar_verified",     default: false
     t.boolean  "ignore_double_chance",  default: false
+    t.boolean  "remember_data",         default: false
   end
 
   add_index "chances", ["first_name", "last_name", "dob"], name: "index_chances_on_first_name_and_last_name_and_dob", unique: true
@@ -41,6 +42,31 @@ ActiveRecord::Schema.define(version: 20141208171600) do
     t.string   "name"
     t.integer  "commentable_id"
     t.string   "commentable_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "crowdcards", force: true do |t|
+    t.integer  "user_id"
+    t.text     "first_name"
+    t.text     "last_name"
+    t.text     "street"
+    t.text     "house_number"
+    t.text     "zip_code"
+    t.text     "city"
+    t.text     "country",         default: "de"
+    t.integer  "number_of_cards", default: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "flags", force: true do |t|
+    t.integer  "user_id"
+    t.text     "name"
+    t.boolean  "value_boolean"
+    t.text     "value_text"
+    t.integer  "value_integer"
+    t.date     "value_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -66,6 +92,11 @@ ActiveRecord::Schema.define(version: 20141208171600) do
 
   add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables"
   add_index "likes", ["liker_id", "liker_type"], name: "fk_likes"
+
+  create_table "notifications", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "questions", force: true do |t|
     t.string   "text"
@@ -118,6 +149,7 @@ ActiveRecord::Schema.define(version: 20141208171600) do
     t.boolean  "recurring"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   create_table "todos", force: true do |t|

@@ -3,22 +3,25 @@
 </div>
 
 <div class="modal-body text-center" style="padding:50px;" >
-{{participation}}
-  <div ng-if="!reload">
 
-	<h1>CrowdBar installiert?</h1>
+  <alert ng-if="installation_not_found">
+    <h1>Crowdbar nicht gefunden!</h1>
+  </alert>
 
-	<h3>Dann hier klicken:</h3>
-	<a href="#" ng-click="test_for_crowdbar()" class="btn-large btn-color"><i class="icon-gear"></i> Installation überprüfen</a>
+	<h1 ng-hide="installation_not_found">Crowdbar installiert?</h1>
+
+	<h3 ng-hide="installation_not_found">Dann hier klicken:</h3>
+	<a href="#" ng-click="reload()" class="btn-large btn-color"><i class="icon-gear"></i>
+    Installation <span ng-show="installation_not_found">nochmal</span> überprüfen
+  </a>
 	<br><br>
 
 	<a href="http://www.crowdbar.org" target="_blank">Nochmal installieren</a>
 	<br>
 	<a href="/info/faq?topic=crowdbar">Hilfe lesen oder eine Frage stellen</a>
 
-  </div>
 
-  <div ng-if="reload">
+  <!-- <div ng-if="reload">
 
   	<div ng-if="!crowdbar_not_found && !crowdbar_found">
 
@@ -32,7 +35,7 @@
 
   	<div ng-if="crowdbar_not_found">
 
-  		<h1>CrowdBar nicht gefunden.</h1>
+  		<h1>CrowdBar nicht gefunden.</h1> -->
 
 
       <a ng-if="browser.isChrome" href="https://www.youtube.com/watch?v=TkVIGt90aPM" class="btn-normal btn-color" target="_blank"><i class="icon-youtube-play"></i> Hilfe-Video angucken</a>
@@ -41,53 +44,57 @@
 
       <a ng-if="browser.isSafari" href="https://www.youtube.com/watch?v=EP-yDuysN18" class="btn-normal btn-color" target="_blank"><i class="icon-youtube-play"></i> Hilfe-Video angucken</a>
 
+      <div ng-show="installation_not_found">
+
+        <h3 class="margin-top-20"><b><u>Was meistens hilft:</u></b></h3>
+
+         <accordion close-others="true">
+          <accordion-group heading="Browser-Chronik einschalten (So geht's)">
+            <img src="/assets/crowdbar_bug_chronik.png">
+          </accordion-group>
 
 
-      <h3 class="margin-top-20"><b><u>Was meistens hilft:</u></b></h3>
+          <accordion-group heading="Privaten Modus ausschalten (So geht's)">
+            <img src="/assets/crowdbar_bug_privat.png">
+          </accordion-group>
 
-       <accordion close-others="true">
-        <accordion-group heading="Browser-Chronik einschalten (So geht's)">
-          <img src="/assets/crowdbar_bug_chronik.png">
-        </accordion-group>
+          <accordion-group heading="Browser komplett schließen und neu starten">
+          </accordion-group>
 
+          <accordion-group heading="Auf die neueste Version der Crowdbar updaten">
+            Die allererste Version (kleiner 0.9.4) der Crowdbar aus dem September/Oktober 2014 wird hier nicht automatisch erkannt. Du kannst dir die neueste Version herunterladen indem du auf Addons (Firefox) oder Erweiterungen (Chrome & Safari) gehst und bei der Crowdbar auf Aktualisieren klickst.
+          </accordion-group>
 
-        <accordion-group heading="Privaten Modus ausschalten (So geht's)">
-          <img src="/assets/crowdbar_bug_privat.png">
-        </accordion-group>
+          <accordion-group heading="Auf anderem Gerät / mit anderem Browser probieren">
+            <p>Auf einigen Smartphones und Tablets kann die Crowdbar Probleme machen. Auch ältere Browser-Versionen sind ein Problem. Du kannst die Crowdbar auch einmalig auf einem anderen Browser installieren, zu diesem hier zurückkehren und trotzdem die doppelte Gewinnchance behalten.</p>
+          </accordion-group>
 
-        <accordion-group heading="Browser komplett schließen und neu starten">
-        </accordion-group>
-
-        <accordion-group heading="Auf anderem Gerät / mit anderem Browser probieren">
-          <p>Auf einigen Smartphones und Tablets kann die Crowdbar Probleme machen. Auch ältere Browser-Versionen sind ein Problem. Du kannst die Crowdbar auch einmalig auf einem anderen Browser installieren, zu diesem hier zurückkehren und trotzdem die doppelte Gewinnchance behalten.</p>
-        </accordion-group>
-
-        <accordion-group heading="Wenn's trotzdem nicht geht">
-          <p>Wenn es trotzdem nicht geht: Schick' mir eine <a href="mailto:support@mein-grundeinkommen.de?subject=Crowdbar%20geht%20nicht&body=Hallo%20Micha%2C%0A%0Aich%20verwende%20einen%20{{browser.ua}}%20-%20Browser%20auf%20einem%20PC%20oder%20Mac%20(kein%20Smartphone%2C%20kein%20Tablet).%20Ich%20erlaube%20meinem%20Browser%20eine%20Chronik%20anzulegen%20und%20surfe%20nicht%20im%20Privaten%20Modus.%20Dennoch%20funktioniert%20die%20Crowdbar%20nicht.%0A%0A(Und%20zwar%20passiert%20folgendes%3A)%0A...%0A%0ABitte%20hilf%20mir!">E-Mail an support@mein-grundeinkommen.de mit dem Betreff 'Crowdbar geht nicht'</a>. Dann kümmere ich mich persönlich um eine Lösung mit dir.</p>
-        </accordion-group>
+          <accordion-group heading="Wenn's trotzdem nicht geht">
+            <p>Wenn es trotzdem nicht geht: Schick' mir eine <a href="mailto:support@mein-grundeinkommen.de?subject=Crowdbar%20geht%20nicht&body=Hallo%20Micha%2C%0A%0Aich%20verwende%20einen%20{{browser.ua}}%20-%20Browser%20auf%20einem%20PC%20oder%20Mac%20(kein%20Smartphone%2C%20kein%20Tablet).%20Ich%20erlaube%20meinem%20Browser%20eine%20Chronik%20anzulegen%20und%20surfe%20nicht%20im%20Privaten%20Modus.%20Dennoch%20funktioniert%20die%20Crowdbar%20nicht.%0A%0A(Und%20zwar%20passiert%20folgendes%3A)%0A...%0A%0ABitte%20hilf%20mir!">E-Mail an support@mein-grundeinkommen.de mit dem Betreff 'Crowdbar geht nicht'</a>. Dann kümmere ich mich persönlich um eine Lösung mit dir.</p>
+          </accordion-group>
 
 
-      </accordion>
+        </accordion>
 
-
+      </div>
     <hr>
 
-  		<a href="#" ng-click="test_for_crowdbar()" class="btn-large btn-color"><i class="icon-gear"></i> Nochmal überprüfen</a>
+  		<!-- <a href="#" ng-click="test_for_crowdbar()" class="btn-large btn-color"><i class="icon-gear"></i> Nochmal überprüfen</a>
 
 		<a href="http://www.crowdbar.org" class="btn-large btn-color" target="_blank">Nochmal installieren</a>
 		<br><br>
-		<a href="/info/faq?topic=crowdbar">Hilfe lesen oder eine Frage stellen</a>
+		<a href="/info/faq?topic=crowdbar">Hilfe lesen oder eine Frage stellen</a> -->
 
   	</div>
 
-  	<div ng-if="crowdbar_found">
+  	<!-- <div ng-if="crowdbar_found">
   		<h1><i class="icon-thumbs-up"></i> CrowdBar installiert!</h1>
   		<hr>
   		<h3>Du hast jetzt doppelte Gewinnchancen und erhältst am Tag der Verlosung die doppelte Anzahl an Losnummern!</h3>
   		<hr>
   		<p>Danke, dass du bereit bist mit der CrowdBar für die nächsten Grundeinkommen beizutragen.</p>
   		<a href="#" ng-click="close()" class="btn-large btn-color margin-top-20">Fertig!</a>
-  	</div>
+  	</div> -->
 
   </div>
 

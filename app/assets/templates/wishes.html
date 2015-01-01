@@ -1,5 +1,6 @@
-<div class="margin-top-30">
-	<h2>Mit <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> würde ich...</h2>
+<div ng-controller="WishesController" class="margin-top-30">
+
+  <h2>Mit <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> würde ich...</h2>
 
       <ul class="listbox">
          <li ng-repeat="wish in user_wishes" ng-if="wish.text">
