@@ -54,12 +54,11 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
       'avatar'
 
       #if not participates
-      'gewinnspiel_question'
-      'wishes'
-      'gewinnspiel'
-      #+confirm?
-      'confirm'
-      'gewinnspiel_thanks'
+      # 'gewinnspiel_question'
+      # 'wishes'
+      # 'gewinnspiel'
+      # 'confirm'
+      # 'gewinnspiel_thanks'
 
       #if everything completed only
       #'states'
