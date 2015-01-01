@@ -1,5 +1,5 @@
 class SupportSerializer < ActiveModel::Serializer
-  attributes :id, :nickname, :comment, :amount_total, :avatar, :payment_completed
+  attributes :id, :nickname, :comment, :amount_total, :avatar, :payment_completed, :user
 
   def avatar
   	u = User.find_by_email(object.email)
@@ -9,4 +9,13 @@ class SupportSerializer < ActiveModel::Serializer
 	  return false
 	 end
   end
+
+  def user
+  	if object.user
+  	  object.user.slice(:name, :avatar, :id)
+  	else
+  	  return false
+  	end
+  end
+
 end
