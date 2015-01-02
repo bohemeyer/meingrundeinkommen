@@ -60,6 +60,35 @@ angular.module "Security", ["Devise","Flag"]
       isAuthenticated: ->
         !!service.user
 
+
+      participates: ->
+        if service.user.chances.length == 0
+          false
+        else
+          found = false
+          angular.forEach service.user.chances, (chance) ->
+            if chance.id
+              found = true
+          return found
+
+      participation_verified: ->
+        if service.participates() && (service.getFlag('hasHadCrowdbar') || service.getFlag('hasCrowdbar') || service.getFlag('crowdcardNumber'))
+          true
+        else
+          false
+
+      has_crowdbar: ->
+        service.getFlag('hasCrowdbar')
+
+      has_crowdcard: ->
+        service.getFlag('crowdcardNumber')
+
+      has_ordered_crowdcard: ->
+        return false if service.user.crowdcards.length == 0
+        return true  if service.user.crowdcards.length > 0
+
+
+
       setFlag: (name, value) ->
         if service.isAuthenticated
           new Flag(

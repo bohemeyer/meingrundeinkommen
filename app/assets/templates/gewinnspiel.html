@@ -1,8 +1,12 @@
 <div class="container">
 
-    <div class="alert" ng-if="!current.user.confirmed_at">Du nimmst erst an der Verlosung teil, wenn du deine <a href="/boarding?trigger=participates">E-Mailadresse bestätigt</a> hast.</div>
+    <alert type="danger" ng-if="!current.user.confirmed_at && current.participates()">Du nimmst erst an der Verlosung teil, wenn du deine <a href="/boarding?trigger=participates">E-Mailadresse bestätigt</a> hast.</alert>
 
-    <div class="text-center" ng-if="!participation.participates">
+    <alert type="danger" ng-if="!current.participation_verified() && current.participates() && !current.has_ordered_crowdcard()">Du nimmst erst an der Verlosung teil, wenn du die <a href="/boarding?go_to=crowdbar">Crowdbar</a> installiert hast oder die <a href="/boarding?go_to=crowdcard">Crowdcard</a> bestellt hast.</alert>
+
+    <alert type="danger" ng-if="!current.participation_verified() && current.participates() && current.has_ordered_crowdcard()">Du nimmst erst an der Verlosung teil, wenn du die Crowdcard per Post erhalten und den Code auf der Karte hier eingetragen hast. Sofort teilnehmen kannst du, wenn du dir die <a href="/boarding?go_to=crowdbar">Crowdbar</a> installierst.</alert>
+
+    <div class="text-center" ng-if="!current.participates()">
 <!--    <div class="text-center">
 
            <h3 class="margin-top-20">Die Anmeldung zum 5. Grundeinkommen hat am <b>14.11.</b> geendet.!</h3>
@@ -26,7 +30,7 @@
 
       </div>
 
-        <div ng-if="participation.participates" ng-include="'/assets/gewinnspiel_form.html'"></div>
+        <div ng-if="current.participates()" ng-include="'/assets/gewinnspiel_form.html'"></div>
 
 
 

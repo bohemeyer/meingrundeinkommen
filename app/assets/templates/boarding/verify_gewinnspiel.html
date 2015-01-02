@@ -1,0 +1,29 @@
+
+<div class="container text-center" style="padding:40px">
+
+	<div class="text-center">
+	<div class="testimonial-image-sm">
+        <img src="{{current.user.avatar.avatar.url}}">
+	  </div>
+	 </div>
+
+	<h1 class="margin-top-30">Du bist fast fertig, {{current.user.name}}!</h1>
+
+	<div class="text-center">
+
+		<h3>
+			Um an der Verlosung teilnehmen zu können, musst du entweder die Crowdbar installieren oder dir die neue Crowdcard zuschicken lassen. Beide sind kostenlos. <a href="#" ng-click="toggle = !toggle" ng-init="toggle = false" ng-hide="toggle">Warum?</a><a href="#" ng-click="toggle = !toggle" ng-show="toggle">Achso!</a>
+		</h3>
+
+		<p ng-show="toggle">
+			Unsere Aktion lebt davon, dass wir immer wieder neue Grundeinkommen verlosen können. Daher wollen wir alle, die am Gewinnspiel teilnehmen, motivieren, auch zur Finanzierung beizutragen. Du musst kein Geld geben. Crowdbar und Crowdcard sind vollkommen anonym und kostenlos für dich. Ob und wie oft du sie einsetzt, bleibt dir überlassen. Wenn du noch nicht weißt, was Crowdbar und Crowdcard sind, erfährst du das im nächsten Schritt.
+		</p>
+
+	</div>
+
+
+	<div class="text-center margin-top-30">
+	<a ng-click="$close(cancel)" href="#" class="text-center btn btn-large btn-color">Los geht's</a>
+</div>
+
+</div>

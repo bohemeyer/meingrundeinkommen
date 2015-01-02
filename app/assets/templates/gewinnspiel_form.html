@@ -1,7 +1,7 @@
 <div ng-controller="ChancesController">
 
   <p>
-  	<h4>Das 6. Grundeinkommen in Höhe von 12.000€ wird Ende Januar 2015 in einem Gewinnspiel verlost.<br>
+  	<h4>Das 6. Grundeinkommen in Höhe von 12.000€ wird Ende Januar 2015 in einem Gewinnspiel verlost.
       <a href="#" ng-click="gewinnspielbedingungen()">Gewinnspielbedingungen</a>
   | <a href="/info/faq">Häufige Fragen</a>
 
@@ -11,11 +11,13 @@
   <ul>
   	<li ng-repeat="chance in chances_form.chances | orderBy:chance.isChild">
   		<div ng-if="chance.id" class="margin-top-30">
-  			<alert type="success"><h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="icon-check"></i> Du nimmst an der Verlosung teil! <!-- <a ng-if="!participation.has_crowdbar" href="#" ng-click="skip_section('gewinnspiel')" class="btn-normal btn-color"><i class="icon-plus"></i> &nbsp; Meine Gewinnchance verdoppeln</a> --></h3>
-  			<h3 style="margin-bottom:0" ng-if="chance.isChild"><i class="icon-check"></i> Du nimmst für dein Kind an der Verlosung teil!</h3></alert>
+  			<alert type="success" ng-if="current.participation_verified()">
+          <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="icon-check"></i> Du nimmst an der Verlosung teil!</h3>
+  			   <h3 style="margin-bottom:0" ng-if="chance.isChild"><i class="icon-check"></i> Du nimmst für dein Kind an der Verlosung teil!</h3>
+        </alert>
   			<div style="padding-left:30px;">
   			<p>
-  				<b>Vollständiger Name (exakt wie auf Ausweis):</b> {{chance.firstName}} {{chance.lastName}}
+  				<b>Vollständiger Name (exakt wie auf Ausweis):</b> {{chance.firstName}} {{chance.lastName}} {{chance.first_name}} {{chance.last_name}}
   				<br>
   				<b>Geburtsdatum:</b> {{chance.dob | date:'dd.MM.yyyy'}}
   				<!-- <span ng-if="!chance.isChild">
@@ -25,7 +27,7 @@
   				<b>Ort:</b> {{chance.city}}
   				</span> -->
   			</p>
-  			<a href="#" ng-click="removeChance(chance)"><i class="icon-remove"></i> ändern / nicht mehr teilnehmen</a>
+  			<a href="#" class="btn btn-grey btn-small" ng-click="removeChance(chance)"><i class="fa fa-remove"></i> ändern / nicht mehr teilnehmen</a>
   			</div>
   		</div>
   		<div ng-if="!chance.id" class="margin-top-30">

@@ -1,0 +1,31 @@
+
+<div class="container text-center" style="padding:40px">
+
+	<div class="text-center">
+	<div class="testimonial-image-sm">
+        <img src="{{current.user.avatar.avatar.url}}">
+	  </div>
+	 </div>
+
+	<h1 class="margin-top-30">Danke!</h1>
+
+	<div class="text-center">
+
+		<h3>
+			Du erhältst in den nächsten Tagen einen Brief mit deiner Crowdcard.
+
+		</h3>
+
+		<alert ng-if="verifiable">Auf der Crowdcard wird ein Zahlencode sein, den du hier eintragen musst, um an der Verlosung teilzunehmen.</alert>
+
+
+		<p>Übrigens: Der Druck der Karte und der Versand kosten uns ca. 1€. Wenn du unsere Arbeit fürs Grundeinkommen mit einem oder mehr Euro unterstützen möchtest, kannst du das im nächsten Schritt tun.</p>
+
+	</div>
+
+
+	<div class="text-center margin-top-30">
+	<a ng-click="$close(cancel)" href="#" class="text-center btn btn-large btn-color">Ok</a>
+</div>
+
+</div>

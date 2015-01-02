@@ -4,6 +4,10 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
   ($routeProvider) ->
     $routeProvider
     .when "/info/faq",
+      redirectTo: "/faq/projekt"
+    .when "/faq",
+      redirectTo: "/faq/projekt"
+    .when "/faq/:topic",
       templateUrl: "/assets/faq.html"
       controller: "FAQController"
       label: "Häufige Fragen"
@@ -20,11 +24,26 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
   "Question"
   "$cookieStore"
   "$sce"
+  "$routeParams"
 
-  ($scope, Question, $cookieStore, $sce) ->
+  ($scope, Question, $cookieStore, $sce, $routeParams) ->
 
-    $scope.current_tab = 'projekt'
-    $scope.categories = ['projekt','grundeinkommen','crowdfunding','crowdbar','community','verlosung','person']
+    $scope.categories =
+      projekt: true
+      grundeinkommen: false
+      crowdfunding: false
+      crowdbar: false
+      crowdcard: false
+      community: false
+      verlosung: false
+      person: false
+
+    if $routeParams['topic']
+      $scope.categories[$routeParams['topic']] = true
+      $scope.current_tab = $routeParams['topic']
+    else
+      $scope.current_tab = 'projekt'
+
     $scope.question = {}
 
     Question.query().then (questions) ->

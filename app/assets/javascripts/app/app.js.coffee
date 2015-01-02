@@ -49,12 +49,9 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
     $scope.browser.isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 && !(ua == "ipad" || ua == "iphone" || ua == "ipod")
     $scope.browser.ua = ua
 
-    $scope.participation = {}
-
     Crowdbar.verify().then (has_crowdbar) ->
-      $scope.participation.has_crowdbar = has_crowdbar
       $scope.current.setFlag('hasCrowdbar',has_crowdbar)
-      $scope.participation.participates = if $scope.current.user and $scope.current.user.chances.length > 0 then true else false
+      $scope.current.setFlag('hasHadCrowdbar', true) if has_crowdbar
 
 
     #STATS

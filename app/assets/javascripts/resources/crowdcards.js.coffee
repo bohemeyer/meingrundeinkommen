@@ -65,6 +65,25 @@ angular.module "Crowdcard", ["rails"]
           $scope.crowdcard_ordered = true
           $scope.steps.done = true if $scope.steps
 
+          modalInstance = $modal.open(
+            templateUrl: "/assets/boarding/crowdcard_ordered.html"
+            controller: [
+              "$scope"
+              "current"
+              "verifiable"
+              ($scope, current, verifiable) ->
+                $scope.current = current
+                $scope.verifiable = verifiable
+                $scope.close = ->
+                  $modalInstance.dismiss('cancel')
+            ]
+            size: 'lg'
+            resolve:
+              current: ->
+                $scope.current
+              verifiable: ->
+                if $scope.current.participates() && !$scope.current.participation_verified() then true else false
+          )
 
 
 

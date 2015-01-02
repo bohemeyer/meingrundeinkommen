@@ -280,15 +280,13 @@
 
 
               <div ng-if="current.user">
-                <alert ng-if="!participation.participates" type="warning"><h1>Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1>
+                <alert ng-if="!current.participates()" type="warning"><h1>Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1>
                   <a class="btn-large btn-color" href="/boarding?trigger=wants_to_participate">Ich will aber teilnehmen!</a>
                 </alert>
 
 
 
-                <a ng-if="participation.participates" class="btn-large btn-color " href="/menschen/{{current.user.id}}?gewinnspiel=true" style="box-shadow:0px 0px 40px 10px white"><i class="fa fa-check"></i> Du nimmst an der Verlosung teil!</a>
-
-                <!-- <br><a ng-if="!participation.has_crowdbar" href="/menschen/{{current.user.id}}?crowdbar" class="margin-top-20 btn-normal btn-grey"><i class="icon-plus"></i> &nbsp; Meine Gewinnchance verdoppeln</a> -->
+                <a ng-if="current.participates()" class="btn-large btn-color " href="/menschen/{{current.user.id}}?gewinnspiel=true" style="box-shadow:0px 0px 40px 10px white"><i class="fa fa-check"></i> Du nimmst an der Verlosung teil!</a>
 
               </div>
 

@@ -36,8 +36,8 @@ angular.module "Chance", ["rails"]
           dob_month: 1
           dob_day: 1
         )
-      if $scope.participation
-        $scope.participation.participates = participates
+      $scope.steps.done = $scope.current.participates() if $scope.steps
+      $scope.steps.hide_skip_button = $scope.current.participates() if $scope.steps
 
     $scope.sanitizeChances()
 
@@ -63,12 +63,7 @@ angular.module "Chance", ["rails"]
           $scope.chance_errors = response.errors
         else
           $scope.chances_form.chances[$scope.chances_form.chances.indexOf(chance)] = response.chance
-          #$scope.current.user.chances.push response.chance
           $scope.sanitizeChances()
-          $scope.participation.participates = true
-          $scope.steps.done = true if $scope.steps
-          #$scope.participation.double_chances = if ($scope.user.chances[0].crowdbarVerified || $scope.participation.crowdbar_test()) && !$scope.user.chances[0].ignoreDoubleChance then true else false
-          #$scope.save_crowdbar_verified_to_db() if $scope.participation.crowdbar_test()
 
 
     $scope.removeChance = (chance) ->
@@ -77,9 +72,6 @@ angular.module "Chance", ["rails"]
           id: chance.id
         ).delete()
       $scope.chances_form.chances.splice($scope.chances_form.chances.indexOf(chance), 1)
-      console.log $scope.participation.participates
-      $scope.participation.participates = if $scope.chances_form.chances.length == 0 then false else true
-      console.log $scope.participation.participates
       $scope.sanitizeChances()
 
     $scope.gewinnspielbedingungen = () ->

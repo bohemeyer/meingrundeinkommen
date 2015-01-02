@@ -86,6 +86,7 @@ angular.module "Crowdbar", []
       $scope.current.incFlag('CrowdbarDownloadLinkClicked') if $scope.current.user
       Crowdbar.open_crowdbar_after_install_modal(false)
       $location.search('trigger','crowdbar_installed')
+      $location.search('trigger2','not_verified') if $scope.current.participates() && !$scope.current.participation_verified()
 
     Support.query(
       crowdbar: true

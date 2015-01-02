@@ -2,7 +2,6 @@
    <div class="container">
       <div class="row" style="padding-bottom: 55px;">
       <div class="col-md-12 text-center"> </div>
-        <!-- <div style="height:150px;" ng-show="largeScreen && own_profile && (!participation.participates || !participation.has_crowdbar)"></div> -->
       </div>
    </div>
 
@@ -119,10 +118,7 @@
 
       <tab active="currentTab.gewinnspiel">
          <tab-heading>
-
-         <!-- <img src="/assets/instructions.png" style="left: -185px;bottom: 50px;max-width: 300px;position: absolute;"  ng-if="!participation.participates && largeScreen"> -->
-
-          <!-- <i class="icon-check" ng-if="participation.participates"></i> -->
+         <i class="fa fa-warning" style="color:red;" ng-if="current.participates() && (!current.user.confirmed_at || !current.participation_verified())"></i>
           Verlosung
          </tab-heading>
 
@@ -133,68 +129,6 @@
       </div>
 
       </tab>
-
-      <!-- Crowdbar -->
-
-      <!-- <tab active="currentTab.crowdbar">
-         <tab-heading> -->
-
-         <!-- <img src="/assets/doublechances.png" style="left: -154px;bottom: 50px;max-width: 300px;position: absolute;"  ng-if="!participation.has_crowdbar && participation.participates && largeScreen"> -->
-<!--
-          <i class="fa fa-check" ng-if="participation.participates && participation.has_crowdbar"></i> Crowdbar
-         </tab-heading>
-
-        <div class="container margin-top-30">
-
-          <div class="text-center margin-top-20">
-
-            <div ng-if="!participation.double_chances && !participation.has_crowdbar">
-              <h2 class="margin-top-20"><span class="infolink" ng-click="crowdbar_info()">CrowdBar</span> installieren & Projekt unterstützen</h2>
-              <p>Die CrowdBar ist eine kostenlose Erweiterung für deinen Browser.</p>
-             <div class="margin-top-30">
-
-             <a ng-if="browser.isChrome" class="btn-color btn-large" ng-click="crowdbar_install('https://chrome.google.com/webstore/detail/crowdbar/lhinknkceoifkecnmmlgnelmdipmbcdn')">Jetzt installieren</a>
-             <a ng-if="browser.isFirefox" class="btn-color btn-large" ng-click="crowdbar_install('https://addons.mozilla.org/de/firefox/addon/mein-grundeinkommen-crowdbar/')">Jetzt installieren</a>
-             <a ng-if="browser.isSafari" class="btn-color btn-large" ng-click="crowdbar_install('http://bar.mein-grundeinkommen.de/extension/crowd_bar/crowd_bar.safariextz')">Jetzt herunterladen</a>
-
-
-             <a class="btn-grey btn-large" ng-click="crowdbar_info()" style="margin-top:-8px">So funktioniert's</a>
-             </div>
-             <br>
-             <small><a href="#"  ng-if="browser.isChrome || browser.isFirefox || browser.isSafari" ng-click="open_crowdbar_test_modal()">Ich hab die CrowdBar schon installiert.</a>
-              <br>
-              <a ng-if="browser.isChrome" href="https://www.youtube.com/watch?v=TkVIGt90aPM" target="_blank"><i class="fa fa-youtube-play"></i> Hilfe-Video angucken</a>
-
-              <a ng-if="browser.isFirefox" href="https://www.youtube.com/watch?v=7QvXzZaVULA" target="_blank"><i class="fa fa-youtube-play"></i> Hilfe-Video angucken</a>
-
-              <a ng-if="browser.isSafari" href="https://www.youtube.com/watch?v=EP-yDuysN18" target="_blank"><i class="fa fa-youtube-play"></i> Hilfe-Video angucken</a>
-
-             </small>
-            </div>
-
-            <div ng-if="participation.has_crowdbar">
-
-              <h1><i class="fa fa-thumbs-up"></i> Du hast die CrowdBar installiert!</h1>
-              <hr>
-
-            </div>
- -->
-              <!-- <h3 ng-if="participation.double_chances">Du hast <span ng-if="!participation.has_crowdbar">aktuell auf diesem Gerät keine Crowdbar installiert. Du hattest sie aber bereits installiert und hast </span>damit doppelte Gewinnchancen und erhältst am Tag der Verlosung die doppelte Anzahl an Losnummern!</h3>
-
-              <h3 ng-if="!participation.participates && participation.has_crowdbar">Sobald du an der <a href="#" ng-click="skip_section('states')">Verlosung teilnimmst</a> hast du doppelte Gewinnchancen und erhältst am Tag der Verlosung die doppelte Anzahl an Losnummern!</h3> -->
-
-     <!--          <p class="well" ng-if="participation.has_crowdbar">Du kannst jetzt und jederzeit in Hunderten von Onlineshops einkaufen und damit das nächste Grundeinkommen unterstützen:
-                <br><br>
-                <a href="https://bar.mein-grundeinkommen.de/shops" class="btn-normal btn-color">Shops anzeigen</a>
-              </p>
-
-
-          </div>
-
-      </div>
-
-      </tab> -->
-
 
     </tabset>
 <div class="clearfix"></div>

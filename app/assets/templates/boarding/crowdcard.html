@@ -122,7 +122,7 @@
 
                 <div class="form-group">
                   <div class="col-sm-offset-2 col-sm-10">
-                    <input type="submit" class="btn btn-special btn-color" value="Karte zusenden lassen"  ng-disabled="submitted">
+                    <input type="submit" class="btn btn-normal btn-color" value="Karte zusenden lassen"  ng-disabled="submitted">
                     <input ng-if="chance.isChild" type="button" class="btn btn-special btn-grey" value="Abbrechen" ng-click="removeChance(chance)" ng-disabled="submitted">
                   </div>
                 </div>
@@ -137,7 +137,7 @@
                         <h4>Crowdcard sofort nutzen und jetzt selbst ausdrucken</h4>
                       </label>
 
-                      <a href="/crowdcard.pdf" target="_blank" ng-click="current.incFlag('NumberOfCrowdcardDownloads');steps.done=true" ng-show="current.user.flags.PrintOutCrowdcard" class="btn btn-color" style="margin-left:50px;margin-top:10px">Jetzt ausdrucken</a>
+                      <a href="/crowdcard.pdf" target="_blank" ng-click="current.incFlag('NumberOfCrowdcardDownloads');steps.done=true" ng-show="current.user.flags.PrintOutCrowdcard" class="btn btn-color btn-normal" style="margin-left:50px;margin-top:10px">Jetzt ausdrucken</a>
 
 
                     </div>
@@ -149,7 +149,7 @@
                         <h4>Karte jetzt für Apple Passbook herunterladen</h4>
                       </label>
 
-                      <a href="http://meinbge.herokuapp.com" target="_blank" ng-click="current.incFlag('NumberOfPassbookDownloads');steps.done=true" ng-show="current.user.flags.DownloadPassbook" class="btn btn-color" style="margin-left:50px;margin-top:10px">Jetzt herunterladen</a>
+                      <a href="http://meinbge.herokuapp.com" target="_blank" ng-click="current.incFlag('NumberOfPassbookDownloads');steps.done=true" ng-show="current.user.flags.DownloadPassbook" class="btn btn-color btn-normal" style="margin-left:50px;margin-top:10px">Jetzt herunterladen</a>
 
                     </div>
 
