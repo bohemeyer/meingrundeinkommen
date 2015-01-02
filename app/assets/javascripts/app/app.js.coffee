@@ -29,6 +29,12 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
 
     $scope.breadcrumbs = breadcrumbs
 
+    $scope.$on '$routeChangeStart', ->
+      $scope.show_spinner = true
+    $scope.$on '$routeChangeSuccess', ->
+      $scope.show_spinner = false
+
+
     $scope.getStatus = (path) ->
       if $location.path().indexOf(path) == 0
         "current"
