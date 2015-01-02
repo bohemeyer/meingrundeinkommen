@@ -15,7 +15,7 @@
   			<h3 style="margin-bottom:0" ng-if="chance.isChild"><i class="icon-check"></i> Du nimmst für dein Kind an der Verlosung teil!</h3></alert>
   			<div style="padding-left:30px;">
   			<p>
-  				<b>Vollständiger Name (wie auf Ausweis):</b> {{chance.firstName}} {{chance.lastName}}
+  				<b>Vollständiger Name (exakt wie auf Ausweis):</b> {{chance.firstName}} {{chance.lastName}}
   				<br>
   				<b>Geburtsdatum:</b> {{chance.dob | date:'dd.MM.yyyy'}}
   				<!-- <span ng-if="!chance.isChild">
@@ -58,7 +58,7 @@
                 <div class="form-group">
                   <label for="inputEmail8" class="col-sm-2 control-label">Vorname(n)</label>
                   <div class="col-sm-10 text-left">
-                    <input name="name" ng-model="chance.first_name" type="text" class="form-control" id="inputEmail8" placeholder="wie auf dem Ausweis" maxlength="50" required>
+                    <input name="name" ng-model="chance.first_name" type="text" class="form-control" id="inputEmail8" placeholder="exakt wie auf dem Ausweis" maxlength="50" required>
                     <alert ng-show="chance_errors.firstName">{{chance_errors.firstName}}</alert>
                   </div>
                 </div>
@@ -68,7 +68,7 @@
                 <div class="form-group">
                   <label for="inputEmail3" class="col-sm-2 control-label">Nachname</label>
                   <div class="col-sm-10 text-left">
-                    <input name="name" ng-model="chance.last_name" type="text" class="form-control" id="inputEmail3" placeholder="wie auf dem Ausweis" maxlength="50" required>
+                    <input name="name" ng-model="chance.last_name" type="text" class="form-control" id="inputEmail3" placeholder="exakt wie auf dem Ausweis" maxlength="50" required>
                     <alert ng-show="chance_errors.lastName">{{chance_errors.lastName}}</alert>
                   </div>
                 </div>
