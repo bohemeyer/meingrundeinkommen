@@ -12,18 +12,9 @@ end
 class Api::HomepagesController < ApplicationController
 
   def show
-    #User.destroy_all
 
-    #cached_data = File.open("public/startnext.json") do |file|
-    #  JSON.parse(file.read)
-    #end
-    #cached_amount = cached_data["project"]["funding_status"]
-
-    #days_left = (Date.today - Date.parse(cached_data["project"]["end_date"])).to_i / 1.day
-    #supporter = cached_data["project"]["supporters_count"]
-
-    crowdfunding_supporter = 2901 + 140 + 18  #startnext + untracked paypal + kto
-    crowdfunding_amount = 50630.52 + 3058.85 + 380.25 #startnext + untracked paypal + kto
+    crowdfunding_supporter = 2900 + 140 + 18  #startnext + untracked paypal + kto
+    crowdfunding_amount = 3058.85 + 380.25 #untracked paypal + untracked kto
 
     own_supporter = Support.where(:payment_completed => true).where.not(:payment_method => :crowdbar).count
 
@@ -41,14 +32,25 @@ class Api::HomepagesController < ApplicationController
 
     #read crowdbar file
 
-    crowdbar_amount = Support.where(:payment_method => :crowdbar).sum(:amount_for_income)
+    crowdbar_amount_2014 = Support.where("payment_method = ? and strftime('%Y', created_at) = ?", 'crowdbar', '2014').sum(:amount_for_income)
+    crowdbar_amount_2015 = Support.where("payment_method = ? and strftime('%Y', created_at) = ?", 'crowdbar', '2015').sum(:amount_for_income)
+
+
+    #fix wrong startnext amount due to invalid payment of supporter
+    if crowdbar_amount_2015 * 0.3 < 3000
+      crowdbar_amount = crowdbar_amount_2014 + crowdbar_amount_2015 * 0.7
+      startnext = 50630.52
+    else
+      crowdbar_amount = crowdbar_amount_2014 + crowdbar_amount_2015
+      startnext = 47630.52
+    end
 
     #if now - date(day before) < 24h
       #gelddiff / 24h * stunden
     #else
       #crowdbar_amount = crowdbar_yesterday
 
-    total_amount = crowdfunding_amount + own_funding_paypal + own_funding + crowdbar_amount
+    total_amount = startnext + crowdfunding_amount + own_funding_paypal + own_funding + crowdbar_amount
 
     #Prognose:
     last_synced_day = Support.where(:payment_completed => true, :payment_method => 'crowdbar').order(created_at: :desc).limit(1).first
@@ -59,7 +61,6 @@ class Api::HomepagesController < ApplicationController
     prediction[:avg_daily_commission_crowdbar] = temp_q.sum(:amount_for_income) / 10
     prediction[:days] = ((12000 - (total_amount % 12000)) / prediction[:avg_daily_commission]).round
     prediction[:date] = Time.now + (prediction[:days].to_i).days
-
 
     amount_internal = Support.where(:payment_completed => true).sum(:amount_internal)
 
@@ -81,7 +82,8 @@ class Api::HomepagesController < ApplicationController
       :amount_internal => amount_internal,
       :prediction => prediction,
       :number_of_participants => number_with_precision(number_of_participants, precision: 0, delimiter: '.'),
-      :supports => Support.where(:comment => true, :payment_completed => false).order(:created_at => :desc).limit(12)
+      :supports => Support.where(:comment => true, :payment_completed => false).order(:created_at => :desc).limit(12),
+      :gap => 3000 - (crowdbar_amount_2015 * 0.3)
     }
     render json: homepage_data
   end
