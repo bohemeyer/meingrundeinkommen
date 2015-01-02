@@ -66,7 +66,8 @@ angular.module "Security", ["Devise","Flag"]
             name: name
             value: value
           ).create().then (flag) ->
-            service.user.flags[name] = value
+            if service.user.flags
+              service.user.flags[name] = value
 
       incFlag: (name) ->
         if service.isAuthenticated
