@@ -35,8 +35,7 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
   "$timeout"
   ($scope, has_crowdbar, Crowdbar, $location, home, $routeParams, $modal, $http, $timeout) ->
 
-    user_id = $scope.current.user.id
-    $scope.user = $scope.current.user
+    $scope.user = $scope.current.user if $scope.current.user
     $scope.steps = {}
     $scope.own_profile = true
 
@@ -54,11 +53,11 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
       'avatar'
 
       #if not participates
-      # 'gewinnspiel_question'
-      # 'wishes'
-      # 'gewinnspiel'
-      # 'confirm'
-      # 'gewinnspiel_thanks'
+      'gewinnspiel_question'
+      'wishes'
+      'gewinnspiel'
+      'confirm'
+      'gewinnspiel_thanks'
 
       #if everything completed only
       #'states'
@@ -183,7 +182,7 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
           true
         when 'done'
           $scope.current_step = -1
-          $location.path("/menschen/" + user_id)
+          $location.path("/menschen/" + $scope.current.user.id)
           true
         else false
 
