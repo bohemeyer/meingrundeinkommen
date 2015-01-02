@@ -32,8 +32,9 @@ class Api::HomepagesController < ApplicationController
 
     #read crowdbar file
 
-    crowdbar_amount_2014 = Support.where("payment_method = ? and strftime('%Y', created_at) = ?", 'crowdbar', '2014').sum(:amount_for_income)
-    crowdbar_amount_2015 = Support.where("payment_method = ? and strftime('%Y', created_at) = ?", 'crowdbar', '2015').sum(:amount_for_income)
+    crowdbar_amount_2014 = Support.where("payment_method = ? and extract(year from created_at) = ?", 'crowdbar', '2014').sum(:amount_for_income)
+    #for development: crowdbar_amount_2015 = Support.where("payment_method = ? and strftime('%Y', created_at) = ?", 'crowdbar', '2015').sum(:amount_for_income)
+    crowdbar_amount_2015 = Support.where("payment_method = ? and extract(year from created_at) = ?", 'crowdbar', '2015').sum(:amount_for_income)
 
 
     #fix wrong startnext amount due to invalid payment of supporter
