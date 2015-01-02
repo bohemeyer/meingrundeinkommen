@@ -17,16 +17,20 @@ angular.module "Chance", ["rails"]
   ($scope, $modal, Chance) ->
 
 
+    if $scope.current.user.chances
+      $scope.chances_form =
+        chances: $scope.current.user.chances
+
     $scope.sanitizeChances = ->
       adult = false
       participates = false
-      angular.forEach $scope.user.chances, (chance) ->
+      angular.forEach $scope.chances_form.chances, (chance) ->
         if !chance.isChild
           adult = true
         if chance.id
           participates = true
       if !adult
-        $scope.user.chances.unshift(
+        $scope.chances_form.chances.unshift(
           isChild: false
           dob_year: 1975
           dob_month: 1
@@ -38,7 +42,7 @@ angular.module "Chance", ["rails"]
     $scope.sanitizeChances()
 
     $scope.addChild = ->
-      $scope.user.chances.push(
+      $scope.chances_form.chances.push(
         isChild: true
         dob_year: 2000
         dob_month: 1
@@ -58,8 +62,8 @@ angular.module "Chance", ["rails"]
         if response.errors
           $scope.chance_errors = response.errors
         else
-          $scope.user.chances[$scope.user.chances.indexOf(chance)] = response.chance
-          $scope.current.user.chances.push response.chance
+          $scope.chances_form.chances[$scope.chances_form.chances.indexOf(chance)] = response.chance
+          #$scope.current.user.chances.push response.chance
           $scope.sanitizeChances()
           $scope.participation.participates = true
           $scope.steps.done = true if $scope.steps
@@ -72,7 +76,10 @@ angular.module "Chance", ["rails"]
         new Chance(
           id: chance.id
         ).delete()
-      $scope.user.chances.splice($scope.user.chances.indexOf(chance), 1)
+      $scope.chances_form.chances.splice($scope.chances_form.chances.indexOf(chance), 1)
+      console.log $scope.participation.participates
+      $scope.participation.participates = if $scope.chances_form.chances.length == 0 then false else true
+      console.log $scope.participation.participates
       $scope.sanitizeChances()
 
     $scope.gewinnspielbedingungen = () ->

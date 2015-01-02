@@ -9,7 +9,7 @@
   </p>
 
   <ul>
-  	<li ng-repeat="chance in user.chances | orderBy:chance.isChild">
+  	<li ng-repeat="chance in chances_form.chances | orderBy:chance.isChild">
   		<div ng-if="chance.id" class="margin-top-30">
   			<alert type="success"><h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="icon-check"></i> Du nimmst an der Verlosung teil! <!-- <a ng-if="!participation.has_crowdbar" href="#" ng-click="skip_section('gewinnspiel')" class="btn-normal btn-color"><i class="icon-plus"></i> &nbsp; Meine Gewinnchance verdoppeln</a> --></h3>
   			<h3 style="margin-bottom:0" ng-if="chance.isChild"><i class="icon-check"></i> Du nimmst für dein Kind an der Verlosung teil!</h3></alert>
@@ -101,7 +101,7 @@
                     <div class="checkbox">
                       <label>
                         <input name="publication"
-                        ng-model="chance.confirmed_publication" value="true" type="checkbox"> Ich stimme den <a href="#" ng-click="gewinnspielbedingungen()">Gewinnspielbedingungen</a> zu. Insbesondere bin ich im Gewinnfall mit der Veröffentlichung des Links zu meiner <a href="/menschen/{{user.id}}">Profilseite</a> einverstanden.
+                        ng-model="chance.confirmed_publication" value="true" type="checkbox"> Ich stimme den <a href="#" ng-click="gewinnspielbedingungen()">Gewinnspielbedingungen</a> zu. Insbesondere bin ich im Gewinnfall mit der Veröffentlichung des Links zu meiner <a href="/menschen/{{current.user.id}}">Profilseite</a> einverstanden.
                       </label>
                       <alert ng-show="chance_errors.confirmedPublication">Häkchen muss angeklickt sein.</alert>
                     </div>
@@ -134,7 +134,7 @@
   </ul>
 
   <div class="text-center">
-    <a href="#" ng-click="addChild()" class="text-center btn btn-special btn-grey btn-small" style="margin-left:40px;"><i class="icon-plus"></i> Mein Kind (unter 18) hinzufügen</a></li>
+    <a href="#" ng-click="addChild()" class="text-center btn btn-color btn-small" style="margin-left:40px;"><i class="icon-plus"></i> Mein Kind (unter 18) hinzufügen</a></li>
   </div>
 
 

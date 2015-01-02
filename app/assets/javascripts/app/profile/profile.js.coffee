@@ -39,6 +39,8 @@ angular.module("profile", ["User","Wish","Chance","State","Avatar",'ng-breadcrum
     #   $scope.current.setFlag key, value
 
     $scope.user = user
+    $scope.chances_form =
+      chances: user.chances
 
     #todo: put in current user service
     $scope.default_avatar = if $scope.current && $scope.current.is_own_profile(user.id) && $scope.current.is_default_avatar() then true else false

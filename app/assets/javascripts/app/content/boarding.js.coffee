@@ -116,6 +116,7 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
             return false
 
         when 'confirm'
+          $scope.trigger = 'participates' if $location.search().trigger && $location.search().trigger == 'participates'
           if ($scope.trigger == 'login' || $location.search().trigger == 'participates') && !$scope.current.user.confirmed_at then true else false
 
 
@@ -124,13 +125,13 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
 
 
         when 'gewinnspiel_question'
-          if $scope.trigger != 'crowdbar_installed' && $scope.current.user.chances.length == 0 && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
+          if $scope.trigger != 'crowdbar_installed' && !$scope.participation.participates && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
             true
           else
             false
 
         when 'wishes'
-          if $scope.trigger != 'crowdbar_installed' && $scope.current.user.chances.length == 0 && $scope.current.user.wishes.length == 0 && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
+          if $scope.trigger != 'crowdbar_installed' && !$scope.participation.participates && $scope.current.user.wishes.length == 0 && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
             $scope.steps.hide_skip_button = true
             $scope.steps.show_next_button = true
             true
@@ -138,7 +139,7 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
             false
 
         when 'gewinnspiel'
-          if $scope.trigger != 'crowdbar_installed' && $scope.current.user.chances.length == 0 && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
+          if $scope.trigger != 'crowdbar_installed' && !$scope.participation.participates && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
             $scope.steps.show_next_button = true
             true
           else
@@ -149,7 +150,7 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
 
 
         when 'states'
-          if $scope.trigger != 'crowdbar_installed' && $scope.current.user.states.length == 0 && !$scope.current.is_default_avatar() && $scope.current.user.chances.length > 0 && $scope.current.user.confirmed_at then true else false
+          if $scope.trigger != 'crowdbar_installed' && $scope.current.user.states.length == 0 && !$scope.current.is_default_avatar() && $scope.participation.participates && $scope.current.user.confirmed_at then true else false
 
 
         when 'crowdbar'
