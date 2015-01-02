@@ -20,6 +20,8 @@ angular.module "Crowdcard", ["rails"]
       $scope.submitted = true
       $scope.crowdcard_errors = []
 
+      crowdcard.country = 'de'
+
       new Crowdcard(crowdcard).create()
       .then (response) ->
         $scope.submitted = false
