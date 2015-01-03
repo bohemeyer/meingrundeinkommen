@@ -12,8 +12,9 @@ angular.module("admin", ["Support", "Registration"])
   "$scope"
   "Support"
   "Registration"
+  "Crowdcard"
 
-  ($scope, Support, Registration) ->
+  ($scope, Support, Registration, Crowdcard) ->
 
     $scope.u = {}
     $scope.u.search = ''
@@ -22,6 +23,11 @@ angular.module("admin", ["Support", "Registration"])
       admin: true
     ).then (supports) ->
       $scope.supports = supports
+
+    Crowdcard.query(
+      admin: true
+    ).then (crowdcards) ->
+      $scope.crowdcards = crowdcards
 
 
     $scope.search_for_user = ->
@@ -114,4 +120,15 @@ angular.module("admin", ["Support", "Registration"])
       ).update()
       .then (response) ->
         $scope.supports[$scope.supports.indexOf(support)] = response
+
+
+    $scope.sendCard = (crowdcard) ->
+      new Crowdcard(
+        id: crowdcard.id
+        admin: true
+      ).update()
+      .then (response) ->
+        #$scope.crowdcards[$scope.crowdcards.indexOf(crowdcard)] = response
+        $scope.crowdcards.splice($scope.crowdcards.indexOf(crowdcard), 1)
+
 ]

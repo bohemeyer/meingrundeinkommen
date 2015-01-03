@@ -10,4 +10,25 @@ class Api::CrowdcardsController < ApplicationController
     end
   end
 
+  def update
+  	if current_user && current_user.admin? and params[:admin]
+  	  c = Crowdcard.find(params[:id])
+	  c.update_attributes(:sent => Date.today)
+      render json: c
+    end
+  end
+
+  def index
+  	if current_user && current_user.admin? and params[:admin]
+
+  	  respond_to do |format|
+	    format.json { render json: Crowdcard.where(:sent => nil).order(:id => :asc) }
+	    format.csv { send_data Crowdcard.all.to_csv }
+	    #format.xls # { send_data @products.to_csv(col_sep: "\t") }
+	  end
+
+
+    end
+  end
+
 end

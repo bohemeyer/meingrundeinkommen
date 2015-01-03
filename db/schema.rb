@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141225223140) do
+ActiveRecord::Schema.define(version: 20150103003412) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20141225223140) do
     t.integer  "number_of_cards", default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "sent"
   end
 
   create_table "flags", force: true do |t|
@@ -197,6 +198,9 @@ ActiveRecord::Schema.define(version: 20141225223140) do
     t.boolean  "crowdbar_not_found",     default: false
     t.integer  "winner",                 default: 0
     t.boolean  "admin",                  default: false
+    t.string   "provider",               default: "",    null: false
+    t.string   "uid",                    default: "",    null: false
+    t.text     "tokens"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

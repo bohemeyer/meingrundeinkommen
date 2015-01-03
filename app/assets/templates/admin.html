@@ -2,10 +2,47 @@
 <div ng-if="current.user && current.user.admin">
 
 
+	<h1 class="margin-top-70">
+		<a href="/api/crowdcards.csv?admin=true" target="_blank" class="pull-right btn btn-grey"><i class="fa fa-download"></i> Als CSV herunterladen</a>
+		Crowdcards
+	</h1>
+
+	<div class="well text-center">
+		<i class="icon-search big"></i> <input type="text" class="big" ng-model="searchcrowdcard">
+	</div>
+
+	<table class="table">
+		<tr>
+			<td>ID</td>
+			<td>Name</td>
+			<td>Anschrift</td>
+			<td>Karten</td>
+			<td>Versendet?</td>
+		</tr>
+
+		<tr ng-repeat="crowdcard in crowdcards | filter:searchcrowdcard">
+			<td>{{crowdcard.id}}</td>
+			<td>
+				{{crowdcard.firstName}} {{crowdcard.lastName}}<br>
+				<a href="/menschen/{{crowdcard.user.id}}" target="_blank">{{crowdcard.user.name}}</a>
+				<a href="mailto:{{crowdcard.user.email}}" class="fa fa-envelope"></a>
+
+			</td>
+			<td>{{crowdcard.street}} {{crowdcard.houseNumber}}, {{crowdcard.zipCode}} {{crowdcard.city}}</td>
+			<td>{{crowdcard.numberOfCards}}</td>
+			<td>
+				<a href="#" ng-if="!crowdcard.sent" ng-click="sendCard(crowdcard)" class="btn btn-normal btn-grey">Versenden</a>
+				<a href="#" ng-if="crowdcard.sent" class="btn btn-normal btn-color"><i class="fa fa-check"></i></a>
+			</td>
+		</tr>
+	</table>
+
+	<hr>
+
 	<h1>User</h1>
 
 	<div class="well text-center">
-		<i class="icon-search big"></i> <input type="text" class="big" ng-model="u.search" ng-change="search_for_user()">
+		<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="u.search" ng-change="search_for_user()">
 	</div>
 
 	<table class="table" ng-show="users.length > 0">
@@ -39,7 +76,7 @@
 	<h1 class="margin-top-70">Bank-Supports</h1>
 
 	<div class="well text-center">
-		<i class="icon-search big"></i> <input type="text" class="big" ng-model="search">
+		<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="search">
 	</div>
 
 	<table class="table">
@@ -60,7 +97,7 @@
                 </div>  --><textarea ng-model="support.comment"></textarea></td>
 			<td>
 				<a href="#" ng-if="!support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-grey">Bestätigen</a>
-				<a href="#" ng-if="support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-color"><i class="icon-check"></i></a>
+				<a href="#" ng-if="support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-color"><i class="fa fa-check"></i></a>
 			</td>
 		</tr>
 	</table>
