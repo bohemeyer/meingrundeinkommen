@@ -8,7 +8,7 @@
     <a ng-show="browser.isSafari" ng-click="crowdbar_install()" href="http://bar.mein-grundeinkommen.de/extension/crowd_bar/crowd_bar.safariextz" target="_blank" class="btn-large btn-color">Jetzt herunterladen</a>
   </div>
 
-  <div ng-if="crowdbar.runs_in_this_browser_as_bookmark">
+  <div ng-if="crowdbar.runs_in_this_browser_as_bookmark()">
     <div class="well" style="color:black;text-shadow:none;"><i class="fa fa-mobile pull-left big"></i> Neu: Jezt auch als App für dein Smartphone oder Tablet!</div>
     <a href="#" ng-click="crowdapp_install()" class="btn-large btn-color"> App installieren</a>
   </div>
