@@ -113,7 +113,7 @@ angular.module "Crowdbar", ["Flag"]
       if $scope.current.user
         $location.path('/crowdapp',false).search('installed_for',$scope.current.user.id)
       else
-        $location.path('/crowdapp',false).search('installed',true)
+        $location.path('/crowdapp',false).search('installed','1')
 
       $scope.current.setFlag('crowdappInstallClicked',true)
       modal = $modal.open(
