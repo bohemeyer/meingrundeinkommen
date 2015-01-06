@@ -3,9 +3,13 @@
 
 
 	<h1 class="margin-top-70">
-		<a href="/api/crowdcards.csv?admin=true" target="_blank" class="pull-right btn btn-grey"><i class="fa fa-download"></i> Als CSV herunterladen</a>
+		<a href="/api/crowdcards.csv?admin=true" target="_blank" class="pull-right btn btn-color"><i class="fa fa-download"></i> Nicht versendete als CSV</a>
+
+		<a href="/api/crowdcards.csv?admin=true&show_all=true" target="_blank" class="pull-right btn btn-grey"><i class="fa fa-download"></i> Alle als CSV</a>
 		Crowdcards
 	</h1>
+	<h3 ng-if="crowdcards.length > 0">Nur noch {{crowdcards.length}}! Go Helwig!</h3>
+	<h3 ng-if="crowdcards.length == 0">Geschafft! Danke, Helwig!</h3>
 
 	<div class="well text-center">
 		<i class="icon-search big"></i> <input type="text" class="big" ng-model="searchcrowdcard">

@@ -5,12 +5,12 @@
 %html{"ng-app" => "grundeinkommen", "xmlns:fb" => "http://ogp.me/ns/fb#"}
   / <![endif]
   %head
-    %title Mein Grundeinkommen
+    %title{"data-ng-bind"=>"meta.title"}
     %meta{content: "width=device-width, initial-scale=1.0", name: "viewport"}/
-    / Google Fonts
-    /%link{href: "http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800", rel: "stylesheet", type: "text/css"}/
-    //%link{href: "http://fonts.googleapis.com/css?family=Oswald:400,300,700", rel: "stylesheet", type: "text/css"}/
-    /%link{href: "http://fonts.googleapis.com/css?family=Lato:300,400,700", rel: "stylesheet", type: "text/css"}/
+
+    %meta{:content => "yes", :name => "mobile-web-app-capable"}/
+    %meta{:content => "yes", :name => "apple-mobile-web-app-capable"}/
+    %meta{:content => "Crowdbar", :name => "apple-mobile-web-app-title"}/
 
     %meta{property: "og:image", content: "https://www.mein-grundeinkommen.de/assets/fbshare.png"}
 
@@ -19,14 +19,19 @@
     = javascript_include_tag "//platform.twitter.com/widgets.js"
     = csrf_meta_tags
     / Favicons
-    %link{href: "assets/ico/favicon.ico", rel: "shortcut icon"}/
-    %link{href: "assets/ico/apple-touch-icon.png", rel: "apple-touch-icon"}/
-    %link{href: "assets/ico/apple-touch-icon-72.png", rel: "apple-touch-icon", sizes: "72x72"}/
-    %link{href: "assets/ico/apple-touch-icon-114.png", rel: "apple-touch-icon", sizes: "114x114"}/
-    %link{href: "assets/ico/apple-touch-icon-144.png", rel: "apple-touch-icon", sizes: "144x144"}/
+    %link{href: "/assets/ico/favicon.ico", rel: "shortcut icon"}/
+    %link{:href => "/assets/ico/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
+    %link{:href => "/assets/ico/apple-touch-icon.png", :rel => "apple-touch-icon"}/
+    %link{:href => "/assets/ico/apple-touch-icon-57x57.png", :rel => "apple-touch-icon", :sizes => "57x57"}/
+    %link{:href => "/assets/ico/apple-touch-icon-72x72.png", :rel => "apple-touch-icon", :sizes => "72x72"}/
+    %link{:href => "/assets/ico/apple-touch-icon-76x76.png", :rel => "apple-touch-icon", :sizes => "76x76"}/
+    %link{:href => "/assets/ico/apple-touch-icon-114x114.png", :rel => "apple-touch-icon", :sizes => "114x114"}/
+    %link{:href => "/assets/ico/apple-touch-icon-120x120.png", :rel => "apple-touch-icon", :sizes => "120x120"}/
+    %link{:href => "/assets/ico/apple-touch-icon-144x144.png", :rel => "apple-touch-icon", :sizes => "144x144"}/
+    %link{:href => "/assets/ico/apple-touch-icon-152x152.png", :rel => "apple-touch-icon", :sizes => "152x152"}/
 
   %body.home-3{"ng-controller" => "AppCtrl"}
-    .wrap{"ng-class"=>"{'full_height' : getStatus('/boarding') == 'current'}"}
+    .wrap{"ng-class"=>"{'full_height' : getStatus('/boarding') == 'current' || getStatus('/crowdapp') == 'current'}"}
       / Header Start
       %header#header
         .main-header{"ng-hide"=>"getStatus('/boarding') == 'current'"}
@@ -113,7 +118,7 @@
       #main{"ng-view" => "", :autoscroll=>"true"}
       / Content End
       / Footer Start
-      %footer#footer{"ng-hide"=>"getStatus('/boarding') == 'current'"}
+      %footer#footer{"ng-hide"=>"getStatus('/boarding') == 'current' || getStatus('/crowdapp') == 'current'"}
         / Footer Top Start
         .footer-top
           .container

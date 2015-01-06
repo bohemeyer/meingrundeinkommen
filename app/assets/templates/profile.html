@@ -1,7 +1,17 @@
 <div class="breadcrumb-wrapper">
    <div class="container">
       <div class="row" style="padding-bottom: 55px;">
-      <div class="col-md-12 text-center"> </div>
+      <div class="col-md-12 text-center">
+
+        <div ng-if="own_profile">
+          <alert type="danger" ng-if="!current.user.confirmed_at && current.participates()">Du nimmst erst an der Verlosung teil, wenn du deine <a href="/boarding?trigger=participates">E-Mailadresse bestätigt</a> hast.</alert>
+
+          <alert type="danger" ng-if="!current.participation_verified() && current.participates() && !current.has_ordered_crowdcard()">Du nimmst erst an der Verlosung teil, wenn du die <a href="/boarding?go_to=crowdbar">Crowdbar</a> installiert hast oder die <a href="/boarding?go_to=crowdcard">Crowdcard</a> bestellt und bestätigt hast.</alert>
+
+          <alert type="danger" ng-if="!current.participation_verified() && current.participates() && current.has_ordered_crowdcard()">Wir haben dir deine Crowdcard per Post zugesendet. Jetzt deine Crowdcard-Nummer eintragen um an der Verlosung teilzunehmen: <br><a href="/boarding?go_to=verify_crowdcard" class="btn btn-big btn-grey">Los geht's</a></alert>
+        </div>
+
+      </div>
       </div>
    </div>
 
@@ -78,7 +88,6 @@
 	  </div>
 	</div>
   <div class="col-md-8">
-
 
     <div ng-if="!own_profile" ng-include="'/assets/wishes.html'"></div>
 

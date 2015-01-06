@@ -38,6 +38,9 @@ angular.module("profile", ["User","Wish","Chance","State","Avatar",'ng-breadcrum
     # $scope.flagtest = (key, value) ->
     #   $scope.current.setFlag key, value
 
+    $scope.$on 'go_to_next_step', ->
+      $scope.chances_form.editAllChances = false
+
     $scope.user = user
     $scope.chances_form =
       chances: user.chances

@@ -7,6 +7,10 @@ angular.module("content", ['ng-breadcrumbs'])
       templateUrl: "/assets/info.html"
       label: "So funktioniert's"
 
+    .when "/crowdapp",
+      controller: "CrowdbarController"
+      templateUrl: "/assets/crowdapp_install.html"
+
     .when "/crowdbar",
       redirectTo: "/support/crowdbar"
 
@@ -21,6 +25,14 @@ angular.module("content", ['ng-breadcrumbs'])
 
     .when "/crowdcard",
       redirectTo: "/support/crowdcard"
+
+    .when "/wo",
+      redirectTo: "/crowdcard/partnerinnen"
+
+    .when "/crowdcard/partnerinnen",
+      templateUrl: "/assets/info.html"
+      controller: ->
+        window.location.href = "https://www.payback.de/pb/partner/id/16380/"
 
     .when "/100",
       redirectTo: "/support/donate"

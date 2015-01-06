@@ -1,15 +1,26 @@
 <script type="text/ng-template" id="buttons.html">
-  <a ng-show="browser.isChrome" ng-click="crowdbar_install()" href="https://chrome.google.com/webstore/detail/crowdbar/lhinknkceoifkecnmmlgnelmdipmbcdn" target="_blank" class="btn-large btn-color">Jetzt installieren</a>
 
-  <a ng-show="browser.isFirefox" ng-click="crowdbar_install()" href="https://addons.mozilla.org/de/firefox/addon/mein-grundeinkommen-crowdbar/" target="_blank" class="btn-large btn-color">Jetzt installieren</a>
+  <div ng-if="crowdbar.runs_in_this_browser()">
+    <a ng-show="browser.isChrome" ng-click="crowdbar_install()" href="https://chrome.google.com/webstore/detail/crowdbar/lhinknkceoifkecnmmlgnelmdipmbcdn" target="_blank" class="btn-large btn-color">Jetzt installieren</a>
 
-  <a ng-show="browser.isSafari" ng-click="crowdbar_install()" href="http://bar.mein-grundeinkommen.de/extension/crowd_bar/crowd_bar.safariextz" target="_blank" class="btn-large btn-color">Jetzt herunterladen</a>
+    <a ng-show="browser.isFirefox" ng-click="crowdbar_install()" href="https://addons.mozilla.org/de/firefox/addon/mein-grundeinkommen-crowdbar/" target="_blank" class="btn-large btn-color">Jetzt installieren</a>
+
+    <a ng-show="browser.isSafari" ng-click="crowdbar_install()" href="http://bar.mein-grundeinkommen.de/extension/crowd_bar/crowd_bar.safariextz" target="_blank" class="btn-large btn-color">Jetzt herunterladen</a>
+  </div>
+
+  <div ng-if="crowdbar.runs_in_this_browser_as_bookmark">
+    <div class="well" style="color:black;text-shadow:none;"><i class="fa fa-mobile pull-left big"></i> Neu: Jezt auch als App für dein Smartphone oder Tablet!</div>
+    <a href="#" ng-click="crowdapp_install()" class="btn-large btn-color"> App installieren</a>
+  </div>
+
+
 </script>
 
 <div id="crowdbar_background">
 	<div class="row">
     <div ng-controller="CrowdbarController">
 		<div class="col-sm-6 col-xs-12" id="crowdbar_overlay">
+
   			<div ng-show="show_faq && !show_form" class="container margin-top-30">
 
   				<a href="#" ng-click="show_faq = false"><i class="fa fa-arrow-left"></i> zurück</a>

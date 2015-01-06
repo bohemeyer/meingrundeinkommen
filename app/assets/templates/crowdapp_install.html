@@ -1,0 +1,37 @@
+<div class="modal-body">
+	<div class="container">
+
+  <div class="col-sm-6">
+  	<img src="/assets/crowdapp.png">
+  </div>
+
+  <div class="col-sm-6">
+  	<div class="{{appclass_name}}">
+	  	<h3 ng-show="browser.OS != 'io' && browser.OS != 'android'">Um die Crowdbar als App zu installieren, klicke jetzt in deinem Browser auf <strong>Zum Home-Bildschirm hinzufügen</strong> bzw. auf <strong>Als Lesezeichen hinzufügen</strong></h3>
+
+
+		<h3 ng-show="browser.OS == 'io'">Um die Crowdbar als App zu installieren, tippe jetzt in auf <span class="ath-action-icon">icon</span> und dann auf <strong>"Zum Home-Bildschirm"</strong>.</h3>
+
+
+		<h3 ng-show="browser.OS == 'android'">Um die Crowdbar als App zu installieren klicke jetzt im Browser-Menü oben rechts auf <span class="ath-action-icon">icon</span> und dann auf <strong>Zum Home-Bildschirm</strong>.</h3>
+
+		<p>
+			Danach bitte zum Home-Bildschirm gehen und auf das Crowdbar-Icon (siehe Bild) klicken.
+		</p>
+
+		<p ng-show="browser.OS != 'io' && browser.OS != 'android'">
+			Wenn es auf deinem Gerät keinen Homebildschirm gibt, dann öffne den Crowdbar-Link in den Lesezeichen deines Browsers.
+		</p>
+
+	  </div>
+
+
+  	<alert ng-if="not_found" class="margin-top-30">Nicht gefunden. Hast du das Lesezeichen/App-Icon nach dem Speichern schon angeklickt?</alert>
+  	<a href="#" class="btn btn-large btn-color margin-top-30" ng-click="check_for_crowdapp()"><i class="fa fa-refresh"></i> App überprüfen</a>
+  	<div class="text-center">
+  	<br><br><a href="#" ng-click="$close()">Abbrechen</a>
+  	</div>
+  </div>
+</div>
+
+</div>

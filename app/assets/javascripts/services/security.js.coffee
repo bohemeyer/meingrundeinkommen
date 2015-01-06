@@ -72,7 +72,12 @@ angular.module "Security", ["Devise","Flag"]
           return found
 
       participation_verified: ->
-        if service.participates() && (service.getFlag('hasHadCrowdbar') || service.getFlag('hasCrowdbar') || service.getFlag('crowdcardNumber'))
+        if service.participates() and
+        (service.getFlag('hasHadCrowdbar') or
+        service.has_crowdbar() or
+        service.has_crowdcard() or
+        service.has_crowdapp())
+
           true
         else
           false
@@ -80,26 +85,32 @@ angular.module "Security", ["Devise","Flag"]
       has_crowdbar: ->
         service.getFlag('hasCrowdbar')
 
+      has_crowdapp: ->
+        service.getFlag('crowdAppVisits')
+
       has_crowdcard: ->
         service.getFlag('crowdcardNumber')
+
 
       has_ordered_crowdcard: ->
         return false if service.user.crowdcards.length == 0
         return true  if service.user.crowdcards.length > 0
 
-
+      has_received_crowdcard_letter: ->
+        if service.has_ordered_crowdcard()
+          if service.user.crowdcards[0].sent then true else false
 
       setFlag: (name, value) ->
-        if service.isAuthenticated
+        if service.isAuthenticated()
+          service.user.flags[name] = value
           new Flag(
             name: name
             value: value
-          ).create().then (flag) ->
-            if service.user.flags
-              service.user.flags[name] = value
+          ).create()
+
 
       incFlag: (name) ->
-        if service.isAuthenticated
+        if service.isAuthenticated()
           new Flag(
             id: 1
             name: name
@@ -111,10 +122,7 @@ angular.module "Security", ["Devise","Flag"]
               service.user.flags[name] = 1
 
       getFlag: (name) ->
-        if service.isAuthenticated
-          #todo: get all flags from server
-          # Flag.query().then (flags) ->
-          #   service.user.flags = flags
+        if service.isAuthenticated()
           if service.user.flags[name] then service.user.flags[name] else false
 
       # Is the current user an adminstrator?

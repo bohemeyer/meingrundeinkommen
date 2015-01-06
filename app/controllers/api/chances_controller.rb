@@ -10,6 +10,15 @@ class Api::ChancesController < ApplicationController
     end
   end
 
+  def update
+    chance = current_user.chances.find(params[:id])
+    if chance.update_attributes(params.permit(:first_name, :last_name, :dob, :city, :confirmed_publication, :remember_data, :crowdcard_code))
+      render json: {:chance => chance}
+    else
+      render json: {:errors => chance.errors, :chance => chance}
+    end
+  end
+
   def destroy
     #if !current_user.winner
       current_user.chances.where(id:params[:id]).first.destroy

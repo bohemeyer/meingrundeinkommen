@@ -1,12 +1,15 @@
 <div class="container">
 
-    <alert type="danger" ng-if="!current.user.confirmed_at && current.participates()">Du nimmst erst an der Verlosung teil, wenn du deine <a href="/boarding?trigger=participates">E-Mailadresse bestätigt</a> hast.</alert>
+    <p ng-show="!chances_form.editAllChances">
+      <h4>Das 6. Grundeinkommen in Höhe von 12.000€ wird Mitte Februar 2015 in einem Gewinnspiel verlost.
+        <a href="#" ng-click="gewinnspielbedingungen()">Gewinnspielbedingungen</a>
+    | <a href="/faq/verlosung">Häufige Fragen</a>
+      </h4>
+    </p>
 
-    <alert type="danger" ng-if="!current.participation_verified() && current.participates() && !current.has_ordered_crowdcard()">Du nimmst erst an der Verlosung teil, wenn du die <a href="/boarding?go_to=crowdbar">Crowdbar</a> installiert hast oder die <a href="/boarding?go_to=crowdcard">Crowdcard</a> bestellt hast.</alert>
+    <div class="text-center" ng-show="!current.participates()">
 
-    <alert type="danger" ng-if="!current.participation_verified() && current.participates() && current.has_ordered_crowdcard()">Du nimmst erst an der Verlosung teil, wenn du die Crowdcard per Post erhalten und den Code auf der Karte hier eingetragen hast. Sofort teilnehmen kannst du, wenn du dir die <a href="/boarding?go_to=crowdbar">Crowdbar</a> installierst.</alert>
-
-    <div class="text-center" ng-if="!current.participates()">
+        <a class="btn-large btn-color btn" href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen!</a>
 <!--    <div class="text-center">
 
            <h3 class="margin-top-20">Die Anmeldung zum 5. Grundeinkommen hat am <b>14.11.</b> geendet.!</h3>
@@ -17,20 +20,36 @@
             Im Dezember werden weitere Grundeinkommen verlost.
           </div>
  -->
-        <!-- <div class="well">
-          <div>Um an der Verlosung teilnehmen zu können, <br>
-          gib bitte wenigstens eine Sache an, <br>
-          die du mit Grundeinkommen tun würdst.
-          </div>
-          <a href="#" ng-click="jumpToFirstTab()" class="margin-top-20 btn-normal btn-color">Jetzt sagen</a>
-        </div> -->
-        <h3>Die nächste Grundeinkommens-Verlosung findet Mitte Februar 2015 statt.</h3>
-        <a href="/boarding?trigger=wants_to_participate" class="margin-top-20 btn-large btn-color">Jetzt teilnehmen</a>
-
 
       </div>
 
-        <div ng-if="current.participates()" ng-include="'/assets/gewinnspiel_form.html'"></div>
+        <div ng-show="current.participates()">
+
+          <alert ng-show="current.participation_verified() && !chances_form.editAllChances" type="success">
+            <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst {{chances_form.chances.length > 1 ? chances_form.chances.length + 'x' : ''}} an der Verlosung teil!</h3>
+          </alert>
+
+          <ul ng-hide="chances_form.editAllChances">
+            <li ng-repeat="chance in current.user.chances | orderBy:chance.isChild">
+              <div ng-if="chance.id" class="margin-top-30">
+                <div style="padding-left:30px;">
+                <p>
+                  <b>Vollständiger Name (exakt wie auf Ausweis):</b> {{chance.first_name}} {{chance.last_name}}
+                  <br>
+                  <b>Geburtsdatum:</b> {{chance.dob | date:'dd.MM.yyyy'}}
+                </p>
+                </div>
+              </div>
+              <hr>
+            </li>
+          </ul>
+
+          <a ng-show="!chances_form.editAllChances" ng-click="chances_form.editAllChances = true" href="#" class="btn btn-color btn-small" ><i class="fa fa-pencil"></i> Daten ändern</a>
+
+
+          <div ng-show="chances_form.editAllChances" ng-include="'/assets/gewinnspiel_form.html'"></div>
+
+        </div>
 
 
 

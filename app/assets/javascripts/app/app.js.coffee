@@ -1,13 +1,19 @@
-window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute','ng-breadcrumbs','Security','ngCookies','angulartics','angulartics.google.analytics','login','reset_password','home','register','profile','wishpage','content','smoothScroll','faq','draw','drawfrontend', 'Support','djds4rce.angular-socialshare','admin','blog','boarding','Crowdbar','Crowdcard'])
+window.App = angular.module('grundeinkommen', ['ui.bootstrap','meta','rails','ngRoute','ng-breadcrumbs','Security','ngCookies','angulartics','angulartics.google.analytics','login','reset_password','home','register','profile','wishpage','content','smoothScroll','faq','draw','drawfrontend', 'Support','djds4rce.angular-socialshare','admin','blog','boarding','Crowdbar','Crowdcard'])
 
 .config [
   "$routeProvider"
   "$locationProvider"
-  ($routeProvider, $locationProvider) ->
+  "MetaProvider"
+  ($routeProvider, $locationProvider, MetaProvider) ->
     $locationProvider.html5Mode true
     $routeProvider
     .otherwise
       redirectTo: "/start"
+    MetaProvider
+      .when '/crowdapp',
+        title: 'Crowdbar'
+      .otherwise
+        title: 'Mein Grundeinkommen'
 ]
 
 
@@ -17,22 +23,23 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
 
 .controller "AppCtrl", [
   "$scope"
+  "$rootScope"
   "Security"
   "breadcrumbs"
   "Home"
   "Crowdbar"
   "$location"
 
-  ($scope, Security, breadcrumbs, Home, Crowdbar, $location) ->
+  ($scope, $rootScope, Security, breadcrumbs, Home, Crowdbar, $location) ->
 
     $scope.current = Security
 
     $scope.breadcrumbs = breadcrumbs
 
-    $scope.$on '$routeChangeStart', ->
-      $scope.show_spinner = true
-    $scope.$on '$routeChangeSuccess', ->
-      $scope.show_spinner = false
+    $rootScope.$on '$routeChangeStart', ->
+      $rootScope.show_spinner = true
+    $rootScope.$on '$routeChangeSuccess', ->
+      $rootScope.show_spinner = false
 
 
     $scope.getStatus = (path) ->
@@ -41,18 +48,9 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
       else
         ""
 
-    $scope.browser = {}
-    ua = navigator.userAgent.match(/chrome|firefox|safari|opera|msie|trident|iPad|iPhone|iPod/i)[0].toLowerCase()
-    isOpera = !!window.opera || navigator.userAgent.indexOf(' OPR/') >= 0
-    $scope.browser.isFirefox = typeof InstallTrigger isnt "undefined" # Firefox 1.0+
-    $scope.browser.isChrome = !!window.chrome and not isOpera && !(ua == "ipad" || ua == "iphone" || ua == "ipod") # Chrome 1+
-    $scope.browser.isSafari = Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 && !(ua == "ipad" || ua == "iphone" || ua == "ipod")
-    $scope.browser.ua = ua
-
     Crowdbar.verify().then (has_crowdbar) ->
       $scope.current.setFlag('hasCrowdbar',has_crowdbar)
       $scope.current.setFlag('hasHadCrowdbar', true) if has_crowdbar
-
 
     #STATS
     Home.query().then (home) ->
@@ -76,9 +74,25 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','rails','ngRoute',
 #################################################
 
 .run [
+  "$route"
+  "$rootScope"
+  "$location"
   "Security"
   "$FB"
-  (Security, $FB) ->
+  "Meta"
+  ($route, $rootScope, $location, Security, $FB, Meta) ->
     Security.requestCurrentUser()
+    Meta.init()
     $FB.init('1410947652520230')
+    original = $location.path
+    $location.path = (path, reload) ->
+      if reload is false
+        lastRoute = $route.current
+        un = $rootScope.$on("$locationChangeSuccess", ->
+          $route.current = lastRoute
+          $rootScope.show_spinner = false
+          un()
+          return
+        )
+      original.apply $location, [path]
 ]

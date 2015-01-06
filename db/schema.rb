@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150103003412) do
+ActiveRecord::Schema.define(version: 20150105203740) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(version: 20150103003412) do
     t.boolean  "crowdbar_verified",     default: false
     t.boolean  "ignore_double_chance",  default: false
     t.boolean  "remember_data",         default: false
+    t.string   "crowdcard_code"
   end
 
   add_index "chances", ["first_name", "last_name", "dob"], name: "index_chances_on_first_name_and_last_name_and_dob", unique: true

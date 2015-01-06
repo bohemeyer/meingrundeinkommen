@@ -1,4 +1,5 @@
 angular.module "Chance", ["rails"]
+
 .factory "Chance", [
   "railsResourceFactory"
   (rails) ->
@@ -14,12 +15,8 @@ angular.module "Chance", ["rails"]
   "$scope"
   "$modal"
   "Chance"
-  ($scope, $modal, Chance) ->
-
-
-    if $scope.current.user.chances
-      $scope.chances_form =
-        chances: $scope.current.user.chances
+  "$q"
+  ($scope, $modal, Chance, $q) ->
 
     $scope.sanitizeChances = ->
       adult = false
@@ -29,6 +26,14 @@ angular.module "Chance", ["rails"]
           adult = true
         if chance.id
           participates = true
+          chance.isChild = if chance.is_child then chance.is_child else chance.isChild
+          chance.is_child = if chance.isChild then chance.isChild else chance.is_child
+          if !chance.dob_year
+            dates = chance.dob.split "-"
+            chance.dob_year = parseInt dates[0]
+            chance.dob_month = parseInt dates[1]
+            chance.dob_day = parseInt dates[2]
+
       if !adult
         $scope.chances_form.chances.unshift(
           isChild: false
@@ -39,7 +44,6 @@ angular.module "Chance", ["rails"]
       $scope.steps.done = $scope.current.participates() if $scope.steps
       $scope.steps.hide_skip_button = $scope.current.participates() if $scope.steps
 
-    $scope.sanitizeChances()
 
     $scope.addChild = ->
       $scope.chances_form.chances.push(
@@ -49,35 +53,77 @@ angular.module "Chance", ["rails"]
         dob_day: 1
       )
 
-    $scope.saveChance = (c) ->
+    $scope.saveChances = () ->
       $scope.submitted = true
-      $scope.chance_errors = []
-      chance = c
-      chance.dob = c.dob_year + '-' + c.dob_month + '-' + c.dob_day
-      chance.is_child = c.isChild
+      $scope.confirmed_publication_error = false
+      errors = false
+      queries = []
 
-      new Chance(chance).create()
-      .then (response) ->
-        $scope.submitted = false
+      handle = (response, chance, key, is_update) ->
         if response.errors
-          $scope.chance_errors = response.errors
+          errors = true
+          $scope.chances_form.chances[key].errors = response.errors
+          $scope.confirmed_publication_error = if response.errors.confirmedPublication then true else false
+
+        if !response.errors #|| is_update
+          $scope.chances_form.chances[key] = response.chance
+          $scope.chances_form.chances[key].id = response.chance.id
+          $scope.chances_form.chances[key].first_name = response.chance.firstName
+          $scope.chances_form.chances[key].last_name = response.chance.lastName
+          $scope.chances_form.chances[key].is_child = response.chance.isChild
+          dates = response.chance.dob.split "-"
+          $scope.chances_form.chances[key].dob_year = parseInt dates[0]
+          $scope.chances_form.chances[key].dob_month = parseInt dates[1]
+          $scope.chances_form.chances[key].dob_day = parseInt dates[2]
+
+
+      angular.forEach $scope.chances_form.chances, (c) ->
+        key = $scope.chances_form.chances.indexOf(c)
+
+        delete $scope.chances_form.chances[key].errors
+        chance = c
+        chance.dob = c.dob_year + '-' + c.dob_month + '-' + c.dob_day
+        chance.is_child = c.isChild
+        chance.confirmed_publication = $scope.confirmed_publication
+        chance.remember_data = $scope.remember_data
+        chance.city = $scope.city
+
+        if chance.id
+          queries.push new Chance(chance).update().then (response) ->
+            handle(response,chance,key,true)
         else
-          $scope.chances_form.chances[$scope.chances_form.chances.indexOf(chance)] = response.chance
-          $scope.sanitizeChances()
+          queries.push new Chance(chance).create().then (response) ->
+            handle(response,chance,key)
+
+      #update current user
+      $scope.current.user.chances = $scope.chances_form.chances
+
+      $q.all(queries).finally ->
+        $scope.submitted = false
+        $scope.sanitizeChances()
+        if !errors
+          $scope.$emit('go_to_next_step')
 
 
-    $scope.removeChance = (chance) ->
+    $scope.deleteChance = (chance) ->
+      new Chance(chance).delete().then ->
+        $scope.chances_form.chances.splice($scope.chances_form.chances.indexOf(chance), 1)
+
+    $scope.cancelChild = (chance) ->
       if chance.id
-        new Chance(
-          id: chance.id
-        ).delete()
-      $scope.chances_form.chances.splice($scope.chances_form.chances.indexOf(chance), 1)
-      $scope.sanitizeChances()
+        $scope.deleteChance(chance)
+      else
+        $scope.chances_form.chances.splice($scope.chances_form.chances.indexOf(chance), 1)
 
     $scope.gewinnspielbedingungen = () ->
       modalInstance = $modal.open(
         templateUrl: "/assets/gewinnspielbedingungen.html"
         size: 'lg'
+        controller: [
+          "$scope"
+          ($scope) ->
+            $scope.is_modal = true
+        ]
       )
       return
 
@@ -87,5 +133,20 @@ angular.module "Chance", ["rails"]
         size: 'lg'
       )
       return
+
+
+    if $scope.current.user.chances && $scope.current.user.chances.length > 0
+      $scope.chances_form =
+        chances: $scope.current.user.chances
+      $scope.confirmed_publication = $scope.current.user.chances[0].confirmed_publication
+      $scope.remember_data = $scope.current.user.chances[0].remember_data
+      $scope.city = $scope.current.user.chances[0].city
+      $scope.sanitizeChances()
+
+    else
+      $scope.chances_form =
+        chances: []
+
+    $scope.sanitizeChances()
 
 ]

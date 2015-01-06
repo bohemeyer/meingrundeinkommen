@@ -85,6 +85,12 @@ angular.module "Crowdcard", ["rails"]
                 if $scope.current.participates() && !$scope.current.participation_verified() then true else false
           )
 
+    $scope.verify_crowdcard = ->
+      $scope.current.setFlag('crowdcardNumber',$scope.crowdcardNumber)
+      $scope.crowdbarVerified = true
+      $scope.steps.done = true if $scope.steps
+      $scope.steps.hide_skip_button = true if $scope.steps
+
 
 
 ]

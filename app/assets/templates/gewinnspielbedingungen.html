@@ -1,8 +1,9 @@
-<breadcrumbs></breadcrumbs>
+<div class="modal-body">
+<breadcrumbs ng-hide="is_modal"></breadcrumbs>
 
 <div class="container margin-top-30">
 
-<div class="text-center">
+<div ng-hide="is_modal" class="text-center">
 	<a href="/register" class="btn btn-special btn-color btn-large">Am Gewinnspiel teilnehmen</a>
 </div>
 
@@ -118,7 +119,10 @@
 	&nbsp;</p>
 
 <div class="text-center">
-	<a href="/register" class="btn btn-special btn-color btn-large">Am Gewinnspiel teilnehmen</a>
+	<a  ng-hide="is_modal" href="/register" class="btn btn-special btn-color btn-large">Am Gewinnspiel teilnehmen</a>
+
+	<a  ng-show="is_modal" ng-click="$close()" class="btn btn-special btn-color btn-large">Okay</a>
 </div>
 
 	</div>
+</div>

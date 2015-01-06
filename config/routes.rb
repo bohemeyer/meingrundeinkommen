@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   end
   resources :users
   resources :payments
+  resource :crowdapp
 
   # Catch all missing templates
   get 'assets/*page' => redirect('assets/missing.html')
