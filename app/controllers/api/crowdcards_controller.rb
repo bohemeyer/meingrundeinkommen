@@ -1,7 +1,8 @@
 class Api::CrowdcardsController < ApplicationController
 
   def create
-    crowdcard = current_user.crowdcards.create(params.permit(:first_name, :last_name, :street, :house_number, :city, :zip_code, :country, :number_of_cards))
+    crowdcard = Crowdcard.create(params.permit(:first_name, :last_name, :street, :house_number, :city, :zip_code, :country, :number_of_cards)) if !current_user
+    crowdcard = current_user.crowdcards.create(params.permit(:first_name, :last_name, :street, :house_number, :city, :zip_code, :country, :number_of_cards)) if current_user
     if crowdcard.valid?
       crowdcard.save!
       render json: {:crowdcard => crowdcard}
