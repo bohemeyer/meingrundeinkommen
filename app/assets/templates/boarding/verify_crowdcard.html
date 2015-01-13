@@ -17,7 +17,9 @@
 				Dieser Nummer hier eintragen:<br>
 				<input type="text" class="big" ng-model="crowdcardNumber" style="width:100%">
 
-				<a href="#" ng-click="verify_crowdcard()" class="margin-top-30 btn btn-large btn-color">Speichern</a>
+				<alert ng-show="crowdcardNumber.indexOf('361504662') > -1">Das ist die falsche Nummer. Bitte trag die Nummer oben links auf der Vorderseite ein (siehe Bild), sie beginnt mit vielen Nullen (die du weglassen kannst).</alert>
+
+				<a href="#" ng-click="verify_crowdcard()" class="margin-top-30 btn btn-large btn-color" ng-disabled="crowdcardNumber.indexOf('361504662') > -1">Speichern</a>
 			</div>
 
 		</div>
