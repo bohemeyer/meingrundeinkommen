@@ -26,7 +26,7 @@ class Api::CrowdcardsController < ApplicationController
       cc_unsent = Crowdcard.where(:sent => nil)
 
   	  respond_to do |format|
-	    format.json { render json: cc_unsent.order(:id => :asc) }
+	    format.json { render json: cc.order(:id => :asc) }
 	    format.csv { send_data params[:show_all] ? cc.to_csv : cc_unsent.to_csv }
 	    #format.xls # { send_data @products.to_csv(col_sep: "\t") }
 	  end
