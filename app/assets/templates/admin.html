@@ -25,7 +25,10 @@
 			<td>{{user.name}}</td>
 			<td>{{user.email}}</td>
 			<td>{{user.chances.length}}</td>
-			<td>{{user.hasCrowdbar}}</td>
+			<td>
+				<span ng-if="user.flags.hasCrowdbar">ja</span>
+				<div ng-if="!user.flags.hasCrowdbar">nein<br><a href="#" ng-click="enable_crowdbar(user)">freischalten</a></div>
+			</td>
 			<td>{{user.confirmedAt}} <a href="#" ng-click="confirm(user)" class="btn btn-normal btn-color">Confirm</a></td>
 			<td>{{user.pw}}<a href="#" ng-click="reset_pw(user)" class="btn btn-normal btn-grey">Set Password</a></td>
 			<td><a href="#" ng-click="delete_user(user)" class="btn btn-normal btn-grey">Delete</a></td>

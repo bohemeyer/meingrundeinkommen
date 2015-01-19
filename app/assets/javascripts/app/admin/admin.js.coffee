@@ -79,6 +79,17 @@ angular.module("admin", ["Support", "Registration"])
 
           window.location.href = link
 
+
+    $scope.enable_crowdbar = (user) ->
+      if confirm('wirklich?')
+        new Registration(
+          id: user.id
+          admin: true
+          enable_crowdbar: true
+        ).update()
+        .then (response) ->
+          user.flags.hasCrowdbar = true
+
     $scope.reset_pw = (user) ->
       if confirm('wirklich?')
         new Registration(

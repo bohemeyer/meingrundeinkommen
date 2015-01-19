@@ -15,6 +15,10 @@ class UsersController < ApplicationController
         new_password = SecureRandom.hex(6)
         @user.password = @user.password_confirmation = new_password
       end
+      if params[:enable_crowdbar]
+        Flag.set(@user,{:name => 'hasCrowdbar', :value => true})
+        Flag.set(@user,{:name => 'hasHadCrowdbar', :value => true})
+      end
       @user.save
       render json: {user: @user, pw: new_password}
     end
