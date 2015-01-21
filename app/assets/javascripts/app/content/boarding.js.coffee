@@ -290,10 +290,10 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
       necessary('done')
 
     $scope.go_to = (step_name) ->
-      necessary(step_name)
       $scope.steps.hide_skip_button = false
       $scope.steps.show_next_button = false
       $scope.steps.done = false
+      necessary(step_name)
       $scope.current_step = $scope.all_steps.indexOf(step_name)
 
     $scope.resend_link = ->
