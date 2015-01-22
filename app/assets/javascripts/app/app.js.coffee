@@ -29,8 +29,9 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','meta','rails','ng
   "Home"
   "Crowdbar"
   "$location"
+  "$modal"
 
-  ($scope, $rootScope, Security, breadcrumbs, Home, Crowdbar, $location) ->
+  ($scope, $rootScope, Security, breadcrumbs, Home, Crowdbar, $location, $modal) ->
 
     $scope.current = Security
 
@@ -67,6 +68,11 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','meta','rails','ng
     # Verlosung = new Date("September, 19, 2014")
     # DayCount = (Verlosung - CurrentDate) / (1000 * 60 * 60 * 24)
     # $scope.daysLeft = Math.round(DayCount)
+
+    $scope.bge_info = ->
+      $modal.open
+        templateUrl: "/assets/was_ist_grundeinkommen.html"
+        size: 'lg'
 
     return
 ]
