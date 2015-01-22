@@ -139,7 +139,7 @@ angular.module("admin", ["Support", "Registration"])
         admin: true
       ).update()
       .then (response) ->
-        #$scope.crowdcards[$scope.crowdcards.indexOf(crowdcard)] = response
-        $scope.crowdcards.splice($scope.crowdcards.indexOf(crowdcard), 1)
+        $scope.crowdcards[$scope.crowdcards.indexOf(crowdcard)] = response
+        #$scope.crowdcards.splice($scope.crowdcards.indexOf(crowdcard), 1)
 
 ]

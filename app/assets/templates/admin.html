@@ -75,6 +75,7 @@
 			<td>
 				<a href="#" ng-if="!crowdcard.sent" ng-click="sendCard(crowdcard)" class="btn btn-normal btn-grey">Versenden</a>
 				<a href="#" ng-if="crowdcard.sent" class="btn btn-normal btn-color"><i class="fa fa-check"></i></a>
+				<span ng-if="crowdcard.sent">am {{crowdcard.sent | date:'dd.MM.yyyy'}}</span>
 			</td>
 		</tr>
 	</table>
