@@ -40,7 +40,7 @@ class Api::StatisticsController < ApplicationController
 
             r = CSV.generate() do |csv|
               ActiveRecord::Base.connection.execute("#{base} #{queries[params[:stat].to_sym]}").each do |row|
-                csv << "#{row.email},#{row.name}"
+                csv << "#{row[0]},#{row[1]}"
               end
             end
 
