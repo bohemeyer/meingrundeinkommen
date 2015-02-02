@@ -211,11 +211,22 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
         when 'crowdcard'
           $scope.show_form = $scope.current.getFlag('ClickedCrowdcardMitmachen')
           $scope.steps.show_next_button = true
-          if $scope.current.user.crowdcards.length == 0 && !$scope.current.user.flags.NotifiyMeWhenCrowdcardReady && !$scope.current.user.flags.NumberOfCrowdcardDownloads && !$scope.current.user.flags.NumberOfPassbookDownloads then true else false
+          if $scope.current.user.crowdcards.length == 0 && !$scope.current.user.flags.crowdcardNumber && !$scope.current.user.flags.NotifiyMeWhenCrowdcardReady && !$scope.current.user.flags.NumberOfCrowdcardDownloads && !$scope.current.user.flags.NumberOfPassbookDownloads then true else false
 
         when 'verify_crowdcard'
           $scope.steps.show_next_button = true
-          if $scope.current.has_received_crowdcard_letter() && $scope.current.participates() && !$scope.current.participation_verified() && !$scope.current.has_crowdcard() then true else false
+
+          if $scope.current.getFlag('crowdcardNumber')
+            $scope.crowdcardNumber = $scope.current.getFlag('crowdcardNumber')
+
+          $scope.crowdbarVerified = $scope.crowdcardNumber
+
+          $scope.steps.done = true if $scope.crowdbarVerified
+
+          if ($scope.current.has_received_crowdcard_letter() || $scope.current.user.flags.gotCrowdcardAsGift) && $scope.current.participates() && !$scope.current.participation_verified() && !$scope.current.has_crowdcard()
+            true
+          else
+            false
 
         when 'donate'
           true

@@ -76,6 +76,17 @@
       <div class="col-sm-offset-2 col-sm-10 text-left">
         <div class="checkbox">
           <label>
+            <input name="haveCB" ng-model="gotCrowdcardAsGift" value="true" type="checkbox"> Ich habe bereits eine <a href="/crowdcard" target="_blank">CrowdCard</a> (optional)
+          </label>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="form-group text-left" style="margin-top:-20px;">
+      <div class="col-sm-offset-2 col-sm-10 text-left">
+        <div class="checkbox">
+          <label>
             <input name="publication" ng-model="confirmed_publication" value="true" type="checkbox"> Ich stimme den <a href="#" ng-click="gewinnspielbedingungen()">Gewinnspielbedingungen</a> zu. Insbesondere bin ich im Gewinnfall mit der Veröffentlichung des Links zu meiner <a href="/menschen/{{current.user.id}}">Profilseite</a> einverstanden.
           </label>
           <alert ng-show="confirmed_publication_error">Häkchen muss angeklickt sein.</alert>

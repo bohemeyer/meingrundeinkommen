@@ -76,6 +76,9 @@ angular.module "Chance", ["rails"]
           $scope.chances_form.chances[key].dob_month = parseInt dates[1]
           $scope.chances_form.chances[key].dob_day = parseInt dates[2]
 
+          if $scope.gotCrowdcardAsGift
+            $scope.current.setFlag('gotCrowdcardAsGift',true)
+
 
       angular.forEach $scope.chances_form.chances, (c) ->
         key = $scope.chances_form.chances.indexOf(c)
