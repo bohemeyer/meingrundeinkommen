@@ -1,4 +1,4 @@
-angular.module("admin", ["Support", "Registration"])
+angular.module("admin", ["Support", "Registration", "Statistic"])
 .config [
   "$routeProvider"
   ($routeProvider) ->
@@ -13,8 +13,9 @@ angular.module("admin", ["Support", "Registration"])
   "Support"
   "Registration"
   "Crowdcard"
+  "Statistic"
 
-  ($scope, Support, Registration, Crowdcard) ->
+  ($scope, Support, Registration, Crowdcard, Statistic) ->
 
     $scope.u = {}
     $scope.u.search = ''
@@ -28,6 +29,13 @@ angular.module("admin", ["Support", "Registration"])
       admin: true
     ).then (crowdcards) ->
       $scope.crowdcards = crowdcards
+
+    Statistic.query(
+      admin: true
+    ).then (statistics) ->
+      $scope.stats = statistics
+
+
 
 
     $scope.search_for_user = ->

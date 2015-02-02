@@ -2,6 +2,20 @@
 <div ng-if="current.user && current.user.admin">
 
 
+	<h1>Statistiken</h1>
+
+	<table>
+		<tr ng-repeat="(key,value) in stats">
+			<td>{{key}}:</td>
+			<td>{{value}} <a href="/api/statistics.csv?admin=true&stat={{key}}" target="_blank"><i class="fa fa-download"></i> Kontakt für Newsletter herunterladen)</a></td>
+		</tr>
+	</table>
+
+
+	<hr>
+
+
+
 	<h1>User</h1>
 
 	<div class="well text-center">

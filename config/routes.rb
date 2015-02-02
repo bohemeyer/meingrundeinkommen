@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resource :crowdbar
     resources :crowdcards
     resources :flags
+    resources :statistics
     resources :notifications
     resources :registrations
     resources :chances
