@@ -1,4 +1,5 @@
 class Api::StatisticsController < ApplicationController
+  require 'csv'
 
   def index
 
@@ -35,8 +36,18 @@ class Api::StatisticsController < ApplicationController
         if current_user && current_user.admin? && params[:stat]
           newsletter_only = " and confirmed_at is not null and newsletter = 1 "
           base = "select users.email, REPLACE(users.name,',','') from users, chances where users.id = chances.user_id #{newsletter_only} and is_child = 0 and "
-          debugger
-          send_data ActiveRecord::Base.connection.execute("#{base} #{queries[params[:stat].to_sym]}").to_csv
+
+
+            r = CSV.generate() do |csv|
+              ActiveRecord::Base.connection.execute("#{base} #{queries[params[:stat].to_sym]}").each do |row|
+                csv << "#{row.email},#{row.name}"
+              end
+            end
+
+            send_data r
+
+
+
         end
       }
     end
