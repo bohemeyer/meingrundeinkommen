@@ -1,4 +1,4 @@
-angular.module("admin", ["Support", "Registration", "Statistic"])
+angular.module("admin", ["Support", "Registration", "Statistic", "Flag"])
 .config [
   "$routeProvider"
   ($routeProvider) ->
@@ -14,8 +14,9 @@ angular.module("admin", ["Support", "Registration", "Statistic"])
   "Registration"
   "Crowdcard"
   "Statistic"
+  "Flag"
 
-  ($scope, Support, Registration, Crowdcard, Statistic) ->
+  ($scope, Support, Registration, Crowdcard, Statistic, Flag) ->
 
     $scope.u = {}
     $scope.u.search = ''
@@ -88,15 +89,30 @@ angular.module("admin", ["Support", "Registration", "Statistic"])
           window.location.href = link
 
 
+    $scope.enable_crowdcard = (user) ->
+      if confirm('wirklich?')
+        new Flag(
+          for_user: user.id
+          admin: true
+          name: 'crowdcardNumber'
+          value: 'pdf-' + user.id
+        ).create()
+        .then (response) ->
+          user.flags.crowdcardNumber = 'pdf-' + user.id
+
+
     $scope.enable_crowdbar = (user) ->
       if confirm('wirklich?')
-        new Registration(
-          id: user.id
+        new Flag(
+          for_user: user.id
           admin: true
-          enable_crowdbar: true
-        ).update()
+          value: true
+          name: 'hasHadCrowdbar'
+        ).create()
         .then (response) ->
-          user.flags.hasCrowdbar = true
+          user.flags.hasHadCrowdbar = true
+
+
 
     $scope.reset_pw = (user) ->
       if confirm('wirklich?')

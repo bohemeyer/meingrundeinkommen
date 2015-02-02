@@ -28,7 +28,8 @@
 			<td>Name</td>
 			<td>E-Mail</td>
 			<td>Verlosung</td>
-			<td>Crowdbar</td>
+			<td>BAR</td>
+			<td>CARD</td>
 			<td>Confirmed</td>
 			<td>Reset Password</td>
 			<td>Delete</td>
@@ -41,7 +42,45 @@
 			<td>{{user.chances.length}}</td>
 			<td>
 				<span ng-if="user.flags.hasCrowdbar">ja</span>
-				<div ng-if="!user.flags.hasCrowdbar">nein<br><a href="#" ng-click="enable_crowdbar(user)">freischalten</a></div>
+				<span ng-if="!user.flags.hasCrowdbar && user.flags.hasHadCrowdbar">hatte sie</span>
+				<div ng-if="!user.flags.hasCrowdbar && !user.flags.hasHadCrowdbar">nein<br><a href="#" ng-click="enable_crowdbar(user)">freischalten</a></div>
+			</td>
+			<td>
+				<div ng-if="user.crowdcards[0]">
+					<span ng-if="user.flags.crowdcardNumber">
+					  bestätigt
+					</span>
+					<div ng-if="!user.flags.crowdcardNumber">
+					  <span ng-if="user.crowdcards[0].sent">
+					  	versendet {{user.crowdcards[0].sent.sent | date:'dd.MM.yy'}}
+					  </span>
+					  <span ng-if="!user.crowdcards[0].sent">
+					  	noch nicht versendet
+					  </span>
+					</div>
+				</div>
+
+				<div ng-if="!user.crowdcards[0]">
+					<span ng-if="user.flags.crowdcardNumber">
+					  bestätigt
+					</span>
+					<span ng-if="!user.flags.crowdcardNumber">
+						nicht bestellt, nicht bestätigt
+					</span>
+				</div>
+
+				<div ng-if="!user.flags.crowdcardNumber">
+			    	<span ng-if="user.flags.PrintOutCrowdcard">
+			    		ausgedruckt
+			    	</span>
+			    	<span ng-if="!user.flags.PrintOutCrowdcard">
+			    		nicht ausgedruckt
+			    	</span>
+			    	<br>
+			    	<a href="#" ng-click="enable_crowdcard(user)">freischalten</a>
+				</div>
+
+
 			</td>
 			<td>{{user.confirmedAt}} <a href="#" ng-click="confirm(user)" class="btn btn-normal btn-color">Confirm</a></td>
 			<td>{{user.pw}}<a href="#" ng-click="reset_pw(user)" class="btn btn-normal btn-grey">Set Password</a></td>
