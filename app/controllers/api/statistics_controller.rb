@@ -17,7 +17,7 @@ class Api::StatisticsController < ApplicationController
       format.json {
 
         newsletter_only = ''
-        base = "select users.email, REPLACE(users.name,',','') from users, chances where users.id = chances.user_id #{newsletter_only} and is_child = null and "
+        base = "select users.email, REPLACE(users.name,',','') from users, chances where users.id = chances.user_id #{newsletter_only} and is_child = 0 and "
 
         stats = {}
         queries.each do |key,query|
@@ -27,14 +27,14 @@ class Api::StatisticsController < ApplicationController
         stats['crowdcardOrders'] = Crowdcard.all.count
         stats['crowdcardsOrdered'] = Crowdcard.sum(:number_of_cards)
         stats['participantsWithChildren'] = Chance.all.count
-        stats['participants'] = Chance.where(:is_child => nil).count
+        stats['participants'] = Chance.where(:is_child => 0).count
 
         render json: stats
       }
       format.csv {
         if current_user && current_user.admin? && params[:stat]
           newsletter_only = " and confirmed_at is not null and newsletter = 1 "
-          base = "select users.email, REPLACE(users.name,',','') from users, chances where users.id = chances.user_id #{newsletter_only} and is_child = null and "
+          base = "select users.email, REPLACE(users.name,',','') from users, chances where users.id = chances.user_id #{newsletter_only} and is_child = 0 and "
           debugger
           send_data ActiveRecord::Base.connection.execute("#{base} #{queries[params[:stat].to_sym]}").to_csv
         end
