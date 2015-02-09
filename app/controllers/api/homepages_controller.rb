@@ -1,4 +1,5 @@
 require 'action_view'
+require 'httparty'
 include ActionView::Helpers::NumberHelper
 
 class Float
@@ -49,24 +50,36 @@ class Api::HomepagesController < ApplicationController
       startnext = 47630.52
     end
 
+    #Crowdcard
+    crowdcard = JSON.parse(File.read('public/crowdcard.json'))
+    crowdcard_amount = (crowdcard["incomingSum"] * 0.9) / 100
+
+    crowdcard_daily = JSON.parse(File.read('public/crowdcard_daily.json'))
+    crowdcard_sum = 0
+    for i in 1..7
+      crowdcard_sum = crowdcard_sum + crowdcard_daily[i.day.ago.strftime('%Y-%m-%d')].to_f
+    end
+    crowdcard_average = crowdcard_sum / 7
+
     #if now - date(day before) < 24h
       #gelddiff / 24h * stunden
     #else
       #crowdbar_amount = crowdbar_yesterday
 
-    total_amount = startnext + crowdfunding_amount + own_funding_paypal + own_funding + crowdbar_amount
+    total_amount = startnext + crowdfunding_amount + own_funding_paypal + own_funding + crowdbar_amount + crowdcard_amount
 
     #Prognose:
     last_synced_day = Support.where(:payment_completed => true, :payment_method => 'crowdbar').order(created_at: :desc).limit(1).first
     prediction = {}
-    temp_q = Support.where(:created_at => (last_synced_day.created_at - 9.days).beginning_of_day..last_synced_day.created_at.end_of_day, :payment_method => :crowdbar)
-    temp_q2 = Support.where(:created_at => (Time.now - 11.days).beginning_of_day..(Time.now - 2.days).end_of_day, :payment_completed => true).where.not(:payment_method => :crowdbar)
-    prediction[:avg_daily_commission] = (temp_q.sum(:amount_for_income) + temp_q2.sum(:amount_for_income)) / 10
-    prediction[:avg_daily_commission_crowdbar] = temp_q.sum(:amount_for_income) / 10
+    temp_q = Support.where(:created_at => (last_synced_day.created_at - 13.days).beginning_of_day..last_synced_day.created_at.end_of_day, :payment_method => :crowdbar)
+    temp_q2 = Support.where(:created_at => (Time.now - 15.days).beginning_of_day..(Time.now - 2.days).end_of_day, :payment_completed => true).where.not(:payment_method => :crowdbar)
+    prediction[:avg_daily_commission] = (temp_q.sum(:amount_for_income) + temp_q2.sum(:amount_for_income)) / 14 + crowdcard_average
+    prediction[:avg_daily_commission_crowdbar] = temp_q.sum(:amount_for_income) / 14
+    prediction[:avg_daily_commission_crowdcard] = crowdcard_average
     prediction[:days] = ((12000 - (total_amount % 12000)) / prediction[:avg_daily_commission]).round
     prediction[:date] = Time.now + (prediction[:days].to_i).days
 
-    amount_internal = Support.where(:payment_completed => true).sum(:amount_internal)
+    amount_internal = Support.where(:payment_completed => true).sum(:amount_internal) + ((crowdcard["incomingSum"] * 0.1) / 100)
 
     number_of_participants = Chance.count()
 
@@ -83,6 +96,9 @@ class Api::HomepagesController < ApplicationController
       :supporter => number_with_precision(supporter, precision: 0, delimiter: '.'),
       :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.'),
       :crowdbar_amount => crowdbar_amount,
+      :crowdcard_amount => crowdcard_amount,
+      :crowdcard_today => number_with_precision(crowdcard_daily[Date.today.strftime('%Y-%m-%d')], precision: 2, delimiter: '.', separator: ','),
+      :crowdcard_users => Crowdcard.sum(:number_of_cards),
       :amount_internal => amount_internal,
       :prediction => prediction,
       :number_of_participants => number_with_precision(number_of_participants, precision: 0, delimiter: '.'),

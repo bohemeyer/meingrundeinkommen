@@ -74,10 +74,41 @@ module Clockwork
     end
 
 
+    if job == "check.crowdcard.stats"
+
+      #sum
+      response = HTTParty.get('http://grundeinkommen.hundertfeuer.de/paybackStatsExtended.json')
+      json = JSON.parse(response.body)
+      File.open("../public/crowdcard.json", "w+") do |f|
+        f.write(json.to_json)
+      end
+
+      #daily
+      daily = {}
+      response = HTTParty.get('http://grundeinkommen.hundertfeuer.de/paybackStats.json')
+      json = JSON.parse(response.body)
+
+      json["dates"].each do |d|
+        points = 0
+        d["entries"].each do |e|
+          points = points + (e["points"].to_f / 100) unless e["action"] == "Punkte ausgezahlt"
+        end
+        daily[d["date"]] = points
+      end
+
+
+      File.open("../public/crowdcard_daily.json", "w+") do |f|
+        f.write(daily.to_json)
+      end
+
+    end
+
+
 
   end
 
-  every(1.hours, 'check.crowdbar.stats')
-  every(30.seconds, 'cache.news')
+  #every(1.hours, 'check.crowdbar.stats')
+  #every(30.seconds, 'cache.news')
+  every(1.minutes, 'check.crowdcard.stats')
 
 end

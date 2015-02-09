@@ -16,6 +16,10 @@ angular.module "Crowdcard", ["rails"]
   "Crowdcard"
   ($scope, $modal, Crowdcard) ->
 
+    $scope.crowdcard_users = $scope.home.crowdcardUsers
+    $scope.daily_comm = $scope.home.prediction.avgDailyCommissionCrowdcard
+    $scope.today_comm = $scope.home.crowdcardToday
+
     $scope.items = [
       {
         id: 1
