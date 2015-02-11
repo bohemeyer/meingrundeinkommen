@@ -2,167 +2,182 @@
 <div ng-if="current.user && current.user.admin">
 
 
-	<h1>Statistiken</h1>
+  <tabset id="tabs" justified="true">
 
-	<table>
-		<tr ng-repeat="(key,value) in stats">
-			<td>{{key}}:</td>
-			<td>{{value}} <a href="/api/statistics.csv?admin=true&stat={{key}}" target="_blank"> <i class="fa fa-download"></i> Kontakte für Newsletter herunterladen</a></td>
-		</tr>
-	</table>
+  	<tab heading="Statistiken">
+  		<div class="container" style="padding:30px">
+			<table>
+				<tr ng-repeat="(key,value) in stats">
+					<td>{{key}}:</td>
+					<td>{{value}} <a href="/api/statistics.csv?admin=true&stat={{key}}" target="_blank"> <i class="fa fa-download"></i> Kontakte für Newsletter herunterladen</a></td>
+				</tr>
+			</table>
+		</div>
 
 
-	<hr>
+	</tab>
 
 
 
-	<h1>User</h1>
+	<tab heading="User">
 
-	<div class="well text-center">
-		<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="u.search" ng-change="search_for_user()">
-	</div>
+		<div class="well text-center">
+			<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="u.search" ng-change="search_for_user()">
+		</div>
 
-	<table class="table" ng-show="users.length > 0">
-		<tr>
-			<td>ID</td>
-			<td>Name</td>
-			<td>E-Mail</td>
-			<td>Verlosung</td>
-			<td>BAR</td>
-			<td>CARD</td>
-			<td>Confirmed</td>
-			<td>Reset Password</td>
-			<td>Delete</td>
-		</tr>
+		<table class="table" ng-show="users.length > 0">
+			<tr>
+				<td>ID</td>
+				<td>Name</td>
+				<td>E-Mail</td>
+				<td>Verlosung</td>
+				<td>BAR</td>
+				<td>CARD</td>
+				<td>Confirmed</td>
+				<td>Reset Password</td>
+				<td>Delete</td>
+			</tr>
 
-		<tr ng-repeat="user in users">
-			<td>{{user.id}}</td>
-			<td>{{user.name}}</td>
-			<td>{{user.email}}</td>
-			<td>{{user.chances.length}}</td>
-			<td>
-				<span ng-if="user.flags.hasCrowdbar">ja</span>
-				<span ng-if="!user.flags.hasCrowdbar && user.flags.hasHadCrowdbar">hatte sie</span>
-				<div ng-if="!user.flags.hasCrowdbar && !user.flags.hasHadCrowdbar">nein<br><a href="#" ng-click="enable_crowdbar(user)">freischalten</a></div>
-			</td>
-			<td>
-				<div ng-if="user.crowdcards[0]">
-					<span ng-if="user.flags.crowdcardNumber">
-					  bestätigt
-					</span>
-					<div ng-if="!user.flags.crowdcardNumber">
-					  <span ng-if="user.crowdcards[0].sent">
-					  	versendet {{user.crowdcards[0].sent.sent | date:'dd.MM.yy'}}
-					  </span>
-					  <span ng-if="!user.crowdcards[0].sent">
-					  	noch nicht versendet
-					  </span>
+			<tr ng-repeat="user in users">
+				<td>{{user.id}}</td>
+				<td>{{user.name}}</td>
+				<td>{{user.email}}</td>
+				<td>{{user.chances.length}}</td>
+				<td>
+					<span ng-if="user.flags.hasCrowdbar">ja</span>
+					<span ng-if="!user.flags.hasCrowdbar && user.flags.hasHadCrowdbar">hatte sie</span>
+					<div ng-if="!user.flags.hasCrowdbar && !user.flags.hasHadCrowdbar">nein<br><a href="#" ng-click="enable_crowdbar(user)">freischalten</a></div>
+				</td>
+				<td>
+					<div ng-if="user.crowdcards[0]">
+						<span ng-if="user.flags.crowdcardNumber">
+						  bestätigt
+						</span>
+						<div ng-if="!user.flags.crowdcardNumber">
+						  <span ng-if="user.crowdcards[0].sent">
+						  	versendet {{user.crowdcards[0].sent.sent | date:'dd.MM.yy'}}
+						  </span>
+						  <span ng-if="!user.crowdcards[0].sent">
+						  	noch nicht versendet
+						  </span>
+						</div>
 					</div>
-				</div>
 
-				<div ng-if="!user.crowdcards[0]">
-					<span ng-if="user.flags.crowdcardNumber">
-					  bestätigt
-					</span>
-					<span ng-if="!user.flags.crowdcardNumber">
-						nicht bestellt, nicht bestätigt
-					</span>
-				</div>
+					<div ng-if="!user.crowdcards[0]">
+						<span ng-if="user.flags.crowdcardNumber">
+						  bestätigt
+						</span>
+						<span ng-if="!user.flags.crowdcardNumber">
+							nicht bestellt, nicht bestätigt
+						</span>
+					</div>
 
-				<div ng-if="!user.flags.crowdcardNumber">
-			    	<span ng-if="user.flags.PrintOutCrowdcard">
-			    		ausgedruckt
-			    	</span>
-			    	<span ng-if="!user.flags.PrintOutCrowdcard">
-			    		nicht ausgedruckt
-			    	</span>
-			    	<br>
-			    	<a href="#" ng-click="enable_crowdcard(user)">freischalten</a>
-				</div>
-
-
-			</td>
-			<td>{{user.confirmedAt}} <a href="#" ng-click="confirm(user)" class="btn btn-normal btn-color">Confirm</a></td>
-			<td>{{user.pw}}<a href="#" ng-click="reset_pw(user)" class="btn btn-normal btn-grey">Set Password</a></td>
-			<td><a href="#" ng-click="delete_user(user)" class="btn btn-normal btn-grey">Delete</a></td>
-		</tr>
-	</table>
+					<div ng-if="!user.flags.crowdcardNumber">
+				    	<span ng-if="user.flags.PrintOutCrowdcard">
+				    		ausgedruckt
+				    	</span>
+				    	<span ng-if="!user.flags.PrintOutCrowdcard">
+				    		nicht ausgedruckt
+				    	</span>
+				    	<br>
+				    	<a href="#" ng-click="enable_crowdcard(user)">freischalten</a>
+					</div>
 
 
-	<hr>
+				</td>
+				<td>{{user.confirmedAt}} <a href="#" ng-click="confirm(user)" class="btn btn-normal btn-color">Confirm</a></td>
+				<td>{{user.pw}}<a href="#" ng-click="reset_pw(user)" class="btn btn-normal btn-grey">Set Password</a></td>
+				<td><a href="#" ng-click="delete_user(user)" class="btn btn-normal btn-grey">Delete</a></td>
+			</tr>
+		</table>
+
+
+	</tab>
+
+
+	<tab  heading="Crowdcards">
+
+		<div class="well">
+
+		<div class="pull-right">
+			<a href="/api/crowdcards.csv?admin=true" target="_blank" class="pull-right btn btn-color"><i class="fa fa-download"></i> Nicht versendete als CSV</a>
+
+			<a href="/api/crowdcards.csv?admin=true&show_all=true" target="_blank" class="pull-right btn btn-grey"><i class="fa fa-download"></i> Alle als CSV</a>
+		</div>
+
+		<h3 ng-if="crowdcards.length > 0">Nur noch {{crowdcards.length}}! Go Helwig!</h3>
+		<h3 ng-if="crowdcards.length == 0">Geschafft! Danke, Helwig!</h3>
+
+
+			<i class="icon-search big"></i> <input type="text" class="big" ng-model="searchcrowdcard">
+		</div>
+
+
+		<table class="table">
+			<tr>
+				<td>ID</td>
+				<td>Name</td>
+				<td>Anschrift</td>
+				<td>Karten</td>
+				<td>Versendet?</td>
+			</tr>
+
+			<tr ng-repeat="crowdcard in crowdcards | filter:searchcrowdcard">
+				<td>{{crowdcard.id}}</td>
+				<td>
+					{{crowdcard.firstName}} {{crowdcard.lastName}}<br>
+					<a href="/menschen/{{crowdcard.user.id}}" target="_blank">{{crowdcard.user.name}}</a>
+					<a href="mailto:{{crowdcard.user.email}}" class="fa fa-envelope"></a>
+
+				</td>
+				<td>{{crowdcard.street}} {{crowdcard.houseNumber}}, {{crowdcard.zipCode}} {{crowdcard.city}}</td>
+				<td>{{crowdcard.numberOfCards}}</td>
+				<td>
+					<a href="#" ng-if="!crowdcard.sent" ng-click="sendCard(crowdcard)" class="btn btn-normal btn-grey">Versenden</a>
+					<a href="#" ng-if="crowdcard.sent" class="btn btn-normal btn-color"><i class="fa fa-check"></i></a>
+					<span ng-if="crowdcard.sent">am {{crowdcard.sent | date:'dd.MM.yyyy'}}</span>
+				</td>
+			</tr>
+		</table>
+
+	</tab>
+
+
+	<tab heading="Bank-Supports">
 
 
 
-	<h1 class="margin-top-70">
-		<a href="/api/crowdcards.csv?admin=true" target="_blank" class="pull-right btn btn-color"><i class="fa fa-download"></i> Nicht versendete als CSV</a>
 
-		<a href="/api/crowdcards.csv?admin=true&show_all=true" target="_blank" class="pull-right btn btn-grey"><i class="fa fa-download"></i> Alle als CSV</a>
-		Crowdcards
-	</h1>
-	<h3 ng-if="crowdcards.length > 0">Nur noch {{crowdcards.length}}! Go Helwig!</h3>
-	<h3 ng-if="crowdcards.length == 0">Geschafft! Danke, Helwig!</h3>
+		<div class="well text-center">
+			<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="search">
+		</div>
 
-	<div class="well text-center">
-		<i class="icon-search big"></i> <input type="text" class="big" ng-model="searchcrowdcard">
-	</div>
+		<table class="table">
+			<tr>
+				<td>ID</td>
+				<td>Name</td>
+				<td>Amount Total</td>
+				<td>Comment</td>
+				<td>Completed?</td>
+			</tr>
 
-	<table class="table">
-		<tr>
-			<td>ID</td>
-			<td>Name</td>
-			<td>Anschrift</td>
-			<td>Karten</td>
-			<td>Versendet?</td>
-		</tr>
+			<tr ng-repeat="support in supports | filter:search">
+				<td>{{support.id}}</td>
+				<td>{{support.nickname}}</td>
+				<td>{{support.amountTotal}}</td>
+				<td><!-- <div ng-if="support.avatar" class="testimonial-image pull-left">
+	                    <img src="{{support.avatar.avatar.thumb.url}}">
+	                </div>  --><textarea ng-model="support.comment"></textarea></td>
+				<td>
+					<a href="#" ng-if="!support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-grey">Bestätigen</a>
+					<a href="#" ng-if="support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-color"><i class="fa fa-check"></i></a>
+				</td>
+			</tr>
+		</table>
 
-		<tr ng-repeat="crowdcard in crowdcards | filter:searchcrowdcard">
-			<td>{{crowdcard.id}}</td>
-			<td>
-				{{crowdcard.firstName}} {{crowdcard.lastName}}<br>
-				<a href="/menschen/{{crowdcard.user.id}}" target="_blank">{{crowdcard.user.name}}</a>
-				<a href="mailto:{{crowdcard.user.email}}" class="fa fa-envelope"></a>
-
-			</td>
-			<td>{{crowdcard.street}} {{crowdcard.houseNumber}}, {{crowdcard.zipCode}} {{crowdcard.city}}</td>
-			<td>{{crowdcard.numberOfCards}}</td>
-			<td>
-				<a href="#" ng-if="!crowdcard.sent" ng-click="sendCard(crowdcard)" class="btn btn-normal btn-grey">Versenden</a>
-				<a href="#" ng-if="crowdcard.sent" class="btn btn-normal btn-color"><i class="fa fa-check"></i></a>
-				<span ng-if="crowdcard.sent">am {{crowdcard.sent | date:'dd.MM.yyyy'}}</span>
-			</td>
-		</tr>
-	</table>
-
-	<hr>
+	</tab>
 
 
-	<h1 class="margin-top-70">Bank-Supports</h1>
-
-	<div class="well text-center">
-		<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="search">
-	</div>
-
-	<table class="table">
-		<tr>
-			<td>ID</td>
-			<td>Name</td>
-			<td>Amount Total</td>
-			<td>Comment</td>
-			<td>Completed?</td>
-		</tr>
-
-		<tr ng-repeat="support in supports | filter:search">
-			<td>{{support.id}}</td>
-			<td>{{support.nickname}}</td>
-			<td>{{support.amountTotal}}</td>
-			<td><!-- <div ng-if="support.avatar" class="testimonial-image pull-left">
-                    <img src="{{support.avatar.avatar.thumb.url}}">
-                </div>  --><textarea ng-model="support.comment"></textarea></td>
-			<td>
-				<a href="#" ng-if="!support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-grey">Bestätigen</a>
-				<a href="#" ng-if="support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-color"><i class="fa fa-check"></i></a>
-			</td>
-		</tr>
-	</table>
+  </tabset>
 </div>
 </div>
