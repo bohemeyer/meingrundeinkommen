@@ -37,6 +37,7 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
       community: false
       verlosung: false
       person: false
+      winners: false
 
     if $routeParams['topic']
       $scope.categories[$routeParams['topic']] = true
