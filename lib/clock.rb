@@ -107,8 +107,8 @@ module Clockwork
 
   end
 
-  #every(1.hours, 'check.crowdbar.stats')
-  #every(30.seconds, 'cache.news')
+  every(1.hours, 'check.crowdbar.stats')
+  every(30.seconds, 'cache.news')
   every(1.minutes, 'check.crowdcard.stats')
 
 end
