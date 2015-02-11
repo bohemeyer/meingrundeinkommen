@@ -54,8 +54,15 @@ class Api::StatisticsController < ApplicationController
             q = queries[params[:stat].to_sym]
             b = base
           else
-            q = queries_not[params[:stat].to_sym]
-            b = base_not
+            if queries_not[params[:stat].to_sym]
+              q = queries_not[params[:stat].to_sym]
+              b = base_not
+            else
+              if params[:stat] == "newsletterSubscriptions"
+                b = "select email, REPLACE(name,',','') from users where confirmed_at is not null and newsletter = 1"
+                q = ""
+              end
+            end
           end
 
           r = CSV.generate() do |csv|
