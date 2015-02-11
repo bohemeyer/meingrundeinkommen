@@ -122,17 +122,21 @@
 
                </div>
 
-                  <!-- <div ng-show="support_now" ng-include="'/assets/support_crowdfund_form.html'"></div> -->
+                  <div ng-controller="SupportController">
 
-                  <!-- <a href="#" ng-hide="support_now" ng-click="support_now = true" class="btn btn-normal btn-color btn-large" style="margin-top:20px;">Ich will unterstützen!</a> -->
+                    <div ng-show="support_now" ng-include="'/assets/support_crowdfund_form.html'"></div>
 
-                  <a href="/support" ng-hide="support_now" class="btn btn-normal btn-color btn-large" style="margin-top:20px;">Ich will unterstützen!</a>
+                  </div>
+
+                  <a href="#" ng-hide="support_now" ng-click="support_now = true" class="btn btn-normal btn-color btn-large" style="margin-top:20px;">Ich will unterstützen!</a>
+
+                  <!-- <a href="/support" ng-hide="support_now" class="btn btn-normal btn-color btn-large" style="margin-top:20px;">Ich will unterstützen!</a> -->
 
                 <!-- <h4><i class="icon-lightbulb"></i> Unterstützen ohne zu bezahlen: <a href="#" class="btn-grey btn-small" ng-click="crowdbar_info()">So geht's</a></h4> -->
 
 
 
-      <!-- <carousel interval="3000" class="margin-top-30" id="all_supports">
+      <carousel interval="3000" class="margin-top-30" id="all_supports">
          <slide ng-repeat="group in supports">
 
           <div class="row">
@@ -157,8 +161,12 @@
           </div>
 
         </slide>
-    </carousel> -->
+    </carousel>
 
+<div class="margin-top-50 text-center"><a name="share"></a>
+  Erzähl deinen Leuten von uns:
+  <div ng-include="'/assets/share.html'"></div>
+</div>
 
             <div class="clearfix"></div>
          </div>
@@ -166,23 +174,19 @@
    </div>
 </div>
 
-<div id="bge100">
+<!-- <div id="bge100">
   <a href="https://www.betterplace.org/de/projects/23920-next-stop-100-grundeinkommen-hilf-uns-dabei">
     <img src="/assets/100bge-button.png" id="bge100button" >
     <img src="/assets/100bge.png">
   </a>
-</div>
+</div> -->
 
 
-<div class="margin-top-70 text-center"><a name="share"></a>
-  Erzähl deinen Leuten von uns:
-  <div ng-include="'/assets/share.html'"></div>
-</div>
-<hr>
+
 
 
 <div class="container margin-top-30" id="winners"  style="padding-top:30px">
-<div class="row text-center margin-top-70">
+<div class="row text-center margin-top-50">
 
         <h1 style="margin-bottom:10px;">Diese Menschen</h2>
           <h3>haben die ersten <span class="big"><b>{{number_of_winners}}</b></span> Grundeinkommen gewonnen:</h3>
@@ -228,7 +232,7 @@
                         </div>
                       </div>
                    <div class="content-box-info text-left">
-                      <h3 style="margin-bottom:5px"><a href="/register">Und ab Februar Du?</a></h3>
+                      <h3 style="margin-bottom:5px"><a href="/register">Und ab März Du?</a></h3>
 
                            Mitte Februar wird das 6. Grundeinkommen verlost. Du kannst es gewinnen. <a href="/register">Jetzt teilnehmen</a></a>
                         </p>
@@ -272,7 +276,7 @@
 
             <!-- <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Am Samstag wird das 5. <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> <a href="https://www.facebook.com/events/376506499170475/?fref=ts" target="_blank" class="huge">hier</a> verlost.</h1> -->
 
-            <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Auch <span class="huge">Du</span> kannst ein Jahr Grundeinkommen gewinnen!
+            <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Nächste Verlosung: 22. Februar 2014</h1>
 
             <h3 style="color:white" class="margin-top-20">Ein Jahr lang monatlich 1.000€ erhalten. Ohne Bedingungen.</h3>
 

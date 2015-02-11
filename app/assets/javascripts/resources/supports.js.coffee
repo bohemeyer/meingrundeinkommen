@@ -38,14 +38,17 @@ angular.module "Support", ["rails"]
       crowdcard: false
       crowdfund: false
       donate: false
+      cola: false
 
     if $routeParams['support_type']
       $scope.tabs[$routeParams['support_type']] = true
+      if $routeParams['support_type'] == 'colagetrunken'
+        $scope.tabs['cola'] = true
     else
       $scope.tabs.crowdbar = true
 
-    if $location.search().tab
-      alert $location.search().tab
+    # if $location.search().tab
+    #   alert $location.search().tab
 
     if $location.search().trigger && $location.search().trigger == 'crowdbar_installed'
 
@@ -93,6 +96,8 @@ angular.module "Support", ["rails"]
         else
           $scope.support.support_id = response.id
           $scope.support.return_url = "https://www.mein-grundeinkommen.de/start?thanks_for_support=" + response.id
+          $scope.support.item_name = "Zuwendung Nr. #{response.id} zur Verlosung"
+          $scope.support.item_name = $scope.support.item_name + ", davon 10% Spende an Verein" if $scope.support.donate
           $scope.support.support_amount = response.amountTotal
           $scope.support.avatar = response.avatar
           $scope.support.nickname = response.nickname
@@ -133,6 +138,7 @@ angular.module "Support", ["rails"]
   "items"
   "Support"
   ($scope, $modalInstance, items, Support) ->
+
     $scope.supported = items
 
     console.log items

@@ -14,6 +14,12 @@ angular.module("content", ['ng-breadcrumbs'])
     .when "/crowdbar",
       redirectTo: "/support/crowdbar"
 
+    .when "/cola",
+      redirectTo: "/support/cola"
+
+    .when "/cola-getrunken",
+      redirectTo: "/support/colagetrunken"
+
     .when "/crowdbar/install",
       redirectTo: "/support/crowdbar"
 
@@ -38,7 +44,7 @@ angular.module("content", ['ng-breadcrumbs'])
       redirectTo: "/support/donate"
 
     .when "/support",
-      redirectTo: "/support/crowdbar"
+      redirectTo: "/support/crowdfund"
 
     .when "/support/:support_type",
       reloadOnSearch: false

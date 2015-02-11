@@ -25,12 +25,12 @@ angular.module("home", ["Wish","Support","Winner","rails"])
     Support.get($routeParams.thanks_for_support).then (support) ->
       Support.thanks_for_support(support)
 
-  # Support.query().then (supports) ->
-  #   result = []
-  #   if supports.length > 2
-  #     while (supports.length > 0)
-  #       result.push(supports.splice(0, 3))
-  #     $scope.supports = result
+  Support.query().then (supports) ->
+    result = []
+    if supports.length > 2
+      while (supports.length > 0)
+        result.push(supports.splice(0, 3))
+      $scope.supports = result
 
   Winner.query().then (winners) ->
     $scope.winners = []

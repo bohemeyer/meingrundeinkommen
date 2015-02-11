@@ -75,9 +75,9 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
 
       'confirm'
 
-      #'crowdfund'
-      'donate'
-      'donate_thanks'
+      'crowdfund'
+      # 'donate'
+      # 'donate_thanks'
 
       'done'
 
