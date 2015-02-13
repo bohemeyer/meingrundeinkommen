@@ -46,6 +46,9 @@ angular.module("content", ['ng-breadcrumbs'])
     .when "/support",
       redirectTo: "/support/crowdfund"
 
+    .when "/spenden",
+      redirectTo: "/support/crowdfund"
+
     .when "/support/:support_type",
       reloadOnSearch: false
       controller: "SupportController"
