@@ -17,5 +17,7 @@
 //= require angular-ui-bootstrap-tpls
 //= require angular-route
 //= require angularjs/rails/resource
+//= require ./app/core/core.module
+//= require ./app/support/support.module
 //= require app/app
 //= require_tree .
