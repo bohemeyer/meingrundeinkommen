@@ -6,14 +6,19 @@
         <div class="col-md-12 text-center">
 
 
-<h4 style="color:white">Die Auslosung in <a style="color:white" class="infolink" href="https://www.facebook.com/events/376506499170475/?fref=ts">Berlin</a> - heute hier im Livestream</h4>
-<h1 class="title_headline">Wer gewinnt das 5. Grundeinkommen?</h1>
+<h4 style="color:white">Die Auslosung in <a style="color:white" class="infolink" href="http://www.dclass.de">Berlin</a> - heute hier im Livestream</h4>
+<h1 class="title_headline">Wer gewinnt das 6. & 7. Grundeinkommen?</h1>
         </div>
 
          <div class="row text-center" style="margin-bottom:50px;">
 
-               <a href="http://www.ustream.tv/channel/mein-grundeinkommen" class="btn btn-special btn-color btn-large margin-top-30" style="box-shadow:0px 0px 30px 15px white">Zum Video-Livestream
-               </a><br>
+               <!-- <a href="http://www.ustream.tv/channel/mein-grundeinkommen" class="btn btn-special btn-color btn-large margin-top-30" style="box-shadow:0px 0px 30px 15px white">Zum Video-Livestream</a><br> -->
+
+               <div class="well">Livestream beginnt am 22.2. um 12:30 mit einem Vortrag von Micha. Um 13:30 findet die Verlosung statt.</div>
+
+                <iframe  style="box-shadow:0px 0px 15px 5px black" width="640" height="385" src="http://cdn.livestream.com/embed/undergroundreports?layout=4&color=0x00b319&autoPlay=false&mute=false&iconColorOver=0xffffff&iconColor=0xe4f9e6&allowchat=true&height=385&width=640" style="border:0;outline:0" frameborder="0" scrolling="no"></iframe>
+
+<br>
                <a class="btn btn-grey btn-pad" ng-click="verlosung_erklaert()">So funktioniert die Auslosung</a>
            <div class="clearfix"></div>
          </div>
@@ -29,11 +34,10 @@
    <div class="container">
 
 
-      <div class="row text-center">
+      <div class="row text-center" ng-repeat="current_drawing in drawings">
+        <h1>Das {{6+$index}}. Grundeinkommen geht an*:</h1>
 
-        <h1>Das 5. Grundeinkommen geht an*:</h1>
-
-        <div class="col-md-12  text-center">
+        <div class="col-md-12  text-center" >
 
           <div ng-if="current_drawing.user">
             <div class="testimonial-image-medium">
@@ -46,21 +50,21 @@
             <br>
             <div class="margin-top:30">Losnummer:</div>
             <br>
-            <alert ng-if="(current_drawing.done || (current.user && current.user.admin)) || current_drawing.niete && current_drawing.number.length > 2">NIETE</alert>
+            <alert ng-if="current_drawing.number.length > 1 && current_drawing.niete">NIETE</alert>
             <br><div class="margin-top-30 row">
-             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets" class="well huge"><span ng-if="current_drawing.done || (current.user && current.user.admin)">{{diget.value}}</span><i ng-if="!diget.value || (!current_drawing.done && !(current.user && current.user.admin))" class="icon-refresh" style="color:#ccc"></i></span>
+             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets" class="well huge"><span ng-if="current_drawing.done || (current.user && current.user.admin)">{{diget.value}}</span><i ng-if="!diget.value || (!current_drawing.done && !(current.user && current.user.admin))" class="fa fa-refresh" style="color:#ccc"></i></span>
 
             </div>
             <br>
             <br>
             <p>* alles ohne Gewähr</p>
             <br>
-          <div class="row text-center">
+        <!--   <div class="row text-center">
             <div class="col-md-6 col-md-offset-3">
           <p><b>Hast du gewonnen?</b> Dann ruf am besten sofort auf der Verlosungsparty an, damit wir dich interviewen können. Per Telefon: 030 / 6483 5996
             oder per Skype: mein.grundeinkommen</p>
           </div>
-        </div>
+        </div> -->
 
             <!-- <h3 style="margin-bottom:0px;margin-top:10px;" ng-repeat="o in own_codes" class="margin-top-20"><span ng-if="!o.isChild">Deine </span>Losnummer<span ng-if="o.isChild"> deines Kindes</span>: {{o.code}}</h3> -->
 
@@ -91,16 +95,13 @@
   </div>
 
 
-
-
-<hr>
 <div class="container">
             <div class="col-md-12 text-center">
 
                <h2 class="slogan-title margin-top-30">
 
                 Hast du nicht gewonnen?<br>
-                Vielleicht klappt's beim 5. Grundeinkommen:
+                Vielleicht klappt's beim 8. Grundeinkommen:
 
               </h2>
 
@@ -115,58 +116,7 @@
 
                   <a href="/support"  analytics-on="click" analytics-event="Link zu Startnext geklickt" class="btn btn-special btn-color btn-large margin-top-30"><i class="icon-heart"></i> Jetzt unterstützen!</a>
 
-               <h1 style="margin-bottom:0;" class="margin-top-70">...oder unterstützen <u>ohne zu bezahlen</u></h1> <p>Mit der CrowdBar fließt aus jedem deiner Online-Einkäufe Geld ins nächste Grundeinkommen.<br>
-Ganz ohne Extrakosten für dich. Zwei Klicks genügen.</p>
-  <div ng-click="video_content2='video2.html'" analytics-on="click" analytics-event="Play CrowdBar Video" style="box-shadow: 0px 0px 10px black; border: 2px solid white; border-radius: 5px; overflow: hidden;background:black;margin-top:20px;margin-bottom: 40px;max-width:800px;width:80%;display:inline-block;">
-     <div ng-include src="video_content2 ? video_content2 : 'video_preview2.html'"></div>
-  </div>
-<div collapse="isCollapsed">
-  <a class="btn-grey btn-normal" href="#" ng-click="isCollapsed = !isCollapsed"><i class="icon-caret-down"></i> CrowdBar - so geht's</a>
+<br><br><br><br><br><br>
 </div>
-<div class="col-md-offset-3 col-md-6" collapse="!isCollapsed">
-   <div ng-include="'/assets/crowdbar_install.html'"></div>
-</div>
-
-
-      <script type="text/ng-template" id="video_preview2.html">
-         <a href="#"><img src="/assets/crowdbar_videopreview.jpg"></a>
-      </script>
-      <script type="text/ng-template" id="video2.html">
-         <iframe width="100%" height="350" src="//www.youtube.com/embed/tcd7NiotGWg?autoplay=1" frameborder="0" allowfullscreen></iframe>
-      </script>
-
-
-
-            <div class="clearfix"></div>
-         </div>
-      </div>
-
-
-
-
-
-   <div class="container">
-      <div class="row">
-         <div class="slogan-content">
-            <div class="col-md-12 text-center">
-
-               <h2 class="slogan-title"><span class="huge">Du</span> kannst das Grundeinkommen gewinnen!</h2>
-               <p>Sobald das {{home.totallyFinancedIncomes + 1}}. Grundeinkommen finanziert ist, wird es hier verlost. <br>In einem Gewinnspiel. Melde dich hier an, um teilzunehmen:</p>
-
-                <div class="get-started">
-                  <a ng-hide="current.user" href="/register" class="btn btn-special btn-color btn-large" analytics-on="click" analytics-event="geklickt: Ich will das Grundeinkommen haben">Ich will das Grundeinkommen haben!</a>
-                </div>
-
-
-
-            </div>
-
-            <div class="clearfix"></div>
-         </div>
-      </div>
-            <div class="col-md-12 margin-top-70">
-                        <h3 class="title">&nbsp;</h3>
-                        </div>
-   </div>
 
 </div>

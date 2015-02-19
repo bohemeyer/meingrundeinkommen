@@ -41,12 +41,12 @@ angular.module("drawfrontend", ['ng-breadcrumbs'])
         $http.get("/currentdrawing.json").success((response) ->
           $scope.drawings = response
 
-          current_drawing_key = 0
-          #angular.forEach $scope.drawings, (d) ->
+          # current_drawing_key = 0
+          # angular.forEach $scope.drawings, (d) ->
           #  if d.done
           #    current_drawing_key = current_drawing_key + 1
-          $scope.current_drawing = $scope.drawings[current_drawing_key]
-          $scope.current_drawing_key = current_drawing_key
+          # #$scope.current_drawing = $scope.drawings[current_drawing_key]
+          # $scope.current_drawing_key = current_drawing_key
 
           myLoop()
           return
