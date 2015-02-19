@@ -6,7 +6,7 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <nav class="bge-support_nav" role="navigation" ng-include="'/assets/support/_nav.html'"></nav>
+            <mge-support-nav></mge-support-nav>
         </div>
     </div>
     <article class="row bge-support_c-bar">
@@ -15,8 +15,7 @@
                 <div class="col-xs-12 col-sm-6 text-center">
                     <h1>Die CrowdBar macht aus deinem Online-Einkauf Grundeinkommen</h1>
                     <h2>Ganz ohne Extrakosten für dich.</h2>
-                    <div ng-include="'/assets/support/_cBar_button.html'"></div>
-                    <p class="bge_support_">Verfügbar für: <i>icon</i> <i>icon</i></p>
+                    <mge-c-bar-button></mge-c-bar-button>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <img src="../assets/support/bar_mac.png" class="img-responsive" alt="Laptop mit CrowdBar">
@@ -24,29 +23,12 @@
             </div>
             <hr>
         </header>
+
         <section class="bge-support_c-bar_facts col-xs-12 text-center">
-            <!-- user count -->
-            <div odometer="crowdcard_users"></div>
-            <p>Crowdcard-Nutzende erwirtschaften täglich:</p>
-            <!-- daily income -->
-            <div odometer="daily_comm" class="prettybig"></div>
-            <!-- currency -->
-            <div class="odometer odometer-auto-theme">
-                <span class="odometer-inside">
-                    <span class="odometer-digit">
-                        <span class="odometer-digit-spacer">€</span>
-                        <span class="odometer-digit-inner">
-                            <span class="odometer-ribbon">
-                                <span class="odometer-ribbon-inner">
-                                    <span class="odometer-value">€</span>
-                                </span>
-                            </span>
-                        </span>
-                    </span>
-                </span>
-            </div>
+            <mge-c-bar-facts></mge-c-bar-facts>
             <hr>
         </section>
+
         <section class="bge-support_c-bar_how col-xs-12">
             <div class="row">
                 <div class="col-xs-12 col-sm-6 text-center">
@@ -57,7 +39,7 @@
                     <p>Dafür zahlen uns die Onlineshops eine Provision (ca. 5%), die wir für das Grundeinkommen verwenden.</p>
                 </div>
                 <div class="col-xs-12 col-sm-6">
-                    <div class="bge-video_container">
+                    <div class="embed-responsive embed-responsive-4by3">
                         <iframe width="560" height="315" src="//www.youtube.com/embed/tcd7NiotGWg" allowfullscreen=""></iframe>
                     </div>
                 </div>
@@ -96,7 +78,7 @@
             <div class="row">
                 <div class="col-xs-12 text-center">
                     <h4>Hier kannst du Fragen stellen oder Antworten auf bereits gestellte Fragen lesen:</h4>
-                    <a href="/faq" class="btn btn-large btn-color btn-bge" target="_self">Häufige Fragen</a>
+                    <a href="/faq" class="btn-large btn-color btn-bge" target="_self">Häufige Fragen</a>
                 </div>
             </div>
             <hr>
@@ -105,8 +87,7 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 text-center">
                     <h1>Hol dir jetzt die Crowdbar und unterstütze das Grundeinkommen!</h1>
-                    <div ng-include="'/assets/support/_cBar_button.html'"></div>
-                    <p class="bge_support_">Verfügbar für: <i>icon</i> <i>icon</i></p>
+                    <mge-c-bar-button></mge-c-bar-button>
                 </div>
                 <div class="col-xs-12 col-sm-6">
                     <carousel interval="4000" class="margin-top-30" id="all_supports">
