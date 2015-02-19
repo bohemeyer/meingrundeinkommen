@@ -16,8 +16,10 @@
 //= require angular-ui-bootstrap
 //= require angular-ui-bootstrap-tpls
 //= require angular-route
+//= require angular-messages
 //= require angularjs/rails/resource
 //= require ./app/core/core.module
 //= require ./app/support/support.module
+//= require ./app/data/data.module
 //= require app/app
 //= require_tree .

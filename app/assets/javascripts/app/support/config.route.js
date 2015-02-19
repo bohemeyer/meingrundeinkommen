@@ -7,26 +7,22 @@
 
             $routeProvider
                 .when('/support/crowdbar', {
-                    controller: 'SupportNController',
-                    controllerAs: 'vm',
+                    controller: 'SupportController',
                     templateUrl: '/assets/support/crowdbar.html',
                     label: 'Unterstützen'
                 })
                 .when('/support/crowdcard', {
-                    controller: 'SupportNController',
-                    controllerAs: 'vm',
+                    controller: 'SupportController',
                     templateUrl: '/assets/support/crowdcard.html',
                     label: 'Unterstützen'
                 })
                 .when('/support/cola', {
-                    controller: 'SupportNController',
-                    controllerAs: 'vm',
+                    controller: 'SupportController',
                     templateUrl: '/assets/support/cola.html',
                     label: 'Unterstützen'
                 })
                 .when('/support/donate', {
-                    controller: 'SupportNController',
-                    controllerAs: 'vm',
+                    controller: 'SupportController',
                     templateUrl: '/assets/support/donate.html',
                     label: 'Unterstützen'
                 });

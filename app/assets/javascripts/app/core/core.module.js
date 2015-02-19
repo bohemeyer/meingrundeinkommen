@@ -2,7 +2,9 @@
     'use strict';
 
     angular
-        .module('app.core', []);
+        .module('app.core', [
+            'ngMessages'
+        ]);
 }());
 
 //= require_tree .

@@ -37,6 +37,7 @@ gem 'browser'
 gem 'therubyracer'
 gem 'less-rails'
 gem 'less-rails-bootstrap'
+gem 'bower-rails'
 
 # production
 gem 'lograge'
