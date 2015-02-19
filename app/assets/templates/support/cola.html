@@ -6,21 +6,19 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <nav class="bge-support_nav" role="navigation" ng-include="'/assets/support/_nav.html'"></nav>
+            <mge-support-nav></mge-support-nav>
         </div>
     </div>
     <article class="row bge-support_cola">
         <header class="col-xs-12">
             <div class="row">
-                <div class="col-xs-12 col-sm-7 text-center">
+                <div class="col-xs-12 col-sm-7 text-center intro">
                     <h1>Die CrowdCola bringt die Fragen auf den Tisch!</h1>
 
-                    <p>Alle Einnahmen fließen zu einhundert Prozent in das Projekt Mein-Grundeinkommen!</p>
-
-                    <p>Ganz ohne Extrakosten für dich.</p>
+                    <h2>Alle Einnahmen fließen zu einhundert Prozent in das Projekt Mein-Grundeinkommen!</h2>
                 </div>
                 <div class="col-xs-12 col-sm-5">
-                    <img class="img-responsive" src="../assets/support/cola.png" alt="Cola Flashe">
+                    <img class="img-responsive" src="../assets/support/cola.png" alt="Cola Flasche">
                 </div>
             </div>
             <hr>
@@ -28,19 +26,47 @@
         <section class="col-xs-12 text-center">
             <h1>Sag's uns!</h1>
 
-            <p>Was würdest du tun, wenn für dein Einkommen gesorgt wäre?</p>
+            <h2>Was würdest du tun, wenn für dein Einkommen gesorgt wäre?</h2>
 
             <form ng-submit="submit()">
-                <input class="form-control input-lg" type="text" min="5" max="300">
+                <input class="form-control input-lg" type="text" min="5" max="300" placeholder="Dein Name">
             </form>
+            </br>
+            <form ng-submit="submit()">
+                <input class="form-control input-lg" type="text" min="5" max="300" placeholder="Ich würde...">
+            </form>
+            </br>
+            <p class="text-center">
+                <a class="btn-large btn-color btn-bge" href="#" ng-click="save_comment(supported.id,supported.nickname,supported.comment)">Sagen!</a>
+            </p>
+
+<!--
+            <div class="row">
+
+                <div ng-if="supported.avatar" class="testimonial-image pull-left" style="margin:10px;">
+                    <img src="{{supported.avatar.avatar.url}}">
+                </div>
+
+                <label>Dein Name: &nbsp;<input type="text" ng-model="supported.nickname" placeholder="Dein Name"></label><br>
+                <textarea  ng-model="supported.comment" placeholder="Ich würde..."></textarea>
+
+            </div>
+
+-->
         </section>
-        <section class="col-xs-12">
+
+        <section class="col-xs-12 text-center bge-link">
+            <h1>Was andere tun würden?</h1>
+            <h2>Lass dich überraschen und inspirieren.</h2>
+
             <ul class="listbox">
+
                 <li ng-repeat="wish in wishes" ng-show="wish.text">
                     <div class="pull-left">
                         <div class="testimonial-image "><img alt="" ng-src="{{wish.user.avatar.avatar.thumb.url}}">
                         </div>
                     </div>
+
                     <a ng-click="me_too(wish)" analytics-on="click" analytics-event="geklickt: Ich auch (Startseite)"
                        href="#" class="btn-normal btn-pad pull-right"
                        ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
@@ -51,6 +77,7 @@
                         <i class="fa fa-lightbulb"></i> Ich auch!
                      </span>
                     </a>
+
                     <a href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}"
                        class="edit_button_hidden btn-normal btn-pad pull-right btn-grey">
                         <i class="fa fa-angle-right"></i> ansehen
@@ -70,6 +97,7 @@
                 </li>
 
             </ul>
+            <!--MEHR ZEIGEN BUTTON-->
             <div class="text-center">
                 <a ng-hide="show_more_wishes" ng-click="show_more_wishes = true" href="#"
                    class="btn-grey btn-small btn-pad">Mehr anzeigen</a>
@@ -78,7 +106,31 @@
                             next-text="Weiter" previous-text="Zurück" max-size="10" last-text="Ende"
                             rotate="true"></pagination>
             </div>
+
+            <hr>
         </section>
-        <section class="col-xs-12"></section>
+        <section class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 text-center">
+                    <h1>Du willst die CrowdCola verkaufen oder selber vertreiben?</h1>
+
+                    <h2>Nimm jetzt einfach Kontakt zu uns auf!</h2>
+
+                    <div ng-include="'/assets/support/_cola_button.html'"></div>
+
+                </div>
+                <div class="col-xs-12 col-sm-4">
+                    <img class="img-responsive" src="../assets/support/cola2.png" alt="Cola Flasche">
+                </div>
+            </div>
+            <hr>
+        </section>
+        <section>
+            <div class="row">
+                <div class="bge-link text-center">
+                    <h3>Die Idee der Grundeinkommens-Cola kommt vom Unternehmen Mitte Basel. </br>Mehr über die Volksinitiative in der Schweiz erfahrt ihr <a target="_blank" href="http://cola.mitte.ch/">hier</a>.</h3>
+                </div>
+            </div>
+        </section>
     </article>
 </section>

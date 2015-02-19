@@ -6,12 +6,27 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-            <nav class="bge-support_nav" role="navigation" ng-include="'/assets/support/_nav.html'"></nav>
+           <mge-support-nav></mge-support-nav>
         </div>
     </div>
-    <article class="row bge-support_donate">
+    <article class="row bge-support_donate text-center">
         <header class="col-xs-12">
+            <div>
+                <h1>Hilf direkt mit, das {{home.totallyFinancedIncomes + 1}}. Grundeinkommen zu finanzieren!</h1>
 
+                <div class="progress" style="font-size: 15px;font-weight: 600;line-height: 40px;">
+
+                    <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50"
+                         aria-valuemax="100" style="width: {{home.percentage}};">
+                        <span ng-hide="home.percentageRaw < 50">{{home.amount}} von 12.000€</span>
+                    </div>
+
+                    <span ng-show="home.percentageRaw < 50">{{home.amount}} von 12.000€</span>
+
+                </div>
+
+                <div ng-include="'/assets/support/donate_form.html'"></div>
+            </div>
         </header>
     </article>
 </section>

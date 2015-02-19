@@ -1,12 +1,17 @@
-<div ng-if="vm.crowdbar.runs_in_this_browser()">
-    <a ng-show="vm.browser.isChrome" ng-click="crowdbar_install()" href="https://chrome.google.com/webstore/detail/crowdbar/lhinknkceoifkecnmmlgnelmdipmbcdn" target="_blank" class="btn btn-large btn-color btn-bge">Browserplugin installieren</a>
+<div ng-if="crowdbar.runs_in_this_browser()">
+    <a ng-show="browser.isChrome" ng-click="crowdbar_install()" href="https://chrome.google.com/webstore/detail/crowdbar/lhinknkceoifkecnmmlgnelmdipmbcdn" target="_blank" class="btn-large btn-color btn-bge">Browserplugin installieren</a>
 
-    <a ng-show="vm.browser.isFirefox" ng-click="crowdbar_install()" href="https://addons.mozilla.org/de/firefox/addon/mein-grundeinkommen-crowdbar/" target="_blank" class="btn btn-large btn-color btn-bge">Browserplugin installieren</a>
+    <a ng-show="browser.isFirefox" ng-click="crowdbar_install()" href="https://addons.mozilla.org/de/firefox/addon/mein-grundeinkommen-crowdbar/" target="_blank" class="btn btn-large btn-color btn-bge">Browserplugin installieren</a>
 
-    <a ng-show="vm.browser.isSafari" ng-click="crowdbar_install()" href="http://bar.mein-grundeinkommen.de/extension/crowd_bar/crowd_bar.safariextz" target="_blank" class="btn btn-large btn-color btn-bge">Browserplugin herunterladen</a>
+    <a ng-show="browser.isSafari" ng-click="crowdbar_install()" href="http://bar.mein-grundeinkommen.de/extension/crowd_bar/crowd_bar.safariextz" target="_blank" class="btn btn-large btn-color btn-bge">Browserplugin herunterladen</a>
 </div>
 
-<div ng-if="vm.crowdbar.runs_in_this_browser_as_bookmark()">
+<div ng-if="crowdbar.runs_in_this_browser_as_bookmark()">
     <div class="well" style="color:black;text-shadow:none;"><i class="fa fa-mobile pull-left big"></i> Neu: Jetzt auch als App für dein Smartphone oder Tablet!</div>
     <a href="#" ng-click="crowdapp_install()" class="btn btn-large btn-color"> App installieren</a>
 </div>
+<p class="bge_support_">Verfügbar für:
+    <img src="../assets/support/firefox-logo.png" class="img-responsive img-browser" alt="Firefox">
+    <img src="../assets/support/chrome-logo.png" class="img-responsive img-browser" alt="Chrome">
+    <img src="../assets/support/safari-logo.png" class="img-responsive img-browser" alt="Safari">
+</p>

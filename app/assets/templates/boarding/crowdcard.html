@@ -75,7 +75,7 @@
 
                     </div>
 
-
+<!--KARTE ZUSENDEN LASSEN -->
                     <form ng-if="current.user.flags.SendCrowdcardToMe && !crowdcard_ordered"
                           class="form-horizontal margin-top-30" ng-submit="saveCrowdcard(crowdcard)" role="form"
                           novalidate>
@@ -159,7 +159,7 @@
 
                     </form>
 
-
+<!-- KARTE SELBER AUSDRUCKEN -->
                     <div class="form-group col-sm-12">
                         <label style="padding-top: 14px;display:block;margin-left:15px;">
                             <input ng-model="current.user.flags.PrintOutCrowdcard"
