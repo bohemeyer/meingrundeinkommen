@@ -1,0 +1,145 @@
+<a ng-click="openOrderModal()" class="btn-large btn-color btn-bge">Karte zusenden lassen</a>
+</br>
+<a href="crowdcard.pdf" target="_blank" class=" btn-link btn-lg">Als PDF downloaden <i class="fa fa-download"></i></a>
+
+<!-- The modal to enter the address data -->
+<script type="text/ng-template" id="modal/order/crowdcard.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Die CrowdCard bestellen.</h3>
+    </div>
+    <form ng-submit="save()" name="cCardForm" novalidate>
+        <div class="modal-body">
+            <fieldset>
+                <legend>Deine Addresse</legend>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <!-- firstName -->
+                        <div class="form-group" ng-class="{ 'has-error' : cCardForm.firstName.$invalid && !cCardForm.firstName.$pristine && cCardForm.firstName.$dirty }">
+                            <label>Vorname</label>
+                            <input type="text"
+                                   name="firstName"
+                                   class="form-control"
+                                   ng-model="formData.firstName"
+                                   ng-maxlength="50"
+                                   ng-minlength="2"
+                                   required>
+                            <div ng-messages="cCardForm.firstName.$error">
+                                <div class="help-block" ng-message="required">Dein Vorname wird benötigt.</div>
+                                <div class="help-block" ng-message="minlength">Der Vorname muss 2 Zeichen lang sein.</div>
+                                <div class="help-block" ng-message="maxlength">Der Vorname darf nicht länger als 50 Zeichen lang sein.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <!-- lastName -->
+                        <div class="form-group" ng-class="{ 'has-error' : cCardForm.lastName.$invalid && !cCardForm.lastName.$pristine && cCardForm.lastName.$dirty }">
+                            <label>Nachname</label>
+                            <input type="text"
+                                   name="lastName"
+                                   class="form-control"
+                                   ng-model="formData.lastName"
+                                   ng-maxlength="50"
+                                   ng-minlength="3"
+                                   required>
+                            <div ng-messages="cCardForm.lastName.$error">
+                                <div class="help-block" ng-message="required">Dein Nachname wird benötigt.</div>
+                                <div class="help-block" ng-message="minlength">Der Nachname muss 3 Zeichen lang sein.</div>
+                                <div class="help-block" ng-message="maxlength">Der Nachname darf nicht länger als 50 Zeichen lang sein.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <!-- street -->
+                        <div class="form-group" ng-class="{ 'has-error' : cCardForm.street.$invalid && !cCardForm.street.$pristine && cCardForm.street.$dirty}">
+                            <label>Straße</label>
+                            <input type="text"
+                                   name="street"
+                                   class="form-control"
+                                   ng-model="formData.street"
+                                   ng-maxlength="40"
+                                   ng-minlength="3"
+                                   required>
+                            <div ng-messages="cCardForm.street.$error">
+                                <div class="help-block" ng-message="required">Dein Straße wird benötigt.</div>
+                                <div class="help-block" ng-message="minlength">Die Straße muss 3 Zeichen lang sein.</div>
+                                <div class="help-block" ng-message="maxlength">Die Straße darf nicht länger als 40 Zeichen lang sein.</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <!-- houseNumber -->
+                        <div class="form-group" ng-class="{ 'has-error' : cCardForm.houseNumber.$invalid && !cCardForm.houseNumber.$pristine && cCardForm.housenumber.$dirty }">
+                            <label>Nummer</label>
+                            <input type="text"
+                                   name="houseNumber"
+                                   class="form-control"
+                                   ng-model="formData.houseNumber"
+                                   ng-maxlength="10"
+                                   required>
+                            <div ng-messages="cCardForm.houseNumber.$error">
+                                <div class="help-block" ng-message="required">Dein Hausnummer wird benötigt.</div>
+                                <div class="help-block" ng-message="maxlength">Eine so lange Hausnummer?</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6">
+                        <!-- city -->
+                        <div class="form-group" ng-class="{ 'has-error' : cCardForm.city.$invalid && !cCardForm.city.$pristine && cCardForm.city.$dirty }">
+                            <label>Ort</label>
+                            <input type="text"
+                                   name="city"
+                                   class="form-control"
+                                   ng-model="formData.city"
+                                   ng-maxlength="50"
+                                   ng-minlength="3"
+                                   required>
+                            <div ng-messages="cCardForm.city.$error">
+                                <div class="help-block" ng-message="required">In welcher Stadt wohnst du.</div>
+                                <div class="help-block" ng-message="maxlength">Der Name der Stadt reicht hier.</div>
+                                <div class="help-block" ng-message="minlength">Das war schon die Stadt?</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-sm-6">
+                        <!-- zipCode -->
+                        <div class="form-group" ng-class="{ 'has-error' : cCardForm.zipCode.$invalid && !cCardForm.zipCode.$pristine && cCardForm.zipCode.$dirty}">
+                            <label>PLZ</label>
+                            <input type="text"
+                                   name="zipCode"
+                                   class="form-control"
+                                   ng-model="formData.zipCode"
+                                   ng-maxlength="5"
+                                   required>
+                            <div ng-messages="cCardForm.zipCode.$error">
+                                <div class="help-block" ng-message="required">Und die Postleitzahl noch.</div>
+                                <div class="help-block" ng-message="maxlength">Die Maximale Länge ist fünf Zeichen.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Zusätzliche Karten zum Verschenken:</legend>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="col-sm-4 text-left">
+                            <select name="additional-cards" ng-model="formData.additionalCards"
+                                    ng-options="item as item.label for item in options"
+                                    class="form-control"
+                                    required>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-primary" ng-disabled="cCardForm.$invalid">Abschicken</button>
+            <button class="btn btn-warning" ng-click="cancel()">Abbrechen</button>
+        </div>
+    </form>
+</script><!-- end of the modal -->
