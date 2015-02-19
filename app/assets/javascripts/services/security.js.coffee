@@ -75,7 +75,10 @@ angular.module "Security", ["Devise","Flag"]
         if service.participates() and
         (service.getFlag('hasHadCrowdbar') or
         service.has_crowdbar() or
-        service.has_crowdcard() or
+
+        #service.has_crowdcard() or
+        service.has_ordered_crowdcard() or
+
         service.has_crowdapp())
 
           true

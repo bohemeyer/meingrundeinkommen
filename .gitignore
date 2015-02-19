@@ -23,3 +23,9 @@ tmp
 vendor/bundle
 
 mailings/launch-beta.html
+
+public/crowdcard.json
+
+public/crowdcard_daily.json
+
+public/news.json
