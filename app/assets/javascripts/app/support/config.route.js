@@ -22,7 +22,7 @@
                     label: 'Unterstützen'
                 })
                 .when('/support/donate', {
-                    controller: 'SupportController',
+                    controller: 'SupportNController',
                     templateUrl: '/assets/support/donate.html',
                     label: 'Unterstützen'
                 });

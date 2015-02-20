@@ -7,7 +7,7 @@ class Api::CrowdcardsController < ApplicationController
       crowdcard.save!
       render json: {:crowdcard => crowdcard}
     else
-      render json: {:errors => crowdcard.errors}
+      render json: {:errors => crowdcard.errors}, status => 422
     end
   end
 
