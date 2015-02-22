@@ -15,10 +15,9 @@ require 'json'
         if Chance.where("code LIKE ?", "#{number}%").present?
           data[i][:niete] =  false
           if number.size == 4
-            data[i][:user] = Chance.where("code = ? or code2 = ?", "#{number}", "#{number}").first.user
-            data[i][:isChild] = Chance.where("code = ? or code2 = ?", "#{number}", "#{number}").first.is_child
-            data[i][:childName] = Chance.where("code = ? or code2 = ?", "#{number}", "#{number}").first_name
-
+            data[i][:user] = Chance.where("code = ?", "#{number}").first.user
+            data[i][:isChild] = Chance.where("code = ?", "#{number}").first.is_child
+            data[i][:childName] = Chance.where("code = ?", "#{number}").first.first_name
           end
         else
           data[i][:niete] = true
