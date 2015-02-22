@@ -12,9 +12,9 @@ require 'json'
           number += "#{d[:value]}"
         end
 
-        if Chance.where("code LIKE ? or code2 LIKE ?", "#{number}%", "#{number}%").present?
+        if Chance.where("code LIKE ?", "#{number}%").present?
           data[i][:niete] =  false
-          if number.size == 5
+          if number.size == 4
             data[i][:user] = Chance.where("code = ? or code2 = ?", "#{number}", "#{number}").first.user
             data[i][:isChild] = Chance.where("code = ? or code2 = ?", "#{number}", "#{number}").first.is_child
             data[i][:childName] = Chance.where("code = ? or code2 = ?", "#{number}", "#{number}").first_name
