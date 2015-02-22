@@ -53,9 +53,9 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
       'avatar'
 
       #if not participates
-      'gewinnspiel_question'
+      #'gewinnspiel_question'
       'wishes'
-      'gewinnspiel'
+      #'gewinnspiel'
       'verify_crowdcard'
 
       'verify_gewinnspiel'
@@ -127,11 +127,11 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
           if ($scope.trigger == 'login' || $scope.trigger == 'registered') && $scope.current.is_default_avatar() then true else false
 
 
-        when 'gewinnspiel_question'
-          if $scope.trigger != 'crowdbar_installed' && $scope.trigger != 'crowdapp_installed' && !$scope.current.participates() && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
-            true
-          else
-            false
+        # when 'gewinnspiel_question'
+        #   if $scope.trigger != 'crowdbar_installed' && $scope.trigger != 'crowdapp_installed' && !$scope.current.participates() && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
+        #     true
+        #   else
+        #     false
 
         when 'wishes'
           if $scope.trigger != 'crowdbar_installed' && $scope.trigger != 'crowdapp_installed' && !$scope.current.participates() && $scope.current.user.wishes.length == 0 && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
@@ -142,13 +142,13 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
           else
             false
 
-        when 'gewinnspiel'
-          if $scope.trigger != 'crowdbar_installed' && $scope.trigger != 'crowdapp_installed' && !$scope.current.participates() && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
-            if !test
-              $scope.steps.show_next_button = true
-            true
-          else
-            false
+        # when 'gewinnspiel'
+        #   if $scope.trigger != 'crowdbar_installed' && $scope.trigger != 'crowdapp_installed' && !$scope.current.participates() && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
+        #     if !test
+        #       $scope.steps.show_next_button = true
+        #     true
+        #   else
+        #     false
 
         when 'verify_gewinnspiel'
           if $scope.current.participates() && !$scope.current.participation_verified() && !$scope.current.has_ordered_crowdcard()

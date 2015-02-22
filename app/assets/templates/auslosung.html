@@ -45,7 +45,9 @@
                 <img src="{{current_drawing.user.avatar.url}}">
               </a>
             </div>
-            <a href="/menschen/{{current_drawing.user.id}}">{{current_drawing.user.name}}</a>
+            <a ng-if="current_drawing.isChild == 0" href="/menschen/{{current_drawing.user.id}}">{{current_drawing.user.name}}</a>
+            <a ng-if="current_drawing.isChild == 1" href="/menschen/{{current_drawing.user.id}}">{{current_drawing.childName}} (Kind von {{current_drawing.user.name}})</a>
+
           </div>
             <br>
             <div class="margin-top:30">Losnummer:</div>

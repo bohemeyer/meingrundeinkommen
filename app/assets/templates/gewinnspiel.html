@@ -1,29 +1,29 @@
 <div class="container">
 
-    <p ng-show="!chances_form.editAllChances">
+<!--     <p ng-show="!chances_form.editAllChances">
       <h4>Das 6. Grundeinkommen in Höhe von 12.000€ wird Mitte Februar 2015 in einem Gewinnspiel verlost.
         <a href="/gewinnspielbedingungen">Gewinnspielbedingungen</a>
     | <a href="/faq/verlosung">Häufige Fragen</a>
       </h4>
-    </p>
+    </p> -->
 
-    <div class="text-center" ng-show="!current.participates()">
+    <div class="text-center" >
 
-        <a class="btn-large btn-color btn" href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen!</a>
-<!--    <div class="text-center">
+       <!--  <a class="btn-large btn-color btn" href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen!</a> -->
+   <div class="text-center">
 
-           <h3 class="margin-top-20">Die Anmeldung zum 5. Grundeinkommen hat am <b>14.11.</b> geendet.!</h3>
+           <h3 class="margin-top-20">Die Anmeldung zum 6. & 7. Grundeinkommen hat am <b>21.02.</b> geendet!</h3>
 
           <hr>
 
           <div class="well text-center">
-            Im Dezember werden weitere Grundeinkommen verlost.
+            Im März werden weitere Grundeinkommen verlost.
           </div>
- -->
+
 
       </div>
 
-        <div ng-show="current.participates()">
+    <!--     <div ng-show="current.participates()">
 
           <alert ng-show="current.participation_verified() && !chances_form.editAllChances" type="success" ng-class="margin-top-30">
             <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst {{chances_form.chances.length > 1 ? chances_form.chances.length + 'x' : ''}} an der Verlosung teil!</h3>
@@ -49,7 +49,7 @@
 
           <div ng-show="chances_form.editAllChances" ng-include="'/assets/gewinnspiel_form.html'"></div>
 
-        </div>
+        </div> -->
 
 
 
