@@ -8,6 +8,7 @@
     function Directive() {
         return {
             restrict: 'E',
+            scope: true,
             templateUrl: '/assets/support/_cBar_facts.html',
             controller: function ($scope, StatsService) {
                 StatsService.then(function(response) {

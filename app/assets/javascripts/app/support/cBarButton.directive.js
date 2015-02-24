@@ -8,6 +8,7 @@
     function Buttons() {
         return {
             restrict: 'E',
+            scope: true,
             templateUrl: '/assets/support/_cBar_button.html',
             controller: function($scope,Crowdbar,$modal){
 

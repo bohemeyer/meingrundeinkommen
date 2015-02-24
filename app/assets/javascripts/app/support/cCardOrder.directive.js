@@ -31,6 +31,7 @@
     function Directive() {
         return {
             restrict: 'E',
+            scope: true,
             templateUrl: '/assets/support/_cCard_order.html',
             controller: function($scope, $modal, common, cCardService) {
 

@@ -8,6 +8,7 @@
     function Navigation() {
         return {
             restrict: 'E',
+            scope: true,
             templateUrl: '/assets/support/_nav.html',
             controllerAs: 'vm',
             controller: function($location){
@@ -15,8 +16,8 @@
                 
                 vm.isActive = checkLocationPathIsEqual;
 
-                function checkLocationPathIsEqual(viewLocation) {
-                    return viewLocation === $location.path();
+                function checkLocationPathIsEqual(viewLocation) {                    
+                    return viewLocation == $location.path();
                 };
             }
 
