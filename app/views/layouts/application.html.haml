@@ -64,19 +64,19 @@
                 /     Was wäre wenn?
                 %li{id: "{{getStatus('/blog')}}"}
                   %a{href: "/blog"}
-                    Blog
+                    Nieuws
                 %li{id: "{{getStatus('/faq')}}"}
                   %a{href: "/faq"}
-                    Fragen
+                    Vragen
                 %li{id: "{{getStatus('/support')}}"}
                   %a{href: "/support", style: "padding-bottom: 25px;"}
-                    Unterstützen!
+                    Ondersteunen
                     .progress{:style=>'height:6px'}
                       .progress-bar(aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: {{percentage}};font-size:6px;padding:0px;")
 
 
                 %li{"ng-hide" => "current.isAuthenticated()", :id => "{{getStatus('/register')}}"}
-                  %a{href: "/register"} Mitmachen
+                  %a{href: "/register"} Meedoen
 
                 / %li{"ng-show" => "current.isAuthenticated()", :id => "{{getStatus('/boarding')}}"}
                 /   %a{href: "/boarding"} Gewinnen
@@ -105,10 +105,10 @@
                     %li
                       %a.sf-with-ul{href: "#", "ng-click"=>"current.logout()"}
                         %i.fa.fa-power-off
-                        Abmelden
+                        Afmelden
 
                 %li{"ng-hide" => "current.isAuthenticated()", :id => "{{getStatus('/login')}}"}
-                  %a{href: "/login"} Einloggen
+                  %a{href: "/login"} Inloggen
 
 
 
@@ -126,9 +126,9 @@
           .container
             .row
               %section.col-lg-6.col-md-6.col-xs-12.col-sm-6.footer-one
-                %h3 Über das Projekt
+                %h3 ONSBASISINKOMEN
                 %p
-                  "Mein Grundeinkommen" sammelt per Crowdfunding Geld für ein Bedingungsloses Grundeinkommen. Immer wenn 12.000€ zusammen sind, werden sie an eine Person ausgelost.
+                  "Zamelt geld in voor privaat gefinancieerd basisinkomen. Elke keer als er 12.000 euro is ingezamed krijgt een aanmelder door loting, een jaar lang 1000 euro per maand, zonder voorwaarden. " 
               / %section.col-lg-3.col-md-3.col-xs-12.col-sm-3.footer-two
               /   %h3 Twitter Stream
               /   %ul#tweets

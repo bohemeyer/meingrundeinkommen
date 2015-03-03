@@ -8,8 +8,8 @@
 
 <!--       <a href="/register?email=micha@mein-grundeinkommen.de&name=Michi&wishes=mich%20um%20meine%20K%C3%BCche%20k%C3%BCmmern%3Bschlafen%3B%3B%3B">test email link</a> -->
 
-      <h1 style="margin-bottom:0px">Melde dich kostenlos an, um mitzumachen!</h1>
-      <p>Oder hast du schon einen Account? Dann <a href="/login">log dich hier ein</a>.</p>
+      <h1 style="margin-bottom:0px">Meld u kostenloos aan, doe mee!</h1>
+      <p>Heeft u al een account? dan <a href="/login">kunt u hier inloggen.</a>.</p>
     </div>
     <div class="clearfix"></div>
   </div>
@@ -22,35 +22,35 @@
               <input type="hidden" ng-model="register_user.initial_conditions" />
 
               <div class="form-group" ng-class="{ 'has-error' : RegisterForm.name.$invalid && !RegisterForm.name.$pristine }">
-                <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                <label for="inputEmail3" class="col-sm-2 control-label">Naam</label>
                 <div class="col-sm-10 text-left">
-                  <input name="name" ng-model="register_user.name" type="text" class="form-control" id="inputEmail3" placeholder="Vorname oder Nickname (öffentlich)" maxlength="40" required ng-minlength="2">
-                  <p ng-show="(RegisterForm.name.$error.minlength || RegisterForm.name.$error.required) && !RegisterForm.name.$pristine" class="help-block">Der Name ist erforderlich und muss mindestens 2 Zeichen lang sein.</p>
+                  <input name="name" ng-model="register_user.name" type="text" class="form-control" id="inputEmail3" placeholder="Naam of alias" maxlength="40" required ng-minlength="2">
+                  <p ng-show="(RegisterForm.name.$error.minlength || RegisterForm.name.$error.required) && !RegisterForm.name.$pristine" class="help-block">Deze naam is ongeldig, deze minstens 2 karakters zijn.</p>
 
                 </div>
-              </div>
+              </div> 
               <div class="form-group" ng-class="{ 'has-error' : !RegisterForm.email.$pristine && (RegisterForm.email.$error.serverMessage || RegisterForm.email.$invalid) }">
                 <label for="inputEmail3" class="col-sm-2 control-label">E-Mail</label>
                 <div class="col-sm-10 text-left">
-                  <input name="email" ng-model="register_user.email" type="email" class="form-control" id="inputEmail3" placeholder="E-Mail-Adresse" required>
-                  <p ng-show="(RegisterForm.email.$invalid || RegisterForm.email.$error.required) && !RegisterForm.email.$pristine" class="help-block">Bitte gib eine gültige E-Mail-Adresse an.</p>
+                  <input name="email" ng-model="register_user.email" type="email" class="form-control" id="inputEmail3" placeholder="e-mail adres" required>
+                  <p ng-show="(RegisterForm.email.$invalid || RegisterForm.email.$error.required) && !RegisterForm.email.$pristine" class="help-block">Geef aub een geldig email adress..</p>
                   <p ng-show="RegisterForm.email.$error.serverMessage" class="help-block">{{RegisterForm.email.$error.serverMessage}}</p>
 
                 </div>
               </div>
               <div class="form-group" ng-class="{ 'has-error' : RegisterForm.password.$invalid && !RegisterForm.password.$pristine }">
-                <label for="inputPassword3" class="col-sm-2 control-label">Passwort</label>
+                <label for="inputPassword3" class="col-sm-2 control-label">Wachtwoord</label>
                 <div class="col-sm-10 text-left">
-                  <input name="password" ng-model="register_user.password" type="password" class="form-control" id="inputPassword3" placeholder="Passwort" ng-minlength="4" required>
-                  <p ng-show="(RegisterForm.password.$error.minlength || RegisterForm.password.$error.required) && !RegisterForm.password.$pristine" class="help-block">Bitte gib ein Passwort mit mindestens 4 Zeichen länge an</p>
+                  <input name="password" ng-model="register_user.password" type="password" class="form-control" id="inputPassword3" placeholder="wachtwoord" ng-minlength="4" required>
+                  <p ng-show="(RegisterForm.password.$error.minlength || RegisterForm.password.$error.required) && !RegisterForm.password.$pristine" class="help-block">Geef aub een geldig wachtwoord</p>
                 </div>
               </div>
               <div class="form-group text-left"  ng-class="{ 'has-error' : RegisterForm.datenschutz.$invalid }">
                 <div class="col-sm-offset-2 col-sm-10 text-left">
                   <div class="checkbox">
-                    <p ng-show="RegisterForm.datenschutz.$error.required || RegisterForm.datenschutz.$error.serverMessage" class="help-block">Bitte bestätigen:</p>
+                    <p ng-show="RegisterForm.datenschutz.$error.required || RegisterForm.datenschutz.$error.serverMessage" class="help-block">graag aankruizen:</p>
                     <label>
-                      <input name="datenschutz" ng-model="register_user.datenschutz" type="checkbox" ng-required="true" required> Ich habe die <a href="#" ng-click="open('nutzungsbedingungen')">Nutzungsbedingungen</a> und die <a href="#" ng-click="open('datenschutz')">Datenschutzerklärung</a> gelesen und stimme zu.
+                      <input name="datenschutz" ng-model="register_user.datenschutz" type="checkbox" ng-required="true" required> Ik heb de  <a href="#" ng-click="open('nutzungsbedingungen')">Algemene voorwaarden</a> en de <a href="#" ng-click="open('datenschutz')">privacyverklaring</a> gelezen en stem hiermee in.
                     </label>
 
                   </div>
@@ -60,7 +60,7 @@
                 <div class="col-sm-offset-2 col-sm-10 text-left">
                   <div class="checkbox">
                     <label>
-                      <input name="newsletter" ng-model="register_user.newsletter" type="checkbox"> Bitte informiert mich per E-Mail über weitere Verlosungstermine und bei wichtigen Änderungen auf der Seite.
+                      <input name="newsletter" ng-model="register_user.newsletter" type="checkbox"> Gelieve mij te informeren via e-mail over andere loterij afspraken en belangrijke wijzigingen die zijn aangebracht op de pagina.
                     </label>
                   </div>
                 </div>
@@ -72,7 +72,7 @@
                       <div class="bounce2"></div>
                       <div class="bounce3"></div>
                     </div>
-                  <span ng-hide="submitted">Jetzt anmelden!</span>
+                  <span ng-hide="submitted">Nu aanmelden!</span>
                   </button>
                 </div>
               </div>
