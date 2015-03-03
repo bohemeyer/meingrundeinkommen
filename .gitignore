@@ -28,3 +28,5 @@ public/news.json
 
 .ruby-version
 
+.ruby-gemset
+.ruby-version*
