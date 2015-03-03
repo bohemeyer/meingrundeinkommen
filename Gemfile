@@ -4,8 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.0'
 
 # database & models
-gem 'mysql2'
-gem 'sqlite3'
+gem 'pg'
 gem 'active_model_serializers'
 gem 'jbuilder', '~> 1.2'
 
