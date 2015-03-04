@@ -83,7 +83,7 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag"])
 
           """
           link = "mailto:#{user.email}?" +
-                 "subject=" + encodeURI("Deine E-Mail ist freigeschaltet") +
+                 "subject=" + encodeURI("Uw e-mail is ingeschakeld.") +
                  "&body=" + encodeURI(body)
 
           window.location.href = link
