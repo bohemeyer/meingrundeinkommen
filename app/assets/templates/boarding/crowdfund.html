@@ -1,19 +1,12 @@
 <div class="container" ng-controller="SupportController">
-<div class="margin-top-30 text-center">
-
-	<i class="fa fa-heart huge"></i><br>
-
- <h2>Hilf direkt mit, das {{home.totallyFinancedIncomes + 1}}. Grundeinkommen zu finanzieren!</h2>
-
-  <div class="progress" style="font-size: 15px;font-weight: 600;line-height: 40px;">
-
-     <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
-        <span ng-hide="home.percentageRaw < 50">{{home.amount}} von 12.000€</span>
+	<div class="margin-top-30 text-center">
+		<i class="fa fa-heart huge"></i><br>
+		 <h2>Ondersteun het {{home.totallyFinancedIncomes + 1}}ste basisinkomen te financieren!</h2>
+		  <div class="progress" style="font-size: 15px;font-weight: 600;line-height: 40px;">
+		     <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50" aria-valuemax="100" style="width: {{home.percentage}};">
+        <span ng-hide="home.percentageRaw < 50">{{home.amount}} van 12.000€</span>
      </div>
-        <span ng-show="home.percentageRaw < 50">{{home.amount}} von 12.000€</span>
-
+        <span ng-show="home.percentageRaw < 50">{{home.amount}} van 12.000€</span>
   </div>
-
-<div  ng-include="'/assets/support_crowdfund_form.html'"></div>
-
+	<div  ng-include="'/assets/support_crowdfund_form.html'"></div>
 <div class="margin-top-70">&nbsp;</div>

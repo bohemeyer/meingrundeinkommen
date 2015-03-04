@@ -12,7 +12,7 @@
 <input type="hidden" name="t3" value="M">
 
 
-<input type="hidden" name="business" value="micha@mein-grundeinkommen.de">
+<input type="hidden" name="business" value="lykle@onsbasisinkomen.nl suppport_crowdfund_form.html">
 
 <INPUT TYPE="text" NAME="item_name" ng-model="support.item_name" id="item_name" style="display:none;">
 
@@ -22,8 +22,8 @@
 <div class="form-group text-center" style="">
   <!-- <label for="supportamount">Mein Beitrag:</label> -->
 <div ng-hide="support.payment_method == 'flattr'" style="width:200px;margin-left: auto;margin-right: auto;margin-bottom:5px;" class="input-group">
-    <input class="form-control input-lg" id="supportamount" width="4" min="1" max="12000" type="number" ng-model="support.amount" name="amount" ng-change = "support.set_equals_bi(support.amount)">
     <div class="input-group-addon">€</div>
+    <input class="form-control input-lg text-centers" id="supportamount" width="4" min="1" max="12000" type="number" ng-model="support.amount" name="amount" ng-change = "support.set_equals_bi(support.amount)">
   </div>
 
   <div ng-hide="support.payment_method == 'flattr'">{{support.equals_bi}}</div>
@@ -31,7 +31,7 @@
   <!-- <label ng-hide="support.payment_method == 'flattr'"><input type="radio" ng-click="support.payment_method = 'bank'" ng-model="support.cmd" name="cmd" value="_xclick" checked> einmalig </label> -->
   <!-- &nbsp;&nbsp;<label ng-hide="support.payment_method == 'flattr'"><input ng-click="support.payment_method = 'paypal_k'" ng-model="support.cmd" type="radio" name="cmd" value="_xclick-subscriptions"> monatlich</label> -->
 <br>
-<label ng-hide="support.payment_method == 'flattr'" style="font-weight:normal"><input type="checkbox" ng-model="support.donate"> hiervan 10% ({{(support.amount * 0.1).toFixed(2)}}€) doneren aan de club.</label>
+<label ng-hide="support.payment_method == 'flattr'" style="font-weight:normal"><input type="checkbox" ng-model="support.donate"> hiervan 10% (€{{(support.amount * 0.1).toFixed(2)}}) doneren aan de stichting.</label>
 </div>
 
        <!-- <label for="supportamount">Mein Beitrag:</label> -->
