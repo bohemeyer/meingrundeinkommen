@@ -122,7 +122,7 @@ angular.module "Support", ["rails"]
         r += '20 Minuten'
       if hours > 0
         if nv > 32
-          r += ' und'
+          r += ' en'
         r += ' ' + hours + ' Uren'
       r += ' Basisinkomen'
       $scope.support.equals_bi = r
