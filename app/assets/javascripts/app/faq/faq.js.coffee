@@ -10,7 +10,7 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
     .when "/faq/:topic",
       templateUrl: "/assets/faq.html"
       controller: "FAQController"
-      label: "Häufige Fragen"
+      label: "Vragen"
 
 ]
 

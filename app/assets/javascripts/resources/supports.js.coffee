@@ -96,8 +96,8 @@ angular.module "Support", ["rails"]
         else
           $scope.support.support_id = response.id
           $scope.support.return_url = "https://www.mein-grundeinkommen.de/start?thanks_for_support=" + response.id
-          $scope.support.item_name = "Zuwendung Nr. #{response.id} zur Verlosung"
-          $scope.support.item_name = $scope.support.item_name + ", davon 10% Spende an Verein" if $scope.support.donate
+          $scope.support.item_name = "Donatie voor Nr. #{response.id} "
+          $scope.support.item_name = $scope.support.item_name + ", hiervan 10% doneert aan de stichting" if $scope.support.donate
           $scope.support.support_amount = response.amountTotal
           $scope.support.avatar = response.avatar
           $scope.support.nickname = response.nickname
@@ -112,9 +112,9 @@ angular.module "Support", ["rails"]
 
 
     $scope.support.set_equals_bi = (nv) ->
-      r = nv + '€ entsprechen '
+      r = '€ '+ nv + ',- euro volstaat voor '
       if nv > 32
-        r += Math.floor((nv / 33)) + ' Tag'
+        r += Math.floor((nv / 33)) + ' Dag'
         if nv > 65
           r += 'en'
       hours = Math.floor((nv % 33) / 1.375)
@@ -122,9 +122,9 @@ angular.module "Support", ["rails"]
         r += '20 Minuten'
       if hours > 0
         if nv > 32
-          r += ' und'
-        r += ' ' + hours + ' Stunden'
-      r += ' Grundeinkommen'
+          r += ' en'
+        r += ' ' + hours + ' Uren'
+      r += ' Basisinkomen'
       $scope.support.equals_bi = r
 
 
