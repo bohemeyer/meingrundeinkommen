@@ -14,15 +14,16 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
+
 default: &default
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlite3
   pool: 5
+  timeout: 5000
 
 development:
   <<: *default
-  database: onsbasisinkomen_development
+  database: db/development.sqlite3
 
 test:
   <<: *default
-  database: onsbasisinkomen_test
+  database: db/test.sqlite3
