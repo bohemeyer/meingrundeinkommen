@@ -3,8 +3,8 @@
    <div class="container">
       <div class="row text-center">
 
-         <h1><span class="huge">{{home.numberOfUsers}}</span> <br> Menschen erzählen hier, wie ein <span class="infolink" ng-click="bge_info()">Grundeinkommen</span>
-{{home.numberOfWishes}} Dinge in ihrem Leben verändern würde.</h1>
+         <h1><span class="huge">{{home.numberOfUsers}}</span> <br> Verhalen van mensen hoe een  <span class="infolink" ng-click="bge_info()">basisinkomen</span>
+{{home.numberOfWishes}} hun leven heeft verandert.</h1>
       </div>
 
     </div>
@@ -31,10 +31,10 @@
             <br>
             <a ng-click="me_too(portrait)" href="#" class="btn-normal btn-pad" ng-class="{disabled: portrait.meToo, 'btn-grey': portrait.meToo, 'btn-color': !portrait.meToo}">
                        <span ng-show="portrait.meToo">
-                          <i class="fa fa-check"></i> Du auch!
+                          <i class="fa fa-check"></i> jij ook!
                        </span>
                        <span ng-hide="portrait.meToo">
-                          <i class="fa fa-lightbulb"></i> Ich auch!
+                          <i class="fa fa-lightbulb"></i> ik ook!
                        </span>
                      </a>
 
@@ -63,20 +63,20 @@
 
                    <a ng-click="me_too(wish)" analytics-on="click" analytics-event="geklickt: Ich auch (Startseite)" href="#" class="btn-normal btn-pad pull-right" ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
                      <span ng-show="wish.meToo">
-                        <i class="fa fa-check"></i> Du auch!
+                        <i class="fa fa-check"></i> jij ook!
                      </span>
                      <span ng-hide="wish.meToo">
-                        <i class="fa fa-lightbulb"></i> Ich auch!
+                        <i class="fa fa-lightbulb"></i> ik ook!
                      </span>
                    </a>
 
-                   <a  href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}" class="edit_button_hidden btn-normal btn-pad pull-right btn-grey"><i class="fa fa-angle-right"></i> ansehen
+                   <a  href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}" class="edit_button_hidden btn-normal btn-pad pull-right btn-grey"><i class="fa fa-angle-right"></i> bekijken
                    </a>
 
                   <div class="textblock"><a href="/menschen/{{wish.user.id}}">{{wish.user.name}}</a>
-                     <span ng-show="wish.othersCount > 0"> und <b>{{wish.othersCount}}</b> andere würden</span>
+                     <span ng-show="wish.othersCount > 0"> en <b>{{wish.othersCount}}</b> anderen zouden</span>
 
-                     <span ng-show="wish.othersCount == 0"> würde</span>
+                     <span ng-show="wish.othersCount == 0"> zouden</span>
 
                      <br><a style="font-size:18px" href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}">{{wish.othersCount == 0 ? wish.wish.he : wish.wish.they}}</a></div>
 
@@ -84,7 +84,7 @@
 
             </ul>
             <div class="text-center">
-               <a ng-hide="show_more_wishes" ng-click="show_more_wishes = true" href="#" class="btn-grey btn-small btn-pad">Mehr anzeigen</a>
+               <a ng-hide="show_more_wishes" ng-click="show_more_wishes = true" href="#" class="btn-grey btn-small btn-pad">Laat meer zien</a>
                <pagination ng-show="show_more_wishes" total-items="home.numberOfWishesRaw" ng-model="pagination.current_page" boundary-links="true" first-text="Anfang" next-text="Weiter" previous-text="Zurück" max-size="10" last-text="Ende" rotate="true"></pagination>
             </div>
 
@@ -96,14 +96,14 @@
 
       <div class="row margin-top-30">
          <div class="col-md-10 col-md-offset-1">
-            <div class="text-center"><h1><i class="fa fa-time"></i> Das passiert gerade:</h1></div>
+            <div class="text-center"><h1><i class="fa fa-time"></i> Zijn u voor gegaan:</h1></div>
 
             <ul class="listbox">
                <li ng-repeat="wish in latest_wishes" ng-show="wish.text">
                   <div class="pull-right" style=" padding-top: 10px;
     text-align: left;
     width: 150px;padding:5px;line-height:24px;font-size:20px;">
-                     <i class="fa fa-time"></i> vor {{wish.timeAgo}}
+                     <i class="fa fa-time"></i> voor {{wish.timeAgo}}
                   </div>
 
                   <div class="pull-left">

@@ -6,7 +6,7 @@ Devise.setup do |config|
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
 
-  config.mailer_sender = 'admin@mein-grundeinkommen.de'
+  config.mailer_sender = 'admin@ons'
 
   # Configure the class responsible to send e-mails.
   config.mailer = 'Devise::Mailer'
@@ -16,6 +16,8 @@ Devise.setup do |config|
   # :mongoid (bson_ext recommended) by default. Other ORMs may be
   # available as additional gems.
   require 'devise/orm/active_record'
+
+  config.secret_key = '8f92b423c43c7ef2ce1ef426a794cb1aec9524491a8fd7516574027eedd77e91b54b90b9f93a68e3148ab6035a106e11aaf401b2fdb6c0ec4b5f4c8caf7dcfb6'
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is

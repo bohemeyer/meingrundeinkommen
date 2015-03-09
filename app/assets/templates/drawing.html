@@ -1,7 +1,7 @@
 <div class="container">
   <form ng-submit="submitDrawing()">
 	<div class="row" ng-repeat="(key, d) in drawings">
-		<h1>{{key+1}}. Aulosung</h1>
+		<h1>{{key+1}}. autodrop )drawing( </h1>
 		<input size="1" type="text" maxlength="1" ng-model="diget.value" ng-repeat="diget in d.digets">
 		<input type="checkbox" ng-click="submitDrawing()" ng-model="d.done" value="true">
 		<input type="submit" class="btn btn-small btn-color" value="Speichern">

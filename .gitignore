@@ -2,10 +2,6 @@
 *.rbc
 .bundle
 capybara-*.html
-config/
-config/environments/development.rb
-config/initializers/mailjet.rb
-config/sunspot.yml
 coverage/
 db/*.sqlite3
 lib/tasks/data.rake
@@ -29,3 +25,9 @@ public/crowdcard.json
 public/crowdcard_daily.json
 
 public/news.json
+
+.ruby-version
+
+.ruby-gemset
+.ruby-version*
+.ruby-gemset*

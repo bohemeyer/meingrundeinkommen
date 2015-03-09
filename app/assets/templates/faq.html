@@ -1,19 +1,19 @@
 <div class="container margin-top-70">
 
-  <h1 class="text-center">Du fragst - Micha antwortet</h1>
+  <h1 class="text-center">U vraagt - M.E.I.S antwoord</h1>
 
-  <h3 class="text-center">Wähle einen Themenbereich und tippe deine Frage ins Textfeld. Entweder du findest eine vorhandene Frage oder du stellst eine neue:</h3>
+  <h3 class="text-center">Selecteer een onderwerp en typ uw vraag in het tekstveld. Zoek in de FAQ voor meest gestelde vragen of stel een nieuwe vraag als u het antwoord niet kunt vinden:</h3>
 
   <tabset>
-    <tab heading="Das Projekt" active="categories.projekt" select="tab('projekt')"></tab>
-    <tab heading="Grundeinkommen" active="categories.grundeinkommen" select="tab('grundeinkommen')"></tab>
+    <tab heading="Over het project" active="categories.projekt" select="tab('projekt')"></tab>
+    <tab heading="Basisinkomen" active="categories.grundeinkommen" select="tab('grundeinkommen')"></tab>
     <tab heading="Crowdfunding" active="categories.crowdfunding" select="tab('crowdfunding')"></tab>
-    <tab heading="Crowdbar" active="categories.crowdbar" select="tab('crowdbar')"></tab>
-    <tab heading="Crowdcard" active="categories.crowdcard" select="tab('crowdcard')"></tab>
+    <tab heading="kan vervallen" active="categories.crowdbar" select="tab('crowdbar')"></tab>
+    <tab heading="Crowdcard idem?" active="categories.crowdcard" select="tab('crowdcard')"></tab>
     <tab heading="Website/Hilfe" active="categories.community" select="tab('community')"></tab>
     <tab heading="Verlosung" active="categories.verlosung" select="tab('verlosung')"></tab>
-    <tab heading="Über uns" active="categories.person" select="tab('person')"></tab>
-    <tab heading="Gewinnende fragen" active="categories.winners" select="tab('winners')"></tab>
+    <tab heading="Over ons" active="categories.person" select="tab('person')"></tab>
+    <tab heading="Begunstigde" active="categories.winners" select="tab('winners')"></tab>
     <!-- <tab heading="Sonstiges" select="tab(null)"></tab> -->
   </tabset>
 
@@ -24,11 +24,11 @@
 
 
         <input type="text" ng-model="question.$" style="height:50px;padding-left:10px;padding-right:10px;margin:20px;width:70%" font-size="25"
-       placeholder="Stell hier deine Frage" maxlength="250">
+       placeholder="Stel uw vraag" maxlength="250">
 
     <br>
 
-    <a href="#" class="btn-large btn-color" ng-click="askQuestion()" > Diese Frage jetzt stellen!</a>
+    <a href="#" class="btn-large btn-color" ng-click="askQuestion()" > Vraag stellen!</a>
 
   	<i ng-show="loading" class="icon-spin fa fa-refresh"></i>
 

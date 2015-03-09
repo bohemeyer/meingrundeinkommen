@@ -13,7 +13,7 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','meta','rails','ng
       .when '/crowdapp',
         title: 'Crowdbar'
       .otherwise
-        title: 'Mein Grundeinkommen'
+        title: 'Ons basisinkomen'
 ]
 
 
@@ -62,7 +62,7 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','meta','rails','ng
       $scope.percentage = home.percentage
 
       for fi in [1..home.totallyFinancedIncomes]
-        $scope.home.financedIncomes.push "#{fi}. Grundeinkommen mit 12.000€ per Crowdfunding finanziert!"
+        $scope.home.financedIncomes.push "#{fi}. Basisinkomen met €12.000 met Crowdfunding gefinancieerd!"
 
     # CurrentDate = new Date()
     # Verlosung = new Date("September, 19, 2014")

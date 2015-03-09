@@ -9,6 +9,10 @@ a {
     font-weight: bold;
 }
 
+.text-centers{
+    text-align: center; 
+}
+
 body.boxed header {
     width: 100%;
 }

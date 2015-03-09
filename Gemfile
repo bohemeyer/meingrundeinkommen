@@ -4,8 +4,6 @@ source 'https://rubygems.org'
 gem 'rails', '4.1.0'
 
 # database & models
-gem 'mysql2'
-gem 'sqlite3'
 gem 'active_model_serializers'
 gem 'jbuilder', '~> 1.2'
 
@@ -40,6 +38,14 @@ gem 'less-rails-bootstrap'
 # production
 gem 'lograge'
 gem 'unicorn'
+
+group :production, :staging do
+  gem 'pg'
+end
+
+group :development, :test do
+  gem 'sqlite3'
+end
 
 group :development, :test do
   gem 'awesome_print'

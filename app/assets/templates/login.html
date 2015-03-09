@@ -11,7 +11,7 @@
     <div class="col-md-12 text-center">
 
       <alert class="danger" ng-if="confirmation_error"><h1>Hoppla!</h1>
-        Es gab einen blöden Fehler, der selten Auftritt. Ich muss deine E-Mail-Adresse manuell freischalten. Könntest du mir dafür bitte auf die gerade erhaltene Bestätigungsmail mit dem Text "bitte freischalten" antworten? Ich meld' mich dann. Sorry!
+      Het was een domme fout, de zeldzame verschijning. Ik moet handmatig uw e-mailadres activeren. Kunt u mij antwoord hierop klikt u op het net ontvangen e-mail met de tekst "activeer" bevestiging? Ik meld 'me dan. Sorry!
       </alert>
 
       <div ng-show="just_confirmed">
@@ -21,8 +21,8 @@
         <i class="icon-check" style="color: #ddd;font-size: 150px;text-shadow: 1px 1px 0 black;"></i>
       </div>
 
-      <h1 style="margin-bottom:0px">Schnell einloggen!</h1>
-      <h4 ng-hide="just_confirmed">Oder: <a href="/register">Neu hier</a>?</h4>
+      <h1 style="margin-bottom:0px">Direct inloggen!</h1>
+      <h4 ng-hide="just_confirmed">Of: <a href="/register">nieuw hier</a>?</h4>
     </div>
     <div class="clearfix"></div>
   </div>
@@ -37,7 +37,7 @@
 
               <alert ng-show="LoginForm.$error.serverMessage" type="warning">{{LoginForm.$error.serverMessage}}
                 <a href="#" ng-click="resend_link()" ng-show="show_resend_link">
-                  Bestätigungsmail erneut senden
+                  Bevestigingsmail opnieuw sturen
                 </a>
                 <i ng-show="resend_status">{{resend_status}}</i>
               </alert>
@@ -46,7 +46,7 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">E-Mail</label>
                 <div class="col-sm-10 text-left">
                   <input autofill name="email" ng-model="login_user.email" type="email" class="form-control input-large" id="inputEmail3" required>
-                  <p ng-show="(LoginForm.email.$invalid || LoginForm.email.$error.required) && !LoginForm.email.$pristine" class="help-block">Bitte gib deine E-Mail-Adresse an.</p>
+                  <p ng-show="(LoginForm.email.$invalid || LoginForm.email.$error.required) && !LoginForm.email.$pristine" class="help-block">Geef aub correct email adress.</p>
                   <p ng-show="LoginForm.email.$error.serverMessage" class="help-block">{{LoginForm.email.$error.serverMessage}}</p>
 
                 </div>
@@ -58,7 +58,7 @@
                 <label for="inputPassword3" class="col-sm-2 control-label">Passwort</label>
                 <div class="col-sm-10 text-left">
                   <input autofill name="password" ng-model="login_user.password" type="password" class="form-control" id="inputPassword3" ng-minlength="4" required autocomplete='off'>
-                  <p ng-show="(LoginForm.password.$error.minlength || LoginForm.password.$error.required) && !LoginForm.password.$pristine" class="help-block">Bitte gibt dein Passwort ein.</p>
+                  <p ng-show="(LoginForm.password.$error.minlength || LoginForm.password.$error.required) && !LoginForm.password.$pristine" class="help-block">Geef aub correct wachtwoord op.</p>
                 </div>
               </div>
               <!-- <div class="form-group text-left">
@@ -77,9 +77,9 @@
                       <div class="bounce2"></div>
                       <div class="bounce3"></div>
                     </div>
-                  <span ng-hide="submitted">Los jetzt!</span>
+                  <span ng-hide="submitted">Log in!</span>
                   </button>
-                  &nbsp;&nbsp;<a href="#" ng-click="forgot_pw_open()">Passwort vergessen?</a>
+                  &nbsp;&nbsp;<a href="#" ng-click="forgot_pw_open()">Wachtwoord vergeten?</a>
                 </div>
               </div>
 
