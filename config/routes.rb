@@ -20,6 +20,7 @@ Rails.application.routes.draw do
     resources :chances
     resources :comments
     resources :supports
+    resources :payments
     resources :drawings
     resources :questions
     resources :todos
