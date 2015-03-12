@@ -16,7 +16,7 @@ gem 'bcrypt-ruby'
 # misc
 gem 'angular-ui-bootstrap-rails'
 gem 'angular_rails_csrf'
-gem 'angularjs-rails'
+# gem 'angularjs-rails'
 gem 'angularjs-rails-resource', '~> 1.1.1'
 gem 'carrierwave'
 gem 'clockwork'
