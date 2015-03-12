@@ -20,6 +20,22 @@
                 })
                 .when('/support/donate', {
                     templateUrl: '/assets/support/donate.html',
+                    controllerAs: 'vm',
+                    controller: function($location, anchorSmoothScroll){
+                        var vm = this;
+
+                        vm.changeOption = toggleOptions;
+                        vm.option = '';
+
+                        function toggleOptions (option){
+                            vm.option = option;
+
+                            $location.hash('funding');
+
+                            anchorSmoothScroll.scrollTo('funding');
+                        }
+
+                    },
                     label: 'Unterstützen'
                 });
 

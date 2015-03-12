@@ -11,15 +11,23 @@
 // about supported directives.
 //
 
+
 //= require services/angular-file-upload-shim.min
 //= require angular
 //= require angular-ui-bootstrap
 //= require angular-ui-bootstrap-tpls
 //= require angular-route
 //= require angular-messages
+//= require angular-translate
+//= require ng-breadcrumbs
+//= require angular-animate
+//= require venturocket-angular-slider
 //= require angularjs/rails/resource
-//= require ./app/core/core.module
-//= require ./app/support/support.module
+//= require ./app/helper/helper.module
+//= require ./services/security
+//= require ./services/angular-meta
 //= require ./app/data/data.module
-//= require app/app
+//= require ./app/support/support.module
+//= require ./app/core/core.module
+//= require ./app/app
 //= require_tree .

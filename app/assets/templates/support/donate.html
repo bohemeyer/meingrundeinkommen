@@ -6,12 +6,49 @@
     </div>
     <div class="row">
         <div class="col-xs-12">
-           <mge-support-nav></mge-support-nav>
+            <mge-support-nav></mge-support-nav>
         </div>
     </div>
     <article class="row bge-support_donate text-center">
         <header class="col-xs-12">
-            <mge-donate></mge-donate>
+            <!-- stats  -->
+            <mge-stats></mge-stats>
+            <!-- choose funding type -->
+            <section class="row">
+                <div class="col-xs-12 col-md-6 text-center">
+                    <h2 translate="SUPPORT_CHOOSE_HEADING"></h2>
+
+                    <p translate="SUPPORT_CHOOSE_INTRO"></p>
+
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <a href="#funding" ng-click="vm.changeOption('primary')" class="btn btn-large btn-color btn-bge">
+                                {{ 'SUPPORT_OPTION_PRIMARY' | translate }}</a>
+                        </div>
+                        <div class="col-xs-12">
+                            <a href="#funding" ng-click="vm.changeOption('secondary')" class="btn btn-xs btn-color btn-bge">
+                                {{ 'SUPPORT_OPTION_SECONDARY' | translate }}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    <img src="assets/support/squirrel.svg" alt="...">
+                </div>
+            </section>
+            <hr/>
         </header>
+        <section class="funding-container" id="funding">
+            <div class="row" ng-switch="vm.option">
+                <div ng-switch-when="primary" class="funding-switch col-xs-12">
+
+                </div>
+                <div ng-switch-when="secondary" class="funding-switch col-xs-12">
+                    <mge-donate></mge-donate>
+                </div>
+                <div ng-switch-default="" class="col-xs-12">
+
+                </div>
+            </div>
+        </section>
     </article>
 </section>

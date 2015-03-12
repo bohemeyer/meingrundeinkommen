@@ -1,43 +1,11 @@
 <section class="row mge-donate-inner">
-    <div class="col-xs-12">
-        <h1>Hilf direkt mit, das {{vm.stats.totally_financed_incomes + 1}}. Grundeinkommen zu finanzieren!</h1>
-
-        <h3>{{vm.stats.amount}} von 12.000€ sind schon zusammen.</h3>
-        <!-- the progress bar -->
-        <div class="progress" style="font-size: 15px;font-weight: 600;line-height: 40px;">
-            <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50"
-                 aria-valuemax="100" style="width: {{vm.stats.percentage}}; ">
-                <span ng-hide="vm.stats.percentage_raw < 50">{{vm.stats.amount}} von 12.000€</span>
-            </div>
-            <span ng-show="vm.stats.percentage_raw < 50">{{vm.stats.amount}} von 12.000€</span>
-        </div>
+    <div class="col-xs-12 text-center">
+        <h1 translate="DONATE_HEADING"></h1>
     </div>
     <div class="col-xs-12">
-
         <form class="form-inline" ng-submit="vm.submit()" name="donateForm">
             <div class="row">
-                <div class="col-xs-12 col-sm-2 col-sm-offset-5">
-                    <div class="input-group">
-                        <select ng-model="vm.support.payment_method"
-                                ng-options="item.value as item.label for item in vm.payment_methods"
-                                class="form-control input-lg" style="margin-bottom: 15px">
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <div class="row" ng-switch="vm.support.payment_method">
-
-                <div class="col-xs-12 col-sm-4 col-sm-offset-4" ng-switch-when="flattr">
-                    <div class="well text-center">
-                        <h4>Klicke hier um das Grundeinkommen mit Flattr zu unterstützen:</h4>
-
-                        <a href="https://flattr.com/submit/auto?user_id=michaxberg&url=http://www.mein-grundeinkommen.de&title=Mein%20Grundeinkommen"
-                           class="btn-large btn-color btn-bge" target="_blank">
-                            <i class="icon-heart"></i> Jetzt unterstützen!
-                        </a>
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4" ng-switch-when="bank">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
                     <div class="form-group text-center">
                         <div class="input-group">
                             <input class="form-control input-lg"
@@ -58,7 +26,7 @@
                     <div>
                         <label>
                             <input type="checkbox" ng-model="vm.support.donate">
-                            davon 10% ({{(vm.support.amount * 0.1).toFixed(2)}}€) an den Verein spenden
+                            <span translate="DONATE_CALC" translate-value-calc="{{(vm.support.amount * 0.1).toFixed(2)}}"></span>
                         </label>
                     </div>
                     <button type="submit"
@@ -69,7 +37,7 @@
                             <div class="bounce3"></div>
                         </div>
 
-                        <span ng-hide="vm.support.submitted"><i class="icon-heart"></i> Jetzt unterstützen!</span>
+                        <span ng-hide="vm.support.submitted"><i class="icon-heart"></i>{{ 'DONATE_BUTTON' | translate }}</span>
                     </button>
 
                 </div>

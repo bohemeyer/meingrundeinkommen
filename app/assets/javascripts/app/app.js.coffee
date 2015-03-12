@@ -1,14 +1,12 @@
 window.App = angular.module('grundeinkommen',
-  ['ui.bootstrap', 'meta', 'rails', 'ngRoute', 'ng-breadcrumbs', 'Security', 'ngCookies', 'angulartics',
-   'angulartics.google.analytics', 'login', 'reset_password', 'home', 'register', 'profile', 'wishpage', 'content',
-   'smoothScroll', 'faq', 'draw', 'drawfrontend', 'Support', 'djds4rce.angular-socialshare', 'admin', 'blog',
-   'boarding', 'Crowdbar', 'Crowdcard','app.support','app.core','app.data'])
+  ['app.support','app.core','app.data','app.helper'])
 
 .config [
   "$routeProvider"
   "$locationProvider"
   "MetaProvider"
-  ($routeProvider, $locationProvider, MetaProvider) ->
+  "$translateProvider"
+  ($routeProvider, $locationProvider, MetaProvider, $translateProvider) ->
     $locationProvider.html5Mode true
     $routeProvider
     .otherwise

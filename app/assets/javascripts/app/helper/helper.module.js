@@ -2,8 +2,7 @@
     'use strict';
 
     angular
-        .module('app.support',['app.core']);
-
+        .module('app.helper',['app.core']);
 
 }());
 

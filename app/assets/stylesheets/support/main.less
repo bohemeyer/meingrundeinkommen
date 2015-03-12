@@ -166,6 +166,30 @@
 
 
 /*SPENDEN*/
+.funding-container{
+  overflow: hidden;
+
+}
+
+.funding-switch.ng-animate {
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.35s;
+  //position: absolute;
+
+
+}
+
+.funding-switch.ng-leave.ng-leave-active,
+.funding-switch.ng-enter {
+
+  opacity: 0;
+}
+.funding-switch.ng-leave,
+.funding-switch.ng-enter.ng-enter-active {
+  //margin-top:-50px;
+  opacity: 1;
+  transition-delay: 0.35s;
+}
 
 
 
