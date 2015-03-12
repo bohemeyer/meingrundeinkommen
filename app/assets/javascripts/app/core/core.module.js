@@ -7,14 +7,17 @@
             'ngMessages',
             'ngAnimate',
             'ngRoute',
+            'ngCookies',
 
             // third party modules
+            // TODO separate our modules from third party stuff
             'ui.bootstrap',
             'pascalprecht.translate',
+
+            'Devise',
             'meta', // check if we need this
             'ng-breadcrumbs', // check for usage
             'Security',
-            'ngCookies',
             'rails',
             'angulartics',
             'angulartics.google.analytics',

@@ -19,7 +19,9 @@
 //= require angular-route
 //= require angular-messages
 //= require angular-translate
+//= require angular-cookies
 //= require ng-breadcrumbs
+//= require angular-devise/lib/devise
 //= require angular-animate
 //= require venturocket-angular-slider
 //= require angularjs/rails/resource

@@ -1,5 +1,7 @@
 window.App = angular.module('grundeinkommen',
-  ['app.support','app.core','app.data','app.helper'])
+  [
+    'app.support', 'app.core', 'app.data', 'app.helper'
+  ])
 
 .config [
   "$routeProvider"
