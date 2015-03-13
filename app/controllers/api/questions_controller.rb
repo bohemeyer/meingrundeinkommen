@@ -19,7 +19,7 @@ class Api::QuestionsController < ApplicationController
       q.update_attributes(:votes => q.votes + 1)
     end
     if current_user.admin?
-      q.update_attributes(params.permit(:text,:category,:answer))
+      q.update_attributes(params.permit(:text,:category,:answer,:votes))
     end
     render json: q
   end

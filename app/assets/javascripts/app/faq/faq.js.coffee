@@ -61,6 +61,8 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
         id: q.id
         answer: q.answer
         category: q.category
+        text: q.text
+        votes: q.votes
       ).update().then (response) ->
         $scope.questions[$scope.questions.indexOf(q)] = response
 

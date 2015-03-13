@@ -23,8 +23,8 @@
 
 
 
-        <input type="text" ng-model="question.$" style="height:50px;padding-left:10px;padding-right:10px;margin:20px;width:70%" font-size="25"
-       placeholder="Stell hier deine Frage" maxlength="250">
+        <i class="fa fa-search"></i><input type="text" ng-model="question.$" style="height:50px;padding-left:10px;padding-right:10px;margin:20px;width:70%" font-size="25"
+       placeholder="Stell hier deine Frage oder suche eine Antwort" maxlength="250">
 
     <br>
 
@@ -57,6 +57,10 @@
           <div ng-bind-html="question.answer | unsafe"></div>
 
           <div ng-if="current.user && current.user.admin">
+
+            <input type="text" ng-model="question.text">
+
+            <input type="number" ng-model="question.votes">
 
             <select ng-model="question.category" ng-options="o as o for o in categories" ng-change="answer(question)"></select>
 
