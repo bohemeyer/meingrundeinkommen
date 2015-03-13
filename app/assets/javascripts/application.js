@@ -19,11 +19,13 @@
 //= require angular-route
 //= require angular-messages
 //= require angular-translate
+//= require angular-translate-loader-static-files
 //= require angular-cookies
 //= require ng-breadcrumbs
 //= require angular-devise/lib/devise
 //= require angular-animate
-//= require venturocket-angular-slider
+//= require ng-slider
+//= require ng-iban
 //= require angularjs/rails/resource
 //= require ./app/helper/helper.module
 //= require ./services/security

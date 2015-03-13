@@ -13,6 +13,8 @@
             // TODO separate our modules from third party stuff
             'ui.bootstrap',
             'pascalprecht.translate',
+            'ngSlider',
+            'mm.iban',
 
             'Devise',
             'meta', // check if we need this
