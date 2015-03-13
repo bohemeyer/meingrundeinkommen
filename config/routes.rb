@@ -56,6 +56,10 @@ Rails.application.routes.draw do
   resources :payments
   resource :crowdapp
 
+
+  # Temp for the german language
+  get 'languages/deDE.json', to: 'languages#de'
+
   # Catch all missing templates
   get 'assets/*page' => redirect('assets/missing.html')
 

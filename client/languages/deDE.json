@@ -1,0 +1,51 @@
+{
+  // globals
+  "OF": "von",
+  // global form keys
+  "FORM_NAME_LABEL": "Vorname",
+  "FORM_NAME_PLACEHOLDER": "Max",
+  "FORM_NAME_LAST_LABEL": "Nachname",
+  "FORM_NAME_LAST_PLACEHOLDER": "Mustermann",
+  "FORM_STREET_LABEL": "Straße",
+  "FORM_STREET_PLACEHOLDER": "Straßenname",
+  "FORM_STREET_NUMBER_LABEL": "Nummer",
+  "FORM_STREET_NUMBER_PLACEHOLDER": "1a",
+  "FORM_BANK_LABEL": "Bank",
+  "FORM_BANK_PLACEHOLDER": "Name der Bank",
+  "FORM_BIC_LABEL": "BIC",
+  "FORM_BIC_PLACEHOLDER": "81...",
+  "FORM_IBAN_LABEL": "IBAN",
+  "FORM_IBAN_PLACEHOLDER": "DE-",
+  // farm validations
+  "VALIDATION_REQUIRED": "Dises Feld wird benötigt.",
+  "VALIDATION_MIN": "Bitte gib mehr als {{length}} Zeichen ein.",
+  "VALIDATION_MAX": "Du kannst nicht mehr als {{length}} Zeichen eingeben.",
+  "VALIDATION_NUMERIC": "",
+  "VALIDATION_IBAN": "Diese IBAN ist nicht gültig",
+  "VALIDATION_BIC": "",
+  // stats directive
+  "STATS_SUPPORT_BUTTON": "Ich will unterstützen",
+  "STATS_HEADING": "Hilf direkt mit, das {{count}} . Grundeinkommen zu finanzieren!",
+  "STATS_INTRO": "{{amount}} von 12.000€ sind schon zusammen.",
+  // donate directive
+  "DONATE_HEADING": "Jetzt einmalig unterstützen.",
+  "DONATE_BUTTON": "Jetzt unterstützen!",
+  "DONATE_CALC": "davon 10% ({{calc}}€) an den Verein spenden",
+  // TODO translate the form
+
+  // be a squirrel directive
+  "SQUIRREL_HEADING": "Jetzt Crowdhörnchen werden",
+  "SQUIRREL_INTRO_ONE": "und monatlich mit",
+  "SQUIRREL_INTRO_TWO": "unterstützen.",
+  "SQUIRREL_INFO_WHY": "",
+  "SQUIRREL_INFO_WHY_LINK": "",
+  "SQUIRREL_INFO_HOW": "",
+  "SQUIRREL_INFO_HOW_LINK": "",
+  "SQUIRREL_ACCEPT": "",
+  "SQUIRREL_SUBMIT": "",
+  // support/funding
+  "SUPPORT_CHOOSE_HEADING": "Werde Hörnchen",
+  "SUPPORT_CHOOSE_INTRO": "Mach das jetzt",
+  "SUPPORT_OPTION_PRIMARY": "Crowdhörnchen werden",
+  "SUPPORT_OPTION_SECONDARY": "Einmalig unterstützen"
+}
