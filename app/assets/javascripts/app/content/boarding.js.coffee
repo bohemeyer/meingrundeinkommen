@@ -56,7 +56,7 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
       #'gewinnspiel_question'
       'wishes'
       #'gewinnspiel'
-      'verify_crowdcard'
+      #'verify_crowdcard'
 
       'verify_gewinnspiel'
 
@@ -65,17 +65,19 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
       #if everything completed only
       #'states'
 
+      'crowdfund'
+
       'crowdbar'
       'crowdbar_thanks'
 
       #'crowdapp'
 
-      'crowdcard'
-      'crowdcard_thanks'
+      #'crowdcard'
+      #'crowdcard_thanks'
 
       'confirm'
 
-      'crowdfund'
+
       # 'donate'
       # 'donate_thanks'
 
