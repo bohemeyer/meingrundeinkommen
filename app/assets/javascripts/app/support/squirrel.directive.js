@@ -3,7 +3,7 @@
 
     angular
         .module('app.support')
-        .directive('mgeSquirrel', ['AuthService','SquirrelService',Directive]);
+        .directive('mgeSquirrel', [Directive]);
 
 
     function Directive() {
@@ -12,13 +12,13 @@
             scope: true,
             templateUrl: 'assets/support/_squirrel_directive.html',
             controllerAs: 'vm',
-            controller: function (AuthService,SquirrelService) {
+            controller: function (AuthService,SquirrelService, $scope, Security, $modal) {
 
                 var vm = this;
                 vm.price = 33;
                 vm.priceSociety = 33;
                 vm.priceBge = 0;
-                vm.auth = AuthService;
+                vm.auth = Security.isAuthenticated();
 
                 // holds the form data in the user scope
                 vm.user = {};
@@ -33,6 +33,10 @@
                 vm.shareWithSociety = sharePriceWithSociety;
                 vm.submit = submitForm;
 
+                // modals
+                vm.showWhy = showWhy;
+                vm.showHow = showHow;
+
                 // state of the form
                 vm.formState = {
                     show: true,
@@ -45,17 +49,81 @@
                 };
 
                 /**
+                 * options for the slider society amount
+                 */
+                vm.optionsSociety = {
+                    from: 1,
+                    to: 33,
+                    step: 1,
+                    dimension: " €",
+                    round: 0,
+                    smooth: false,
+                    vertical: false,
+                    css: {
+                        background: {"background-color": "#a2dedd"}
+                    }
+                }
+
+                /**
+                 * options for the slider bge amount
+                 */
+                vm.optionsBge = {
+                    from: 0,
+                    to: (vm.price - 1),
+                    step: 1,
+                    dimension: " €",
+                    round: 0,
+                    smooth: false,
+                    vertical: false,
+                    css: {
+                        background: {"background-color": "#a2dedd"}
+                    }
+                }
+
+                function boot (){
+                    if(Security.isAuthenticated()) {
+                        vm.user.email = Security.user.email;
+                    }
+                }
+
+                boot();
+
+                /**
                  *
                  */
                 function submitForm (){
+
+                    if($scope.squirrelForm.$invalid){
+                        $scope.squirrelForm.$setDirty();
+                        return;
+                    }
+
+                    var payment = {
+                        user_email: vm.user.email,
+                        user_first_name: vm.user.name,
+                        user_last_name: vm.user.lastName,
+                        user_street: vm.user.address.street,
+                        user_street_number: vm.user.address.streetNumber,
+                        amount_society: vm.priceSociety,
+                        amount_bge: vm.priceBge,
+                        amount_total: vm.price,
+                        account_bank: vm.user.bank.name,
+                        account_iban: vm.user.bank.iban,
+                        account_bic: vm.user.bank.bic,
+                        accept: vm.payment.accept
+                    };
+
                     vm.formState.show = false;
                     vm.formState.progress.show = true;
 
-                    var promise = SquirrelService.store({success:true});
+                    var promise = SquirrelService.store(payment);
+
                     promise.then(function(data) {
+
                         vm.formState.progress.show = false;
                         vm.formState.response.show = true;
-                    }, function(reason) {
+
+                    }, function(error) {
                         console.log(error);
                     });
 
@@ -109,43 +177,39 @@
                     vm.priceSociety = (total - bgePrice);
                 };
 
-                vm.optionsSociety = {
-                    from: 1,
-                    to: 33,
-                    step: 1,
-                    dimension: " €",
-                    round: 0,
-                    smooth: false,
-                    vertical: false,
-                    css: {
-                        //background: {"background-color": "silver"},
-                        //before: {"background-color": "purple"},
-                        //default: {"background-color": "white"},
-                        //after: {"background-color": "green"},
-                        //pointer: {"background-color": "red"}
-                    }
+                /**
+                 * Modal for why
+                 */
+                function showWhy () {
+                    var modalInstance = $modal.open({
+                        templateUrl: 'squirrel/modal-why.html',
+                        controller: modalController,
+                        size: 'sm'
+                    });
+                };
 
-                    //threshold:
+                /**
+                 * Modal for how
+                 */
+                function showHow () {
+                    var modalInstance = $modal.open({
+                        templateUrl: 'squirrel/modal-how.html',
+                        controller:  modalController,
+                        size: 'sm'
+                    });
+                };
+
+                /**
+                 *
+                 * @param $scope
+                 * @param $modalInstance
+                 */
+                function modalController ($scope,$modalInstance) {
+                    $scope.ok = function () {
+                        $modalInstance.close();
+                    };
                 }
 
-                vm.optionsBge = {
-                    from: 0,
-                    to: (vm.price - 1),
-                    step: 1,
-                    dimension: " €",
-                    round: 0,
-                    smooth: false,
-                    vertical: false,
-                    css: {
-                        //background: {"background-color": "silver"},
-                        before: {"background-color": "purple"},
-                        //default: {"background-color": "white"},
-                        after: {"background-color": "green"},
-                        pointer: {"background-color": "red"}
-                    }
-
-                    //threshold:
-                }
 
 
             }

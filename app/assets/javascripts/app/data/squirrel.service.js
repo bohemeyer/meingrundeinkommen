@@ -16,22 +16,7 @@
 
         function store (data){
 
-            var deferred = $q.defer();
-
-            setTimeout(function() {
-                deferred.notify('About to greet ' + name + '.');
-
-                if (data.success) {
-                    deferred.resolve('Hello, ' + name + '!');
-                } else {
-                    deferred.reject('Greeting ' + name + ' is not allowed.');
-                }
-            }, 2000);
-
-            return deferred.promise;
-
-
-
+           return $http.post('/api/payments/',data);
 
         };
 

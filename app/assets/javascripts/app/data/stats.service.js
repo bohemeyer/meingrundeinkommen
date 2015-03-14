@@ -10,7 +10,7 @@
 
         return $http.get('/api/homepages')
             .success(function (response) {
-                return response.data;
+                return response;
             })
             .error(function (error) {
                 return {};

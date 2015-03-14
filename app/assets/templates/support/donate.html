@@ -13,25 +13,26 @@
         <header class="col-xs-12">
             <!-- stats  -->
             <mge-stats></mge-stats>
+            <hr>
             <!-- choose funding type -->
-            <section class="row">
-                <div class="col-xs-12 col-md-6 text-center">
+            <section class="row bge-support_donate_intro">
+                <div class="col-xs-12 col-md-5 text-center">
                     <h2 translate="SUPPORT_CHOOSE_HEADING"></h2>
 
                     <p translate="SUPPORT_CHOOSE_INTRO"></p>
 
                     <div class="row">
                         <div class="col-xs-12">
-                            <a href="#funding" ng-click="vm.changeOption('primary')" class="btn btn-large btn-color btn-bge">
+                            <a href="#funding" ng-click="vm.changeOption('primary')" class="btn btn-large btn-bge">
                                 {{ 'SUPPORT_OPTION_PRIMARY' | translate }}</a>
                         </div>
                         <div class="col-xs-12">
-                            <a href="#funding" ng-click="vm.changeOption('secondary')" class="btn btn-xs btn-color btn-bge">
+                            <a href="#funding" ng-click="vm.changeOption('secondary')" class="btn btn-xs btn-bge">
                                 {{ 'SUPPORT_OPTION_SECONDARY' | translate }}</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-md-6">
+                <div class="col-xs-12 col-md-7">
                     <img src="assets/support/squirrel.svg" alt="...">
                 </div>
             </section>
@@ -52,3 +53,4 @@
         </section>
     </article>
 </section>
+
