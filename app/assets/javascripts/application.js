@@ -31,6 +31,7 @@
 //= require ./services/security
 //= require ./services/angular-meta
 //= require ./app/data/data.module
+//= require ./app/auth/auth.module
 //= require ./app/support/support.module
 //= require ./app/core/core.module
 //= require ./app/app

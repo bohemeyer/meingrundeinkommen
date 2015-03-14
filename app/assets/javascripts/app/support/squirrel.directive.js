@@ -3,7 +3,7 @@
 
     angular
         .module('app.support')
-        .directive('mgeSquirrel', [Directive]);
+        .directive('mgeSquirrel', ['AuthService','SquirrelService',Directive]);
 
 
     function Directive() {
@@ -12,17 +12,18 @@
             scope: true,
             templateUrl: 'assets/support/_squirrel_directive.html',
             controllerAs: 'vm',
-            controller: function () {
+            controller: function (AuthService,SquirrelService) {
 
                 var vm = this;
                 vm.price = 33;
                 vm.priceSociety = 33;
                 vm.priceBge = 0;
+                vm.auth = AuthService;
 
-                vm.user = {
+                // holds the form data in the user scope
+                vm.user = {};
 
-                };
-
+                // holds the form data for the payment scope
                 vm.payment = {
                     accept: false
                 };
@@ -32,8 +33,31 @@
                 vm.shareWithSociety = sharePriceWithSociety;
                 vm.submit = submitForm;
 
+                // state of the form
+                vm.formState = {
+                    show: true,
+                    progress: {
+                        show: false
+                    },
+                    response: {
+                        show: false
+                    }
+                };
+
+                /**
+                 *
+                 */
                 function submitForm (){
-                    console.log('form submitted');
+                    vm.formState.show = false;
+                    vm.formState.progress.show = true;
+
+                    var promise = SquirrelService.store({success:true});
+                    promise.then(function(data) {
+                        vm.formState.progress.show = false;
+                        vm.formState.response.show = true;
+                    }, function(reason) {
+                        console.log(error);
+                    });
 
                 };
 

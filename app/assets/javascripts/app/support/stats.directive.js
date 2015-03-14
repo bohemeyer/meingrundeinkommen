@@ -16,9 +16,10 @@
             },
             templateUrl: 'assets/support/_stats.html',
             controllerAs: 'vm',
-            controller: function ($scope) {
+            controller: function ($scope,StatsService) {
 
                 var vm = this;
+                vm.stats = StatsService;
                 var showLink = !!$scope.link;
 
                 vm.showLink =  showLink;

@@ -39,15 +39,7 @@
             <!-- info -->
             <section class="row">
                 <div class="col-xs-12 text-center">
-                    <p>
-                        {{'SQUIRREL_INFO_WHY' | translate}}
-                        <a href="#" popover-placement="top"
-                           popover="{{'SQUIRREL_INFO_WHY_POPOVER' | translate}}"
-                           popover-title="{{'SQUIRREL_INFO_WHY_POPOVER_TITLE' | translate}}"
-                           popover-trigger="mouseenter"
-                           popover-placement="bottom"
-                           >{{'SQUIRREL_INFO_WHY_LINK' | translate }}</a>
-                    </p>
+                    <!-- replace the popover with modals if the content is to long -->
                     <p>
                         {{'SQUIRREL_INFO_HOW' | translate}}
                         <a href="#" popover-placement="top"
@@ -57,12 +49,21 @@
                            popover-placement="bottom"
                                 >{{ 'SQUIRREL_INFO_HOW_LINK' | translate }}</a>
                     </p>
+                    <p>
+                        {{'SQUIRREL_INFO_WHY' | translate}}
+                        <a href="#" popover-placement="top"
+                           popover="{{'SQUIRREL_INFO_WHY_POPOVER' | translate}}"
+                           popover-title="{{'SQUIRREL_INFO_WHY_POPOVER_TITLE' | translate}}"
+                           popover-trigger="mouseenter"
+                           popover-placement="bottom"
+                           >{{'SQUIRREL_INFO_WHY_LINK' | translate }}</a>
+                    </p>
                 </div>
             </section>
             <!-- bank account -->
-            <section class="row">
-                <h5>Kontoinhaber</h5>
+            <section class="row" ng-show="vm.formState.show">
                 <div class="col-xs-12 text-left">
+                    <h4 translate="SQUIRREL_FORM_HEADING"></h4>
                     <div class="row">
                         <div class="col-xs-12 col-md-6">
                             <div class="form-group"  ng-class="{ 'has-error' : squirrelForm.firstName.$invalid && !squirrelForm.firstName.$pristine && squirrelForm.firstName.$dirty }">
@@ -100,6 +101,31 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
+                        <!-- user email if he is not logged in -->
+                        <div ng-hide="vm.auth.user" class="col-xs-12">
+                            <div class="row">
+                                <div class="col-xs-12 col-md-6">
+                                    <div class="form-group"  ng-class="{ 'has-error' : squirrelForm.email.$invalid && !squirrelForm.email.$pristine && squirrelForm.email.$dirty }">
+                                        <label for="email">{{ 'FORM_EMAIL_LABEL' | translate }}</label>
+                                        <input type="email"
+                                               name="email"
+                                               id="email"
+                                               ng-model="vm.user.email"
+                                               placeholder="{{ 'FORM_EMAIL_PLACEHOLDER' | translate }}"
+                                               ng-required="{{ !vm.auth.user }}"
+                                               class="form-control">
+                                        <div ng-messages="squirrelForm.email.$error">
+                                            <div class="help-block" ng-message="required">{{ 'VALIDATION_REQUIRED' | translate }}</div>
+                                            <div class="help-block" ng-message="email"><span translate="VALIDATION_EMAIL"></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-xs-12 col-md-8">
                             <div class="form-group"  ng-class="{ 'has-error' : squirrelForm.street.$invalid && !squirrelForm.street.$pristine && squirrelForm.street.$dirty }">
                                 <label for="street">{{ 'FORM_STREET_LABEL' | translate }}</label>
@@ -136,6 +162,8 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="row">
                         <div class="col-xs-12 col-md-8">
                             <div class="form-group"  ng-class="{ 'has-error' : squirrelForm.bank.$invalid && !squirrelForm.bank.$pristine && squirrelForm.bank.$dirty }">
                                 <label for="bank">{{ 'FORM_BANK_LABEL' | translate }}</label>
@@ -174,7 +202,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                     <div class="row">
                         <div class="col-xs-12">
@@ -209,10 +236,15 @@
                     <div class="row">
                         <div class="col-xs-12 text-center">
                             <button type="submit" ng-disabled="squirrelForm.$invalid" class="btn btn-color btn-large btn-bge">{{ 'SQUIRREL_SUBMIT' | translate }}</button>
+                            <button class="btn btn-danger">TESTBUTTON</button>
                         </div>
                     </div>
                 </div>
-
+            </section>
+            <!-- messages -->
+            <section class="row">
+                <alert ng-show="vm.formState.response.show" type="success">{{ 'SQUIRREL_SUCCESS' | translate }}</alert>
+                <alert ng-show="vm.formState.progress.show" type="info">{{ 'SQUIRREL_PROGRESS' | translate }}</alert>
             </section>
         </form>
     </div>

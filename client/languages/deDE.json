@@ -4,6 +4,8 @@
   // global form keys
   "FORM_NAME_LABEL": "Vorname",
   "FORM_NAME_PLACEHOLDER": "Max",
+  "FORM_EMAIL_LABEL": "Email",
+  "FORM_EMAIL_PLACEHOLDER": "Email",
   "FORM_NAME_LAST_LABEL": "Nachname",
   "FORM_NAME_LAST_PLACEHOLDER": "Mustermann",
   "FORM_STREET_LABEL": "Straße",
@@ -50,6 +52,8 @@
   "SQUIRREL_INFO_HOW_POPOVER": "Und hier auch",
   "SQUIRREL_ACCEPT": "hiermit bevollmächtige ich den “Mein Grundeinkommen“ e.V. monatlich {{price}}€ von meinem Konto per Lastschrift abzubuchen. Ich kann diese Vollmacht jederzeit auf meinem Profil wiederrufen.",
   "SQUIRREL_SUBMIT": "Jetzt unterstützen",
+  "SQUIRREL_SUCCESS": "Du bist jetzt ein Hörnchen.",
+  "SQUIRREL_PROCESS": "Moment wir machen aus dir ein Hörnchen.",
   // support/funding
   "SUPPORT_CHOOSE_HEADING": "Werde Hörnchen",
   "SUPPORT_CHOOSE_INTRO": "Mach das jetzt",
