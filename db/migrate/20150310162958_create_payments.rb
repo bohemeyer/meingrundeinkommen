@@ -1,15 +1,23 @@
 class CreatePayments < ActiveRecord::Migration
   def change
     create_table :payments do |t|
-      t.string :email
+      t.string :user_email
       t.references :user
+      t.string :user_first_name
+      t.string :user_last_name
+      t.string :user_street
+      t.string :user_street_number
       t.float :amount_total
-      t.float :amount_internal
-      t.float :amount_for_income
-      t.string :bank_owner
-      t.string :bank_account
-      t.string :bank_code
+      t.float :amount_society
+      t.float :amount_bge
+      t.boolean :accept
+      t.string :account_bank
+      t.string :account_iban
+      t.string :account_bic
       t.boolean :active, :default => true
+      t.datetime :activated_at
+      t.datetime :paused_at
+      t.datetime :deleted_at
       t.timestamps
     end
   end
