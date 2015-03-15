@@ -48,7 +48,7 @@ angular.module("content", ['ng-breadcrumbs'])
         redirectTo: "/support/crowdfund"
 
       .when "/crowdfund",
-        redirectTo: "/support/crowdfund"
+        redirectTo: "/support/donate"
 
       .when "/crowdcard",
         redirectTo: "/support/crowdcard"
@@ -59,7 +59,7 @@ angular.module("content", ['ng-breadcrumbs'])
         redirectTo: "/support/donate"
 
       .when "/support",
-        redirectTo: "/support/crowdfund"
+        redirectTo: "/support/donate"
 
       .when "/nutzungsbedingungen",
         redirectTo: "/info/nutzungsbedingungen"
