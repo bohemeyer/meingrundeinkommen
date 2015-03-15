@@ -1,0 +1,115 @@
+<section class="container bge-support">
+    <div class="row">
+        <div class="col-xs-12 col-sm-8 col-sm-offset-2 text-center bge-support_intro">
+            <h1>Du kannst das Grundeinkommen derzeit auf 4 verschiedenen Wegen unterstützen!</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <mge-support-nav></mge-support-nav>
+        </div>
+    </div>
+    <article class="row bge-support_c-bar">
+        <header class="col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 text-center">
+                    <h1>Die CrowdBar macht aus deinem Online-Einkauf Grundeinkommen</h1>
+                    <h2>Ganz ohne Extrakosten für dich.</h2>
+                    <mge-c-bar-button></mge-c-bar-button>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <img src="../assets/support/bar_mac.png" class="img-responsive" alt="Laptop mit CrowdBar">
+                </div>
+            </div>
+            <hr>
+        </header>
+
+        <section class="bge-support_c-bar_facts col-xs-12 text-center">
+            <mge-c-bar-facts></mge-c-bar-facts>
+            <hr>
+        </section>
+
+        <section class="bge-support_c-bar_how col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 text-center">
+                    <h1>Wie das geht?</h1>
+                    <h2>Schnell. Sicher. Kostenlos.</h2>
+                    <p>Die Crowdbar ist eine anonyme und kostenlose Erweiterung für deinen Internet-Browser. </p>
+                    <p>Nachdem du sie installiert hast bekommst du bei allen teilnehmenden Internetshops die Möglichkeit deinen Einkauf über unseren Werbelink zu tätigen.</p>
+                    <p>Dafür zahlen uns die Onlineshops eine Provision (ca. 5%), die wir für das Grundeinkommen verwenden.</p>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <div class="embed-responsive embed-responsive-4by3">
+                        <iframe width="560" height="315" src="//www.youtube.com/embed/tcd7NiotGWg" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6">
+                    <img class="img-responsive" src="../assets/support/shop.png" alt="Einkaufstüten">
+                </div>
+                <div class="col-xs-12 col-sm-6 text-center">
+                    <h2>Warum machen die Shops das?</h2>
+                    <p>Onlineshops sind immer auf neue Kundschaft angewiesen. Deshalb zahlen sie Webseiten, die neue Kunden bringen, eine Werbeprovision.</p>
+                    <p>Wenn du die Crowdbar benutzt, wissen die Shops, dass du über uns auf sie aufmerksam geworden bist und belohnen uns dafür.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 text-center">
+                    <h2>Werden Daten von mir übermittelt?</h2>
+                    <p><strong>Nein.</strong> Die Crowdbar prüft lediglich, ob du dich gerade auf einem Partnershop befindest oder nicht.</p>
+                    <p>Wann, wie oft oder wie lange du dort bist erfahren wir nicht. Wir wissen auch nicht, was du gekauft hast oder in welchem Shop du eingekauft hast.</p>
+                    <p>Die Quelltexte der Crowdbar sind öffentlich, so dass es auch keine heimliche Datenübermittlung geben kann.</p>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <img class="img-responsive" src="../assets/support/safety.png" alt="Bildschirm">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 text-center">
+                    <h3>Gibt es irgendwelche versteckten Kosten oder einen Haken?</h3>
+                    <p>Nein. Wenn du die Crowdbar nicht nutzt, dann verdient der Onlineshop einfach mehr. Du kannst also entscheiden, wem du es mehr gönnst. :)</p>
+                </div>
+                <div class="col-xs-12 col-sm-6 text-center">
+                    <h3>Wird mein Browser dadurch langsam?</h3>
+                    <p>Nein. Die Crowdbar ist winzig und wird in wenigen Millisekunden ausgeführt, so dass es kein Mensch bemerkt.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-center">
+                    <h4>Hier kannst du Fragen stellen oder Antworten auf bereits gestellte Fragen lesen:</h4>
+                    <a href="/faq" class="btn-large btn-color btn-bge" target="_self">Häufige Fragen</a>
+                </div>
+            </div>
+            <hr>
+        </section>
+        <section class="bge-support_c-bar_call-to-action col-xs-12">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 text-center">
+                    <h1>Hol dir jetzt die Crowdbar und unterstütze das Grundeinkommen!</h1>
+                    <mge-c-bar-button></mge-c-bar-button>
+                </div>
+                <div class="col-xs-12 col-sm-6">
+                    <carousel interval="4000" class="margin-top-30" id="all_supports">
+                        <slide ng-repeat="cb in testimonials">
+                            <div class="text-left" style="padding:8px;height:120px;font-size:12px;overflow:hidden;line-height:16px;">
+                                <div class="testimonial-image pull-left">
+                                    <img ng-src="{{cb.user.avatar.avatar.thumb.url}}">
+                                </div>
+                                <b>
+                                    <a href="/menschen/{{cb.user.id}}">{{cb.user.name}}</a>
+                                    benutzt die Crowdbar:
+                                </b>
+                                <br>
+                                <div style="margin-left:70px;">
+                                    „{{cb.comment}}“
+                                </div>
+                            </div>
+
+                        </slide>
+                    </carousel>
+                </div>
+            </div>
+        </section>
+    </article>
+</section>

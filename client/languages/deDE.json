@@ -1,0 +1,64 @@
+{
+  // globals
+  "OF": "von",
+  // global form keys
+  "FORM_NAME_LABEL": "Vorname",
+  "FORM_NAME_PLACEHOLDER": "Max",
+  "FORM_EMAIL_LABEL": "Email",
+  "FORM_EMAIL_PLACEHOLDER": "Email",
+  "FORM_NAME_LAST_LABEL": "Nachname",
+  "FORM_NAME_LAST_PLACEHOLDER": "Mustermann",
+  "FORM_STREET_LABEL": "Straße",
+  "FORM_STREET_PLACEHOLDER": "Straßenname",
+  "FORM_STREET_NUMBER_LABEL": "Nummer",
+  "FORM_STREET_NUMBER_PLACEHOLDER": "1a",
+  "FORM_BANK_LABEL": "Bank",
+  "FORM_BANK_PLACEHOLDER": "Name der Bank",
+  "FORM_BIC_LABEL": "BIC",
+  "FORM_BIC_PLACEHOLDER": "81...",
+  "FORM_IBAN_LABEL": "IBAN",
+  "FORM_IBAN_PLACEHOLDER": "DE-",
+  // farm validations
+  "VALIDATION_REQUIRED": "Dises Feld wird benötigt.",
+  "VALIDATION_MIN": "Bitte gib mehr als {{length}} Zeichen ein.",
+  "VALIDATION_MAX": "Du kannst nicht mehr als {{length}} Zeichen eingeben.",
+  "VALIDATION_NUMERIC": "",
+  "VALIDATION_IBAN": "Diese IBAN ist nicht gültig",
+  "VALIDATION_BIC": "Das ist keine gültiges BIC Format.",
+  "VALIDATION_CHECKED": "Zustimmung erforderlich.",
+  // stats directive
+  "STATS_SUPPORT_BUTTON": "Ich will unterstützen",
+  "STATS_HEADING": "Hilf direkt mit, das {{count}} . Grundeinkommen zu finanzieren!",
+  "STATS_INTRO": "{{amount}} von 12.000 € sind schon zusammen.",
+  // donate directive
+  "DONATE_HEADING": "Jetzt einmalig unterstützen.",
+  "DONATE_BUTTON": "Jetzt unterstützen!",
+  "DONATE_CALC": "davon 10% ({{calc}} €) an den Verein spenden",
+  // TODO translate the form
+
+  // be a squirrel directive
+  "SQUIRREL_HEADING": "Jetzt Crowdhörnchen werden",
+  "SQUIRREL_INTRO_ONE": "und monatlich mit",
+  "SQUIRREL_INTRO_TWO": "unterstützen.",
+  "SQUIRREL_SELECT_SOCIETY": "An den Verein",
+  "SQUIRREL_SELECT_BGE": "An das BGE",
+  "SQUIRREL_INFO_WHY": "Eine Spendenquittung erhälst du nur bei Spenden an den Verein.",
+  "SQUIRREL_INFO_WHY_LINK": "Warum?",
+  "SQUIRREL_INFO_HOW": "Aus jedem für den Verein gespendeten Euro machen wir momentan 10€ Grundeinkommen.",
+  "SQUIRREL_INFO_HOW_LINK": "Wie?",
+  "SQUIRREL_ACCEPT": "Ich ermächtige den Verein „Mein Grundeinkommen“ e.V. i. G., die monatlichen Zahlungen in Höhe von {{price}} € von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von „Mein Grundeinkommen“ e.V. i. G. auf mein Konto gezogenen Lastschriften einzulösen. Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.",
+  "SQUIRREL_SUBMIT": "Jetzt unterstützen",
+  "SQUIRREL_SUCCESS": "Vielen Dank für deine Unterstützung.",
+  "SQUIRREL_PROGRESS": "Moment, deine Daten werden übermittelt.",
+  "SQUIRREL_SLIDER_SOCIETY": "An den Verein",
+  "SQUIRREL_SLIDER_BGE": "An das BGE",
+  "SQUIRREL_WHY_MODAL_TITLE": "Warum?",
+  "SQUIRREL_WHY_MODAL_CONTENT": "Die Arbeit des Vereins „Mein Grundeinkommen“ ist als gemeinnützig anerkannt. Daher erhältst du für Spenden an den Verein auch eine Spendenquittung. Zuwendungen, die direkt ins Gewinnspiel fließen, sind nicht gemeinnützig, da die Auszahlung von Grundeinkommen ohne Bedingungen und ohne Nachweis von Bedürftigkeit (noch) nicht als gemeinnützig gilt. Daher dürfen wir für diese Zuwendungen auch keine Spendenquittungen ausstellen.",
+  "SQUIRREL_HOW_MODAL_TITLE": "Wie?",
+  "SQUIRREL_HOW_MODAL_CONTENT": "",
+  // support/funding
+  "SUPPORT_CHOOSE_HEADING": "Werde Crowdhörnchen und unterstütze uns regelmäßig!",
+  "SUPPORT_CHOOSE_INTRO": "Schon ab 1 € monatlich möglich und jederzeit stoppbar. Du erhältst eine Spendenquittung und nimmst automatisch an allen Verlosungen teil.",
+  "SUPPORT_OPTION_PRIMARY": "Crowdhörnchen werden",
+  "SUPPORT_OPTION_SECONDARY": "Einmalig unterstützen"
+}

@@ -1,18 +1,22 @@
-window.App = angular.module('grundeinkommen', ['ui.bootstrap','meta','rails','ngRoute','ng-breadcrumbs','Security','ngCookies','angulartics','angulartics.google.analytics','login','reset_password','home','register','profile','wishpage','content','smoothScroll','faq','draw','drawfrontend', 'Support','djds4rce.angular-socialshare','admin','blog','boarding','Crowdbar','Crowdcard'])
+window.App = angular.module('grundeinkommen',
+  [
+    'app.support', 'app.core', 'app.data', 'app.helper', 'app.auth'
+  ])
 
 .config [
   "$routeProvider"
   "$locationProvider"
   "MetaProvider"
-  ($routeProvider, $locationProvider, MetaProvider) ->
+  "$translateProvider"
+  ($routeProvider, $locationProvider, MetaProvider, $translateProvider) ->
     $locationProvider.html5Mode true
     $routeProvider
     .otherwise
-      redirectTo: "/start"
+        redirectTo: "/start"
     MetaProvider
-      .when '/crowdapp',
-        title: 'Crowdbar'
-      .otherwise
+    .when '/crowdapp',
+      title: 'Crowdbar'
+    .otherwise
         title: 'Mein Grundeinkommen'
 ]
 
@@ -32,7 +36,6 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','meta','rails','ng
   "$modal"
 
   ($scope, $rootScope, Security, breadcrumbs, Home, Crowdbar, $location, $modal) ->
-
     $scope.current = Security
 
     $scope.breadcrumbs = breadcrumbs
@@ -50,7 +53,7 @@ window.App = angular.module('grundeinkommen', ['ui.bootstrap','meta','rails','ng
         ""
 
     Crowdbar.verify().then (has_crowdbar) ->
-      $scope.current.setFlag('hasCrowdbar',has_crowdbar)
+      $scope.current.setFlag('hasCrowdbar', has_crowdbar)
       $scope.current.setFlag('hasHadCrowdbar', true) if has_crowdbar
 
     #STATS

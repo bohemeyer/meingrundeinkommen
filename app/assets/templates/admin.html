@@ -145,9 +145,6 @@
 
 	<tab heading="Bank-Supports">
 
-
-
-
 		<div class="well text-center">
 			<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="search">
 		</div>
@@ -171,6 +168,35 @@
 				<td>
 					<a href="#" ng-if="!support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-grey">Bestätigen</a>
 					<a href="#" ng-if="support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-color"><i class="fa fa-check"></i></a>
+				</td>
+			</tr>
+		</table>
+
+	</tab>
+
+
+	<tab heading="Crowdhörnchen">
+
+		<div class="well text-center">
+			<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="search">
+		</div>
+
+		<table class="table">
+			<tr>
+				<td>ID</td>
+				<td>Kontoinahber_in</td>
+				<td>Amount Total</td>
+				<td>Amount Spende</td>
+				<td>Aktiv?</td>
+			</tr>
+
+			<tr ng-repeat="payment in payments | filter:search">
+				<td>{{payment.id}}</td>
+				<td>{{payment.bankOwner}}</td>
+				<td>{{payment.amountTotal}}</td>
+				<td>{{payment.amountInternal}}</td>
+				<td>
+					{{payment.active}}
 				</td>
 			</tr>
 		</table>

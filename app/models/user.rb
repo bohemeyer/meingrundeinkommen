@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :supports
   has_many :crowdcards
 
+  has_one :payment
+
   has_many :flags
 
   scope :with_flag, lambda {|flag, value| joins(:flags).where("flags.name = ? and flags.value_boolean = ?", flag, value)}

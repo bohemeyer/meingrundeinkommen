@@ -1,0 +1,17 @@
+<section class="row">
+    <div class="col-xs-12 text-center">
+        <h1 translate="STATS_HEADING" translate-value-count="{{vm.stats.totally_financed_incomes + 1}}"></h1>
+        <h3 translate="STATS_INTRO" translate-value-amount="{{vm.stats.amount}}"></h3>
+        <!-- the progress bar -->
+        <div class="progress" style="font-size: 15px;font-weight: 600;line-height: 40px;">
+            <div class="progress-bar colored" role="progressbar" aria-valuenow="85" aria-valuemin="50"
+                 aria-valuemax="100" style="width: {{vm.stats.percentage}}; ">
+                <span ng-hide="vm.stats.percentage_raw < 50">{{vm.stats.amount}} von 12.000€</span>
+            </div>
+            <span ng-show="vm.stats.percentage_raw < 50">{{vm.stats.amount}} von 12.000€</span>
+        </div>
+    </div>
+    <div class="col-xs-12 text-center">
+        <a ng-show="vm.showLink" href="#" class="btn btn-large btn-color btn-bge">{{ 'STATS_SUPPORT_BUTTON' | translate }}</a>
+    </div>
+</section>

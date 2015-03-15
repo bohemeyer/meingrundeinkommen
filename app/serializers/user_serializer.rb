@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar, :wishes, :states, :crowdcards, :confirmed_at, :admin, :flags
+  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar, :wishes, :states, :crowdcards, :confirmed_at, :admin, :flags, :payment
 
   def email
     if (current_user && object == current_user) || (current_user && current_user.admin?)
@@ -78,6 +78,14 @@ class UserSerializer < ActiveModel::Serializer
       r
     else
       ''
+    end
+  end
+
+  def payment
+    if (current_user && object == current_user) || (current_user && current_user.admin?)
+      object.payment
+    else
+      object.payment.exists? ? object.payment.active : false
     end
   end
 

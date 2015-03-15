@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150105203740) do
+ActiveRecord::Schema.define(version: 20150310162958) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -84,6 +84,19 @@ ActiveRecord::Schema.define(version: 20150105203740) do
   add_index "follows", ["followable_id", "followable_type"], name: "fk_followables"
   add_index "follows", ["follower_id", "follower_type"], name: "fk_follows"
 
+  create_table "ideas", force: true do |t|
+    t.string   "name"
+    t.text     "emo_pitch"
+    t.text     "pitch"
+    t.text     "details"
+    t.text     "needs"
+    t.integer  "up_votes"
+    t.integer  "down_votes"
+    t.string   "potential"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "likes", force: true do |t|
     t.string   "liker_type"
     t.integer  "liker_id"
@@ -96,6 +109,20 @@ ActiveRecord::Schema.define(version: 20150105203740) do
   add_index "likes", ["liker_id", "liker_type"], name: "fk_likes"
 
   create_table "notifications", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "payments", force: true do |t|
+    t.string   "email"
+    t.integer  "user_id"
+    t.float    "amount_total"
+    t.float    "amount_internal"
+    t.float    "amount_for_income"
+    t.string   "bank_owner"
+    t.string   "bank_account"
+    t.string   "bank_code"
+    t.boolean  "active",            default: true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

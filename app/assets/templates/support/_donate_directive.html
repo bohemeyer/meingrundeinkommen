@@ -1,0 +1,152 @@
+<section class="row mge-donate-inner">
+    <div class="col-xs-12 text-center">
+        <h1 translate="DONATE_HEADING"></h1>
+    </div>
+    <div class="col-xs-12">
+        <form class="form-inline" ng-submit="vm.submit()" name="donateForm">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4 col-sm-offset-3 col-md-offset-4">
+                    <div class="form-group text-center">
+                        <div class="input-group">
+                            <input class="form-control input-lg"
+                                   id="supportamount"
+                                   width="4"
+                                   min="1"
+                                   max="12000"
+                                   type="number"
+                                   ng-model="vm.support.amount"
+                                   name="amount"
+                                   ng-change="vm.calculateGeString()"
+                                    >
+
+                            <div class="input-group-addon">€</div>
+                        </div>
+                    </div>
+                    <div ng-init="vm.calculateGeString()" ng-bind="vm.geString"></div>
+                    <div>
+                        <label>
+                            <input type="checkbox" ng-model="vm.support.donate">
+                            <span translate="DONATE_CALC" translate-value-calc="{{(vm.support.amount * 0.1).toFixed(2)}}"></span>
+                        </label>
+                    </div>
+                    <button type="submit"
+                            class="btn-large btn-color btn-bge" ng-disabled="support.submitted">
+                        <div class="spinner" ng-show="vm.support.submitted">
+                            <div class="bounce1"></div>
+                            <div class="bounce2"></div>
+                            <div class="bounce3"></div>
+                        </div>
+
+                        <span ng-hide="vm.support.submitted"><i class="icon-heart"></i>{{ 'DONATE_BUTTON' | translate }}</span>
+                    </button>
+
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- modal for post handling a donation -->
+<script type="text/ng-template" id="modal/support/bank.html">
+    <div class="modal-header">
+        <h3 class="modal-title">Vielen Dank!</h3>
+    </div>
+    <div class="modal-body">
+       <div class="row">
+           <div class="col-xs-1">
+               <i class="fa fa-arrow-right pull-left huge"></i>
+           </div>
+           <div class="col-xs-11">
+               <h1> Bitte überweise die <b>{{vm.support.amount}}€</b> auf folgendes Konto:</h1>
+           </div>
+       </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                <div class="alert">
+                    <table>
+                        <tr>
+                            <td>
+                                <b>Empfänger</b>:
+                            </td>
+                            <td>Verein "Mein Grundeinkommen"</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Betreff (unbedingt genau so)</b></td>
+                            <td>Zuwendung Nr. {{vm.support.id}} zur Verlosung<span ng-if="vm.support.donate">, davon 10% Spende an Verein</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Konto-Nr</b>:
+                            </td>
+                            <td>
+                                1165313800
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Bankleitzahl</b>: &nbsp;</td>
+                            <td>43060967</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <b>Bank</b>:
+                            </td>
+                            <td>GLS Gemeinschaftsbank
+                            </td>
+                        </tr>
+                    </table>
+                    <br>
+                    <i>oder:</i><br>
+                    <b>IBAN</b>: DE76430609671165313800<br>
+                    <b>BIC</b>: GENODEM1GLS
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-xs-1">
+                <i class="fa fa-bullhorn pull-left huge"></i>
+            </div>
+            <div class="col-xs-11">
+                <h2>Warum hast du "Mein Grundeinkommen" mit Geld unterstützt?</h2>
+                <p>(ist optional und wird veröffentlicht, sobald dein Geld eingegangen ist)</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-1">
+                <div ng-if="vm.support.avatar" class="testimonial-image" >
+                    <img ng-src="{{support.avatar.avatar.url}}">
+                </div>
+            </div>
+            <div class="col-xs-10">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-12 col-sm-2">
+                            <label for="nickname">Dein Name: &nbsp;</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-4">
+                            <input type="text" class="form-control" name="nickname" id="nickname" ng-model="vm.support.nickname" placeholder="Dein Name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-xs-12 col-sm-2">
+                            <label>Dein Grund:</label>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <textarea class="form-control" maxlength="200" ng-model="vm.support.comment" placeholder="Dein Grund"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-color btn-lg" ng-click="vm.ok(supported.support_id,supported.nickname,supported.comment)">
+            <i class="fa fa-bullhorn" ng-click></i> Sagen!
+        </button>
+        <a class="btn-small btn-grey" href="#" ng-click="vm.cancel()">Schließen</a>
+    </div>
+</script>

@@ -20,6 +20,6 @@
  *= require colors/green
  *= require odometer
  *= require addtohomescreen
-
+ *= require support/main
 
  */

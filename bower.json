@@ -1,0 +1,25 @@
+{
+  "lib": {
+    "name": "bower-rails generated lib assets",
+    "dependencies": {
+      // "threex"      : "git@github.com:rharriso/threex.git",
+      // "gsvpano.js"  : "https://github.com/rharriso/GSVPano.js/blob/master/src/GSVPano.js"
+    }
+  },
+  "vendor": {
+    "name": "bower-rails generated vendor assets",
+    "dependencies": {
+      "angular": "1.3.14",
+      "angular-messages": "*",
+      "angular-translate": "*",
+      "angular-cookies": "*",
+      "angular-animate": "*",
+      "ng-breadcrumbs": "0.4.1",
+      "ng-slider": "2.2.2",
+      "angular-devise": "1.0.2",
+      "angular-file-upload":"1.1.5",
+      "angular-translate-loader-static-files": "*",
+      "ng-iban": "0.3.2"
+    }
+  }
+}
