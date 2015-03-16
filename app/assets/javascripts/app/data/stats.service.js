@@ -8,14 +8,7 @@
     function Service($http, $log) {
 
 
-        return $http.get('/api/homepages')
-            .success(function (response) {
-                return response;
-            })
-            .error(function (error) {
-                return {};
-                $log.error(error);
-            });
+        return $http.get('/api/homepages');
 
 
     };

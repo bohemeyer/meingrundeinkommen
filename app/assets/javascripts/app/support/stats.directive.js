@@ -19,10 +19,19 @@
             controller: function ($scope,StatsService) {
 
                 var vm = this;
-                vm.stats = StatsService;
+                vm.stats = {};
                 var showLink = !!$scope.link;
 
                 vm.showLink =  showLink;
+
+                function boot(){
+                    StatsService.then(function(response){
+                       vm.stats = response.date;
+                    }, function(error) {
+                        console.log('cant get stats');
+                    });
+                }
+                boot();
             }
         }
 
