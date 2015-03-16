@@ -17,8 +17,8 @@
                 $scope.user = Security
 
                 var vm = this;
-                vm.price = 10;
-                vm.priceSociety = 10;
+                vm.price = 7;
+                vm.priceSociety = 7;
                 vm.priceBge = 0;
                 vm.auth = Security.isAuthenticated();
 
