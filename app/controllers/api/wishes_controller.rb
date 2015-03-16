@@ -2,8 +2,6 @@ class Api::WishesController < ApplicationController
 
   include ConjugationHelper
 
-  caches_action :index
-
   def create
     #current_user = User.first
     wish = Wish.where(text:params[:text]).first
