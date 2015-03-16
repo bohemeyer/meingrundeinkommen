@@ -27,11 +27,17 @@
                 .when('/support/crowdfund', {
                     templateUrl: '/assets/support/donate.html',
                     controllerAs: 'vm',
-                    controller: function($location, anchorSmoothScroll){
+                    controller: function($scope, $location, anchorSmoothScroll){
                         var vm = this;
 
                         vm.changeOption = toggleOptions;
-                        vm.option = 'primary';
+
+                        if($scope.current.isAuthenticated()) {
+                            vm.option = 'primary';
+                        }
+                        else {
+                            vm.option = 'secondary';
+                        }
 
                         function toggleOptions (option){
 
