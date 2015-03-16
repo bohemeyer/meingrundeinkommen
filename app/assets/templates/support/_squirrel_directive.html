@@ -51,6 +51,21 @@
                         </div>
                         <div class="col-xs-1 c-squirrel-spread__amount">{{vm.priceSociety}}€</div>
                     </div>
+                    <!-- info -->
+            <section class="row" style="margin-bottom:0;padding-bottom:0">
+                <div class="col-xs-12 text-center" style="margin-top:15px;margin-bottom: 15px;">
+                    <!-- replace the popover with modals if the content is to long -->
+                    <p style="font-size:17px;">
+                        {{'SQUIRREL_INFO_HOW' | translate}}
+                        <a href="#" ng-click="vm.showHow()">{{'SQUIRREL_INFO_HOW_LINK' | translate }}</a>
+                    </p>
+                    <p style="font-size:17px;">
+                        {{'SQUIRREL_INFO_WHY' | translate}}
+                        <a href="#" ng-click="vm.showWhy()">{{ 'SQUIRREL_INFO_WHY_LINK' | translate }}</a>
+                    </p>
+
+                </div>
+            </section>
                     <div class="row c-squirrel-spread">
                         <div class="col-xs-3 c-squirrel-spread__title">{{ 'SQUIRREL_SLIDER_BGE' | translate }}</div>
                         <div class="col-xs-8 c-squirrel-spread__slider">
@@ -60,21 +75,7 @@
                     </div>
                 </div>
             </section>
-            <!-- info -->
-            <section class="row">
-                <div class="col-xs-12 text-center">
-                    <!-- replace the popover with modals if the content is to long -->
-                    <p>
-                        {{'SQUIRREL_INFO_HOW' | translate}}
-                        <a href="#" ng-click="vm.showHow()">{{'SQUIRREL_INFO_HOW_LINK' | translate }}</a>
-                    </p>
-                    <p>
-                        {{'SQUIRREL_INFO_WHY' | translate}}
-                        <a href="#" ng-click="vm.showWhy()">{{ 'SQUIRREL_INFO_WHY_LINK' | translate }}</a>
-                    </p>
 
-                </div>
-            </section>
             <!-- bank account -->
             <section class="row" ng-show="vm.formState.show">
                 <div class="col-xs-12 text-left">

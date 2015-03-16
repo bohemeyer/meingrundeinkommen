@@ -73,7 +73,7 @@
                  */
                 vm.optionsBge = {
                     from: 0,
-                    to: (vm.price - 1),
+                    to: vm.price,
                     step: 1,
                     dimension: " €",
                     round: 0,
@@ -171,9 +171,10 @@
                  * change the values
                  */
                 function priceChanged() {
+
                     vm.optionsSociety.to = vm.price;
-                    vm.optionsBge.to = vm.optionsSociety.to - 1;
-                    sharePriceWithSociety();
+                    vm.optionsBge.to = vm.optionsSociety.to;
+                    resharePrices();
 
                 };
 
@@ -205,6 +206,26 @@
                     var total = vm.price;
                     vm.priceBge = (total - societyPrice);
                 };
+
+                /**
+                 * The bge shares with the society
+                 */
+                function resharePrices() {
+
+                    var bgePrice = vm.priceBge;
+                    var diff = vm.price - vm.priceBge - vm.priceSociety;
+
+                    if (diff >= 0) {
+                        vm.priceSociety = vm.priceSociety + diff;
+                    }
+                    else {
+                        vm.priceBge = vm.priceBge + diff;
+                        if (vm.priceBge < 0) {
+                            vm.priceSociety = vm.priceSociety + vm.priceBge;
+                            vm.priceBge = 0;
+                        }
+                    }
+                }
 
                 /**
                  * The bge shares with the society

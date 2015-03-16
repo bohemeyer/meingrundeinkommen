@@ -80,7 +80,7 @@
                  */
                 function formatData(data) {
                     var result = data;
-                    result.number_of_cards = data.additionalCards.value;
+                    result.number_of_cards = data.additionalCards.value + 1;
                     result.last_name = data.lastName;
                     result.first_name = data.firstName;
                     result.zip_code = data.zipCode;
