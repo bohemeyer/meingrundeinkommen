@@ -65,18 +65,19 @@ angular.module("login", [
 
     # Try to login
     Security.login($scope.login_user).then ((response) ->
+
+      $scope.show_resend_link = false
+
       $location.path( "/boarding" ) if response.id && !response.error
+
+      if response.error
+        serverMessage = $parse("LoginForm.$error.serverMessage")
+        if response.error.indexOf('[[resend_link]]') > -1
+          $scope.show_resend_link = true
+        serverMessage.assign $scope, response.error.replace('[[resend_link]]','')
+        $scope.submitted = false
       return
     )
 
-    $scope.$on('devise:unauthorized', (event, xhr, deferred) ->
-      $scope.show_resend_link = false
-      if xhr.data.error
-        serverMessage = $parse("LoginForm.$error.serverMessage")
-        if xhr.data.error.indexOf('[[resend_link]]') > -1
-          $scope.show_resend_link = true
-        serverMessage.assign $scope, xhr.data.error.replace('[[resend_link]]','')
-        $scope.submitted = false
-    )
 
     return
