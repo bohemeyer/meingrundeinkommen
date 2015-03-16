@@ -122,11 +122,11 @@
 
                   <div ng-controller="SupportController">
 
-                    <div ng-show="support_now" ng-include="'/assets/support_crowdfund_form.html'"></div>
+                    <!-- <div ng-show="support_now" ng-include="'/assets/support_crowdfund_form.html'"></div> -->
 
                   </div>
 
-                  <a href="#" ng-hide="support_now" ng-click="support_now = true" class="btn btn-normal btn-color btn-large" style="margin-top:20px;">Ich will unterstützen!</a>
+                  <a href="/support/donate" ng-hide="support_now" class="btn btn-normal btn-color btn-large" style="margin-top:20px;">Ich will unterstützen!</a>
 
                   <!-- <a href="/support" ng-hide="support_now" class="btn btn-normal btn-color btn-large" style="margin-top:20px;">Ich will unterstützen!</a> -->
 
@@ -290,7 +290,7 @@
 <!--             <h2 style="color:white"><span class="huge">{{home.numberOfParticipants}}</span> Menschen nehmen bereits teil</h2> -->
 
 
-              <!-- <div ng-if="current.user">
+              <div ng-if="current.user">
                 <alert ng-if="!current.participates()" type="warning"><h1>Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1>
                   <a class="btn-large btn-color" href="/boarding?trigger=wants_to_participate">Ich will aber teilnehmen!</a>
                 </alert>
@@ -303,10 +303,10 @@
 
               <div ng-if="!current.user">
                 <a href="/register" class="btn-large btn-color margin-top-20" style="box-shadow:0px 0px 30px 15px white">Ich will teilnehmen</i></a>
-              </div> -->
+              </div>
 
 
-              <a href="/register" class="btn-large btn-color margin-top-20" style="box-shadow:0px 0px 30px 15px white">Mitmachen!</i></a>
+             <!--  <a href="/register" class="btn-large btn-color margin-top-20" style="box-shadow:0px 0px 30px 15px white">Mitmachen!</i></a> -->
 
 
 

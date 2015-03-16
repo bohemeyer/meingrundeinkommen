@@ -19,7 +19,10 @@
             controller: function ($scope,StatsService) {
 
                 var vm = this;
-                vm.stats = StatsService;
+                StatsService.success(function(data) {
+                    vm.stats = data;
+                });
+
                 var showLink = !!$scope.link;
 
                 vm.showLink =  showLink;

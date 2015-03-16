@@ -61,13 +61,26 @@ angular.module "Security", ["Devise","Flag"]
         !!service.user
 
 
+      isSquirrel: ->
+        if service.user.payment && service.user.payment.active
+          return true
+        else
+          return false
+
+      isPausedSquirrel: ->
+        if service.user.payment && !service.user.payment.active
+          return true
+        else
+          return false
+
+
       participates: ->
         if service.user.chances.length == 0
           false
         else
           found = false
           angular.forEach service.user.chances, (chance) ->
-            if chance.id
+            if chance.id && chance.confirmed
               found = true
           return found
 

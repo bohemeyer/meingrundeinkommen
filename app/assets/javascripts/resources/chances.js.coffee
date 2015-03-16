@@ -1,4 +1,4 @@
-angular.module "Chance", ["rails"]
+angular.module "Chance", ["rails","Support"]
 
 .factory "Chance", [
   "railsResourceFactory"
@@ -17,6 +17,26 @@ angular.module "Chance", ["rails"]
   "Chance"
   "$q"
   ($scope, $modal, Chance, $q) ->
+
+    synchronize_form_with_squirrel_state = ->
+      $scope.current.user.isSquirrel = $scope.current.isSquirrel()
+
+    synchronize_form_with_squirrel_state()
+
+    $scope.openSquirrelModal = ->
+      Squirrelmodal = $modal.open(
+        templateUrl: "squirrelmodal.html"
+        size: 'lg'
+        controller: "SupportController"
+        resolve:
+          isModal: ->
+            true
+      )
+
+      Squirrelmodal.result.then ->
+        synchronize_form_with_squirrel_state()
+      , ->
+        synchronize_form_with_squirrel_state()
 
     $scope.sanitizeChances = ->
       adult = false

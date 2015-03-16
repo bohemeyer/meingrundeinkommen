@@ -56,7 +56,7 @@
       </div>
       <div class="col-sm-2">&nbsp;</div>
       <div class="col-sm-10 text-center">
-          <a href="#" ng-click="addChild()" class="text-center btn btn-color btn-small" ><i class="fa fa-plus"></i> Mein Kind (unter 18) hinzufügen</a>
+          <a href="#" ng-click="addChild()" class="text-center btn btn-color btn-small" >Mein Kind (unter 18) hinzufügen</a>
       </div>
       <div class="col-sm-2">&nbsp;</div>
       <div class="col-sm-10">
@@ -72,7 +72,7 @@
     </div>
 
 
-    <div class="form-group text-left" style="margin-top:-20px;">
+    <!-- <div class="form-group text-left" style="margin-top:-20px;">
       <div class="col-sm-offset-2 col-sm-10 text-left">
         <div class="checkbox">
           <label>
@@ -81,7 +81,7 @@
         </div>
       </div>
     </div>
-
+ -->
 
     <div class="form-group text-left" style="margin-top:-20px;">
       <div class="col-sm-offset-2 col-sm-10 text-left">
@@ -94,7 +94,7 @@
       </div>
     </div>
 
-    <div  class="form-group text-left" style="margin-top:-20px;">
+    <!-- <div  class="form-group text-left" style="margin-top:-20px;">
       <div class="col-sm-offset-2 col-sm-10 text-left">
         <div class="checkbox">
           <label>
@@ -102,11 +102,25 @@
           </label>
         </div>
       </div>
+    </div> -->
+
+    <div  class="form-group text-left" style="margin-top:-20px;">
+      <div class="col-sm-offset-2 col-sm-10 text-left">
+        <div class="checkbox">
+          <label>
+            <input name="remember_data" ng-click="editChances = false" ng-model="current.user.isSquirrel" value="true" type="checkbox" ng-change="openSquirrelModal()"> <span ng-hide="current.isSquirrel()">Ich möchte automatisch an allen zukünftigen Verlosungen teilnehmen. Daher werde ich <a href="#" ng-click="openSquirrelModal()">Crowdhörnchen</a></span><span ng-show="current.isSquirrel()">Ich bin <a href="#" ng-click="openSquirrelModal()">Crowdhörnchen.</a> Solange ich das bin, nehme ich automatisch an allen Verlosungen teil.</span>.
+          </label>
+        </div>
+      </div>
     </div>
 
+    <script type="text/ng-template" id="squirrelmodal.html">
+      <mge-squirrel></mge-squirrel>
+    </script>
+
     <div class="form-group">
-      <div class="col-sm-offset-2 col-sm-10">
-        <input type="submit" class="btn btn-special btn-color" value="Speichern & Teilnehmen"  ng-disabled="submitted">
+      <div class="col-sm-offset-2 col-sm-10 text-center">
+        <input type="submit" class="btn btn-special btn-color" value="{{ current.isSquirrel() ? 'Speichern & Dauerhaft Teilnehmen' : 'Speichern & Teilnehmen'}}"  ng-disabled="submitted">
       </div>
     </div>
 

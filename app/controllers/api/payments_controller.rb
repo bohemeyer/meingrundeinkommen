@@ -1,10 +1,11 @@
 class Api::PaymentsController < ApplicationController
 
   def create
-    payment = Payment.create(params.permit(:amount_total, :amount_for_income, :amount_internal, :bank_account, :bank_owner, :bank_code, :email))
+    payment = Payment.create(params[:payment].permit(:user_email, :user_first_name, :user_last_name, :user_street, :user_street_number, :amount_total, :amount_society, :amount_bge, :accept, :account_bank, :account_iban, :account_bic, :active))
 
     if current_user
-      payment.email = current_user.email
+      payment.user_email = current_user.email
+      payment.user_id = current_user.id
     end
 
     if payment.valid?
@@ -18,7 +19,7 @@ class Api::PaymentsController < ApplicationController
   def update
     p = Payment.find(params[:id])
     if current_user && ((current_user.admin? and params[:admin]) || (p.user && current_user == p.user))
-      p.update_attributes(:active => params[:active])
+      p.update_attributes(params[:payment].permit(:user_email, :user_first_name, :user_last_name, :user_street, :user_street_number, :amount_total, :amount_society, :amount_bge, :accept, :account_bank, :account_iban, :account_bic, :active))
     end
     render json: p
   end

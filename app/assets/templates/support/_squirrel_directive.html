@@ -1,10 +1,34 @@
 <section class="row c-squirrel">
-    <div class="col-xs-12 text-center">
-        <h2 translate="SQUIRREL_HEADING"></h2>
+
+    <div class="text-center" style="margin:20px;" ng-show="user.isSquirrel() || user.isPausedSquirrel()">
+      <img ng-if="user.isSquirrel()" width="50%" src="assets/support/squirrel.svg">
+      <h2 ng-if="user.isSquirrel()" translate="SQUIRREL_HEADING_ACTIVE"></h2>
+      <h2 ng-if="user.isPausedSquirrel()" translate="SQUIRREL_HEADING_INACTIVE"></h2>
+      <h4 ng-if="user.isSquirrel()">Und unterstützt das Projekt mit monatlich {{vm.price}} €. Danke!</h4>
+      <hr>
+      <button type="button" ng-click="vm.formState.edit = true"  class="btn btn-small">{{ 'SQUIRREL_EDIT' | translate }}</button>
+
+      <button ng-show="user.isPausedSquirrel()" ng-click="vm.payment.active = true; vm.submit()" type="button"  class="btn btn-small">{{ 'SQUIRREL_UNPAUSE' | translate }}</button>
+
+      <button ng-show="user.isSquirrel()" ng-click="vm.payment.active = false; vm.submit()" type="button"  class="btn btn-small">{{ 'SQUIRREL_PAUSE' | translate }}</button>
+
+      <button type="button" ng-click="quit()" class="btn btn-small">{{ 'SQUIRREL_DELETE' | translate }}</button>
+
+      <hr>
+
+      <button ng-hide="vm.formState.edit || !isModal" type="button" ng-click="$close()" class="btn btn-large btn-bge">{{ 'SQUIRREL_DONE' | translate }}</button>
+
+
     </div>
-    <div class="col-xs-12 col-md-8 col-md-offset-2">
+
+    <div ng-hide="user.isSquirrel() || user.isPausedSquirrel()" class="col-xs-12 text-center">
+      <h2 translate="SQUIRREL_HEADING"></h2>
+    </div>
+
+    <div ng-hide="(user.isSquirrel() || user.isPausedSquirrel()) && !vm.formState.edit" class="col-xs-12 col-md-8 col-md-offset-2">
         <!-- form to be a squirrel -->
-        <form name="squirrelForm" ng-submit="vm.submit()" novalidate>
+
+        <form ng-show="vm.formState.show" name="squirrelForm" ng-submit="vm.submit()" novalidate>
             <!-- price -->
             <section class="row c-squirrel-intro">
                 <div class="col-xs-12 text-center">
@@ -23,7 +47,7 @@
                     <div class="row c-squirrel-spread">
                         <div class="col-xs-3 c-squirrel-spread__title">{{ 'SQUIRREL_SLIDER_SOCIETY' | translate }}</div>
                         <div class="col-xs-8 c-squirrel-spread__slider">
-                            <input ng-model="vm.priceSociety" ng-change="vm.shareWithBge()" type="number" min="1"  slider options="vm.optionsSociety" />
+                            <input ng-model="vm.priceSociety" ng-change="vm.shareWithBge()" type="number" min="0"  slider options="vm.optionsSociety" />
                         </div>
                         <div class="col-xs-1 c-squirrel-spread__amount">{{vm.priceSociety}}€</div>
                     </div>
@@ -231,7 +255,8 @@
                     <!-- submit -->
                     <div class="row">
                         <div class="col-xs-12 text-center">
-                            <button type="submit"  class="btn btn-large btn-bge">{{ 'SQUIRREL_SUBMIT' | translate }}</button>
+                            <button ng-hide="vm.id" type="submit"  class="btn btn-large btn-bge">{{ 'SQUIRREL_SUBMIT' | translate }}</button>
+                            <button ng-show="vm.id" type="submit"  class="btn btn-large btn-bge">{{ 'SQUIRREL_UPDATE' | translate }}</button>
                         </div>
                     </div>
                 </div>

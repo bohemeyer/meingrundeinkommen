@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150310162958) do
+ActiveRecord::Schema.define(version: 20150315204836) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 20150310162958) do
     t.boolean  "ignore_double_chance",  default: false
     t.boolean  "remember_data",         default: false
     t.string   "crowdcard_code"
+    t.boolean  "confirmed",             default: false
   end
 
   add_index "chances", ["first_name", "last_name", "dob"], name: "index_chances_on_first_name_and_last_name_and_dob", unique: true
@@ -114,15 +115,23 @@ ActiveRecord::Schema.define(version: 20150310162958) do
   end
 
   create_table "payments", force: true do |t|
-    t.string   "email"
+    t.string   "user_email"
     t.integer  "user_id"
+    t.string   "user_first_name"
+    t.string   "user_last_name"
+    t.string   "user_street"
+    t.string   "user_street_number"
     t.float    "amount_total"
-    t.float    "amount_internal"
-    t.float    "amount_for_income"
-    t.string   "bank_owner"
-    t.string   "bank_account"
-    t.string   "bank_code"
-    t.boolean  "active",            default: true
+    t.float    "amount_society"
+    t.float    "amount_bge"
+    t.boolean  "accept"
+    t.string   "account_bank"
+    t.string   "account_iban"
+    t.string   "account_bic"
+    t.boolean  "active",             default: true
+    t.datetime "activated_at"
+    t.datetime "paused_at"
+    t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

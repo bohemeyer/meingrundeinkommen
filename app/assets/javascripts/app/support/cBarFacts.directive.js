@@ -13,7 +13,7 @@
             controller: function ($scope, StatsService) {
                 StatsService.then(function(response) {
                     $scope.userCount = response.data.crowdbar_users;
-                    $scope.dailyIncome = response.data.prediction.avg_daily_commission_crowdbar;
+                    $scope.dailyIncome = Math.round(response.data.prediction.avg_daily_commission_crowdbar);
                 },function(){
                     $scope.userCount = 18000;
                     $scope.dailyIncome = 150;

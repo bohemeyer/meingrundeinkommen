@@ -6,11 +6,11 @@ gem 'rails', '4.1.0'
 # database & models
 gem 'mysql2'
 gem 'sqlite3'
-gem 'active_model_serializers'
+gem 'active_model_serializers', '0.8.1'
 gem 'jbuilder', '~> 1.2'
 
 # authentication/authorization
-gem 'devise'
+gem 'devise', '3.2.4'
 gem 'bcrypt-ruby'
 
 # misc
@@ -38,6 +38,7 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'less-rails-bootstrap'
 gem 'bower-rails'
+gem 'actionpack-action_caching'
 
 # production
 gem 'lograge'

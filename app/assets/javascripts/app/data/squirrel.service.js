@@ -16,7 +16,13 @@
 
         function store (data){
 
-           return $http.post('/api/payments/',data);
+           if (data.id) {
+                return $http.put('/api/payments/' + data.id ,data);
+
+           }
+           else {
+                return $http.post('/api/payments/',data);
+           }
 
         };
 

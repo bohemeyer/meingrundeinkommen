@@ -3,14 +3,14 @@
       <div class="row" style="padding-bottom: 55px;">
       <div class="col-md-12 text-center">
 
-        <div ng-if="own_profile">
+        <!-- <div ng-if="own_profile">
           <alert type="danger" ng-if="!current.user.confirmed_at && current.participates()">Du nimmst erst an der Verlosung teil, wenn du deine <a href="/boarding?trigger=participates">E-Mailadresse bestätigt</a> hast.</alert>
 
           <alert type="danger" ng-if="!current.participation_verified() && current.participates() && current.has_ordered_crowdcard()">Du nimmst erst an der Verlosung teil, wenn du die <a href="/boarding?go_to=crowdbar">Crowdbar</a> installiert hast oder die <a href="/boarding?go_to=crowdcard">Crowdcard</a> bestellt hast. Oder hast du schon eine Crowdcard? Dann <a href="/boarding?go_to=verify_crowdcard">hier</a> freischalten.</alert>
 
-<!--           <alert type="danger" ng-if="current.participates() && current.has_ordered_crowdcard() && !current.user.flags.crowdcardNumber">Wir haben dir deine Crowdcard per Post zugesendet. Jetzt deine Crowdcard-Nummer eintragen um an der Verlosung teilzunehmen: <br><a href="/boarding?go_to=verify_crowdcard" class="btn btn-big btn-grey">Los geht's</a></alert> -->
+           <alert type="danger" ng-if="current.participates() && current.has_ordered_crowdcard() && !current.user.flags.crowdcardNumber">Wir haben dir deine Crowdcard per Post zugesendet. Jetzt deine Crowdcard-Nummer eintragen um an der Verlosung teilzunehmen: <br><a href="/boarding?go_to=verify_crowdcard" class="btn btn-big btn-grey">Los geht's</a></alert>
         </div>
-
+        -->
       </div>
       </div>
    </div>
@@ -127,7 +127,7 @@
 
       <tab active="currentTab.gewinnspiel">
          <tab-heading>
-         <i class="fa fa-warning" style="color:red;" ng-if="current.participates() && (!current.user.confirmed_at || !current.participation_verified())"></i>
+         <!-- <i class="fa fa-warning" style="color:red;" ng-if="current.participates() && (!current.user.confirmed_at || !current.participation_verified())"></i> -->
           Verlosung
          </tab-heading>
 
@@ -135,6 +135,18 @@
 
           <div ng-include="'/assets/gewinnspiel.html'"></div>
 
+      </div>
+
+      </tab>
+
+      <tab active="currentTab.squirrel">
+         <tab-heading>
+         <!-- <i class="fa fa-warning" style="color:red;" ng-if="current.participates() && (!current.user.confirmed_at || !current.participation_verified())"></i> -->
+          Crowdhörnchen
+         </tab-heading>
+
+        <div class="container margin-top-30">
+          <mge-squirrel></mge-squirrel>
       </div>
 
       </tab>

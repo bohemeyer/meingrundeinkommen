@@ -12,15 +12,19 @@
             scope: true,
             templateUrl: 'assets/support/_squirrel_directive.html',
             controllerAs: 'vm',
-            controller: function (AuthService,SquirrelService, $scope, Security, $modal) {
+            controller: function (AuthService, SquirrelService, $scope, Security, $modal) {
+
+                $scope.user = Security
 
                 var vm = this;
-                vm.price = 33;
-                vm.priceSociety = 33;
+                vm.price = 5;
+                vm.priceSociety = 5;
                 vm.priceBge = 0;
                 vm.auth = Security.isAuthenticated();
 
                 // holds the form data in the user scope
+
+
                 vm.user = {};
 
                 // holds the form data for the payment scope
@@ -52,8 +56,8 @@
                  * options for the slider society amount
                  */
                 vm.optionsSociety = {
-                    from: 1,
-                    to: 33,
+                    from: 0,
+                    to: 5,
                     step: 1,
                     dimension: " €",
                     round: 0,
@@ -83,6 +87,28 @@
                 function boot (){
                     if(Security.isAuthenticated()) {
                         vm.user.email = Security.user.email;
+                        if (Security.user.payment) {
+                            var p = Security.user.payment;
+
+                            vm.id = p.id;
+                            vm.user.name = p.user_first_name;
+                            vm.user.lastName = p.user_last_name;
+                            vm.user.address = {
+                                street: p.user_street,
+                                streetNumber: p.user_street_number
+                            };
+                            vm.priceSociety = p.amount_society;
+                            vm.priceBge = p.amount_bge;
+                            vm.price = p.amount_total;
+                            vm.user.bank = {
+                                name: p.account_bank,
+                                iban: p.account_iban,
+                                bic: p.account_bic
+                            };
+                            vm.payment.accept = p.accept;
+                            vm.payment.active = p.active;
+
+                        }
                     }
                 }
 
@@ -110,18 +136,30 @@
                         account_bank: vm.user.bank.name,
                         account_iban: vm.user.bank.iban,
                         account_bic: vm.user.bank.bic,
-                        accept: vm.payment.accept
+                        accept: vm.payment.accept,
+                        active: vm.payment.active
                     };
 
+
                     vm.formState.show = false;
+                    vm.formState.edit = false;
                     vm.formState.progress.show = true;
+
+                    if (vm.id) {
+                        payment.id = vm.id;
+                    }
+
 
                     var promise = SquirrelService.store(payment);
 
-                    promise.then(function(data) {
+
+                    promise.then(function(response) {
 
                         vm.formState.progress.show = false;
                         vm.formState.response.show = true;
+
+                        Security.user.payment = response.data;
+
 
                     }, function(error) {
                         console.log(error);

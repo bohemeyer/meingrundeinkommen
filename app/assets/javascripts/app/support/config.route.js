@@ -6,6 +6,9 @@
         .config(function ($routeProvider) {
 
             $routeProvider
+                .when('/support', {
+                    redirectTo: '/support/crowdfund'
+                })
                 .when('/support/crowdbar', {
                     templateUrl: '/assets/support/crowdbar.html',
                     label: 'Unterstützen'
@@ -19,18 +22,20 @@
                     label: 'Unterstützen'
                 })
                 .when('/support/donate', {
+                    redirectTo: '/support/crowdfund'
+                })
+                .when('/support/crowdfund', {
                     templateUrl: '/assets/support/donate.html',
                     controllerAs: 'vm',
                     controller: function($location, anchorSmoothScroll){
                         var vm = this;
 
                         vm.changeOption = toggleOptions;
-                        vm.option = '';
+                        vm.option = 'primary';
 
                         function toggleOptions (option){
-                            vm.option = option;
 
-                            $location.hash('funding');
+                            vm.option = option;
 
                             anchorSmoothScroll.scrollTo('funding');
                         }
