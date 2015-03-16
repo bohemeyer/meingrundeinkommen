@@ -34,6 +34,7 @@ class Api::PaymentsController < ApplicationController
     p = Payment.find(params[:id])
     if current_user && current_user == p.user
       p.destroy
+      render json: false
     end
   end
 

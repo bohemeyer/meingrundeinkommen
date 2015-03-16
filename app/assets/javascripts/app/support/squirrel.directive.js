@@ -36,6 +36,7 @@
                 vm.shareWithBge = sharePriceWithBge;
                 vm.shareWithSociety = sharePriceWithSociety;
                 vm.submit = submitForm;
+                vm.quit = quit;
 
                 // modals
                 vm.showWhy = showWhy;
@@ -81,6 +82,13 @@
                     vertical: false,
                     css: {
                         background: {"background-color": "#a2dedd"}
+                    }
+                }
+
+                function quit (){
+                    if (confirm('Unterstützung wirklich beenden und alle Kontodaten löschen?')) {
+                        vm.delete_me = true;
+                        submitForm();
                     }
                 }
 
@@ -147,6 +155,10 @@
 
                     if (vm.id) {
                         payment.id = vm.id;
+                    }
+
+                    if (vm.delete_me) {
+                        payment.delete_me = vm.delete_me;
                     }
 
 

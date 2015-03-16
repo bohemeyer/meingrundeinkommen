@@ -17,8 +17,12 @@
         function store (data){
 
            if (data.id) {
-                return $http.put('/api/payments/' + data.id ,data);
-
+                if (data.delete_me) {
+                  return $http.delete('/api/payments/' + data.id ,data);
+                }
+                else {
+                  return $http.put('/api/payments/' + data.id ,data);
+                }
            }
            else {
                 return $http.post('/api/payments/',data);
