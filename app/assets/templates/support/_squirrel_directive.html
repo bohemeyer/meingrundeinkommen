@@ -33,7 +33,9 @@
             <!-- price -->
             <section class="row c-squirrel-intro">
                 <div class="col-xs-12 text-center">
-                    <p translate="SQUIRREL_INTRO_ONE"></p>
+                    <p translate="SQUIRREL_INTRO_ONE_ACTIVE" ng-show="user.isSquirrel()"></p>
+                    <p translate="SQUIRREL_INTRO_ONE_INACTIVE" ng-show="user.isPausedSquirrel()"></p>
+                    <p translate="SQUIRREL_INTRO_ONE" ng-show="!(user.isSquirrel() || user.isPausedSquirrel())"></p>
                     <div class="row">
                         <div class="col-xs-8 col-md-4 col-md-offset-4">
                             <div class="input-group input-group-lg">
@@ -42,7 +44,9 @@
                             </div>
                         </div>
                     </div>
-                    <p translate="SQUIRREL_INTRO_TWO"></p>
+                    <p translate="SQUIRREL_INTRO_TWO_ACTIVE" ng-show="user.isSquirrel()"></p>
+                    <p translate="SQUIRREL_INTRO_TWO_INACTIVE" ng-show="user.isPausedSquirrel()"></p>
+                    <p translate="SQUIRREL_INTRO_TWO" ng-show="!(user.isSquirrel() || user.isPausedSquirrel())"></p>
                 </div>
                 <div class="col-xs-12 col-md-10 col-md-offset-1">
                     <div class="row c-squirrel-spread">
