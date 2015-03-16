@@ -28,7 +28,7 @@
   "VALIDATION_CHECKED": "Zustimmung erforderlich.",
   // stats directive
   "STATS_SUPPORT_BUTTON": "Ich will unterstützen",
-  "STATS_HEADING": "Hilf direkt mit, das {{count}} . Grundeinkommen zu finanzieren!",
+  "STATS_HEADING": "Hilf direkt mit, das {{count}}. Grundeinkommen zu finanzieren!",
   "STATS_INTRO": "{{amount}} von 12.000 € sind schon zusammen.",
   // donate directive
   "DONATE_HEADING": "Jetzt einmalig unterstützen.",
