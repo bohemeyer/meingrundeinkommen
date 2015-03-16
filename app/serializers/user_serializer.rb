@@ -85,7 +85,7 @@ class UserSerializer < ActiveModel::Serializer
     if (current_user && object == current_user) || (current_user && current_user.admin?)
       object.payment
     else
-      object.payment.exists? ? object.payment.active : false
+      object.payment ? object.payment.active : false
     end
   end
 

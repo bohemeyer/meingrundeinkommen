@@ -31,10 +31,7 @@ angular.module "Support", ["rails"]
   "Support"
   "Crowdbar"
   "$routeParams"
-  "isModal"
-  ($scope, $location, $modal, Support, Crowdbar, $routeParams, isModal) ->
-
-    $scope.isModal = isModal;
+  ($scope, $location, $modal, Support, Crowdbar, $routeParams) ->
 
     $scope.tabs =
       crowdbar: false
