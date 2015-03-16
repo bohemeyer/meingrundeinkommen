@@ -10,8 +10,6 @@ GEM
       activesupport (= 4.1.0)
       rack (~> 1.5.2)
       rack-test (~> 0.6.2)
-    actionpack-action_caching (1.1.1)
-      actionpack (>= 4.0.0, < 5.0)
     actionview (4.1.0)
       activesupport (= 4.1.0)
       builder (~> 3.1)
@@ -287,7 +285,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  actionpack-action_caching
   active_model_serializers (= 0.8.1)
   angular-ui-bootstrap-rails
   angular_rails_csrf
