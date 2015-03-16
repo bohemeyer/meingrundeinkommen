@@ -159,6 +159,7 @@
 
                     if (vm.delete_me) {
                         payment.delete_me = vm.delete_me;
+                        vm.formState.show = true;
                     }
 
 
@@ -169,6 +170,8 @@
 
                         vm.formState.progress.show = false;
                         vm.formState.response.show = true;
+
+                        vm.id = response.data.id;
 
                         Security.user.payment = response.data;
 

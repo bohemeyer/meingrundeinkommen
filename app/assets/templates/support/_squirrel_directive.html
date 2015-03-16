@@ -6,7 +6,7 @@
       <h2 ng-if="user.isPausedSquirrel()" translate="SQUIRREL_HEADING_INACTIVE"></h2>
       <h4 ng-if="user.isSquirrel()">Und unterstützt das Projekt mit monatlich {{vm.price}} €. Danke!</h4>
       <hr>
-      <button type="button" ng-click="vm.formState.edit = true"  class="btn btn-small">{{ 'SQUIRREL_EDIT' | translate }}</button>
+      <button type="button" ng-click="vm.formState.edit = true; vm.formState.show = true"  class="btn btn-small">{{ 'SQUIRREL_EDIT' | translate }}</button>
 
       <button ng-show="user.isPausedSquirrel()" ng-click="vm.payment.active = true; vm.submit()" type="button"  class="btn btn-small">{{ 'SQUIRREL_UNPAUSE' | translate }}</button>
 
@@ -53,14 +53,14 @@
                         <div class="col-xs-1 c-squirrel-spread__amount">{{vm.priceSociety}}€</div>
                     </div>
                     <!-- info -->
-            <section class="row" style="margin-bottom:0;padding-bottom:0">
+            <section class="row well" style="margin-bottom:0;padding-bottom:0;margin-top: 20px;padding-top: 0;">
                 <div class="col-xs-12 text-center" style="margin-top:15px;margin-bottom: 15px;">
                     <!-- replace the popover with modals if the content is to long -->
-                    <p style="font-size:17px;">
+                    <p style="font-size:15px;">
                         {{'SQUIRREL_INFO_HOW' | translate}}
                         <a href="#" ng-click="vm.showHow()">{{'SQUIRREL_INFO_HOW_LINK' | translate }}</a>
                     </p>
-                    <p style="font-size:17px;">
+                    <p style="font-size:15px;">
                         {{'SQUIRREL_INFO_WHY' | translate}}
                         <a href="#" ng-click="vm.showWhy()">{{ 'SQUIRREL_INFO_WHY_LINK' | translate }}</a>
                     </p>
@@ -263,13 +263,16 @@
                     </div>
                 </div>
             </section>
-            <!-- messages -->
-            <section class="row">
-                <alert ng-show="vm.formState.response.show" type="success">{{ 'SQUIRREL_SUCCESS' | translate }}</alert>
-                <alert ng-show="vm.formState.progress.show" type="info">{{ 'SQUIRREL_PROGRESS' | translate }}</alert>
-            </section>
         </form>
     </div>
+
+    <!-- messages -->
+    <section class="row">
+        <alert ng-show="vm.formState.response.show && !vm.formState.show" type="success">{{ 'SQUIRREL_SUCCESS' | translate }}</alert>
+        <alert ng-show="vm.formState.progress.show && !vm.formState.show" type="info">{{ 'SQUIRREL_PROGRESS' | translate }}</alert>
+    </section>
+
+
     <script type="text/ng-template" id="squirrel/modal-how.html">
         <div class="modal-header">
             <h3 class="modal-title">{{ 'SQUIRREL_HOW_MODAL_TITLE' | translate }}</h3>
