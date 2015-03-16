@@ -17,10 +17,10 @@
                     templateUrl: '/assets/support/crowdcard.html',
                     label: 'Unterstützen'
                 })
-                .when('/support/cola', {
-                    templateUrl: '/assets/support/cola.html',
-                    label: 'Unterstützen'
-                })
+                // .when('/support/cola', {
+                //     templateUrl: '/assets/support/cola.html',
+                //     label: 'Unterstützen'
+                // })
                 .when('/support/donate', {
                     redirectTo: '/support/crowdfund'
                 })
