@@ -99,6 +99,8 @@ class Api::HomepagesController < ApplicationController
       :crowdcard_amount => crowdcard_amount,
       :crowdcard_today => number_with_precision(crowdcard_daily[Date.today.strftime('%Y-%m-%d')], precision: 2, delimiter: '.', separator: ','),
       :crowdcard_users => Crowdcard.sum(:number_of_cards),
+      :squirrels => Payment.count,
+      :squirrel_monthly_amount => number_with_precision(Payment.sum(:amount_total), precision: 0, delimiter: ''),
       :amount_internal => amount_internal,
       :prediction => prediction,
       :number_of_participants => number_with_precision(number_of_participants, precision: 0, delimiter: '.'),
