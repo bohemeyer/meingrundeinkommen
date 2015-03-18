@@ -13,7 +13,7 @@
 
 			<a ng-show="finishable" href="#" class="small" style="display:inline-block;color:#666;margin-right:20px;font-weight:normal;cursor:pointer;" ng-click="done()">Direkt zu deinem Profil</a>
 
-			<a ng-hide="finishable || steps.hide_skip_button" href="#" class="small" style="display:inline-block;color:#666;margin-right:20px;font-weight:normal;cursor:pointer;" ng-click="next_step('skip')">Will ich nicht</a>
+			<a ng-hide="finishable || steps.hide_skip_button" href="#" class="small" style="display:inline-block;color:#666;margin-right:20px;font-weight:normal;cursor:pointer;" ng-click="next_step('skip')">Überspringen</a>
 
 			<a ng-show="steps.show_next_button" ng-disabled="!steps.done" href="#" ng-click="next_step()" class="btn" ng-class="{ 'btn-color' : steps.done, 'btn-grey' : !steps.done }">
 				Weiter
