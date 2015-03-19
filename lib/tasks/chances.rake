@@ -4,17 +4,17 @@ namespace :chances do
 
   task :SetCodes => :environment do
     desc "set random codes for users"
-    letters = ['[1-12]','[13-24]','[25-36]','[37-48]','[49-60]']
+    letters = ['1-12','13-24','25-36','37-48','49-60']
     i = 0
     (1..61).each do |c1|
       (1..61).each do |c2|
         letters.each do |c3|
           i = i + 1
           puts "#{i} - #{c1},#{c2},#{c3}"
-
+          #13|25|13-24
           chance = Chance.where(:code => nil, :confirmed => true).sample
           if chance
-            chance[:code] = "#{c1},#{c2},#{c3}"
+            chance[:code] = "#{c1}|#{c2}|#{c3}"
             chance.save!
           end
         end

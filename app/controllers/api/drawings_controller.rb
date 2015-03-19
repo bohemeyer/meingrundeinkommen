@@ -16,17 +16,17 @@ require 'json'
         end
 
         if digits.count == 3
-          t = '[1-12]'  if digits[2] <= 12
-          t = '[13-24]' if digits[2] >= 13 && digits[2] <= 24
-          t = '[25-36]' if digits[2] >= 25 && digits[2] <= 36
-          t = '[37-48]' if digits[2] >= 37 && digits[2] <= 48
-          t = '[49-60]' if digits[2] >= 49 && digits[2] <= 60
+          t = '1-12'  if digits[2] <= 12
+          t = '13-24' if digits[2] >= 13 && digits[2] <= 24
+          t = '25-36' if digits[2] >= 25 && digits[2] <= 36
+          t = '37-48' if digits[2] >= 37 && digits[2] <= 48
+          t = '49-60' if digits[2] >= 49 && digits[2] <= 60
           digits[2] = t
         end
 
 #       letters = ['[1-12]','[13-24]','[25-36]','[37-48]','[49-60]']
 
-        number = digits.join(",")
+        number = digits.join("|")
 
         debugger
 
