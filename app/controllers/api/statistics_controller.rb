@@ -26,7 +26,7 @@ class Api::StatisticsController < ApplicationController
         # base     = "select users.email, REPLACE(users.name,',','') from users, chances where users.id = chances.user_id #{newsletter_only} and is_child = 0 and "
         # base_not = "select users.email, REPLACE(users.name,',','') from users where users.id not in (select user_id from chances) #{newsletter_only} "
 
-        # stats = {}
+        stats = {}
         # queries.each do |key,query|
         #   stats[key] = ActiveRecord::Base.connection.execute("#{base} #{query}").count
         # end
