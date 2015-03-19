@@ -69,19 +69,19 @@ class Api::StatisticsController < ApplicationController
             q = "and id in (select user_id from chances where confirmed = 1)"
           end
 
-          if params[:stat] == "not_participating"
+          if params[:stat] == "notParticipating"
             q = " and id not in (select user_id from chances where confirmed = 1)"
           end
 
-          if params[:stat] == "participants_squirrel"
+          if params[:stat] == "participantsSquirrel"
             q = " and id in (select user_id from chances where confirmed = 1) and id in (select user_id from payments)"
           end
 
-          if params[:stat] == "participants_no_squirrel"
+          if params[:stat] == "participantsNoSquirrel"
             q = " and id in (select user_id from chances where confirmed = 1) and id not in (select user_id from payments)"
           end
 
-          if params[:stat] == "participants_mail_unconfirmed"
+          if params[:stat] == "participantsMailUnconfirmed"
             b = "select email, REPLACE(name,',','') from users where confirmed_at is null "
             q = "and id in (select user_id from chances where confirmed = 1)"
           end
