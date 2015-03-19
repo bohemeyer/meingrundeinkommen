@@ -22,13 +22,9 @@ angular.module("draw", ["Drawing",'ng-breadcrumbs'])
           value: ''
         ,
           value: ''
-        ,
-          value: ''
         ]
     ,
       digets: [
-          value: ''
-        ,
           value: ''
         ,
           value: ''

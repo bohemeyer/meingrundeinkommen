@@ -43,7 +43,7 @@ Am Sonntag verlosen wir das neunte Grundeinkommen in Berlin. Der Live-Stream sta
 
         <div class="col-md-12  text-center" >
 
-          <div ng-if="current_drawing.user">
+          <div ng-if="current_drawing.user && current_drawing.done">
             <div class="testimonial-image-medium">
               <a href="/menschen/{{current_drawing.user.id}}">
                 <img src="{{current_drawing.user.avatar.url}}">
@@ -56,9 +56,9 @@ Am Sonntag verlosen wir das neunte Grundeinkommen in Berlin. Der Live-Stream sta
             <br>
             <div class="margin-top:30">Losnummer:</div>
             <br>
-            <alert ng-if="current_drawing.number.length > 1 && current_drawing.niete">NIETE</alert>
+            <alert ng-if="current_drawing.number.length > 1 && current_drawing.niete && current_drawing.done">NIETE</alert>
             <br><div class="margin-top-30 row">
-             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets" class="well huge"><span ng-if="current_drawing.done || (current.user && current.user.admin)">{{diget.value}}</span><i ng-if="!diget.value || (!current_drawing.done && !(current.user && current.user.admin))" class="fa fa-refresh" style="color:#ccc"></i></span>
+             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets" class="well huge"><span ng-if="current_drawing.done && (current_drawing.done || (current.user && current.user.admin))">{{diget.value}}</span><i ng-if=" !current_drawing.done || (!diget.value || (!current_drawing.done && !(current.user && current.user.admin)))" class="fa fa-refresh" style="color:#ccc"></i></span>
 
             </div>
             <br>
