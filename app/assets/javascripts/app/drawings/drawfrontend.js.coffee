@@ -4,7 +4,7 @@ angular.module("drawfrontend", ['ng-breadcrumbs'])
   ($routeProvider) ->
     $routeProvider
     .when "/auslosung",
-      templateUrl: "/assets/auslosung.html"
+      templateUrl: "/assets/auslosung_switch.html"
       controller: "DrawingFrontendController"
 ]
 
@@ -27,6 +27,7 @@ angular.module("drawfrontend", ['ng-breadcrumbs'])
     if Security.currentUser
       $scope.own_codes = Security.currentUser.chances
 
+
     myLoop = ->
 
       # When the timeout is defined, it returns a
@@ -38,7 +39,7 @@ angular.module("drawfrontend", ['ng-breadcrumbs'])
       timer.then (->
         console.log "Timer resolved!"
 
-        $http.get("/currentdrawing.json").success((response) ->
+        $http.get("/currentdrawing.json?timecode=#{new Date().getTime()}").success((response) ->
           $scope.drawings = response
 
           # current_drawing_key = 0
@@ -61,7 +62,14 @@ angular.module("drawfrontend", ['ng-breadcrumbs'])
 
       return
     timer = undefined
-    myLoop()
+
+    if $scope.current.isAdmin()
+      myLoop()
+    else
+      $http.get("/currentdrawing.json?timecode=#{new Date().getTime()}").success((response) ->
+        $scope.drawings = response
+      )
+
 
 
 ]

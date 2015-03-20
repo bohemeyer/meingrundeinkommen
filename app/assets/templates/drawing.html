@@ -1,12 +1,13 @@
 <div class="container">
   <form ng-submit="submitDrawing()">
-	<div class="row" ng-repeat="(key, d) in drawings">
-		<h1>{{key+1}}. Aulosung</h1>
-		<input size="1" type="text" maxlength="1" ng-model="diget.value" ng-repeat="diget in d.digets">
-		<input type="checkbox" ng-click="submitDrawing()" ng-model="d.done" value="true">
+	<div class="row" ng-repeat="(key, d) in drawings | limitTo: 1">
+		<h1>{{key+1}}. Auslosung</h1>
+		<alert>Achtung: Nach jeder Zahleneingabe Speichern drücken.</alert>
+		<input size="1" type="text" maxlength="2" ng-model="diget.value" ng-repeat="diget in d.digets | limitTo: 3">
+		<!-- <input type="checkbox" ng-click="submitDrawing()" ng-model="d.done" value="true"> -->
 		<input type="submit" class="btn btn-small btn-color" value="Speichern">
 		<hr>
 	</div>
-	<input type="submit" class="btn btn-small btn-color" value="Speichern">
+	<!-- <input type="submit" class="btn btn-small btn-color" value="Speichern"> -->
   </form>
 </div>

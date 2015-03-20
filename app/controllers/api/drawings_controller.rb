@@ -6,14 +6,20 @@ require 'json'
       #characters = ['1','2','3','4','5','6','A','B']
       data = params[:d]
 
+
+
       data.each_with_index do |drawing,i|
         number = ""
 
         digits = []
 
+
+
         drawing[:digets].each_with_index do |d,i|
-          digits << d[:value].to_i if d[:value] && i < 3
+          digits << d[:value].to_i if d[:value] && i < 3 && d[:value] != 0 && d[:value] != ""
         end
+
+
 
         if digits.count == 3
           t = '1-12'  if digits[2] <= 12
@@ -28,7 +34,7 @@ require 'json'
 
         number = digits.join("|")
 
-        debugger
+
 
         if Chance.where("code LIKE ?", "#{number}%").present?
           data[i][:niete] = false
@@ -36,10 +42,15 @@ require 'json'
             data[i][:user] = Chance.where("code = ?", "#{number}").first.user
             data[i][:isChild] = Chance.where("code = ?", "#{number}").first.is_child
             data[i][:childName] = Chance.where("code = ?", "#{number}").first.first_name
+          else
+            data[i][:user] = false
           end
         else
           data[i][:niete] = true
+          data[i][:user] = false
         end
+
+
 
         data[i][:number] = number
 
@@ -62,6 +73,8 @@ require 'json'
         # end
 
       end
+
+
 
       File.open("public/currentdrawing.json","w") do |f|
         f.write(data.to_json)
