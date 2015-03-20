@@ -1,6 +1,10 @@
 class Api::UserWishesController < ApplicationController
   include ActionView::Helpers::DateHelper
 
+
+  caches_page :index
+
+
   def create
     #current_user = User.first
     wish = Wish.find(params[:wish_id])

@@ -12,6 +12,8 @@ end
 
 class Api::HomepagesController < ApplicationController
 
+  caches_page :show
+
   def show
 
     crowdfunding_supporter = 2900 + 140 + 18  #startnext + untracked paypal + kto

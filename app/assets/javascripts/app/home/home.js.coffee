@@ -45,10 +45,10 @@ angular.module("home", ["Wish","Support","Winner","rails"])
         row++
         i = 0
 
-  TDay = new Date("November, 15, 2014")
-  CurrentDate = new Date()
-  DayCount = (TDay-CurrentDate)/(1000*60*60*24)
-  $scope.days_left = Math.round(DayCount)
+  # TDay = new Date("November, 15, 2014")
+  # CurrentDate = new Date()
+  # DayCount = (TDay-CurrentDate)/(1000*60*60*24)
+  # $scope.days_left = Math.round(DayCount)
 
 
   $scope.pagination = []
@@ -61,21 +61,22 @@ angular.module("home", ["Wish","Support","Winner","rails"])
       i = i + 1
       $scope.news.push p if i < 4
 
-  Wish.query().then (wishes) ->
-    $scope.wishes = wishes
+  #Wish.query().then (wishes) ->
+  $http.get("/cached_top_wishes.json").success (data) ->
+    $scope.wishes = data
 
   Wish.latest().then (wishes) ->
-    $scope.latest_wishes = wishes[0..9]
-    $scope.portraits = wishes[15..39]
+    #$scope.latest_wishes = wishes[0..9]
+    $scope.portraits = wishes[15..20]
 
-  $scope.$watch (->
-    $scope.pagination.current_page
-  ), (nv) ->
-    Wish.query
-      page: nv
-    .then (wishes) ->
-      $scope.wishes = wishes
-    return
+  # $scope.$watch (->
+  #   $scope.pagination.current_page
+  # ), (nv) ->
+  #   Wish.query
+  #     page: nv
+  #   .then (wishes) ->
+  #     $scope.wishes = wishes
+  #   return
 
 
   $scope.video_content = 'video_preview.html'

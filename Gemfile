@@ -38,6 +38,7 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'less-rails-bootstrap'
 gem 'bower-rails'
+gem 'actionpack-page_caching'
 
 # production
 gem 'lograge'
