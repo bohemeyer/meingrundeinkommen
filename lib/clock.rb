@@ -104,11 +104,18 @@ module Clockwork
     end
 
 
+    if job == "clear.cache"
+      cache_dir = ActionController::Base.page_cache_directory
+      FileUtils.rm_r(Dir.glob(cache_dir+"/*")) rescue Errno::ENOENT
+    end
+
+
 
   end
 
   every(1.hours, 'check.crowdbar.stats')
-  every(30.seconds, 'cache.news')
-  every(1.minutes, 'check.crowdcard.stats')
+  every(5.minutes, 'cache.news')
+  every(1.hours, 'check.crowdcard.stats')
+  every(1.hours, 'clear.cache')
 
 end
