@@ -1,6 +1,6 @@
 class Api::SupportsController < ApplicationController
 
-  caches_page index
+  caches_page :index
 
 
   def create
