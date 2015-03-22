@@ -31,8 +31,11 @@ namespace :chances do
   task :confirmSquirrels => :environment do
     desc "confirm chance of squirrels or set their chance"
 
+    #test query: must be zero after script worked fine:
+    #select count(id) from users where id not in (select user_id from chances where confirmed = 1) and id in (select user_id from payments where active = 1);
+
     Payment.where(:active => true).each do |p|
-      if !p.user_id.nil? && p.user
+      if !p.user_id.nil? && !p.user.nil?
         if !p.user.chances.any?
           #create chanche with fake dob
           chance = Chance.new({
