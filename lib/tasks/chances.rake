@@ -4,18 +4,24 @@ namespace :chances do
 
   task :SetCodes => :environment do
     desc "set random codes for users"
-    letters = ['1-12','13-24','25-36','37-48','49-60']
+
+    #chances = Chance.where(:code => nil, :confirmed => true).shuffle
+    chances = Chance.where(:confirmed => true).shuffle
+
     i = 0
-    (1..61).each do |c1|
-      (1..61).each do |c2|
-        letters.each do |c3|
-          i = i + 1
-          puts "#{i} - #{c1},#{c2},#{c3}"
-          #13|25|13-24
-          chance = Chance.where(:code => nil, :confirmed => true).sample
-          if chance
-            chance[:code] = "#{c1}|#{c2}|#{c3}"
-            chance.save!
+    (0..36).each do |c1|
+      ["K1","K2","K3"].each do |c2|
+        ["r","s"].each do |c3|
+          ["g","u"].each do |c4|
+            (0..36).each do |c5|
+              ["r","s"].each do |c6|
+                i = i + 1
+                if chances[i]
+                  puts "#{i} - #{c1},#{c2},#{c3},#{c4},#{c5},#{c6}"
+                  chances[i].update_attribute(:code, "#{c1},#{c2},#{c3},#{c4},#{c5},#{c6}")
+                end
+              end
+            end
           end
         end
       end
