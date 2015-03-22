@@ -15,7 +15,7 @@
                <!-- <a href="http://www.ustream.tv/channel/mein-grundeinkommen" class="btn btn-special btn-color btn-large margin-top-30" style="box-shadow:0px 0px 30px 15px white">Zum Video-Livestream</a><br> -->
 
                <div class="well">
-Am Sonntag verlosen wir das neunte Grundeinkommen - diesmal in Abendgarderobe in einem Casino in Berlin. Das erste Roulette bei dem nicht die Bank gewinnt. Der Live-Stream startet um 15 Uhr auf dieser Seite.
+Heute verlosen wir das neunte Grundeinkommen - diesmal in Abendgarderobe in einem Casino in Berlin. Das erste Roulette bei dem nicht die Bank gewinnt. Der Live-Stream startet um 15 Uhr auf dieser Seite.
 </div>
                 <a href="http://85.25.44.111/BGE/" target="_blank" class="btn btn-color btn-large">Zum Livestream</a>
 
@@ -35,8 +35,8 @@ Am Sonntag verlosen wir das neunte Grundeinkommen - diesmal in Abendgarderobe in
    <div class="container">
 
 
-      <div class="row text-center" ng-repeat="current_drawing in drawings">
-        <h1>Das {{8+$index}}. Grundeinkommen geht an*:</h1>
+      <div class="row text-center" ng-repeat="current_drawing in drawings | limitTo: 1">
+        <h1>Das {{9+$index}}. Grundeinkommen geht an*:</h1>
 
         <div class="col-md-12  text-center" >
 
