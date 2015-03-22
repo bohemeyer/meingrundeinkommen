@@ -22,59 +22,6 @@ angular.module("draw", ["Drawing",'ng-breadcrumbs'])
           value: ''
         ,
           value: ''
-        ]
-    ,
-      digets: [
-          value: ''
-        ,
-          value: ''
-        ,
-          value: ''
-        ]
-    ,
-      digets: [
-          value: ''
-        ,
-          value: ''
-        ,
-          value: ''
-        ,
-          value: ''
-
-        ]
-    ,
-      digets: [
-          value: ''
-        ,
-          value: ''
-        ,
-          value: ''
-        ,
-          value: ''
-        ]
-    ,
-      digets: [
-          value: ''
-        ,
-          value: ''
-        ,
-          value: ''
-        ,
-          value: ''
-        ]
-    ,
-      digets: [
-          value: ''
-        ,
-          value: ''
-        ,
-          value: ''
-        ,
-          value: ''
-        ]
-    ,
-      digets: [
-          value: ''
         ,
           value: ''
         ,
