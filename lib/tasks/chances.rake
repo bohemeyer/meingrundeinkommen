@@ -32,7 +32,7 @@ namespace :chances do
     desc "confirm chance of squirrels or set their chance"
 
     Payment.where(:active => true).each do |p|
-      if !p.user_id.nil?
+      if !p.user_id.nil? && p.user
         if !p.user.chances.any?
           #create chanche with fake dob
           chance = Chance.new({
