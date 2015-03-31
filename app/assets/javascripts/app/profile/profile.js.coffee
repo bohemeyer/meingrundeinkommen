@@ -54,7 +54,7 @@ angular.module("profile", ["User","Wish","Chance","State","Avatar",'ng-breadcrum
 
     $scope.skip = []
     $scope.currentTab = []
-    $scope.tabs = ['wishes', 'image', 'states', 'gewinnspiel', 'crowdbar']
+    $scope.tabs = ['wishes', 'image', 'states', 'gewinnspiel', 'crowdbar', 'squirrel']
 
     # $scope.tabtype = if $scope.mobile then 'pills' else ''
     # $scope.verticaltabs = if $scope.mobile then 'true' else 'false'
@@ -146,6 +146,9 @@ angular.module("profile", ["User","Wish","Chance","State","Avatar",'ng-breadcrum
 
     if $routeParams['crowdbar']
       $scope.currentTab.crowdbar = true
+
+    if $routeParams['squirrel']
+      $scope.currentTab.squirrel = true
 
     $scope.jumpToFirstTab = ->
       $scope.currentTab = []
