@@ -33,7 +33,7 @@
         };
     }];
 }).config(['$httpProvider', function($httpProvider) {
-    $httpProvider.interceptors.push('AuthIntercept');
+    //$httpProvider.interceptors.push('AuthIntercept');
 }]);
 
     devise.provider('Auth', function AuthProvider() {
