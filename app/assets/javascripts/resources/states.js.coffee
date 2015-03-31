@@ -110,12 +110,13 @@ angular.module "State", ["rails"]
         selected: true
         is_default_state: false
 
-      new_state.forStatesUser = 's'
-      new State(new_state).create().then (response) ->
-        new_state.user_state_id = response.userStateId
-        $scope.states.push new_state
-        $scope.current.user.states.push new_state if $scope.own_profile
-        $scope.state_form.new_custom_state = ""
+      if new_state.text.trim() != ""
+        new_state.forStatesUser = 's'
+        new State(new_state).create().then (response) ->
+          new_state.user_state_id = response.userStateId
+          $scope.states.push new_state
+          $scope.current.user.states.push new_state if $scope.own_profile
+          $scope.state_form.new_custom_state = ""
 
     $scope.stateClicked = (state) ->
 
