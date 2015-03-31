@@ -58,7 +58,7 @@
   "SQUIRREL_INFO_WHY_LINK": "Warum?",
   "SQUIRREL_INFO_HOW": "Aus jedem für den Verein gespendeten Euro machen wir momentan 6€ Grundeinkommen.",
   "SQUIRREL_INFO_HOW_LINK": "Wie?",
-  "SQUIRREL_ACCEPT": "Ich ermächtige den Verein „Mein Grundeinkommen“ e.V. i.G., die monatlichen Zahlungen in Höhe von {{price}} € von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von „Mein Grundeinkommen“ e.V. i. G. auf mein Konto gezogenen Lastschriften einzulösen. Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen.",
+  "SQUIRREL_ACCEPT": "Ich ermächtige den Verein „Mein Grundeinkommen“ e.V. i. Gr., die monatlichen Zahlungen jeweils am 1. eines Monats in Höhe von {{price}} € von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von „Mein Grundeinkommen“ e.V. i. Gr. auf mein Konto gezogenen Lastschriften einzulösen. Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen. Spätestens 2 Tage vor einer Lastschrift-Abbuchung erhalte ich eine Benachrichtigung darüber per E-Mail.",
   "SQUIRREL_SUBMIT": "Speichern & monatlich unterstützen",
   "SQUIRREL_SUCCESS": "Vielen Dank für deine Unterstützung.",
   "SQUIRREL_PROGRESS": "Moment, deine Daten werden übermittelt.",
