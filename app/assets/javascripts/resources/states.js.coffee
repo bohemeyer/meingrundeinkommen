@@ -99,7 +99,7 @@ angular.module "State", ["rails"]
       if state.user_state_id
         new State(
           id: state.user_state_id
-          visibility: !state.visibility
+          visibility: state.visibility
           forStatesUser: '_users'
         ).update()
 
@@ -119,7 +119,7 @@ angular.module "State", ["rails"]
 
     $scope.stateClicked = (state) ->
 
-      if !state.selected #ADD
+      if state.selected #ADD
         state.forStatesUser = 's'
         new State(state).create().then (response) ->
           $scope.states[$scope.states.indexOf(state)].user_state_id = response.userStateId

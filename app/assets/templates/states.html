@@ -21,12 +21,11 @@
                         </label>
                     </div>
                     <label style="display: block; width: 350px;font-size: 18px;">
-
                       <input type="checkbox"
                           name="selectedStates[]"
                           value="{{state.text}}"
                           ng-model="state.selected"
-                          ng-click="stateClicked(state)"
+                          ng-change="stateClicked(state)"
                           style="font-size: 18px;"
                           > <div style="width:250px">{{state.text}}</div>
 
