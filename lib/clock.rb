@@ -64,7 +64,7 @@ module Clockwork
 
     if job == "cache.news"
 
-      response = HTTParty.get('http://blog.meinbge.de/wp-json/posts')
+      response = HTTParty.get('http://blog.meinbge.de/wp-json/posts?filter[posts_per_page]=500')
       json = JSON.parse(response.body)
 
       File.open("../public/news.json", "w+") do |f|
@@ -114,8 +114,8 @@ module Clockwork
   end
 
   every(1.hours, 'check.crowdbar.stats')
-  every(5.minutes, 'cache.news')
-  every(1.hours, 'check.crowdcard.stats')
-  every(1.hours, 'clear.cache')
+  every(3.minutes, 'cache.news')
+  every(5.hours, 'check.crowdcard.stats')
+  every(10.minutes, 'clear.cache')
 
 end
