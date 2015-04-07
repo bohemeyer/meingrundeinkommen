@@ -18625,6 +18625,8 @@ namespace :squirrels do
 
       #puts "IBAN: #{p.account_iban.upcase}; BIC: #{p.account_bic} - #{!p.account_bic.blank? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]]}"
 
+      puts p.amount_total
+
       if IBANTools::IBAN.valid?(p.account_iban.upcase)
         sdd.add_transaction(
           # Name of the debtor, in German: "Zahlungspflichtiger"
