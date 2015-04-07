@@ -40,6 +40,7 @@ gem 'less-rails-bootstrap'
 gem 'bower-rails'
 gem 'actionpack-page_caching'
 gem 'sepa_king'
+gem 'iban-tools'
 
 # production
 gem 'lograge'

@@ -315,6 +315,7 @@ DEPENDENCIES
   google_drive
   haml-rails
   httparty
+  iban-tools
   jbuilder (~> 1.2)
   jquery-rails
   less-rails
