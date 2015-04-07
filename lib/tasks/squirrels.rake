@@ -18622,6 +18622,8 @@ namespace :squirrels do
 
       # Second: Add transactions
 
+      puts "#{p.account_bic} - #{!p.account_bic.nil? ? p.account_bic : get_bic_for[p.account_iban[4,8]]}"
+
       sdd.add_transaction(
         # Name of the debtor, in German: "Zahlungspflichtiger"
         # String, max. 70 char
