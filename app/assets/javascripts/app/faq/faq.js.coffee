@@ -49,7 +49,7 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
         crowdcard: 'CrowdCard'
         squirrel: 'Crowdhörnchen'
         community: 'Anmeldung/Konto'
-        verlosung: 'Cerlosung'
+        verlosung: 'Verlosung'
         person: 'Über uns'
       r[cat]
 
