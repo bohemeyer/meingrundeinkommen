@@ -18622,7 +18622,7 @@ namespace :squirrels do
 
       # Second: Add transactions
 
-      puts "#{p.account_bic} - #{!p.account_bic.nil? ? p.account_bic : get_bic_for[p.account_iban[4,8]]}"
+      puts "#{p.account_bic} - #{!p.account_bic.blank? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]]}"
 
       sdd.add_transaction(
         # Name of the debtor, in German: "Zahlungspflichtiger"
@@ -18631,7 +18631,7 @@ namespace :squirrels do
 
         # OPTIONAL: Business Identifier Code (SWIFT-Code) of the debtor's account
         # String, 8 or 11 char
-        bic:                       !p.account_bic.nil? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]],
+        bic:                       !p.account_bic.blank? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]],
 
         # International Bank Account Number of the debtor's account
         # String, max. 34 chars
