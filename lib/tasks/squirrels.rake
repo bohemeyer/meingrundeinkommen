@@ -18631,11 +18631,11 @@ namespace :squirrels do
 
         # OPTIONAL: Business Identifier Code (SWIFT-Code) of the debtor's account
         # String, 8 or 11 char
-        bic:                       !p.account_bic.nil? ? p.account_bic : get_bic_for[p.account_iban[4,8]],
+        bic:                       !p.account_bic.nil? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]],
 
         # International Bank Account Number of the debtor's account
         # String, max. 34 chars
-        iban:                      p.account_iban,
+        iban:                      p.account_iban.upcase,
 
         # Amount in EUR
         # Number with two decimal digit
