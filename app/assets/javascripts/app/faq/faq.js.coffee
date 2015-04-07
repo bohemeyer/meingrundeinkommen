@@ -25,8 +25,9 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
   "$cookieStore"
   "$sce"
   "$routeParams"
+  "$location"
 
-  ($scope, Question, $cookieStore, $sce, $routeParams) ->
+  ($scope, Question, $cookieStore, $sce, $routeParams, $location) ->
 
     $scope.categories =
       projekt: true
@@ -34,10 +35,24 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
       crowdfunding: false
       crowdbar: false
       crowdcard: false
+      squirrel: false
       community: false
       verlosung: false
       person: false
-      winners: false
+      #winners: false
+
+    $scope.cat2text = (cat) ->
+      r =
+        projekt: 'Grundeinkommen'
+        crowdfunding: 'Crowdfunding'
+        crowdbar: 'CrowdBar'
+        crowdcard: 'CrowdCard'
+        squirrel: 'Crowdhörnchen'
+        community: 'Anmeldung/Konto'
+        verlosung: 'Cerlosung'
+        person: 'Über uns'
+      r[cat]
+
 
     if $routeParams['topic']
       $scope.categories[$routeParams['topic']] = true
@@ -46,6 +61,9 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
       $scope.current_tab = 'projekt'
 
     $scope.question = {}
+
+    if $location.search().q
+      $scope.show_answer = $location.search().q
 
     Question.query().then (questions) ->
       $scope.questions = questions
@@ -70,6 +88,7 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
     $scope.tab = (tab) ->
       $scope.current_tab = tab
       $scope.question.$ = ''
+      $scope.show_answer = false
 
     $scope.up = (q) ->
       if !$scope.has_been_voted_for(q.id)
@@ -96,8 +115,10 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
         text: $scope.question.$
         category: $scope.current_tab
       ).create().then (response) ->
+        response.answer = 'Danke für deine Frage. Sobald wir sie beantwortet haben erscheint hier die Antwort.'
         $scope.questions.push response
         $scope.setVoted response
+        alert 'Danke für deine Frage. Sobald wir sie beantwortet haben erscheint hier die Antwort.'
 ]
 
 .filter "search", ($filter, Question) ->

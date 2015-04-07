@@ -5,15 +5,27 @@
   <h3 class="text-center">Wähle einen Themenbereich und tippe deine Frage ins Textfeld. Entweder du findest eine vorhandene Frage oder du stellst eine neue:</h3>
 
   <tabset>
-    <tab heading="Das Projekt" active="categories.projekt" select="tab('projekt')"></tab>
-    <tab heading="Grundeinkommen" active="categories.grundeinkommen" select="tab('grundeinkommen')"></tab>
-    <tab heading="Crowdfunding" active="categories.crowdfunding" select="tab('crowdfunding')"></tab>
-    <tab heading="Crowdbar" active="categories.crowdbar" select="tab('crowdbar')"></tab>
-    <tab heading="Crowdcard" active="categories.crowdcard" select="tab('crowdcard')"></tab>
-    <tab heading="Website/Hilfe" active="categories.community" select="tab('community')"></tab>
+
+
+    <tab heading="Grundeinkommen" active="categories.projekt" select="tab('projekt')"></tab>
+
+    <tab heading="Grundeinkommen (alt)" active="categories.grundeinkommen" select="tab('grundeinkommen')" ng-if="(current.user && current.user.admin)"></tab>
+
     <tab heading="Verlosung" active="categories.verlosung" select="tab('verlosung')"></tab>
+
+    <tab heading="Anmeldung/Konto" active="categories.community" select="tab('community')"></tab>
+
+    <tab heading="Crowdfunding" active="categories.crowdfunding" select="tab('crowdfunding')"></tab>
+
+    <tab heading="CrowdCard" active="categories.crowdcard" select="tab('crowdcard')"></tab>
+
+    <tab heading="CrowdBar" active="categories.crowdbar" select="tab('crowdbar')"></tab>
+
+    <tab heading="Crowdhörnchen" active="categories.squirrel" select="tab('squirrel')"></tab>
+
     <tab heading="Über uns" active="categories.person" select="tab('person')"></tab>
-    <tab heading="Gewinnende fragen" active="categories.winners" select="tab('winners')"></tab>
+
+<!--     <tab heading="Gewinnende fragen" active="categories.winners" select="tab('winners')"></tab> -->
     <!-- <tab heading="Sonstiges" select="tab(null)"></tab> -->
   </tabset>
 
@@ -39,39 +51,39 @@
     <h3 class="title">&nbsp;</h3>
 
   <accordion close-others="true" class="listbox">
-    <accordion-group ng-repeat="question in questions | orderBy:'-votes' | search:question.$ | filter:{category:current_tab}">
+    <accordion-group is-open="show_answer" ng-repeat="q in questions | orderBy:'-votes' | search:question.$ | filter: question.$ ? {} : (show_answer ? {id:show_answer} : {category:current_tab})" ng-if="q.answer || (current.user && current.user.admin && !q.answer)">
         <accordion-heading>
           <div style="margin: 0px 20px;padding-bottom:15px;border-bottom: 1px solid #ddd;">
 
-            <i class="big fa fa-star float-left" ng-if="current.user && current.user.admin && !question.answer"></i>
+            <i class="big fa fa-star float-left" ng-if="current.user && current.user.admin && !q.answer"></i>
 
-            <a href="#" ng-click="up(question)" class="btn-small btn-grey pull-right">Will ich auch wissen!</a>
+            <a href="#" ng-click="up(q)" class="btn-small btn-grey pull-right">Antwort lesen</a>
 
-            <a ng-if="current.user && current.user.admin" href="#" ng-click="delete(question)" class="btn-small btn-grey pull-right"><i class="fa fa-trash"></i>Löschen</a>
+            <a ng-if="current.user && current.user.admin" href="#" ng-click="delete(q)" class="btn-small btn-grey pull-right"><i class="fa fa-trash"></i>Löschen</a>
 
-            {{question.text}}<br><small>{{question.votes}} Leute fragen das</small>
+             {{q.text}}<br><small class="grey" ng-show="question.$">Kategorie: {{cat2text(q.category)}} | </small><small>{{q.votes}} Leute fragen das</small>
           </div>
         </accordion-heading>
-        <div style="margin-left:20px;margin-top:0px;padding: 50px;padding-top:0px;border-bottom: 2px solid #666;font-size:13px;font-weight:normal;">
+        <div style="margin-left:20px;margin-top:0px;padding: 30px;padding-top:0px;font-size:13px;font-weight:normal;">
 
-          <div ng-bind-html="question.answer | unsafe"></div>
+          <div class="well" ng-bind-html="q.answer | unsafe"></div>
 
           <div ng-if="current.user && current.user.admin">
 
-            <input type="text" ng-model="question.text">
+            Frage: <input type="text" ng-model="q.text">
 
-            <input type="number" ng-model="question.votes">
+            gefragt: <input type="number" ng-model="question.votes">
 
-            <select ng-model="question.category" ng-options="o as o for o in categories" ng-change="answer(question)"></select>
+            Kategorie: <select ng-model="q.category" ng-options="k as k for (k , v) in categories" ng-change="answer(q)"></select>
 
-            <a href="#" ng-click="answer(question)" class="btn-small btn-grey pull-right"><i class="fa fa-pencil"></i> Beantworten</a>
+            <a href="#" ng-click="answer(q)" class="btn-small btn-grey pull-right"><i class="fa fa-pencil"></i> Beantworten</a>
 
-            <textarea ng-model="question.answer" style="min-width:100%;min-height:300px;"></texarea>
+            <textarea ng-model="q.answer" style="min-width:100%;min-height:300px;"></texarea>
 
 
           </div>
 
-          <span ng-if="!question.answer">Bisher wurde diese Frage noch nicht beantwortet. Aber deine Wunsch nach Beantwortung wurde gespeichert und ich beeile mich so schnell wie Möglich zu antworten.</span>
+          <span ng-if="!q.answer">Bisher wurde diese Frage noch nicht beantwortet. Aber deine Wunsch nach Beantwortung wurde gespeichert und ich beeile mich so schnell wie Möglich zu antworten.</span>
         </div>
     </accordion-group>
   </accordion>
