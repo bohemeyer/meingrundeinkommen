@@ -9,8 +9,6 @@
 
     <tab heading="Grundeinkommen" active="categories.projekt" select="tab('projekt')"></tab>
 
-    <tab heading="Grundeinkommen (alt)" active="categories.grundeinkommen" select="tab('grundeinkommen')" ng-if="(current.user && current.user.admin)"></tab>
-
     <tab heading="Verlosung" active="categories.verlosung" select="tab('verlosung')"></tab>
 
     <tab heading="Anmeldung/Konto" active="categories.community" select="tab('community')"></tab>
@@ -74,7 +72,7 @@
 
             gefragt: <input type="number" ng-model="question.votes">
 
-            Kategorie: <select ng-model="q.category" ng-options="k as k for (k , v) in categories" ng-change="answer(q)"></select>
+            Kategorie: <select ng-model="q.category" ng-options="k as v for (k , v) in cats" ng-change="answer(q)"></select>
 
             <a href="#" ng-click="answer(q)" class="btn-small btn-grey pull-right"><i class="fa fa-pencil"></i> Beantworten</a>
 
