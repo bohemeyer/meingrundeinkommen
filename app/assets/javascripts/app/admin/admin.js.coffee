@@ -27,10 +27,10 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
     ).then (supports) ->
       $scope.supports = supports
 
-    Crowdcard.query(
-      admin: true
-    ).then (crowdcards) ->
-      $scope.crowdcards = crowdcards
+    # Crowdcard.query(
+    #   admin: true
+    # ).then (crowdcards) ->
+    #   $scope.crowdcards = crowdcards
 
     Statistic.query(
       admin: true
