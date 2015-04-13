@@ -41,17 +41,18 @@ angular.module("faq", ["Question",'ng-breadcrumbs'])
       person: false
       #winners: false
 
+    $scope.cats =
+      projekt: 'Grundeinkommen'
+      crowdfunding: 'Crowdfunding'
+      crowdbar: 'CrowdBar'
+      crowdcard: 'CrowdCard'
+      squirrel: 'Crowdhörnchen'
+      community: 'Anmeldung/Konto'
+      verlosung: 'Verlosung'
+      person: 'Über uns'
+
     $scope.cat2text = (cat) ->
-      r =
-        projekt: 'Grundeinkommen'
-        crowdfunding: 'Crowdfunding'
-        crowdbar: 'CrowdBar'
-        crowdcard: 'CrowdCard'
-        squirrel: 'Crowdhörnchen'
-        community: 'Anmeldung/Konto'
-        verlosung: 'Verlosung'
-        person: 'Über uns'
-      r[cat]
+      $scope.cats[cat]
 
 
     if $routeParams['topic']
