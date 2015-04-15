@@ -42,7 +42,7 @@
 				<td>{{user.id}}</td>
 				<td>{{user.name}}</td>
 				<td>{{user.email}}</td>
-				<td>{{user.chances.length}}</td>
+				<td>{{user.chances[0].confirmed}}</td>
 				<td>
 					<span ng-if="user.flags.hasCrowdbar">ja</span>
 					<span ng-if="!user.flags.hasCrowdbar && user.flags.hasHadCrowdbar">hatte sie</span>
