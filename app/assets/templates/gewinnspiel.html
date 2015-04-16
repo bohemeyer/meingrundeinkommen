@@ -1,7 +1,7 @@
 <div class="container">
 
-    <alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
-      <h3 style="margin-bottom:0" ng-show="current.hasCode()"><i class="fa fa-check"></i> Du nimmst an der Verlosung des 10. Grundeinkommens am 17. April teil!</h3>
+    <alert ng-show="!chances_form.editAllChances && current.hasCode()" type="success" class="margin-top-30">
+      <h3 style="margin-bottom:0"><i class="fa fa-check"></i> Du nimmst an der Verlosung des 10. Grundeinkommens am 17. April teil!</h3>
     </alert>
 
     <p ng-show="!chances_form.editAllChances">
