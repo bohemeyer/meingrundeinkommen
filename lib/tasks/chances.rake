@@ -9,10 +9,10 @@ namespace :chances do
     chances = Chance.where(:confirmed => true).shuffle
 
     i = 0
-    ['A','B','C','D','E'].each do |c1|
-      (1..15).each do |c2|
-        (1..15).each do |c3|
-          (1..15).each do |c4|
+    (1..5).each do |c1|
+      ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S'].each do |c2|
+        ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S'].each do |c3|
+          ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S'].each do |c4|
             i = i + 1
             if chances[i]
               puts "#{i} - #{c1},#{c2},#{c3},#{c4}"
