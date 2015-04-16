@@ -43,16 +43,18 @@
 	<a ng-if="own_profile" href="#" ng-click="open()"><i class="fa fa-pencil"></i> Mitgliedsdaten ändern</a>
   <hr>
 
-   <ul ng-show="user.chances.length > 0">
-    <li><b>Losnummer:</b></li>
-    <li><i>- wird am Abend des 16.4. vergeben -</i></li>
-    <!-- <li ng-repeat="chance in user.chances">
+   <ul ng-show="user.chances[0].code">
+    <!-- <ul ng-show="user.chances.length > 0"> -->
+    <li><b>Losnummer für die Verlosung am 17. April:</b></li>
+    <!-- <li><i>- wird am Abend des 16.4. vergeben -</i></li> -->
+    <li ng-repeat="chance in user.chances">
       <div class="well big">{{chance.code}}
         <div style="font-size:12px;font-weight:normal;">
           <span ng-show="chance.isChild">(für ein Kind)</span>
         </div>
       </div>
-    </li> -->
+    </li>
+
     <!-- <li ng-if="user.chances[0].crowdbarVerified"><b>Doppelte Chance (für <a href="/crowdbar">Crowdbar</a>-Nutzung):</b></li>
     <li ng-repeat="chance in user.chances" ng-if="chance.code2">
       <div class="well big">{{chance.code2}}</div>

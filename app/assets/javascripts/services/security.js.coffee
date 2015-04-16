@@ -73,6 +73,15 @@ angular.module "Security", ["Devise","Flag"]
         else
           return false
 
+      hasCode: ->
+        if service.user.chances.length == 0
+          false
+        else
+          found = false
+          angular.forEach service.user.chances, (chance) ->
+            if chance.id && chance.code
+              found = true
+          return found
 
       participates: ->
         if service.user.chances.length == 0
