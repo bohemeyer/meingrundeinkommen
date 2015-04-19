@@ -1,18 +1,17 @@
 class Api::PaymentsController < ApplicationController
 
   def create
-    payment = Payment.create(params[:payment].permit(:user_email, :user_first_name, :user_last_name, :user_street, :user_street_number, :amount_total, :amount_society, :amount_bge, :accept, :account_bank, :account_iban, :account_bic, :active))
-
-    if current_user
+    if current_user && current_user.payment.nil?
+      payment = Payment.create(params[:payment].permit(:user_email, :user_first_name, :user_last_name, :user_street, :user_street_number, :amount_total, :amount_society, :amount_bge, :accept, :account_bank, :account_iban, :account_bic, :active))
       payment.user_email = current_user.email
       payment.user_id = current_user.id
-    end
 
-    if payment.valid?
-      payment.save!
-      render json: payment
-    else
-      render json: {:errors => payment.errors}
+      if payment.valid?
+        payment.save!
+        render json: payment
+      else
+        render json: {:errors => payment.errors}
+      end
     end
   end
 

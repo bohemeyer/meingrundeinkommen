@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
   has_many :supports
   has_many :crowdcards
 
-  has_one :payment
+  has_one :payment, :dependent => :destroy
 
-  has_many :flags
+  has_many :flags, :dependent => :destroy
 
   scope :with_flag, lambda {|flag, value| joins(:flags).where("flags.name = ? and flags.value_boolean = ?", flag, value)}
 
