@@ -44,9 +44,11 @@
   <hr>
 
    <!-- <ul ng-show="user.chances[0].code"> -->
-    <ul ng-show="user.chances.length > 0">
+    <div ng-show="own_profile">
+    <ul>
     <li><b>Losnummer für die Verlosung am 07. Mai:</b></li>
-    <li><i>- wird am Abend des 6. Mai vergeben -</i></li>
+    <li ng-show="user.chances.length == 0"><i>Bitte erst <a href="/boarding?trigger=wants_to_participate">teilnehmen</a></i></li>
+    <li ng-show="user.chances.length > 0"><i>- wird am Abend des 6. Mai vergeben -</i></li>
 <!--     <li ng-repeat="chance in user.chances">
       <div class="well big">{{chance.code}}
         <div style="font-size:12px;font-weight:normal;">
@@ -60,6 +62,7 @@
       <div class="well big">{{chance.code2}}</div>
     </li> -->
   </ul>
+</div>
 
   <hr>
 
