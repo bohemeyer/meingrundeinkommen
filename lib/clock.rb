@@ -109,6 +109,11 @@ module Clockwork
       FileUtils.rm_r(Dir.glob(cache_dir+"/*")) rescue Errno::ENOENT
     end
 
+    if job == "bank.check"
+      results = `/home/hibiscus/scripts/enter_umsatz.pl`
+      puts results
+    end
+
 
 
   end
@@ -117,5 +122,5 @@ module Clockwork
   every(3.minutes, 'cache.news')
   every(5.hours, 'check.crowdcard.stats')
   every(10.minutes, 'clear.cache')
-
+  every(20.minutes, 'bank.check')
 end
