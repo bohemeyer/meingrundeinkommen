@@ -67,10 +67,18 @@
     <div class="form-group">
       <label for="inputEmail12" class="col-sm-2 control-label">Postleitzahl</label>
       <div class="col-sm-10 text-left">
-        <input name="city" ng-model="city" type="text" class="form-control" id="inputEmail12" placeholder="freiwillige Angabe" maxlength="5" required>
+        <input name="city" ng-model="city" type="text" class="form-control" id="inputEmail12" placeholder="optionale Angabe" maxlength="5" required>
       </div>
     </div>
 
+    <div class="form-group">
+      <label for="inputEmail12" class="col-sm-2 control-label">Telefonnummer</label>
+      <div class="col-sm-10 text-left">
+        <input name="phone" ng-model="phone" type="text" class="form-control" id="inputEmail22" placeholder="Damit wir dich im Falle deines Gewinns anrufen können (optional)" required>
+      </div>
+    </div>
+
+    <br>
 
     <!-- <div class="form-group text-left" style="margin-top:-20px;">
       <div class="col-sm-offset-2 col-sm-10 text-left">
@@ -100,7 +108,7 @@
       <div class="col-sm-offset-2 col-sm-10 text-left">
         <div class="checkbox">
           <label>
-            <input name="mediacoverage" ng-model="mediacoverage" value="true" type="checkbox"> Wenn ich gewinne, bin ich bereit, mich von "Mein Grundeinkommen" und/oder von ausgewählten Medien interviewen zu lassen. (freiwillig, hat keine Auswirkungen auf deine Gewinnchancen, aber sehr wichtig für's Projekt)
+            <input name="mediacoverage" ng-model="mediacoverage" value="true" type="checkbox"> Wenn ich gewinne, bin ich bereit, mich nach Absprache von „Mein Grundeinkommen“ oder von ausgewählten Medien interviewen zu lassen. <a popover="Das Projekt lebt von der Medienarbeit von Micha und den Gewinnenden. Ihre Geschichten sind der Kern unserer Arbeit. Daher sind wir auf die Medienbereitschaft der Gewinnenden angewiesen. Hauptbestandteil davon sind Interviews mit Journalist*innen von Rundfunk, TV- und Printmedien. In welchem Maße ihr euch und euer Leben in der Öffentlichkeit präsentieren möchtet, liegt bei euch. Von einer anonymisierten Mail bis zur TV-Homestory ist alles möglich. Wir übernehmen die Koordination und Vorbereitung der Anfragen und leiten nur diejenigen weiter, denen du zugestimmt hast. - Was meinst du?">Mehr Infos</a>. (freiwillig, hat keine Auswirkungen auf deine Gewinnchancen, aber sehr wichtig fürs Projekt)
           </label>
         </div>
       </div>

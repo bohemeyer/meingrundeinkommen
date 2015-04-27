@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150419220557) do
+ActiveRecord::Schema.define(version: 20150427143857) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(version: 20150419220557) do
     t.string   "crowdcard_code"
     t.boolean  "confirmed",             default: false
     t.boolean  "mediacoverage",         default: false
+    t.string   "phone"
   end
 
   add_index "chances", ["first_name", "last_name", "dob"], name: "index_chances_on_first_name_and_last_name_and_dob", unique: true
