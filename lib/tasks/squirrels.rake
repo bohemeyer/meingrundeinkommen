@@ -18583,9 +18583,10 @@ namespace :squirrels do
     get_bic_for = Hash[banks.scan(/^(\d{8}).{131}([A-Z\d]{11})/).map {|key, value| [key, value]}]
 
 
-    due_date = '15.04.2015'
-    #TODO: limit to confirmed entries
-    payments = Payment.where('id < 2375')
+    due_date = '01.05.2015'
+
+
+    payments = Payment.where('id < 3349')
 
 
     sdd = SEPA::DirectDebit.new(
@@ -18626,78 +18627,79 @@ namespace :squirrels do
       #puts "IBAN: #{p.account_iban.upcase}; BIC: #{p.account_bic} - #{!p.account_bic.blank? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]]}"
 
       #puts p.amount_total
+      if p.active
+	      if IBANTools::IBAN.valid?(p.account_iban.upcase) && !p.amount_total.nil?
+	        sdd.add_transaction(
+	          # Name of the debtor, in German: "Zahlungspflichtiger"
+	          # String, max. 70 char
+	          name:                      "#{p.user_first_name} #{p.user_last_name}",
 
-      if IBANTools::IBAN.valid?(p.account_iban.upcase) && !p.amount_total.nil?
-        sdd.add_transaction(
-          # Name of the debtor, in German: "Zahlungspflichtiger"
-          # String, max. 70 char
-          name:                      "#{p.user_first_name} #{p.user_last_name}",
+	          # OPTIONAL: Business Identifier Code (SWIFT-Code) of the debtor's account
+	          # String, 8 or 11 char
+	          bic:                       !p.account_bic.blank? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]],
 
-          # OPTIONAL: Business Identifier Code (SWIFT-Code) of the debtor's account
-          # String, 8 or 11 char
-          bic:                       !p.account_bic.blank? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]],
+	          # International Bank Account Number of the debtor's account
+	          # String, max. 34 chars
+	          iban:                      p.account_iban.upcase,
 
-          # International Bank Account Number of the debtor's account
-          # String, max. 34 chars
-          iban:                      p.account_iban.upcase,
+	          # Amount in EUR
+	          # Number with two decimal digit
+	          amount:                    p.amount_total, #number_with_precision(p.amount_total, precision: 2),
 
-          # Amount in EUR
-          # Number with two decimal digit
-          amount:                    p.amount_total, #number_with_precision(p.amount_total, precision: 2),
+	          # OPTIONAL: Instruction Identification, will not be submitted to the debtor
+	          # String, max. 35 char
+	          #instruction:               '',
 
-          # OPTIONAL: Instruction Identification, will not be submitted to the debtor
-          # String, max. 35 char
-          #instruction:               '',
+	          # OPTIONAL: End-To-End-Identification, will be submitted to the debtor
+	          # String, max. 35 char
+	          reference:                 "CH#{p.id}-#{due_date}",
 
-          # OPTIONAL: End-To-End-Identification, will be submitted to the debtor
-          # String, max. 35 char
-          reference:                 "CH#{p.id}-#{due_date}",
+	          # OPTIONAL: Unstructured remittance information, in German "Verwendungszweck"
+	          # String, max. 140 char
+	          remittance_information:    'Spende an Mein Grundeinkommen. Vielen Dank',
 
-          # OPTIONAL: Unstructured remittance information, in German "Verwendungszweck"
-          # String, max. 140 char
-          remittance_information:    'Spende an Mein Grundeinkommen. Vielen Dank',
+	          # Mandate identifikation, in German "Mandatsreferenz"
+	          # String, max. 35 char
+	          mandate_id:                "CH#{p.id}",
 
-          # Mandate identifikation, in German "Mandatsreferenz"
-          # String, max. 35 char
-          mandate_id:                "CH#{p.id}",
-
-          # Mandate Date of signature, in German "Datum, zu dem das Mandat unterschrieben wurde"
-          # Date
-
-
-
-          mandate_date_of_signature: p.created_at.to_date,
-
-          # Local instrument, in German "Lastschriftart"
-          # One of these strings:
-          #   'CORE' ("Basis-Lastschrift")
-          #   'COR1' ("Basis-Lastschrift mit verkürzter Vorlagefrist")
-          #   'B2B' ("Firmen-Lastschrift")
-          local_instrument: 'CORE',
-
-          # Sequence type
-          # One of these strings:
-          #   'FRST' ("Erst-Lastschrift")
-          #   'RCUR' ("Folge-Lastschrift")
-          #   'OOFF' ("Einmalige Lastschrift")
-          #   'FNAL' ("Letztmalige Lastschrift")
+	          # Mandate Date of signature, in German "Datum, zu dem das Mandat unterschrieben wurde"
+	          # Date
 
 
-          #TODO: switch for recurring / first
-          sequence_type: 'FRST',
 
-          # OPTIONAL: Requested collection date, in German "Fälligkeitsdatum der Lastschrift"
-          # Date
-          requested_date: due_date.to_date,
+	          mandate_date_of_signature: p.created_at.to_date,
 
-          # OPTIONAL: Enables or disables batch booking, in German "Sammelbuchung / Einzelbuchung"
-          # True or False
-          batch_booking: true
+	          # Local instrument, in German "Lastschriftart"
+	          # One of these strings:
+	          #   'CORE' ("Basis-Lastschrift")
+	          #   'COR1' ("Basis-Lastschrift mit verkürzter Vorlagefrist")
+	          #   'B2B' ("Firmen-Lastschrift")
+	          local_instrument: 'COR1',
 
-        )
-      else
-        puts "iban error with payment id: #{p.id}"
-      end
+	          # Sequence type
+	          # One of these strings:
+	          #   'FRST' ("Erst-Lastschrift")
+	          #   'RCUR' ("Folge-Lastschrift")
+	          #   'OOFF' ("Einmalige Lastschrift")
+	          #   'FNAL' ("Letztmalige Lastschrift")
+
+
+	          #TODO: switch for recurring / first
+	          sequence_type: p.sent_first_notification_at.nil? ? 'FRST' : 'RCUR',
+
+	          # OPTIONAL: Requested collection date, in German "Fälligkeitsdatum der Lastschrift"
+	          # Date
+	          requested_date: due_date.to_date,
+
+	          # OPTIONAL: Enables or disables batch booking, in German "Sammelbuchung / Einzelbuchung"
+	          # True or False
+	          batch_booking: true
+
+	        )
+	      else
+	        puts "iban error with payment id: #{p.id}"
+	      end
+	    end
 
     end
 
