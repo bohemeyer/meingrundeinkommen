@@ -18694,9 +18694,11 @@ namespace :squirrels do
 	    end
 
 	    # Last: create XML string
-        puts sdd.to_xml # Use latest schema pain.008.003.02
 
-    	debugger
+ 		if i%1000 == 999 || i == payments.count - 1
+	        puts sdd.to_xml # Use latest schema pain.008.003.02
+	    	debugger
+	    end
 
     end
 
