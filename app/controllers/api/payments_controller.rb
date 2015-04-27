@@ -25,13 +25,25 @@ class Api::PaymentsController < ApplicationController
 
   def index
     if current_user && current_user.admin? and params[:admin]
-      render json: Payment.all
+
+      if params[:q]
+        query = Payment.search do
+          fulltext params[:q] do
+            minimum_match 1
+          end
+        end
+        r = query.results
+      else
+        r = Payment.all
+      end
+
+      render json: r
     end
   end
 
   def destroy
     p = Payment.find(params[:id])
-    if current_user && current_user == p.user
+    if current_user && (current_user == p.user || current_user.admin?)
       p.destroy
       render json: false
     end

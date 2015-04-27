@@ -21,11 +21,13 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
 
     $scope.u = {}
     $scope.u.search = ''
+    $scope.pymnt = {}
+    $scope.pymnt.search = ''
 
-    Support.query(
-      admin: true
-    ).then (supports) ->
-      $scope.supports = supports
+    # Support.query(
+    #   admin: true
+    # ).then (supports) ->
+    #   $scope.supports = supports
 
     # Crowdcard.query(
     #   admin: true
@@ -43,6 +45,12 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
       $scope.payments = payments
 
 
+    $scope.search_for_payment = ->
+      Payment.query(
+        admin: true
+        q: $scope.pymnt.search
+      ).then (payments) ->
+        $scope.payments = payments
 
 
     $scope.search_for_user = ->
@@ -55,6 +63,27 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
         q: email
       ).then (users) ->
         $scope.users = users
+
+
+    $scope.deletePayment = (payment) ->
+      if confirm('wirklich löschen?')
+        new Payment(
+          id: payment.id
+          admin: true
+        ).delete()
+        .then () ->
+          $scope.payments.splice($scope.payments.indexOf(payment), 1)
+
+
+    $scope.togglePayment = (payment) ->
+      if confirm('wirklich?')
+        new Payment(
+          id: payment.id
+          admin: true
+          active: !payment.active
+        ).update()
+        .then () ->
+          $scope.payments[$scope.payments.indexOf(payment)].active = !payment.active
 
 
     $scope.delete_user = (user) ->

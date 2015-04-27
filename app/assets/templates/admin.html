@@ -143,7 +143,7 @@
 	</tab>
  -->
 
-	<tab heading="Bank-Supports">
+	<!-- <tab heading="Bank-Supports">
 
 		<div class="well text-center">
 			<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="search">
@@ -162,9 +162,9 @@
 				<td>{{support.id}}</td>
 				<td>{{support.nickname}}</td>
 				<td>{{support.amountTotal}}</td>
-				<td><!-- <div ng-if="support.avatar" class="testimonial-image pull-left">
+				<td><div ng-if="support.avatar" class="testimonial-image pull-left">
 	                    <img src="{{support.avatar.avatar.thumb.url}}">
-	                </div>  --><textarea ng-model="support.comment"></textarea></td>
+	                </div> <textarea ng-model="support.comment"></textarea></td>
 				<td>
 					<a href="#" ng-if="!support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-grey">Bestätigen</a>
 					<a href="#" ng-if="support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-color"><i class="fa fa-check"></i></a>
@@ -172,31 +172,48 @@
 			</tr>
 		</table>
 
-	</tab>
+	</tab> -->
 
 
 	<tab heading="Crowdhörnchen">
 
 		<div class="well text-center">
-			<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="search">
+			<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="pymnt.search" ng-change="search_for_payment()">
 		</div>
 
 		<table class="table">
 			<tr>
 				<td>ID</td>
-				<td>Kontoinahber_in</td>
-				<td>Amount Total</td>
-				<td>Amount Spende</td>
+				<td>User</td>
+				<td>Inhaber_in</td>
+				<td>IBAN</td>
+				<td>Gesamt</td>
+				<td>Spende</td>
 				<td>Aktiv?</td>
+				<td>First Mail am</td>
+				<td></td>
 			</tr>
 
 			<tr ng-repeat="payment in payments | filter:search">
 				<td>{{payment.id}}</td>
-				<td>{{payment.bankOwner}}</td>
-				<td>{{payment.amountTotal}}</td>
-				<td>{{payment.amountInternal}}</td>
+				<td>{{payment.userId}}</td>
+				<td><a href="mailto:{{payment.userEmail}}">{{payment.userFirstName}} {{payment.userLastName}}</a>
+				</td>
+				<td>{{payment.accountIban}}</td>
+				<td>{{payment.amountTotal}}€</td>
+				<td>{{payment.amountSociety}}€</td>
 				<td>
-					{{payment.active}}
+					<span class="fa fa-check" ng-show="payment.active"></span>
+					<span class="fa fa-close" ng-hide="payment.active"></span>
+					 |
+					<a ng-click="togglePayment(payment)" ng-show="payment.active">pausieren</a>
+					<a ng-click="togglePayment(payment)" ng-hide="payment.active">aktivieren</a>
+				</td>
+				<td>
+					{{payment.sentFirstNotificationAt}}
+				</td>
+				<td>
+					<a ng-click="deletePayment(payment)">Löschen</a>
 				</td>
 			</tr>
 		</table>
