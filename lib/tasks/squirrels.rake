@@ -18589,38 +18589,30 @@ namespace :squirrels do
     payments = Payment.where('id < 3349')
 
 
-    sdd = SEPA::DirectDebit.new(
-      # Name of the initiating party and creditor, in German: "Auftraggeber"
-      # String, max. 70 char
-      name:       'Mein Grundeinkommen e.V. i.G.',
+    payments.each_with_index do |p,i|
 
-      # OPTIONAL: Business Identifier Code (SWIFT-Code) of the creditor
-      # String, 8 or 11 char
-      bic:        'GENODEM1GLS',
-
-      # International Bank Account Number of the creditor
-      # String, max. 34 chars
-      iban:       'DE76430609671165313800',
-
-      # Creditor Identifier, in German: Gläubiger-Identifikationsnummer
-      # String, max. 35 chars
-      creditor_identifier: 'DE62ZZZ00001604785'
-    )
+    	if i%1000 == 0
 
 
-    payments.each do |p|
+		    sdd = SEPA::DirectDebit.new(
+		      # Name of the initiating party and creditor, in German: "Auftraggeber"
+		      # String, max. 70 char
+		      name:       'Mein Grundeinkommen e.V. i.G.',
 
+		      # OPTIONAL: Business Identifier Code (SWIFT-Code) of the creditor
+		      # String, 8 or 11 char
+		      bic:        'GENODEM1GLS',
 
- #      »···$buchung{betrag}           = "$amount_total"; #fraglich, ob wir das Format anpassen müssen? Nein laut http://www.ebics.    de/index.php?eID=tx_nawsecuredl&u=0&file=/fileadmin/unsecured/anlage3/anlage3_spec/Anlage_3_Datenformatstandards-V2.8_Final    .pdf&t=1427895285&hash=e18adc9a05ba63ce955db9c3b6203e4091599024
- # 81 »···$buchung{name}             = "$user_first_name $user_last_name";
- # 82 »···$buchung{blz}              = "$account_bic";
- # 83 »···$buchung{kontonummer}      = "$account_iban";
- # 84 »···$buchung{verwendungszweck} = "Spende an mein-grundeinkommen.de. Vielen Dank!";
- # 85 »···$buchung{endtoendid}       = "CH$id-$due_date";
- # 86 »···$buchung{purposecode}      = "CHAR"; #dürfen wir das wegen nicht-gemeinnützig?
- # 87 »···$buchung{mandateid}        = "CH$id";
- # 88 »···$buchung{creditorid}       = "DE62ZZZ00001604785";
- # 89 »···$buchung{sigdate}          = "$created_at"; #ggf. an das Datumsformat dd.mm.yyyy anpassen. -> ist im MySQL-Code passier    t
+		      # International Bank Account Number of the creditor
+		      # String, max. 34 chars
+		      iban:       'DE76430609671165313800',
+
+		      # Creditor Identifier, in German: Gläubiger-Identifikationsnummer
+		      # String, max. 35 chars
+		      creditor_identifier: 'DE62ZZZ00001604785'
+		    )
+
+		end
 
       # Second: Add transactions
 
@@ -18701,12 +18693,13 @@ namespace :squirrels do
 	      end
 	    end
 
+	    # Last: create XML string
+        puts sdd.to_xml # Use latest schema pain.008.003.02
+
+    	debugger
+
     end
 
-    # Last: create XML string
-    xml_string = sdd.to_xml # Use latest schema pain.008.003.02
-
-    puts xml_string
 
   end
 
