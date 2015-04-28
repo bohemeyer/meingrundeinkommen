@@ -85,7 +85,7 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
 
 
     $scope.sendMail = (test = true)->
-      if confirm('Sicher?')
+      if test || confirm('Sicher?')
         $scope.mail.sending = true
         new Mailing(
           groups: $scope.group_selection
@@ -95,7 +95,8 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
           test: test
           subject: $scope.mail.subject
         ).create().then (response) ->
-          alert 'Erfolgreich versendet'
+          alert 'Test versendet' if test
+          alert 'E-Mails versendet' if !test
           $scope.mail.sending = false
 
       return

@@ -1,6 +1,27 @@
 class MailingsMailer < MassMandrill::MandrillMailer
   include ActionView::Helpers::NumberHelper
 
+  def possible_user_groups
+    %w(confirmed with_newsletter sign_up_after# participating has_code without_crowdbar with_crowdbar is_squirrel frst_notification_not_sent last_squirrel_id# byids#)
+  end
+
+  def prepare_recipients(groups,group_keys)
+
+    users = User.all
+    groups.each_with_index do |g,i|
+      if self.possible_user_groups.include? g
+        if group_keys[i].empty?
+            users = users.send(g)
+        else
+            users = users.send(g.sub!('#',''),group_keys[i])
+        end
+      end
+    end
+
+    return users
+  end
+
+
   def transactionmail(recipients,subject,content,template = 'transactionmail')
     addresses = recipients.map { |recipient| recipient.email }
     #global_merge_vars = [{ name: 'headline', content: 'This is first example notice' }]
