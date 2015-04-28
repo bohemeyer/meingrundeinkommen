@@ -4,7 +4,7 @@ class Api::MailingsController < ApplicationController
   def create
 
   	if current_user.admin?
-	  	possible_user_groups = %w(byids# last_squirrel_id# frst_notification_not_sent is_squirrel sign_up_after# without_crowdbar with_crowdbar has_code participating confirmed with_newsletter)
+	  	possible_user_groups = %w(confirmed with_newsletter sign_up_after# participating has_code without_crowdbar with_crowdbar is_squirrel frst_notification_not_sent last_squirrel_id# byids#)
 
 	  	if params[:groups]
 		  	groups = []

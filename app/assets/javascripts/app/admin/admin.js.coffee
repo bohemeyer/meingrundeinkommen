@@ -85,18 +85,18 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
 
 
     $scope.sendMail = (test = true)->
-        if confirm('Sicher?')
-          $scope.mail.sending = true
-          new Mailing(
-            groups: $scope.group_selection
-            group_keys: $scope.group_keys
-            body: $scope.mail.body
-            send: true
-            test: test
-            subject: $scope.mail.subject
-          ).create().then (response) ->
-            alert 'Erfolgreich versendet'
-            $scope.mail.sending = false
+      if confirm('Sicher?')
+        $scope.mail.sending = true
+        new Mailing(
+          groups: $scope.group_selection
+          group_keys: $scope.group_keys
+          body: $scope.mail.body
+          send: true
+          test: test
+          subject: $scope.mail.subject
+        ).create().then (response) ->
+          alert 'Erfolgreich versendet'
+          $scope.mail.sending = false
 
       return
 
