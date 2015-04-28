@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
   scope :sign_up_after, ->(date) { where('created_at > ?',date)}
   scope :is_squirrel, lambda { includes(:payment).where(payments: {:active => true}) }
   scope :frst_notification_not_sent, lambda { includes(:payment).where(payments: { :sent_first_notification_at => nil }) }
-  scope :last_squirrel_id, ->(last_squirrel_id) { includes(:payment).where(payments: { :id => last_squirrel_id.to_i..Float::INFINITY }) }
+  scope :last_squirrel_id, ->(last_squirrel_id) { includes(:payment).where(payments: { :id => 0..last_squirrel_id.to_i }) }
 
   def self.all_newsletter_receipients
 

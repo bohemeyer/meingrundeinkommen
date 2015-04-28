@@ -27,6 +27,7 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
     $scope.mail = {}
     $scope.mail.body = '<p>Hallo *|name|*,</p><p><br></p><p><br></p><p><br></p><p>Dein Mein-Grundeinkommen-Team</p><p><br></p><hr><p>Mein Grundeinkommen bei <a href="http://www.facebook.com/MeinGrundeinkommen">Facebook</a> &amp; <a href="http://www.twitter.com/meinbge">Twitter</a> | Keine weiteren Mails erhalten: <a href="https://www.mein-grundeinkommen.de/subscriptions/*|uid|*?email=*|email|*">Hier</a> klicken</p>'
     $scope.mail.subject = ""
+    $scope.mail.sending = false
 
     # Support.query(
     #   admin: true
@@ -60,6 +61,13 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
       $scope.m = response
 
 
+    $scope.recalculate_receipients = ->
+      new Mailing(
+        groups: $scope.group_selection
+        group_keys: $scope.group_keys
+      ).create().then (response) ->
+        $scope.m = response
+
 
     $scope.toggleGroupSelection = (group) ->
       idx = $scope.group_selection.indexOf(group)
@@ -71,17 +79,14 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
         $scope.group_selection.push group
         $scope.group_keys.push ""
 
-      new Mailing(
-        groups: $scope.group_selection
-        group_keys: $scope.group_keys
-      ).create().then (response) ->
-        $scope.m = response
+      $scope.recalculate_receipients()
 
       return
 
 
     $scope.sendMail = (test = true)->
         if confirm('Sicher?')
+          $scope.mail.sending = true
           new Mailing(
             groups: $scope.group_selection
             group_keys: $scope.group_keys
@@ -90,7 +95,8 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
             test: test
             subject: $scope.mail.subject
           ).create().then (response) ->
-            $scope.m = response
+            alert 'Erfolgreich versendet'
+            $scope.mail.sending = false
 
       return
 

@@ -31,7 +31,7 @@
 				    ng-checked="group_selection.indexOf(group) > -1"
 				    ng-click="toggleGroupSelection(group)"
 				  > {{group}}
-				  <input type="text" ng-show="group.slice(-1) == '#' && group_selection.indexOf(group) > -1" ng-model="group_keys[group_selection.indexOf(group)]">
+				  <input ng-change="recalculate_receipients()" type="text" ng-show="group.slice(-1) == '#' && group_selection.indexOf(group) > -1" ng-model="group_keys[group_selection.indexOf(group)]">
 				</label>
 				<br>
 			</div>
@@ -47,7 +47,8 @@
 
 
 				<a ng-click="sendMail(true)" class="btn btn-normal btn-grey"><i class="fa fa-outbox"></i> Test an mich senden</a>
-				<a ng-click="sendMail(false)" class="btn btn-large btn-color"><i class="fa fa-envelope"></i> {{m.count}} Mails jetzt senden</a>
+				<span ng-show="mail.sending">Mails werden versendet...</span>
+				<a ng-hide="mail.sending" ng-click="sendMail(false)" class="btn btn-large btn-color"><i class="fa fa-envelope"></i> {{m.count}} Mails jetzt senden</a>
 			</div>
 		</div>
 	</tab>
