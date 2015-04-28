@@ -41,6 +41,8 @@ gem 'bower-rails'
 gem 'actionpack-page_caching'
 gem 'sepa_king'
 gem 'iban-tools'
+gem 'figaro'
+gem 'mass_mandrill'
 
 # production
 gem 'lograge'

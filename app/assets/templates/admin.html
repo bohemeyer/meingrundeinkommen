@@ -18,6 +18,40 @@
 	</tab>
 
 
+	<tab heading="Mailings">
+  		<div class="container" style="padding:30px">
+  			<div class="col-md-4">
+	  			<h3 class="title">Empfänger_innen:</h3>
+	  			<div ng-repeat="group in m.groups" >
+	  			<label>
+				  <input
+				    type="checkbox"
+				    name="groups[]"
+				    value="{{group}}"
+				    ng-checked="group_selection.indexOf(group) > -1"
+				    ng-click="toggleGroupSelection(group)"
+				  > {{group}}
+				  <input type="text" ng-show="group.slice(-1) == '#' && group_selection.indexOf(group) > -1" ng-model="group_keys[group_selection.indexOf(group)]">
+				</label>
+				<br>
+			</div>
+			<hr>
+			<div class="well"><h3>{{m.count}} Empfänger_innen</h3></div>
+
+			</div>
+			<div class="col-md-8">
+				<div class="well">Betreff: <input type="text" ng-model="mail.subject">
+				</div>
+
+				<div text-angular ng-model="mail.body"></div>
+
+
+				<a ng-click="sendMail(true)" class="btn btn-normal btn-grey"><i class="fa fa-outbox"></i> Test an mich senden</a>
+				<a ng-click="sendMail(false)" class="btn btn-large btn-color"><i class="fa fa-envelope"></i> {{m.count}} Mails jetzt senden</a>
+			</div>
+		</div>
+	</tab>
+
 
 	<tab heading="User">
 

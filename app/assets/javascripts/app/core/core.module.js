@@ -40,7 +40,8 @@
             'blog',
             'boarding',
             'Crowdbar',
-            'Crowdcard'
+            'Crowdcard',
+            'textAngular'
         ]);
 }());
 

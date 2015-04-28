@@ -1,4 +1,4 @@
-angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Payment"])
+angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Payment", "Mailing"])
 .config [
   "$routeProvider"
   ($routeProvider) ->
@@ -16,13 +16,17 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
   "Statistic"
   "Flag"
   "Payment"
+  "Mailing"
 
-  ($scope, Support, Registration, Crowdcard, Statistic, Flag, Payment) ->
+  ($scope, Support, Registration, Crowdcard, Statistic, Flag, Payment, Mailing) ->
 
     $scope.u = {}
     $scope.u.search = ''
     $scope.pymnt = {}
     $scope.pymnt.search = ''
+    $scope.mail = {}
+    $scope.mail.body = '<p>Hallo *|name|*,</p><p><br></p><p><br></p><p><br></p><p>Dein Mein-Grundeinkommen-Team</p><p><br></p><hr><p>Mein Grundeinkommen bei <a href="http://www.facebook.com/MeinGrundeinkommen">Facebook</a> &amp; <a href="http://www.twitter.com/meinbge">Twitter</a> | Keine weiteren Mails erhalten: <a href="https://www.mein-grundeinkommen.de/unsubscribe">Hier</a> klicken</p>'
+    $scope.mail.subject = ""
 
     # Support.query(
     #   admin: true
@@ -44,6 +48,51 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
     ).then (payments) ->
       $scope.payments = payments
 
+
+
+    $scope.group_selection = ['with_newsletter','confirmed']
+    $scope.group_keys = ['','']
+
+    new Mailing(
+      groups: $scope.group_selection
+      group_keys: $scope.group_keys
+    ).create().then (response) ->
+      $scope.m = response
+
+
+
+    $scope.toggleGroupSelection = (group) ->
+      idx = $scope.group_selection.indexOf(group)
+      # is currently selected
+      if idx > -1
+        $scope.group_selection.splice idx, 1
+        $scope.group_keys.splice idx, 1
+      else
+        $scope.group_selection.push group
+        $scope.group_keys.push ""
+
+      new Mailing(
+        groups: $scope.group_selection
+        group_keys: $scope.group_keys
+      ).create().then (response) ->
+        $scope.m = response
+
+      return
+
+
+    $scope.sendMail = (test = true)->
+        if confirm('Sicher?')
+          new Mailing(
+            groups: $scope.group_selection
+            group_keys: $scope.group_keys
+            body: $scope.mail.body
+            send: true
+            test: test
+            subject: $scope.mail.subject
+          ).create().then (response) ->
+            $scope.m = response
+
+      return
 
     $scope.search_for_payment = ->
       Payment.query(

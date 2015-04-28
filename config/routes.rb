@@ -51,6 +51,7 @@ Rails.application.routes.draw do
       end
     end
     resource :homepages
+    resources :mailings
   end
   resources :users
   resources :payments
