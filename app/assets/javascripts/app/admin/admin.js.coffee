@@ -95,9 +95,9 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
           test: test
           subject: $scope.mail.subject
         ).create().then (response) ->
+          $scope.mail.sending = false
           alert 'Test versendet' if test
           alert 'E-Mails versendet' if !test
-          $scope.mail.sending = false
 
       return
 

@@ -118,7 +118,7 @@ module Clockwork
       path_to_file = '../tmp/mailqueue.json'
       if File.exist?(path_to_file)
         params = JSON.parse(File.read(path_to_file))
-        File.delete(path_to_file)
+        #File.delete(path_to_file)
 
         users = MailingsMailer.prepare_recipients(params["groups"],params["group_keys"])
         puts MailingsMailer.transactionmail(users,params["subject"],params["body"]).deliver
