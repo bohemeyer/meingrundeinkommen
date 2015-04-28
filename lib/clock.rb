@@ -6,6 +6,10 @@ require 'csv'
 
 module Clockwork
 
+  configure do |config|
+    config[:logger] = Logger.new("../log/clock.log")
+  end
+
   handler do |job|
 
 
@@ -117,6 +121,7 @@ module Clockwork
     if job == "newsletter.send"
       path_to_file = '../tmp/mailqueue.json'
       if File.exist?(path_to_file)
+
         params = JSON.parse(File.read(path_to_file))
         #File.delete(path_to_file)
 
