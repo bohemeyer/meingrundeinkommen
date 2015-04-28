@@ -7,7 +7,9 @@ class MailingsMailer < MassMandrill::MandrillMailer
       {
         :rcpt => recipient.email,
         :vars => [
-                    { :name => 'name', :content => recipient.name }
+                    { :name => 'name', :content => recipient.name },
+                    { :name => 'uid', :content => recipient.id },
+                    { :name => 'email', :content => recipient.email }
                  ]
       }
     end
