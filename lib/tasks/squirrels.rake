@@ -18589,30 +18589,38 @@ namespace :squirrels do
     payments = Payment.where('id < 3349')
 
 
+
+    documents = (payments.count / 1000).floor
+    documents += 1 if payments.count%1000 > 0
+
+    sdd = []
+
+    documents.times do |i|
+    	sdd << SEPA::DirectDebit.new(
+	      # Name of the initiating party and creditor, in German: "Auftraggeber"
+	      # String, max. 70 char
+	      name:       'Mein Grundeinkommen e.V. i.G.',
+
+	      # OPTIONAL: Business Identifier Code (SWIFT-Code) of the creditor
+	      # String, 8 or 11 char
+	      bic:        'GENODEM1GLS',
+
+	      # International Bank Account Number of the creditor
+	      # String, max. 34 chars
+	      iban:       'DE76430609671165313800',
+
+	      # Creditor Identifier, in German: Gläubiger-Identifikationsnummer
+	      # String, max. 35 chars
+	      creditor_identifier: 'DE62ZZZ00001604785'
+	    )
+
+    	puts sdd
+
+    end
+
+    puts sdd
+
     payments.each_with_index do |p,i|
-
-    	if i%1000 == 0
-
-
-		    sdd = SEPA::DirectDebit.new(
-		      # Name of the initiating party and creditor, in German: "Auftraggeber"
-		      # String, max. 70 char
-		      name:       'Mein Grundeinkommen e.V. i.G.',
-
-		      # OPTIONAL: Business Identifier Code (SWIFT-Code) of the creditor
-		      # String, 8 or 11 char
-		      bic:        'GENODEM1GLS',
-
-		      # International Bank Account Number of the creditor
-		      # String, max. 34 chars
-		      iban:       'DE76430609671165313800',
-
-		      # Creditor Identifier, in German: Gläubiger-Identifikationsnummer
-		      # String, max. 35 chars
-		      creditor_identifier: 'DE62ZZZ00001604785'
-		    )
-
-		end
 
       # Second: Add transactions
 
@@ -18621,7 +18629,9 @@ namespace :squirrels do
       #puts p.amount_total
       if p.active
 	      if IBANTools::IBAN.valid?(p.account_iban.upcase) && !p.amount_total.nil?
-	        sdd.add_transaction(
+
+
+	        sdd[(i/1000).floor].add_transaction(
 	          # Name of the debtor, in German: "Zahlungspflichtiger"
 	          # String, max. 70 char
 	          name:                      "#{p.user_first_name} #{p.user_last_name}",
@@ -18692,15 +18702,15 @@ namespace :squirrels do
 	        puts "iban error with payment id: #{p.id}"
 	      end
 	    end
-
-	    # Last: create XML string
-
- 		if i%1000 == 999 || i == payments.count - 1
-	        puts sdd.to_xml # Use latest schema pain.008.003.02
-	    	debugger
-	    end
-
     end
+
+	# Last: create XML string
+	sdd.each do |r|
+		puts r.to_xml # Use latest schema pain.008.003.02
+		debugger
+	end
+
+
 
 
   end
