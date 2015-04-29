@@ -43,6 +43,7 @@ gem 'sepa_king'
 gem 'iban-tools'
 gem 'figaro'
 gem 'mass_mandrill'
+gem 'newrelic_rpm'
 
 # production
 gem 'lograge'
