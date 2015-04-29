@@ -118,23 +118,22 @@ module Clockwork
       puts results
     end
 
-    if job == "newsletter.send"
-      path_to_file = '../tmp/mailqueue.json'
-      if File.exist?(path_to_file)
+    # if job == "newsletter.send"
+    #   path_to_file = '../tmp/mailqueue.json'
+    #   if File.exist?(path_to_file)
+    #     params = JSON.parse(File.read(path_to_file))
+    #     #File.delete(path_to_file)
 
-        params = JSON.parse(File.read(path_to_file))
-        #File.delete(path_to_file)
-
-        users = MailingsMailer.prepare_recipients(params["groups"],params["group_keys"])
-        puts MailingsMailer.transactionmail(users,params["subject"],params["body"]).deliver
-      end
-    end
+    #     users = MailingsMailer.prepare_recipients(params["groups"],params["group_keys"])
+    #     puts MailingsMailer.transactionmail(users,params["subject"],params["body"]).deliver
+    #   end
+    # end
 
 
 
   end
 
-  every(1.minutes, 'newsletter.send')
+  #every(1.minutes, 'newsletter.send')
   every(1.hours, 'check.crowdbar.stats')
   every(3.minutes, 'cache.news')
   every(5.hours, 'check.crowdcard.stats')
