@@ -3,34 +3,27 @@ class Api::MailingsController < ApplicationController
 
   def create
 
-  	possible_user_groups = %w(byids# last_squirrel_id# frst_notification_not_sent is_squirrel sign_up_after# without_crowdbar with_crowdbar has_code participating confirmed with_newsletter)
+  	if current_user.admin?
 
-  	if params[:groups]
-	  	groups = []
+	  	if params[:groups]
+		  	users = MailingsMailer.prepare_recipients(params[:groups],params[:group_keys])
+		end
 
-	  	users = User
-	  	params[:groups].each_with_index do |g,i|
-	  	  if possible_user_groups.include? g
-	  	  	if params[:group_keys][i].empty?
-	  	  		users = users.send(g)
-	  	  	else
-	  	  		params[:group_keys][i] = params[:group_keys][i].split(',') if g == "find#"
-				users = users.send(g.sub!('#',''),params[:group_keys][i])
+
+		if params[:send]
+			if params[:test]
+				#send it
+				render json: MailingsMailer.transactionmail([User.find(current_user.id)],params[:subject],params[:body]).deliver
+			else
+				#write to queue
+				File.open("tmp/mailqueue.json", "w+") do |f|
+			      f.write(params.to_json)
+			    end
+			    render json: 'ok'
 			end
-	  	  end
-	  	end
-
-	    # users = User.send(groups.join('.'))
-	end
-
-
-
-	if params[:send]
-		users = [User.find(current_user.id)] if params[:test]
-		test = MailingsMailer.transactionmail(users,params[:subject],params[:body]).deliver
-		render json: test
-	else
-		render json: { count: users ? users.count : 0, groups: possible_user_groups }
+		else
+			render json: { count: users ? users.count : 0, groups: MailingsMailer.possible_user_groups }
+		end
 	end
   end
 end
