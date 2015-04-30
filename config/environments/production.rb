@@ -6,7 +6,7 @@ Rails.application.configure do
 
 
   config.action_controller.perform_caching = true
-  #config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/cache"
+  config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/cache"
 
   # Eager load code on boot. This eager loads most of Rails and
   # your application in memory, allowing both thread web servers
