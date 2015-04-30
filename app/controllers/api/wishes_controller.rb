@@ -2,6 +2,8 @@ class Api::WishesController < ApplicationController
 
   include ConjugationHelper
 
+  caches_page :top
+
   def create
     #current_user = User.first
     wish = Wish.where(text:params[:text]).first
@@ -82,6 +84,35 @@ class Api::WishesController < ApplicationController
     render json: x
   end
 
+
+  def top
+
+    x= []
+
+    UserWish.group(:wish_id).limit(8).order('count_all desc').count.map do |id, count|
+      next if !id
+      wish = Wish.where(id:id).first
+      next if !wish
+      user = wish.users.where.not('users.avatar' => nil).sample
+      user = wish.users.sample if !user
+      x << {
+        others_count:count-1,
+        count: count,
+        wish_id: wish.id,
+        wish_url: Rack::Utils.escape(wish.text),
+        wish: wish.conjugate,
+        text: wish.text,
+        me_too: false,#(current_user && current_user.wishes.exists?(wish.id) ? true : false),
+        #user:UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar),
+        user: user.slice(:name, :id, :avatar),
+        create: false
+      }
+    end
+
+    render json:x
+  end
+
+
   def index
 
     base = UserWish
@@ -121,7 +152,7 @@ class Api::WishesController < ApplicationController
         wish_url: Rack::Utils.escape(wish.text),
         wish: wish.conjugate,
         text: wish.text,
-        me_too: (current_user && current_user.wishes.exists?(wish.id) ? true : false),
+        me_too: false,#(current_user && current_user.wishes.exists?(wish.id) ? true : false),
         #user:UserWish.where(id:wish.user_wish_ids.sample).first.user.slice(:name, :id, :avatar),
         user: user.slice(:name, :id, :avatar),
         create: false

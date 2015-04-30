@@ -19,7 +19,12 @@ Rails.application.routes.draw do
     resources :registrations
     resources :chances
     resources :comments
-    resources :supports
+    resources :supports do
+      collection do
+        get 'statements'
+        get 'crowdbar'
+      end
+    end
     resources :payments
     resources :drawings
     resources :questions
@@ -33,6 +38,9 @@ Rails.application.routes.draw do
       end
     end
     resources :wishes do
+      collection do
+        get 'top'
+      end
       member do
         get :users
         get :stories

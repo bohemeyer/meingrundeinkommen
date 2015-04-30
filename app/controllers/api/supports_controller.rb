@@ -1,6 +1,6 @@
 class Api::SupportsController < ApplicationController
 
-  #caches_page :index
+  caches_page :crowdbar, :statements
 
 
   def create
@@ -29,16 +29,17 @@ class Api::SupportsController < ApplicationController
     render json: s
   end
 
+  def crowdbar
+    render json: Support.where("comment is not null and payment_method = 'crowdbar'").limit(20)
+  end
+
+  def statements
+    render json: Support.where('comment is not null and payment_completed is not null').limit(30).order(:updated_at => :desc)
+  end
+
   def index
     if current_user && current_user.admin? and params[:admin]
      render json: Support.where('payment_method = "bank" or payment_method like "paypal%"').order(:id => :desc)
-    else
-      if params[:crowdbar]
-       render json: Support.where("comment is not null and payment_method = 'crowdbar'").limit(20)
-      else
-        render json: Support.where('comment is not null and payment_completed is not null').limit(30).order(:updated_at => :desc)
-      end
-    end
   end
 
   def show

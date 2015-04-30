@@ -147,9 +147,7 @@ angular.module "Crowdbar", ["Flag"]
 
 
 
-    Support.query(
-      crowdbar: true
-    ).then (testimonials) ->
+    Support.get_crowdbar_statements().then (testimonials) ->
       $scope.testimonials = testimonials
 
 
