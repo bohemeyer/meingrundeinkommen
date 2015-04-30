@@ -40,6 +40,7 @@ class Api::SupportsController < ApplicationController
   def index
     if current_user && current_user.admin? and params[:admin]
      render json: Support.where('payment_method = "bank" or payment_method like "paypal%"').order(:id => :desc)
+    end
   end
 
   def show
