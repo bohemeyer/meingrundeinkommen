@@ -5,7 +5,7 @@ Rails.application.configure do
   config.cache_classes = true
 
 
-  config.action_controller.perform_caching = true
+  config.action_controller.perform_caching = false
   #config.action_controller.page_cache_directory = "#{Rails.root.to_s}/public/cache"
 
   # Eager load code on boot. This eager loads most of Rails and
