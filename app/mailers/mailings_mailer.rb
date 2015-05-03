@@ -7,17 +7,17 @@ class MailingsMailer < MassMandrill::MandrillMailer
 
   def prepare_recipients(groups,group_keys)
 
-    users = User.all
+    users = User
     groups.each_with_index do |g,i|
-      if self.possible_user_groups.include? g
+      g2 = "#{g}#"
+      if self.possible_user_groups.include?(g) || self.possible_user_groups.include?(g2)
         if group_keys[i].empty?
             users = users.send(g)
         else
-            users = users.send(g.sub!('#',''),group_keys[i])
+            users = users.send(g.sub('#',''),group_keys[i])
         end
       end
     end
-
     return users
   end
 
@@ -38,8 +38,6 @@ class MailingsMailer < MassMandrill::MandrillMailer
                  ]
       }
     end
-
-    puts merge_vars
 
     template_content = [{ :name => 'body', :content => content }]
 

@@ -83,23 +83,22 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
 
       return
 
-
     $scope.sendMail = (test = true)->
-      if test || confirm('Sicher?')
-        $scope.mail.sending = true
-        new Mailing(
-          groups: $scope.group_selection
-          group_keys: $scope.group_keys
-          body: $scope.mail.body
-          send: true
-          test: test
-          subject: $scope.mail.subject
-        ).create().then (response) ->
-          $scope.mail.sending = false
-          alert 'Test versendet' if test
-          alert 'E-Mails versendet' if !test
-
-      return
+      $scope.recalculate_receipients().then ->
+        if test || confirm("Mail an #{$scope.m.count} User versenden?")
+          $scope.mail.sending = true
+          new Mailing(
+            groups: $scope.group_selection
+            group_keys: $scope.group_keys
+            body: $scope.mail.body
+            send: true
+            test: test
+            subject: $scope.mail.subject
+          ).create().then (response) ->
+            $scope.mail.sending = false
+            alert 'Test versendet' if test
+            alert 'E-Mails versendet' if !test
+        return
 
     $scope.search_for_payment = ->
       Payment.query(
