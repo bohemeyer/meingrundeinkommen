@@ -38,7 +38,7 @@ class Api::HomepagesController < ApplicationController
     #crowdcard = JSON.parse(File.read('public/crowdcard.json'))
 
     #temp
-    crowdcard_amount = 1329
+    crowdcard_amount = 3380
 
     # crowdcard_daily = JSON.parse(File.read('public/crowdcard_daily.json'))
     # crowdcard_sum = 0
