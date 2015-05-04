@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     resources :statistics
     resources :notifications
     resources :registrations
+    resources :twitter_chances
     resources :chances
     resources :comments
     resources :supports do
