@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   scope :with_newsletter, lambda { where(newsletter: true) }
   scope :confirmed, lambda { where('confirmed_at is not null') }
   scope :participating, lambda { includes(:chances).where(chances: { :confirmed => true })}
-  #scope :not_participating, lambda { includes(:chances).where(chances: { :confirmed => false })}
+  scope :not_participating, -> { where.not(:id => Chance.where(chances: { :confirmed => true }).select(:user_id).uniq) }
   scope :has_code, lambda { includes(:chances).where.not(chances: { :code => nil })}
   scope :with_crowdbar, lambda { includes(:flags).where(flags: {name: 'hasCrowdbar', value_boolean: true}) }
   scope :without_crowdbar, lambda { includes(:flags).where(flags: {name: 'hasCrowdbar', value_boolean: false}) }
