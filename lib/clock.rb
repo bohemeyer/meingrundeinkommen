@@ -24,6 +24,18 @@ module Clockwork
     end
 
 
+    if job == "crowdbar.stats"
+
+      response = HTTParty.get('http://bar.mein-grundeinkommen.de/crowd_bar_stats.json')
+      json = JSON.parse(response.body)
+
+      File.open("../public/crowdbar.json", "w+") do |f|
+        f.write(json.to_json)
+      end
+
+    end
+
+
     if job == "clear.cache"
       cache_dir = ActionController::Base.page_cache_directory
       FileUtils.rm_r(Dir.glob(cache_dir+"/*")) rescue Errno::ENOENT
@@ -53,6 +65,7 @@ module Clockwork
 
   every(5.minutes, 'newsletter.send')
   every(3.minutes, 'cache.news')
+  every(3.minutes, 'crowdbar.stats')
   every(10.minutes, 'clear.cache')
   every(20.minutes, 'bank.check')
 end

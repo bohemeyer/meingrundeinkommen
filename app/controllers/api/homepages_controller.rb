@@ -53,8 +53,7 @@ class Api::HomepagesController < ApplicationController
       #crowdbar_amount = crowdbar_yesterday
 
     #crowdbar
-    cb_stats = HTTParty.get('http://bar.mein-grundeinkommen.de/crowd_bar_stats.json')
-    cb_json = JSON.parse(cb_stats.body)
+    cb_json = JSON.parse(File.read('public/crowdbar.json'))
 
     crowdbar_amount = cb_json["total_commission"] * 0.9
 
