@@ -32,16 +32,22 @@ require 'json'
 
 #       letters = ['[1-12]','[13-24]','[25-36]','[37-48]','[49-60]']
 
-        number = digits.join(",")
+        number = digits.join("")
 
 
 
-        if Chance.where("code LIKE ?", "#{number}%").present?
+        if Chance.where("code LIKE ?", "%#{number}").present?
           data[i][:niete] = false
-          if digits.count == 4
-            data[i][:user] = Chance.where("code = ?", "#{number}").first.user
-            data[i][:isChild] = Chance.where("code = ?", "#{number}").first.is_child
-            data[i][:childName] = Chance.where("code = ?", "#{number}").first.first_name
+          if digits.count == 7
+            winner = Chance.where("code = ?", "#{number}").first
+            if winner.user
+              data[i][:user] = winner.user
+            else
+              data[i][:user] = { :name => "Twitter-Nutzer @#{winner.last_name}", :id => 0 }
+            end
+
+            data[i][:isChild] = winner.is_child
+            data[i][:childName] = winner.first_name
           else
             data[i][:user] = false
           end

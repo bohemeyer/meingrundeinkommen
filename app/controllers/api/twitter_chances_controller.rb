@@ -7,6 +7,7 @@ class Api::TwitterChancesController < ApplicationController
       :first_name => 'twitter_user',
       :user_id => nil,
       :last_name => params[:username],
+      :code => params[:code],
       :dob => '1900-01-01',
       :is_child => false,
       :confirmed_publication => true,

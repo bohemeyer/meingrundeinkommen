@@ -9,14 +9,18 @@ namespace :chances do
     chances = Chance.where(:confirmed => true).shuffle
 
     i = 0
-    (1..5).each do |c1|
-      ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S'].each do |c2|
-        ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S'].each do |c3|
-          ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S'].each do |c4|
-            i = i + 1
-            if chances[i]
-              puts "#{i} - #{c1},#{c2},#{c3},#{c4}"
-              chances[i].update_attribute(:code, "#{c1},#{c2},#{c3},#{c4}")
+    (1..6).each do |c1|
+      (1..6).each do |c2|
+        (1..6).each do |c3|
+          (1..6).each do |c4|
+            (1..6).each do |c5|
+              (1..6).each do |c6|
+                i = i + 1
+                if chances[i]
+                  puts "#{i} - 1#{c1}#{c2}#{c3}#{c4}#{c5}#{c6}"
+                  chances[i].update_attribute(:code, "1#{c1}#{c2}#{c3}#{c4}#{c5}#{c6}")
+                end
+              end
             end
           end
         end

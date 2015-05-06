@@ -17,7 +17,12 @@
                <div class="well">
 Am Donnerstag, dem 7. Mai um 18 Uhr verlosen wir das 11. Grundeinkommen während <a href="https://re-publica.de/session/wir-grundeinkommen-eingefuehrt-haben-und-session-bge-12000-eu-verlosen">unseres Talks auf der re:publica</a> in Berlin. Kommt vorbei (Stage 8) oder schaut euch hier den Video-Livestream an.
 </div>
-                <a href="#" disabled target="_blank" class="btn btn-color btn-large">Zum Livestream (Do ab 18 Uhr)</a>
+
+              <iframe width="600" height="450" src="//www.youtube.com/embed/ZVnGNVIxlYQ?autoplay=1" frameborder="0" allowfullscreen></iframe>
+
+
+
+                <!-- <br><a href="http://rp15.mein-grundeinkommen.de" target="_blank" class="btn btn-color btn-large"><i class="fa fa-twitter"></i> Noch schnell teilnehmen</a> -->
 
 <br>
                <a class="btn btn-grey btn-pad" ng-click="verlosung_erklaert()">So funktioniert die Auslosung</a>
@@ -55,7 +60,7 @@ Am Donnerstag, dem 7. Mai um 18 Uhr verlosen wir das 11. Grundeinkommen während
             <br>
             <alert ng-if="current_drawing.number.length > 1 && current_drawing.niete && current_drawing.done">NIETE</alert>
             <br><div class="margin-top-30 row">
-             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets | limitTo:6" class="well huge"><span ng-if="current_drawing.done && (current_drawing.done || (current.user && current.user.admin))">{{diget.value}}</span><i ng-if=" !current_drawing.done || (!diget.value || (!current_drawing.done && !(current.user && current.user.admin)))" class="fa fa-refresh" style="color:#ccc"></i></span>
+             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets | limitTo:7" class="well huge"><span ng-if="current_drawing.done && (current_drawing.done || (current.user && current.user.admin))">{{diget.value}}</span><i ng-if=" !current_drawing.done || (!diget.value || (!current_drawing.done && !(current.user && current.user.admin)))" class="fa fa-refresh" style="color:#ccc"></i></span>
 
             </div>
             <br>
@@ -118,6 +123,9 @@ Am Donnerstag, dem 7. Mai um 18 Uhr verlosen wir das 11. Grundeinkommen während
                </div>
 
                   <a href="/support"  analytics-on="click" analytics-event="Link zu Startnext geklickt" class="btn btn-special btn-color btn-large margin-top-30"><i class="icon-heart"></i> Jetzt unterstützen!</a>
+
+                  <br><br>
+                  <b>Oder</b>: Einfach eine SMS mit „meinbge5“ (5 Euro) oder „meinbge10“ (10 Euro) an die 81190 senden.
 
 <br><br><br><br><br><br>
 </div>
