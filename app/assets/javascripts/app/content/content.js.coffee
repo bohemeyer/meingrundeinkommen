@@ -30,10 +30,6 @@ angular.module("content", ['ng-breadcrumbs'])
       .when "/gewinnspielbedingungen",
         templateUrl: "/assets/gewinnspielbedingungen.html"
 
-      .when "/advocateeurope",
-        templateUrl: "/assets/advocateeurope.html"
-
-
 
       # Redirects
       ###################################
