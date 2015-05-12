@@ -30,8 +30,8 @@ angular.module("content", ['ng-breadcrumbs'])
       .when "/gewinnspielbedingungen",
         templateUrl: "/assets/gewinnspielbedingungen.html"
 
-      .when "/advocate-europe",
-        templateUrl: "/assets/advocateEurope.html"
+      .when "/advocateeurope",
+        templateUrl: "/assets/advocateeurope.html"
 
 
 
