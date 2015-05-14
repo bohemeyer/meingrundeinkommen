@@ -25,7 +25,7 @@ angular.module("home", ["Wish","Support","Winner","rails"])
     Support.get($routeParams.thanks_for_support).then (support) ->
       Support.thanks_for_support(support)
 
-  Support.query().then (supports) ->
+  Support.get_statements().then (supports) ->
     result = []
     if supports.length > 2
       while (supports.length > 0)
@@ -61,21 +61,21 @@ angular.module("home", ["Wish","Support","Winner","rails"])
       i = i + 1
       $scope.news.push p if i < 4
 
-  Wish.query().then (wishes) ->
-    $scope.wishes = data
+  Wish.top().then (wishes) ->
+    $scope.wishes = wishes
 
   Wish.latest().then (wishes) ->
     $scope.latest_wishes = wishes[0..9]
     $scope.portraits = wishes[15..20]
 
-  $scope.$watch (->
-    $scope.pagination.current_page
-  ), (nv) ->
-    Wish.query
-      page: nv
-    .then (wishes) ->
-      $scope.wishes = wishes
-    return
+  # $scope.$watch (->
+  #   $scope.pagination.current_page
+  # ), (nv) ->
+  #   Wish.query
+  #     page: nv
+  #   .then (wishes) ->
+  #     $scope.wishes = wishes
+  #   return
 
 
   $scope.video_content = 'video_preview.html'

@@ -12,7 +12,7 @@ Rails.application.configure do
   # your application in memory, allowing both thread web servers
   # and those relying on copy on write to perform better.
   # Rake tasks automatically ignore this option for performance.
-  config.eager_load = true
+  config.eager_load = false
 
   #config.action_mailer.delivery_method = :mailjet
   config.action_mailer.default_url_options = {
@@ -27,7 +27,7 @@ Rails.application.configure do
     :port      => 587, # ports 587 and 2525 are also supported with STARTTLS
     :enable_starttls_auto => true, # detects and uses STARTTLS
     :user_name => "admin@mein-grundeinkommen.de",
-    :password  => "6e9axsx9xGIKginQUbJuMA",
+    :password  => "inTTDfiANNdrbuLsULo0xA",
     #:user_name => Rails.application.secrets.mandrill_user,
     #:password  => Rails.application.secrets.mandrill_password, # SMTP password is any valid API key
     :authentication => 'login', # Mandrill supports 'plain' or 'login'
@@ -49,7 +49,7 @@ Rails.application.configure do
 
   # Compress JavaScripts and CSS.
   #config.assets.js_compressor = :uglifier
-  # config.assets.css_compressor = :sass
+  config.assets.css_compressor = :sass
 
   # Do not fallback to assets pipeline if a precompiled asset is missed.
   #config.assets.compile = false

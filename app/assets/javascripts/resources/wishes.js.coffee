@@ -16,6 +16,10 @@ angular.module "Wish", ["rails"]
       Wish.query {},
         forUser: 'user_'
 
+    Wish.top = (query) ->
+      Wish.query {},
+        id: 'top'
+
     Wish.forUser = (user_id) ->
       Wish.query {},
         forUser: 'users/' + user_id + '/'

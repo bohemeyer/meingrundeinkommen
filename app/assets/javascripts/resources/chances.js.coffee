@@ -108,6 +108,7 @@ angular.module "Chance", ["rails","Support"]
         chance.dob = c.dob_year + '-' + c.dob_month + '-' + c.dob_day
         chance.is_child = c.isChild
         chance.confirmed_publication = $scope.confirmed_publication
+        chance.mediacoverage = $scope.mediacoverage
         chance.remember_data = $scope.remember_data
         chance.city = $scope.city
 
@@ -162,6 +163,7 @@ angular.module "Chance", ["rails","Support"]
       $scope.chances_form =
         chances: $scope.current.user.chances
       $scope.confirmed_publication = $scope.current.user.chances[0].confirmed_publication
+      $scope.mediacoverage = $scope.current.user.chances[0].mediacoverage
       $scope.remember_data = $scope.current.user.chances[0].remember_data
       $scope.city = $scope.current.user.chances[0].city
       $scope.sanitizeChances()

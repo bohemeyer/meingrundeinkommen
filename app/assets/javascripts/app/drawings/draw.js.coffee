@@ -28,6 +28,8 @@ angular.module("draw", ["Drawing",'ng-breadcrumbs'])
           value: ''
         ,
           value: ''
+        ,
+          value: ''
         ]
     ]
 

@@ -1,4 +1,4 @@
-angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Payment"])
+angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Payment", "Mailing"])
 .config [
   "$routeProvider"
   ($routeProvider) ->
@@ -16,16 +16,23 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
   "Statistic"
   "Flag"
   "Payment"
+  "Mailing"
 
-  ($scope, Support, Registration, Crowdcard, Statistic, Flag, Payment) ->
+  ($scope, Support, Registration, Crowdcard, Statistic, Flag, Payment, Mailing) ->
 
     $scope.u = {}
     $scope.u.search = ''
+    $scope.pymnt = {}
+    $scope.pymnt.search = ''
+    $scope.mail = {}
+    $scope.mail.body = '<p>Hallo *|name|*,</p><p><br></p><p><br></p><p><br></p><p>Dein Mein-Grundeinkommen-Team</p><p><br></p><hr><p>Mein Grundeinkommen bei <a href="http://www.facebook.com/MeinGrundeinkommen">Facebook</a> &amp; <a href="http://www.twitter.com/meinbge">Twitter</a> | Keine weiteren Mails erhalten: <a href="https://www.mein-grundeinkommen.de/subscriptions/*|uid|*?email=*|email|*">Hier</a> klicken</p>'
+    $scope.mail.subject = ""
+    $scope.mail.sending = false
 
-    Support.query(
-      admin: true
-    ).then (supports) ->
-      $scope.supports = supports
+    # Support.query(
+    #   admin: true
+    # ).then (supports) ->
+    #   $scope.supports = supports
 
     # Crowdcard.query(
     #   admin: true
@@ -44,6 +51,62 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
 
 
 
+    $scope.group_selection = ['with_newsletter','confirmed']
+    $scope.group_keys = ['','']
+
+    new Mailing(
+      groups: $scope.group_selection
+      group_keys: $scope.group_keys
+    ).create().then (response) ->
+      $scope.m = response
+
+
+    $scope.recalculate_receipients = ->
+      new Mailing(
+        groups: $scope.group_selection
+        group_keys: $scope.group_keys
+      ).create().then (response) ->
+        $scope.m = response
+
+
+    $scope.toggleGroupSelection = (group) ->
+      idx = $scope.group_selection.indexOf(group)
+      # is currently selected
+      if idx > -1
+        $scope.group_selection.splice idx, 1
+        $scope.group_keys.splice idx, 1
+      else
+        $scope.group_selection.push group
+        $scope.group_keys.push ""
+
+      $scope.recalculate_receipients()
+
+      return
+
+    $scope.sendMail = (test = true)->
+      $scope.recalculate_receipients().then ->
+        if test || confirm("Mail an #{$scope.m.count} User versenden?")
+          $scope.mail.sending = true
+          new Mailing(
+            groups: $scope.group_selection
+            group_keys: $scope.group_keys
+            body: $scope.mail.body
+            send: true
+            test: test
+            subject: $scope.mail.subject
+          ).create().then (response) ->
+            $scope.mail.sending = false
+            alert 'Test versendet' if test
+            alert 'E-Mails versendet' if !test
+        return
+
+    $scope.search_for_payment = ->
+      Payment.query(
+        admin: true
+        q: $scope.pymnt.search
+      ).then (payments) ->
+        $scope.payments = payments
+
 
     $scope.search_for_user = ->
       console.log $scope.u.search
@@ -55,6 +118,27 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
         q: email
       ).then (users) ->
         $scope.users = users
+
+
+    $scope.deletePayment = (payment) ->
+      if confirm('wirklich löschen?')
+        new Payment(
+          id: payment.id
+          admin: true
+        ).delete()
+        .then () ->
+          $scope.payments.splice($scope.payments.indexOf(payment), 1)
+
+
+    $scope.togglePayment = (payment) ->
+      if confirm('wirklich?')
+        new Payment(
+          id: payment.id
+          admin: true
+          active: !payment.active
+        ).update()
+        .then () ->
+          $scope.payments[$scope.payments.indexOf(payment)].active = !payment.active
 
 
     $scope.delete_user = (user) ->

@@ -30,6 +30,7 @@ angular.module("content", ['ng-breadcrumbs'])
       .when "/gewinnspielbedingungen",
         templateUrl: "/assets/gewinnspielbedingungen.html"
 
+
       # Redirects
       ###################################
       .when "/crowdbar",

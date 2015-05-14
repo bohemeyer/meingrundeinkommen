@@ -9,16 +9,16 @@ namespace :chances do
     chances = Chance.where(:confirmed => true).shuffle
 
     i = 0
-    (0..36).each do |c1|
-      ["K1","K2","K3"].each do |c2|
-        ["r","s"].each do |c3|
-          ["g","u"].each do |c4|
-            (0..36).each do |c5|
-              ["r","s"].each do |c6|
+    (1..6).each do |c1|
+      (1..6).each do |c2|
+        (1..6).each do |c3|
+          (1..6).each do |c4|
+            (1..6).each do |c5|
+              (1..6).each do |c6|
                 i = i + 1
                 if chances[i]
-                  puts "#{i} - #{c1},#{c2},#{c3},#{c4},#{c5},#{c6}"
-                  chances[i].update_attribute(:code, "#{c1},#{c2},#{c3},#{c4},#{c5},#{c6}")
+                  puts "#{i} - 1#{c1}#{c2}#{c3}#{c4}#{c5}#{c6}"
+                  chances[i].update_attribute(:code, "1#{c1}#{c2}#{c3}#{c4}#{c5}#{c6}")
                 end
               end
             end

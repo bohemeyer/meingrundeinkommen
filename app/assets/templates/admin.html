@@ -18,6 +18,50 @@
 	</tab>
 
 
+	<tab heading="Mailings">
+  		<div class="container" style="padding:30px">
+  			<div class="col-md-4">
+	  			<h3 class="title">Empfänger_innen:</h3>
+	  			<div ng-repeat="group in m.groups" >
+	  			<label>
+				  <input
+				    type="checkbox"
+				    name="groups[]"
+				    value="{{group}}"
+				    ng-checked="group_selection.indexOf(group) > -1"
+				    ng-click="toggleGroupSelection(group)"
+				  > {{group}}
+				  <input ng-change="recalculate_receipients()" type="text" ng-show="group.slice(-1) == '#' && group_selection.indexOf(group) > -1" ng-model="group_keys[group_selection.indexOf(group)]">
+				</label>
+				<br>
+			</div>
+			<hr>
+			<div class="well"><h3>{{m.count}} Empfänger_innen</h3>
+				Variablen:
+				<ul>
+					<li>*|name|*</li>
+					<li>*|real_first_name|*</li>
+					<li>*|ch_betrag|*</li>
+					<li>*|ch_id|*</li>
+
+				</ul>
+			</div>
+
+			</div>
+			<div class="col-md-8">
+				<div class="well">Betreff: <input type="text" ng-model="mail.subject">
+				</div>
+
+				<div text-angular ng-model="mail.body"></div>
+
+
+				<a ng-click="sendMail(true)" class="btn btn-normal btn-grey"><i class="fa fa-outbox"></i> Test an mich senden</a>
+				<span ng-show="mail.sending">Mails werden versendet...</span>
+				<a ng-hide="mail.sending" ng-click="sendMail(false)" class="btn btn-large btn-color"><i class="fa fa-envelope"></i> {{m.count}} Mails jetzt senden</a>
+			</div>
+		</div>
+	</tab>
+
 
 	<tab heading="User">
 
@@ -143,7 +187,7 @@
 	</tab>
  -->
 
-	<tab heading="Bank-Supports">
+	<!-- <tab heading="Bank-Supports">
 
 		<div class="well text-center">
 			<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="search">
@@ -162,9 +206,9 @@
 				<td>{{support.id}}</td>
 				<td>{{support.nickname}}</td>
 				<td>{{support.amountTotal}}</td>
-				<td><!-- <div ng-if="support.avatar" class="testimonial-image pull-left">
+				<td><div ng-if="support.avatar" class="testimonial-image pull-left">
 	                    <img src="{{support.avatar.avatar.thumb.url}}">
-	                </div>  --><textarea ng-model="support.comment"></textarea></td>
+	                </div> <textarea ng-model="support.comment"></textarea></td>
 				<td>
 					<a href="#" ng-if="!support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-grey">Bestätigen</a>
 					<a href="#" ng-if="support.paymentCompleted" ng-click="changeStatus(support)" class="btn btn-normal btn-color"><i class="fa fa-check"></i></a>
@@ -172,31 +216,48 @@
 			</tr>
 		</table>
 
-	</tab>
+	</tab> -->
 
 
 	<tab heading="Crowdhörnchen">
 
 		<div class="well text-center">
-			<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="search">
+			<i class="fa fa-search big"></i> <input type="text" class="big" ng-model="pymnt.search" ng-change="search_for_payment()">
 		</div>
 
 		<table class="table">
 			<tr>
 				<td>ID</td>
-				<td>Kontoinahber_in</td>
-				<td>Amount Total</td>
-				<td>Amount Spende</td>
+				<td>User</td>
+				<td>Inhaber_in</td>
+				<td>IBAN</td>
+				<td>Gesamt</td>
+				<td>Spende</td>
 				<td>Aktiv?</td>
+				<td>First Mail am</td>
+				<td></td>
 			</tr>
 
 			<tr ng-repeat="payment in payments | filter:search">
 				<td>{{payment.id}}</td>
-				<td>{{payment.bankOwner}}</td>
-				<td>{{payment.amountTotal}}</td>
-				<td>{{payment.amountInternal}}</td>
+				<td>{{payment.userId}}</td>
+				<td><a href="mailto:{{payment.userEmail}}">{{payment.userFirstName}} {{payment.userLastName}}</a>
+				</td>
+				<td>{{payment.accountIban}}</td>
+				<td>{{payment.amountTotal}}€</td>
+				<td>{{payment.amountSociety}}€</td>
 				<td>
-					{{payment.active}}
+					<span class="fa fa-check" ng-show="payment.active"></span>
+					<span class="fa fa-close" ng-hide="payment.active"></span>
+					 |
+					<a ng-click="togglePayment(payment)" ng-show="payment.active">pausieren</a>
+					<a ng-click="togglePayment(payment)" ng-hide="payment.active">aktivieren</a>
+				</td>
+				<td>
+					{{payment.sentFirstNotificationAt}}
+				</td>
+				<td>
+					<a ng-click="deletePayment(payment)">Löschen</a>
 				</td>
 			</tr>
 		</table>

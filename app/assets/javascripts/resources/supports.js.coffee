@@ -9,6 +9,14 @@ angular.module "Support", ["rails"]
       name: "support"
     )
 
+    Support.get_crowdbar_statements = ->
+      Support.query {},
+        id: 'crowdbar'
+
+    Support.get_statements = ->
+      Support.query {},
+        id: 'statements'
+
 
     Support.thanks_for_support = (support, template = 'thanks_for_support', size = 'md') ->
       modalInstance = $modal.open(

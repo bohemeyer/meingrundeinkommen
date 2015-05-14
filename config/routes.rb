@@ -17,9 +17,15 @@ Rails.application.routes.draw do
     resources :statistics
     resources :notifications
     resources :registrations
+    resources :twitter_chances
     resources :chances
     resources :comments
-    resources :supports
+    resources :supports do
+      collection do
+        get 'statements'
+        get 'crowdbar'
+      end
+    end
     resources :payments
     resources :drawings
     resources :questions
@@ -33,6 +39,9 @@ Rails.application.routes.draw do
       end
     end
     resources :wishes do
+      collection do
+        get 'top'
+      end
       member do
         get :users
         get :stories
@@ -51,10 +60,12 @@ Rails.application.routes.draw do
       end
     end
     resource :homepages
+    resources :mailings
   end
   resources :users
   resources :payments
   resource :crowdapp
+  resources :subscriptions
 
 
   # Temp for the german language

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315204836) do
+ActiveRecord::Schema.define(version: 20150427143857) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -31,6 +31,8 @@ ActiveRecord::Schema.define(version: 20150315204836) do
     t.boolean  "remember_data",         default: false
     t.string   "crowdcard_code"
     t.boolean  "confirmed",             default: false
+    t.boolean  "mediacoverage",         default: false
+    t.string   "phone"
   end
 
   add_index "chances", ["first_name", "last_name", "dob"], name: "index_chances_on_first_name_and_last_name_and_dob", unique: true
@@ -128,12 +130,13 @@ ActiveRecord::Schema.define(version: 20150315204836) do
     t.string   "account_bank"
     t.string   "account_iban"
     t.string   "account_bic"
-    t.boolean  "active",             default: true
+    t.boolean  "active",                     default: true
     t.datetime "activated_at"
     t.datetime "paused_at"
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.date     "sent_first_notification_at"
   end
 
   create_table "questions", force: true do |t|

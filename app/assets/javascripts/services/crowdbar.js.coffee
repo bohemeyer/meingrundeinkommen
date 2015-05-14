@@ -19,15 +19,15 @@ angular.module "Crowdbar", ["Flag"]
     #firefox
     #$http.get("chrome://firebug/content/annotations.json")
     if this.runs_in_this_browser()
-      $http.get("chrome-extension://mjeadmcnffmdlplbdceeolmdgdlimhib/manifest.json")
-      .success (manifest) ->
-        deferred.resolve manifest.version
-        deferred.promise
-      .error ->
-        periodical_crowdbar_test2 = $interval(crowdbar_checker, interval, loops)
-        .then ->
-          $interval.cancel(periodical_crowdbar_test2)
-          deferred.resolve false
+      #$http.get("chrome-extension://mjeadmcnffmdlplbdceeolmdgdlimhib/manifest.json")
+      #.success (manifest) ->
+      #  deferred.resolve manifest.version
+      #  deferred.promise
+      #.error ->
+      periodical_crowdbar_test2 = $interval(crowdbar_checker, interval, loops)
+      .then ->
+        $interval.cancel(periodical_crowdbar_test2)
+        deferred.resolve false
     else
       deferred.resolve false
 
@@ -147,9 +147,7 @@ angular.module "Crowdbar", ["Flag"]
 
 
 
-    Support.query(
-      crowdbar: true
-    ).then (testimonials) ->
+    Support.get_crowdbar_statements().then (testimonials) ->
       $scope.testimonials = testimonials
 
 

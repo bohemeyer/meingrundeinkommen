@@ -213,6 +213,7 @@
                                        name="bic"
                                        ng-model="vm.user.bank.bic"
                                        id="bic"
+                                       ng-required="vm.bicRequired"
                                        ng-minlength="8"
                                        ng-maxlength="11"
                                        ng-pattern="'([a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}([a-zA-Z0-9]{3})?)'"
@@ -222,6 +223,7 @@
                                     <div class="help-block" ng-message="minlength"><span translate="VALIDATION_MIN" translate-value-length="8"></span></div>
                                     <div class="help-block" ng-message="maxlength"><span translate="VALIDATION_MAX" translate-value-length="11"></span></div>
                                     <div class="help-block" ng-message="pattern"><span translate="VALIDATION_BIC"></span></div>
+                                    <div class="help-block" ng-message="required"><span translate="VALIDATION_REQUIRED"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -236,6 +238,7 @@
                                        ng-model="vm.user.bank.iban"
                                        id="iban"
                                        ng-iban
+                                       ng-change="vm.ibanChanged()"
                                        placeholder="{{ 'FORM_IBAN_PLACEHOLDER' | translate }}"
                                        required class="form-control">
                                 <div ng-messages="squirrelForm.iban.$error" ng-if="squirrelForm.iban.$dirty || squirrelForm.$dirty">

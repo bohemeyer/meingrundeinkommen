@@ -6,6 +6,9 @@
         .config(function ($routeProvider) {
 
             $routeProvider
+                .when('/advocate-europe', {
+                    templateUrl: '/assets/advocateEurope.html'
+                })
                 .when('/support', {
                     redirectTo: '/support/crowdfund'
                 })

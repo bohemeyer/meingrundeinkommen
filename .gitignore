@@ -177,7 +177,6 @@ crashlytics-build.properties
 
 .bundle
 
-config/
 config/environments/development.rb
 config/initializers/mailjet.rb
 config/sunspot.yml
