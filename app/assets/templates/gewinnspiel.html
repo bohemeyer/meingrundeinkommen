@@ -4,10 +4,10 @@
       <h3 style="margin-bottom:0"><i class="fa fa-check"></i> Du nimmst an der Verlosung des 10. Grundeinkommens am 17. April teil!</h3>
     </alert> -->
 
-    <alert>Ein weiteres Grundeinkommen wird im Juni verlost, sobald es finanziert ist. Infos & Anmeldung findest du dann hier.</alert>
+    <!-- <alert>Das nächste Grundeinkommen wird Mitte Juli verlost.</alert> -->
 
     <p ng-show="!chances_form.editAllChances">
-      <h4>Das 11. Grundeinkommen in Höhe von 12.000€ wird am 7. Mai 2015 in einem Gewinnspiel verlost.
+      <h4>Das 13. Grundeinkommen in Höhe von 12.000€ wird am 7. Mai 2015 in einem Gewinnspiel verlost.
         <a href="/gewinnspielbedingungen">Gewinnspielbedingungen</a>
     | <a href="/faq/verlosung">Häufige Fragen</a>
       </h4>
@@ -15,7 +15,7 @@
 
     <div class="text-center" ng-hide="current.participates()">
 
-        <!-- <a class="btn-large btn-color btn" href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen!</a> -->
+        <a class="btn-large btn-color btn" href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen!</a>
    <!-- <div class="text-center"> -->
 
            <!-- <h3 class="margin-top-20">Die Anmeldung zum 6. & 7. Grundeinkommen hat am <b>21.02.</b> geendet!</h3>
@@ -32,7 +32,7 @@
         <div ng-show="current.participates()">
 
           <alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
-            <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst an der Verlosung des 11. Grundeinkommens am 7. Mai teil!</h3>
+            <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst an der Verlosung des 13. Grundeinkommens Mitte Juli teil!</h3>
           </alert>
 
           <ul ng-hide="chances_form.editAllChances">
