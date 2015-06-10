@@ -31,60 +31,6 @@
             <a class="btn-large btn-color btn-bge" href="/register">Anmelden!</a>
         </section>
 
-        <section class="col-xs-12 text-center bge-link">
-            <h1>Was andere tun würden?</h1>
-            <h2>Lass dich überraschen und inspirieren.</h2>
-
-            <ul class="listbox">
-
-                <li ng-repeat="wish in wishes" ng-show="wish.text">
-                    <div class="pull-left">
-                        <div class="testimonial-image "><img alt="" ng-src="{{wish.user.avatar.avatar.thumb.url}}">
-                        </div>
-                    </div>
-
-                    <a ng-click="me_too(wish)" analytics-on="click" analytics-event="geklickt: Ich auch (Startseite)"
-                       href="#" class="btn-normal btn-pad pull-right"
-                       ng-class="{disabled: wish.meToo, 'btn-grey': wish.meToo, 'btn-color': !wish.meToo}">
-                     <span ng-show="wish.meToo">
-                        <i class="fa fa-check"></i> Du auch!
-                     </span>
-                     <span ng-hide="wish.meToo">
-                        <i class="fa fa-lightbulb"></i> Ich auch!
-                     </span>
-                    </a>
-
-                    <a href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}"
-                       class="edit_button_hidden btn-normal btn-pad pull-right btn-grey">
-                        <i class="fa fa-angle-right"></i> ansehen
-                    </a>
-
-                    <div class="textblock">
-                        <a href="/menschen/{{wish.user.id}}">{{wish.user.name}}</a>
-                        <span ng-show="wish.othersCount > 0"> und <b>{{wish.othersCount}}</b> andere würden</span>
-
-                        <span ng-show="wish.othersCount == 0"> würde</span>
-                        <br>
-                        <a style="font-size:18px" href="/mit-grundeinkommen-wuerde-ich/{{wish.wishUrl}}/{{wish.wishId}}">
-                            {{wish.othersCount == 0 ? wish.wish.he : wish.wish.they}}
-                        </a>
-                    </div>
-
-                </li>
-
-            </ul>
-            <!--MEHR ZEIGEN BUTTON-->
-            <div class="text-center">
-                <a ng-hide="show_more_wishes" ng-click="show_more_wishes = true" href="#"
-                   class="btn-grey btn-small btn-pad">Mehr anzeigen</a>
-                <pagination ng-show="show_more_wishes" total-items="home.numberOfWishesRaw"
-                            ng-model="pagination.current_page" boundary-links="true" first-text="Anfang"
-                            next-text="Weiter" previous-text="Zurück" max-size="10" last-text="Ende"
-                            rotate="true"></pagination>
-            </div>
-
-            <hr>
-        </section>
         <section class="col-xs-12">
             <div class="row">
                 <div class="col-xs-12 col-sm-8 text-center">
