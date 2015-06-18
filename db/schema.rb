@@ -11,9 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150427143857) do
+ActiveRecord::Schema.define(version: 20150617210707) do
 
   create_table "chances", force: true do |t|
+    t.integer  "user_id"
     t.date     "dob"
     t.boolean  "is_child"
     t.integer  "country_id"
@@ -22,7 +23,6 @@ ActiveRecord::Schema.define(version: 20150427143857) do
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "user_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "code2"
@@ -36,7 +36,6 @@ ActiveRecord::Schema.define(version: 20150427143857) do
   end
 
   add_index "chances", ["first_name", "last_name", "dob"], name: "index_chances_on_first_name_and_last_name_and_dob", unique: true
-  add_index "chances", ["user_id"], name: "index_chances_on_user_id"
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -58,7 +57,7 @@ ActiveRecord::Schema.define(version: 20150427143857) do
     t.text     "house_number"
     t.text     "zip_code"
     t.text     "city"
-    t.text     "country",         default: "de"
+    t.text     "country"
     t.integer  "number_of_cards", default: 1
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -75,41 +74,6 @@ ActiveRecord::Schema.define(version: 20150427143857) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  create_table "follows", force: true do |t|
-    t.string   "follower_type"
-    t.integer  "follower_id"
-    t.string   "followable_type"
-    t.integer  "followable_id"
-    t.datetime "created_at"
-  end
-
-  add_index "follows", ["followable_id", "followable_type"], name: "fk_followables"
-  add_index "follows", ["follower_id", "follower_type"], name: "fk_follows"
-
-  create_table "ideas", force: true do |t|
-    t.string   "name"
-    t.text     "emo_pitch"
-    t.text     "pitch"
-    t.text     "details"
-    t.text     "needs"
-    t.integer  "up_votes"
-    t.integer  "down_votes"
-    t.string   "potential"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "likes", force: true do |t|
-    t.string   "liker_type"
-    t.integer  "liker_id"
-    t.string   "likeable_type"
-    t.integer  "likeable_id"
-    t.datetime "created_at"
-  end
-
-  add_index "likes", ["likeable_id", "likeable_type"], name: "fk_likeables"
-  add_index "likes", ["liker_id", "liker_type"], name: "fk_likes"
 
   create_table "notifications", force: true do |t|
     t.datetime "created_at"
@@ -191,6 +155,7 @@ ActiveRecord::Schema.define(version: 20150427143857) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.boolean  "tweeted"
   end
 
   create_table "todos", force: true do |t|
@@ -238,9 +203,6 @@ ActiveRecord::Schema.define(version: 20150427143857) do
     t.boolean  "crowdbar_not_found",     default: false
     t.integer  "winner",                 default: 0
     t.boolean  "admin",                  default: false
-    t.string   "provider",               default: "",    null: false
-    t.string   "uid",                    default: "",    null: false
-    t.text     "tokens"
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true

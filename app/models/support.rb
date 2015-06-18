@@ -1,3 +1,6 @@
 class Support < ActiveRecord::Base
-	belongs_to :user
+  include TweetSupportConcern
+
+  belongs_to :user
+
 end
