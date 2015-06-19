@@ -11,6 +11,7 @@ angular.module("login", [
 .controller "LoginViewController", LoginViewController = ($rootScope, $routeParams, $scope, $http, $location, Security, $parse) ->
 
   if Security.isAuthenticated()
+    console.info(Security.isAuthenticated())
     $location.path( "/boarding" )
 
   $scope.just_confirmed = if $routeParams['confirmed'] then $routeParams['confirmed'] else ''
