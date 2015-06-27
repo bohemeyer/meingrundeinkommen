@@ -18630,6 +18630,7 @@ namespace :squirrels do
       if p.active
 	      if IBANTools::IBAN.valid?(p.account_iban.upcase) && !p.amount_total.nil?
 
+	      	puts ">#{p.account_bic}<"
 
 	        sdd[(i/1000).floor].add_transaction(
 	          # Name of the debtor, in German: "Zahlungspflichtiger"
