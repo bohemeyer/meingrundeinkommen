@@ -35,6 +35,9 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
   "$timeout"
   ($scope, has_crowdbar, Crowdbar, $location, home, $routeParams, $modal, $http, $timeout) ->
 
+    if !$scope.current.user
+      $location.path("/login")
+
     $scope.user = $scope.current.user if $scope.current.user
     $scope.steps = {}
     $scope.own_profile = true
