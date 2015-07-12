@@ -3016,3 +3016,7 @@ html,body{height:100%;}
     overflow: scroll;
     border: 10px solid white;
 }
+
+.footer-bottom{
+    height: 80px;
+}
