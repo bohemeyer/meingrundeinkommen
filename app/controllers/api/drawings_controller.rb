@@ -38,7 +38,7 @@ require 'json'
 
         if Chance.where("code LIKE ?", "%#{number}").present?
           data[i][:niete] = false
-          if digits.count == 7
+          if digits.count == 6
             winner = Chance.where("code = ?", "#{number}").first
             if winner.user
               data[i][:user] = winner.user
