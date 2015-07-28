@@ -31,9 +31,9 @@
 
         <div ng-show="current.participates()">
 
-          <alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
+          <!--<alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
             <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst an der Verlosung des 13. Grundeinkommens am 18. Juli teil!</h3>
-          </alert>
+          </alert>-->
 
           <ul ng-hide="chances_form.editAllChances">
             <li ng-repeat="chance in current.user.chances | orderBy:chance.isChild">
