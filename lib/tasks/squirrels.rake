@@ -18583,10 +18583,10 @@ namespace :squirrels do
     get_bic_for = Hash[banks.scan(/^(\d{8}).{131}([A-Z\d]{11})/).map {|key, value| [key, value]}]
 
 
-    due_date = '01.07.2015'
+    due_date = '01.08.2015'
 
 
-    payments = Payment.where('id < 4262') #was < 3733
+    payments = Payment.where('id < 4686') #was < 4262
 
 
 
@@ -18599,7 +18599,7 @@ namespace :squirrels do
     	sdd << SEPA::DirectDebit.new(
 	      # Name of the initiating party and creditor, in German: "Auftraggeber"
 	      # String, max. 70 char
-	      name:       'Mein Grundeinkommen e.V. i.G.',
+	      name:       'Mein Grundeinkommen e.V.',
 
 	      # OPTIONAL: Business Identifier Code (SWIFT-Code) of the creditor
 	      # String, 8 or 11 char
