@@ -1,77 +1,79 @@
 <div class="container">
 
-    <alert ng-show="!chances_form.editAllChances && current.hasCode()" type="success" class="margin-top-30">
-        <h3 style="margin-bottom:0"><i class="fa fa-check"></i> Du nimmst an der Verlosung des 14. Grundeinkommens am
-            22. August teil!</h3>
+    <!-- <alert ng-show="!chances_form.editAllChances && current.hasCode()" type="success" class="margin-top-30">
+      <h3 style="margin-bottom:0"><i class="fa fa-check"></i> Du nimmst an der Verlosung des 14. Grundeinkommens am 22. August teil!</h3>
     </alert>
 
     <!-- <alert>Das nächste Grundeinkommen wird Mitte Juli verlost.</alert> -->
 
-    <p ng-show="!chances_form.editAllChances">
-      <h4>Das 14. Grundeinkommen in Höhe von 12.000€ wird am 22. August 2015 in einem Gewinnspiel verlost.
+    <!-- <p ng-show="!chances_form.editAllChances">
+      <h4>Das 13. Grundeinkommen in Höhe von 12.000€ wird Mitte Juli 2015 in einem Gewinnspiel verlost.
         <a href="/gewinnspielbedingungen">Gewinnspielbedingungen</a>
     | <a href="/faq/verlosung">Häufige Fragen</a>
       </h4>
-    </p>
+    </p> -->
 
-    <div class="text-center" ng-hide="current.participates()">
+    <!-- <div class="text-center" ng-hide="current.participates()"> -->
 
-        <a class="btn-large btn-color btn" href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen!</a>
+        <!-- <a class="btn-large btn-color btn" href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen!</a> -->
+   <!-- <div class="text-center"> -->
 
-    </div>
+           <!-- <h3 class="margin-top-20">Die Anmeldung zum 6. & 7. Grundeinkommen hat am <b>21.02.</b> geendet!</h3>
 
-    <div ng-show="current.participates()">
+          <hr>
+ -->
+          <!-- <div class="well text-center">
+            Nächste Grundeinkommensverlosung: 21. März 2015
+          </div> -->
 
-        <alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
-          <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst an der Verlosung des 14. Grundeinkommens am 22. August teil!</h3>
-        </alert>
 
-        <ul ng-hide="chances_form.editAllChances">
+      <!-- </div> -->
+
+        <div ng-show="current.participates()">
+
+          <!--<alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
+            <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst an der Verlosung des 13. Grundeinkommens am 18. Juli teil!</h3>
+          </alert>-->
+
+          <ul ng-hide="chances_form.editAllChances">
             <li ng-repeat="chance in current.user.chances | orderBy:chance.isChild">
-                <div ng-if="chance.id" class="margin-top-30">
-                    <div style="padding-left:30px;">
-                        <p>
-                            <b>Vollständiger Name (exakt wie auf Ausweis):</b> {{chance.first_name}}
-                            {{chance.last_name}}
-                            <br>
-                            <b>Geburtsdatum:</b> {{chance.dob | date:'dd.MM.yyyy'}}
-                        </p>
-                    </div>
+              <div ng-if="chance.id" class="margin-top-30">
+                <div style="padding-left:30px;">
+                <p>
+                  <b>Vollständiger Name (exakt wie auf Ausweis):</b> {{chance.first_name}} {{chance.last_name}}
+                  <br>
+                  <b>Geburtsdatum:</b> {{chance.dob | date:'dd.MM.yyyy'}}
+                </p>
                 </div>
-                <hr>
+              </div>
+              <hr>
             </li>
-        </ul>
+          </ul>
 
-        <a ng-show="!chances_form.editAllChances" ng-click="chances_form.editAllChances = true" href="#"
-           class="btn btn-color btn-small"><i class="fa fa-pencil"></i> Daten ändern</a>
-
-
-        <div ng-show="chances_form.editAllChances" ng-include="'/assets/gewinnspiel_form.html'"></div>
-
-    </div>
+          <a ng-show="!chances_form.editAllChances" ng-click="chances_form.editAllChances = true" href="#" class="btn btn-color btn-small" ><i class="fa fa-pencil"></i> Daten ändern</a>
 
 
-    <h3 class="title">&nbsp;</h3>
+          <div ng-show="chances_form.editAllChances" ng-include="'/assets/gewinnspiel_form.html'"></div>
 
-    <div ng-show="!user.newsletter">
-        <div class="text-center"><h3>Du musst zu jeder weiteren Verlosung hier erneut am Gewinnspiel teilnehmen. Gern
-            erinnern wir dich daran per Mail:</h3></div>
-        <div class="form-group text-left">
-            <div class="col-sm-offset-1 col-sm-11 text-left">
-                <div class="checkbox">
-                    <label>
-                        <input name="newsletter" ng-model="user.newsletter" type="checkbox"
-                               ng-click="setNewsletterFlag()" analytics-on="click"
-                               analytics-event="Newsletter abboniert (im Gewinnspieltab)"> Bitte informiert mich per
-                        E-Mail über weitere Verlosungstermine und bei wichtigen Änderungen auf der Seite.
-                    </label>
-                </div>
-            </div>
         </div>
-    </div>
-    <div ng-show="user.newsletter">
-        <alert type="success"><i class="icon-envelope"></i> Wir erinnern dich rechtzeitig per E-Mail wenn eine neue
-            Verlosung ansteht!
-        </alert>
-    </div>
-</div>
+
+
+
+        <h3 class="title">&nbsp;</h3>
+
+        <div ng-show="!user.newsletter">
+            <div class="text-center"><h3>Du musst zu jeder weiteren Verlosung hier erneut am Gewinnspiel teilnehmen. Gern erinnern wir dich daran per Mail:</h3></div>
+          <div class="form-group text-left">
+            <div class="col-sm-offset-1 col-sm-11 text-left">
+              <div class="checkbox">
+                <label>
+                  <input name="newsletter" ng-model="user.newsletter" type="checkbox" ng-click="setNewsletterFlag()" analytics-on="click" analytics-event="Newsletter abboniert (im Gewinnspieltab)"> Bitte informiert mich per E-Mail über weitere Verlosungstermine und bei wichtigen Änderungen auf der Seite.
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div ng-show="user.newsletter">
+          <alert type="success"><i class="icon-envelope"></i> Wir erinnern dich rechtzeitig per E-Mail wenn eine neue Verlosung ansteht!</alert>
+        </div>
+      </div>
