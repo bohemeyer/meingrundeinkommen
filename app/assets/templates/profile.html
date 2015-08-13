@@ -47,16 +47,16 @@
     <!-- <div ng-show="own_profile"> -->
     <!-- <ul> -->
     <ul ng-show="user.chances[0].code">
-    <li><b>Losnummer für die Verlosung am 18. Juli:</b></li>
-    <!-- <li ng-show="user.chances.length == 0"><i>Bitte erst <a href="/boarding?trigger=wants_to_participate">teilnehmen</a></i></li> -->
-<!--     <li ng-show="user.chances.length > 0"><i>- Wird am Abend des 17. Juli vergeben. -</i></li> -->
-    <li ng-repeat="chance in user.chances">
+    <!--<li><b>Losnummer für die Verlosung am 18. Juli:</b></li>-->
+     <li ng-show="user.chances.length == 0"><i>Bitte erst <a href="/boarding?trigger=wants_to_participate">teilnehmen</a></i></li>
+     <li ng-show="user.chances.length > 0"><i>- Wird am Abend des 21. August vergeben. -</i></li>
+    <!--<li ng-repeat="chance in user.chances">
       <div class="well big">{{chance.code}}
         <div style="font-size:12px;font-weight:normal;">
           <span ng-show="chance.isChild">(für ein Kind)</span>
         </div>
       </div>
-    </li>
+    </li>-->
 
     <!-- <li ng-if="user.chances[0].crowdbarVerified"><b>Doppelte Chance (für <a href="/crowdbar">Crowdbar</a>-Nutzung):</b></li>
     <li ng-repeat="chance in user.chances" ng-if="chance.code2">
