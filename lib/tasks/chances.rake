@@ -9,18 +9,14 @@ namespace :chances do
     chances = Chance.where(:confirmed => true).shuffle
 
     i = 0
-    (1..5).each do |c1|
-      (1..6).each do |c2|
-        (1..6).each do |c3|
-          (1..6).each do |c4|
-            (1..6).each do |c5|
-              (1..6).each do |c6|
-                i = i + 1
-                if chances[i]
-                  puts "#{i} - #{c1}#{c2}#{c3}#{c4}#{c5}#{c6}"
-                  chances[i].update_attribute(:code, "#{c1}#{c2}#{c3}#{c4}#{c5}#{c6}")
-                end
-              end
+    (1..47).each do |c1|
+      ((c1+1)..48).each do |c2|
+        ((c2+1)..49).each do |c3|
+          ['Superzahl: gerade','Superzahl: ungerade'].each do |c4|
+            i = i + 1
+            if chances[i]
+              puts "#{i} - #{c1} • #{c2} • #{c3} • #{c4}"
+              chances[i].update_attribute(:code, "#{c1} • #{c2} • #{c3} • #{c4}")
             end
           end
         end
