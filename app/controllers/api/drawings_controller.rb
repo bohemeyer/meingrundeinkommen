@@ -35,7 +35,7 @@ require 'json'
         number = digits.join(" • ")
 
 
-        if Chance.where("code LIKE ?", "%#{number}").present?
+        if Chance.where("code LIKE ?", "#{number}%").present?
           data[i][:niete] = false
           if digits.count == 4
             winner = Chance.where("code = ?", "#{number}").first
