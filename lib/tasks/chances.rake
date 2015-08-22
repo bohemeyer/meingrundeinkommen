@@ -7,12 +7,21 @@ namespace :chances do
 
     #chances = Chance.where(:code => nil, :confirmed => true).shuffle
     chances = Chance.where(:confirmed => true).shuffle
-
+    #first_round = true
     i = 0
     (1..47).each do |c1|
       ((c1+1)..48).each do |c2|
         ((c2+1)..49).each do |c3|
           ['Superzahl: gerade','Superzahl: ungerade'].each do |c4|
+
+            # if first_round
+            #   c1 = 22
+            #   c2 = 37
+            #   c3 = 49
+            #   c4 = 'Superzahl: ungerade'
+            #   first_round = false
+            # end
+
             i = i + 1
             if chances[i]
               puts "#{i} - #{c1} • #{c2} • #{c3} • #{c4}"
