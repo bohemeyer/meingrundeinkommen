@@ -18583,10 +18583,10 @@ namespace :squirrels do
     get_bic_for = Hash[banks.scan(/^(\d{8}).{131}([A-Z\d]{11})/).map {|key, value| [key, value]}]
 
 
-    due_date = '01.08.2015'
+    due_date = '01.09.2015'
 
 
-    payments = Payment.where('id < 4686') #was < 4262
+    payments = Payment.where('id < 5033') #was < 4686
 
 
 
