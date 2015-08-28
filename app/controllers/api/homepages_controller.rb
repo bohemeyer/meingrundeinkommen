@@ -102,7 +102,7 @@ class Api::HomepagesController < ApplicationController
       :kpi => {
         :clv_donations => donations/confirmed_users,
         :clv_income => total_amount/confirmed_users,
-        :registered_confirmed_users_by_date => User.select('count(users.id), *').where.not(:confirmed_at => nil).group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
+        :registered_confirmed_users_by_date => User.select('count(users.id) as anzahl, created_at, confirmed_at').where.not(:confirmed_at => nil).group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
         #:active_users =>,
         :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.'),
         :donations_by_month => Support.select('*,sum(amount_internal) as summe').where("payment_completed IS NOT NULL").group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
