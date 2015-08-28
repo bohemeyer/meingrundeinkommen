@@ -32,13 +32,15 @@ class Api::HomepagesController < ApplicationController
     own_funding_paypal -= own_funding_paypal * 0.019
     own_funding_paypal -= own_funding_paypal_q.count * 0.19
 
-    own_funding = Support.where("payment_method = 'bank' AND payment_completed IS NOT NULL").sum(:amount_for_income)
+    own_funding_query = Support.where("payment_method = 'bank' AND payment_completed IS NOT NULL")
+    own_funding = own_funding_query.sum(:amount_for_income)
 
     #Crowdcard
     #crowdcard = JSON.parse(File.read('public/crowdcard.json'))
 
     #temp
-    crowdcard_amount = 5500
+    crowdcard_total = 6516
+    crowdcard_amount = 6516 * 0.9
 
     # crowdcard_daily = JSON.parse(File.read('public/crowdcard_daily.json'))
     # crowdcard_sum = 0
@@ -58,6 +60,12 @@ class Api::HomepagesController < ApplicationController
     crowdbar_amount = cb_json["total_commission"] * 0.9
 
     total_amount = startnext + crowdfunding_amount + own_funding_paypal + own_funding + crowdbar_amount + crowdcard_amount
+
+    donations = Support.where("payment_completed IS NOT NULL").sum(:amount_internal) + cb_json["total_commission"] * 0.1 + crowdcard_total * 0.1
+
+    confirmed_users = User.where.not(:confirmed_at => nil).count
+
+    newsletter_users = User.where.not(:confirmed_at => nil).where(:newsletter => true).count
 
     #Prognose:
     #last_synced_day = Support.where(:payment_completed => true, :payment_method => 'crowdbar').order(created_at: :desc).limit(1).first
@@ -90,7 +98,20 @@ class Api::HomepagesController < ApplicationController
       :squirrel_monthly_amount => number_with_precision(Payment.where(:active => true).sum(:amount_total), precision: 0, delimiter: ''),
       :prediction => prediction,
       :number_of_participants => number_with_precision(number_of_participants, precision: 0, delimiter: '.'),
-      :supports => Support.where(:comment => true, :payment_completed => false).order(:created_at => :desc).limit(12)
+      :supports => Support.where(:comment => true, :payment_completed => false).order(:created_at => :desc).limit(12),
+      :kpi => {
+        :clv_donations => donations/confirmed_users,
+        :clv_income => total_amount/confirmed_users,
+        :registered_confirmed_users_by_date => User.select('count(users.id), *').where.not(:confirmed_at => nil).group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
+        #:active_users =>,
+        :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.'),
+        :donations_by_month => Support.select('*,sum(amount_internal) as summe').where("payment_completed IS NOT NULL").group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
+        :basic_income_funding_by_month => own_funding_query.group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
+        #:newsletter_signup_ratio_per_day => ,
+        :newsletter_signup_ratio => newsletter_users / confirmed_users,
+        :social_groups_distribution => State.select('states.text, count(state_users.id) AS statecount').joins(:state_users).group("states.id").order('statecount desc')
+
+      }
     }
     render json: homepage_data
   end
