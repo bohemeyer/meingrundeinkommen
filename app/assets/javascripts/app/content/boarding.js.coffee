@@ -61,7 +61,7 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
       'gewinnspiel'
       #'verify_crowdcard'
 
-      'verify_gewinnspiel'
+      #'verify_gewinnspiel'
 
       'gewinnspiel_thanks'
 
@@ -150,7 +150,7 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
 
         when 'gewinnspiel'
           #if $scope.trigger != 'crowdbar_installed' && $scope.trigger != 'crowdapp_installed' && !$scope.current.participates() && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
-          if !$scope.current.participates() && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
+          if !$scope.current.participates() || $scope.trigger == 'wants_to_participate'
             if !test
               $scope.steps.show_next_button = true
             true
