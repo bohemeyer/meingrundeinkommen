@@ -25,7 +25,7 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
     $scope.pymnt = {}
     $scope.pymnt.search = ''
     $scope.mail = {}
-    $scope.mail.body = '<p>Hallo *|name|*,</p><p><br></p><p><br></p><p><br></p><p>Dein Mein-Grundeinkommen-Team</p><p><br></p><hr><p>Mein Grundeinkommen bei <a href="http://www.facebook.com/MeinGrundeinkommen">Facebook</a> &amp; <a href="http://www.twitter.com/meinbge">Twitter</a> | Keine weiteren Mails erhalten: <a href="https://www.mein-grundeinkommen.de/subscriptions/*|uid|*?email=*|email|*">Hier</a> klicken</p>'
+    $scope.mail.body = '<p>Hallo *|name|*,</p><p><br></p><p><br></p><p><br></p><p>Dein Mein-Grundeinkommen-Team</p><p><br></p><hr><p>Mein Grundeinkommen bei <a href="http://www.facebook.com/MeinGrundeinkommen">Facebook</a> &amp; <a href="http://www.twitter.com/meinbge">Twitter</a> | Keine weiteren Mails erhalten: <a href="https://www.mein-grundeinkommen.de/subscriptions/*|uid|*?email=*|email|*">Hier</a> klicken</p><p>Per SMS unterstützen (5€ oder 10€): „meinbge5" oder „meinbge10" an die Nummer 81190 senden</p>'
     $scope.mail.subject = ""
     $scope.mail.sending = false
 
