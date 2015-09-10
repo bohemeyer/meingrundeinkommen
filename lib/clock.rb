@@ -14,12 +14,22 @@ module Clockwork
 
     if job == "cache.news"
 
-      #response = HTTParty.get('http://blog.meinbge.de/wp-json/posts?filter[posts_per_page]=500')
       response = HTTParty.get('http://blog.meinbge.de/wp-json/wp/v2/posts?filter[posts_per_page]=500')
       json = JSON.parse(response.body)
+      posts = []
+      puts json.length
+      json.each do |opost|
+        post = opost
+        thumb = JSON.parse(HTTParty.get("http://blog.meinbge.de/wp-json/wp/v2/media/#{opost['featured_image']}").body)
+        post['thumb'] = thumb['media_details']['sizes']['post-thumbnail']['source_url'] if thumb['media_details']['sizes']['post-thumbnail']
+        post['image'] = thumb['media_details']['sizes']['large']['source_url']          if thumb['media_details']['sizes']['large']
+        author = JSON.parse(HTTParty.get("http://blog.meinbge.de/wp-json/wp/v2/users/#{opost['author']}").body)
+        post['authorname'] = author['name'] if author['name']
+        posts << post
+      end
 
       File.open("../public/news.json", "w+") do |f|
-        f.write(json.to_json)
+        f.write(posts.to_json)
       end
 
     end
@@ -64,9 +74,9 @@ module Clockwork
 
   end
 
-  every(5.minutes, 'newsletter.send')
+  #every(5.minutes, 'newsletter.send')
   every(3.minutes, 'cache.news')
-  every(3.minutes, 'crowdbar.stats')
-  every(10.minutes, 'clear.cache')
-  every(20.minutes, 'bank.check')
+  #every(3.minutes, 'crowdbar.stats')
+  #every(10.minutes, 'clear.cache')
+  #every(20.minutes, 'bank.check')
 end
