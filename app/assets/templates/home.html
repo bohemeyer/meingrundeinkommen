@@ -459,7 +459,7 @@
                         <small><i class="fa fa-calendar"></i> {{article.date | date:'dd.MM.yyyy'}}</small>
                         <h4><a href="/blog/{{article.id}}">{{article.title.rendered}}</a></h4>
 
-                        <div ng-bind-html="article.excerpt | unsafe"></div>
+                        <div ng-bind-html="article.excerpt.rendered | unsafe"></div>
                         <a href="/blog/{{article.id}}">Weiter lesen <i class="fa fa-arrow-right"></i></a>
                     </div>
                 </li>
