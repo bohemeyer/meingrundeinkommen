@@ -30,11 +30,18 @@ angular.module("blog", ['ng-breadcrumbs','Comment'])
     #url += "?" + serializeQuery(query)  if serializeQuery(query)
     $http.get(url).success (data) ->
       $scope.posts = data
+      console.log(data)
 
-      if $routeParams['postId']
-        angular.forEach data, (post) ->
-          if parseInt(post.ID) == parseInt($routeParams['postId'])
-            $scope.post = post
+      angular.forEach data, (post) ->
+        if post.featured_image
+          $http.get("http://blog.meinbge.de/wp-json/wp/v2/media/#{post.featured_image}").success (img) ->
+            post.thumb = img.media_details.sizes['post-thumbnail'].source_url
+            post.image = img.media_details.sizes.large.source_url
+
+        if $routeParams['postId'] && parseInt(post.id) == parseInt($routeParams['postId'])
+          $http.get("http://blog.meinbge.de/wp-json/wp/v2/users/#{post.author}").success (author) ->
+            post.authorname = author.name
+          $scope.post = post
           return
       return
 

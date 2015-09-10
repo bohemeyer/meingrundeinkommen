@@ -6,7 +6,7 @@
   <article class="post hentry">
 
      <header class="post-header">
-        <h1 class="content-title">{{post.title}}</h1>
+        <h1 class="content-title">{{post.title.rendered}}</h1>
         <div class="blog-entry-meta">
            <div class="blog-entry-meta-date">
               <i class="fa fa-clock-o"></i>
@@ -14,7 +14,7 @@
            </div>
            <div class="blog-entry-meta-author">
               <i class="fa fa-user"></i>
-              <a class="blog-entry-meta-author" href="#">{{post.author.nickname}}</a>
+              <a class="blog-entry-meta-author" href="#">{{post.authorname}}</a>
            </div>
            <!-- <div class="blog-entry-meta-tags">
               <i class="fa fa-tags"></i>
@@ -31,11 +31,11 @@
      <div class="post-image">
         <span class="img-hover" style="opacity: 0;"></span>
         <span class="fullscreen" style="top: 65%; opacity: 0;"><i class="fa fa-search"></i></span>
-        <img alt="" src="{{post.featured_image.attachment_meta.sizes['large'].url}}">
+        <img alt="" src="{{post.image}}">
      </div>
 
      <div class="post-content">
-        <div class="post-content" ng-bind-html="post.content | unsafe">
+        <div class="post-content" ng-bind-html="post.content.rendered | unsafe">
        </div>
      </div>
   </article>
