@@ -14,7 +14,8 @@ module Clockwork
 
     if job == "cache.news"
 
-      response = HTTParty.get('http://blog.meinbge.de/wp-json/posts?filter[posts_per_page]=500')
+      #response = HTTParty.get('http://blog.meinbge.de/wp-json/posts?filter[posts_per_page]=500')
+      response = HTTParty.get('http://blog.meinbge.de/wp-json/wp/v2/posts?filter[posts_per_page]=500')
       json = JSON.parse(response.body)
 
       File.open("../public/news.json", "w+") do |f|
