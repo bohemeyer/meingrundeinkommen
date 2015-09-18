@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
 
   has_many :supports
 
+  has_many :crowdcards
+
   has_one :payment
 
   has_one :payment, :dependent => :destroy
@@ -42,6 +44,7 @@ class User < ActiveRecord::Base
   scope :has_code, lambda { includes(:chances).where.not(chances: { :code => nil })}
   scope :with_crowdbar, lambda { includes(:flags).where(flags: {name: 'hasCrowdbar', value_boolean: true}) }
   scope :without_crowdbar, lambda { includes(:flags).where(flags: {name: 'hasCrowdbar', value_boolean: false}) }
+  scope :has_crowdcard, -> { joins(:crowdcards).distinct }
   scope :sign_up_after, ->(date) { where('created_at > ?',date)}
   scope :is_squirrel, lambda { includes(:payment).where(payments: {:active => true}) }
   scope :frst_notification_not_sent, lambda { includes(:payment).where(payments: { :sent_first_notification_at => nil }) }
