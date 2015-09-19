@@ -72,10 +72,10 @@ namespace :chances do
 
 
     #cc_no = []
-    cc_no << (1..300).to_a
+    #cc_no = (1..300).to_a
     #cc_no << (12626..12750).to_a
 
-    cc_no.each do |cc|
+    (1..300).each do |cc|
       #blub.each do |cc|
         puts "#{cc}"
         pw = Devise.friendly_token.first(8)
