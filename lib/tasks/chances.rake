@@ -9,23 +9,19 @@ namespace :chances do
     chances = Chance.where(:confirmed => true).shuffle
     #first_round = true
     i = 0
-    (1..47).each do |c1|
-      ((c1+1)..48).each do |c2|
-        ((c2+1)..49).each do |c3|
-          ['Superzahl: gerade','Superzahl: ungerade'].each do |c4|
-
-            # if first_round
-            #   c1 = 22
-            #   c2 = 37
-            #   c3 = 49
-            #   c4 = 'Superzahl: ungerade'
-            #   first_round = false
-            # end
-
-            i = i + 1
-            if chances[i]
-              puts "#{i} - #{c1} • #{c2} • #{c3} • #{c4}"
-              chances[i].update_attribute(:code, "#{c1} • #{c2} • #{c3} • #{c4}")
+    (1..5).each do |c1|
+      (1..6).each do |c2|
+        (1..6).each do |c3|
+          (1..6).each do |c4|
+            (1..6).each do |c5|
+              (1..6).each do |c6|
+                i = i + 1
+                if chances[i]
+                  # •
+                  puts "#{i} - #{c1}#{c2}#{c3}#{c4}#{c5}#{c6}"
+                  chances[i].update_attribute(:code, "#{c1}#{c2}#{c3}#{c4}#{c5}#{c6}")
+                end
+              end
             end
           end
         end
@@ -71,35 +67,35 @@ namespace :chances do
   end
 
 
-  # task :crowdjoker => :environment do
-  #   desc "setup jokers for crowdcard users on location"
+  task :crowdjoker => :environment do
+    desc "setup jokers for crowdcard users on location"
 
 
-  #   cc_no = []
-  #   cc_no << (11626..11999).to_a
-  #   cc_no << (12626..12750).to_a
+    #cc_no = []
+    cc_no << (1..300).to_a
+    #cc_no << (12626..12750).to_a
 
-  #   cc_no.each do |blub|
-  #     blub.each do |cc|
-  #       puts "#{cc}"
-  #       pw = Devise.friendly_token.first(8)
-  #       user_data = {
-  #         name: "Vor-Ort-Crowdcard Nr. #{cc}",
-  #         email: "vorortcrowdcard#{cc}@mein-grundeinkommen.de",
-  #         password: pw,
-  #         password_confirmation: pw,
-  #         datenschutz: true
-  #       }
-  #       user = User.new(user_data)
-  #       user.skip_confirmation!
-  #       if user.valid?
-  #         if user.save!
-  #           user.chances.create(:confirmed_publication => true, :first_name => "vorOrt", :last_name =>"nummer#{cc}", :dob => "1984-10-01", :code2 => "1")
-  #         end
-  #       end
-  #     end
-  #   end
-  # end
+    cc_no.each do |cc|
+      #blub.each do |cc|
+        puts "#{cc}"
+        pw = Devise.friendly_token.first(8)
+        user_data = {
+          name: "Vor-Ort-Crowdcard Nr. C#{cc}",
+          email: "vorortcrowdcard#{cc}@mein-grundeinkommen.de",
+          password: pw,
+          password_confirmation: pw,
+          datenschutz: true
+        }
+        user = User.new(user_data)
+        user.skip_confirmation!
+        if user.valid?
+          if user.save!
+            user.chances.create(:confirmed_publication => true, :first_name => "vorOrt", :last_name =>"nummerC#{cc}", :dob => "1984-10-01", :confirmed => true)
+          end
+        end
+      #end
+    end
+  end
 
 
 end

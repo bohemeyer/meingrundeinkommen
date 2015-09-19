@@ -32,12 +32,12 @@ require 'json'
 
 #       letters = ['[1-12]','[13-24]','[25-36]','[37-48]','[49-60]']
 
-        number = digits.join(" • ")
+        number = digits.join("") # •
 
 
         if Chance.where("code LIKE ?", "#{number}%").present?
           data[i][:niete] = false
-          if digits.count == 4
+          if digits.count == 6
             winner = Chance.where("code = ?", "#{number}").first
             if winner.user
               data[i][:user] = winner.user
