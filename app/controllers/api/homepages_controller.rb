@@ -66,8 +66,6 @@ class Api::HomepagesController < ApplicationController
 
     confirmed_users = User.where.not(:confirmed_at => nil).count
 
-    newsletter_users = User.where.not(:confirmed_at => nil).where(:newsletter => true).count
-
     #Prognose:
     #last_synced_day = Support.where(:payment_completed => true, :payment_method => 'crowdbar').order(created_at: :desc).limit(1).first
     prediction = {}
@@ -103,8 +101,7 @@ class Api::HomepagesController < ApplicationController
       :kpi => {
         :clv_donations => donations/confirmed_users,
         :clv_income => total_amount/confirmed_users,
-        :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.'),
-        :newsletter_signup_ratio => newsletter_users / confirmed_users
+        :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.')
       }
 
 
@@ -114,9 +111,9 @@ class Api::HomepagesController < ApplicationController
     if params[:kpi]
 
       kpi_per_day = {
-        :registered_confirmed_users_by_date => User.all.where.not(:confirmed_at => nil).group("YEAR(created_at), MONTH(created_at), DAY(created_at)").count,
-        :donations_by_date => Support.all.where("payment_completed IS NOT NULL").group("YEAR(created_at), MONTH(created_at), DAY(created_at)").sum(:amount_interal) ,
-        :basic_income_funding_by_date => Support.all.where("payment_completed IS NOT NULL").group("YEAR(created_at), MONTH(created_at), DAY(created_at)").sum(:amount_for_income) ,
+        :registered_confirmed_users_by_date => User.all.where.not(:confirmed_at => nil).group("DATE(created_at)").count,
+        :donations_by_date => Support.all.where("payment_completed IS NOT NULL").group("DATE(created_at)").sum(:amount_interal) ,
+        :basic_income_funding_by_date => Support.all.where("payment_completed IS NOT NULL").group("DATE(created_at)").sum(:amount_for_income) ,
         :kpi_social_groups_distribution => State.joins(:state_users).select('count(state_users.id)').group("states.text").order('count_state_users_id desc').count('state_users.id')
       }
 
