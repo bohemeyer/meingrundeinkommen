@@ -46,7 +46,7 @@ class Api::StatisticsController < ApplicationController
         stats['Accounts'] = User.count
         stats['activeAccounts'] = User.where('confirmed_at is not null').count
         stats['newsletterSubscriptions'] = User.where('confirmed_at is not null and newsletter = 1').count
-        stats['newsletterRatio'] = (stats['newsletterSubscriptions'] / stats['activeAccounts']) * 100
+        #stats['newsletterRatio'] = (stats['newsletterSubscriptions'] / stats['activeAccounts']) * 100
         render json: stats
       }
       format.csv {

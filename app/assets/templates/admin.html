@@ -20,16 +20,16 @@
 					<td>{{home.kpi.crowdbarUsers}}</td>
 				</tr>
 				<tr>
-					<td>Newsletterquote der confirmed User:</td>
-					<td>{{home.kpi.newsletterSignupRatio}}%</td>
-				</tr>
-				<tr>
 					<td>Verteilung der sozialen Gruppen:</td>
 					<td><a target="_blank" href="/api/homepages.csv?kpi=kpi_social_groups_distribution">Herunterladen</a></td>
 				</tr>
 				<tr ng-repeat="(key,value) in stats">
 					<td>{{key}}:</td>
 					<td>{{value}} <span ng-show="key == 'Accounts'"><a target="_blank" href="/api/homepages.csv?kpi=registered_confirmed_users_by_date">Registrierungen pro Tag</a></span></td>
+				</tr>
+				<tr>
+					<td>Newsletterquote der confirmed User:</td>
+					<td>{{(stats.newsletterSubscriptions / stats.activeAccounts) * 100}}%</td>
 				</tr>
 			</table>
 		</div>

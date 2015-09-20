@@ -112,7 +112,7 @@ class Api::HomepagesController < ApplicationController
 
       kpi_per_day = {
         :registered_confirmed_users_by_date => User.all.where.not(:confirmed_at => nil).group("DATE(created_at)").count,
-        :donations_by_date => Support.all.where("payment_completed IS NOT NULL").group("DATE(created_at)").sum(:amount_interal) ,
+        :donations_by_date => Support.all.where("payment_completed IS NOT NULL").group("DATE(created_at)").sum(:amount_internal) ,
         :basic_income_funding_by_date => Support.all.where("payment_completed IS NOT NULL").group("DATE(created_at)").sum(:amount_for_income) ,
         :kpi_social_groups_distribution => State.joins(:state_users).select('count(state_users.id)').group("states.text").order('count_state_users_id desc').count('state_users.id')
       }
