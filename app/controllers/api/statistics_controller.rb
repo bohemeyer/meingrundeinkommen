@@ -37,7 +37,7 @@ class Api::StatisticsController < ApplicationController
 
         stats['crowdcardOrders'] = Crowdcard.all.count
         stats['crowdcardsOrdered'] = Crowdcard.sum(:number_of_cards)
-        #stats['participantsWithChildren'] = Chance.all.count
+        stats['participantsWithChildren'] = Chance.where(:confirmed => 1).count
         stats['participants'] = Chance.where(:is_child => 0, :confirmed => 1).count
         #stats['participants_mail_unconfirmed'] = 0
         #stats['participants_squirrel'] = 0
