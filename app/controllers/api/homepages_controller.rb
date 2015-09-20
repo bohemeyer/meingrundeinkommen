@@ -1,5 +1,6 @@
 require 'action_view'
 require 'httparty'
+require 'csv'
 include ActionView::Helpers::NumberHelper
 
 class Float
@@ -102,18 +103,36 @@ class Api::HomepagesController < ApplicationController
       :kpi => {
         :clv_donations => donations/confirmed_users,
         :clv_income => total_amount/confirmed_users,
-        :registered_confirmed_users_by_date => User.select('count(users.id) as anzahl, created_at, confirmed_at').where.not(:confirmed_at => nil).group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
-        #:active_users =>,
         :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.'),
-        :donations_by_month => Support.select('payment_completed, created_at, sum(amount_internal) as summe').where("payment_completed IS NOT NULL").group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
-        :basic_income_funding_by_month => own_funding_query.group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
-        #:newsletter_signup_ratio_per_day => ,
-        :newsletter_signup_ratio => newsletter_users / confirmed_users,
-        :social_groups_distribution => State.select('states.text, count(state_users.id) AS statecount').joins(:state_users).group("states.id").order('statecount desc')
-
+        :newsletter_signup_ratio => newsletter_users / confirmed_users
       }
+
+
     }
-    render json: homepage_data
+
+
+    if params[:kpi]
+
+      kpi_per_day = {
+        :registered_confirmed_users_by_date => User.all.where.not(:confirmed_at => nil).group("YEAR(created_at), MONTH(created_at), DAY(created_at)").count,
+        :donations_by_date => Support.all.where("payment_completed IS NOT NULL").group("YEAR(created_at), MONTH(created_at), DAY(created_at)").sum(:amount_interal) ,
+        :basic_income_funding_by_date => Support.all.where("payment_completed IS NOT NULL").group("YEAR(created_at), MONTH(created_at), DAY(created_at)").sum(:amount_for_income) ,
+        :kpi_social_groups_distribution => State.joins(:state_users).select('count(state_users.id)').group("states.text").order('count_state_users_id desc').count('state_users.id')
+      }
+
+      csv = CSV.generate() do |csv|
+        columns = ['Date']
+        columns << params[:kpi].to_s
+        csv << columns
+        kpi_per_day[params[:kpi].to_sym].each do |r|
+          csv << r
+        end
+      end
+      render text: csv
+    else
+      render json: homepage_data
+    end
+
   end
 
 end

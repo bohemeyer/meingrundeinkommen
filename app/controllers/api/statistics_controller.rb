@@ -37,12 +37,13 @@ class Api::StatisticsController < ApplicationController
 
         stats['crowdcardOrders'] = Crowdcard.all.count
         stats['crowdcardsOrdered'] = Crowdcard.sum(:number_of_cards)
-        stats['participantsWithChildren'] = Chance.all.count
+        #stats['participantsWithChildren'] = Chance.all.count
         stats['participants'] = Chance.where(:is_child => 0, :confirmed => 1).count
-        stats['participants_mail_unconfirmed'] = 0
-        stats['participants_squirrel'] = 0
-        stats['participants_no_squirrel'] = 0
-        stats['not_participating'] = 0
+        #stats['participants_mail_unconfirmed'] = 0
+        #stats['participants_squirrel'] = 0
+        #stats['participants_no_squirrel'] = 0
+        #stats['not_participating'] = 0
+        stats['Accounts'] = User.count
         stats['activeAccounts'] = User.where('confirmed_at is not null').count
         stats['newsletterSubscriptions'] = User.where('confirmed_at is not null and newsletter = 1').count
 
@@ -73,18 +74,18 @@ class Api::StatisticsController < ApplicationController
             q = " and id not in (select user_id from chances where confirmed = 1)"
           end
 
-          if params[:stat] == "participantsSquirrel"
-            q = " and id in (select user_id from chances where confirmed = 1) and id in (select user_id from payments)"
-          end
+          # if params[:stat] == "participantsSquirrel"
+          #   q = " and id in (select user_id from chances where confirmed = 1) and id in (select user_id from payments)"
+          # end
 
-          if params[:stat] == "participantsNoSquirrel"
-            q = " and id in (select user_id from chances where confirmed = 1) and id not in (select user_id from payments)"
-          end
+          # if params[:stat] == "participantsNoSquirrel"
+          #   q = " and id in (select user_id from chances where confirmed = 1) and id not in (select user_id from payments)"
+          # end
 
-          if params[:stat] == "participantsMailUnconfirmed"
-            b = "select email, REPLACE(name,',','') from users where confirmed_at is null "
-            q = "and id in (select user_id from chances where confirmed = 1)"
-          end
+          # if params[:stat] == "participantsMailUnconfirmed"
+          #   b = "select email, REPLACE(name,',','') from users where confirmed_at is null "
+          #   q = "and id in (select user_id from chances where confirmed = 1)"
+          # end
 
 
 
