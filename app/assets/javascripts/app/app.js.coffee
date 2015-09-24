@@ -33,9 +33,10 @@ window.App = angular.module('grundeinkommen',
   "Home"
   "Crowdbar"
   "$location"
+  "$cookies"
   "$modal"
 
-  ($scope, $rootScope, Security, breadcrumbs, Home, Crowdbar, $location, $modal) ->
+  ($scope, $rootScope, Security, breadcrumbs, Home, Crowdbar, $location, $cookies, $modal) ->
     $scope.current = Security
 
     $scope.breadcrumbs = breadcrumbs
@@ -44,6 +45,10 @@ window.App = angular.module('grundeinkommen',
       $rootScope.show_spinner = true
     $rootScope.$on '$routeChangeSuccess', ->
       $rootScope.show_spinner = false
+
+
+    if $location.search().bgemitdir #&& !$cookies["bgemitdir"]
+      $cookies["bgemitdir"] = $location.search().bgemitdir
 
 
     $scope.getStatus = (path) ->

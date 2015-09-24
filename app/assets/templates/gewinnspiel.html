@@ -43,6 +43,8 @@
                   <b>Vollständiger Name (exakt wie auf Ausweis):</b> {{chance.first_name}} {{chance.last_name}}
                   <br>
                   <b>Geburtsdatum:</b> {{chance.dob | date:'dd.MM.yyyy'}}
+                  <br>
+                  <span ng-if="!chance.isChild && chance.affiliate"><b>Wenn du gewinnst, gewinnt auch:</b> <img ng-src="chance.affiliateDetails.avatar.avatar.thumb.url" height="50"> {{chance.affiliateDetails.name}}</span>
                 </p>
                 </div>
               </div>

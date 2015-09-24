@@ -8,6 +8,11 @@ angular.module "User", ['rails']
       name: "user"
     )
 
+    User.find = (q) ->
+      User.query {
+        q: q
+      }
+
 
     User.suggestions = (user_id) ->
       User.query {},

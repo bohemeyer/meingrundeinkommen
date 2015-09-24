@@ -15,13 +15,31 @@ angular.module "Chance", ["rails","Support"]
   "$scope"
   "$modal"
   "Chance"
+  "User"
   "$q"
-  ($scope, $modal, Chance, $q) ->
+  "$cookies"
+  ($scope, $modal, Chance, User, $q, $cookies) ->
 
     synchronize_form_with_squirrel_state = ->
       $scope.current.user.isSquirrel = $scope.current.isSquirrel()
 
     synchronize_form_with_squirrel_state()
+
+
+    $scope.getAffiliate = (q) ->
+      User.find(q).then (users) ->
+        console.log users
+        return users
+
+
+    $scope.chooseAffiliate = (model) ->
+      $scope.affiliate = model.id
+      $scope.affiliateDetails = model
+
+    $scope.removeAffiliate = ->
+      $scope.affiliate = null
+      $scope.affiliateDetails = null
+
 
     $scope.openSquirrelModal = ->
       Squirrelmodal = $modal.open(
@@ -111,6 +129,7 @@ angular.module "Chance", ["rails","Support"]
         chance.mediacoverage = $scope.mediacoverage
         chance.remember_data = $scope.remember_data
         chance.city = $scope.city
+        chance.affiliate = $scope.affiliate
 
         if chance.id
           queries.push new Chance(chance).update().then (response) ->
@@ -126,6 +145,7 @@ angular.module "Chance", ["rails","Support"]
         $scope.submitted = false
         $scope.sanitizeChances()
         if !errors
+          $scope.current.getAffiliateDetails()
           $scope.$emit('go_to_next_step')
 
 
@@ -159,19 +179,30 @@ angular.module "Chance", ["rails","Support"]
       return
 
 
-    if $scope.current.user.chances && $scope.current.user.chances.length > 0
-      $scope.chances_form =
-        chances: $scope.current.user.chances
-      $scope.confirmed_publication = $scope.current.user.chances[0].confirmed_publication
-      $scope.mediacoverage = $scope.current.user.chances[0].mediacoverage
-      $scope.remember_data = $scope.current.user.chances[0].remember_data
-      $scope.city = $scope.current.user.chances[0].city
+    $scope.current.getAffiliateDetails().then ->
+
+      if $cookies["bgemitdir"] && ($scope.current.user.chances.length == 0 || ($scope.current.user.chances[0] && $scope.current.user.chances[0].affiliate == null))
+        $scope.affiliate = $cookies["bgemitdir"]
+        User.query {},
+          id: $cookies["bgemitdir"]
+        .then (user) ->
+          $scope.affiliateDetails = user
+
+      if $scope.current.user.chances && $scope.current.user.chances.length > 0
+        $scope.chances_form =
+          chances: $scope.current.user.chances
+        $scope.confirmed_publication = $scope.current.user.chances[0].confirmed_publication
+        $scope.mediacoverage = $scope.current.user.chances[0].mediacoverage
+        $scope.remember_data = $scope.current.user.chances[0].remember_data
+        $scope.city = $scope.current.user.chances[0].city
+        $scope.affiliate = $scope.current.user.chances[0].affiliate
+        $scope.affiliateDetails = $scope.current.user.chances[0].affiliateDetails
+        $scope.sanitizeChances()
+
+      else
+        $scope.chances_form =
+          chances: []
+
       $scope.sanitizeChances()
-
-    else
-      $scope.chances_form =
-        chances: []
-
-    $scope.sanitizeChances()
 
 ]

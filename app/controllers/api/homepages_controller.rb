@@ -1,5 +1,6 @@
 require 'action_view'
 require 'httparty'
+require 'csv'
 include ActionView::Helpers::NumberHelper
 
 class Float
@@ -99,21 +100,36 @@ class Api::HomepagesController < ApplicationController
       :prediction => prediction,
       :number_of_participants => number_with_precision(number_of_participants, precision: 0, delimiter: '.'),
       :supports => Support.where(:comment => true, :payment_completed => false).order(:created_at => :desc).limit(12),
+      :kpi_per_day => {
+        :registered_confirmed_users_by_date => User.select('count(users.id) as anzahl, created_at, confirmed_at').where.not(:confirmed_at => nil).group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
+        :donations_by_date => Support.select('payment_completed, created_at, sum(amount_internal) as summe').where("payment_completed IS NOT NULL").group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
+        :basic_income_funding_by_month => own_funding_query.group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
+      },
       :kpi => {
         :clv_donations => donations/confirmed_users,
         :clv_income => total_amount/confirmed_users,
-        :registered_confirmed_users_by_date => User.select('count(users.id) as anzahl, created_at, confirmed_at').where.not(:confirmed_at => nil).group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
         #:active_users =>,
         :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.'),
-        :donations_by_month => Support.select('payment_completed, created_at, sum(amount_internal) as summe').where("payment_completed IS NOT NULL").group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
-        :basic_income_funding_by_month => own_funding_query.group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
         #:newsletter_signup_ratio_per_day => ,
         :newsletter_signup_ratio => newsletter_users / confirmed_users,
-        :social_groups_distribution => State.select('states.text, count(state_users.id) AS statecount').joins(:state_users).group("states.id").order('statecount desc')
-
+      },
+      :kpi_social_groups => {
+        :distribution => State.select('states.text, count(state_users.id) AS statecount').joins(:state_users).group("states.id").order('statecount desc')
       }
+
     }
-    render json: homepage_data
+
+    if params[:kpi]
+      render CSV.generate() do |csv|
+        csv << column_names
+        all.each do |product|
+          csv << product.attributes.values_at(*column_names)
+        end
+      end
+    else
+      render json: homepage_data
+    end
+
   end
 
 end

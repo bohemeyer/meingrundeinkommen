@@ -17,6 +17,7 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
         has_crowdbar: [
           "Crowdbar"
           (Crowdbar) ->
+            true
             Crowdbar.verify(20).then (has_crowdbar) ->
               has_crowdbar
         ]

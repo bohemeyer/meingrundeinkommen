@@ -31,7 +31,7 @@ class UserSerializer < ActiveModel::Serializer
     else
       r = []
       object.chances.each do |c|
-        r << c.slice(:code,:code2,:is_child,:crowdbar_verified)
+        r << c.slice(:code,:code2,:is_child,:crowdbar_verified,:affiliate)
       end
       r
     end

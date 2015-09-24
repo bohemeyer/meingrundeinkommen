@@ -3,6 +3,23 @@ class Api::UsersController < ApplicationController
 
   before_filter :load_user, only:[:show,:states, :wishes]
 
+
+  def index
+    if current_user && params[:q]
+      query = User.search do
+        fulltext params[:q]
+      end
+      render json: query.results[0..20].map {|u|
+        x = {
+          name: u.name,
+          id: u.id,
+          avatar: u.avatar
+        }
+        x
+      }
+    end
+  end
+
   def states
     if current_user && @user == current_user
       render json: @user.state_users
@@ -166,7 +183,7 @@ class Api::UsersController < ApplicationController
       current_user.save
     end
 
-    render json: @user
+    render json: @user, serializer: UserSerializer
   end
 
   def load_user

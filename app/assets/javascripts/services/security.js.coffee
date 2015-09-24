@@ -7,7 +7,8 @@ angular.module "Security", ["Devise","Flag"]
   "Flag"
   "$cookies"
   "$window"
-  ($http, $q, $location, Auth, Flag, $cookies, $window) ->
+  "User"
+  ($http, $q, $location, Auth, Flag, $cookies, $window, User) ->
 
     # The public API of the service
     service =
@@ -106,6 +107,15 @@ angular.module "Security", ["Devise","Flag"]
           true
         else
           false
+
+      getAffiliateDetails: (id) ->
+        if service.user.chances && service.user.chances[0] && service.user.chances[0].affiliate
+          User.query {},
+            id: service.user.chances[0].affiliate
+          .then (user) ->
+            service.user.chances[0].affiliateDetails = user
+        else
+          Promise.resolve()
 
       has_crowdbar: ->
         service.getFlag('hasCrowdbar')
