@@ -40,7 +40,7 @@ class Api::HomepagesController < ApplicationController
     #crowdcard = JSON.parse(File.read('public/crowdcard.json'))
 
     #temp
-    crowdcard_total = 6516
+    crowdcard_total = 7187
     crowdcard_amount = crowdcard_total * 0.9
 
     # crowdcard_daily = JSON.parse(File.read('public/crowdcard_daily.json'))
@@ -65,8 +65,6 @@ class Api::HomepagesController < ApplicationController
     donations = Support.where("payment_completed IS NOT NULL").sum(:amount_internal) + cb_json["total_commission"] * 0.1 + crowdcard_total * 0.1
 
     confirmed_users = User.where.not(:confirmed_at => nil).count
-
-    newsletter_users = User.where.not(:confirmed_at => nil).where(:newsletter => true).count
 
     #Prognose:
     #last_synced_day = Support.where(:payment_completed => true, :payment_method => 'crowdbar').order(created_at: :desc).limit(1).first
@@ -108,24 +106,31 @@ class Api::HomepagesController < ApplicationController
       :kpi => {
         :clv_donations => donations/confirmed_users,
         :clv_income => total_amount/confirmed_users,
-        #:active_users =>,
-        :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.'),
-        #:newsletter_signup_ratio_per_day => ,
-        :newsletter_signup_ratio => newsletter_users / confirmed_users,
-      },
-      :kpi_social_groups => {
-        :distribution => State.select('states.text, count(state_users.id) AS statecount').joins(:state_users).group("states.id").order('statecount desc')
+        :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.')
       }
+
 
     }
 
+
     if params[:kpi]
-      render CSV.generate() do |csv|
-        csv << column_names
-        all.each do |product|
-          csv << product.attributes.values_at(*column_names)
+
+      kpi_per_day = {
+        :registered_confirmed_users_by_date => User.all.where.not(:confirmed_at => nil).group("DATE(created_at)").count,
+        :donations_by_date => Support.all.where("payment_completed IS NOT NULL").group("DATE(created_at)").sum(:amount_internal) ,
+        :basic_income_funding_by_date => Support.all.where("payment_completed IS NOT NULL").group("DATE(created_at)").sum(:amount_for_income) ,
+        :kpi_social_groups_distribution => State.joins(:state_users).select('count(state_users.id)').group("states.text").order('count_state_users_id desc').count('state_users.id')
+      }
+
+      csv = CSV.generate() do |csv|
+        columns = ['Date']
+        columns << params[:kpi].to_s
+        csv << columns
+        kpi_per_day[params[:kpi].to_sym].each do |r|
+          csv << r
         end
       end
+      render text: csv
     else
       render json: homepage_data
     end
