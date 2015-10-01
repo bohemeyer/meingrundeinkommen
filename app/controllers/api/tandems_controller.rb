@@ -11,15 +11,15 @@ class Api::TandemsController < ApplicationController
 				tandem[:invitation_accepted_at] = Time.now
 				tandem[:invitee_participates] = true
 				#send mail to inviter and inform about confirmation
-				InvitationMailer.inform_about_link_confirmation(tandem,current_user,User.find(tandem[:invitee_id])).deliver
+				#InvitationMailer.inform_about_link_confirmation(tandem,current_user,User.find(tandem[:invitee_id])).deliver
 			else #existing, mail, random
 				#check if email is already connected to existing user
 				#send invitation mail
-				if tandem[:invitation_type] == 'mail'
-					InvitationMailer.invite_new(tandem,current_user,User.find(tandem[:invitee_id])).deliver
-				else
-					InvitationMailer.invite_existing(tandem,current_user,User.find(tandem[:invitee_id])).deliver
-				end
+				#if tandem[:invitation_type] == 'mail'
+				#	InvitationMailer.invite_new(tandem,current_user,User.find(tandem[:invitee_id])).deliver
+				#else
+				#	InvitationMailer.invite_existing(tandem,current_user,User.find(tandem[:invitee_id])).deliver
+				#end
 			end
 
 		end
@@ -44,8 +44,6 @@ class Api::TandemsController < ApplicationController
 				render json: {:success => true}
 			end
 		end
-
-
 	end
 
 	def destroy
