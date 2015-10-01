@@ -10,7 +10,7 @@
 
                 <p ng-hide="current.inviter" style="font-size:140%">Was wäre, wenn Du <b>und ein Mensch, den du kennst,</b> ein Jahr Grundeinkommen hätten? <br>Probiert es aus!</p>
 
-                <div ng-show="current.inviter" class="testimonial-image-medium"><img ng-src="current.inviter.avatar.avatar.thumb.url" height="100"></div>
+                <div ng-show="current.inviter" class="testimonial-image-medium"><img ng-src="{{current.inviter.avatar.avatar.thumb.url}}" height="100"></div>
 
                 <p ng-show="current.inviter" style="font-size:140%">Was wäre, wenn <b>Du und {{current.inviter.name}}</b> ein Jahr gemeinsam Grundeinkommen hätten? <br>Probiert es aus!</p>
 

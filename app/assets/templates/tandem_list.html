@@ -6,8 +6,8 @@
     <div class="pull-left text-center" style="margin:15px;background: #F6F6F6;border: 2px solid white;border-radius: 10px;padding: 16px;box-shadow: 0px 0px 5px #000;">
 
       <div class="pull-left" style="    position: absolute;height: 30px;width: 30px;border-radius: 15px;background-color: white;margin-left: -27px;margin-top: -27px;border: 2px solid #aaa;font-size: 20px;padding-left: 1px;"><a href="#" ng-click="removeTandem(tandem)">x</a></div>
-      <div class="testimonial-image "><img ng-src="current.user.avatar.avatar.url" height="50"></div>
-      <div style="margin-left:-35px;" class="testimonial-image "><img ng-src="tandem.details.avatar.avatar.thumb.url" height="50"></div>
+      <div class="testimonial-image "><img ng-src="{{current.user.avatar.avatar.thumb.url}}" height="50"></div>
+      <div style="margin-left:-35px;" class="testimonial-image "><img ng-src="{{tandem.details.avatar.avatar.thumb.url}}" height="50"></div>
       <br> Du &
 
       <a ng-show="tandem.invitee_id && tandem.invitee_id != current.user.id" href="/menschen/{{tandem.invitee_id}}" target="_blank">{{tandem.details.name}}</a>
