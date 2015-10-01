@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar, :wishes, :states, :confirmed_at, :admin, :flags, :payment #, :crowdcards
+  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar, :wishes, :states, :confirmed_at, :admin, :flags, :payment, :tandems #, :crowdcards
 
   def email
     if (current_user && object == current_user) || (current_user && current_user.admin?)
@@ -87,6 +87,36 @@ class UserSerializer < ActiveModel::Serializer
     else
       object.payment ? object.payment.active : false
     end
+  end
+
+
+  def tandems
+
+      r = []
+      object.tandems.each do |c|
+
+        if (current_user && object == current_user) || (current_user && current_user.admin?)
+          t = {:id => c.id, :disabled_by => c.disabled_by, :invitation_type => c.invitation_type, :inviter_id => c.inviter_id, :invitee_id => c.invitee_id, :invitee_name => c.invitee_name, :invitee_email => c.invitee_email, :invitation_accepted_at => c.invitation_accepted_at, :invitee_participates => c.invitee_participates}
+        else
+          t = {:id => c.id, :inviter_id => c.inviter_id, :invitee_id => c.invitee_id, :invitee_name => c.invitee_name, :invitation_accepted_at => c.invitation_accepted_at, :invitee_participates => c.invitee_participates}
+        end
+
+        if object.id == c.inviter_id && c.invitee_id
+          u = User.find(c.invitee_id)
+          t[:details] = { :name => u.name, :avatar => u.avatar }
+        else
+          if object.id == c.inviter_id && t[:invitee_email]
+            t[:details] = { :name => t[:invitee_email], :avatar => nil }
+          end
+        end
+        if object.id == c.invitee_id && c.inviter_id
+          u = User.find(c.inviter_id)
+          t[:details] = { :name => u.name, :avatar => u.avatar }
+        end
+
+        r << t
+      end
+      r
   end
 
 end

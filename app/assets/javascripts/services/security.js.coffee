@@ -108,14 +108,11 @@ angular.module "Security", ["Devise","Flag"]
         else
           false
 
-      getAffiliateDetails: (id) ->
-        if service.user.chances && service.user.chances[0] && service.user.chances[0].affiliate
-          User.query {},
-            id: service.user.chances[0].affiliate
-          .then (user) ->
-            service.user.chances[0].affiliateDetails = user
-        else
-          Promise.resolve()
+      getInviterDetails: (id) ->
+        User.query {},
+          id: id
+        .then (user) ->
+          return user
 
       has_crowdbar: ->
         service.getFlag('hasCrowdbar')

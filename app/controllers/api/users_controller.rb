@@ -5,18 +5,31 @@ class Api::UsersController < ApplicationController
 
 
   def index
-    if current_user && params[:q]
-      query = User.search do
-        fulltext params[:q]
-      end
-      render json: query.results[0..20].map {|u|
-        x = {
-          name: u.name,
-          id: u.id,
-          avatar: u.avatar
+    if current_user
+      if params[:q]
+        query = User.search do
+          fulltext params[:q]
+        end
+        render json: query.results[0..20].map {|u|
+          if u.id != current_user.id
+            x = {
+              name: u.name,
+              id: u.id,
+              avatar: u.avatar
+            }
+          end
+          x
         }
-        x
-      }
+      end
+      if params[:rand]
+        u = User.order("RANDOM()").first
+        render json:
+          {
+            name: u.name,
+            id: u.id,
+            avatar: u.avatar
+          }
+      end
     end
   end
 

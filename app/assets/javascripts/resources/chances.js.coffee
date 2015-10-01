@@ -1,4 +1,4 @@
-angular.module "Chance", ["rails","Support"]
+angular.module "Chance", ["rails","Support","Tandem"]
 
 .factory "Chance", [
   "railsResourceFactory"
@@ -15,30 +15,19 @@ angular.module "Chance", ["rails","Support"]
   "$scope"
   "$modal"
   "Chance"
+  "Tandem"
   "User"
   "$q"
   "$cookies"
-  ($scope, $modal, Chance, User, $q, $cookies) ->
+  ($scope, $modal, Chance, Tandem, User, $q, $cookies) ->
+
+    $scope.chances = []
+    $scope.chances.affiliate_error = false
 
     synchronize_form_with_squirrel_state = ->
       $scope.current.user.isSquirrel = $scope.current.isSquirrel()
 
     synchronize_form_with_squirrel_state()
-
-
-    $scope.getAffiliate = (q) ->
-      User.find(q).then (users) ->
-        console.log users
-        return users
-
-
-    $scope.chooseAffiliate = (model) ->
-      $scope.affiliate = model.id
-      $scope.affiliateDetails = model
-
-    $scope.removeAffiliate = ->
-      $scope.affiliate = null
-      $scope.affiliateDetails = null
 
 
     $scope.openSquirrelModal = ->
@@ -75,7 +64,7 @@ angular.module "Chance", ["rails","Support"]
       if !adult
         $scope.chances_form.chances.unshift(
           isChild: false
-          dob_year: 1975
+          dob_year: 1980
           dob_month: 1
           dob_day: 1
         )
@@ -86,14 +75,22 @@ angular.module "Chance", ["rails","Support"]
     $scope.addChild = ->
       $scope.chances_form.chances.push(
         isChild: true
-        dob_year: 2000
+        dob_year: 2010
         dob_month: 1
         dob_day: 1
       )
 
     $scope.saveChances = () ->
+
+      if $scope.chances.tandems.length == 0
+        $scope.chances.notandemerror = true
+        return false
+      else
+        $scope.chances.notandemerror = false
+
       $scope.submitted = true
       $scope.confirmed_publication_error = false
+      $scope.chances.affiliate_error = false
       errors = false
       queries = []
 
@@ -102,6 +99,7 @@ angular.module "Chance", ["rails","Support"]
           errors = true
           $scope.chances_form.chances[key].errors = response.errors
           $scope.confirmed_publication_error = if response.errors.confirmedPublication then true else false
+          $scope.chances.affiliate_error = if response.errors.affiliate then true else false
 
         if !response.errors #|| is_update
           $scope.chances_form.chances[key] = response.chance
@@ -145,8 +143,27 @@ angular.module "Chance", ["rails","Support"]
         $scope.submitted = false
         $scope.sanitizeChances()
         if !errors
-          $scope.current.getAffiliateDetails()
-          $scope.$emit('go_to_next_step')
+
+          #Handle tandems
+          tqueries = []
+          angular.forEach $scope.chances.tandems, (t) ->
+            if !t.id && (t.invitee_id || t.inviter_id || t.email)
+
+              tandem =
+                invitee_id: if t.invitee_id then t.invitee_id else null
+                inviter_id: if t.inviter_id then t.inviter_id else null
+                invitation_type: t.invitation_type
+                invitee_name: t.name
+                invitee_email: t.email
+                purpose: t.purpose
+              tqueries.push new Tandem(tandem).create().then (tandems) ->
+                $cookies["mitdir"] = null
+                $scope.current.inviter = null if $scope.current.inviter
+                $scope.current.user.tandems = tandems
+
+
+          $q.all(tqueries).finally ->
+            $scope.$emit('go_to_next_step')
 
 
     $scope.deleteChance = (chance) ->
@@ -179,29 +196,20 @@ angular.module "Chance", ["rails","Support"]
       return
 
 
-    $scope.current.getAffiliateDetails().then ->
 
-      if $cookies["bgemitdir"] && ($scope.current.user.chances.length == 0 || ($scope.current.user.chances[0] && $scope.current.user.chances[0].affiliate == null))
-        $scope.affiliate = $cookies["bgemitdir"]
-        User.query {},
-          id: $cookies["bgemitdir"]
-        .then (user) ->
-          $scope.affiliateDetails = user
 
-      if $scope.current.user.chances && $scope.current.user.chances.length > 0
-        $scope.chances_form =
-          chances: $scope.current.user.chances
-        $scope.confirmed_publication = $scope.current.user.chances[0].confirmed_publication
-        $scope.mediacoverage = $scope.current.user.chances[0].mediacoverage
-        $scope.remember_data = $scope.current.user.chances[0].remember_data
-        $scope.city = $scope.current.user.chances[0].city
-        $scope.affiliate = $scope.current.user.chances[0].affiliate
-        $scope.affiliateDetails = $scope.current.user.chances[0].affiliateDetails
-        $scope.sanitizeChances()
+    if $scope.current.user.chances && $scope.current.user.chances.length > 0
+      $scope.chances_form =
+        chances: $scope.current.user.chances
+      $scope.confirmed_publication = $scope.current.user.chances[0].confirmed_publication
+      $scope.mediacoverage = $scope.current.user.chances[0].mediacoverage
+      $scope.remember_data = $scope.current.user.chances[0].remember_data
+      $scope.city = $scope.current.user.chances[0].city
+      $scope.sanitizeChances()
 
-      else
-        $scope.chances_form =
-          chances: []
+    else
+      $scope.chances_form =
+        chances: []
 
       $scope.sanitizeChances()
 

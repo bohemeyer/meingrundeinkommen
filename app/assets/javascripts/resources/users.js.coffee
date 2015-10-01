@@ -13,6 +13,11 @@ angular.module "User", ['rails']
         q: q
       }
 
+    User.random = () ->
+      User.query {
+        rand: true
+      }
+
 
     User.suggestions = (user_id) ->
       User.query {},
