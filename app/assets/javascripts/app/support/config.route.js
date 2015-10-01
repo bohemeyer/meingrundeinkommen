@@ -6,6 +6,12 @@
         .config(function ($routeProvider) {
 
             $routeProvider
+                .when('/tandem', {
+                    templateUrl: '/assets/tandem.html'
+                })
+                .when('/bgemitdir', {
+                    redirectTo: '/tandem'
+                })
                 .when('/advocate-europe', {
                     templateUrl: '/assets/advocateEurope.html'
                 })

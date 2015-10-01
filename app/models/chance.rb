@@ -3,8 +3,6 @@ class Chance < ActiveRecord::Base
 
 	belongs_to :user
 
-	validates :confirmed_publication, inclusion: [true]
-
 	validates_presence_of :first_name, :last_name, :dob
 
 	validates_uniqueness_of :code, :allow_blank => true, :allow_nil => true
@@ -28,12 +26,12 @@ class Chance < ActiveRecord::Base
 	  	return false
 	  end
 
-	  if self.is_child && self.dob < DateTime.new(2015,9,19) - 18.years
-	      errors.add(:dob, "Du kannst nur für dein Kind teilnehmen, wenn es am Tag des Gewinnspielendes das 18. Lebensjahr noch nicht vollendet hat. Dein Kind ist alt genug und kann eigenständig (mit einem eigenen Profil) am Gewinnspiel teilnehmen.")
+	  if self.is_child && self.dob < DateTime.new(2015,10,25) - 14.years
+	      errors.add(:dob, "Du kannst nur für dein Kind teilnehmen, wenn es am Tag des Gewinnspielendes das 14. Lebensjahr noch nicht vollendet hat. Dein Kind ist alt genug und kann eigenständig (mit einem eigenen Profil) am Gewinnspiel teilnehmen.")
 	      return false
 	  end
-	  if !self.is_child && self.dob > DateTime.new(2015,9,19) - 18.years
-	      errors.add(:dob, "Du musst 18 Jahre alt sein, um teilnehmen zu können. Ein_e Erziehungsberechtigte_r kann aber für dich am Gewinnspiel teilnehmen indem er oder sie hier unten auf 'Mein Kind hinzufügen' klickt.")
+	  if !self.is_child && self.dob > DateTime.new(2015,10,25) - 14.years
+	      errors.add(:dob, "Du musst 14 Jahre alt sein, um teilnehmen zu können. Ein_e Erziehungsberechtigte_r kann aber für dich am Gewinnspiel teilnehmen indem er oder sie hier unten auf 'Mein Kind hinzufügen' klickt.")
 	      return false
 	  end
 	end

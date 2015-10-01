@@ -1,4 +1,4 @@
-angular.module "Chance", ["rails","Support"]
+angular.module "Chance", ["rails","Support","Tandem"]
 
 .factory "Chance", [
   "railsResourceFactory"
@@ -15,13 +15,20 @@ angular.module "Chance", ["rails","Support"]
   "$scope"
   "$modal"
   "Chance"
+  "Tandem"
+  "User"
   "$q"
-  ($scope, $modal, Chance, $q) ->
+  "$cookies"
+  ($scope, $modal, Chance, Tandem, User, $q, $cookies) ->
+
+    $scope.chances = []
+    $scope.chances.affiliate_error = false
 
     synchronize_form_with_squirrel_state = ->
       $scope.current.user.isSquirrel = $scope.current.isSquirrel()
 
     synchronize_form_with_squirrel_state()
+
 
     $scope.openSquirrelModal = ->
       Squirrelmodal = $modal.open(
@@ -57,7 +64,7 @@ angular.module "Chance", ["rails","Support"]
       if !adult
         $scope.chances_form.chances.unshift(
           isChild: false
-          dob_year: 1975
+          dob_year: 1980
           dob_month: 1
           dob_day: 1
         )
@@ -68,14 +75,22 @@ angular.module "Chance", ["rails","Support"]
     $scope.addChild = ->
       $scope.chances_form.chances.push(
         isChild: true
-        dob_year: 2000
+        dob_year: 2010
         dob_month: 1
         dob_day: 1
       )
 
     $scope.saveChances = () ->
+
+      if $scope.chances.tandems.length == 0
+        $scope.chances.notandemerror = true
+        return false
+      else
+        $scope.chances.notandemerror = false
+
       $scope.submitted = true
       $scope.confirmed_publication_error = false
+      $scope.chances.affiliate_error = false
       errors = false
       queries = []
 
@@ -84,6 +99,7 @@ angular.module "Chance", ["rails","Support"]
           errors = true
           $scope.chances_form.chances[key].errors = response.errors
           $scope.confirmed_publication_error = if response.errors.confirmedPublication then true else false
+          $scope.chances.affiliate_error = if response.errors.affiliate then true else false
 
         if !response.errors #|| is_update
           $scope.chances_form.chances[key] = response.chance
@@ -111,6 +127,7 @@ angular.module "Chance", ["rails","Support"]
         chance.mediacoverage = $scope.mediacoverage
         chance.remember_data = $scope.remember_data
         chance.city = $scope.city
+        chance.affiliate = $scope.affiliate
 
         if chance.id
           queries.push new Chance(chance).update().then (response) ->
@@ -126,7 +143,27 @@ angular.module "Chance", ["rails","Support"]
         $scope.submitted = false
         $scope.sanitizeChances()
         if !errors
-          $scope.$emit('go_to_next_step')
+
+          #Handle tandems
+          tqueries = []
+          angular.forEach $scope.chances.tandems, (t) ->
+            if !t.id && (t.invitee_id || t.inviter_id || t.email)
+
+              tandem =
+                invitee_id: if t.invitee_id then t.invitee_id else null
+                inviter_id: if t.inviter_id then t.inviter_id else null
+                invitation_type: t.invitation_type
+                invitee_name: t.name
+                invitee_email: t.email
+                purpose: t.purpose
+              tqueries.push new Tandem(tandem).create().then (tandems) ->
+                $cookies["mitdir"] = null
+                $scope.current.inviter = null if $scope.current.inviter
+                $scope.current.user.tandems = tandems
+
+
+          $q.all(tqueries).finally ->
+            $scope.$emit('go_to_next_step')
 
 
     $scope.deleteChance = (chance) ->
@@ -159,6 +196,8 @@ angular.module "Chance", ["rails","Support"]
       return
 
 
+
+
     if $scope.current.user.chances && $scope.current.user.chances.length > 0
       $scope.chances_form =
         chances: $scope.current.user.chances
@@ -172,6 +211,6 @@ angular.module "Chance", ["rails","Support"]
       $scope.chances_form =
         chances: []
 
-    $scope.sanitizeChances()
+      $scope.sanitizeChances()
 
 ]

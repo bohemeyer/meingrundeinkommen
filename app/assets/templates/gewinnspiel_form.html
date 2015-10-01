@@ -50,16 +50,27 @@
     </div>
 
     <div class="form-group">
-      <div class="col-sm-2">&nbsp;</div>
+      <!-- <div class="col-sm-2">&nbsp;</div>
       <div class="col-sm-10">
         <h3 class="title" style="margin-bottom:5px">&nbsp;</h3>
+      </div> -->
+      <!-- <div class="col-sm-2">&nbsp;</div> -->
+      <div class="col-sm-12 text-center">
+          <a href="#" ng-click="addChild()" class="text-center" >Mein Kind (unter 14) hinzufügen</a>
       </div>
-      <div class="col-sm-2">&nbsp;</div>
-      <div class="col-sm-10 text-center">
-          <a href="#" ng-click="addChild()" class="text-center btn btn-color btn-small" >Mein Kind (unter 18) hinzufügen</a>
+      <!-- <div class="col-sm-2">&nbsp;</div> -->
+      <div class="col-sm-12">
+        <h3 class="title" style="margin-bottom:5px">&nbsp;</h3>
       </div>
-      <div class="col-sm-2">&nbsp;</div>
-      <div class="col-sm-10">
+    </div>
+
+
+    <div ng-include="'/assets/tandem_form.html'"></div>
+
+
+    <div class="form-group">
+      <!-- <div class="col-sm-2">&nbsp;</div> -->
+      <div class="col-sm-12">
         <h3 class="title" style="margin-bottom:5px">&nbsp;</h3>
       </div>
     </div>
@@ -67,16 +78,17 @@
     <div class="form-group">
       <label for="inputEmail12" class="col-sm-2 control-label">Postleitzahl</label>
       <div class="col-sm-10 text-left">
-        <input name="city" ng-model="city" type="text" class="form-control" id="inputEmail12" placeholder="Pflichtfeld" maxlength="5" required>
+        <input name="city" ng-model="city" type="text" class="form-control" id="inputEmail12" maxlength="5" required>
       </div>
     </div>
 
-    <div class="form-group">
+
+    <!-- <div class="form-group">
       <label for="inputEmail12" class="col-sm-2 control-label">Telefonnummer</label>
       <div class="col-sm-10 text-left">
         <input name="phone" ng-model="phone" type="text" class="form-control" id="inputEmail22" placeholder="Damit wir dich im Falle deines Gewinns anrufen können (optional)" required>
       </div>
-    </div>
+    </div> -->
 
     <br>
 

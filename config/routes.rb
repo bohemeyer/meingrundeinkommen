@@ -12,6 +12,7 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
     resource :crowdbar
+    resources :tandems
     resources :crowdcards
     resources :flags
     resources :statistics
@@ -63,6 +64,7 @@ Rails.application.routes.draw do
     resources :mailings
   end
   resources :users
+
   resources :payments
   resource :crowdapp
   resources :subscriptions
@@ -81,6 +83,7 @@ Rails.application.routes.draw do
 
   # Angular catch all to allow page refresh
   get '*page' => "websites#show"
+
   #get '*path' => "websites#show"
 
   # Example of regular route:

@@ -31,6 +31,12 @@ class User < ActiveRecord::Base
   has_many :state_users, :dependent => :destroy
   has_many :states, through: :state_users
 
+  searchable do
+    text :name
+    text :email
+    text :id
+  end
+
   #validates_presence_of   :avatar
   validates_integrity_of  :avatar
   validates_processing_of :avatar
@@ -53,6 +59,10 @@ class User < ActiveRecord::Base
 
   def self.all_newsletter_receipients
 
+  end
+
+  def tandems
+    Tandem.where("(inviter_id = #{id} or invitee_id = #{id}) and disabled_by is null")
   end
 
 end

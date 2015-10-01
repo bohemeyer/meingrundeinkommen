@@ -17,6 +17,7 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
         has_crowdbar: [
           "Crowdbar"
           (Crowdbar) ->
+            #true
             Crowdbar.verify(20).then (has_crowdbar) ->
               has_crowdbar
         ]
@@ -58,12 +59,12 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
       #if not participates
       #'gewinnspiel_question'
       'wishes'
-      #'gewinnspiel'
+      'gewinnspiel'
       #'verify_crowdcard'
 
-      #'verify_gewinnspiel'
+      'verify_gewinnspiel'
 
-      #'gewinnspiel_thanks'
+      'gewinnspiel_thanks'
 
       #if everything completed only
       #'states'
@@ -218,10 +219,10 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
           else
             false
 
-        # when 'crowdcard'
-        #   $scope.show_form = $scope.current.getFlag('ClickedCrowdcardMitmachen')
-        #   $scope.steps.show_next_button = true
-        #   if $scope.current.user.crowdcards.length == 0 && !$scope.current.user.flags.crowdcardNumber && !$scope.current.user.flags.NotifiyMeWhenCrowdcardReady && !$scope.current.user.flags.NumberOfCrowdcardDownloads && !$scope.current.user.flags.NumberOfPassbookDownloads then true else false
+        when 'crowdcard'
+          $scope.show_form = $scope.current.getFlag('ClickedCrowdcardMitmachen')
+          $scope.steps.show_next_button = true
+          if $scope.current.user.crowdcards.length == 0 && !$scope.current.user.flags.crowdcardNumber && !$scope.current.user.flags.NotifiyMeWhenCrowdcardReady && !$scope.current.user.flags.NumberOfCrowdcardDownloads && !$scope.current.user.flags.NumberOfPassbookDownloads then true else false
 
         # when 'verify_crowdcard'
         #   $scope.steps.show_next_button = true

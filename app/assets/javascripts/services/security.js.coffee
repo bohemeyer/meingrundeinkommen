@@ -7,7 +7,8 @@ angular.module "Security", ["Devise","Flag"]
   "Flag"
   "$cookies"
   "$window"
-  ($http, $q, $location, Auth, Flag, $cookies, $window) ->
+  "User"
+  ($http, $q, $location, Auth, Flag, $cookies, $window, User) ->
 
     # The public API of the service
     service =
@@ -106,6 +107,12 @@ angular.module "Security", ["Devise","Flag"]
           true
         else
           false
+
+      getInviterDetails: (id) ->
+        User.query {},
+          id: id
+        .then (user) ->
+          return user
 
       has_crowdbar: ->
         service.getFlag('hasCrowdbar')

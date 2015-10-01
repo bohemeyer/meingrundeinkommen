@@ -33,9 +33,10 @@ window.App = angular.module('grundeinkommen',
   "Home"
   "Crowdbar"
   "$location"
+  "$cookies"
   "$modal"
 
-  ($scope, $rootScope, Security, breadcrumbs, Home, Crowdbar, $location, $modal) ->
+  ($scope, $rootScope, Security, breadcrumbs, Home, Crowdbar, $location, $cookies, $modal) ->
     $scope.current = Security
 
     $scope.breadcrumbs = breadcrumbs
@@ -44,6 +45,23 @@ window.App = angular.module('grundeinkommen',
       $rootScope.show_spinner = true
     $rootScope.$on '$routeChangeSuccess', ->
       $rootScope.show_spinner = false
+
+
+    if $location.search().mitdir || ($cookies["mitdir"] && $cookies["mitdir"]!=null)
+      if $location.search().mitdir
+        inviter_id = $location.search().mitdir
+      else
+        inviter_id = $cookies["mitdir"]
+      $scope.current.getInviterDetails(inviter_id)
+      .then (user) ->
+        $cookies["mitdir"] = inviter_id
+        $scope.current.inviter =
+          name: user.name
+          id: inviter_id
+          avatar: user.avatar
+          invitation_type: 'link'
+        if $location.search().mitdir
+          $location.path("/tandem")
 
 
     $scope.getStatus = (path) ->
