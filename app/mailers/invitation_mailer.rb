@@ -5,6 +5,6 @@ class InvitationMailer < ActionMailer::Base
     @tandem = tandem
     @inviter = inviter
     @invitee = invitee
-    mail(to: @tandem.invitee_email, subject: "#{@invitee.chances.first_name} will #bgeMitDir gewinnen")
+    mail(to: @invitee.email, subject: "#{@invitee.chances.first_name} will #bgeMitDir gewinnen")
   end
 end
