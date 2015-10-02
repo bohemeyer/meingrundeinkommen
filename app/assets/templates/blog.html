@@ -13,7 +13,7 @@
 	      <img src="{{post.thumb}}" alt="">
 	      </a>
 	   </div>
-	   <div class="post-content-wrap">
+	   <div class="post-content-wrap" style="height:210px;overflow:hidden;">
 	      <header class="post-header">
 	         <!-- <div class="post-date">
 	            <a class="date" href="#"><strong>{{post.modified | date:'dd.MM.yyyy'}}</a>
@@ -35,12 +35,13 @@
 	            </div> -->
 	         </div>
 	      </header>
-	      <div class="post-content" ng-bind-html="post.content.rendered | unsafe | limitTo: 400">... <a href="/blog/{{post.id}}">weiterlesen</a>
+	      <div class="post-content" ng-bind-html="post.content.rendered | unsafe | ">
        </div>
        <!-- <footer class="post-footer">
           <a class="btn-small btn-color" href="/blog/{{post.id}}">Lesen</a>
        </footer> -->
 	   </div>
+     <a class="pull-right" href="/blog/{{post.id}}"> >> weiterlesen</a>
 	   <div class="clearfix"></div>
 	</article>
 
