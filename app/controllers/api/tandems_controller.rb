@@ -18,7 +18,9 @@ class Api::TandemsController < ApplicationController
 				#if tandem[:invitation_type] == 'mail'
 				#	InvitationMailer.invite_new(tandem,current_user,User.find(tandem[:invitee_id])).deliver
 				#else
-				#	InvitationMailer.invite_existing(tandem,current_user,User.find(tandem[:invitee_id])).deliver
+				if tandem[:invitation_type] != 'mail' && tandem[:invitee_id] == 1
+					InvitationMailer.invite_existing(tandem,current_user,User.find(tandem[:invitee_id])).deliver
+				end
 				#end
 			end
 

@@ -26,7 +26,7 @@
     <li class="pull-left" ng-show="chances.tandems.length > 0">
       <div class="pull-left text-center" style="margin:15px;background: #white;border: 2px dotted #ccc;border-radius: 10px;padding: 16px;">
 
-      <div class="testimonial-image "><img ng-src="current.user.avatar.avatar.url" height="50"></div>
+      <div class="testimonial-image "><img ng-src="{{current.user.avatar.avatar.thumb.url}}" height="50"></div>
       <div style="margin-left:-35px;" class="testimonial-image "><img alt="" ng-src="/assets/team/team-member.jpg" src="/assets/team/team-member.jpg"></div>
       <br> <a href="#" ng-click="invite = true; chances_form.editAllChances = true">Jemanden einladen</a>
 

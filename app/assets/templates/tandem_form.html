@@ -30,7 +30,7 @@
 
       <script type="text/ng-template" id="suggestion_list.html">
           <a class="suggestion_entry" ng-class="{new_entry: match.model.create}">
-              <div class="testimonial-image "><img ng-src="match.model.avatar.avatar.thumb.url" height="50"></div>
+              <div class="testimonial-image "><img ng-src="{{match.model.avatar.avatar.thumb.url}}" height="50"></div>
               &nbsp;&nbsp;<span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> <br>&nbsp;&nbsp;<span ng-show="match.model.id" style="color:#bbb;font-size:13px;">ID: {{match.model.id}}</span>
 
           </a>
