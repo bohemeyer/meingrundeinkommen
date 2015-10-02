@@ -4,13 +4,13 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>Hallo <%= @invitee.name %>,</h1>
+    <p>Hallo <%= @invitee.name %>,</p>
     <p>
-      das 16. & 17. Grundeinkommen wird ab sofort an zwei Menschen verlost, die sich kennen. Dafür kannst du mit belieb vielen Freunden Tandems bilden. (<a href="http://www.mein-grundeinkommen.de/tandem">So funktioniert's</a>)
+      das 16. & 17. Grundeinkommen wird ab sofort an zwei Menschen verlost, die sich kennen. Dafür kannst du mit beliebig vielen Menschen Verlosungs-Tandems bilden. <a href="http://www.mein-grundeinkommen.de/tandem">So funktioniert's</a>
     </p>
 
     <p>
-    	<a href="https://www.mein-grundeinkommen.de/menschen/<%= @inviter.id %>"><%= @inviter.name %></a> (<%= @inviter.chances.first.first_name %> <%= @inviter.chances.first.last_name %>) hat dich eingeladen gemeinsam ein Tandem zu bilden. Dadurch habt ihr beide höhere Gewinnchancen.
+    	<a href="https://www.mein-grundeinkommen.de/menschen/<%= @inviter.id %>"><%= @inviter.name %></a> (<%= @inviter.chances.first.first_name %> <%= @inviter.chances.first.last_name %>) hat dich eingeladen gemeinsam mit dir ein Tandem zu bilden. Dadurch habt ihr beide höhere Gewinnchancen.
     </p>
 
     <p>
@@ -20,7 +20,7 @@
     	<p>Um das Tandem zu bestätigen müsstest du noch kurz auf mein-grundeinkommen.de <a href="https://www.mein-grundeinkommen.de/boarding?trigger=wants_to_participate">an der Verlsoung teilnehmen.</a></p>
 
     <% else %>
-    	All deine Tandems findest du auf deinem Profil.
+    	All deine Tandems findest du auf deiner Profilseite.
     	Du kannst belieb viele weitere Tandems mit deinen Freund_innen bilden, indem du ihnen diesen persönlichen Einladungslink schickst:
     	http://www.meinbge.de/tandem?mitdir=<%= @invitee.id %>
 

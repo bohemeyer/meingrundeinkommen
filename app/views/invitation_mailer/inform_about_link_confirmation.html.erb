@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hallo <%= @inviter.name %>,</p>
+    <p>
+
+      Juhuu! ​<%= @invitee.chances.first.first_name %> (<a href="https://www.mein-grundeinkommen.de/menschen/<%= @invitee.id %>"><%= @invitee.name %></a>) ist dem Link zu deiner persönlichen Tandem-Einladung gefolgt. <br>Ihr bildet jetzt ein Verlosungs-Tandem und habt damit höhere Gewinnchancen bei der Verlosung des 16. & 17. Grundeinkommens.
+    </p>
+
+    <p>
+      All deine Tandems findest du auf deiner Profilseite.
+      Du kannst belieb viele weitere Tandems mit deinen Freund_innen bilden, indem du ihnen diesen Einladungslink schickst:
+      http://www.meinbge.de/tandem?mitdir=<%= @inviter.id %>
+    </p>
+    <p>
+
+      <p>
+    Wir drücken die Daumen!
+  </p>
+  <p>
+    Liebe Grüße,<br>
+    Dein Team von Mein Grundeinkommen
+  </p>
+
+  </body>
+</html>
