@@ -82,11 +82,11 @@ angular.module "Chance", ["rails","Support","Tandem"]
 
     $scope.saveChances = () ->
 
-      if $scope.chances.tandems.length == 0
-        $scope.chances.notandemerror = true
-        return false
-      else
-        $scope.chances.notandemerror = false
+      # if $scope.chances.tandems.length == 0
+      #   $scope.chances.notandemerror = true
+      #   return false
+      # else
+      #   $scope.chances.notandemerror = false
 
       $scope.submitted = true
       $scope.confirmed_publication_error = false
