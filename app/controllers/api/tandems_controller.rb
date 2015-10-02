@@ -11,7 +11,7 @@ class Api::TandemsController < ApplicationController
 				tandem[:invitation_accepted_at] = Time.now
 				tandem[:invitee_participates] = true
 				#send mail to inviter and inform about confirmation
-				InvitationMailer.inform_about_link_confirmation(tandem,current_user,User.find(tandem[:inviter_id])).deliver if current_user.id == 555
+				InvitationMailer.inform_about_link_confirmation(tandem,current_user,User.find(tandem[:inviter_id])).deliver
 			else #existing, mail, random
 				#check if email is already connected to existing user
 				#send invitation mail
