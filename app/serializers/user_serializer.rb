@@ -93,28 +93,34 @@ class UserSerializer < ActiveModel::Serializer
   def tandems
 
       r = []
-      object.tandems.each do |c|
+      if !object.tandems.nil?
+        object.tandems.each do |c|
 
-        if (current_user && object == current_user) || (current_user && current_user.admin?)
-          t = {:id => c.id, :disabled_by => c.disabled_by, :invitation_type => c.invitation_type, :inviter_id => c.inviter_id, :invitee_id => c.invitee_id, :invitee_name => c.invitee_name, :invitee_email => c.invitee_email, :invitation_accepted_at => c.invitation_accepted_at, :invitee_participates => c.invitee_participates}
-        else
-          t = {:id => c.id, :inviter_id => c.inviter_id, :invitee_id => c.invitee_id, :invitee_name => c.invitee_name, :invitation_accepted_at => c.invitation_accepted_at, :invitee_participates => c.invitee_participates}
-        end
-
-        if object.id == c.inviter_id && c.invitee_id
-          u = User.find(c.invitee_id)
-          t[:details] = { :name => u.name, :avatar => u.avatar }
-        else
-          if object.id == c.inviter_id && t[:invitee_email]
-            t[:details] = { :name => t[:invitee_email], :avatar => nil }
+          if (current_user && object == current_user) || (current_user && current_user.admin?)
+            t = {:id => c.id, :disabled_by => c.disabled_by, :invitation_type => c.invitation_type, :inviter_id => c.inviter_id, :invitee_id => c.invitee_id, :invitee_name => c.invitee_name, :invitee_email => c.invitee_email, :invitation_accepted_at => c.invitation_accepted_at, :invitee_participates => c.invitee_participates}
+          else
+            t = {:id => c.id, :inviter_id => c.inviter_id, :invitee_id => c.invitee_id, :invitee_name => c.invitee_name, :invitation_accepted_at => c.invitation_accepted_at, :invitee_participates => c.invitee_participates}
           end
-        end
-        if object.id == c.invitee_id && c.inviter_id
-          u = User.find(c.inviter_id)
-          t[:details] = { :name => u.name, :avatar => u.avatar }
-        end
 
-        r << t
+          if object.id == c.inviter_id && c.invitee_id
+            u = User.find(c.invitee_id)
+            t[:details] = { :name => u.name, :avatar => u.avatar }
+          else
+            if object.id == c.inviter_id && t[:invitee_name] && t[:invitee_name] != ""
+              t[:details] = { :name => t[:invitee_name], :avatar => nil }
+              else
+                if object.id == c.inviter_id && t[:invitee_email]
+                  t[:details] = { :name => t[:invitee_email], :avatar => nil }
+                end
+            end
+          end
+          if object.id == c.invitee_id && c.inviter_id
+            u = User.find(c.inviter_id)
+            t[:details] = { :name => u.name, :avatar => u.avatar }
+          end
+
+          r << t
+        end
       end
       r
   end

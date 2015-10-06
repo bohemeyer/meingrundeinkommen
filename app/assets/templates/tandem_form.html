@@ -12,13 +12,13 @@
 
       <label ng-show="chances.tandems.length < 2" style="font-size:150%;" for="inputEmail12" class=" text-center">Wenn ich gewinne, soll auch diese Person Grundeinkommen erhalten:</label>
 
-      <label ng-show="chances.tandems.length > 1" style="font-size:150%;" for="inputEmail12" class=" text-center">Wenn ich gewinne, soll auch <u>eine dieser Personen</u> Grundeinkommen erhalten:</label>
+      <label ng-show="chances.tandems.length > 1" style="font-size:150%;" for="inputEmail12" class=" text-center">Wenn ich gewinne, soll auch <b><i>eine dieser Personen</i></b> Grundeinkommen erhalten:</label>
 
       <div ng-show="chances.tandems.length == 0">
 
         <input type="text" ng-model="tandeminviteform.reference" style="height:50px;padding-left:10px;padding-right:10px;width:100%;margin-top:25px" font-size="25" autocomplete="false"
-        placeholder="Benutzername, User-ID, E-Mail-Adresse" typeahead="user as user.name for user in getTandem($viewValue)"
-        typeahead-on-select="chooseTandem($model)"
+        placeholder="Suchen nach Benutzername / User-ID oder E-Mail-Adresse" typeahead="user as user.name for user in getTandem($viewValue)"
+        typeahead-on-select="chooseExisting($model)"
         typeahead-loading="loading" typeahead-template-url="suggestion_list.html" typeahead-min-length="1" required ng-blur="checkifblur()">
 
         <alert ng-show="chances.notandemerror && chances.tandems.length==0">Bitte eine Person auswählen (einfach lostippen) oder eine E-Mail-Adresse eintragen um jemanden einzuladen. <a href="#" ng-click="getRandomTandem()" class=" btn btn-small btn-color">Zufällige Person auswählen</a></alert>
@@ -30,7 +30,7 @@
 
       <script type="text/ng-template" id="suggestion_list.html">
           <a class="suggestion_entry" ng-class="{new_entry: match.model.create}">
-              <div class="testimonial-image "><img ng-src="{{match.model.avatar.avatar.thumb.url}}" height="50"></div>
+              <div class="testimonial-image " ng-show="{{match.model.avatar}}"><img ng-src="{{match.model.avatar.avatar.thumb.url}}" height="50"></div>
               &nbsp;&nbsp;<span bind-html-unsafe="match.model.name | typeaheadHighlight:query"></span> <br>&nbsp;&nbsp;<span ng-show="match.model.id" style="color:#bbb;font-size:13px;">ID: {{match.model.id}}</span>
 
           </a>
@@ -52,9 +52,9 @@
 
             <div class="testimonials-arrow" style="margin-left:58%"></div>
 
-
           <div> <!-- ng-show="chances.tandems.length==1 && !invite"> -->
             <div class="col-sm-12 text-center">
+              <a name="invitelink"></a>
               <h2 style="font-weight: bold;color: white;text-shadow: 1px 1px black;">Lade Freund_innen ein & erhöhe deine Chancen</h2>
               <h3 style="color: black;text-shadow: 1px 1px 2px white;">Mit jedem Menschen, der sich auf deine Einladung hin neu registriert, bildest du ein weiteres Tandem und erhöhst gleichzeitig deine Gewinnchancen. </h3>
 
@@ -62,26 +62,59 @@
             </div>
           </div>
 
+          <script type="text/ng-template" id="invitemodal.html">
+            <div class="modal-header">
 
-          <!-- <div class="row" ng-show="invite || chances.tandems.length > 1">
-            <div class="col-sm-3">
-              <input style="display:inline" class="form-control" type="email" placeholder="E-Mail-Adresse" ng-model="tandeminviteform.email">
-            </div>
+                  <a href="mailto:{{tandeminviteform.recipients[0].email}}?subject={{tandeminviteform.subject}}&body={{encodemail(tandeminviteform.mailtext)}}" class="pull-right btn btn-small btn-color" style="z-index: 999999999;position: relative;"><i class="fa fa-external-link"></i> In meinem Mailprogramm öffnen</a>
+                  <h3 class="float-left modal-title">Jemanden auf mein Tandem einladen</h3>
 
-            <div class="col-sm-3">
-              <input style="display:inline" class="form-control" type="text" ng-model="tandeminviteform.name" placeholder="Vorname (freiwillig)">
-            </div>
-            <div class="col-sm-4" style="margin-top:-29px">
-              <span style="font-size:12px;">Ich gönne dir Grundeinkommen, damit:</span>
-              <textarea style="height:35px;margin-top:-3px" class="form-control" ng-model="tandeminviteform.purpose"></textarea>
+              </div>
+              <div class="modal-body">
+                <div class="row" ng-repeat="to in tandeminviteform.recipients">
+                  <label for="to" class="col-sm-2 control-label"><span ng-show="$first">An:</span></label>
 
-            </div>
+                  <div class="col-sm-4">
+                    <input style="display:inline" class="form-control" type="email" placeholder="E-Mail-Adresse" ng-model="to.email">
+                  </div>
 
-            <div class="col-sm-2">
-              <a href="#" ng-click="chooseTandem()" class=" btn btn-small btn-color">Per E-Mail einladen</a>
-            </div>
+                  <div class="col-sm-4">
+                    <input style="display:inline" class="form-control" type="text" ng-model="to.name" placeholder="Vorname (freiwillig)">
+                  </div>
+
+                  <div class="col-sm-1">
+                    <a ng-hide="$first || $last" href="#" ng-click="removeRecipient(to)" class=" btn btn-small btn-grey"><i class="fa fa-times"></i></a>
+                    <a ng-show="$last" href="#" ng-click="addRecipient()" class=" btn btn-small btn-grey"><i class="fa fa-user-plus"></i></span></a>
+                  </div>
+                  <span style="font-size:12px;"><br>&nbsp;</span>
+                </div>
+
+                <div class="row">
+
+                  <label for="subject" class="col-sm-2 control-label">Betreff:</label>
+                  <div class="col-sm-10 text-left">
+                    <input name="subject" ng-model="tandeminviteform.subject" type="text" class="form-control" id="inputEmail12" required>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <label for="text" class="col-sm-2 control-label">E-Mail:</label>
+                  <div class="col-sm-10 text-left">
+                    <textarea style="min-height:400px;" name="text" class="form-control" ng-model="tandeminviteform.mailtext"></textarea>
+                  </div>
+                </div>
           </div>
- -->
+              </div>
+              <div class="modal-footer">
+
+                <div class="text-center pull-left"><a href="javascript:void(0)" ng-click="$dismiss()" style="margin-top:15px;">Schließen</div>
+                <a href="#" ng-click="inviteNow()" class=" pull-right btn btn-normal btn-color">Per E-Mail einladen</a>
+
+              </div>
+
+          </script>
+
+
+
 
           <div class="row" style="font-size: 15px;
 margin-top: 11px;
@@ -91,14 +124,15 @@ padding-top: 15px;
       <div class="col-md-12 text-center">
         <h3 style="color: black;text-shadow: 1px 1px 2px white;">Verschicke dafür deinen persönlichen Einladungslink: </h3>
 
-              <input type="text" readonly value="www.meinbge.de/tandem?mitdir={{current.user.id}}" size="30">
+              <input onClick="this.select();" type="text" readonly size="40" ng-model="personallink">
 
-              <!-- <div class="fb-share-button" data-href="http://www.meinbge.de/tandem?mitdir={{current.user.id}}" data-type="button_count"></div> -->
+              <a href="#" ng-click="openInviteModal()" class="btn btn-small btn-grey"><i class="fa fa-mail fa-envelope"></i> E-Mail</a>
 
-              <a facebook="" class="facebookShare" data-shares="shares" data-url="http://www.meinbge.de/tandem?mitdir={{current.user.id}}" style="display:inline-block;">
+              <a facebook="" class="facebookShare" data-shares="shares" data-url="https://{{personallink}}" style="display:inline-block;"></a>
 
-
-              <a class="" twitter="" data-count="horizontal" data-lang="de" data-size="medium" data-text="Sei mein Tandem & gewinne Grundeinkommen mit mir! #bgeMitDir" data-url="http://www.meinbge.de/tandem?mitdir={{current.user.id}}" data-via="meinbge"></a>
+              <div class="btn btn-small btn-grey" style="padding-bottom: 2px;padding-right: 20px;padding-top: 7px;">
+              <a class="" twitter="" data-count="horizontal" data-lang="de" data-size="medium" data-text="Sei mein Tandem & gewinne Grundeinkommen mit mir! #bgeMitDir" data-url="https://{{personallink}}" data-via="meinbge"></a>
+            </div>
           </div>
       </div>
           </div>

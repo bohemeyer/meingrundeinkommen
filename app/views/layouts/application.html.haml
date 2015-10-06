@@ -18,10 +18,16 @@
 
     %meta{name: "google-site-verification", content:"6jfRBR0Umvg4AYmNgtNLT7nz8APFzGxMCc8d1BuKFUw"}
 
+    / %script{:src => "//cdnjs.cloudflare.com/ajax/libs/zeroclipboard/2.1.6/ZeroClipboard.min.js"}
+    / %script{:src => "//rawgit.com/asafdav/ng-clip/master/src/ngClip.js"}
+
+
     = stylesheet_link_tag    "application", media: "all"
     = javascript_include_tag "application"
     = javascript_include_tag "//platform.twitter.com/widgets.js"
     = csrf_meta_tags
+
+
     / Favicons
     %link{href: "/assets/ico/favicon.ico", rel: "shortcut icon"}/
     %link{:href => "/assets/ico/favicon.ico", :rel => "shortcut icon", :type => "image/x-icon"}/
@@ -33,6 +39,8 @@
     %link{:href => "/assets/ico/apple-touch-icon-120x120.png", :rel => "apple-touch-icon", :sizes => "120x120"}/
     %link{:href => "/assets/ico/apple-touch-icon-144x144.png", :rel => "apple-touch-icon", :sizes => "144x144"}/
     %link{:href => "/assets/ico/apple-touch-icon-152x152.png", :rel => "apple-touch-icon", :sizes => "152x152"}/
+
+
 
   %body.home-3{"ng-controller" => "AppCtrl"}
     .wrap{"ng-class"=>"{'full_height' : getStatus('/boarding') == 'current' || getStatus('/crowdapp') == 'current'}"}

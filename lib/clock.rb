@@ -70,11 +70,23 @@ module Clockwork
       end
     end
 
+    if job == "invitations.send"
+
+        invitations = Tandem.where(:invitee_email_sent => nil, :invitation_type => 'mail', :invitee_email => 'micha-0815@mail36.net')
+        invitations.each do |i|
+          InvitationMailer.invite_new(tandem,current_user).deliver
+        end
+        invitations.update_all(:invitee_email_sent => Time.now)
+
+
+    end
+
 
 
   end
 
   every(5.minutes, 'newsletter.send')
+  every(1.minutes, 'invitations.send')
   every(3.minutes, 'cache.news')
   every(3.minutes, 'crowdbar.stats')
   every(10.minutes, 'clear.cache')

@@ -11,7 +11,7 @@
     </p>
 
     <p>
-    	<a href="https://www.mein-grundeinkommen.de/menschen/<%= @inviter.id %>"><%= @inviter.name %></a> (<%= @inviter.chances.first.first_name %> <%= @inviter.chances.first.last_name %>) hat dich eingeladen gemeinsam mit dir ein Tandem zu bilden. Dadurch habt ihr beide höhere Gewinnchancen.
+    	<a href="https://www.mein-grundeinkommen.de/menschen/<%= @inviter.id %>"><%= @inviter.name %></a> (<%= @inviter.chances.first.first_name %> <%= @inviter.chances.first.last_name %>) möchte mit dir ein Tandem zu bilden. Dadurch habt ihr beide höhere Gewinnchancen.
     </p>
 
     <p>
@@ -24,6 +24,11 @@
     	All deine Tandems findest du auf deiner Profilseite.
     	Du kannst belieb viele weitere Tandems mit deinen Freund_innen bilden, indem du ihnen diesen persönlichen Einladungslink schickst:
     	http://www.meinbge.de/tandem?mitdir=<%= @invitee.id %>
+
+      </p>
+
+      <p>
+        Falls du dieses Tandem nicht eingehen möchtest, kannst du es auf deiner Profilseite wieder entfernen.
 
     <% end %>
 

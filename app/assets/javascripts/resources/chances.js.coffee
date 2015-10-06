@@ -140,8 +140,6 @@ angular.module "Chance", ["rails","Support","Tandem"]
       $scope.current.user.chances = $scope.chances_form.chances
 
       $q.all(queries).finally ->
-        $scope.submitted = false
-        $scope.sanitizeChances()
         if !errors
 
           #Handle tandems
@@ -153,17 +151,25 @@ angular.module "Chance", ["rails","Support","Tandem"]
                 invitee_id: if t.invitee_id then t.invitee_id else null
                 inviter_id: if t.inviter_id then t.inviter_id else null
                 invitation_type: t.invitation_type
-                invitee_name: t.name
-                invitee_email: t.email
+                invitee_name: t.invitee_name
+                invitee_email_subject: if t.invitee_email_subject then t.invitee_email_subject else null
+                invitee_email_text: if t.invitee_email_text then t.invitee_email_text else null
+                invitee_email: t.invitee_email
                 purpose: t.purpose
               tqueries.push new Tandem(tandem).create().then (tandems) ->
-                $cookies["mitdir"] = null
-                $scope.current.inviter = null if $scope.current.inviter
-                $scope.current.user.tandems = tandems
+                tandems = tandems
 
 
           $q.all(tqueries).finally ->
-            $scope.$emit('go_to_next_step')
+            $cookies["mitdir"] = null
+            $scope.current.inviter = null if $scope.current.inviter
+            $scope.current.user.tandems = tandems
+
+          $scope.sanitizeChances()
+          $scope.submitted = false
+          $scope.$emit('go_to_next_step')
+
+
 
 
     $scope.deleteChance = (chance) ->

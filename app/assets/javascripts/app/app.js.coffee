@@ -51,7 +51,7 @@ window.App = angular.module('grundeinkommen',
       if $location.search().mitdir
         inviter_id = $location.search().mitdir
       else
-        inviter_id = $cookies["mitdir"]
+        inviter_id = parseInt($cookies["mitdir"])
       $scope.current.getInviterDetails(inviter_id)
       .then (user) ->
         $cookies["mitdir"] = inviter_id
@@ -60,6 +60,7 @@ window.App = angular.module('grundeinkommen',
           id: inviter_id
           avatar: user.avatar
           invitation_type: 'link'
+          number_of_tandems: user.tandems.length
         if $location.search().mitdir
           $location.path("/tandem")
 

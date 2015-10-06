@@ -18,16 +18,20 @@ angular.module "Tandem", ["rails"]
   "User"
   "$q"
   "$cookies"
-  ($scope, $modal, Tandem, User, $q, $cookies) ->
+  ($scope, $modal, Tandem, User, $q, $cookies, anchorSmoothScroll) ->
 
     mail_re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
 
     $scope.chances.tandems = $scope.current.user.tandems
 
-    if $scope.current.inviter
+    $scope.personallink = "www.mein-grundeinkommen.de/tandem?mitdir=#{$scope.current.user.id}"
+
+    if $scope.current.inviter && $scope.current.inviter.id != $scope.current.user.id
+
       if $scope.current.inviter.invitation_type == 'link'
         tnew =
           inviter_id: $scope.current.inviter.id
+          invitee_id: $scope.current.user.id
           invitation_type: 'link'
           details:
             name: $scope.current.inviter.name
@@ -57,11 +61,6 @@ angular.module "Tandem", ["rails"]
 
     $scope.invite = false
 
-    $scope.confirmTandem = (tandem) ->
-      new Tandem(
-        id: tandem.id
-        confirm: true
-      ).update()
 
     $scope.getTandem = (q) ->
       User.find(q).then (users) ->
@@ -74,12 +73,13 @@ angular.module "Tandem", ["rails"]
               notpossible: true
             ]
           else
-            return [
-              dbemail: q
-              name: q
-              id: null
-              avatar: null
-            ]
+            if users.length == 0
+              return [
+                inviteemail: q
+                name: "'#{q}' einladen"
+                id: null
+                avatar: null
+              ]
         return users
 
     $scope.getRandomTandem = () ->
@@ -87,32 +87,86 @@ angular.module "Tandem", ["rails"]
         $scope.chooseTandem(user,'random')
 
 
+    $scope.openInviteModal = (current_user_id, email = false) ->
+      InviteModal = $modal.open(
+        templateUrl: "invitemodal.html"
+        size: 'lg'
+        controller: [
+          "$scope"
+          "tandeminviteform"
+          "current_user_id"
+          "$modalInstance"
+          ($scope,tandeminviteform,current_user_id,$modalInstance) ->
+            $scope.tandeminviteform = tandeminviteform
+            $scope.addRecipient = ->
+              $scope.tandeminviteform.recipients.push
+                email: ''
+                name: ''
+            $scope.removeRecipient = (r) ->
+              $scope.tandeminviteform.recipients.splice($scope.tandeminviteform.recipients.indexOf(r), 1)
+            $scope.inviteNow = ->
+              $modalInstance.close($scope.tandeminviteform)
+            $scope.encodemail = (txt) ->
+              return encodeURI(txt)
+        ]
+        resolve:
+          tandeminviteform: ->
+            mailtext = "Hallo, \n\ndie Seite \"Mein Grundeinkommen\" will herausfinden, was mit Menschen passiert, wenn sie ein Bedingungsloses Grundeinkommen erhalten. Dazu verlosen sie regelmäßig an eine Person ein Grundeinkommen, das 1000 €  im Monat beträgt und ein Jahr lang ausgezahlt wird.\n\nFünfzehn Menschen erhalten das Geld schon.\nDieses Mal werden zwei Grundeinkommen an zwei Menschen verlost, die sich kennen.\nIch nehme selbst an der Verlosung teil und lade dich herzlich ein, mein_e Tandempartner_in zu sein. Du musst nichts weiter tun als diesem Link zu folgen und meine Tandem-Einladung zu bestätigen:\n\nhttps:\/\/www.mein-grundeinkommen.de\/tandem?mitdir=#{$scope.current.user.id} \n\nEs kostet nichts und im besten Fall erhalten wir beide ein Jahr lang Grundeinkommen.\n\nLiebe Grüße\nMicha"
+            subject = 'Grundeinkommen für dich und mich'
+            if email
+              r =
+                mailtext: mailtext
+                subject: subject
+                recipients: [ {
+                  email: email
+                  name: ''
+                } ]
+            else
+              r =
+                mailtext: mailtext
+                subject: subject
+                recipients: [ {
+                  email: ''
+                  name: ''
+                } ]
+          current_user_id: ->
+            current_user_id
+      )
 
-    $scope.chooseTandem = (model = false, type = false) ->
+      InviteModal.result.then (invites) ->
+
+
+        angular.forEach invites.recipients, (invite) ->
+
+
+          if mail_re.test(invite.email) && $scope.chances.tandems.length < 100
+            console.log invite
+            $scope.chances.tandems.push
+              invitee_email: invite.email
+              invitee_name: invite.name
+              invitee_email_text: invites.mailtext
+              invitee_email_subject: invites.subject
+              invitation_type: 'mail'
+              inviter_id: $scope.current.user.id
+              details:
+                name: if invite.name and invite.name != '' then invite.name else invite.email
+
+
+
+    $scope.chooseExisting = (model) ->
+      if model.inviteemail
+        $scope.openInviteModal(model.inviteemail)
+        return true
+
       tandem =
-        name: $scope.tandeminviteform.name
-        email: $scope.tandeminviteform.email
-        purpose: $scope.tandeminviteform.purpose
         reference: $scope.tandeminviteform.reference
-        invitee_id: $scope.tandeminviteform.reference
-        invitation_type: if type then type else if model then 'existing' else 'mail'
-
+        invitee_id: $scope.tandeminviteform.reference.id
+        inviter_id: $scope.current.user.id
+        invitation_type: 'existing'
+        details: model
 
       unless (model && model.notpossible)
-        tandem.created = true if !model || !model.email
-        tandem.invitee_id = model.id if model
-        tandem.details = model if model
-        tandem.is_invite = true if model && model.email
-        tandem.is_invite = false if !model
-        tandem.email = model.dbemail if model.dbemail
-        if !model
-          tandem.details =
-            name: if tandem.name then tandem.name else tandem.email
-
         $scope.chances.tandems.push(tandem)
-        $scope.tandeminviteform.name = ''
-        $scope.tandeminviteform.email = ''
-        $scope.tandeminviteform.purpose = ''
         $scope.tandeminviteform.reference = ''
 
 

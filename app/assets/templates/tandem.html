@@ -17,9 +17,9 @@
             </div>
 
 
-            <a ng-show="current.user && current.participates && current.inviter" href="/boarding?trigger=wants_to_participate"  class="btn btn-large btn-bge">Tandem mit {{current.inviter.name}} bestätigen & eure Chancen erhöhen</a>
+            <a ng-show="current.user && current.participates() && current.inviter" href="#" ng-click="current.confirmTandem()"  class="btn btn-large btn-bge">Tandem mit {{current.inviter.name}} bestätigen & eure Chancen erhöhen</a>
 
-            <a ng-show="current.user && (!current.inviter || !current.participates)" href="/boarding?trigger=wants_to_participate"  class="btn btn-large btn-bge">Jetzt mitmachen</a>
+            <a ng-show="current.user && (!current.inviter || !current.participates())" ng-click="confirmTandem()" href="#"  class="btn btn-large btn-bge">Jetzt mitmachen</a>
 
             <a ng-hide="current.user" href="/register"  class="btn btn-large btn-bge">Jetzt mitmachen</a>
 

@@ -8,7 +8,8 @@ angular.module "Security", ["Devise","Flag"]
   "$cookies"
   "$window"
   "User"
-  ($http, $q, $location, Auth, Flag, $cookies, $window, User) ->
+  "Tandem"
+  ($http, $q, $location, Auth, Flag, $cookies, $window, User, Tandem) ->
 
     # The public API of the service
     service =
@@ -17,6 +18,8 @@ angular.module "Security", ["Devise","Flag"]
       login: (credentials) ->
         Auth.login(credentials).then (response) ->
           service.user = response unless response.error
+          if service.inviter
+            service.confirmTandem()
           return response
         , (error) ->
           return error.data
@@ -113,6 +116,32 @@ angular.module "Security", ["Devise","Flag"]
           id: id
         .then (user) ->
           return user
+
+      confirmTandem: ->
+        if service.user.tandems.length > 99
+          alert('Du kannst kein weiteres Tandem bilden, weil du bereits 100 Tandems hast. Bitte lösche erst eines deiner Tandems um dieses hier bilden zu können.')
+          $location.path("/menschen/#{service.user.id}").search('gewinnspiel',true)
+        else
+          if service.inviter.number_of_tandems > 99
+            alert("Du kannst dieses Tandem nicht bilden, weil #{service.inviter.name} bereits 100 Tandems hat. Du kannst natürlich trotzdem teilnehmen.")
+            $location.path("/menschen/#{service.user.id}").search('gewinnspiel',true)
+          else
+
+            if service.participates()
+              new Tandem(
+                invitee_id: service.user.id
+                inviter_id: service.inviter.id
+                invitation_type: service.inviter.invitation_type
+              ).create().then (tandems) ->
+                $cookies["mitdir"] = null
+                #service.user.tandems = tandems
+                alert("Du und #{service.inviter.name} bildet jetzt ein Tandem! Gute Fahrt!")
+                service.inviter = null if service.inviter
+                $location.path("/menschen/#{service.user.id}").search('gewinnspiel',true)
+
+            else
+              $location.path("/boarding").search('trigger','wants_to_participate')
+
 
       has_crowdbar: ->
         service.getFlag('hasCrowdbar')
