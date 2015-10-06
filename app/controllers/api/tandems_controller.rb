@@ -23,11 +23,11 @@ class Api::TandemsController < ApplicationController
 				tandem[:invitation_accepted_at] = Time.now
 				tandem[:invitee_participates] = true
 				#send mail to inviter and inform about confirmation
-				#InvitationMailer.inform_about_link_confirmation(tandem,current_user,User.find(tandem[:inviter_id])).deliver
+				InvitationMailer.inform_about_link_confirmation(tandem,current_user,User.find(tandem[:inviter_id])).deliver
 			else #existing, mail, random
 				tandem[:invitation_accepted_at] = Time.now
 				if tandem[:invitation_type] == 'existing'
-					#InvitationMailer.invite_existing(tandem,current_user,User.find(tandem[:invitee_id])).deliver
+					InvitationMailer.invite_existing(tandem,current_user,User.find(tandem[:invitee_id])).deliver
 				end
 				#end
 			end
