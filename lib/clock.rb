@@ -72,9 +72,10 @@ module Clockwork
 
     if job == "invitations.send"
         invitations = Tandem.where(:invitee_email_sent => nil, :invitation_type => 'mail')
-        invitations.update_all({:invitee_email_sent => Time.now})
+
         invitations.each do |i|
           InvitationMailer.invite_new(i,User.find(i[:inviter_id])).deliver
+          i.update_attribute(:invitee_email_sent,Time.now)
         end
 
     end

@@ -11,8 +11,8 @@ class Api::TandemsController < ApplicationController
 
 			#check if invited email address already exists in users and change to existing tandem
 			if tandem[:invitation_type] == 'mail'
-				partner = User.where(:email => tandem[:invitee_email])
-				if partner.count > 0
+				partner = User.where(:email => tandem[:invitee_email]).first
+				if partner
 					tandem[:invitation_type] == 'existing'
 					tandem[:invitee_id] == partner.id
 				end

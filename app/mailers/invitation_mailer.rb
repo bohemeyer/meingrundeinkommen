@@ -19,7 +19,6 @@ class InvitationMailer < ActionMailer::Base
     @tandem = tandem
     @inviter = inviter
     @invitee_name = tandem.invitee_name if tandem.invitee_name
-
     mail(from: "#{inviter.name} via Mein Grundeinkommen<support@mein-grundeinkommen.de>", reply_to: @inviter.email, to: @tandem.invitee_email, subject: @tandem.invitee_email_subject)
 
   end
