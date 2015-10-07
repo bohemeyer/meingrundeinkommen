@@ -70,8 +70,11 @@
         <h3 class="title" style="margin-bottom:5px">&nbsp;</h3>
       </div> -->
       <!-- <div class="col-sm-2">&nbsp;</div> -->
-      <div class="col-sm-12 text-center">
+      <div class="col-sm-12 text-center" ng-show="chances_form.chances.length == 1">
           <a href="#" ng-click="addChild()" class="text-center" >Mein Kind (unter 14) hinzufügen</a>
+      </div>
+      <div class="col-sm-12 text-center" ng-show="chances_form.chances.length > 1">
+          <a href="#" ng-click="addChild()" class="text-center" >ein weiteres Kind (unter 14) hinzufügen</a>
       </div>
       <!-- <div class="col-sm-2">&nbsp;</div> -->
       <div class="col-sm-12">
@@ -79,8 +82,7 @@
       </div>
     </div>
 
-
-    <div ng-include="'/assets/tandem_form.html'"></div>
+    <div ng-hide="current.participates()" ng-include="'/assets/tandem_form.html'"></div>
 
 
 

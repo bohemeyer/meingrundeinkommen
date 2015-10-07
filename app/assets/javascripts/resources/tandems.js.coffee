@@ -41,6 +41,7 @@ angular.module "Tandem", ["rails"]
       #TODO
 
       $scope.chances.tandems.push(tnew)
+      $scope.saveTandems()
       $scope.current.inviter = null
 
 
@@ -49,15 +50,6 @@ angular.module "Tandem", ["rails"]
     $scope.tandeminviteform.email = ''
     $scope.tandeminviteform.purpose = ''
     $scope.tandeminviteform.reference = ''
-
-    # $scope.current.getAffiliateDetails().then ->
-
-    #   if $cookies["bgemitdir"] && ($scope.current.user.chances.length == 0 || ($scope.current.user.chances[0] && $scope.current.user.chances[0].affiliate == null))
-    #     $scope.affiliate = $cookies["bgemitdir"]
-    #     User.query {},
-    #       id: $cookies["bgemitdir"]
-    #     .then (user) ->
-    #       $scope.affiliateDetails = user
 
     $scope.invite = false
 
@@ -87,16 +79,15 @@ angular.module "Tandem", ["rails"]
         $scope.chooseTandem(user,'random')
 
 
-    $scope.openInviteModal = (current_user_id, email = false) ->
+    $scope.openInviteModal = (email = false) ->
       InviteModal = $modal.open(
         templateUrl: "invitemodal.html"
         size: 'lg'
         controller: [
           "$scope"
           "tandeminviteform"
-          "current_user_id"
           "$modalInstance"
-          ($scope,tandeminviteform,current_user_id,$modalInstance) ->
+          ($scope,tandeminviteform,$modalInstance) ->
             $scope.tandeminviteform = tandeminviteform
             $scope.addRecipient = ->
               $scope.tandeminviteform.recipients.push
@@ -129,19 +120,12 @@ angular.module "Tandem", ["rails"]
                   email: ''
                   name: ''
                 } ]
-          current_user_id: ->
-            current_user_id
       )
 
       InviteModal.result.then (invites) ->
-
-
         angular.forEach invites.recipients, (invite) ->
-
-
-          if mail_re.test(invite.email) && $scope.chances.tandems.length < 100
-            console.log invite
-            $scope.chances.tandems.push
+          if mail_re.test(invite.email)
+            t =
               invitee_email: invite.email
               invitee_name: invite.name
               invitee_email_text: invites.mailtext
@@ -150,6 +134,10 @@ angular.module "Tandem", ["rails"]
               inviter_id: $scope.current.user.id
               details:
                 name: if invite.name and invite.name != '' then invite.name else invite.email
+
+            $scope.chances.tandems.push t
+
+        $scope.saveTandems()
 
 
 
@@ -167,6 +155,7 @@ angular.module "Tandem", ["rails"]
 
       unless (model && model.notpossible)
         $scope.chances.tandems.push(tandem)
+        $scope.saveTandems()
         $scope.tandeminviteform.reference = ''
 
 
@@ -185,6 +174,16 @@ angular.module "Tandem", ["rails"]
     #       #$scope.chooseTandem(tandem, $scope.current.getAffiliateDetails(tandem.reference) )
 
 
+    $scope.saveTandems = ->
+      if $scope.current.participates() && $scope.chances.tandems.length < 100
+        tqueries = []
+        angular.forEach $scope.chances.tandems, (t) ->
+          if !t.id
+            tqueries.push new Tandem(t).create().then (tandem) ->
+              $scope.chances.tandems[$scope.chances.tandems.indexOf(t)].id = tandem.id
+
+        $q.all(tqueries)
+        #$scope.current.user.tandems = $scope.chances.tandems
 
 
     $scope.removeTandem = (tandem) ->
@@ -193,11 +192,10 @@ angular.module "Tandem", ["rails"]
           new Tandem(
             id: tandem.id
           ).delete()
-        console.log $scope.current.inviter
-        console.log tandem.inviter_id
 
         if (tandem.inviter_id == $cookies["mitdir"] && tandem.inviter_id!= $scope.current.user) || (tandem.invitee_id == $cookies["mitdir"] && tandem.invitee_id!= $scope.current.user)
           $cookies["mitdir"] = null
         $scope.chances.tandems.splice($scope.chances.tandems.indexOf(tandem), 1)
+        $scope.current.user.tandems.splice($scope.chances.tandems.indexOf(tandem), 1)
 
 ]

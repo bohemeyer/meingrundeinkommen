@@ -72,11 +72,10 @@ module Clockwork
 
     if job == "invitations.send"
         invitations = Tandem.where(:invitee_email_sent => nil, :invitation_type => 'mail')
+        invitations.update_all({:invitee_email_sent => Time.now})
         invitations.each do |i|
           InvitationMailer.invite_new(i,User.find(i[:inviter_id])).deliver
         end
-        invitations.update_all(:invitee_email_sent => Time.now)
-
 
     end
 
@@ -85,7 +84,7 @@ module Clockwork
   end
 
   every(5.minutes, 'newsletter.send')
-  #every(5.minutes, 'invitations.send')
+  every(5.minutes, 'invitations.send')
   every(3.minutes, 'cache.news')
   every(3.minutes, 'crowdbar.stats')
   every(10.minutes, 'clear.cache')

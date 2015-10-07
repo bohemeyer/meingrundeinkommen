@@ -155,15 +155,15 @@ angular.module "Chance", ["rails","Support","Tandem"]
                 invitee_email_subject: if t.invitee_email_subject then t.invitee_email_subject else null
                 invitee_email_text: if t.invitee_email_text then t.invitee_email_text else null
                 invitee_email: t.invitee_email
-                purpose: t.purpose
-              tqueries.push new Tandem(tandem).create().then (tandems) ->
-                tandems = tandems
+              tqueries.push new Tandem(tandem).create().then (t) ->
+                tandem.id = t.id
+                $scope.current.user.tandems.push tandem
+                $scope.chances.tandems.push tandem
 
 
           $q.all(tqueries).finally ->
             $cookies["mitdir"] = null
             $scope.current.inviter = null if $scope.current.inviter
-            $scope.current.user.tandems = tandems
 
           $scope.sanitizeChances()
           $scope.submitted = false

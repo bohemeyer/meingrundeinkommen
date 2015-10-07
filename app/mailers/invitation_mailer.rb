@@ -5,14 +5,14 @@ class InvitationMailer < ActionMailer::Base
     @tandem = tandem
     @inviter = inviter
     @invitee = invitee
-    mail(to: @invitee.email, subject: "#{@inviter.chances.first.first_name} will #bgeMitDir gewinnen")
+    mail(to: @invitee.email, subject: "#{@inviter.name} will #bgeMitDir gewinnen")
   end
 
   def inform_about_link_confirmation(tandem,invitee,inviter)
     @tandem = tandem
     @inviter = inviter
     @invitee = invitee
-    mail(to: @inviter.email, subject: "#{@invitee.chances.first.first_name} ist jetzt dein Tandem")
+    mail(to: @inviter.email, subject: "#{@invitee.name} ist jetzt dein Tandem")
   end
 
   def invite_new(tandem,inviter)
@@ -20,7 +20,7 @@ class InvitationMailer < ActionMailer::Base
     @inviter = inviter
     @invitee_name = tandem.invitee_name if tandem.invitee_name
 
-    mail(from: "#{inviter.chances.first.first_name} #{inviter.chances.first.last_name} via Mein Grundeinkommen<support@mein-grundeinkommen.de>", reply_to: @inviter.email, to: @tandem.invitee_email, subject: @tandem.invitee_email_subject)
+    mail(from: "#{inviter.name} via Mein Grundeinkommen<support@mein-grundeinkommen.de>", reply_to: @inviter.email, to: @tandem.invitee_email, subject: @tandem.invitee_email_subject)
 
   end
 

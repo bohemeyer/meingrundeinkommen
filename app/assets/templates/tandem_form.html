@@ -4,11 +4,11 @@
 
     <div class="row">
 
-    <div class="col-sm-4 text-center">
+    <div ng-hide="chances.tandems.length > 1" class="col-sm-4 text-center">
       <img src="/assets/tandem-klein.png" style="max-height:150px;">
     </div>
 
-    <div class="col-sm-8">
+    <div ng-class="{'col-sm-8': chances.tandems.length < 2, 'col-sm-12': chances.tandems.length > 1}">
 
       <label ng-show="chances.tandems.length < 2" style="font-size:150%;" for="inputEmail12" class=" text-center">Wenn ich gewinne, soll auch diese Person Grundeinkommen erhalten:</label>
 

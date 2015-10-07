@@ -49,10 +49,8 @@
 
           <div ng-controller="TandemsController">
             <div ng-hide="chances_form.editAllChances">
-              <h4 ng-show="chances.tandems.length == 1" style="font-size:150%;" for="inputEmail12" class=" text-center">Wenn ich gewinne, wird auch diese Person Grundeinkommen erhalten:</h4>
 
-      <h4 ng-show="chances.tandems.length > 1" style="font-size:150%;" for="inputEmail12" class=" text-center">Wenn ich gewinne, wird auch <u>eine dieser Personen</u> Grundeinkommen erhalten:</h4>
-              <div ng-include="'/assets/tandem_list.html'" ng-init="location = 'overview'"></div>
+              <div ng-include="'/assets/tandem_form.html'" ng-init="location = 'overview'"></div>
               <hr>
               <div sytle="clear:both"></div>
             </div>

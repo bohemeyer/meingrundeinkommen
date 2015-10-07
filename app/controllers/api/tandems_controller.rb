@@ -38,9 +38,9 @@ class Api::TandemsController < ApplicationController
 		  break token unless Tandem.exists?(invitation_token: token)
 		end
 
-		Tandem.create(tandem)
+		r = Tandem.create(tandem)
 
-    	render json: {:tandem => current_user.tandems }
+    	render json: {:tandem => r }
 
 	end
 
