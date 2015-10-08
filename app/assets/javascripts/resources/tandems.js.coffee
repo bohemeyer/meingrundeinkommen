@@ -26,6 +26,23 @@ angular.module "Tandem", ["rails"]
 
     $scope.personallink = "www.mein-grundeinkommen.de/tandem?mitdir=#{$scope.current.user.id}"
 
+
+
+    $scope.saveTandems = ->
+      if $scope.current.participates() && $scope.chances.tandems.length < 100
+        tqueries = []
+        angular.forEach $scope.chances.tandems, (t) ->
+          if !t.id
+            tqueries.push new Tandem(t).create().then (tandem) ->
+              $scope.chances.tandems[$scope.chances.tandems.indexOf(t)].id = tandem.id
+
+        $q.all(tqueries)
+        #$scope.current.user.tandems = $scope.chances.tandems
+
+
+
+
+
     if $scope.current.inviter && $scope.current.inviter.id != $scope.current.user.id
 
       if $scope.current.inviter.invitation_type == 'link'
@@ -172,18 +189,6 @@ angular.module "Tandem", ["rails"]
     #     if angular.isNumber(parseInt(tandem.reference))
     #       true
     #       #$scope.chooseTandem(tandem, $scope.current.getAffiliateDetails(tandem.reference) )
-
-
-    $scope.saveTandems = ->
-      if $scope.current.participates() && $scope.chances.tandems.length < 100
-        tqueries = []
-        angular.forEach $scope.chances.tandems, (t) ->
-          if !t.id
-            tqueries.push new Tandem(t).create().then (tandem) ->
-              $scope.chances.tandems[$scope.chances.tandems.indexOf(t)].id = tandem.id
-
-        $q.all(tqueries)
-        #$scope.current.user.tandems = $scope.chances.tandems
 
 
     $scope.removeTandem = (tandem) ->
