@@ -21,11 +21,14 @@ module Clockwork
       json.each do |opost|
         post = opost
         thumb = JSON.parse(HTTParty.get("http://blog.meinbge.de/wp-json/wp/v2/media/#{opost['featured_image']}").body)
-        post['thumb'] = thumb['media_details']['sizes']['post-thumbnail']['source_url'] if thumb['media_details']['sizes']['post-thumbnail']
-        post['image'] = thumb['media_details']['sizes']['large']['source_url']          if thumb['media_details']['sizes']['large']
+        if thumb['media_details']
+          post['thumb'] = thumb['media_details']['sizes']['post-thumbnail']['source_url'] if thumb['media_details']['sizes']['post-thumbnail']
+          post['image'] = thumb['media_details']['sizes']['large']['source_url']          if thumb['media_details']['sizes']['large']
+        end
         author = JSON.parse(HTTParty.get("http://blog.meinbge.de/wp-json/wp/v2/users/#{opost['author']}").body)
         post['authorname'] = author['name'] if author['name']
         posts << post
+
       end
 
       File.open("../public/news.json", "w+") do |f|
@@ -70,24 +73,27 @@ module Clockwork
       end
     end
 
-    # if job == "invitations.send"
-    #     invitations = Tandem.where(:invitee_email_sent => nil, :invitation_type => 'mail')
+    if job == "invitations.send"
+        invitations = Tandem.where(:invitee_email_sent => nil, :invitation_type => 'mail')
+        invitations.each do |i|
+          user = User.find_by_id(i[:inviter_id])
+          unless user.nil?
+            puts InvitationMailer.invite_new(i,user).deliver
+            i.update_attribute(:invitee_email_sent,Time.now)
+          end
+        end
 
-    #     invitations.each do |i|
-    #       InvitationMailer.invite_new(i,User.find(i[:inviter_id])).deliver
-    #       i.update_attribute(:invitee_email_sent,Time.now)
-    #     end
-
-    # end
+    end
 
 
 
   end
 
+  every(5.minutes, 'invitations.send')
   every(5.minutes, 'newsletter.send')
-  #every(5.minutes, 'invitations.send')
   every(3.minutes, 'cache.news')
   every(3.minutes, 'crowdbar.stats')
   every(10.minutes, 'clear.cache')
   every(20.minutes, 'bank.check')
+
 end
