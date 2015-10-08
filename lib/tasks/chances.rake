@@ -67,6 +67,23 @@ namespace :chances do
   end
 
 
+  task :mailinvitees => :environment do
+    desc "send mail to mistakenly created invites"
+
+    inv = Tandem.where("invitation_type='existing' and invitee_email is not null and invitee_email != '' and inviter_id = invitee_id and invitee_email not in (select email from users)")
+
+    inv.each do |i|
+      user = User.find_by_id(i[:inviter_id])
+      unless user.nil?
+        mailtext = "Hallo, \n\ndie Seite \"Mein Grundeinkommen\" will herausfinden, was mit Menschen passiert, wenn sie ein Bedingungsloses Grundeinkommen erhalten. Dazu verlosen sie regelmäßig an eine Person ein Grundeinkommen, das 1000 €  im Monat beträgt und ein Jahr lang ausgezahlt wird.\n\nFünfzehn Menschen erhalten das Geld schon.\nDieses Mal werden zwei Grundeinkommen an zwei Menschen verlost, die sich kennen.\nIch nehme selbst an der Verlosung teil und lade dich herzlich ein, mein_e Tandempartner_in zu sein. Du musst nichts weiter tun als diesem Link zu folgen und meine Tandem-Einladung zu bestätigen:\n\nhttps:\/\/www.mein-grundeinkommen.de\/tandem?mitdir=#{user.id} \n\nEs kostet nichts und im besten Fall erhalten wir beide ein Jahr lang Grundeinkommen.\n\nLiebe Grüße"
+        subject = 'Grundeinkommen für dich und mich'
+        i.update_attributes({:invitation_type => 'mail', :invitee_email_subject => subject, :invitee_email_text => mailtext, :invitee_id => nil})
+      end
+    end
+
+  end
+
+
   task :crowdjoker => :environment do
     desc "setup jokers for crowdcard users on location"
 
