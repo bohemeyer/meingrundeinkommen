@@ -103,8 +103,9 @@ class UserSerializer < ActiveModel::Serializer
           end
 
           if object.id == c.inviter_id && c.invitee_id
-            u = User.find(c.invitee_id)
-            t[:details] = { :name => u.name, :avatar => u.avatar }
+            if u = User.find(c.invitee_id)
+              t[:details] = { :name => u.name, :avatar => u.avatar }
+            end
           else
             if object.id == c.inviter_id && t[:invitee_name] && t[:invitee_name] != ""
               t[:details] = { :name => t[:invitee_name], :avatar => nil }
@@ -115,8 +116,9 @@ class UserSerializer < ActiveModel::Serializer
             end
           end
           if object.id == c.invitee_id && c.inviter_id
-            u = User.find(c.inviter_id)
-            t[:details] = { :name => u.name, :avatar => u.avatar }
+            if u = User.find(c.inviter_id)
+              t[:details] = { :name => u.name, :avatar => u.avatar }
+            end
           end
 
           r << t
