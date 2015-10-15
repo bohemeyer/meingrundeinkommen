@@ -26,9 +26,6 @@
             <a ng-hide="current.user" href="/register"  class="btn btn-large btn-bge">Jetzt mitmachen</a>
 
 
-
-            <p class="light grey">kostenlos & keine Tricks</p>
-
         </div>
     </section>
     <section class="container">
@@ -40,6 +37,126 @@
             </div>
         </div>
     </section>
+
+
+
+
+
+    <script type="text/ng-template" id="videomodal.html">
+
+              <div class="modal-body">
+                <div class="row text-center" >
+
+                    <iframe width="100%" height="500" ng-src="{{slug}}"
+                                frameborder="0" allowfullscreen></iframe>
+
+                </div>
+              </div>
+              <div class="modal-footer">
+
+                <div class="text-center"><a href="javascript:void(0)" ng-click="$dismiss()" style="margin-top:15px;">Schließen</div>
+
+              </div>
+
+          </script>
+
+          <a name="portraits"></a>
+    <section class="a-europe__team container">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                <img src="assets/support/squirrel.svg" height="200">
+                <h2 style="margin-bottom:10px">"Warum ich dir Grundeinkommen gönne"</h2>
+                <h3>Tandem-Paare im Portrait</h3>
+            </div>
+
+        </div>
+
+
+<!--
+<div class="slogan bottom-pad-small" style="padding:0">
+      <carousel interval="3000">
+        <slide ng-repeat="portrait in portraits">
+          <div style="height:100%;width:100%;position:absolute;opacity: 0.3; filter: alpha(opacity=30);z-index:0;">
+            <div style="background:url('{{portrait.user.avatar.avatar.url}}');background-size:100% auto;background-position:50% 30%;height:100%;width:100%"></div>
+          </div>
+          <div style="padding:20px;padding-bottom:50px;z-index:1;position:relative;">
+            <div class="testimonial-image-medium">
+              <a href="/menschen/{{portrait.user.id}}">
+                <img src="{{portrait.user.avatar.avatar.url}}">
+              </a>
+            </div>
+            <h3><a href="/menschen/{{portrait.user.id}}">{{portrait.user.name}}</a> gönnt <a href="/menschen/{{portrait.user.id}}">{{portrait.user.name}}</a> Grundeinkommen, damit <br>
+            {{portrait.wish.he}}
+            </h3>
+            <br>
+
+          </div>
+        </slide>
+    </carousel>
+
+</div>
+
+ -->
+
+
+
+
+
+
+        <div ng-repeat="t in portraits" ng-if="$index % 4 == 0" class="row">
+            <div class="col-xs-12 col-md-3" >
+                <a href="#" ng-click="openVideoModal(portraits[$index])"><img style="border-radius:10px" src="/tandem/Tandem-Paar-{{portraits[$index].pic}}.jpg" class="img-responsive"></a>
+                <h4>{{portraits[$index].title}}
+                </h4>
+                <p>{{portraits[$index].text}}</p>
+            </div>
+
+            <div class="col-xs-12 col-md-3" >
+                <a href="#" ng-click="openVideoModal(portraits[$index+1])"><img style="border-radius:10px" src="/tandem/Tandem-Paar-{{portraits[$index+1].pic}}.jpg" class="img-responsive"></a>
+                <h4>{{portraits[$index+1].title}}
+                </h4>
+                <p>{{portraits[$index+1].text}}</p>
+            </div>
+
+            <div class="col-xs-12 col-md-3" >
+                <a href="#" ng-click="openVideoModal(portraits[$index+2])"><img style="border-radius:10px" src="/tandem/Tandem-Paar-{{portraits[$index+2].pic}}.jpg" class="img-responsive"></a>
+                <h4>{{portraits[$index+2].title}}
+                </h4>
+                <p>{{portraits[$index+2].text}}</p>
+            </div>
+
+            <div ng-show="portraits[$index+3]" class="col-xs-12 col-md-3" >
+
+                <a href="#" ng-click="openVideoModal(portraits[$index+3])"><img style="border-radius:10px" src="/tandem/Tandem-Paar-{{portraits[$index+3].pic}}.jpg" class="img-responsive"></a>
+                <h4>{{portraits[$index+3].title}}
+                </h4>
+                <p>{{portraits[$index+3].text}}</p>
+            </div>
+
+            <div ng-show="$index == 8" class="col-xs-12 col-md-3" >
+                <img style="border-radius:10px" src="/tandem/foto_lp.jpg" class="img-responsive">
+                <h4>Warum gönnst du deinen Tandems Grundeinkommen?
+                </h4>
+                <p>Sag es ihnen und der Welt!
+                    <br>
+                    <a href="/menschen/{{current.user.id}}?gewinnspiel" class="btn btn-large btn-bge">Jetzt sagen!</a></p>
+            </div>
+
+        </div>
+
+
+
+
+    </section>
+
+
+
+
+
+
+
+
+
     <section class="a-europe__project green text-center">
         <div class="container">
 
@@ -98,57 +215,7 @@
     </section>
 
 
-    <script type="text/ng-template" id="videomodal.html">
 
-              <div class="modal-body">
-                <div class="row text-center" >
-
-                    <iframe width="100%" height="500" ng-src="{{slug}}"
-                                frameborder="0" allowfullscreen></iframe>
-
-                </div>
-              </div>
-              <div class="modal-footer">
-
-                <div class="text-center"><a href="javascript:void(0)" ng-click="$dismiss()" style="margin-top:15px;">Schließen</div>
-
-              </div>
-
-          </script>
-
-
-    <!-- <section class="a-europe__team container">
-        <div class="row">
-            <div class="col-xs-6">
-                <h2>"Warum ich dir Grundeinkommen gönne"</h2>
-                <h3>Tandem-Paare im Portrait</h3>
-            </div>
-            <div class="col-xs-6">
-                <img src="assets/support/squirrel.svg" height="120">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-3" ng-repeat="t in [1,2,3,4,5,6,7,8,9,10]">
-                <a href="#" ng-click="openVideoModal('hF84cQN0J48')"><img style="border-radius:10px" src="/tandem/Tandem-Paar-{{t}}.jpg" class="img-responsive"></a>
-                <h4>Claudia & Felix<br>
-                    <small>"Weil ich dich liebe"</small>
-                </h4>
-                <p>Diplom-Kommunikationswirt (dab). Vater einer 3-jährigen Tochter. Gründer einiger Internet-Start-Ups
-                    und Gesicht der Kampagne.</p>
-            </div>
-
-            <div class="col-xs-12 col-md-3" >
-                <img style="border-radius:10px" src="" class="img-responsive">
-                <h4>Warum gönnst du deinen Tandems Grundeinkommen?<br>
-                    <small>"Weil ich dich liebe"</small>
-                </h4>
-                <p>Sag es ihnen und der Welt!
-                    <br>
-                    <a href="/menschen/{{current.user.id}}?gewinnspiel" class="btn btn-large btn-bge">Jetzt sagen!</a></p>
-            </div>
-
-        </div>
-    </section> -->
 
 <!--     <section class="a-europe__history container text-center">
         <div class="row">

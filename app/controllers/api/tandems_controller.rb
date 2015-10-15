@@ -1,6 +1,55 @@
 class Api::TandemsController < ApplicationController
 
 
+	def index
+		x = []
+		Tandem.where("invitee_id != inviter_id and inviter_id is not null and invitee_id is not null and ((invitee_grudges_inviter_for is not null and invitee_grudges_inviter_for != '') or (inviter_grudges_invitee_for is not null and inviter_grudges_invitee_for !='')").sample(50).map do |tandem|
+	      inviter = User.find_by_id(tandem.inviter_id).first
+	      invitee = User.find_by_id(tandem.invitee_id).first
+
+	      next if inviter.nil? || invitee.nil? || (!inviter.nil? && inviter.avatar.nil?) || (!invitee.nil? && invitee.avatar.nil?)
+
+	      grudges = []
+
+	      if !tandem.invitee_grudges_inviter_for.nil? && !tandem.invitee_grudges_inviter_for == ""
+	      	grudges << {
+		      	grudge: tandem.invitee_grudges_inviter_for
+		      	grudger: inviter
+		      	grudgee: invitee
+		    }
+		  end
+
+		  if !tandem.inviter_grudges_invitee_for.nil? && !tandem.inviter_grudges_invitee_for == ""
+	      	grudges << {
+		      	grudge: tandem.inviter_grudges_invitee_for
+		      	grudger: invitee
+		      	grudgee: inviter
+		    }
+		  end
+
+		  grudge = grudges.sample
+
+	      x << {
+	        grudger: {
+	        	avatar: grudge.grudger.avatar
+	        	id: grudge.grudger.id
+	        	name: grudge.grudger.name
+	        },
+	        grudgee: {
+	        	avatar: grudge.grudgee.avatar
+	        	id: grudge.grudgee.id
+	        	name: grudge.grudgee.name
+	        }
+	        grudge: grudge.grudge
+	      }
+		end
+		render json: x
+    end
+
+		tandems.
+
+	end
+
 	def create
 
 		#todo:
