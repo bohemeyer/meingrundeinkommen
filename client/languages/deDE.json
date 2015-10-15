@@ -3,11 +3,11 @@
   "OF": "von",
   // global form keys
   "FORM_NAME_LABEL": "Vorname",
-  "FORM_NAME_PLACEHOLDER": "Max",
+  "FORM_NAME_PLACEHOLDER": "Maxi",
   "FORM_EMAIL_LABEL": "Email",
   "FORM_EMAIL_PLACEHOLDER": "Email",
   "FORM_NAME_LAST_LABEL": "Nachname",
-  "FORM_NAME_LAST_PLACEHOLDER": "Mustermann",
+  "FORM_NAME_LAST_PLACEHOLDER": "Mustermensch",
   "FORM_STREET_LABEL": "Straße",
   "FORM_STREET_PLACEHOLDER": "Straßenname",
   "FORM_STREET_NUMBER_LABEL": "Nummer",
