@@ -5,11 +5,15 @@ class Api::TandemsController < ApplicationController
 
 		#todo:
 
+		grudge = params[:grudge]
 		tandem = params[:tandem].permit(:invitee_email, :invitee_name, :invitee_id, :inviter_id, :purpose, :invitation_type, :invitee_email_subject, :invitee_email_text)
 
 		r = false
 
 		if tandem[:invitation_type] && (tandem[:invitee_id] == current_user.id || tandem[:inviter_id] == current_user.id) && current_user.tandems.count < 100
+
+			tandem[:invitee_grudges_inviter_for] = grudge if tandem[:invitee_id] == current_user.id
+			tandem[:inviter_grudges_invitee_for] = grudge if tandem[:inviter_id] == current_user.id
 
 			tandem[:invitation_token] = loop do
 			  token = SecureRandom.urlsafe_base64
@@ -50,19 +54,14 @@ class Api::TandemsController < ApplicationController
 
 	end
 
-	# def update
-	# 	if params[:confirm]
-	# 		tandem = Tandem.find(params[:id])
-	# 		if tandem.invitation_token == params[:confirm]
-	# 			#set confirmed
-	# 			tandem[:invitation_accepted_at] = Time.now
-	# 			tandem.save
-	# 			#send email to inviter and inform about confirmation
-	# 			InvitationMailer.inform_mail_confirmation(tandem,current_user,User.find(tandem[:inviter_id])).deliver
-	# 			render json: {:success => true}
-	# 		end
-	# 	end
-	# end
+	def update
+			tandem = Tandem.find(params[:id])
+			tandem[:invitee_grudges_inviter_for] = params[:grudge] if tandem[:invitee_id] == current_user.id
+			tandem[:inviter_grudges_invitee_for] = params[:grudge] if tandem[:inviter_id] == current_user.id
+			tandem.save
+			#InvitationMailer.inform_mail_confirmation(tandem,current_user,User.find(tandem[:inviter_id])).deliver
+			render json: {:success => true}
+	end
 
 	def destroy
 

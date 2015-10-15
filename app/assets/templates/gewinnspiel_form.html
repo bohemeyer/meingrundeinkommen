@@ -150,6 +150,22 @@
       </div>
     </div>
 
+    <div ng-show="!current.user.newsletter" class="form-group text-left" style="margin-top:-20px;">
+      <div class="col-sm-offset-2 col-sm-10 text-left">
+        <div class="checkbox">
+          <label>
+            <input name="newsletter" type="checkbox" ng-click="current.setNewsletterFlag();" analytics-on="click" analytics-event="Newsletter abboniert (im Gewinnspieltab)"> Bitte informiert mich zukünftig per E-Mail über Verlosungstermine und bei wichtigen Änderungen auf der Seite.
+                </label>
+        </div>
+      </div>
+    </div>
+
+    <div ng-show="current.user.newsletter && current.subscribed">
+          <alert type="success"><i class="icon-envelope"></i> Wir erinnern dich rechtzeitig per E-Mail wenn eine neue Verlosung ansteht!</alert>
+        </div>
+
+
+
     <script type="text/ng-template" id="squirrelmodal.html">
       <div class="modal-header">
             <h3 class="float-left modal-title">Crowdhörnchen werden</h3>

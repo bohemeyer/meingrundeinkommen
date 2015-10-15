@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151006035327) do
+ActiveRecord::Schema.define(version: 20151008192629) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -211,6 +211,8 @@ ActiveRecord::Schema.define(version: 20151006035327) do
     t.text     "invitee_email_subject"
     t.text     "invitee_email_text"
     t.datetime "invitee_email_sent"
+    t.text     "inviter_grudges_invitee_for"
+    t.text     "invitee_grudges_inviter_for"
   end
 
   add_index "tandems", ["invitation_token"], name: "index_tandems_on_invitation_token", unique: true

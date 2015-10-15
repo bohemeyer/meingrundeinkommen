@@ -22,34 +22,35 @@ angular.module "Tandem", ["rails"]
 
     mail_re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i
 
-    $scope.chances.tandems = $scope.current.user.tandems
-
     $scope.personallink = "www.mein-grundeinkommen.de/tandem?mitdir=#{$scope.current.user.id}"
 
 
 
     $scope.saveTandems = ->
-      if $scope.current.participates() && $scope.chances.tandems.length < 100
+      if $scope.current.participates() && $scope.current.user.tandems.length < 100
         tqueries = []
-        angular.forEach $scope.chances.tandems, (t) ->
+        angular.forEach $scope.current.user.tandems, (t) ->
           if !t.id
             tqueries.push new Tandem(t).create().then (tandem) ->
-              $scope.chances.tandems[$scope.chances.tandems.indexOf(t)].id = tandem.id
+              $scope.current.user.tandems[$scope.current.user.tandems.indexOf(t)].id = tandem.tandem.id
+          else
+            if t.grudge
+              tqueries.push new Tandem(
+                id: t.id
+                grudge: t.grudge
+              ).update()
 
         $q.all(tqueries)
-        #$scope.current.user.tandems = $scope.chances.tandems
+        true
 
-
-
-
-
-    if $scope.current.inviter && $scope.current.inviter.id != $scope.current.user.id
+    if $scope.current.inviter && parseInt($scope.current.inviter.id) != $scope.current.user.id
 
       if $scope.current.inviter.invitation_type == 'link'
         tnew =
           inviter_id: $scope.current.inviter.id
           invitee_id: $scope.current.user.id
           invitation_type: 'link'
+          grudge: ''
           details:
             name: $scope.current.inviter.name
             avatar: $scope.current.inviter.avatar
@@ -57,7 +58,7 @@ angular.module "Tandem", ["rails"]
       #if $scope.current.inviter.invitation_type == 'email'
       #TODO
 
-      $scope.chances.tandems.push(tnew)
+      $scope.current.user.tandems.push(tnew)
       $scope.saveTandems()
       $scope.current.inviter = null
 
@@ -149,10 +150,11 @@ angular.module "Tandem", ["rails"]
               invitee_email_subject: invites.subject
               invitation_type: 'mail'
               inviter_id: $scope.current.user.id
+              grudge: ''
               details:
                 name: if invite.name and invite.name != '' then invite.name else invite.email
 
-            $scope.chances.tandems.push t
+            $scope.current.user.tandems.push t
 
         $scope.saveTandems()
 
@@ -168,10 +170,11 @@ angular.module "Tandem", ["rails"]
         invitee_id: $scope.tandeminviteform.reference.id
         inviter_id: $scope.current.user.id
         invitation_type: 'existing'
+        grudge: ''
         details: model
 
       unless (model && model.notpossible)
-        $scope.chances.tandems.push(tandem)
+        $scope.current.user.tandems.push(tandem)
         $scope.saveTandems()
         $scope.tandeminviteform.reference = ''
 
@@ -191,6 +194,30 @@ angular.module "Tandem", ["rails"]
     #       #$scope.chooseTandem(tandem, $scope.current.getAffiliateDetails(tandem.reference) )
 
 
+    $scope.grudge = (tandem) ->
+      GrudgeModal = $modal.open(
+        templateUrl: "grudgemodal.html"
+        size: 'lg'
+        controller: [
+          "$scope"
+          "tandem"
+          "$modalInstance"
+          ($scope,tandem,$modalInstance) ->
+            $scope.tandem = tandem
+            $scope.tandem.grudge = "" if !$scope.tandem.grudge
+            $scope.saveGrudge = ->
+              $modalInstance.close($scope.tandem)
+        ]
+        resolve:
+          tandem: ->
+            tandem
+      )
+
+      GrudgeModal.result.then (t) ->
+        tandem.grudge = t.grudge
+        $scope.saveTandems()
+
+
     $scope.removeTandem = (tandem) ->
       if confirm('Willst du wirklich von diesem Tandem absteigen?')
         if tandem.id
@@ -200,7 +227,6 @@ angular.module "Tandem", ["rails"]
 
         if (tandem.inviter_id == $cookies["mitdir"] && tandem.inviter_id!= $scope.current.user) || (tandem.invitee_id == $cookies["mitdir"] && tandem.invitee_id!= $scope.current.user)
           $cookies["mitdir"] = null
-        $scope.chances.tandems.splice($scope.chances.tandems.indexOf(tandem), 1)
-        $scope.current.user.tandems.splice($scope.chances.tandems.indexOf(tandem), 1)
+        $scope.current.user.tandems.splice($scope.current.user.tandems.indexOf(tandem), 1)
 
 ]

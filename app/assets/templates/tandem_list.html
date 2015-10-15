@@ -4,7 +4,7 @@
 
     <li ng-repeat="tandem in current.user.tandems" class="pull-left">
 
-    <div class="pull-left text-center" style="margin:15px;background: #F6F6F6;border: 2px solid white;border-radius: 10px;padding: 16px;box-shadow: 0px 0px 5px #000;max-height:150px">
+    <div class="pull-left text-center" style="margin:15px;background: #F6F6F6;border: 2px solid white;border-radius: 10px;padding: 16px;box-shadow: 0px 0px 5px #000;max-height:160px">
 
       <div class="pull-left" style="    position: absolute;height: 30px;width: 30px;border-radius: 15px;background-color: white;margin-left: -27px;margin-top: -27px;border: 2px solid #aaa;font-size: 20px;padding-left: 1px;"><a href="#" ng-click="removeTandem(tandem)">x</a></div>
 
@@ -24,6 +24,13 @@
       <a ng-show="tandem.inviter_id && tandem.inviter_id != current.user.id" href="/menschen/{{tandem.inviter_id}}" target="_blank">{{tandem.details.name}}</a>
 
       <span ng-show="tandem.invitee_email">{{tandem.details.name}}</span>
+      <br>
+
+      {{tandem.grudge}}
+
+      <a ng-hide="(tandem.grudge && tandem.grudge != '')" href="#" ng-click="grudge(tandem)" class=" btn btn-small btn-color" style="margin:5px;">.. und wofür?</a>
+
+      <a ng-show="tandem.grudge && tandem.grudge != ''" href="#" ng-click="grudge(tandem)" class=" btn btn-small btn-grey" style="margin:5px;"><i class="fa fa-check"></i> Gönn-Text ansehen</a>
 
 
 
@@ -35,7 +42,7 @@
     </li>
 
 
-    <li class="pull-left" ng-show="chances.tandems.length > 0">
+    <li class="pull-left" ng-show="current.user.tandems.length > 0">
 
       <a ng-click="openInviteModal()"  href="javascript:void(0)">
       <div class="pull-left text-center" style="margin:15px;background: #white;border: 2px dotted #ccc;border-radius: 10px;padding: 16px;">
@@ -51,3 +58,41 @@
     <li style="clear:both"></li>
 
   </ul>
+
+<script type="text/ng-template" id="grudgemodal.html">
+
+              <div class="modal-body">
+                <div class="row text-center" >
+
+
+                  <h3>Wofür gönnst du {{tandem.details.name}} <br>ein bedingungsloses Grundeinkommen?</h3>
+
+                  <div class="testimonial-image-medium"><img ng-src="{{tandem.details.avatar.avatar.url}}" height="100"></div>
+
+
+                  <p>Wir wollen auf unserer Seite erzählen, dass und wofür Menschen sich gegenseitig Grundeinkommen gönnen. <br>Erzähl es uns hier (die Angabe ist freiwillig und wird öffentlich zu sehen sein)</p>
+
+                </div>
+
+                  <h4 class="text-center">Ich gönne {{tandem.details.name}} das Grundeinkommen, damit... <i>(150 Zeichen)</i></h4>
+                  <div class="row">
+                  <div class="col-sm-12 text-center">
+                    <textarea maxlength="50" style="min-height:50px;" name="text" class="form-control" ng-model="tandem.grudge"></textarea>
+                    <br>
+                    <a href="#" ng-click="saveGrudge()"  class="btn btn-large btn-bge">Speichern & veröffentlichen</a>
+                  </div>
+
+
+
+                </div>
+
+
+          </div>
+              </div>
+              <div class="modal-footer">
+
+                <div class="text-center"><a href="javascript:void(0)" ng-click="$dismiss()" style="margin-top:15px;">Schließen</div>
+
+              </div>
+
+          </script>

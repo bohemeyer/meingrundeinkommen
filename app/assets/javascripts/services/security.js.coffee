@@ -44,6 +44,8 @@ angular.module "Security", ["Devise","Flag"]
 
       user: null
 
+      subscribed: false
+
 
       # Ask the backend to see if a user is already authenticated - this may be from a previous session.
       requestCurrentUser: ->
@@ -53,6 +55,15 @@ angular.module "Security", ["Devise","Flag"]
         ), (error) ->
           service.user = false
           console.log error
+
+
+      setNewsletterFlag: ->
+        $http.put("/users.json",
+          user:
+            newsletter: true
+        )
+        service.user.newsletter = true
+        service.subscribed = true
 
       is_own_profile: (profile_id) ->
         if this.user && this.user.id == profile_id then true else false
@@ -118,6 +129,11 @@ angular.module "Security", ["Devise","Flag"]
           return user
 
       confirmTandem: ->
+
+        if parseInt(service.inviter.id)==service.user.id
+          alert 'Nur gemeinsam ist man stark! Du kannst kein Tandem mit dir selbst bilden.'
+          return false
+
         if service.user.tandems.length > 99
           alert('Du kannst kein weiteres Tandem bilden, weil du bereits 100 Tandems hast. Bitte lösche erst eines deiner Tandems um dieses hier bilden zu können.')
           $location.path("/menschen/#{service.user.id}").search('gewinnspiel',true)
@@ -128,16 +144,21 @@ angular.module "Security", ["Devise","Flag"]
           else
 
             if service.participates()
-              new Tandem(
+              tnew =
                 invitee_id: service.user.id
                 inviter_id: service.inviter.id
                 invitation_type: service.inviter.invitation_type
-              ).create().then (tandems) ->
+                grudge: ""
+                details:
+                  name: service.inviter.name
+                  avatar: service.inviter.avatar
+              new Tandem(tnew).create().then (tandems) ->
+                tnew.id = tandems.id
+                service.user.tandems.push tnew
                 $cookies["mitdir"] = null
-                #service.user.tandems = tandems
                 alert("Du und #{service.inviter.name} bildet jetzt ein Tandem! Gute Fahrt!")
                 service.inviter = null if service.inviter
-                $location.path("/menschen/#{service.user.id}").search('gewinnspiel',true)
+                $location.path("/menschen/#{service.user.id}").search('gewinnspiel',true).search('mitdir', null)
 
             else
               $location.path("/boarding").search('trigger','wants_to_participate')

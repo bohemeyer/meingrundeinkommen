@@ -45,6 +45,7 @@ class User < ActiveRecord::Base
   scope :byids, ->(ids) { where(['users.id IN (?)', ids.split(',')])}
   scope :with_newsletter, lambda { where(newsletter: true) }
   scope :confirmed, lambda { where('confirmed_at is not null') }
+  scope :not_confirmed, lambda { where('confirmed_at is null') }
   scope :participating, lambda { includes(:chances).where(chances: { :confirmed => true })}
   scope :not_participating, -> { where.not(:id => Chance.where(chances: { :confirmed => true }).select(:user_id).uniq) }
   scope :has_code, lambda { includes(:chances).where.not(chances: { :code => nil })}

@@ -140,11 +140,12 @@ angular.module "Chance", ["rails","Support","Tandem"]
       $scope.current.user.chances = $scope.chances_form.chances
 
       $q.all(queries).finally ->
+        $scope.submitted = false
         if !errors
 
           #Handle tandems
           tqueries = []
-          angular.forEach $scope.chances.tandems, (t) ->
+          angular.forEach $scope.current.user.tandems, (t) ->
             if !t.id && (t.invitee_id || t.inviter_id || t.email)
 
               tandem =
@@ -155,10 +156,9 @@ angular.module "Chance", ["rails","Support","Tandem"]
                 invitee_email_subject: if t.invitee_email_subject then t.invitee_email_subject else null
                 invitee_email_text: if t.invitee_email_text then t.invitee_email_text else null
                 invitee_email: t.invitee_email
+                grudge: t.grudge
               tqueries.push new Tandem(tandem).create().then (t) ->
                 tandem.id = t.id
-                $scope.current.user.tandems.push tandem
-                $scope.chances.tandems.push tandem
 
 
           $q.all(tqueries).finally ->
@@ -166,7 +166,6 @@ angular.module "Chance", ["rails","Support","Tandem"]
             $scope.current.inviter = null if $scope.current.inviter
 
           $scope.sanitizeChances()
-          $scope.submitted = false
           $scope.$emit('go_to_next_step')
 
 

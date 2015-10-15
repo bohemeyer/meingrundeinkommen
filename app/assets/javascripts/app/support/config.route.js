@@ -2,12 +2,34 @@
     'use strict';
 
     angular
-        .module('app.support')
+        .module('app.support', ['ngRoute','ngSanitize'])
         .config(function ($routeProvider) {
 
             $routeProvider
                 .when('/tandem', {
-                    templateUrl: '/assets/tandem.html'
+                    templateUrl: '/assets/tandem.html',
+                    controller: function ($scope, $modal) {
+
+                        $scope.openVideoModal = function(slug) {
+                          var VideoModal;
+                          return VideoModal = $modal.open({
+                            templateUrl: "videomodal.html",
+                            size: 'lg',
+                            controller: [
+                              "$scope", "slug", "$modalInstance", "$sce", function($scope, slug, $modalInstance,$sce) {
+                                $scope.slug = $sce.trustAsResourceUrl("//www.youtube.com/embed/" + slug + "?autoplay=1");
+
+                              }
+                            ],
+                            resolve: {
+                              slug: function() {
+                                return slug;
+                              }
+                            }
+                          });
+                        };
+
+                    },
                 })
                 .when('/bgemitdir', {
                     redirectTo: '/tandem'

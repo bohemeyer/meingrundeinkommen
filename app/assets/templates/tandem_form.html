@@ -4,24 +4,24 @@
 
     <div class="row">
 
-    <div ng-hide="chances.tandems.length > 1" class="col-sm-4 text-center">
+    <div ng-hide="current.user.tandems.length > 1" class="col-sm-4 text-center">
       <img src="/assets/tandem-klein.png" style="max-height:150px;">
     </div>
 
-    <div ng-class="{'col-sm-8': chances.tandems.length < 2, 'col-sm-12': chances.tandems.length > 1}">
+    <div ng-class="{'col-sm-8': current.user.tandems.length < 2, 'col-sm-12': current.user.tandems.length > 1}">
 
-      <label ng-show="chances.tandems.length < 2" style="font-size:150%;" for="inputEmail12" class=" text-center">Wenn ich gewinne, soll auch diese Person Grundeinkommen erhalten:</label>
+      <label ng-show="current.user.tandems.length < 2" style="font-size:150%;" for="inputEmail12" class=" text-center">Wenn ich gewinne, soll auch diese Person Grundeinkommen erhalten:</label>
 
-      <label ng-show="chances.tandems.length > 1" style="font-size:150%;" for="inputEmail12" class=" text-center">Wenn ich gewinne, soll auch <b><i>eine dieser Personen</i></b> Grundeinkommen erhalten:</label>
+      <label ng-show="current.user.tandems.length > 1" style="font-size:150%;" for="inputEmail12" class=" text-center">Wenn ich gewinne, soll auch <b><i>eine dieser Personen</i></b> Grundeinkommen erhalten:</label>
 
-      <div ng-show="chances.tandems.length == 0">
+      <div ng-show="current.user.tandems.length == 0">
 
         <input type="text" ng-model="tandeminviteform.reference" style="height:50px;padding-left:10px;padding-right:10px;width:100%;margin-top:25px" font-size="25" autocomplete="false"
         placeholder="Suchen nach Benutzername / User-ID oder E-Mail-Adresse" typeahead="user as user.name for user in getTandem($viewValue)"
         typeahead-on-select="chooseExisting($model)"
         typeahead-loading="loading" typeahead-template-url="suggestion_list.html" typeahead-min-length="1" required ng-blur="checkifblur()">
 
-        <alert ng-show="chances.notandemerror && chances.tandems.length==0">Bitte eine Person auswählen (einfach lostippen) oder eine E-Mail-Adresse eintragen um jemanden einzuladen. <a href="#" ng-click="getRandomTandem()" class=" btn btn-small btn-color">Zufällige Person auswählen</a></alert>
+        <alert ng-show="chances.notandemerror && current.user.tandems.length==0">Bitte eine Person auswählen (einfach lostippen) oder eine E-Mail-Adresse eintragen um jemanden einzuladen. <a href="#" ng-click="getRandomTandem()" class=" btn btn-small btn-color">Zufällige Person auswählen</a></alert>
 
         <br>
         <span style="font-size:11px;">#bgeMitDir - Diesmal werden zwei Grundeinkommen verlost, an zwei Personen, die sich kennen. Im Tandem. Mehr Infos <a href="/tandem">hier</a></span>.
