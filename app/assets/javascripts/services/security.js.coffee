@@ -138,7 +138,7 @@ angular.module "Security", ["Devise","Flag"]
           alert('Du kannst kein weiteres Tandem bilden, weil du bereits 100 Tandems hast. Bitte lösche erst eines deiner Tandems um dieses hier bilden zu können.')
           $location.path("/menschen/#{service.user.id}").search('gewinnspiel',true)
         else
-          if service.inviter.number_of_tandems > 99
+          if service.inviter && service.inviter.number_of_tandems > 99
             alert("Du kannst dieses Tandem nicht bilden, weil #{service.inviter.name} bereits 100 Tandems hat. Du kannst natürlich trotzdem teilnehmen.")
             $location.path("/menschen/#{service.user.id}").search('gewinnspiel',true)
           else
