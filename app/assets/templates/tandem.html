@@ -72,23 +72,23 @@
         </div>
 
 
-<!--
+
+
 <div class="slogan bottom-pad-small" style="padding:0">
       <carousel interval="3000">
-        <slide ng-repeat="portrait in portraits">
+        <slide ng-repeat="t in grudgeportraits">
           <div style="height:100%;width:100%;position:absolute;opacity: 0.3; filter: alpha(opacity=30);z-index:0;">
-            <div style="background:url('{{portrait.user.avatar.avatar.url}}');background-size:100% auto;background-position:50% 30%;height:100%;width:100%"></div>
+            <div style="background:url('{{t.grudgee.avatar.avatar.url}}');background-size:100% auto;background-position:50% 30%;height:100%;width:100%"></div>
           </div>
           <div style="padding:20px;padding-bottom:50px;z-index:1;position:relative;">
             <div class="testimonial-image-medium">
-              <a href="/menschen/{{portrait.user.id}}">
-                <img src="{{portrait.user.avatar.avatar.url}}">
+              <a href="/menschen/{{t.grudger.id}}">
+                <img src="{{t.grudger.avatar.avatar.url}}">
               </a>
             </div>
-            <h3><a href="/menschen/{{portrait.user.id}}">{{portrait.user.name}}</a> gönnt <a href="/menschen/{{portrait.user.id}}">{{portrait.user.name}}</a> Grundeinkommen, damit <br>
-            {{portrait.wish.he}}
+            <h3><a href="/menschen/{{t.grudger.id}}">{{t.grudger.name}}</a> gönnt <a href="/menschen/{{t.grudgee.id}}">{{t.grudgee.name}}</a> Grundeinkommen, damit <br>
+            {{t.grudge}}
             </h3>
-            <br>
 
           </div>
         </slide>
@@ -96,7 +96,6 @@
 
 </div>
 
- -->
 
 
 

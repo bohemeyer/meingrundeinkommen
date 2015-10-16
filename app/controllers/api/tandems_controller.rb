@@ -3,52 +3,65 @@ class Api::TandemsController < ApplicationController
 
 	def index
 		x = []
-		Tandem.where("invitee_id != inviter_id and inviter_id is not null and invitee_id is not null and ((invitee_grudges_inviter_for is not null and invitee_grudges_inviter_for != '') or (inviter_grudges_invitee_for is not null and inviter_grudges_invitee_for !='')").sample(50).map do |tandem|
-	      inviter = User.find_by_id(tandem.inviter_id).first
-	      invitee = User.find_by_id(tandem.invitee_id).first
+		Tandem.where("invitee_id != inviter_id AND
+					  inviter_id is not null AND
+					  invitee_id is not null AND
+					  (
+					  	(invitee_grudges_inviter_for is not null AND
+					  	 invitee_grudges_inviter_for != '')
+						or
+						(inviter_grudges_invitee_for is not null AND
+						 inviter_grudges_invitee_for !='')
 
-	      next if inviter.nil? || invitee.nil? || (!inviter.nil? && inviter.avatar.nil?) || (!invitee.nil? && invitee.avatar.nil?)
+		)").sample(50).map do |tandem|
+
+
+	      inviter = User.find_by_id(tandem.inviter_id)
+	      invitee = User.find_by_id(tandem.invitee_id)
+
+
+	      next if inviter.nil? || invitee.nil? || (!inviter.nil? && (inviter.avatar.nil? || inviter.avatar.url == "/assets/team/team-member.jpg")) || (!invitee.nil? && (invitee.avatar.nil? || invitee.avatar.url == "/assets/team/team-member.jpg"))
 
 	      grudges = []
 
-	      if !tandem.invitee_grudges_inviter_for.nil? && !tandem.invitee_grudges_inviter_for == ""
+	      if !tandem.invitee_grudges_inviter_for.nil? && tandem.invitee_grudges_inviter_for != ""
 	      	grudges << {
-		      	grudge: tandem.invitee_grudges_inviter_for
-		      	grudger: inviter
+		      	grudge: tandem.invitee_grudges_inviter_for,
+		      	grudger: invitee,
+		      	grudgee: inviter
+		    }
+		  end
+
+		  if !tandem.inviter_grudges_invitee_for.nil? && tandem.inviter_grudges_invitee_for != ""
+	      	grudges << {
+		      	grudge: tandem.inviter_grudges_invitee_for,
+		      	grudger: inviter,
 		      	grudgee: invitee
 		    }
 		  end
 
-		  if !tandem.inviter_grudges_invitee_for.nil? && !tandem.inviter_grudges_invitee_for == ""
-	      	grudges << {
-		      	grudge: tandem.inviter_grudges_invitee_for
-		      	grudger: invitee
-		      	grudgee: inviter
-		    }
-		  end
+		  next if grudges.empty?
 
 		  grudge = grudges.sample
 
 	      x << {
 	        grudger: {
-	        	avatar: grudge.grudger.avatar
-	        	id: grudge.grudger.id
-	        	name: grudge.grudger.name
+	        	avatar: grudge[:grudger].avatar,
+	        	id: grudge[:grudger].id,
+	        	name: grudge[:grudger].name
 	        },
 	        grudgee: {
-	        	avatar: grudge.grudgee.avatar
-	        	id: grudge.grudgee.id
-	        	name: grudge.grudgee.name
-	        }
-	        grudge: grudge.grudge
+	        	avatar: grudge[:grudgee].avatar,
+	        	id: grudge[:grudgee].id,
+	        	name: grudge[:grudgee].name
+	        },
+	        grudge: grudge[:grudge]
 	      }
 		end
 		render json: x
     end
 
-		tandems.
 
-	end
 
 	def create
 
