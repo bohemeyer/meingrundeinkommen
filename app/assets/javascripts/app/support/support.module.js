@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.support',['app.core','app.auth','app.data']);
+        .module('app.support',['app.core','app.auth','app.data','ngRoute','ngSanitize','Tandem']);
 
 
 }());

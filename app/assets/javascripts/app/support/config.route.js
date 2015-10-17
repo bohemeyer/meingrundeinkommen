@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('app.support', ['ngRoute','ngSanitize','Tandem'])
+        .module('app.support')
         .config(function ($routeProvider) {
 
             $routeProvider
