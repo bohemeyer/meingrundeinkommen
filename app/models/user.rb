@@ -23,7 +23,6 @@ class User < ActiveRecord::Base
 
   scope :with_flag, lambda {|flag, value| joins(:flags).where("flags.name = ? and flags.value_boolean = ?", flag, value)}
 
-
   #   # the participations in user_todos:
   has_many :user_wishes, :dependent => :destroy
   has_many :wishes, through: :user_wishes
@@ -52,6 +51,8 @@ class User < ActiveRecord::Base
   scope :with_crowdbar, lambda { includes(:flags).where(flags: {name: 'hasCrowdbar', value_boolean: true}) }
   scope :without_crowdbar, lambda { includes(:flags).where(flags: {name: 'hasCrowdbar', value_boolean: false}) }
   scope :has_crowdcard, -> { joins(:crowdcards).distinct }
+  scope :has_tandems, -> { where('users.id IN (SELECT DISTINCT(inviter_id) FROM tandems) OR users.id IN (SELECT DISTINCT(invitee_id) FROM tandems)') }
+  scope :has_no_tandems, -> { where('users.id NOT IN (SELECT DISTINCT(inviter_id) FROM tandems where inviter_id is not null) AND users.id NOT IN (SELECT DISTINCT(invitee_id) FROM tandems where invitee_id is not null)') }
   scope :sign_up_after, ->(date) { where('created_at > ?',date)}
   scope :is_squirrel, lambda { includes(:payment).where(payments: {:active => true}) }
   scope :frst_notification_not_sent, lambda { includes(:payment).where(payments: { :sent_first_notification_at => nil }) }
