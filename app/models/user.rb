@@ -64,7 +64,7 @@ class User < ActiveRecord::Base
   end
 
   def tandems
-    Tandem.where("(inviter_id = #{id} or invitee_id = #{id}) and disabled_by is null")
+    Tandem.where("(inviter_id = #{id} or invitee_id = #{id}) and inviter_id != invitee_id and disabled_by is null")
   end
 
 end

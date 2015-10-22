@@ -21,6 +21,8 @@
 
             <a ng-show="current.user && !current.inviter && !current.participates()" href="/boarding?trigger=wants_to_participate"  class="btn btn-large btn-bge">Jetzt mitmachen</a>
 
+            <a ng-show="current.user && current.inviter && !current.participates()" href="/boarding?trigger=wants_to_participate"  class="btn btn-large btn-bge">Jetzt mit {{current.inviter.name}} mitmachen</a>
+
             <a ng-show="current.user && !current.inviter && current.participates()" href="/menschen/{{current.user.id}}?gewinnspiel"  class="btn btn-large btn-bge">Meine Tandems ansehen & bearbeiten</a>
 
             <a ng-hide="current.user" href="/register"  class="btn btn-large btn-bge">Jetzt mitmachen</a>
