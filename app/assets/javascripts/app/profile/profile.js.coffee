@@ -42,11 +42,11 @@ angular.module("profile", ["User","Wish","Chance","Tandem","State","Avatar",'ng-
       $scope.chances_form.editAllChances = false
 
     $scope.user = user
+
     $scope.chances_form =
       chances: user.chances
 
     $scope.chances = {}
-    $scope.chances.tandems = $scope.current.user.tandems
 
     #todo: put in current user service
     $scope.default_avatar = if $scope.current && $scope.current.is_own_profile(user.id) && $scope.current.is_default_avatar() then true else false
