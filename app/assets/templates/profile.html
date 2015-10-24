@@ -75,6 +75,9 @@
   <ul>
     <li><h4><b>Bestätigte Tandems</b></h4></li>
     <li ng-repeat="t in user.tandems" ng-show="t.invitation_type=='link' || t.invitee_participates || t.invitationType=='link' || t.inviteeParticipates" class="text-left">
+
+      <!-- t.codeInviter || t.code_inviter -->
+
       <!-- <div class="well big pull-right">{{t.details.code}}</div> --><div style="margin-right:20px;" class="testimonial-image pull-left"><img ng-src="{{t.details.avatar ? t.details.avatar.avatar.thumb.url : '/assets/team/team-member.jpg'}}" height="50"></div>
       mit <br>
       <a ng-show="t.invitee_id && t.invitee_id != user.id" href="/menschen/{{t.invitee_id}}">{{t.details.name}}</a>
@@ -84,6 +87,8 @@
       <div style="clear:both"></div>
     </li>
   </ul>
+
+  <alert><b>Hinweis:</b> Für die Verlosung relevant ist ein Tandem erst, wenn ich a) selbst an der Verlosung teilnehme, b) meine Tandempartnerin dem Tandem zugestimmt hat und c) auch an der Verlosung teilnimmt.</alert>
 
 
   </div>

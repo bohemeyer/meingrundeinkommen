@@ -33,8 +33,8 @@ class MailingsMailer < MassMandrill::MandrillMailer
                     { :name => 'uid', :content => recipient.id },
                     { :name => 'losnummern', :content => recipient.chances.where.not(:code => nil).any? ? recipient.chances.map(&:code).join('; ') : '' },
                     { :name => 'ch_betrag', :content => !recipient.payment.blank? ? number_with_precision(recipient.payment.amount_total, precision: 2, separator: ',', delimiter: '.') : '' },
-                    { :name => 'ch_id', :content => !recipient.payment.blank? ? recipient.payment.id : '' },
-                    { :name => 'real_first_name', :content => recipient.chances.any? ? !recipient.chances.where(:is_child => false).empty? ? recipient.chances.where(:is_child => false).first.first_name : '' : '' }
+                    { :name => 'ch_id', :content => !recipient.payment.blank? ? recipient.payment.id : '' }
+                    #{ :name => 'real_first_name', :content => recipient.chances.any? ? !recipient.chances.where(:is_child => false).empty? ? recipient.chances.where(:is_child => false).first.first_name : '' : '' }
                  ]
       }
     end

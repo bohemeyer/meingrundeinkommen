@@ -31,6 +31,22 @@ angular.module("draw", ["Drawing",'ng-breadcrumbs'])
         ,
           value: ''
         ]
+    ,
+      digets: [
+          value: ''
+        ,
+          value: ''
+        ,
+          value: ''
+        ,
+          value: ''
+        ,
+          value: ''
+        ,
+          value: ''
+        ,
+          value: ''
+        ]
     ]
 
 
@@ -39,8 +55,9 @@ angular.module("draw", ["Drawing",'ng-breadcrumbs'])
         $scope.drawings = response
       )
 
+    console.log $scope.drawings
     $scope.loadDrawings()
-
+    console.log $scope.drawings
 
     $scope.submitDrawing = ->
       console.log $scope.drawings

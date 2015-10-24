@@ -6,18 +6,22 @@
         <div class="col-md-12 text-center">
 
 
-<h4 style="color:white">Die Verlosung beim Haus Bartleby</h4>
-<h1 class="title_headline">Wer gewinnt das 15. Grundeinkommen?</h1>
+<h4 style="color:white">Die Verlosung bei den Bayreuther Dialogen</h4>
+<h1 class="title_headline">Welche zwei Tandems gewinnen?</h1>
         </div>
 
          <div class="row text-center" style="margin-bottom:50px;">
 
 
+
                <div class="well">
-Am Samstag, dem 19. September um 19 Uhr verlosen wir das 15. Grundeinkommen bei einer <a href="https://www.facebook.com/events/808344695949074/">Buchpräsentation des Haus Bartleby</a>.
+Am Sonntag, dem 25. Oktober um 14:15 Uhr verlosen wir die vier <a href="/tandem">Tandem-Grundeinkommen</a> bei den <a href="http://www.bayreuther-dialoge.de/">Bayreuther Dialogen</a>. Komm gern <a href="https://www.facebook.com/events/500080840151579/">vorbei</a>, wenn du in der Nähe bist!
 </div>
 
-              <iframe width="600" height="450" src="//www.youtube.com/embed/NlYb-iu4Qzw?autoplay=1" frameborder="0" allowfullscreen></iframe>
+<a href="http://www.bayreuther-dialoge.de/"><img src="/assets/dialoge.png"></a>
+<br>
+
+              <iframe width="600" height="450" src="//www.youtube.com/embed/mCzIUAZTgvA?autoplay=1" frameborder="0" allowfullscreen></iframe>
 <br>
               <!-- <a href="http://www.daserste.de/live/index.html" class="btn btn-special btn-color btn-large margin-top-30" style="box-shadow:0px 0px 30px 15px white">Zum ARD-Livestream</a><br> -->
 
@@ -43,8 +47,8 @@ Am Samstag, dem 19. September um 19 Uhr verlosen wir das 15. Grundeinkommen bei 
    <div class="container">
 
 
-      <div class="row text-center" ng-repeat="current_drawing in drawings | limitTo: 1">
-        <h1>Das {{15+$index}}. Grundeinkommen geht an*:</h1>
+      <div class="row text-center" ng-repeat="current_drawing in drawings | limitTo: 2">
+        <h1>Das {{16+($index*2)}}. & {{16+($index*2+1)}} Grundeinkommen geht an*:</h1>
 
         <div class="col-md-12  text-center" >
 
@@ -54,16 +58,27 @@ Am Samstag, dem 19. September um 19 Uhr verlosen wir das 15. Grundeinkommen bei 
                 <img src="{{current_drawing.user.avatar.url}}">
               </a>
             </div>
+
+            <div class="testimonial-image-medium">
+              <a href="/menschen/{{current_drawing.user.id}}">
+                <img src="{{current_drawing.user.avatar.url}}">
+              </a>
+            </div>
+
+
             <a ng-if="current_drawing.isChild == 0" href="/menschen/{{current_drawing.user.id}}">{{current_drawing.user.name}}</a>
             <a ng-if="current_drawing.isChild == 1" href="/menschen/{{current_drawing.user.id}}">{{current_drawing.childName}} (Kind von {{current_drawing.user.name}})</a>
-
           </div>
+
+
+
+
             <br>
             <div class="margin-top:30">Losnummer:</div>
             <br>
             <alert ng-if="current_drawing.number.length > 1 && current_drawing.niete && current_drawing.done">NIETE</alert>
             <br><div class="margin-top-30 row">
-             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets | limitTo:7" class="well huge"><span ng-if="current_drawing.done && (current_drawing.done || (current.user && current.user.admin))">{{diget.value}}</span><i ng-if=" !current_drawing.done || (!diget.value || (!current_drawing.done && !(current.user && current.user.admin)))" class="fa fa-refresh" style="color:#ccc"></i></span>
+             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets | limitTo:6" class="well huge"> <span ng-if="current_drawing.done && (current_drawing.done || (current.user && current.user.admin))">{{diget.value}}</span><i ng-if=" !current_drawing.done || (!diget.value || (!current_drawing.done && !(current.user && current.user.admin)))" class="fa fa-refresh" style="color:#ccc"></i></span>
 
             </div>
             <br>
