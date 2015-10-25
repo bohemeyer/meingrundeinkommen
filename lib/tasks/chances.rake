@@ -9,24 +9,72 @@ namespace :chances do
     chances = Chance.where(:confirmed => true).shuffle
     #first_round = true
     i = 0
-    (1..5).each do |c1|
-      (1..6).each do |c2|
-        (1..6).each do |c3|
+    [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32].each do |c1|
+      (1..24).each do |c2|
+        (1..24).each do |c3|
           (1..6).each do |c4|
-            (1..6).each do |c5|
-              (1..6).each do |c6|
-                i = i + 1
-                if chances[i]
-                  # •
-                  puts "#{i} - #{c1}#{c2}#{c3}#{c4}#{c5}#{c6}"
-                  chances[i].update_attribute(:code, "#{c1}#{c2}#{c3}#{c4}#{c5}#{c6}")
-                end
-              end
+            if chances[i]
+              # •
+              puts "#{i} - #{c1}•#{c2}•#{c3}•#{c4}"
+              chances[i].update_attribute(:code, "#{c1}•#{c2}•#{c3}•#{c4}")
             end
+            i = i + 1
           end
         end
       end
     end
+
+
+    #set codes for tandems
+
+    users_without_tandem = []
+    Chance.where('is_child = 0 and code is null') do |chance|
+      uid = chance.user.id
+      tandems = Tandem.where("(inviter_id = #{uid} or invitee_id = #{uid}) and inviter_id in (select user_id from chances where confirmed=1) and invitee_id in (select user_id from chances where confirmed=1)  and inviter_id != invitee_id and inviter_id is not null and invitee_id is not null and disabled_by is null").limit(100)
+
+      if tandems.any?
+
+        if tandems.count < 7
+          code = 1
+          tandems.each do |t|
+            role = t.inviter_id == uid ? "inviter" : "invitee"
+            t.update_attribute("#{role}_code", "#{code}")
+            code = code + 1
+          end
+        else
+          i = 0
+          (1..24).each do |c1|
+            (1..6).each do |c2|
+              if tandems[i]
+                role = t.inviter_id == uid ? "inviter" : "invitee"
+                t.update_attribute("#{role}_code", "#{c1}•#{c2}")
+                i = i + 1
+              end
+            end
+          end
+        end
+
+      else
+        users_without_tandem << uid
+      end
+    end
+
+    #set codes for users without tandems
+
+    users = users_without_tandem.shuffle
+    i = 0
+    while users[i] do
+      Tandem.create({
+        inviter_id: users[i],
+        invitee_id: users[i+1],
+        invitation_type: "random",
+        invitee_participates: true,
+        inviter_code: "1",
+        invitee_code: "1"
+      })
+      i = i + 2
+    end
+
   end
 
   task :confirmSquirrels => :environment do

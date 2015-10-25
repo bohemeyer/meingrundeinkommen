@@ -97,16 +97,16 @@ class UserSerializer < ActiveModel::Serializer
         object.tandems.each do |c|
 
           if (current_user && object == current_user) || (current_user && current_user.admin?)
-            t = {:id => c.id, :inviter_grudges_invitee_for => c.inviter_grudges_invitee_for, :invitee_grudges_inviter_for => c.invitee_grudges_inviter_for, :disabled_by => c.disabled_by, :invitation_type => c.invitation_type, :inviter_id => c.inviter_id, :invitee_id => c.invitee_id, :invitee_name => c.invitee_name, :invitee_email => c.invitee_email, :invitation_accepted_at => c.invitation_accepted_at, :invitee_participates => c.invitee_participates}
+            t = {:id => c.id, :inviter_grudges_invitee_for => c.inviter_grudges_invitee_for, :invitee_grudges_inviter_for => c.invitee_grudges_inviter_for, :disabled_by => c.disabled_by, :invitation_type => c.invitation_type, :inviter_id => c.inviter_id, :invitee_id => c.invitee_id, :invitee_name => c.invitee_name, :invitee_email => c.invitee_email, :invitation_accepted_at => c.invitation_accepted_at, :invitee_participates => c.invitee_participates, :inviter_code => c.inviter_code, :invitee_code => c.invitee_code}
           else
-            t = {:id => c.id, :inviter_grudges_invitee_for => c.inviter_grudges_invitee_for, :invitee_grudges_inviter_for => c.invitee_grudges_inviter_for, :inviter_id => c.inviter_id, :invitee_id => c.invitee_id, :invitee_name => c.invitee_name, :invitation_accepted_at => c.invitation_accepted_at, :invitee_participates => c.invitee_participates}
+            t = {:id => c.id, :inviter_grudges_invitee_for => c.inviter_grudges_invitee_for, :invitee_grudges_inviter_for => c.invitee_grudges_inviter_for, :inviter_id => c.inviter_id, :invitee_id => c.invitee_id, :invitee_name => c.invitee_name, :invitation_accepted_at => c.invitation_accepted_at, :invitee_participates => c.invitee_participates, :inviter_code => c.inviter_code, :invitee_code => c.invitee_code}
           end
 
           if object.id == c.inviter_id && c.invitee_id
             t[:grudge] = t[:inviter_grudges_invitee_for]
             u = User.find_by_id(c.invitee_id)
             unless u.nil?
-              t[:details] = { :name => u.name, :avatar => u.avatar }
+              t[:details] = { :name => u.name, :avatar => u.avatar, :code => t[:inviter_code] }
             end
           else
             t[:grudge] = t[:inviter_grudges_invitee_for]
@@ -122,7 +122,7 @@ class UserSerializer < ActiveModel::Serializer
             t[:grudge] = t[:invitee_grudges_inviter_for]
             u = User.find_by_id(c.inviter_id)
             unless u.nil?
-              t[:details] = { :name => u.name, :avatar => u.avatar }
+              t[:details] = { :name => u.name, :avatar => u.avatar, :code => t[:invitee_code] }
             end
           end
 

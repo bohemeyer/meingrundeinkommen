@@ -1,18 +1,18 @@
 <div style="margin-bottom:0;" ng-hide="hide_announcement" class="well">
     <div class="container">
         <div class="col-md-8 text-left">
-            <span style="font-size:25px;">Am Sonntag werden 4 Grundeinkommen verlost</span>
+            <span style="font-size:25px;">Heute werden 4 Grundeinkommen verlost!</span>
             <br>Das 16.,17.,18. & 19. BGE wird an zwei Tandem verlost, aus je zwei Menschen, die sich kennen.
         </div>
         <div class="col-md-4">
             <!-- <a href="/live" class="btn btn-special btn-color">
                 Video der Auslosung
             </a> -->
-            <a href="/tandem" class="btn btn-special btn-color">
+            <!-- <a href="/tandem" class="btn btn-special btn-color">
                 Teilnehmen
-            </a>
+            </a> -->
             <a href="/live" class="btn btn-special btn-color">
-                Livestream
+                Zum Livestream
             </a>
         </div>
     </div>
@@ -341,7 +341,7 @@
                 <!-- <h2 style="color:white"><span class="huge">{{home.numberOfParticipants}}</span> Menschen nehmen bereits teil</h2> -->
 
 
-                <div ng-if="current.user">
+                <!-- <div ng-if="current.user">
                     <alert ng-if="!current.participates()" type="warning"><h1>Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1>
                       <a class="btn-large btn-color" href="/tandem">Ich will aber teilnehmen!</a>
                     </alert>
@@ -351,15 +351,15 @@
                        href="/menschen/{{current.user.id}}?gewinnspiel=true" style="box-shadow:0px 0px 40px 10px white"><i
                             class="fa fa-check"></i> Du nimmst an der Verlosung teil!</a>
 
-                </div>
+                </div> -->
 
-                <div ng-if="!current.user">
+                <!-- <div ng-if="!current.user">
                     <a href="/tandem" class="btn-large btn-color margin-top-20"
                        style="box-shadow:0px 0px 30px 15px white">Ich will teilnehmen</i></a>
-                </div>
+                </div> -->
 
 
-                <!-- <a href="/register" class="btn-large btn-color margin-top-20" style="box-shadow:0px 0px 30px 15px white">Mitmachen!</i></a> -->
+                <a href="/register" class="btn-large btn-color margin-top-20" style="box-shadow:0px 0px 30px 15px white">Mitmachen!</i></a>
 
 
 
