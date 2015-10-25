@@ -1,14 +1,14 @@
 class Api::ChancesController < ApplicationController
 
   def create
-    # chance = current_user.chances.create(params.permit(:first_name, :last_name, :dob, :is_child, :country_id, :city, :confirmed_publication, :remember_data, :confirmed, :mediacoverage, :phone, :affiliate))
-    # chance.confirmed = true
-    # if chance.valid?
-    #   chance.save!
-    #   render json: {:chance => chance}
-    # else
-    #   render json: {:errors => chance.errors}
-    # end
+    chance = current_user.chances.create(params.permit(:first_name, :last_name, :dob, :is_child, :country_id, :city, :confirmed_publication, :remember_data, :confirmed, :mediacoverage, :phone, :affiliate))
+    chance.confirmed = true
+    if chance.valid?
+      chance.save!
+      render json: {:chance => chance}
+    else
+      render json: {:errors => chance.errors}
+    end
   end
 
   def update

@@ -196,6 +196,49 @@ class Api::UsersController < ApplicationController
       current_user.save
     end
 
+
+
+    tandems = Tandem.where("(inviter_id = #{@user.id} or invitee_id = #{@user.id}) and inviter_id in (select user_id from chances where confirmed=1) and invitee_id in (select user_id from chances where confirmed=1)  and inviter_id != invitee_id and inviter_id is not null and invitee_id is not null and disabled_by is null").limit(100)
+
+    if tandems.any?
+
+      if tandems.count < 7
+        code = 1
+        tandems.each do |t|
+          role = t.inviter_id == uid ? "inviter" : "invitee"
+          t.update_attribute("#{role}_code", "#{code}")
+          code = code + 1
+        end
+      else
+        i = 0
+        [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32].each do |c1|
+          (1..6).each do |c2|
+            if tandems[i]
+              role = t.inviter_id == uid ? "inviter" : "invitee"
+              t.update_attribute("#{role}_code", "#{c1}•#{c2}")
+              i = i + 1
+            end
+          end
+        end
+      end
+
+    else
+
+      random = User.where("id not in (select invitee_id from tandems) and id not in (select inviter_id from tandems) and id in (select user_id from chances where confirmed=1)").order("RANDOM()").limit(1).first
+      unless random.nil?
+        Tandem.create({
+            inviter_id: @user.id,
+            invitee_id: random.id,
+            invitation_type: "random",
+            invitee_participates: true,
+            inviter_code: "1",
+            invitee_code: "1"
+          })
+      end
+
+    end
+
+
     render json: @user, serializer: UserSerializer
   end
 

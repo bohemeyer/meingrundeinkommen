@@ -54,8 +54,8 @@
     <ul>
     <!-- <ul ng-show="user.chances[0].code"> -->
     <li><b>Losnummer für die Verlosung am 25. Oktober:</b></li>
-     <li ng-show="user.chances.length == 0"><i>Bitte erst <a href="/boarding?trigger=wants_to_participate">teilnehmen</a></i></li>
-     <li ng-show="user.chances.length > 0"><i>- Du nimmst teil aber die Losnummern werden erst am Morgen des 25. Oktobers vergeben. -</i></li>
+     <!-- <li ng-show="user.chances.length == 0"><i>Bitte erst <a href="/boarding?trigger=wants_to_participate">teilnehmen</a></i></li>
+     <li ng-show="user.chances.length > 0"><i>- Du nimmst teil aber die Losnummern werden erst am Morgen des 25. Oktobers vergeben. -</i></li> -->
     <li ng-repeat="chance in user.chances" ng-show="chance.code">
       <div class="well big">{{chance.code}}
         <div style="font-size:12px;font-weight:normal;">
@@ -74,11 +74,11 @@
 
   <ul>
     <li><h4><b>Bestätigte Tandems</b></h4></li>
-    <li ng-repeat="t in user.tandems" ng-show="t.invitation_type=='link' || t.invitee_participates || t.invitationType=='link' || t.inviteeParticipates" class="text-left">
+    <li ng-repeat="t in user.tandems" ng-show="t.inviterCode || t.inviter_code" class="text-left">
 
-      <!-- t.codeInviter || t.code_inviter -->
+      <!-- t.invitation_type=='link' || t.invitee_participates || t.invitationType=='link' || t.inviteeParticipates -->
 
-      <!-- <div class="well big pull-right">{{t.details.code}}</div> --><div style="margin-right:20px;" class="testimonial-image pull-left"><img ng-src="{{t.details.avatar ? t.details.avatar.avatar.thumb.url : '/assets/team/team-member.jpg'}}" height="50"></div>
+      <div class="well big pull-right">{{t.details.code}}</div><div style="margin-right:20px;" class="testimonial-image pull-left"><img ng-src="{{t.details.avatar ? t.details.avatar.avatar.thumb.url : '/assets/team/team-member.jpg'}}" height="50"></div>
       mit <br>
       <a ng-show="t.invitee_id && t.invitee_id != user.id" href="/menschen/{{t.invitee_id}}">{{t.details.name}}</a>
       <a ng-show="t.inviter_id && t.inviter_id != user.id" href="/menschen/{{t.inviter_id}}">{{t.details.name}}</a>

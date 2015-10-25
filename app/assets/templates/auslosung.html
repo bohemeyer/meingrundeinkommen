@@ -53,17 +53,10 @@ Am Sonntag, dem 25. Oktober um 14:15 Uhr verlosen wir die vier <a href="/tandem"
 
         <div class="col-md-12  text-center" >
 
-          <div ng-if="current_drawing.user && current_drawing.done">
+          <div class="row" ng-if="current_drawing.user && current_drawing.done">
 
-
-            <div class="">
-              <div class="testimonial-image-medium pull-left">
-                <a href="/menschen/{{current_drawing.user.id}}">
-                  <img src="{{current_drawing.user.avatar.url}}">
-                </a>
-              </div>
-
-              <div class="testimonial-image-medium pull-left">
+            <div class="col-sm-5 text-right">
+              <div class="testimonial-image-medium ">
                 <a href="/menschen/{{current_drawing.user.id}}">
                   <img src="{{current_drawing.user.avatar.url}}">
                 </a>
@@ -71,8 +64,31 @@ Am Sonntag, dem 25. Oktober um 14:15 Uhr verlosen wir die vier <a href="/tandem"
             </div>
 
 
+            <div class="col-sm-1">
+              <h1>&</h1>
+            </div>
+            <div class="col-sm-5 text-left">
+
+              <div ng-show="current_drawing.tandem" class="testimonial-image-medium">
+                <a href="/menschen/{{current_drawing.tandem.id}}">
+                  <img src="{{current_drawing.tandem.avatar.url}}">
+                </a>
+              </div>
+
+            </div>
+
+
+            </div>
+
+
             <a ng-if="current_drawing.isChild == 0" href="/menschen/{{current_drawing.user.id}}">{{current_drawing.user.name}}</a>
             <a ng-if="current_drawing.isChild == 1" href="/menschen/{{current_drawing.user.id}}">{{current_drawing.childName}} (Kind von {{current_drawing.user.name}})</a>
+
+            <span ng-show="current_drawing.tandem">
+              &
+              <a href="/menschen/{{current_drawing.tandem.id}}">{{current_drawing.tandem.name}}</a>
+            </span>
+
           </div>
 
 

@@ -32,7 +32,9 @@ require 'json'
 
 #       letters = ['[1-12]','[13-24]','[25-36]','[37-48]','[49-60]']
 
-        number = digits.join("•") # •
+        number = digits[0..3].join("•") # •
+
+        drawing[:tandemcode] = digits[4..-1].join("•") if digits[4]
 
         query = Chance.where("code LIKE ?", "#{number}%")
 
@@ -61,11 +63,11 @@ require 'json'
 
 
         if winner
-          tandem = Tandem.where("(inviter_code = '#{drawing[:tandemcode]}' and inviter_id = #{winner.id}) or (invitee_code = '#{drawing[:tandemcode]}' and invitee_id = #{winner.id})")
+          tandem = Tandem.where("(inviter_code = '#{drawing[:tandemcode]}' and inviter_id = #{winner.user.id}) or (invitee_code = '#{drawing[:tandemcode]}' and invitee_id = #{winner.user.id})").first
 
           if tandem.present?
-             partner_id = tandem.inviter_id if tandem.invitee_id == winner.id
-             partner_id = tandem.invitee_id if tandem.inviter_id == winner.id
+             partner_id = tandem.inviter_id if tandem.invitee_id == winner.user.id
+             partner_id = tandem.invitee_id if tandem.inviter_id == winner.user.id
              data[i][:tandem] = User.find_by_id(partner_id)
           else
             data[i][:tandem] = false

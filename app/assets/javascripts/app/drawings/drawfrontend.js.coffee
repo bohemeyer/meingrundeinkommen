@@ -30,37 +30,37 @@ angular.module("drawfrontend", ['ng-breadcrumbs'])
 
     myLoop = ->
 
-      # When the timeout is defined, it returns a
-      # promise object.
-      timer = $timeout(->
-        console.log "Timeout executed", Date.now()
-        return
-      , 1000)
-      timer.then (->
-        console.log "Timer resolved!"
+      if $scope.current.user && $scope.current.user.id == 1
 
-        $http.get("/currentdrawing.json?timecode=#{new Date().getTime()}").success((response) ->
-          $scope.drawings = response
-
-          # current_drawing_key = 0
-          # angular.forEach $scope.drawings, (d) ->
-          #  if d.done
-          #    current_drawing_key = current_drawing_key + 1
-          # #$scope.current_drawing = $scope.drawings[current_drawing_key]
-          # $scope.current_drawing_key = current_drawing_key
-
-          myLoop()
+        timer = $timeout(->
+          console.log "Timeout executed", Date.now()
           return
-        )
+        , 1000)
+        timer.then (->
+          console.log "Timer resolved!"
+
+          $http.get("/currentdrawing.json?timecode=#{new Date().getTime()}").success((response) ->
+            $scope.drawings = response
+
+            # current_drawing_key = 0
+            # angular.forEach $scope.drawings, (d) ->
+            #  if d.done
+            #    current_drawing_key = current_drawing_key + 1
+            # #$scope.current_drawing = $scope.drawings[current_drawing_key]
+            # $scope.current_drawing_key = current_drawing_key
+
+            myLoop()
+            return
+          )
+
+          return
+
+        # something went wrong :(
+        ), ->
+          console.log "Timer rejected!"
+          return
 
         return
-
-      # something went wrong :(
-      ), ->
-        console.log "Timer rejected!"
-        return
-
-      return
     timer = undefined
 
     if $scope.current.isAdmin()
