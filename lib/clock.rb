@@ -85,10 +85,10 @@ module Clockwork
 
     end
 
-    if job == "tandem.statusupdate"
-        sql = "update tandems set invitee_participates=1 where invitation_type='existing' and inviter_id != invitee_id and inviter_id is not null and invitee_id is not null and invitee_id in (select user_id from chances where confirmed=1);"
-        ActiveRecord::Base.connection.execute(sql)
-    end
+    # if job == "tandem.statusupdate"
+    #     sql = "update tandems set invitee_participates=1 where invitation_type='existing' and inviter_id != invitee_id and inviter_id is not null and invitee_id is not null and invitee_id in (select user_id from chances where confirmed=1);"
+    #     ActiveRecord::Base.connection.execute(sql)
+    # end
 
 
 
@@ -100,6 +100,6 @@ module Clockwork
   every(3.minutes, 'crowdbar.stats')
   every(10.minutes, 'clear.cache')
   every(20.minutes, 'bank.check')
-  every(25.minutes, 'tandem.statusupdate')
+  #every(25.minutes, 'tandem.statusupdate')
 
 end
