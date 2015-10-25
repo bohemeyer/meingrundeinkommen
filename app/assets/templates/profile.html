@@ -74,9 +74,9 @@
 
   <ul>
     <li><h4><b>Bestätigte Tandems</b></h4></li>
-    <li ng-repeat="t in user.tandems" ng-show="t.inviterCode || t.inviter_code" class="text-left">
+    <li ng-repeat="t in user.tandems" ng-show="t.invitation_type=='link' || t.invitee_participates || t.invitationType=='link' || t.inviteeParticipates" class="text-left">
 
-      <!-- t.invitation_type=='link' || t.invitee_participates || t.invitationType=='link' || t.inviteeParticipates -->
+      <!-- t.inviterCode || t.inviter_code -->
 
       <div class="well big pull-right">{{t.details.code}}</div><div style="margin-right:20px;" class="testimonial-image pull-left"><img ng-src="{{t.details.avatar ? t.details.avatar.avatar.thumb.url : '/assets/team/team-member.jpg'}}" height="50"></div>
       mit <br>
