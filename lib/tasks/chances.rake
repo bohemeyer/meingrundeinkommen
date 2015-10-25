@@ -6,19 +6,31 @@ namespace :chances do
     desc "set random codes for users"
 
     #chances = Chance.where(:code => nil, :confirmed => true).shuffle
-    chances = Chance.where(:confirmed => true).shuffle
-    #first_round = true
+    chances = Chance.where(:confirmed => true,:code=>nil).shuffle
+    first_round = true
     i = 0
     [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32].each do |c1|
       [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32].each do |c2|
         [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32].each do |c3|
           (1..6).each do |c4|
-            if chances[i]
-              # •
-              puts "#{i} - #{c1}•#{c2}•#{c3}•#{c4}"
-              chances[i].update_attribute(:code, "#{c1}•#{c2}•#{c3}•#{c4}")
+            if first_round
+              c1=9
+              c2=22
+              c3=30
+              c4=4
+              first_round = false
             end
-            i = i + 1
+
+            if !first_round
+              if chances[i]
+                # •
+                puts "#{i} - #{c1}•#{c2}•#{c3}•#{c4}"
+                chances[i].update_attribute(:code, "#{c1}•#{c2}•#{c3}•#{c4}")
+              end
+              i = i + 1
+            end
+
+
           end
         end
       end
