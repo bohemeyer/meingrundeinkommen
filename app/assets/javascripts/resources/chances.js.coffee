@@ -138,11 +138,9 @@ angular.module "Chance", ["rails","Support","Tandem"]
 
       #update current user
       $scope.current.user.chances = $scope.chances_form.chances
-
       $q.all(queries).finally ->
         $scope.submitted = false
         if !errors
-
           #Handle tandems
           tqueries = []
           angular.forEach $scope.current.user.tandems, (t) ->
