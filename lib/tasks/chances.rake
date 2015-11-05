@@ -44,7 +44,7 @@ namespace :chances do
     #set codes for tandems
 
     users_without_tandem = []
-    allchances = Chance.where('is_child = 0 and confirmed = 1')
+    allchances = Chance.where('is_child = 0 and confirmed = 1 and code is not null')
     i = 0
 
     allchances.each do |chance|
