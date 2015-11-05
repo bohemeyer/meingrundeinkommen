@@ -14,7 +14,7 @@
                 city: null,
                 street: null,
                 houseNumber: null,
-                additionalCards: options[2],
+                additionalCards: options[1],
                 country: 'de'
             };
 
