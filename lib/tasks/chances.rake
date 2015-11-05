@@ -81,13 +81,19 @@ namespace :chances do
       end
     end
 
-    #set codes for users without tandems
 
-    puts "User ohne Tandems: #{users_without_tandem.count}"
+  end
+
+
+  task :setRandomTandems => :environment do
+    desc "set random tandems for ppl w/o tandem"
+
+    users_without_tandem = Chance.where('is_child = 0 and confirmed = 1 and user_id not in (select inviter_id from tandems where inviter_id != invitee_id and inviter_id is not null and invitee_id is not null and disabled_by is null) and user_id not in (select invitee_id from tandems where inviter_id != invitee_id and inviter_id is not null and invitee_id is not null and disabled_by is null)')
 
     users = users_without_tandem.shuffle
     i = 0
     while users[i] do
+      puts "#{i} of #{users_without_tandem.count}"
       Tandem.create({
         inviter_id: users[i],
         invitee_id: users[i+1],
@@ -100,6 +106,9 @@ namespace :chances do
     end
 
   end
+
+
+  is_child = 0 and confirmed = 1 and user_id not in (select inviter_id from tandems where inviter_id != invitee_id and inviter_id is not null and invitee_id is not null and disabled_by is null) and user_id not in (select invitee_id from tandems where inviter_id != invitee_id and inviter_id is not null and invitee_id is not null and disabled_by is null)
 
   task :confirmSquirrels => :environment do
     desc "confirm chance of squirrels or set their chance"
