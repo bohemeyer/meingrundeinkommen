@@ -7,23 +7,28 @@ namespace :chances do
 
     #chances = Chance.where(:code => nil, :confirmed => true).shuffle
     chances = Chance.where(:confirmed => true,:code=>nil).shuffle
-    first_round = true
-    i = 0
-    [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32].each do |c1|
-      [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32].each do |c2|
-        [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32].each do |c3|
-          [1,2,3,4,5,6].each do |c4|
-            if first_round && c1 == 9 && c2 == 22 && c3 == 30 && c4 == 4
-              first_round = false
-            end
 
+    first_round = false
+
+    i = 0
+
+    [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32,33,34].each do |c1|
+      [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32,33,34].each do |c2|
+        [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32,33,34].each do |c3|
+          [1,2,3,4,5,6].each do |c4|
+            # if first_round && c1 == 9 && c2 == 22 && c3 == 30 && c4 == 4
+            #   first_round = false
+            # end
             if !first_round
-              if chances[i]
+              if [c1,c2,c3].max > 32
+                if chances[i]
                 # •
-                puts "#{i} - #{c1}•#{c2}•#{c3}•#{c4}"
-                chances[i].update_attribute(:code, "#{c1}•#{c2}•#{c3}•#{c4}")
+                  puts "#{i} - #{c1}•#{c2}•#{c3}•#{c4}"
+                  chances[i].update_attribute(:code, "#{c1}•#{c2}•#{c3}•#{c4}")
+                  i = i + 1
+                end
               end
-              i = i + 1
+              #i = i + 1
             end
 
 
@@ -31,16 +36,25 @@ namespace :chances do
         end
       end
     end
+  end
 
 
+  task :SetCodesForTandems => :environment do
+    desc "set random codes for tandems"
     #set codes for tandems
 
     users_without_tandem = []
-    Chance.where('is_child = 0 and code is null') do |chance|
+    allchances = Chance.where('is_child = 0 and confirmed = 1')
+    i = 0
+
+    allchances.each do |chance|
+      i = i + 1
       uid = chance.user.id
       tandems = Tandem.where("(inviter_id = #{uid} or invitee_id = #{uid}) and inviter_id in (select user_id from chances where confirmed=1) and invitee_id in (select user_id from chances where confirmed=1)  and inviter_id != invitee_id and inviter_id is not null and invitee_id is not null and disabled_by is null").limit(100)
 
       if tandems.any?
+
+        puts "#{i} von #{allchances.count} | user: #{uid} - #{tandems.count} Tandems"
 
         if tandems.count < 7
           code = 1
@@ -51,8 +65,8 @@ namespace :chances do
           end
         else
           i = 0
-          [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32].each do |c1|
-            (1..6).each do |c2|
+          (1..4).each do |c1|
+            [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32,33,34].each do |c2|
               if tandems[i]
                 role = t.inviter_id == uid ? "inviter" : "invitee"
                 t.update_attribute("#{role}_code", "#{c1}•#{c2}")
@@ -68,6 +82,8 @@ namespace :chances do
     end
 
     #set codes for users without tandems
+
+    puts "User ohne Tandems: #{users_without_tandem.count}"
 
     users = users_without_tandem.shuffle
     i = 0
