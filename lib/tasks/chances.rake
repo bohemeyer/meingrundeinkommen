@@ -89,7 +89,7 @@ namespace :chances do
     desc "set random tandems for ppl w/o tandem"
 
     q = "is_child = 0 and confirmed = 1 and user_id not in (select inviter_id from tandems where inviter_id != invitee_id and inviter_id is not null and invitee_id is not null and disabled_by is null) and user_id not in (select invitee_id from tandems where inviter_id != invitee_id and inviter_id is not null and invitee_id is not null and disabled_by is null)"
-    users_without_tandem = Chance.where(q)
+    users_without_tandem = Chance.where(q).map(&:user_id)
 
     users = users_without_tandem.shuffle
     i = 0
