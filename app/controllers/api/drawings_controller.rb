@@ -6,9 +6,10 @@ require 'json'
       #characters = ['1','2','3','4','5','6','A','B']
       data = params[:d]
 
-      winner = false
 
       data.each_with_index do |drawing,i|
+
+        winner = false
         number = ""
 
         digits = []
@@ -63,6 +64,10 @@ require 'json'
 
 
         if winner
+
+          #generate tandem codes
+          query.first.generatetandemcodes
+
           tandem = Tandem.where("(inviter_code = '#{drawing[:tandemcode]}' and inviter_id = #{winner.user.id}) or (invitee_code = '#{drawing[:tandemcode]}' and invitee_id = #{winner.user.id})").first
 
           if tandem.present?
