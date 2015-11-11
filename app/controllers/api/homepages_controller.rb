@@ -95,6 +95,8 @@ class Api::HomepagesController < ApplicationController
       :crowdcard_users => Crowdcard.sum(:number_of_cards),
       :squirrels => Payment.where(:active => true).count,
       :squirrel_monthly_amount => number_with_precision(Payment.where(:active => true).sum(:amount_total), precision: 0, delimiter: ''),
+      :squirrel_monthly_amount_bge => number_with_precision(Payment.where(:active => true).sum(:amount_bge), precision: 0, delimiter: '.'),
+      :squirrel_monthly_amount_society => number_with_precision(Payment.where(:active => true).sum(:amount_society), precision: 0, delimiter: '.'),
       :prediction => prediction,
       :number_of_participants => number_with_precision(number_of_participants, precision: 0, delimiter: '.'),
       :supports => Support.where(:comment => true, :payment_completed => false).order(:created_at => :desc).limit(12),

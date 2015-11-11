@@ -6,25 +6,25 @@
     -->
 
      <p ng-show="!chances_form.editAllChances">
-      <h3 style="margin-bottom:0;">Das 19. & 20. Grundeinkommen wird am 6. November 2015 verlost
+      <h3 style="margin-bottom:0;">Die nächsten Grundeinkommen werden am 7. Dezember 2015 verlost
       </h3>
       <a href="/gewinnspielbedingungen">Gewinnspielbedingungen</a>
     | <a href="/faq/verlosung">Häufige Fragen</a>
-    | <a href="/tandem">So funktioniert das Tandem</a>
+    <!-- | <a href="/tandem">So funktioniert das Tandem</a> -->
     </p>
 
      <div class="text-center" ng-hide="current.participates()">
 
-       <!--  <a class="btn-large btn-color btn" href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen!</a> -->
+        <a class="btn-large btn-color btn" href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen!</a>
 
-        <alert>Die Anmeldung zur Verlosung ist geschlossen. Das nächste Grundeinkommen wird im Dezember verlost. Du kannst dich in den nächsten Tagen dafür anmelden.</alert>
+        <!-- <alert>Die Anmeldung zur Verlosung ist geschlossen. Das nächste Grundeinkommen wird im Dezember verlost. Du kannst dich in den nächsten Tagen dafür anmelden.</alert> -->
 
       </div>
 
         <div ng-show="current.participates()">
 
           <alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
-            <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst an der Verlosung der Tandem-Grundeinkommen am 6. November teil!</h3>
+            <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst an der Verlosung der Grundeinkommen am 7. Dezember teil!</h3>
           </alert>
 
           <ul ng-hide="chances_form.editAllChances">
@@ -47,17 +47,17 @@
 
 
 
-          <div ng-controller="TandemsController">
+           <!-- <div ng-controller="TandemsController">
             <div ng-hide="chances_form.editAllChances">
 
-              <!-- <div ng-include="'/assets/tandem_form.html'" ng-init="location = 'overview'"></div> -->
+               <div ng-include="'/assets/tandem_form.html'" ng-init="location = 'overview'"></div>
 
               <div ng-include="'/assets/tandem_list.html'" ng-init="location = 'overview'"></div>
 
               <hr>
               <div sytle="clear:both"></div>
             </div>
-          </div>
+          </div> -->
 
 
 
