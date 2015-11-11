@@ -53,16 +53,16 @@
 
     <ul>
     <!-- <ul ng-show="user.chances[0].code"> -->
-    <li><b>Losnummer für die Verlosung am 6. November:</b></li>
-     <!-- <li ng-show="user.chances.length == 0"><i>Bitte erst <a href="/boarding?trigger=wants_to_participate">teilnehmen</a></i></li> -->
-     <li ng-show="user.chances.length > 0 && !user.chances[0].code"><i>- Du nimmst teil aber die Losnummern werden erst am Morgen des 6. Novembers vergeben. -</i></li>
-    <li ng-repeat="chance in user.chances" ng-show="chance.code">
+    <li><b>Losnummer für die Verlosung am 7. Dezember:</b></li>
+     <li ng-show="user.chances.length == 0"><i>Bitte erst <a href="/boarding?trigger=wants_to_participate">teilnehmen</a></i></li>
+     <li ng-show="user.chances.length > 0 && !user.chances[0].code"><i>- Du nimmst teil aber die Losnummern werden erst am Morgen des 7. Dezembers vergeben. -</i></li>
+    <!-- <li ng-repeat="chance in user.chances" ng-show="chance.code">
       <div class="well big">{{chance.code}}
         <div style="font-size:12px;font-weight:normal;">
           <span ng-show="chance.isChild">(für ein Kind)</span>
         </div>
       </div>
-    </li>
+    </li> -->
 
     <!-- <li ng-if="user.chances[0].crowdbarVerified"><b>Doppelte Chance (für <a href="/crowdbar">Crowdbar</a>-Nutzung):</b></li>
     <li ng-repeat="chance in user.chances" ng-if="chance.code2">
