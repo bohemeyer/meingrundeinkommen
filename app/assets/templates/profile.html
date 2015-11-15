@@ -45,12 +45,11 @@
 
 
     <!-- <div ng-show="own_profile"> -->
-    <div>
 
 
 
 
-
+<div ng-show="own_profile">
     <ul>
     <!-- <ul ng-show="user.chances[0].code"> -->
     <li><b>Losnummer für die Verlosung am 7. Dezember:</b></li>
@@ -71,7 +70,7 @@
   </ul>
 
   <hr>
-
+</div>
   <ul>
     <li><h4><b>Freund_innen</b></h4></li>
     <li ng-repeat="t in user.tandems" ng-show="t.invitation_type=='link' || t.invitee_participates || t.invitationType=='link' || t.inviteeParticipates" class="text-left">
@@ -91,7 +90,6 @@
   <!-- <alert><b>Hinweis:</b> Für die Verlosung relevant ist ein Tandem erst, wenn ich a) selbst an der Verlosung teilnehme, b) meine Tandempartnerin dem Tandem zugestimmt hat und c) auch an der Verlosung teilnimmt.</alert> -->
 
 
-  </div>
 
   <hr>
 
