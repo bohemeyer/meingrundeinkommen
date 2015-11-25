@@ -68,8 +68,10 @@ module Clockwork
         File.delete(path_to_file)
 
         users = MailingsMailer.prepare_recipients(params["groups"],params["group_keys"])
-        puts users.count
-        puts MailingsMailer.transactionmail(users,params["subject"],params["body"]).deliver
+
+        users.each_slice(10).to_a.each do |user_group|
+          puts MailingsMailer.transactionmail(user_group,params["subject"],params["body"]).deliver
+        end
       end
     end
 
