@@ -290,7 +290,7 @@
 				<td>
 					{{crowdcard.firstName}} {{crowdcard.lastName}}<br>
 					<a href="/menschen/{{crowdcard.user.id}}" target="_blank">{{crowdcard.user.name}}</a>
-					<a href="mailto:{{crowdcard.user.email}}" class="fa fa-envelope"></a>
+					<i class="fa fa-envelope"></i> {{crowdcard.user.email}}
 
 				</td>
 				<td>{{crowdcard.street}} {{crowdcard.houseNumber}}, {{crowdcard.zipCode}} {{crowdcard.city}}</td>
@@ -360,7 +360,7 @@
 			<tr ng-repeat="payment in payments | filter:search">
 				<td>{{payment.id}}</td>
 				<td>{{payment.userId}}</td>
-				<td><a href="mailto:{{payment.userEmail}}">{{payment.userFirstName}} {{payment.userLastName}}</a>
+				<td>{{payment.userFirstName}} {{payment.userLastName}} ( {{payment.userEmail}} )
 				</td>
 				<td>{{payment.accountIban}}</td>
 				<td>{{payment.amountTotal}}€</td>

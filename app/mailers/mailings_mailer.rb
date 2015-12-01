@@ -2,7 +2,7 @@ class MailingsMailer < MassMandrill::MandrillMailer
   include ActionView::Helpers::NumberHelper
 
   def possible_user_groups
-    %w(confirmed with_newsletter without_newsletter not_confirmed sign_up_after# not_participating participating has_code without_crowdbar with_crowdbar has_crowdcard has_tandems has_no_tandems is_squirrel frst_notification_not_sent frst_notification_sent last_squirrel_id# byids#)
+    %w(confirmed not_confirmed with_newsletter without_newsletter sign_up_after# not_participating participating has_code without_crowdbar with_crowdbar has_crowdcard has_tandems has_no_tandems is_squirrel frst_notification_not_sent frst_notification_sent last_squirrel_id# byids#)
   end
 
   def prepare_recipients(groups,group_keys)
