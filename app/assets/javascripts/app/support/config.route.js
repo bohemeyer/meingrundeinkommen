@@ -6,6 +6,11 @@
         .config(function ($routeProvider) {
 
             $routeProvider
+
+                .when('/studis', {
+                    templateUrl: '/assets/studis.html'
+                })
+
                 .when('/tandem', {
                     templateUrl: '/assets/tandem.html',
                     controller: function ($scope, $modal, Tandem) {
