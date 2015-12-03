@@ -4,6 +4,10 @@
     </header>
     <section class="a-europe__intro container text-center">
         <div class="row">
+
+
+            <alert>Achtung: Die Tandem-Kampagne ist beendet. Du kannst dich nach wie vor anmelden und an den Verlosungen teilnehmen, aber keine neuen Tandem mit Freund_innen mehr bilden.</alert>
+
             <div class="col-xs-12 col-md-10 col-md-offset-1 text-center">
 
                 <h1 style="margin-bottom:15px;">Doppeltes Grundeinkommen<br> - vielfache Wirkung</h1>
@@ -15,8 +19,6 @@
                 <p ng-show="current.inviter" style="font-size:140%">Was wäre, wenn <b>Du und {{current.inviter.name}}</b> ein Jahr gemeinsam Grundeinkommen hätten? <br>Probiert es aus!</p>
 
             </div>
-
-            <alert>Achtung: Die Tandem-Kampagne ist beendet. Du kannst dich nach wie vor anmelden und an den Verlosungen teilnehmen, aber keine neuen Tandem mit Freund_innen mehr bilden.</alert>
 
 
             <a ng-show="current.user && current.participates() && current.inviter" href="#" ng-click="current.confirmTandem()"  class="btn btn-large btn-bge">Tandem mit {{current.inviter.name}} bestätigen & eure Chancen erhöhen</a>
