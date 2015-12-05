@@ -12,21 +12,21 @@ namespace :chances do
 
     i = 0
 
-    [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32,33,34].each do |c1|
-      [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32,33,34].each do |c2|
-        [2,3,4,6,7,9,10,11,12,13,15,16,17,19,20,22,23,24,25,27,28,29,30,32,33,34].each do |c3|
-          [1,2,3,4,5,6].each do |c4|
+    wheel_numbers = [1,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,35,36]
+
+    wheel_numbers.each do |c1|
+      wheel_numbers.each do |c2|
+        wheel_numbers.each do |c3|
+          ['grün','blau'].each do |c4|
             # if first_round && c1 == 9 && c2 == 22 && c3 == 30 && c4 == 4
             #   first_round = false
             # end
             if !first_round
-              if [c1,c2,c3].max > 32
-                if chances[i]
-                # •
-                  puts "#{i} - #{c1}•#{c2}•#{c3}•#{c4}"
-                  chances[i].update_attribute(:code, "#{c1}•#{c2}•#{c3}•#{c4}")
-                  i = i + 1
-                end
+              if chances[i]
+              # •
+                puts "#{i} - #{c1}•#{c2}•#{c3}•#{c4}"
+                chances[i].update_attribute(:code, "#{c1}•#{c2}•#{c3}•#{c4}")
+                i = i + 1
               end
               #i = i + 1
             end
@@ -171,9 +171,12 @@ namespace :chances do
     #cc_no = (1..300).to_a
     #cc_no << (12626..12750).to_a
 
-    (1..300).each do |cc|
+
+    #C160 bis C219
+
+    (120..259).each do |cc|
       #blub.each do |cc|
-        puts "#{cc}"
+        puts "C#{cc}"
         pw = Devise.friendly_token.first(8)
         user_data = {
           name: "Vor-Ort-Crowdcard Nr. C#{cc}",
