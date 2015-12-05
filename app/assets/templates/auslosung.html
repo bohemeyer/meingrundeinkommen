@@ -7,7 +7,7 @@
 
 
 <!-- <h4 style="color:white">Die Verlosung bei den Bayreuther Dialogen</h4> -->
-<h1 class="title_headline">Welche zwei Tandems gewinnen?</h1>
+<h1 class="title_headline">Fünf neue Grundeinkommen!</h1>
         </div>
 
          <div class="row text-center" style="margin-bottom:50px;">
@@ -15,10 +15,10 @@
 
 
                <div class="well">
-Am Freitag, dem 6. November um 18:30 Uhr verlosen wir drei Grundeinkommen in Berlin. Einmal verlosen wir das Tandem der letzten Gewinnerin Sonja nach. Und dann noch ein weiteres <a href="/tandem">Tandem</a> bestehend aus zwei Grundeinkommen. Komm gern <a href="https://www.facebook.com/events/418923404983658/">vorbei</a>, wenn du in der Nähe bist!
+Am Montag, dem 7. Dezember um 23:59 Uhr verlosen wir bei der <a href="https://www.facebook.com/events/950267335047949/">Langen Nacht des Grundeinkommens</a> ganze 5 Mal 12.000€ Grundeinkommen. Komm gern vorbei, wenn du in der Nähe bist!
 </div>
 
-              <iframe width="600" height="450" src="//www.youtube.com/embed/hRjoW48Itek?t=1m35s&autoplay=1" frameborder="0" allowfullscreen></iframe>
+              <!-- <iframe width="600" height="450" src="//www.youtube.com/embed/hRjoW48Itek?t=1m35s&autoplay=1" frameborder="0" allowfullscreen></iframe> -->
 
 <br>
               <!-- <a href="http://www.daserste.de/live/index.html" class="btn btn-special btn-color btn-large margin-top-30" style="box-shadow:0px 0px 30px 15px white">Zum ARD-Livestream</a><br> -->
@@ -45,8 +45,8 @@ Am Freitag, dem 6. November um 18:30 Uhr verlosen wir drei Grundeinkommen in Ber
    <div class="container">
 
 
-      <div class="row text-center" ng-repeat="current_drawing in drawings | limitTo: 2">
-        <h1>Das {{17+($index*2)}}. & {{17+($index*2+1)}} Grundeinkommen geht an*:</h1>
+      <div class="row text-center" ng-repeat="current_drawing in drawings | limitTo: 5">
+        <h1>Das {{20+$index}}. Grundeinkommen geht an*:</h1>
 
         <div class="col-md-12  text-center" >
 
@@ -61,7 +61,7 @@ Am Freitag, dem 6. November um 18:30 Uhr verlosen wir drei Grundeinkommen in Ber
             </div>
 
 
-            <div class="col-sm-1">
+            <!-- <div class="col-sm-1">
               <h1>&</h1>
             </div>
             <div class="col-sm-5 text-left">
@@ -72,10 +72,10 @@ Am Freitag, dem 6. November um 18:30 Uhr verlosen wir drei Grundeinkommen in Ber
                 </a>
               </div>
 
-            </div>
+            </div> -->
 
 
-            </div>
+            <!-- </div> -->
 
 
             <a ng-if="current_drawing.isChild == 0" href="/menschen/{{current_drawing.user.id}}">{{current_drawing.user.name}}</a>
