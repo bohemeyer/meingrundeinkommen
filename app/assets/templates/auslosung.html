@@ -14,9 +14,9 @@
 
 
 
-               <div class="well">
+               <!-- <div class="well">
 Am Montag, dem 7. Dezember um 23:59 Uhr verlosen wir bei der <a href="https://www.facebook.com/events/950267335047949/">Langen Nacht des Grundeinkommens</a> ganze 5 Mal 12.000€ Grundeinkommen. Komm gern vorbei, wenn du in der Nähe bist!
-</div>
+</div> -->
 
               <!-- <iframe width="600" height="450" src="//www.youtube.com/embed/hRjoW48Itek?t=1m35s&autoplay=1" frameborder="0" allowfullscreen></iframe> -->
 
@@ -46,7 +46,7 @@ Am Montag, dem 7. Dezember um 23:59 Uhr verlosen wir bei der <a href="https://ww
 
 
       <div class="row text-center" ng-repeat="current_drawing in drawings | limitTo: 5">
-        <h1>Das {{20+$index}}. Grundeinkommen geht an*:</h1>
+        <h1>Das {{21+$index}}. Grundeinkommen geht an*:</h1>
 
         <div class="col-md-12  text-center" >
 
@@ -96,7 +96,7 @@ Am Montag, dem 7. Dezember um 23:59 Uhr verlosen wir bei der <a href="https://ww
             <br>
             <alert ng-if="current_drawing.number.length > 1 && current_drawing.niete && current_drawing.done">NIETE</alert>
             <br><div class="margin-top-30 row">
-             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets | limitTo:6" class="well huge"> <span ng-if="current_drawing.done && (current_drawing.done || (current.user && current.user.admin))">{{diget.value}}</span><i ng-if=" !current_drawing.done || (!diget.value || (!current_drawing.done && !(current.user && current.user.admin)))" class="fa fa-refresh" style="color:#ccc"></i></span>
+             <span style="margin-left:10px;" ng-repeat="diget in current_drawing.digets | limitTo:4" class="well huge"> <span ng-if="current_drawing.done && (current_drawing.done || (current.user && current.user.admin))">{{diget.value}}</span><i ng-if=" !current_drawing.done || (!diget.value || (!current_drawing.done && !(current.user && current.user.admin)))" class="fa fa-refresh" style="color:#ccc"></i></span>
 
             </div>
             <br>
