@@ -18589,12 +18589,20 @@ namespace :squirrels do
     }
 
 
-    payments = Payment.where('id < 10790')
+    all_payments = Payment.where('id < 10790')
+
+    payments = {
+    	'COR1' => all_payments.where("account_iban like 'DE%'"),
+    	'CORE' => all_payments.where("account_iban not like 'DE%'")
+    }
 
 
 
-    documents = (payments.count / 1000).floor
-    documents += 1 if payments.count%1000 > 0
+    documents = (payments['COR1'].count / 1000).floor
+    documents += 1 if payments['COR1'].count%1000 > 0
+
+    documents += 1 #for CORE
+
 
     sdd = []
 
@@ -18617,103 +18625,94 @@ namespace :squirrels do
 	      creditor_identifier: 'DE62ZZZ00001604785'
 	    )
 
-    	puts sdd
+    	#puts sdd
 
     end
 
-    puts sdd
+    #puts sdd
 
-    payments.each_with_index do |p,i|
+    payments.each do |instrument,payment|
 
-      # Second: Add transactions
+	    payment.each_with_index do |p,i|
 
-      #puts "IBAN: #{p.account_iban.upcase}; BIC: #{p.account_bic} - #{!p.account_bic.blank? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]]}"
-
-      #puts p.amount_total
-      if p.active
-	      if IBANTools::IBAN.valid?(p.account_iban.upcase) && !p.amount_total.nil?
-
-	      	#puts ">#{p.account_bic}<"
-
-	      	if p.account_iban.upcase[0,2] == 'DE' ||  p.account_iban.upcase[0,2] == 'AT'
-	      		instrument = 'COR1'
-	      	else
-	      		instrument = 'CORE'
-	      	end
+	      if p.active
+		      if IBANTools::IBAN.valid?(p.account_iban.upcase) && !p.amount_total.nil?
 
 
-	        sdd[(i/1000).floor].add_transaction(
-	          # Name of the debtor, in German: "Zahlungspflichtiger"
-	          # String, max. 70 char
-	          name:                      "#{p.user_first_name} #{p.user_last_name}",
+		      	doc = (i/1000).floor if instrument == 'COR1'
+		      	doc = -1 if instrument == 'CORE'
 
-	          # OPTIONAL: Business Identifier Code (SWIFT-Code) of the debtor's account
-	          # String, 8 or 11 char
-	          bic:                       !p.account_bic.blank? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]],
+		        sdd[doc].add_transaction(
+		          # Name of the debtor, in German: "Zahlungspflichtiger"
+		          # String, max. 70 char
+		          name:                      "#{p.user_first_name} #{p.user_last_name}",
 
-	          # International Bank Account Number of the debtor's account
-	          # String, max. 34 chars
-	          iban:                      p.account_iban.upcase,
+		          # OPTIONAL: Business Identifier Code (SWIFT-Code) of the debtor's account
+		          # String, 8 or 11 char
+		          bic:                       !p.account_bic.blank? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]],
 
-	          # Amount in EUR
-	          # Number with two decimal digit
-	          amount:                    p.amount_total, #number_with_precision(p.amount_total, precision: 2),
+		          # International Bank Account Number of the debtor's account
+		          # String, max. 34 chars
+		          iban:                      p.account_iban.upcase,
 
-	          # OPTIONAL: Instruction Identification, will not be submitted to the debtor
-	          # String, max. 35 char
-	          #instruction:               '',
+		          # Amount in EUR
+		          # Number with two decimal digit
+		          amount:                    p.amount_total, #number_with_precision(p.amount_total, precision: 2),
 
-	          # OPTIONAL: End-To-End-Identification, will be submitted to the debtor
-	          # String, max. 35 char
-	          reference:                 "CH#{p.id}-#{due_date[instrument]}",
+		          # OPTIONAL: Instruction Identification, will not be submitted to the debtor
+		          # String, max. 35 char
+		          #instruction:               '',
 
-	          # OPTIONAL: Unstructured remittance information, in German "Verwendungszweck"
-	          # String, max. 140 char
-	          remittance_information:    'Spende an Mein Grundeinkommen. Vielen Dank',
+		          # OPTIONAL: End-To-End-Identification, will be submitted to the debtor
+		          # String, max. 35 char
+		          reference:                 "CH#{p.id}-#{due_date[instrument]}",
 
-	          # Mandate identifikation, in German "Mandatsreferenz"
-	          # String, max. 35 char
-	          mandate_id:                "CH#{p.id}",
+		          # OPTIONAL: Unstructured remittance information, in German "Verwendungszweck"
+		          # String, max. 140 char
+		          remittance_information:    'Spende an Mein Grundeinkommen. Vielen Dank',
 
-	          # Mandate Date of signature, in German "Datum, zu dem das Mandat unterschrieben wurde"
-	          # Date
+		          # Mandate identifikation, in German "Mandatsreferenz"
+		          # String, max. 35 char
+		          mandate_id:                "CH#{p.id}",
+
+		          # Mandate Date of signature, in German "Datum, zu dem das Mandat unterschrieben wurde"
+		          # Date
+
+		          mandate_date_of_signature: p.created_at.to_date,
+
+		          # Local instrument, in German "Lastschriftart"
+		          # One of these strings:
+		          #   'CORE' ("Basis-Lastschrift")
+		          #   'COR1' ("Basis-Lastschrift mit verkürzter Vorlagefrist")
+		          #   'B2B' ("Firmen-Lastschrift")
+		          local_instrument: instrument,
+
+		          # Sequence type
+		          # One of these strings:
+		          #   'FRST' ("Erst-Lastschrift")
+		          #   'RCUR' ("Folge-Lastschrift")
+		          #   'OOFF' ("Einmalige Lastschrift")
+		          #   'FNAL' ("Letztmalige Lastschrift")
 
 
+		          #TODO: switch for recurring / first
+		          sequence_type: p.sent_first_notification_at.nil? ? 'FRST' : 'RCUR',
 
-	          mandate_date_of_signature: p.created_at.to_date,
+		          # OPTIONAL: Requested collection date, in German "Fälligkeitsdatum der Lastschrift"
+		          # Date
+		          requested_date: due_date[instrument].to_date,
 
-	          # Local instrument, in German "Lastschriftart"
-	          # One of these strings:
-	          #   'CORE' ("Basis-Lastschrift")
-	          #   'COR1' ("Basis-Lastschrift mit verkürzter Vorlagefrist")
-	          #   'B2B' ("Firmen-Lastschrift")
-	          local_instrument: instrument,
+		          # OPTIONAL: Enables or disables batch booking, in German "Sammelbuchung / Einzelbuchung"
+		          # True or False
+		          batch_booking: true
 
-	          # Sequence type
-	          # One of these strings:
-	          #   'FRST' ("Erst-Lastschrift")
-	          #   'RCUR' ("Folge-Lastschrift")
-	          #   'OOFF' ("Einmalige Lastschrift")
-	          #   'FNAL' ("Letztmalige Lastschrift")
-
-
-	          #TODO: switch for recurring / first
-	          sequence_type: p.sent_first_notification_at.nil? ? 'FRST' : 'RCUR',
-
-	          # OPTIONAL: Requested collection date, in German "Fälligkeitsdatum der Lastschrift"
-	          # Date
-	          requested_date: due_date[instrument].to_date,
-
-	          # OPTIONAL: Enables or disables batch booking, in German "Sammelbuchung / Einzelbuchung"
-	          # True or False
-	          batch_booking: true
-
-	        )
-	      else
-	        puts "iban error with payment id: #{p.id}"
-	      end
+		        )
+		      else
+		        puts "iban error with payment id: #{p.id}"
+		      end
+		    end
 	    end
-    end
+	end
 
 	# Last: create XML string
 	sdd.each do |r|
