@@ -18583,10 +18583,13 @@ namespace :squirrels do
     get_bic_for = Hash[banks.scan(/^(\d{8}).{131}([A-Z\d]{11})/).map {|key, value| [key, value]}]
 
 
-    due_date = '01.12.2015'
+    due_date = {
+      'COR1' => '04.01.2016',
+      'CORE' => '07.01.2016'
+    }
 
 
-    payments = Payment.where('id < 10144')
+    payments = Payment.where('id < 10790')
 
 
 
@@ -18630,7 +18633,14 @@ namespace :squirrels do
       if p.active
 	      if IBANTools::IBAN.valid?(p.account_iban.upcase) && !p.amount_total.nil?
 
-	      	puts ">#{p.account_bic}<"
+	      	#puts ">#{p.account_bic}<"
+
+	      	if p.account_iban.upcase[0,2] == 'DE' ||  p.account_iban.upcase[0,2] == 'AT'
+	      		instrument = 'COR1'
+	      	else
+	      		instrument = 'CORE'
+	      	end
+
 
 	        sdd[(i/1000).floor].add_transaction(
 	          # Name of the debtor, in German: "Zahlungspflichtiger"
@@ -18655,7 +18665,7 @@ namespace :squirrels do
 
 	          # OPTIONAL: End-To-End-Identification, will be submitted to the debtor
 	          # String, max. 35 char
-	          reference:                 "CH#{p.id}-#{due_date}",
+	          reference:                 "CH#{p.id}-#{due_date[instrument]}",
 
 	          # OPTIONAL: Unstructured remittance information, in German "Verwendungszweck"
 	          # String, max. 140 char
@@ -18677,7 +18687,7 @@ namespace :squirrels do
 	          #   'CORE' ("Basis-Lastschrift")
 	          #   'COR1' ("Basis-Lastschrift mit verkürzter Vorlagefrist")
 	          #   'B2B' ("Firmen-Lastschrift")
-	          local_instrument: 'COR1',
+	          local_instrument: instrument,
 
 	          # Sequence type
 	          # One of these strings:
@@ -18692,7 +18702,7 @@ namespace :squirrels do
 
 	          # OPTIONAL: Requested collection date, in German "Fälligkeitsdatum der Lastschrift"
 	          # Date
-	          requested_date: due_date.to_date,
+	          requested_date: due_date[instrument].to_date,
 
 	          # OPTIONAL: Enables or disables batch booking, in German "Sammelbuchung / Einzelbuchung"
 	          # True or False
