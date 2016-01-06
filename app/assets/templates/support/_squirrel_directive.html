@@ -148,7 +148,7 @@
                         </div>
                     </div>
                     <!-- street and number -->
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="col-xs-12 col-md-8">
                             <div class="form-group"  ng-class="{ 'has-error' : squirrelForm.street.$invalid && !squirrelForm.street.$pristine && squirrelForm.street.$dirty, 'has-warning' : squirrelForm.$dirty }">
                                 <label for="street">{{ 'FORM_STREET_LABEL' | translate }}</label>
@@ -185,7 +185,46 @@
                                 </div>
                             </div>
                         </div>
-                    </div> -->
+                    </div>
+                    <!-- zip and city -->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <div class="form-group"  ng-class="{ 'has-error' : squirrelForm.zip.$invalid && !squirrelForm.zip.$pristine && squirrelForm.zip.$dirty, 'has-warning' : squirrelForm.$dirty }">
+                                <label for="zip">Postleitzahl</label>
+                                <input type="text"
+                                       name="zip"
+                                       ng-model="vm.user.address.zip"
+                                       id="zip"
+                                       ng-minlength="4"
+                                       ng-maxlength="6"
+                                       placeholder="Postleitzahl"
+                                       required class="form-control">
+                                <div ng-messages="squirrelForm.zip.$error" ng-if="squirrelForm.zip.$dirty || squirrelForm.$dirty">
+                                    <div class="help-block" ng-message="required">{{ 'VALIDATION_REQUIRED' | translate }}</div>
+                                    <div class="help-block" ng-message="minlength"><span translate="VALIDATION_MIN" translate-value-length="2"></span></div>
+                                    <div class="help-block" ng-message="maxlength"><span translate="VALIDATION_MAX" translate-value-length="30"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-8">
+                            <div class="form-group"  ng-class="{ 'has-error' : squirrelForm.city.$invalid && !squirrelForm.city.$pristine && squirrelForm.city.$dirty, 'has-warning' : squirrelForm.$dirty }">
+                                <label for="city">Ort</label>
+                                <input type="text"
+                                       name="city"
+                                       ng-model="vm.user.address.city"
+                                       id="city"
+                                       ng-minlength="2"
+                                       ng-maxlength="80"
+                                       placeholder="Ort"
+                                       required class="form-control">
+                                <div ng-messages="squirrelForm.city.$error" ng-if="squirrelForm.city.$dirty || squirrelForm.$dirty">
+                                    <div class="help-block" ng-message="required">{{ 'VALIDATION_REQUIRED' | translate }}</div>
+                                    <div class="help-block" ng-message="minlength"><span translate="VALIDATION_MIN" translate-value-length="2"></span></div>
+                                    <div class="help-block" ng-message="maxlength"><span translate="VALIDATION_MAX" translate-value-length="30"></span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <!-- bank name and bic -->
                     <div class="row">
                         <div class="col-xs-12 col-md-8">
@@ -254,7 +293,7 @@
                             <div class="checkbox" ng-class="{ 'has-error' : squirrelForm.accept.$invalid && !squirrelForm.accept.$pristine && squirrelForm.accept.$dirty, 'has-warning' : squirrelForm.$dirty }">
                                 <label>
                                     <input type="checkbox" ng-model="vm.payment.accept" name="accept" check-required>
-Ich ermächtige den Verein „Mein Grundeinkommen“ e.V. i.G., die monatlichen Zahlungen jeweils am 1. eines Monats in Höhe von {{vm.price}}€ von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von „Mein Grundeinkommen“ e.V. i.G. auf mein Konto gezogenen Lastschriften einzulösen. Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen. Spätestens 2 Tage vor einer Lastschrift-Abbuchung erhalte ich eine Benachrichtigung darüber per E-Mail.<br>
+Ich ermächtige den Verein „Mein Grundeinkommen“ e.V., die monatlichen Zahlungen jeweils am 1. eines Monats in Höhe von {{vm.price}}€ von meinem Konto mittels Lastschrift einzuziehen. Zugleich weise ich mein Kreditinstitut an, die von „Mein Grundeinkommen“ e.V. auf mein Konto gezogenen Lastschriften einzulösen. Hinweis: Ich kann innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit meinem Kreditinstitut vereinbarten Bedingungen. Spätestens 2 Tage vor einer Lastschrift-Abbuchung erhalte ich eine Benachrichtigung darüber per E-Mail.<br>
 Mein Grundeinkommen e.V., Skalitzer Straße 85-8, 10997 Berlin<br>
 Gläubiger-Identifikationsnummer DE62ZZZ00001604785
 
