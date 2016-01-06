@@ -1,16 +1,16 @@
 <div style="margin-bottom:0;" ng-hide="hide_announcement" class="well">
     <div class="container">
         <div class="col-md-8 text-left">
-            <span style="font-size:25px;">5 neue Menschen haben jetzt Grundeinkommen!</span>
-            <br>Pepa, Judith, Hildegard, Stefan und Katrin haben die Grundeinkommen 21 bis 25 gewonnen. Herzlichen Glückwunsch! Mehr in den nächsten Tagen.
+            <span style="font-size:25px;">Nächste Verlosung: Am 3. Februar</span>
+            <br>Nimm teil und gewinne ein Jahr lang 1.000€ monatliches Bedingungsloses Grundeinkommen!
         </div>
         <div class="col-md-4">
-            <!-- <a href="/boarding?trigger=wants_to_participate" class="btn btn-special btn-color">
+            <a href="/boarding?trigger=wants_to_participate" class="btn btn-special btn-color">
                 Teilnehmen
-            </a> -->
-            <a href="https://www.youtube.com/watch?v=MOO-CBbEHSA" class="btn btn-special btn-color" target="_blank">
-                Video ansehen
             </a>
+            <!-- <a href="https://www.youtube.com/watch?v=MOO-CBbEHSA" class="btn btn-special btn-color" target="_blank">
+                Video ansehen
+            </a> -->
         </div>
     </div>
 </div>
@@ -286,6 +286,31 @@
                                 ansehen</a>
                             </p>
 
+                            <p ng-switch-when="Katrin Klink">
+                                Erhält seit 1. Januar 2016 ein monatliches Grundeinkommen von 1.000€. <a href="/menschen/{{d.id}}">Vorhaben
+                                ansehen</a>
+                            </p>
+
+                            <p ng-switch-when="Stefan">
+                                Erhält seit 1. Januar 2016 ein monatliches Grundeinkommen von 1.000€. <a href="/menschen/{{d.id}}">Vorhaben
+                                ansehen</a>
+                            </p>
+
+                            <p ng-switch-when="Hildegard Schroedter">
+                                Erhält seit 1. Januar 2016 ein monatliches Grundeinkommen von 1.000€. <a href="/menschen/{{d.id}}">Vorhaben
+                                ansehen</a>
+                            </p>
+
+                            <p ng-switch-when="Judy">
+                                Erhält seit 1. Januar 2016 ein monatliches Grundeinkommen von 1.000€. <a href="/menschen/{{d.id}}">Vorhaben
+                                ansehen</a>
+                            </p>
+
+                            <p ng-switch-when="Anna Nebel">
+                                Ihr Kind Pepa Moa (7) erhält seit 1. Januar 2016 ein monatliches Grundeinkommen von 1.000€. <a href="/menschen/{{d.id}}">Vorhaben
+                                ansehen</a>
+                            </p>
+
 
                             <p ng-switch-default>
                                 hat von Oktober 2014 bis September 2015 ein Jahr lang 1.000 € monatliches Grundeinkommen erhalten. <a
@@ -306,9 +331,9 @@
                         </div>
                     </div>
                     <div class="content-box-info text-left">
-                        <h3 style="margin-bottom:5px"><a href="/register">Und ab Februar Du?</a></h3>
+                        <h3 style="margin-bottom:5px"><a href="/register">Und ab März Du?</a></h3>
 
-                        Im Januar werden wieder Grundeinkommen verlost. Du kannst es gewinnen. <a href="/register">Jetzt
+                        Am 3.2. werden wieder Grundeinkommen verlost. Du kannst es gewinnen. <a href="/register">Jetzt
                         teilnehmen</a></a>
                         </p>
                     </div>
@@ -326,9 +351,9 @@
                         </div>
                     </div>
                     <div class="content-box-info text-left">
-                        <h3 style="margin-bottom:5px"><a href="/boarding">Und ab Februar Du?</a></h3>
+                        <h3 style="margin-bottom:5px"><a href="/boarding">Und ab März Du?</a></h3>
 
-                        Im Januar werden wieder Grundeinkommen verlost. Du kannst es gewinnen. <a href="/boarding">Jetzt
+                        Am 3.2. werden wieder Grundeinkommen verlost. Du kannst es gewinnen. <a href="/boarding">Jetzt
                         teilnehmen</a></a>
                         </p>
                     </div>
@@ -351,7 +376,7 @@
                 <!-- <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Am Samstag wird das 5. <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> <a href="https://www.facebook.com/events/376506499170475/?fref=ts" target="_blank" class="huge">hier</a> verlost.</h1> -->
 
                 <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Nächste
-                    Verlosung: Im Januar</h1>
+                    Verlosung: 3. Februar</h1>
 
                 <!-- <h3 style="color:white" class="margin-top-20">Wir verlosen das 13. Grundeinkommen auf dem <a
                         href="http://cassiopeia-berlin.de/event/female-focus-festival/" target="_blank">Female Focus
@@ -362,7 +387,7 @@
 
                 <!-- <h2 style="color:white"><span class="huge">{{home.numberOfParticipants}}</span> Menschen nehmen bereits teil</h2> -->
 
-<!--
+
                 <div ng-if="current.user">
                     <alert ng-if="!current.participates()" type="warning"><h1>Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1>
                       <a class="btn-large btn-color" href="/boarding?trigger=wants_to_participate">Ich will aber teilnehmen!</a>
@@ -372,7 +397,7 @@
                     <a ng-if="current.participates()" class="btn-large btn-color "
                        href="/menschen/{{current.user.id}}?gewinnspiel=true" style="box-shadow:0px 0px 40px 10px white"><i
                             class="fa fa-check"></i> Du nimmst an der Verlosung teil!</a>
-                </div> -->
+                </div>
 
                 <div ng-if="!current.user">
                     <a href="/boarding?trigger=wants_to_participate" class="btn-large btn-color margin-top-20"
