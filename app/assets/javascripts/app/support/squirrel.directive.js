@@ -105,10 +105,12 @@
                             vm.id = p.id;
                             vm.user.name = p.user_first_name;
                             vm.user.lastName = p.user_last_name;
-                            // vm.user.address = {
-                            //     street: p.user_street,
-                            //     streetNumber: p.user_street_number
-                            // };
+                            vm.user.address = {
+                                street: p.user_street,
+                                streetNumber: p.user_street_number
+                                city: p.user_city,
+                                zip: p.user_zip,
+                            };
                             vm.priceSociety = p.amount_society;
                             vm.priceBge = p.amount_bge;
                             vm.price = p.amount_total;
