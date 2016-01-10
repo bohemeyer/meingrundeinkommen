@@ -37,7 +37,8 @@ angular.module("register", [
       $scope.veganz = false
 
 
-    if Security.isAuthenticated()
+    if Security.isAuthenticated() || $scope.current.user
+      console.log 'ok'
       $location.path( "/boarding")
 
     $scope.registered = false
