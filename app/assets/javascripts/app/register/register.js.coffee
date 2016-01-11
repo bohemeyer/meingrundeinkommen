@@ -37,10 +37,6 @@ angular.module("register", [
       $scope.veganz = false
 
 
-    if Security.isAuthenticated() || $scope.current.user
-      console.log 'ok'
-      $location.path( "/boarding")
-
     $scope.registered = false
     $scope.submitted = false
 
@@ -52,6 +48,13 @@ angular.module("register", [
         initial_wishes = ''
       else
         initial_wishes = $cookies.initial_wishes + ';'
+
+
+    console.log $scope.current.user
+    if $scope.current.user
+      console.log 'ok'
+      $location.path("/boarding")
+
 
     $scope.register_user =
       email: if $routeParams.email then $routeParams.email else ''
