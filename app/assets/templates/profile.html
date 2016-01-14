@@ -52,8 +52,8 @@
     <ul>
     <!-- <ul ng-show="user.chances[0].code"> -->
     <li><b>Losnummer für die Verlosung am 3. Februar:</b></li>
-     <li ng-show="user.chances.length == 0"><i>Bitte erst <a href="/boarding?trigger=wants_to_participate">teilnehmen</a></i></li>
-     <li ng-show="user.chances.length > 0 && !user.chances[0].code"><i>- Du nimmst teil aber die Losnummern werden erst am 2. Februar vergeben. -</i></li>
+     <li ng-hide="current.participates()"><i>Bitte erst <a href="/boarding?trigger=wants_to_participate">teilnehmen</a></i></li>
+     <li ng-show="current.participates() && !user.chances[0].code"><i>- Du nimmst teil aber die Losnummern werden erst am 2. Februar vergeben. -</i></li>
     <!-- <li ng-repeat="chance in user.chances" ng-show="chance.code">
       <div class="well big">{{chance.code}}
         <div style="font-size:12px;font-weight:normal;">
