@@ -18650,6 +18650,8 @@ namespace :squirrels do
 		      	doc = (i/1000).floor if instrument == 'COR1'
 		      	doc = -1 if instrument == 'CORE'
 
+		      	puts "payment-id: #{p.id}"
+
 		        sdd[doc].add_transaction(
 		          # Name of the debtor, in German: "Zahlungspflichtiger"
 		          # String, max. 70 char
