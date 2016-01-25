@@ -18584,12 +18584,20 @@ namespace :squirrels do
 
 
     due_date = {
-      'COR1' => '04.01.2016',
-      'CORE' => '07.01.2016'
+      'COR1' => '01.02.2016',
+      'CORE' => '01.02.2016'
     }
 
 
-    all_payments = Payment.where('id < 10790')
+    all_payments = Payment.where('id < 12201')
+
+    #############!!!!!!!!!!!!!!!!!!!!!! TODO: TEST new überweisungszweck+#############
+    #############!!!!!!!!!!!!!!!!!!!!!! TODO: TEST new überweisungszweck+#############
+    #############!!!!!!!!!!!!!!!!!!!!!! TODO: TEST new überweisungszweck+#############
+    #############!!!!!!!!!!!!!!!!!!!!!! TODO: TEST new überweisungszweck+#############
+    #############!!!!!!!!!!!!!!!!!!!!!! TODO: TEST new überweisungszweck+#############
+    #############!!!!!!!!!!!!!!!!!!!!!! TODO: TEST new überweisungszweck+#############
+    #############!!!!!!!!!!!!!!!!!!!!!! TODO: TEST new überweisungszweck+#############
 
     payments = {
     	'COR1' => all_payments.where("account_iban like 'DE%'"),
@@ -18669,7 +18677,7 @@ namespace :squirrels do
 
 		          # OPTIONAL: Unstructured remittance information, in German "Verwendungszweck"
 		          # String, max. 140 char
-		          remittance_information:    'Spende an Mein Grundeinkommen. Vielen Dank',
+		          remittance_information:    "{p.amount_bge} EUR in den Grundeinkommenstopf - #{p.amount_society} EUR Spende an den Verein. Vielen Dank",
 
 		          # Mandate identifikation, in German "Mandatsreferenz"
 		          # String, max. 35 char
