@@ -18679,7 +18679,7 @@ namespace :squirrels do
 
 		          # OPTIONAL: Unstructured remittance information, in German "Verwendungszweck"
 		          # String, max. 140 char
-		          remittance_information:    "{p.amount_bge} EUR in den Grundeinkommenstopf - #{p.amount_society} EUR Spende an den Verein. Vielen Dank",
+		          remittance_information:    p.amount_bge > 0 ? "#{p.amount_bge} EUR in den Grundeinkommenstopf - #{p.amount_society} EUR Spende an den Verein. Vielen Dank" : "#{p.amount_society} EUR Spende an den Verein. Vielen Dank",
 
 		          # Mandate identifikation, in German "Mandatsreferenz"
 		          # String, max. 35 char
