@@ -24,7 +24,7 @@ class Api::MailingsController < ApplicationController
 					body: params[:body]
 				}
 
-				File.open("tmp/mailqueue.json", "w+") do |f|
+				File.open("tmp/mymailqueue.json", "w+") do |f|
 			      f.write(queue.to_json)
 			    end
 
