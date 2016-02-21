@@ -45,31 +45,21 @@
 
 
 
-
-<div ng-show="own_profile">
-<!-- <div> -->
-
-    <ul>
-    <!-- <ul ng-show="user.chances[0].code"> -->
+  <ul ng-hide="!own_profile && !user.chances[0].code">
     <li><b>Losnummer für die nächste Verlosung:</b></li>
-     <li ng-hide="current.participates()"><i>Bitte erst <a href="/boarding?trigger=wants_to_participate">teilnehmen</a></i></li>
-     <li ng-show="current.participates() && !user.chances[0].code"><i>- Du nimmst teil aber die Losnummern werden erst kurz vor der Verlosung vergeben. -</i></li>
-    <!-- <li ng-repeat="chance in user.chances" ng-show="chance.code">
+    <li ng-hide="!own_profile || current.participates()"><i>Bitte erst <a href="/boarding?trigger=wants_to_participate">teilnehmen</a></i></li>
+    <li ng-show="own_profile && current.participates() && !user.chances[0].code"><i>- Du nimmst teil aber die Losnummern werden erst kurz vor der Verlosung vergeben. -</i></li>
+    <li ng-repeat="chance in user.chances" ng-show="chance.code">
       <div class="well big">{{chance.code}}
         <div style="font-size:12px;font-weight:normal;">
           <span ng-show="chance.isChild">(für ein Kind)</span>
         </div>
       </div>
-    </li> -->
+    </li>
+    </ul>
+  <hr ng-hide="!own_profile && !user.chances[0].code">
 
-    <!-- <li ng-if="user.chances[0].crowdbarVerified"><b>Doppelte Chance (für <a href="/crowdbar">Crowdbar</a>-Nutzung):</b></li>
-    <li ng-repeat="chance in user.chances" ng-if="chance.code2">
-      <div class="well big">{{chance.code2}}</div>
-    </li> -->
-  </ul>
 
-  <hr>
-</div>
   <ul>
     <li><h4><b>Freund_innen</b></h4></li>
     <li ng-repeat="t in user.tandems" ng-show="t.invitation_type=='link' || t.invitee_participates || t.invitationType=='link' || t.inviteeParticipates" class="text-left">

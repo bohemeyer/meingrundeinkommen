@@ -1,4 +1,4 @@
-angular.module "Security", ["Devise","Flag"]
+angular.module "Security", ["Devise","Flag","Setting"]
 .factory "Security", [
   "$http"
   "$q"
@@ -9,7 +9,8 @@ angular.module "Security", ["Devise","Flag"]
   "$window"
   "User"
   "Tandem"
-  ($http, $q, $location, Auth, Flag, $cookies, $window, User, Tandem) ->
+  "Setting"
+  ($http, $q, $location, Auth, Flag, $cookies, $window, User, Tandem, Setting) ->
 
     # The public API of the service
     service =
@@ -40,6 +41,12 @@ angular.module "Security", ["Devise","Flag"]
           console.log erro
 
         return
+
+
+      getSettings: ->
+        Setting.query().then (settings) ->
+          service.settings = settings
+
 
 
       user: null

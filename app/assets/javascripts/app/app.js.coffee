@@ -110,6 +110,7 @@ window.App = angular.module('grundeinkommen',
   "Meta"
   ($route, $rootScope, $location, Security, $FB, Meta) ->
     Security.requestCurrentUser()
+    Security.getSettings()
     Meta.init()
     $FB.init('1410947652520230')
     original = $location.path

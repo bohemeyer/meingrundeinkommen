@@ -1,4 +1,4 @@
-angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Avatar','ui.odometer'])
+angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Avatar','ui.odometer', 'Security'])
 .config [
   "$routeProvider"
   ($routeProvider) ->
@@ -20,6 +20,11 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
             #true
             Crowdbar.verify(20).then (has_crowdbar) ->
               has_crowdbar
+        ]
+        settings: [
+          "Security"
+          (Security) ->
+            Security.getSettings()
         ]
 
 ]
@@ -48,48 +53,59 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
     $scope.trigger = if $location.search().trigger then $location.search().trigger else 'login'
 
 
-    $scope.all_steps = [
-
-      #after login
-      'welcome_back'
-      'confirm'
-
-      'avatar'
-
-      #if not participates
-      'gewinnspiel_question'
-      'wishes'
-      'gewinnspiel'
-      #'verify_crowdcard'
-
-      'verify_gewinnspiel'
-
-      'gewinnspiel_thanks'
-
-      #if everything completed only
-      #'states'
-
-      'crowdfund'
-
-      'crowdbar'
-      'crowdbar_thanks'
-
-      #'crowdapp'
-
-      #'crowdcard'
-      #'crowdcard_thanks'
-
-      'confirm'
-
-
-      # 'donate'
-      # 'donate_thanks'
-
-      'done'
-
-
-
-    ]
+    if $scope.current.settings['raffleOpen']
+      $scope.all_steps = [
+        #after login
+        'welcome_back'
+        'confirm'
+        'avatar'
+        #if not participates
+        'gewinnspiel_question'
+        'wishes'
+        'gewinnspiel'
+        #'verify_crowdcard'
+        'verify_gewinnspiel'
+        'gewinnspiel_thanks'
+        #if everything completed only
+        #'states'
+        'crowdfund'
+        'crowdbar'
+        'crowdbar_thanks'
+        #'crowdapp'
+        #'crowdcard'
+        #'crowdcard_thanks'
+        'confirm'
+        # 'donate'
+        # 'donate_thanks'
+        'done'
+      ]
+    else
+      $scope.all_steps = [
+        #after login
+        'welcome_back'
+        'confirm'
+        'avatar'
+        #if not participates
+        #'gewinnspiel_question'
+        'wishes'
+        'gewinnspiel_closed'
+        #'gewinnspiel'
+        #'verify_crowdcard'
+        #'verify_gewinnspiel'
+        #'gewinnspiel_thanks'
+        #if everything completed only
+        'states'
+        'crowdfund'
+        'crowdbar'
+        'crowdbar_thanks'
+        #'crowdapp'
+        #'crowdcard'
+        #'crowdcard_thanks'
+        'confirm'
+        # 'donate'
+        # 'donate_thanks'
+        'done'
+      ]
 
 
     necessary = (stepname, test = false) ->
@@ -136,6 +152,12 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
         when 'gewinnspiel_question'
           #if $scope.trigger != 'crowdbar_installed' && $scope.trigger != 'crowdapp_installed' && !$scope.current.participates() && ($scope.current.getFlag('dontWantToParticipate') < 3 || $scope.trigger == 'wants_to_participate')
           if !$scope.current.participates() || $scope.trigger == 'wants_to_participate'
+            true
+          else
+            false
+
+        when 'gewinnspiel_closed'
+          if !$scope.current.settings['raffleOpen'] && $scope.trigger == 'wants_to_participate'
             true
           else
             false

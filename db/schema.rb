@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022215122) do
+ActiveRecord::Schema.define(version: 20160122145310) do
 
   create_table "chances", force: true do |t|
     t.date     "dob"
@@ -38,6 +38,13 @@ ActiveRecord::Schema.define(version: 20151022215122) do
 
   add_index "chances", ["first_name", "last_name", "dob"], name: "index_chances_on_first_name_and_last_name_and_dob", unique: true
   add_index "chances", ["user_id"], name: "index_chances_on_user_id"
+
+  create_table "codes", force: true do |t|
+    t.string   "code"
+    t.boolean  "used",       default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "comments", force: true do |t|
     t.integer  "user_id"
@@ -138,6 +145,8 @@ ActiveRecord::Schema.define(version: 20151022215122) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "sent_first_notification_at"
+    t.string   "user_zip"
+    t.string   "user_city"
   end
 
   create_table "questions", force: true do |t|
@@ -147,6 +156,13 @@ ActiveRecord::Schema.define(version: 20151022215122) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "votes",      default: 1
+  end
+
+  create_table "settings", force: true do |t|
+    t.string   "name"
+    t.boolean  "value",      default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "state_users", force: true do |t|
@@ -268,6 +284,7 @@ ActiveRecord::Schema.define(version: 20151022215122) do
     t.string   "provider",               default: "",    null: false
     t.string   "uid",                    default: "",    null: false
     t.text     "tokens"
+    t.boolean  "veganz",                 default: false
   end
 
   add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
