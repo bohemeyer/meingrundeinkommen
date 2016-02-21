@@ -6,28 +6,37 @@ namespace :chances do
     desc "set random codes for users"
 
     #chances = Chance.where(:code => nil, :confirmed => true).shuffle
-    chances = Chance.where(:confirmed => true,:code=>nil).shuffle
+    chances = Chance.where(:confirmed => true).shuffle
 
     first_round = false
 
     i = 0
 
-    wheel_numbers = [1,3,4,5,6,7,8,9,10,11,12,13,14,15,16,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,35,36]
+    wheel_numbers = (1..36)
 
-    wheel_numbers.each do |c1|
+    (1..6).each do |c1|
       wheel_numbers.each do |c2|
         wheel_numbers.each do |c3|
-          ['grün','blau'].each do |c4|
+          wheel_numbers.each do |c4|
             # if first_round && c1 == 9 && c2 == 22 && c3 == 30 && c4 == 4
             #   first_round = false
             # end
             if !first_round
+
+              code = "#{c1}•#{c2}•#{c3}•#{c4}"
+
+              code_save = {:code => code, :used => false}
+
               if chances[i]
-              # •
+                # •
+                code_save[:used] = true
                 puts "#{i} - #{c1}•#{c2}•#{c3}•#{c4}"
-                chances[i].update_attribute(:code, "#{c1}•#{c2}•#{c3}•#{c4}")
+                chances[i].update_attribute(:code, code)
                 i = i + 1
               end
+
+              Code.create(code_save)
+
               #i = i + 1
             end
 
@@ -115,7 +124,7 @@ namespace :chances do
     #select count(id) from users where id not in (select user_id from chances where confirmed = 1) and id in (select user_id from payments where active = 1);
 
     Payment.where(:active => true).each do |p|
-      if !p.user_id.nil? && !p.user.nil?
+      if !p.user_id.nil? && !p.user.nil? && p.user.winner == 0
         if !p.user.chances.any?
           #create chanche with fake dob
           chance = Chance.new({
