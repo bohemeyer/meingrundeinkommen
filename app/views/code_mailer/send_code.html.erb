@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p>Hallo <%= @user.name %>,</p>
+    <p>
+      schön, dass du an der nächsten Grundeinkommens-Verlosung teilnimmst.
+    </p>
+    <p>
+      <% if @user.chances.count > 1 %>
+        Deine Losnummern lauten:
+      <% else %>
+        Deine Losnummer lautet:
+      <% end %>
+      <%= @code %>
+    </p>
+    <p>Du findest deine Losnummer auch auf deinem <a href="https://www.mein-grundeinkommen.de/menschen/<%=@user.id%>">Profil</a>. Die Verlosung wird auf <a href="https://live.mein-grundeinkommen.de">live.mein-grundeinkommen.de</a> im Video-Livestream übertragen.
+    </p>
+
+	<p>
+		Wir drücken die Daumen!
+	</p>
+	<p>
+		Liebe Grüße,<br>
+		Dein Team von Mein Grundeinkommen
+	</p>
+
+
+  </body>
+</html>
