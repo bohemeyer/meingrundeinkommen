@@ -26,11 +26,11 @@
 
                     <div class="form-group"
                          ng-class="{ 'has-error' : RegisterForm.name.$invalid && !RegisterForm.name.$pristine }">
-                        <label for="inputEmail3" class="col-sm-2 control-label">Name</label>
+                        <label for="inputEmail3" class="col-sm-2 control-label">Benutzername</label>
 
                         <div class="col-sm-10 text-left">
                             <input name="name" ng-model="register_user.name" type="text" class="form-control"
-                                   id="inputEmail3" placeholder="Benutzername (öffentlich)" maxlength="40"
+                                   id="inputEmail3" placeholder="(dieser Name wird öffentlich in deinem Profil angezeigt)" maxlength="40"
                                    required ng-minlength="2">
 
                             <p ng-show="(RegisterForm.name.$error.minlength || RegisterForm.name.$error.required) && !RegisterForm.name.$pristine"
