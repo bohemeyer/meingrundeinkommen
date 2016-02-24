@@ -6,7 +6,7 @@
   <body>
     <p>Hallo <%= @user.name %>,</p>
     <p>
-      schön, dass du an der nächsten Grundeinkommens-Verlosung teilnimmst.
+      schön, dass du an der Grundeinkommens-Verlosung teilnimmst.
     </p>
     <p>
       <% if @user.chances.count > 1 %>
@@ -16,14 +16,14 @@
       <% end %>
       <%= @code %>
     </p>
-    <p>Du findest deine Losnummer auch auf deinem <a href="https://www.mein-grundeinkommen.de/menschen/<%=@user.id%>">Profil</a>. Die Verlosung wird auf <a href="https://live.mein-grundeinkommen.de">live.mein-grundeinkommen.de</a> im Video-Livestream übertragen.
+    <p>Du findest deine Losnummer(n) auch auf deiner <a href="https://www.mein-grundeinkommen.de/menschen/<%=@user.id%>">Profil-Seite</a>. Die Verlosung wird auf <a href="https://live.mein-grundeinkommen.de">live.mein-grundeinkommen.de</a> im Video-Livestream übertragen.
     </p>
 
 	<p>
 		Wir drücken die Daumen!
 	</p>
 	<p>
-		Liebe Grüße,<br>
+		Liebe Grüße<br>
 		Dein Team von Mein Grundeinkommen
 	</p>
 
