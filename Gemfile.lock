@@ -203,6 +203,11 @@ GEM
       sprockets (>= 2.8, < 4.0)
       sprockets-rails (>= 2.0, < 4.0)
       tilt (~> 1.1)
+    sepa_king (0.4.0)
+      activemodel (>= 3.0.0)
+      builder
+      i18n
+      iban-tools
     sexp_processor (4.5.0)
     shoulda-matchers (2.8.0)
       activesupport (>= 3.0.0)
@@ -277,7 +282,6 @@ DEPENDENCIES
   font-awesome-rails
   haml-rails
   httparty
-  iban-tools
   jbuilder (~> 1.2)
   jquery-rails
   less-rails
@@ -292,6 +296,7 @@ DEPENDENCIES
   rails (= 4.1.0)
   rspec-rails
   sass-rails
+  sepa_king
   shoulda-matchers
   simplecov
   sqlite3

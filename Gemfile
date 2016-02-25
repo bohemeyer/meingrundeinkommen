@@ -40,8 +40,8 @@ gem 'less-rails' #????
 gem 'less-rails-bootstrap' #????
 gem 'bower-rails'
 gem 'actionpack-page_caching'
-#gem 'sepa_king' #????
-gem 'iban-tools'
+gem 'sepa_king' #????
+#gem 'iban-tools'
 #gem 'figaro' #???
 gem 'mass_mandrill'
 gem 'newrelic_rpm'

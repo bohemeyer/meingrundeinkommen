@@ -1,5 +1,4 @@
 require "rubygems"
-require 'iban-tools'
 
 namespace :squirrels do
 
