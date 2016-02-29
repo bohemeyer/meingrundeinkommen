@@ -8108,8 +8108,8 @@ namespace :squirrels do
 
 
     due_date = {
-      'COR1' => '02.03.2016',
-      'CORE' => '05.03.2016'
+      'COR1' => '03.03.2016',
+      'CORE' => '07.03.2016'
     }
 
 
@@ -8178,6 +8178,7 @@ namespace :squirrels do
 		      	doc = -1 if instrument == 'CORE'
 
 		      	puts "payment-id: #{p.id}"
+		      	puts get_bic_for[p.account_iban[4,8]] if instrument == 'COR1'
 
 		        sdd[doc].add_transaction(
 		          # Name of the debtor, in German: "Zahlungspflichtiger"
