@@ -18281,7 +18281,7 @@ namespace :squirrels do
     }
 
 
-    all_payments = Payment.where('id < 163501') #16370
+    all_payments = Payment.where('id < 16371') #
 
     #############!!!!!!!!!!!!!!!!!!!!!! TODO: NEUE BANKENLISTE LADEN+#############
     #############!!!!!!!!!!!!!!!!!!!!!! TODO: NEUE BANKENLISTE LADEN+#############
