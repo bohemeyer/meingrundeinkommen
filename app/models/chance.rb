@@ -9,7 +9,7 @@ class Chance < ActiveRecord::Base
 
 	validate :unique_entry
 
-	validate :no_winner
+	#validate :no_winner
 
 	validate :validate_birthday
 
@@ -21,11 +21,11 @@ class Chance < ActiveRecord::Base
 		end
 	end
 
-	def no_winner
-		if self.user.winner != 0
-			errors.add(:last_name, "Du hast bereits einmal Grundeinkommen gewonnen und kannst deshalb nicht erneut teilnehmen.")
-		end
-	end
+	# def no_winner
+	# 	if self.user.winner != 0
+	# 		errors.add(:last_name, "Du hast bereits einmal Grundeinkommen gewonnen und kannst deshalb nicht erneut teilnehmen.")
+	# 	end
+	# end
 
 	def validate_birthday
 
@@ -39,7 +39,7 @@ class Chance < ActiveRecord::Base
 	      return false
 	  end
 	  if !self.is_child && self.dob > DateTime.now - 14.years
-	      errors.add(:dob, "Du musst 14 Jahre alt sein, um teilnehmen zu können. Ein_e Erziehungsberechtigte_r kann aber für dich am Gewinnspiel teilnehmen indem er oder sie hier unten auf 'Mein Kind hinzufügen' klickt.")
+	      errors.add(:dob, "Du musst 14 Jahre alt sein, um teilnehmen zu können. Ein_e Erziehungsberechtigte*r kann aber für dich am Gewinnspiel teilnehmen indem er oder sie hier unten auf 'Mein Kind hinzufügen' klickt.")
 	      return false
 	  end
 	end
