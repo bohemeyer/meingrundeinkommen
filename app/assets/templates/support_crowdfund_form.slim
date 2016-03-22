@@ -1,0 +1,46 @@
+form.form-inline[name="paypal_form" action="https://www.paypal.com/cgi-bin/webscr" method="post"]
+  input[type="hidden" name="charset" value="utf-8"]
+  input#support_id[type="text" name="custom" ng-model="support.support_id" style="display:none;"]
+  input#return_url[type="text" name="return" ng-model="support.return_url" style="display:none;"]
+  input[type="text" name="a3" ng-model="support.amount" style="display:none;"]
+  input[type="hidden" name="p3" value="1"]
+  input[type="hidden" name="t3" value="M"]
+  input[type="hidden" name="business" value="micha@mein-grundeinkommen.de"]
+  input#item_name[type="text" name="item_name" ng-model="support.item_name" style="display:none;"]
+  input[type="hidden" name="currency_code" value="EUR"]
+  .form-group.text-center[style=""]
+    .input-group[ng-hide="support.payment_method == 'flattr'" style="width:200px;margin-left: auto;margin-right: auto;margin-bottom:5px;"]
+      input#supportamount.form-control.input-lg[width="4" min="1" max="12000" type="number" ng-model="support.amount" name="amount" ng-change="support.set_equals_bi(support.amount)"]
+      .input-group-addon
+        | €
+    div[ng-hide="support.payment_method == 'flattr'"]
+      | {{support.equals_bi}}
+    div
+      br
+      label[ng-hide="support.payment_method == 'flattr'" style="font-weight:normal"]
+        input[type="checkbox" ng-model="support.donate"]
+        |  davon 10% ({{(support.amount * 0.1).toFixed(2)}}€) an den Verein spenden
+    .input-group[style="width:200px;margin-top:10px;margin-left: auto;margin-right: auto"]
+      select#payment_method.form-control[ng-model="support.payment_method"]
+        option[value="bank" ng-if="support.cmd == '_xclick'"]
+          | Überweisung
+        option[value="flattr" ng-if="support.cmd == '_xclick'"]
+          | Flattr
+    small[ng-hide="support.payment_method == 'bank' || support.payment_method == 'flattr'"]
+      | abzüglich {{(0.35 + support.amount * 0.019).toFixed(2)}}€ Paypal-Gebühren 
+      br
+    .well.text-center[ng-show="support.payment_method == 'flattr'"]
+      h4
+        | Klicke hier um das Grundeinkommen mit Flattr zu unterstützen:
+      h4
+        a.btn.btn-special.btn-color.btn-large[href="https://flattr.com/submit/auto?user_id=michaxberg&url=http://www.mein-grundeinkommen.de&title=Mein%20Grundeinkommen" target="_blank"]
+          i.icon-heart
+          |  Jetzt unterstützen! 
+    a.btn.btn-special.btn-color.btn-large[ng-hide="support.payment_method == 'flattr'" href="#" ng-click="support.create()" style="margin-top:20px;" ng-disabled="support.submitted"]
+    .spinner[ng-show="support.submitted"]
+      .bounce1
+      .bounce2
+      .bounce3
+    span[ng-hide="support.submitted"]
+      i.icon-heart
+      |  Jetzt unterstützen!
