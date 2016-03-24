@@ -72,7 +72,7 @@ Rails.application.routes.draw do
   resources :users
 
   resources :payments
-  resource :crowdapp
+  resource  :crowdapp
   resources :subscriptions
 
 
