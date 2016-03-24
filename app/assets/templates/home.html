@@ -1,6 +1,30 @@
 <div style="margin-bottom:0;" ng-hide="hide_announcement" class="well">
     <div class="container">
+
         <div class="row">
+            <div class="col-md-8 text-left">
+                <span style="font-size:25px;">Am 29. März: Verlosung von 4 Grundeinkommen</span></br>
+                Jetzt kostenlos teilnehmen und ein Jahr lang 1.000 € monatliches Grundeinkommen gewinnen.
+            </div>
+            <div class="col-md-4 text-center">
+                <a ng-if="current.user && current.participates()" href="" disabled="true" class="btn btn-special btn-color">
+                    <i class="fa fa-check"></i> Du nimmst teil
+                </a>
+                <a ng-if="current.user && !current.participates()" href="/boarding?trigger=wants_to_participate" class="btn btn-special btn-color">
+                    Jetzt teilnehmen
+                </a>
+
+                <a ng-if="!current.user" href="/register" class="btn btn-special btn-color">
+                    Jetzt teilnehmen
+                </a>
+            </div>
+        </div>
+
+
+
+
+
+        <!-- <div class="row">
             <div class="col-md-12 text-center">
                 <span style="font-size:25px;">Täglich grüßte das Grundeinkommen!</span></br>
                 Herzlichen Glückwunsch an die 8 Grundeinkommens-Gewinnenden dieser Woche!
@@ -68,7 +92,7 @@
         </div>
         <div class="row">
             <div class="col-md-12 text-center" style="margin-top:40px">
-                <!-- <a ng-if="current.user && current.participates()" href="" disabled="true" class="btn btn-special btn-color">
+                <a ng-if="current.user && current.participates()" href="" disabled="true" class="btn btn-special btn-color">
                     <i class="fa fa-check"></i> Du nimmst an allen Verlosungen teil
                 </a>
                 <a ng-if="current.user && !current.participates()" href="/boarding?trigger=wants_to_participate" class="btn btn-special btn-color">
@@ -77,14 +101,14 @@
 
                 <a ng-if="!current.user" href="/boarding?trigger=wants_to_participate" class="btn btn-special btn-color">
                     Teilnehmen
-                </a> -->
+                </a>
 
 
                  <a href="https://live.mein-grundeinkommen.de" class="btn btn-special btn-color" target="_blank">
                     Verlosungsvideos ansehen
                 </a>
             </div>
-        </div>
+        </div> -->
     </div>
 </div>
 
@@ -406,19 +430,19 @@
                             </p>
 
                             <p ng-switch-when="200805">
-                                erhält ab 1. März 2016 ein Jahr lang 1.000€ monatliches Grundeinkommen. <a href="/menschen/{{d.id}}">Vorhaben
+                                erhält seit 1. März 2016 ein Jahr lang 1.000€ monatliches Grundeinkommen. <a href="/menschen/{{d.id}}">Vorhaben
                                 ansehen</a>
                             </p>
                             <p ng-switch-when="206536">
-                                Renés Kind erhält ab 1. März 2016 ein Jahr lang 1.000€ monatliches Grundeinkommen. <a href="/menschen/{{d.id}}">Vorhaben
+                                Renés Kind erhält seit 1. März 2016 ein Jahr lang 1.000€ monatliches Grundeinkommen. <a href="/menschen/{{d.id}}">Vorhaben
                                 ansehen</a>
                             </p>
                             <p ng-switch-when="190834">
-                                Ihr Kind erhält ab 1. März 2016 ein Jahr lang 1.000€ monatliches Grundeinkommen. <a href="/menschen/{{d.id}}">Vorhaben
+                                Ihr Kind erhält seit 1. März 2016 ein Jahr lang 1.000€ monatliches Grundeinkommen. <a href="/menschen/{{d.id}}">Vorhaben
                                 ansehen</a>
                             </p>
                             <p ng-switch-when="220623">
-                                erhält ab 1. März 2016 ein Jahr lang 1.000€ monatliches Grundeinkommen. <a href="/menschen/{{d.id}}">Vorhaben
+                                erhält seit 1. März 2016 ein Jahr lang 1.000€ monatliches Grundeinkommen. <a href="/menschen/{{d.id}}">Vorhaben
                                 ansehen</a>
                             </p>
                             <p ng-switch-when="30">
@@ -459,9 +483,9 @@
                         </div>
                     </div>
                     <div class="content-box-info text-left">
-                        <h3 style="margin-bottom:5px"><a href="/register">Und ab März Du?</a></h3>
+                        <h3 style="margin-bottom:5px"><a href="/register">Und ab April Du?</a></h3>
 
-                        Ende März wird wieder Grundeinkommen verlost. Du kannst gewinnen. <a href="/register">Jetzt
+                        Am 29. März werden wieder Grundeinkommen verlost. Du kannst gewinnen. <a href="/register">Jetzt
                         teilnehmen</a></a>
                         </p>
                     </div>
@@ -481,7 +505,7 @@
                     <div class="content-box-info text-left">
                         <h3 style="margin-bottom:5px"><a href="/boarding">Und bald auch Du?</a></h3>
 
-                        Vom 22.2. bis 26.2. werden wieder Grundeinkommen verlost. Du kannst gewinnen. <a href="/boarding">Jetzt
+                        Am 29. März werden wieder Grundeinkommen verlost. Du kannst gewinnen. <a href="/boarding">Jetzt
                         teilnehmen</a></a>
                         </p>
                     </div>
@@ -503,7 +527,7 @@
 
                 <!-- <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Am Samstag wird das 5. <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> <a href="https://www.facebook.com/events/376506499170475/?fref=ts" target="_blank" class="huge">hier</a> verlost.</h1> -->
 
-                <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Nächste Verlosung: Im März</h1>
+                <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Nächste Verlosung: 29. März um 19:30 Uhr</h1>
 
                 <!-- <h3 style="color:white" class="margin-top-20">Wir verlosen das 13. Grundeinkommen auf dem <a
                         href="http://cassiopeia-berlin.de/event/female-focus-festival/" target="_blank">Female Focus

@@ -293,11 +293,17 @@
                 }
 
                 function detectGermanIban(){
-                    var iban = vm.user.bank.iban;
-                    var contryCode = iban.substring(0, 2);
-                    if(contryCode == 'DE' || contryCode == 'de'){
-                        vm.bicRequired = true;
-                    }else{
+
+                    if(vm.user.bank.iban) {
+                        var iban = vm.user.bank.iban;
+                        var contryCode = iban.substring(0, 2);
+                        if(contryCode == 'DE' || contryCode == 'de'){
+                            vm.bicRequired = true;
+                        }else{
+                            vm.bicRequired = false;
+                        }
+                    }
+                    else {
                         vm.bicRequired = false;
                     }
                 }

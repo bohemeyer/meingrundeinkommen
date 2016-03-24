@@ -1,0 +1,77 @@
+section.container.bge-support
+  .row
+    .col-xs-12.col-sm-8.col-sm-offset-2.text-center.bge-support_intro
+      h1
+        | Du kannst das Grundeinkommen derzeit auf 4 verschiedenen Wegen unterstützen!
+  .row
+    .col-xs-12
+      mge-support-nav
+  article.row.bge-support_donate.text-center
+    header.col-xs-12
+      mge-stats
+      hr
+      section.row.bge-support_donate_intro
+        .col-xs-12.col-md-5.text-center
+          h2[translate="SUPPORT_CHOOSE_HEADING"]
+          p[translate="SUPPORT_CHOOSE_INTRO"]
+          .row
+            .col-xs-12
+              a.btn.btn-large.btn-bge[href="javascript:void(0)" ng-click="vm.changeOption('primary')"]
+                |  {{ 'SUPPORT_OPTION_PRIMARY' | translate }}
+            .col-xs-12
+              a[href="javascript:void(0)" ng-click="vm.option='secondary';vm.changeOption('secondary')"]
+                |  {{ 'SUPPORT_OPTION_SECONDARY' | translate }}
+            .col-xs-12
+              a[href="/blog/217"]
+                |  Per SMS unterstützen
+        .col-xs-12.col-md-7
+          img[src="assets/support/squirrel.svg" alt="..."]
+      hr
+      div[odometer="home.squirrels"]
+      p
+        | Crowdhörnchen sammeln monatlich:
+      div[odometer="home.squirrelMonthlyAmount"]
+      .odometer.odometer-auto-theme
+        span.odometer-inside
+          span.odometer-digit
+            span.odometer-digit-spacer
+              | €
+            span.odometer-digit-inner
+              span.odometer-ribbon
+                span.odometer-ribbon-inner
+                  span.odometer-value
+                    | €
+      br
+      br
+      .grey
+        |  Crowdhörnchen bestimmen selbst, welchen Teil ihres Geldes sie in den Lostopf geben (momentan {{home.squirrelMonthlyAmountBge}}€)
+        br
+        | und welchen sie für unsere Vereinsarbeit spenden (momentan {{home.squirrelMonthlyAmountSociety}}€).
+        a[href="/blog/1192"]
+          | Mehr dazu...
+      br
+      br
+      hr
+    /section.row.bge-support_donate_intro
+    section.row.embed-responsive.embed-responsive-4by3
+      .col-md-6.embed-responsive-item
+        iframe allowfullscreen="" frameborder="0" src="https://www.youtube.com/embed/nhBWXqc09Oc" width="560" height="315"
+      .col-md-6.text-left
+        .row
+        h2
+          | Was sind eigentlich Crowdhörnchen?
+        p
+          | Jeder Mensch kann Crowdhörnchen werden und die Arbeit von Mein Grundeinkommen unterstützen.
+        p
+          | Dies ist schon ab 1 € monatlich möglich und jederzeit stoppbar. Du erhältst eine Spendenquittung und nimmst automatisch an allen Verlosungen teil.
+        p
+          | In diesem Video erfährst du, was Crowdhörnchen genau sind.
+    hr
+    section#funding.funding-container
+      .row[ng-switch="vm.option"]
+        .funding-switch.col-xs-12[ng-switch-when="primary"]
+          mge-squirrel
+        .funding-switch.col-xs-12[ng-switch-when="secondary"]
+          mge-donate
+        .col-xs-12[ng-switch-default=""]
+          mge-squirrel
