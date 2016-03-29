@@ -177,7 +177,7 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
                  "subject=" + encodeURI("Deine E-Mail ist freigeschaltet") +
                  "&body=" + encodeURI(body)
 
-          window.location.href = link
+          #window.location.href = link
 
 
     $scope.enable_crowdcard = (user) ->
@@ -235,7 +235,7 @@ angular.module("admin", ["Support", "Registration", "Statistic", "Flag", "Paymen
                  "subject=" + encodeURI("Dein neues Passwort") +
                  "&body=" + encodeURI(body)
 
-          window.location.href = link
+          #window.location.href = link
 
     $scope.changeStatus = (support) ->
       new Support(
