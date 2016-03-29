@@ -18276,12 +18276,12 @@ namespace :squirrels do
 
 
     due_date = {
-      'COR1' => '03.03.2016',
-      'CORE' => '07.03.2016'
+      'COR1' => '01.04.2016',
+      'CORE' => '06.04.2016'
     }
 
 
-    all_payments = Payment.where('id < 16383') #
+    all_payments = Payment.where('id < 18976') #16383
 
     #############!!!!!!!!!!!!!!!!!!!!!! TODO: NEUE BANKENLISTE LADEN+#############
     #############!!!!!!!!!!!!!!!!!!!!!! TODO: NEUE BANKENLISTE LADEN+#############
