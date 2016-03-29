@@ -3,8 +3,8 @@
 
         <div class="row">
             <div class="col-md-8 text-left">
-                <span style="font-size:25px;">Am 29. März: Verlosung von 3 Grundeinkommen</span></br>
-                Jetzt kostenlos teilnehmen und ein Jahr lang 1.000 € monatliches Grundeinkommen gewinnen.
+                <span style="font-size:25px;">Heute um 19:30 Uhr verlosen wir 3 Grundeinkommen</span></br>
+                Du kannst noch bis wenige Minuten vorher teilnehmen.
             </div>
             <div class="col-md-4 text-center">
                 <a ng-if="current.user && current.participates()" href="" disabled="true" class="btn btn-special btn-color">
@@ -12,6 +12,10 @@
                 </a>
                 <a ng-if="current.user && !current.participates()" href="/boarding?trigger=wants_to_participate" class="btn btn-special btn-color">
                     Jetzt teilnehmen
+                </a>
+
+                <a href="http://live.mein-grundeinkommen.de" class="btn btn-special btn-color">
+                    Zum Livestream
                 </a>
 
                 <a ng-if="!current.user" href="/register" class="btn btn-special btn-color">
