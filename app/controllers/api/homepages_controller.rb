@@ -92,24 +92,24 @@ class Api::HomepagesController < ApplicationController
       :crowdbar_amount => crowdbar_amount,
       :crowdcard_amount => crowdcard_amount,
       #:crowdcard_today => number_with_precision(crowdcard_daily[Date.today.strftime('%Y-%m-%d')], precision: 2, delimiter: '.', separator: ','),
-      :crowdcard_users => Crowdcard.sum(:number_of_cards),
-      :squirrels => Payment.where(:active => true).count,
-      :squirrel_monthly_amount => number_with_precision(Payment.where(:active => true).sum(:amount_total), precision: 0, delimiter: ''),
-      :squirrel_monthly_amount_bge => number_with_precision(Payment.where(:active => true).sum(:amount_bge), precision: 0, delimiter: '.'),
-      :squirrel_monthly_amount_society => number_with_precision(Payment.where(:active => true).sum(:amount_society), precision: 0, delimiter: '.'),
-      :prediction => prediction,
-      :number_of_participants => number_with_precision(number_of_participants, precision: 0, delimiter: '.'),
-      :supports => Support.where(:comment => true, :payment_completed => false).order(:created_at => :desc).limit(12),
-      :kpi_per_day => {
-        :registered_confirmed_users_by_date => User.select('count(users.id) as anzahl, created_at, confirmed_at').where.not(:confirmed_at => nil).group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
-        :donations_by_date => Support.select('payment_completed, created_at, sum(amount_internal) as summe').where("payment_completed IS NOT NULL").group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
-        :basic_income_funding_by_month => own_funding_query.group_by{|x| x.created_at.strftime("%Y-%m-%d")} ,
-      },
-      :kpi => {
-        :clv_donations => donations/confirmed_users,
-        :clv_income => total_amount/confirmed_users,
-        :crowdbar_users => number_with_precision(crowdbar_users, precision: 0, delimiter: '.')
-      }
+      crowdcard_users:                 Crowdcard.sum(:number_of_cards),
+      squirrels:                       Payment.where(active: true).count,
+      squirrel_monthly_amount:         number_with_precision(Payment.where(active: true).sum(:amount_total), precision: 0, delimiter: ''),
+      squirrel_monthly_amount_bge:     number_with_precision(Payment.where(active: true).sum(:amount_bge), precision: 0, delimiter: '.'),
+      squirrel_monthly_amount_society: number_with_precision(Payment.where(active: true).sum(:amount_society), precision: 0, delimiter: '.'),
+      prediction:                      prediction,
+      number_of_participants:          number_with_precision(number_of_participants, precision: 0, delimiter: '.'),
+      supports:                        Support.where(comment: true, payment_completed: false).order(created_at: :desc).limit(12),
+      # kpi_per_day:                     {
+      #   registered_confirmed_users_by_date: User.select('count(users.id) as anzahl, created_at, confirmed_at').where.not(confirmed_at: nil).group_by{|x| x.created_at.strftime('%Y-%m-%d')} ,
+      #   donations_by_date:                  Support.select('payment_completed, created_at, sum(amount_internal) as summe').where('payment_completed IS NOT NULL').group_by{|x| x.created_at.strftime('%Y-%m-%d')} ,
+      #   basic_income_funding_by_month:      own_funding_query.group_by{|x| x.created_at.strftime('%Y-%m-%d')} ,
+      # },
+      # kpi:                             {
+      #   clv_donations:  donations/confirmed_users,
+      #   clv_income:     total_amount/confirmed_users,
+      #   crowdbar_users: number_with_precision(crowdbar_users, precision: 0, delimiter: '.')
+      # }
 
 
     }
