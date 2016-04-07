@@ -46,8 +46,8 @@
 
 
   <ul ng-hide="!own_profile && !user.chances[0].code">
-    <li><b>Losnummer für die nächste Verlosung:</b></li>
-    <li ng-hide="!own_profile || current.participates()"><i>Noch kann man nicht teilnehmen</i></li>
+    <li><b>Aktuelle Losnummer:</b></li>
+    <li ng-hide="!own_profile || current.participates()"><i>Noch kann man nicht teilnehmen.</i></li>
     <li ng-show="own_profile && current.participates() && !user.chances[0].code"><i>- Du nimmst teil aber die Losnummern werden erst kurz vor der Verlosung vergeben. -</i></li>
     <li ng-repeat="chance in user.chances" ng-show="chance.code">
       <div class="well big">{{chance.code}}
@@ -56,6 +56,7 @@
         </div>
       </div>
     </li>
+    <li><i>Sobald du dich für die nächste Verlosung anmeldest, wird deine Losnummer neu generiert.</i></li>
     </ul>
   <hr ng-hide="!own_profile && !user.chances[0].code">
 
