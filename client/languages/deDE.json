@@ -54,7 +54,7 @@
   "SQUIRREL_INTRO_TWO_INACTIVE": "unterstützt.",
   "SQUIRREL_SELECT_SOCIETY": "An den Verein",
   "SQUIRREL_SELECT_BGE": "An das BGE",
-  "SQUIRREL_INFO_WHY": "Eine Spendenquittung erhältst du nur bei Spenden an den Verein.",
+  "SQUIRREL_INFO_WHY": "Eine Spendenquittung erhältst du bei Spenden ab 200€ an den Verein.",
   "SQUIRREL_INFO_WHY_LINK": "Warum?",
   "SQUIRREL_INFO_HOW": "Aus jedem für den Verein gespendeten Euro machen wir momentan 6€ Grundeinkommen.",
   "SQUIRREL_INFO_HOW_LINK": "Wie?",
@@ -70,7 +70,7 @@
   "SQUIRREL_HOW_MODAL_CONTENT": "In den letzten Monaten haben wir jeden Euro, der an den Verein „Mein Grundeinkommen“ gespendet wurde, versechsfacht. Aus 17.600 Euro Spenden wurden mit eurer Hilfe neun Grundeinkommen mit jeweils 12.000 Euro. Wenn ihr Geld direkt dem Verein spendet, können wir es vervielfachen, indem wir damit PR-Aktionen langfristig planen und finanzieren und so die Community stetig vergrößern können.",
   // support/funding
   "SUPPORT_CHOOSE_HEADING": "Werde Crowdhörnchen und unterstütze uns regelmäßig!",
-  "SUPPORT_CHOOSE_INTRO": "Schon ab 1 € monatlich möglich und jederzeit stoppbar. Du erhältst eine Spendenquittung und nimmst automatisch an allen Verlosungen teil.",
+  "SUPPORT_CHOOSE_INTRO": "Schon ab 1 € monatlich möglich und jederzeit stoppbar. Du nimmst automatisch an allen Verlosungen teil.",
   "SUPPORT_OPTION_PRIMARY": "Crowdhörnchen werden",
   "SUPPORT_OPTION_SECONDARY": "Einmalig unterstützen"
 }
