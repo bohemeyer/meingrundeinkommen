@@ -13,14 +13,17 @@
 
         <a ng-show="current.settings['raffleOpen']" class="btn-large btn-color btn" href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen!</a>
 
-        <alert ng-hide="current.settings['raffleOpen']">Die Anmeldung zur Verlosung ist leider schon geschlossen. Die nächsten Grundeinkommen werden im März verlost. Du kannst dich in den nächsten Tagen dafür anmelden.</alert>
+        <alert ng-hide="current.settings['raffleOpen']">Die Anmeldung zur Verlosung ist leider schon geschlossen. Sobald der Termin für die nächste Verlosung feststeht, kannst du daran teilnehmen.
+            Crowdhörnchen nehmen dann automatisch teil.</alert>
 
-      </div>
+     </div>
 
         <div ng-show="current.participates()">
 
           <alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
-            <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst an der Verlosung teil!</h3>
+            <!--<h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst an der Verlosung teil!</h3>-->
+              Die Anmeldung zur Verlosung ist leider schon geschlossen. Sobald der Termin für die nächste Verlosung feststeht, kannst du daran teilnehmen.
+              Crowdhörnchen nehmen dann automatisch teil.
           </alert>
 
           <ul ng-hide="chances_form.editAllChances">
@@ -40,9 +43,6 @@
             </li>
           </ul>
 
-
-
-
            <!-- <div ng-controller="TandemsController">
             <div ng-hide="chances_form.editAllChances">
 
@@ -54,8 +54,6 @@
               <div sytle="clear:both"></div>
             </div>
           </div> -->
-
-
 
           <div ng-show="chances_form.editAllChances" ng-include="'/assets/gewinnspiel_form.html'"></div>
 
