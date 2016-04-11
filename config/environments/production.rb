@@ -19,7 +19,7 @@ Rails.application.configure do
     host: 'https://www.mein-grundeinkommen.de'
   }
 
-  config.action_mailer.default_options = { from: "\"Mein Grundeinkommen\" <micha@meinbge.de>" }
+  config.action_mailer.default_options = { from: "\"Mein Grundeinkommen\" <support@meinbge.de>" }
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
@@ -32,7 +32,7 @@ Rails.application.configure do
     #:password  => Rails.application.secrets.mandrill_password, # SMTP password is any valid API key
     :authentication => 'login', # Mandrill supports 'plain' or 'login'
     :domain => 'meinbge.de', # your domain to identify your server when connecting
-    :from => "\"Mein Grundeinkommen\" <micha@meinbge.de>"
+    :from => "\"Mein Grundeinkommen\" <support@meinbge.de>"
   }
 
   # Full error reports are disabled and caching is turned on.
