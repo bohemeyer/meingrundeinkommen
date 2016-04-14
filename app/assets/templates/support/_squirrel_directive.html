@@ -23,7 +23,7 @@
     <div ng-hide="user.isSquirrel() || user.isPausedSquirrel()" class="col-xs-12 text-center">
       <h2 translate="SQUIRREL_HEADING"></h2>
 
-      <alert ng-if="!vm.auth">Bitte erst <a href="/login">einloggen</a></alert>
+      <alert ng-if="!vm.auth">Bitte erst <a href="/login">anmelden</a></alert>
 
     </div>
     <div ng-hide="((user.isSquirrel() || user.isPausedSquirrel()) && !vm.formState.edit) || !vm.auth" class="col-xs-12 col-md-8 col-md-offset-2">
