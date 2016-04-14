@@ -314,7 +314,7 @@ angular.module("boarding", ['Crowdbar', 'Wish','State','Chance','Crowdcard','Ava
           $scope.current.incFlag 'dontWantToCrowdfund' if skip
         when 'confirm'
           if skip && $scope.trigger == 'participates'
-            alert 'Achtung: Solange deine E-Mail-Adresse nicht bestätigt ist, nimmmst du nicht an der Verlosung teil.'
+            alert 'Achtung: Solange deine E-Mail-Adresse nicht aktiviert ist, nimmmst du nicht an der Verlosung teil.'
 
       $scope.current_step++
       $scope.steps.hide_skip_button = false
