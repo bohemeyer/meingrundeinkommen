@@ -16,7 +16,7 @@ class Chance < ActiveRecord::Base
 	def unique_entry
 		matched_entry = Chance.where(['LOWER(last_name) = LOWER(?) AND LOWER(first_name) = LOWER(?) AND dob = ? AND confirmed = 1', self.last_name, self.first_name, self.dob]).first
 		if matched_entry && (matched_entry.id != self.id)
-			errors.add(:last_name, 'Jemand mit deinem Namen und deinem Geburtsdatum nimmt bereits teil. Falls dies nicht du bist, kontaktiere bitte support@mein-grundeinkommen.de - sehr viel wahrscheinlicher ist aber, dass du aus Versehen zwei User-Accounts bei uns hast und bereits mit dem anderen teilnimmst. Oft passiert das, wenn du z.b. eine E-Mail-Adresse mit @gmail.com hast, dich aber mit @googlemail.com eingeloggt hast (oder andersrum).')
+			errors.add(:last_name, 'Jemand mit deinem Namen und deinem Geburtsdatum nimmt bereits teil. Falls dies nicht du bist, kontaktiere bitte support@mein-grundeinkommen.de - sehr viel wahrscheinlicher ist aber, dass du aus Versehen zwei User-Kontos bei uns hast und bereits mit dem anderen teilnimmst. Oft passiert das, wenn du z.b. eine E-Mail-Adresse mit @gmail.com hast, dich aber mit @googlemail.com eingeloggt hast (oder andersrum).')
 			return false
 		end
 	end
