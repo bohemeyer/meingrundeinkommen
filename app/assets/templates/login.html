@@ -18,7 +18,7 @@
 
       <div ng-show="just_confirmed">
 
-        <h2 style="margin-bottom:15px;">Super, deine E-Mail-Adresse wurde bestätigt!</h2>
+        <h2 style="margin-bottom:15px;">Super, deine E-Mail-Adresse wurde aktiviert!</h2>
 
         <i class="fa fa-check" style="color: #ddd;font-size: 150px;text-shadow: 1px 1px 0 black;"></i>
       </div>
@@ -39,7 +39,7 @@
 
               <alert ng-show="LoginForm.$error.serverMessage" type="warning">{{LoginForm.$error.serverMessage}}
                 <a href="#" ng-click="resend_link()" ng-show="show_resend_link">
-                  Bestätigungsmail erneut senden
+                  Aktivierungsmail erneut senden
                 </a>
                 <i ng-show="resend_status">{{resend_status}}</i>
               </alert>
