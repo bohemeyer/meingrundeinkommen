@@ -2,8 +2,13 @@
 
 <p>schön, dass du bei "Mein Grundeinkommen" mitmachst!</p>
 
-<p>Klick noch schnell auf diesen Link um dein Konto zu aktivieren:</p>
+<p>Klick noch schnell auf diesen Button, um dein Konto zu aktivieren:</p>
 
+<form action="<%= confirmation_url(@resource, confirmation_token: @token) %>">
+    <input type="submit" value="Mein Konto aktivieren">
+</form>
+
+<p>Sollte der Button nicht funktionieren, dann versuch es bitte mit diesem Link:</p>
 <p><a href="<%= confirmation_url(@resource, confirmation_token: @token) %>"><%= confirmation_url(@resource, confirmation_token: @token) %></a></p>
 
 <p>Liebe Grüße,<br><br>
