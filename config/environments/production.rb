@@ -14,6 +14,8 @@ Rails.application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = false
 
+  config.action_mailer.delivery_method = :smtp
+
   config.action_mailer.default_url_options = {
     host: 'https://www.mein-grundeinkommen.de'
   }
@@ -29,8 +31,6 @@ Rails.application.configure do
   }
 
   #config.action_mailer.default_options = { from: '"Mein Grundeinkommen" <support@meinbge.de>' }
-
-  config.action_mailer.delivery_method = :sparkpost
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
