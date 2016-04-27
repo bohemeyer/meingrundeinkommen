@@ -25,7 +25,7 @@ Rails.application.configure do
     port: 587,
     enable_starttls_auto: true,
     format: :html,
-    from: '"Mein Grundeinkommen" <support@meinbge.de>'
+    from: '"Mein Grundeinkommen" <support@mein-grundeinkommen.de>'
   }
 
   #config.action_mailer.default_options = { from: '"Mein Grundeinkommen" <support@meinbge.de>' }
