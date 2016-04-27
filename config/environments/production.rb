@@ -18,7 +18,17 @@ Rails.application.configure do
     host: 'https://www.mein-grundeinkommen.de'
   }
 
-  config.action_mailer.default_options = { from: '"Mein Grundeinkommen" <support@meinbge.de>' }
+  config.action_mailer.smtp_settings = {
+    user_name: 'SMTP_Injection',
+    password: '2b545f95aa2dc1d3a20bc58617b7d03e631630bb',
+    address: 'smtp.sparkpostmail.com',
+    port: 587,
+    enable_starttls_auto: true,
+    format: :html,
+    from: '"Mein Grundeinkommen" <support@meinbge.de>'
+  }
+
+  #config.action_mailer.default_options = { from: '"Mein Grundeinkommen" <support@meinbge.de>' }
 
   config.action_mailer.delivery_method = :sparkpost
 
