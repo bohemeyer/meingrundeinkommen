@@ -18276,12 +18276,12 @@ namespace :squirrels do
 
 
     due_date = {
-      'COR1' => '01.04.2016',
-      'CORE' => '06.04.2016'
+      'COR1' => '02.05.2016',
+      'CORE' => '04.05.2016'
     }
 
 
-    all_payments = Payment.where('id < 18976') #16383
+    all_payments = Payment.where('id < 19822') #16383
 
     #############!!!!!!!!!!!!!!!!!!!!!! TODO: NEUE BANKENLISTE LADEN+#############
     #############!!!!!!!!!!!!!!!!!!!!!! TODO: NEUE BANKENLISTE LADEN+#############
@@ -18410,7 +18410,7 @@ namespace :squirrels do
 
 		          # OPTIONAL: Enables or disables batch booking, in German "Sammelbuchung / Einzelbuchung"
 		          # True or False
-		          batch_booking: true
+		          batch_booking: false
 
 		        )
 		      else
