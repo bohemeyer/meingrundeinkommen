@@ -5,7 +5,7 @@ SparkPostRails.configure do |c|
   c.inline_css = true
   #c.ip_pool = "MY-POOL"
   #c.return_path = 'BOUNCE-EMAIL@YOUR-DOMAIN.COM'
-  c.sandbox = true
+  #c.sandbox = true
   #c.subaccount = "123"
   c.track_clicks = true
   c.track_opens = true
