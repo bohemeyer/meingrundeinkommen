@@ -1,4 +1,4 @@
-class MailingsMailer < MassMandrill::MandrillMailer
+class MailingsMailer < ActionMailer::Base
   include ActionView::Helpers::NumberHelper
 
   def possible_user_groups

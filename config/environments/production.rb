@@ -14,26 +14,13 @@ Rails.application.configure do
   # Rake tasks automatically ignore this option for performance.
   config.eager_load = false
 
-  #config.action_mailer.delivery_method = :mailjet
   config.action_mailer.default_url_options = {
     host: 'https://www.mein-grundeinkommen.de'
   }
 
-  config.action_mailer.default_options = { from: "\"Mein Grundeinkommen\" <support@mein-grundeinkommen.de>" }
+  config.action_mailer.default_options = { from: '"Mein Grundeinkommen" <support@meinbge.de>' }
 
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.smtp_settings = {
-    :address   => "smtp.mandrillapp.com",
-    :port      => 587, # ports 587 and 2525 are also supported with STARTTLS
-    :enable_starttls_auto => true, # detects and uses STARTTLS
-    :user_name => "admin@mein-grundeinkommen.de",
-    :password  => "fiQrblujhGZbPOQzreEVMw",
-    #:user_name => Rails.application.secrets.mandrill_user,
-    #:password  => Rails.application.secrets.mandrill_password, # SMTP password is any valid API key
-    :authentication => 'login', # Mandrill supports 'plain' or 'login'
-    :domain => 'meinbge.de', # your domain to identify your server when connecting
-    :from => "\"Mein Grundeinkommen\" <support@mein-grundeinkommen.de>"
-  }
+  config.action_mailer.delivery_method = :sparkpost
 
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
