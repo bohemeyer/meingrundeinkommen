@@ -1,5 +1,5 @@
 SparkPostRails.configure do |c|
-  c.api_key = '2b545f95aa2dc1d3a20bc58617b7d03e631630bb'
+  c.api_key = '6ef3cc88fada326360f9ac98a0a320d2ce27267b'
   #c.campaign_id = 'YOUR-CAMPAIGN'
   c.html_content_only = true
   c.inline_css = true
