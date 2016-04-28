@@ -24,6 +24,7 @@ Rails.application.configure do
     user_name: 'SMTP_Injection',
     password: '6ef3cc88fada326360f9ac98a0a320d2ce27267b',
     address: 'smtp.sparkpostmail.com',
+    authentication: :login,
     port: 587,
     format: :html,
     from: '"Mein Grundeinkommen" <support@mein-grundeinkommen.de>'
