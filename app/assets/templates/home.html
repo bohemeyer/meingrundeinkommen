@@ -18,6 +18,7 @@
                     Gewinnende ansehen
                 </a> -->
 
+                <!--# RAFFLE To open/close a raffle (un)comment the section below -->
                 <a ng-if="!current.user" href="/register" class="btn btn-special btn-color">
                     Jetzt teilnehmen
                 </a>
@@ -303,6 +304,7 @@
                     <div class="content-box-info text-left">
                         <h3 style="margin-bottom:5px"><a href="/menschen/{{d.id}}">{{d.name}}</a></h3>
 
+                       <!--RAFFLE after the raffle, winners are manually updated in the following section -->
                         <div ng-switch="d.id">
 
                             <p ng-switch-when="26255">
@@ -486,6 +488,7 @@
                                 <img src="/assets/team/team-member.jpg"></a>
                         </div>
                     </div>
+                    <!--RAFFLE nach der Verlosung neue Daten. -->
                     <div class="content-box-info text-left">
                         <h3 style="margin-bottom:5px"><a href="/register">Und ab Juni Du?</a></h3>
 
@@ -509,7 +512,8 @@
                     <div class="content-box-info text-left">
                         <h3 style="margin-bottom:5px"><a href="/boarding">Und ab Juni Du?</a></h3>
 
-                        Im Mai werden wieder Grundeinkommen verlost. Du kannst gewinnen. <a href="/boarding">Jetzt
+                        <!--# RAFFLE DATE-->
+                        Am 18. Mai werden wieder Grundeinkommen verlost. Du kannst gewinnen. <a href="/boarding">Jetzt
                         teilnehmen</a></a>
                         </p>
                     </div>
@@ -531,7 +535,8 @@
 
                 <!-- <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Am Samstag wird das 5. <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> <a href="https://www.facebook.com/events/376506499170475/?fref=ts" target="_blank" class="huge">hier</a> verlost.</h1> -->
 
-                <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Nächste Verlosung: 11. Mai</h1>
+                <!--# RAFFLE open-->
+                <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Nächste Verlosung: 18. Mai</h1>
 
                 <!-- <h3 style="color:white" class="margin-top-20">Wir verlosen das 13. Grundeinkommen auf dem <a
                         href="http://cassiopeia-berlin.de/event/female-focus-festival/" target="_blank">Female Focus
