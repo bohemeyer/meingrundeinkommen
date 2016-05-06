@@ -36,6 +36,10 @@
                   <b>Vollständiger Name (exakt wie auf Ausweis):</b> {{chance.first_name}} {{chance.last_name}}
                   <br>
                   <b>Geburtsdatum:</b> {{chance.dob | date:'dd.MM.yyyy'}}
+                  <span ng-if="chance.code">
+                  <br>
+                  <b>Losnummer:</b> {{chance.code}}
+                  </span>
                 </p>
                 </div>
               </div>
