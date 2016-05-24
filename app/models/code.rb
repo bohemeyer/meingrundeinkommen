@@ -8,13 +8,6 @@ class Code < ActiveRecord::Base
 		return code.code
 	end
 
-	def self.get_random(limit = 100000)
-		code = self.where(:used => false, :id => 0..limit).lock(true).sample
-		code.used = true
-		code.save!
-		return code.code
-	end
-
 	def self.last
 		self.where(:used => true).order(id: :desc).limit(1).first
 	end
