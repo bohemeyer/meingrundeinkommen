@@ -46,12 +46,24 @@ namespace :chances do
   task SetCodesForConfirmedButNoCode: :environment do
     desc 'set code for those chances that are confirmed but for some reason dont have a code yet'
 
-    chances = Chance.where(code: nil, confirmed: true).shuffle
+    chances = Chance.where(code: nil, confirmed: true).order('random()')
 
     chances.each do |chance|
       chance.update_attribute(:code, Code.get)
     end
   end
+
+  #### USE THIS ONE FOR INITIAL CODE GENERATION OF SQUIRRELS #####
+  task SetRandomCodesForSquirrels: :environment do
+    desc 'set code for squirrels'
+
+    chances = Chance.where(code: nil, confirmed: true).order('random()')
+
+    chances.each do |chance|
+      chance.update_attribute(:code, Code.get_random)
+    end
+  end
+
 
   task SetCodesForTandems: :environment do
     desc 'set random codes for tandems'
