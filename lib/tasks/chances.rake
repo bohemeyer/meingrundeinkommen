@@ -58,10 +58,15 @@ namespace :chances do
     desc 'set code for squirrels'
 
     chances = Chance.where(code: nil, confirmed: true).shuffle
+    codes = Code.where(:used => false, :id => 0..100000).order("RAND()").limit(chances.count)
 
-    chances.each do |chance|
-      chance.update_attribute(:code, Code.get_random)
+    codes.update_all(:used => true)
+
+    chances.each_with_index do |chance, i|
+      puts "#{i} of #{chances.count} - #{codes[i].code}"
+      chance.update_attribute(:code, codes[i].code) if codes[i]
     end
+
   end
 
 
