@@ -16,7 +16,7 @@
 				<li ng-repeat="chance in current.user.chances" ng-show="chance.code">
 			      <div class="well big">{{chance.code}}
 			        <div style="font-size:12px;font-weight:normal;">
-			          <span ng-show="chance.is_child || chance.isChild">(für ein Kind)</span>
+			          <span ng-show="chance.is_child || chance.isChild">(für Kind {{chance.firstName}})</span>
 			        </div>
 			      </div>
 			    </li>
