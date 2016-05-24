@@ -3,7 +3,7 @@ class Chance < ActiveRecord::Base
 
 	belongs_to :user
 
-	validates_presence_of :first_name, :last_name, :dob
+	validates_presence_of :first_name, :last_name, :dob, :confirmed_publication
 
 	validates_uniqueness_of :code, :allow_blank => true, :allow_nil => true
 
