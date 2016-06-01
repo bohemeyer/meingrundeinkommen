@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
   def index
     if params[:admin] && current_user && current_user.admin?
-      render json: User.where("email LIKE ? OR name LIKE ?", "%#{params[:q]}%", "%#{params[:q]}%").limit(10)
+      render json: (User.search(params[:q]) + User.search(params[:q])).uniq
     end
   end
 

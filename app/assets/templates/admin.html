@@ -190,19 +190,19 @@
 				<td>Name</td>
 				<td>E-Mail</td>
 				<td>Verlosung</td>
-				<td>BAR</td>
-				<td>CARD</td>
-				<td>Confirmed</td>
-				<td>Reset Password</td>
-				<td>Delete</td>
+				<!-- <td>BAR</td>
+				<td>CARD</td> -->
+				<td>Action</td>
 			</tr>
 
 			<tr ng-repeat="user in users">
 				<td>{{user.id}}</td>
 				<td>{{user.name}}</td>
 				<td>{{user.email}}</td>
-				<td>{{user.chances[0].confirmed}}</td>
-				<td>
+				<td><span ng-repeat="chance in user.chances">
+					{{chance.firstName}} {{chance.lastName}} ({{chance.dob}}): {{chance.code}}<hr>
+				</span></td>
+				<!-- <td>
 					<span ng-if="user.flags.hasCrowdbar">ja</span>
 					<span ng-if="!user.flags.hasCrowdbar && user.flags.hasHadCrowdbar">hatte sie</span>
 					<div ng-if="!user.flags.hasCrowdbar && !user.flags.hasHadCrowdbar">nein<br><a href="#" ng-click="enable_crowdbar(user)">freischalten</a></div>
@@ -243,10 +243,10 @@
 					</div>
 
 
-				</td>
-				<td>{{user.confirmedAt}} <a href="#" ng-click="confirm(user)" class="btn btn-normal btn-color">Confirm</a></td>
-				<td>{{user.pw}}<a href="#" ng-click="reset_pw(user)" class="btn btn-normal btn-grey">Set Password</a></td>
-				<td><a href="#" ng-click="delete_user(user)" class="btn btn-normal btn-grey">Delete</a></td>
+				</td> -->
+				<td>{{user.confirmedAt}}<br> <a href="#" ng-click="confirm(user)">Confirm</a> |
+				{{user.pw}} <a href="#" ng-click="reset_pw(user)">Set Password</a> |
+				<a href="#" ng-click="delete_user(user)">Delete</a></td>
 			</tr>
 		</table>
 

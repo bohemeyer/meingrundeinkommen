@@ -44,6 +44,11 @@ class Chance < ActiveRecord::Base
 	  end
 	end
 
+
+	def self.search(q)
+	  Chance.where("first_name LIKE ? OR last_name LIKE ? OR CONCAT( first_name,  ' ', last_name ) LIKE ?", "%#{q}%", "%#{q}%", "%#{q}%").limit(10).map(&:user)
+	end
+
 	def generatetandemcodes
 
 		uid = user_id

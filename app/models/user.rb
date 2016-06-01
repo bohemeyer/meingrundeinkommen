@@ -36,6 +36,10 @@ class User < ActiveRecord::Base
     text :id
   end
 
+  def self.search(q)
+    User.where("email LIKE ? OR name LIKE ?", "%#{q}%", "%#{q}%").limit(10)
+  end
+
   #validates_presence_of   :avatar
   validates_integrity_of  :avatar
   validates_processing_of :avatar
