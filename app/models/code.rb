@@ -2,9 +2,11 @@ class Code < ActiveRecord::Base
 
 
 	def self.get
-		code = self.where(:used => false).order(id: :asc).limit(1).lock(true).first
-		code.used = true
-		code.save!
+		code = self.where(:used => false).order(id: :asc).first
+		code.with_lock do
+			code.used = true
+			code.save!
+		end
 		return code.code
 	end
 
