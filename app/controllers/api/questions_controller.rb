@@ -36,6 +36,8 @@ class Api::QuestionsController < ApplicationController
   # end
 
   def index
+    expires_in 1.minutes, :public => true
+
     render json: Question.all.order(:votes => :desc)
   end
 end

@@ -43,6 +43,7 @@ class Api::UserWishesController < ApplicationController
   end
 
   def index
+    expires_in 1.minutes, :public => true
 
     x = []
     UserWish.limit(10).order('updated_at desc').map do |user_wish|
