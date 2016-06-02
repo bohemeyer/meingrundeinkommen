@@ -1,5 +1,5 @@
 class Wish < ActiveRecord::Base
-  searchable do
+  searchable :auto_index => false, :auto_remove => false do
     text :text, :more_like_this => true
   end
 

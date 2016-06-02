@@ -1,5 +1,5 @@
 class Question < ActiveRecord::Base
-  searchable do
+  searchable :auto_index => false, :auto_remove => false do
     text :text
     text :answer
   end
