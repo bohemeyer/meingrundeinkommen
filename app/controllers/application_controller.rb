@@ -6,10 +6,10 @@ class ApplicationController < ActionController::Base
 
   #before_filter :set_cache_buster
 
-  after_filter :set_csrf_cookie_for_ng
+  before_filter :set_csrf_cookie_for_ng
 
   def set_csrf_cookie_for_ng
-    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery?
+    cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery? && current_user.present?
   end
 
   # def set_cache_buster
@@ -18,7 +18,17 @@ class ApplicationController < ActionController::Base
   #   response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
   # end
 
+  layout :layout_by_resource
+
  protected
+
+  def layout_by_resource
+    if devise_controller?
+      "no_angular"
+    else
+      "application"
+    end
+  end
 
   def verified_request?
     super || form_authenticity_token == request.headers['X-XSRF-TOKEN']

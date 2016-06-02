@@ -15,7 +15,6 @@ gem 'bcrypt-ruby'
 
 # misc
 gem 'angular-ui-bootstrap-rails'
-gem 'angular_rails_csrf'
 # gem 'angularjs-rails'
 gem 'angularjs-rails-resource', '~> 1.1.1'
 gem 'carrierwave', '~> 0.11.2'
@@ -47,6 +46,7 @@ gem 'newrelic_rpm'
 # production
 gem 'lograge'
 gem 'unicorn'
+gem 'modularity', '>=2'
 
 group :development, :test do
   gem 'awesome_print'
