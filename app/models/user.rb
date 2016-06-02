@@ -30,7 +30,7 @@ class User < ActiveRecord::Base
   has_many :state_users, :dependent => :destroy
   has_many :states, through: :state_users
 
-  searchable do
+  searchable :auto_index => false, :auto_remove => false do
     text :name
     text :email
     text :id
