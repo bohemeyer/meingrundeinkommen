@@ -1,7 +1,7 @@
 class WebsitesController < ApplicationController
 
-
   def show
+    expires_in 1.minutes, :public => true
 
     b = request.env['HTTP_USER_AGENT']
   	if b.include?('facebookexternalhit') || b.include?('Twitterbot') # || b.include?('Mozilla')

@@ -5,6 +5,8 @@ class Api::UsersController < ApplicationController
 
 
   def index
+    expires_in 3.minutes, :public => true
+
     if current_user
       if params[:q]
         query = User.search do

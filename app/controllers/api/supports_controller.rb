@@ -34,10 +34,14 @@ class Api::SupportsController < ApplicationController
   end
 
   def statements
+    expires_in 1.minutes, :public => true
+
     render json: Support.where('comment is not null and payment_completed is not null').limit(30).order(:updated_at => :desc)
   end
 
   def index
+    expires_in 3.minutes, :public => true
+
     if current_user && current_user.admin? and params[:admin]
      render json: Support.where('payment_method = "bank" or payment_method like "paypal%"').order(:id => :desc)
     end

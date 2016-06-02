@@ -86,6 +86,7 @@ class Api::WishesController < ApplicationController
 
 
   def top
+    expires_in 1.minutes, :public => true
 
     x= []
 
@@ -114,6 +115,7 @@ class Api::WishesController < ApplicationController
 
 
   def index
+    expires_in 1.minutes, :public => true
 
     base = UserWish
 
