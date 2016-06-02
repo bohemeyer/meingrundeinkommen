@@ -16,6 +16,7 @@ class Api::HomepagesController < ApplicationController
   caches_page :show
 
   def show
+    expires_in 1.minutes, :public => true
 
     crowdfunding_supporter = 2900 + 140 + 18  #startnext + untracked paypal + kto
     crowdfunding_amount = 3058.85 + 380.25 #untracked paypal + untracked kto
