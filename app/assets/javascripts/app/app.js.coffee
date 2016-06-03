@@ -4,13 +4,19 @@ window.App = angular.module('grundeinkommen',
   ])
 
 .config [
-  "$routeProvider"
-  "$locationProvider"
-  "MetaProvider"
-  "$translateProvider"
+  "$routeProvider",
+  "$locationProvider",
+  "MetaProvider",
+  "$translateProvider",
   ($routeProvider, $locationProvider, MetaProvider, $translateProvider) ->
     $locationProvider.html5Mode true
     $routeProvider
+    .when '/register',
+         redirectTo: () ->
+           window.location = "/register"
+    .when '/login',
+         redirectTo: () ->
+           window.location = "/login"
     .otherwise
         redirectTo: "/start"
     MetaProvider
