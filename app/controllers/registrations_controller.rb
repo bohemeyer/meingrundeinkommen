@@ -6,7 +6,6 @@ class RegistrationsController < Devise::RegistrationsController
   def update
 
     account_update_params = devise_parameter_sanitizer.sanitize(:account_update)
-
     if account_update_params[:password].blank?
       account_update_params.delete("password")
       account_update_params.delete("password_confirmation")
@@ -30,9 +29,6 @@ class RegistrationsController < Devise::RegistrationsController
 
 
   def create
-
-    account_create_params = devise_parameter_sanitizer.sanitize(:sign_up)
-
     #account_create_params['sign_up_ip'] = request.remote_ip
     if cookies[:sign_ups]
       signups = cookies[:sign_ups].to_i + 1
@@ -43,6 +39,11 @@ class RegistrationsController < Devise::RegistrationsController
     #account_create_params['number_of_signups'] = signups
 
     super
+  end
+
+
+  def sign_up_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation, :datenschutz, :newsletter)
   end
 
 end
