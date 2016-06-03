@@ -1,33 +1,73 @@
-<h2>Sign up</h2>
+<div class="container margin-top-70">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
-
-  <div><%= f.label :name %><br />
-  <%= f.text_field :name, autofocus: true %></div>
-
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
-
-
-  <div><%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "off" %></div>
-
-  <div><%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %></div>
-
-  <div>
-    <%= f.check_box :datenschutz %>
-    Ich habe die <a href="/nutzungsbedingungen">Nutzungsbedingungen</a>
-      und die <a href="datenschutz">Datenschutzerklärung</a> gelesen
-      und stimme zu.
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1 style="margin-bottom:0px">Sign up</h1>
+    </div>
   </div>
 
-  <div>
-    <%= f.check_box :newsletter %>
-    informiert mich per E-Mail über weitere Verlosungstermine und bei wichtigen
-    Änderungen auf der Seite.
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 col-xs-12 col-lg-6 col-lg-offset-3 col">
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: {class: "form-horizontal margin-top-30"}) do |f| %>
+        <%= devise_error_messages! %>
+
+        <div class="form-group">
+          <%= f.label :name, :class => "col-sm-2 control-label" %>
+          <div class="col-sm-10 text-left">
+            <%= f.text_field :name, autofocus: true, :class => "form-control", placeholder: "(dieser Name wird öffentlich in deinem Profil angezeigt)" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email, :class => "col-sm-2 control-label" %>
+          <div class="col-sm-10 text-left">
+            <%= f.email_field :email, :class => "form-control", :placeholder => "E-Mail-Adresse" %>
+          </div>
+        </div>
+
+
+        <div class="form-group">
+          <%= f.label :password, :class => "col-sm-2 control-label" %>
+          <div class="col-sm-10 text-left">
+            <%= f.password_field :password, autocomplete: "off", :class => "form-control", :placeholder => "Passwort" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, :class => "col-sm-2 control-label" %>
+          <div class="col-sm-10 text-left">
+            <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control", :placeholder => "Passwort" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10 text-left">
+            <div class="checkbox" style="margin-bottom: 0;">
+              <%= f.check_box :datenschutz %>
+              Ich habe die <a href="/nutzungsbedingungen">Nutzungsbedingungen</a>
+                und die <a href="datenschutz">Datenschutzerklärung</a> gelesen
+                und stimme zu.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10 text-left">
+            <div class="checkbox">
+              <%= f.check_box :newsletter %>
+              informiert mich per E-Mail über weitere Verlosungstermine und bei wichtigen
+              Änderungen auf der Seite.
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <%= f.submit "Sign up", :class => "btn btn-special btn-color" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 
-  <div><%= f.submit "Sign up" %></div>
-<% end %>
+</div>
