@@ -12,12 +12,6 @@ class ApplicationController < ActionController::Base
     cookies['XSRF-TOKEN'] = form_authenticity_token if protect_against_forgery? && current_user.present?
   end
 
-  # def set_cache_buster
-  #   response.headers["Cache-Control"] = "no-cache, no-store, max-age=0, must-revalidate"
-  #   response.headers["Pragma"] = "no-cache"
-  #   response.headers["Expires"] = "Fri, 01 Jan 1990 00:00:00 GMT"
-  # end
-
   layout :layout_by_resource
 
  protected

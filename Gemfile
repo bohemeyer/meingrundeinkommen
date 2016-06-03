@@ -49,6 +49,7 @@ gem 'unicorn'
 gem 'modularity', '>=2'
 
 group :development, :test do
+  gem "pry"
   gem 'awesome_print'
   gem 'brice'
   gem 'byebug'

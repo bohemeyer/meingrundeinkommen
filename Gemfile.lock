@@ -56,6 +56,7 @@ GEM
     clockwork (1.1.0)
       activesupport
       tzinfo
+    coderay (1.1.1)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -128,6 +129,7 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    method_source (0.8.2)
     mime-types (1.25.1)
     mimemagic (0.3.1)
     mini_magick (4.1.0)
@@ -148,6 +150,10 @@ GEM
     progress_bar (1.0.3)
       highline (~> 1.6.1)
       options (~> 2.3.0)
+    pry (0.10.3)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
     rack (1.5.2)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -211,6 +217,7 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.9.0)
     simplecov-html (0.9.0)
+    slop (3.6.0)
     sprockets (2.12.3)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -287,6 +294,7 @@ DEPENDENCIES
   mysql2
   newrelic_rpm
   progress_bar
+  pry
   rails (= 4.1.0)
   rspec-rails
   sass-rails
@@ -302,4 +310,4 @@ DEPENDENCIES
   unicorn
 
 BUNDLED WITH
-   1.11.2
+   1.12.0.pre.2
