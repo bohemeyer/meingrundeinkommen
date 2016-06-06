@@ -1,0 +1,22 @@
+.container.margin-top-70
+  .row
+    .text-center
+      %h1{"ng-hide" => "confirmation_error", :style => "margin-bottom:0px"} Schnell einloggen!
+      %h4{"ng-hide" => "just_confirmed"}
+        Oder:
+        %a{:href => "/users/sign_up"} Neu hier?
+  .row
+    .col-md-8.col-md-offset-2.col-xs-12.col-lg-6.col-lg-offset-3.col
+      = form_for(resource, as: resource_name, url: session_path(resource_name), html: {class: "form-horizontal margin-top-30"}) do |f|
+        .form-group
+          = f.label :email, :class => "control-label col-sm-2"
+          .col-sm-10.text-left
+            = f.email_field :email, autofocus: true, :class => "form-control input-large"
+        .form-group
+          = f.label :password, "passwort", :class => "control-label col-sm-2"
+          .col-sm-10.text-left
+            = f.password_field :password, autocomplete: "off", :class => "form-control input-large"
+        .form-group
+          .col-sm-offset-2.col-sm-10
+            = f.submit "Los Jetzt!", :class => "btn btn-special btn-color"
+            = link_to "passwort vergessen?", new_user_password_path
