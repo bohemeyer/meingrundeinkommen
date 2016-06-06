@@ -1,0 +1,16 @@
+.container.margin-top-70
+  .row
+    .text-center
+      %h2{:style => "margin-bottom:0px"} Passwort vergessen?
+    .row
+      .col-md-8.col-md-offset-2.col-xs-12.col-lg-6.col-lg-offset-3.col
+        = form_for(resource, as: resource_name, url: password_path(resource_name), html: { class: "form-horizontal margin-top-30",method: :post }) do |f|
+          = devise_error_messages!
+          .form-group
+            = f.label :email, :class => "control-label col-sm-2"
+            .col-sm-10.text-left
+              = f.email_field :email, autofocus: true, :class => "form-control input-large"
+          .form-group
+            .col-sm-offset-2.col-sm-2
+              = f.submit "Passwort zurücksetzen", :class => "btn btn-special btn-color"
+          

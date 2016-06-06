@@ -98,7 +98,13 @@
                 %li
                   %a{href: "/blog/1282"} EN
 
-      
+      - if flash.present?
+        .container.margin-top-70
+          .row
+            .text-center
+              - flash.each do |key, value|
+                = content_tag :div, value, class: "flash #{key}"
+
 
       #main= yield
       / Content End
