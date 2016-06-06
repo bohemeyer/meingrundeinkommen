@@ -9,7 +9,7 @@
         = f.hidden_field :reset_password_token
         
         .form-group
-          = f.label :password, "Neues passwort", :class => "control-label col-sm-4"
+          = f.label :password, "Neues Passwort", :class => "control-label col-sm-4"
           .col-sm-8.text-left
             = f.password_field :password, autofocus: true, :class => "form-control input-large"
         .form-group
@@ -19,4 +19,4 @@
 
         .form-group
           .col-sm-offset-4.col-sm-2
-            = f.submit "Passwort zurücksetzen", :class => "btn btn-special btn-color"
+            = f.submit "Passwort speichern", :class => "btn btn-special btn-color"
