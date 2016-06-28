@@ -296,14 +296,30 @@
             <div ng-repeat="d in winners_row" class="col-lg-4 col-md-4 col-sm-4 bottom-pad">
                 <div class="content-box ch-item">
                     <div class="ch-info-wrap">
-                        <div class="testimonial-image-sm">
-                            <a href="/menschen/{{d.id}}">
-                                <img src="{{d.avatar.avatar.url}}">
-                            </a>
+
+                        <div ng-switch="d.id">
+                            <div ng-switch-default class="testimonial-image-sm">
+                                <a href="/menschen/{{d.id}}">
+                                    <img src="{{d.avatar.avatar.url}}">
+                                </a>
+                            </div>
+
+                            <div ng-switch-when="271799" class="testimonial-image-sm">
+                                <a href="#">
+                                    <img src="/assets/team/team-member.jpg">
+                                </a>
+                            </div>
                         </div>
+
+
                     </div>
                     <div class="content-box-info text-left">
-                        <h3 style="margin-bottom:5px"><a href="/menschen/{{d.id}}">{{d.name}}</a></h3>
+
+
+                        <h3 ng-if="d.id == 271799" style="margin-bottom:5px"><a href="/menschen/{{d.id}}">42. Gewinner*in</a></h3>
+                        <h3 ng-if="d.id != 271799" style="margin-bottom:5px"><a href="/menschen/{{d.id}}">{{d.name}}</a></h3>
+
+
 
                        <!--RAFFLE after the raffle, winners are manually updated in the following section -->
                         <div ng-switch="d.id">
@@ -467,6 +483,10 @@
                             <p ng-switch-when="33">
                                 Ihr Kind Pepa Moa (7) erhält seit 1. Januar 2016 ein monatliches Grundeinkommen von 1.000€. <a href="/menschen/{{d.id}}">Vorhaben
                                 ansehen</a>
+                            </p>
+
+                            <p ng-switch-when="271799">
+                                ###### Text für 42. Gewinner*in
                             </p>
 
                             <p ng-switch-default>
