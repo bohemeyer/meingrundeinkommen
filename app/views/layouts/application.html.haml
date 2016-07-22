@@ -33,7 +33,12 @@
     %link{:href => "/assets/ico/apple-touch-icon-120x120.png", :rel => "apple-touch-icon", :sizes => "120x120"}/
     %link{:href => "/assets/ico/apple-touch-icon-144x144.png", :rel => "apple-touch-icon", :sizes => "144x144"}/
     %link{:href => "/assets/ico/apple-touch-icon-152x152.png", :rel => "apple-touch-icon", :sizes => "152x152"}/
-
+    
+    :javascript
+      window.cookieconsent_options = {"message":"Mein-Grundeinkommen.de setzt eigene Cookies und verwendet Cookies von Diensten Dritter, um das Angebot auf der Website kontinuierlich verbessern zu können.","dismiss":"Ich habe verstanden!","learnMore":"Weitere Informationen Informationen","link":"https://www.mein-grundeinkommen.de/info/datenschutz","theme":"light-top"};
+      
+    %script(src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js")
+      
   %body.home-3{"ng-controller" => "AppCtrl"}
     .wrap{"ng-class"=>"{'full_height' : getStatus('/boarding') == 'current' || getStatus('/crowdapp') == 'current'}"}
       / Header Start
@@ -132,7 +137,7 @@
               %section.col-lg-6.col-md-6.col-xs-12.col-sm-6.footer-one
                 %h3 Über das Projekt
                 %p
-                  "Mein Grundeinkommen" sammelt per Crowdfunding Geld für ein Bedingungsloses Grundeinkommen. Immer wenn 12.000€ zusammen sind, werden sie an eine Person ausgelost.
+                  &bdquo;Mein Grundeinkommen&ldquo; sammelt per Crowdfunding Geld für ein Bedingungsloses Grundeinkommen. Immer wenn 12.000€ zusammen sind, werden sie an eine Person ausgelost.
               / %section.col-lg-3.col-md-3.col-xs-12.col-sm-3.footer-two
               /   %h3 Twitter Stream
               /   %ul#tweets
@@ -166,7 +171,7 @@
             .row
               .col-lg-9.col-md-9.col-xs-12.col-sm-9
                 \© 2014
-                %a{href: "/impressum"} Verein "Mein Grundeinkommen"
+                %a{href: "/impressum"} Mein Grundeinkommen e.V. (gemeinnützig)
                 |
                 %a{href:"/impressum"} Impressum
                 |
@@ -178,10 +183,10 @@
               .col-lg-3.col-md-3.col-xs-12.col-sm-3
                 %ul.social.social-icons-footer-bottom{:style => "margin-left: -120px;"}
                   %li.facebook
-                    %a{"data-original-title" => "Facebook", "data-toggle" => "tooltip", :href => "http://www.facebook.com/MeinGrundeinkommen", :title => ""}
+                    %a{"data-original-title" => "Facebook", "data-toggle" => "tooltip", :href => "https://www.facebook.com/MeinGrundeinkommen", :title => ""}
                       %i.fa.fa-facebook
                   %li.twitter
-                    %a{"data-original-title" => "Twitter", "data-toggle" => "tooltip", :href => "http://www.twitter.com/meinbge", :title => ""}
+                    %a{"data-original-title" => "Twitter", "data-toggle" => "tooltip", :href => "https://www.twitter.com/meinbge", :title => ""}
                       %i.fa.fa-twitter
         / Footer Bottom End
       / Scroll To Top
