@@ -22,7 +22,7 @@ Rails.application.configure do
 
   config.action_mailer.smtp_settings = {
     user_name: 'SMTP_Injection',
-    password: '9637bd8767cb32fbbfeb01b0890bd161733b38de',
+    password: 'e7306aead234aae64771d9ab1acf485ebcb6f51a',
     address: 'smtp.sparkpostmail.com',
     authentication: :login,
     enable_starttls_auto: :true,
