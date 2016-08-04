@@ -55,6 +55,10 @@
 
     <li ng-if="current.participates() && !current.hasCode()">Deine Losnummer wird dir vor der Verlosung zugewiesen und erscheint dann hier</li>
 
+    <div class="alert alert-warning" role="alert">
+        <div>Sollte Deine Losnummer nach Deiner Anmeldung zur Verlosung hier nicht angezeigt werden, werden wir sie am 18., spätestens aber am 23. August nachtragen.</div>
+    </div>
+
     <li ng-repeat="chance in current.user.chances" ng-show="chance.code">
       <div class="well big">{{chance.code}}
         <div style="font-size:12px;font-weight:normal;">
