@@ -67,6 +67,7 @@
       </div>
     </li>
   </ul>
+  <span ng-if="current.participates()" style="color: #eee;">_</span>
 
   <ul ng-if="!own_profile">
     <li ng-repeat="chance in user.chances" ng-show="chance.code">
