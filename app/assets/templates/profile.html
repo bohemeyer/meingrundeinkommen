@@ -69,7 +69,6 @@
     </div>
     
   </ul>
-  <span ng-if="current.participates()" style="color: #eee;">_</span>
 
   <ul ng-if="!own_profile">
     <li ng-repeat="chance in user.chances" ng-show="chance.code">
@@ -100,6 +99,8 @@
       <div style="clear:both"></div>
     </li>
   </ul>
+
+  <hr ng-hide="!user.participates()" style="border: 2px solid #323B44;" />
 
   <!-- <alert><b>Hinweis:</b> Für die Verlosung relevant ist ein Tandem erst, wenn ich a) selbst an der Verlosung teilnehme, b) meine Tandempartnerin dem Tandem zugestimmt hat und c) auch an der Verlosung teilnimmt.</alert> -->
 
