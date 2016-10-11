@@ -13,22 +13,22 @@
        return !!document.getElementById("crowd_bar_verified");
      };
 
-     var validOrigins = [
-       "http://crowdbar.mein-grundeinkommen.de/",
-       "https://crowdbar.mein-grundeinkommen.de/",
-       "http://crowdbar.meinbge.de/",
-       "https://crowdbar.meinbge.de/",
-       "http://crowdbar-staging.meinbge.de",
-       "https://crowdbar-staging.meinbge.de",
-       "http://lol:3000"
-     ]
+     function isValidOrigin(origin) {
+       return origin === "http://crowdbar.mein-grundeinkommen.de" ||
+              origin === "https://crowdbar.mein-grundeinkommen.de" ||
+              origin === "http://crowdbar.meinbge.de" ||
+              origin === "https://crowdbar.meinbge.de" ||
+              origin === "http://crowdbar-staging.meinbge.de" ||
+              origin === "https://crowdbar-staging.meinbge.de" ||
+              origin === "http://lol:3000";
+     };
 
      /**
       * redirect to the domain we came from, but only if it's one of ours
       */
      function redirectBack(path) {
        var origin = document.referrer.match(/(https?:\/\/.[^\/]+)/)[1];
-       if (!validOrigins.includes(origin)) {
+       if (!isValidOrigin(origin)) {
          origin = "https://crowdbar.meinbge.de";
        };
        window.location = origin + path;
