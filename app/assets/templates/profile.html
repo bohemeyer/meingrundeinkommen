@@ -52,17 +52,17 @@
     <!--<li ng-if="current.participates()" style="margin-top: 10px;" class="alert alert-success" role="alert">Du nimmst an der nächsten Verlosung teil.</li>-->
     <li ng-if="!current.participates() && current.settings['raffleOpen']" style="margin-top: 10px;" class="alert alert-error" role="alert">Du nimmst <strong>nicht</strong> an der nächsten Verlosung teil.</li>
 
-    <li ng-if="current.hasCode()">Hier findest du deine Losnummer(n):</li>
+   <!-- <li ng-if="current.hasCode()">Hier findest du deine Losnummer(n):</li>-->
 
-    <li ng-if="current.participates() && !current.hasCode()">Deine Losnummer wird dir vor der Verlosung zugewiesen und erscheint dann hier</li>
+   <li ng-if="current.participates() && !current.hasCode()">Deine Losnummer wird dir vor der Verlosung zugewiesen und erscheint dann hier</li>
 
-    <li ng-repeat="chance in current.user.chances" ng-show="chance.code">
+    <!--<li ng-repeat="chance in current.user.chances" ng-show="chance.code">
       <div class="well big">{{chance.code}}
         <div style="font-size:12px;font-weight:normal;">
           <span ng-show="chance.isChild">(für {{chance.first_name}})</span>
         </div>
       </div>
-    </li>
+    </li>-->
     
     <!--<div ng-if="current.participates() && current.settings['raffleOpen']" style="margin-top: 10px;" class="alert alert-warning" role="alert">
         <div>Sollte deine Losnummer nach deiner Anmeldung zur Verlosung hier nicht angezeigt werden, tragen wir sie am 18., spätestens aber am 23. August nach.</div>
