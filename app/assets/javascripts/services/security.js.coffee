@@ -104,7 +104,14 @@ angular.module "Security", ["Devise","Flag","Setting"]
             if chance.id && chance.code
               found = true
           return found
-
+      
+      participationlink: ->
+        baseurl = 'http://doppelverlosung.meinbge.de/'
+        if service.user.initialWishes && service.user.initialWishes != ""
+          return baseurl + "go/" + service.user.initialWishes
+        else
+          return baseurl
+      
       participates: ->
         if service.user.chances.length == 0
           false
