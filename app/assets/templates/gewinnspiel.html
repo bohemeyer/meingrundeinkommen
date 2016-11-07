@@ -9,31 +9,31 @@
     <!-- | <a href="/tandem">So funktioniert das Tandem</a> -->
     </div>
 
-     <div class="text-center" ng-hide="current.participates()">
+    <!--<div class="text-center" ng-hide="current.participates()">
 
-        <a ng-show="current.settings['raffleOpen']" class="btn-large btn-color btn" ng-href="current.participationlink()" target="_blank">Jetzt teilnehmen!</a>
-          
-          <p><i>Für aktive Crowdhörnchen:</i><br>
-Für die Teilnahme an der Großen Doppelverlosung am 24.11. und 06.12. müssen wir dieses Mal zunächst deine Daten überprüfen. Bitte tue dies auf <a ng-href="current.participationlink()" target="_blank">dieser Seite</a>. Deine Teilnahme wird nur auf dieser separaten Seite und NICHT hier im Profil angezeigt. 
-          </p>
-          
-          <p><i>Für alle anderen User:</i><br>
-               Um die Arbeit an unserer neuen Website nicht zu behindern, führen wir die Große Doppelverlosung am 24.11. und 06.12. auf einer separaten Seite und NICHT hier in deinem Profil durch. Bitte melde dich dafür <a ng-href="current.participationlink()" target="_blank">hier</a> an. 
-          </p>
-          
-          
-        <alert ng-hide="current.settings['raffleOpen']">Die Anmeldung zur Verlosung ist leider schon geschlossen. Ab morgen kannst du hier an der zweiten Verlosung teilnehmen.
-            </alert>
+       <a ng-show="current.settings['raffleOpen']" class="btn-large btn-color btn" ng-href="current.participationlink()" target="_blank">Jetzt teilnehmen!</a>
 
-     </div>
+         <p><i>Für aktive Crowdhörnchen:</i><br>
+           Für die Teilnahme an der Großen Doppelverlosung am 23.11. und 06.12. müssen wir dieses Mal zunächst deine Daten überprüfen. Bitte tue dies auf <a ng-href="current.participationlink()" target="_blank">dieser Seite</a>. Deine Teilnahme wird nur auf dieser separaten Seite und NICHT hier im Profil angezeigt.
+         </p>
+
+         <p><i>Für alle anderen User:</i><br>
+              Um die Arbeit an unserer neuen Website nicht zu behindern, führen wir die Große Doppelverlosung am 24.11. und 06.12. auf einer separaten Seite und NICHT hier in deinem Profil durch. Bitte melde dich dafür <a ng-href="current.participationlink()" target="_blank">hier</a> an.
+         </p>
+
+
+       <alert ng-hide="current.settings['raffleOpen']">Die Anmeldung zur Verlosung ist leider schon geschlossen. Ab morgen kannst du hier an der zweiten Verlosung teilnehmen.
+           </alert>
+
+    </div>-->
 
         <div ng-show="current.participates()">
 
-          <alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
+          <!--<alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
             <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst an der Verlosung teil!</h3>
           </alert>
 
-          <ul ng-hide="chances_form.editAllChances">
+          <!--<ul ng-hide="chances_form.editAllChances">
             <li style="float:right"><a ng-show="!chances_form.editAllChances" ng-click="chances_form.editAllChances = true" href="#" class="btn btn-color btn-small" ><i class="fa fa-pencil"></i> Daten ändern</a></li>
 
             <li ng-repeat="chance in current.user.chances | orderBy:chance.isChild">
@@ -52,7 +52,7 @@ Für die Teilnahme an der Großen Doppelverlosung am 24.11. und 06.12. müssen w
               </div>
               <hr>
             </li>
-          </ul>
+          </ul>-->
 
            <!-- <div ng-controller="TandemsController">
             <div ng-hide="chances_form.editAllChances">
