@@ -1,20 +1,20 @@
 <div class="container">
 
      <div ng-show="!chances_form.editAllChances && current.settings['raffleOpen']">
-      <h3 style="margin-bottom:0;">Die nächsten Grundeinkommen werden im Herbst 2016 verlost
+      <h3 style="margin-bottom:0;">Die nächsten Grundeinkommen werden am 23.11. und 6.12. verlost
 
       </h3>
       <a href="/gewinnspielbedingungen">Gewinnspielbedingungen</a>
-    | <a href="/faq/verlosung">Häufige Fragen</a>
+    | <a href="http://doppelverlosung.meinbge.de/pages/faq-crowdbar-verlosung" target="_blank">Häufige Fragen</a>
     <!-- | <a href="/tandem">So funktioniert das Tandem</a> -->
     </div>
 
      <div class="text-center" ng-hide="current.participates()">
 
-        <a ng-show="current.settings['raffleOpen']" class="btn-large btn-color btn" href="/boarding?trigger=wants_to_participate">Jetzt teilnehmen!</a>
+        <a ng-show="current.settings['raffleOpen']" class="btn-large btn-color btn" href="current.participationlink()" target="_blank">Jetzt teilnehmen!</a>
 
-        <alert ng-hide="current.settings['raffleOpen']">Die Anmeldung zur Verlosung ist leider schon geschlossen. Sobald der Termin für die nächste Verlosung feststeht, kannst du daran teilnehmen.
-            Crowdhörnchen nehmen dann automatisch teil.</alert>
+        <alert ng-hide="current.settings['raffleOpen']">Die Anmeldung zur Verlosung ist leider schon geschlossen. Ab morgen kannst du hier an der zweiten Verlosung teilnehmen.
+            </alert>
 
      </div>
 
@@ -57,13 +57,13 @@
             </div>
           </div> -->
 
-          <div ng-show="chances_form.editAllChances" ng-include="'/assets/gewinnspiel_form.html'"></div>
+         <!-- <div ng-show="chances_form.editAllChances" ng-include="'/assets/gewinnspiel_form.html'"></div>-->
 
         </div>
 
-        <alert ng-hide="current.settings['raffleOpen']">
+        <!--<alert ng-hide="current.settings['raffleOpen']">
           Hinterlegte Daten ändern und Hinzufügen/Entfernen von Kindern ist erst wieder möglich, sobald die Verlosung geöffnet ist.
-        </alert>
+        </alert>-->
 
 
 
