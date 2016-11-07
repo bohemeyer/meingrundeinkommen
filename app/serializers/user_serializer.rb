@@ -9,6 +9,14 @@ class UserSerializer < ActiveModel::Serializer
     end
   end
 
+  def initial_wishes
+    if (current_user && object == current_user) || (current_user && current_user.admin?)
+      object.initial_wishes
+    else
+      ''
+    end
+  end
+
   def confirmed_at
     if (current_user && object == current_user) || (current_user && current_user.admin?)
       object.confirmed_at
