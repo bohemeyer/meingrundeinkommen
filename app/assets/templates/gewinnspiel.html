@@ -9,7 +9,7 @@
     <!-- | <a href="/tandem">So funktioniert das Tandem</a> -->
     </div>
 
-    <!--<div class="text-center" ng-hide="current.participates()">
+    <div class="text-center" ng-hide="current.participates()">
 
        <a ng-show="current.settings['raffleOpen']" class="btn-large btn-color btn" ng-href="{{current.participationlink()}}" target="_blank">Jetzt teilnehmen!</a>
 
@@ -25,15 +25,15 @@
        <alert ng-hide="current.settings['raffleOpen']">Die Anmeldung zur Verlosung ist leider schon geschlossen. Ab morgen kannst du hier an der zweiten Verlosung teilnehmen.
            </alert>
 
-    </div>-->
+    </div>
 
-        <div ng-show="current.participates()">
+        <!--<div ng-show="current.participates()">
 
-          <!--<alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
+          <alert ng-show="!chances_form.editAllChances" type="success" class="margin-top-30">
             <h3 style="margin-bottom:0" ng-if="!chance.isChild"><i class="fa fa-check"></i> Du nimmst an der Verlosung teil!</h3>
           </alert>
 
-          <!--<ul ng-hide="chances_form.editAllChances">
+          <ul ng-hide="chances_form.editAllChances">
             <li style="float:right"><a ng-show="!chances_form.editAllChances" ng-click="chances_form.editAllChances = true" href="#" class="btn btn-color btn-small" ><i class="fa fa-pencil"></i> Daten ändern</a></li>
 
             <li ng-repeat="chance in current.user.chances | orderBy:chance.isChild">
@@ -96,5 +96,5 @@
      
      -->
      
-     <!--<p>Wir haben dir auch eine ausführliche E-Mail mit den Informationen zur Großen Doppelverlosung zugesandt. Falls sie innerhalb der nächsten Tage nicht ankommt oder deine Teilnahmebestätigung nicht funktioniert, wende dich bitte an support@mein-grundeinkommen.de.</p>-->
+     <p>Wir haben dir auch eine ausführliche E-Mail mit den Informationen zur Großen Doppelverlosung zugesandt. Falls sie innerhalb der nächsten Tage nicht ankommt oder deine Teilnahmebestätigung nicht funktioniert, wende dich bitte an support@mein-grundeinkommen.de.</p>
       </div>
