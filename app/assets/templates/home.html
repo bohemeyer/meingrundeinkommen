@@ -3,25 +3,25 @@
 
         <div class="row">
             <div class="col-md-8 text-left">
-                <strong>Und bald auch Du?</strong><br />
-                Ein Jahr lang monatlich 1.000 € erhalten. Ohne Bedingungen.
+                <strong>Die Große Doppelverlosung kommt</strong><br />
+                Nimm jetzt teil und erhalte eine Losnummer für beide Verlosungen am 24. November und 06. Dezember!
             </div>
             <div class="col-md-4 text-center">
                 <!--<a ng-if="current.user && current.participates()" href="" disabled="true" class="btn btn-special btn-color">
                     <i class="fa fa-check"></i> Du nimmst teil
-                </a>
-                <a ng-if="current.user && !current.participates()" href="/boarding?trigger=wants_to_participate" class="btn btn-special btn-color">
-                    Jetzt teilnehmen
                 </a>-->
-                
-                <a href="/support/crowdfund" class="btn btn-special btn-color">
-                    Jetzt unterstützen
+                <a ng-if="current.user && !current.participates()" ng-href="current.participationlink()" target="_blank" class="btn btn-special btn-color">
+                    Jetzt teilnehmen
                 </a>
+                
+                <!--<a href="/support/crowdfund" class="btn btn-special btn-color">
+                    Jetzt unterstützen
+                </a>-->
 
                 <!--# RAFFLE To open/close a raffle (un)comment the section below -->
-                <!--<a ng-if="!current.user" href="/register" class="btn btn-special btn-color">
+                <a ng-if="!current.user" href="http://doppelverlosung.meinbge.de" target="_blank" class="btn btn-special btn-color">
                     Jetzt teilnehmen
-                </a>-->
+                </a>
             </div>
         </div>
 
@@ -553,7 +553,7 @@
                 <!-- <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Am Samstag wird das 5. <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> <a href="https://www.facebook.com/events/376506499170475/?fref=ts" target="_blank" class="huge">hier</a> verlost.</h1> -->
 
                 <!--# RAFFLE open-->
-                <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Nächste Verlosung: im Herbst 2016</h1>
+                <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Nächste Verlosung: 24. November</h1>
 
                 <!-- <h3 style="color:white" class="margin-top-20">Wir verlosen das 13. Grundeinkommen auf dem <a
                         href="http://cassiopeia-berlin.de/event/female-focus-festival/" target="_blank">Female Focus
@@ -566,18 +566,23 @@
 
                 <div ng-if="current.settings['raffleOpen']">
                     <div ng-if="current.user">
-                        <alert ng-if="!current.participates()" type="warning"><h1>Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1>
+                        <!--<alert ng-if="!current.participates()" type="warning"><h1>Du nimmst <u>nicht</u> an der nächsten Verlosung teil.</h1>
                           <a class="btn-large btn-color" href="/boarding?trigger=wants_to_participate">Ich will aber teilnehmen!</a>
                         </alert>
-
 
                         <a ng-if="current.participates()" class="btn-large btn-color "
                            href="/menschen/{{current.user.id}}?gewinnspiel=true" style="box-shadow:0px 0px 40px 10px white"><i
                                 class="fa fa-check"></i> Du nimmst an der Verlosung teil!</a>
+                        -->
+                           
+                        <a class="btn-large btn-color" ng-href="current.participationlink()" target="_blank">Ich will teilnehmen!</a>
+                        
                     </div>
 
                     <div ng-if="!current.user">
-                        <a href="/boarding?trigger=wants_to_participate" class="btn-large btn-color margin-top-20"
+                        <!--<a href="/boarding?trigger=wants_to_participate" class="btn-large btn-color margin-top-20"
+                           style="box-shadow:0px 0px 30px 15px white">Ich will teilnehmen</i></a>-->
+                        <a href="http://doppelverlosung.meinbge.de" target="_blank" class="btn-large btn-color margin-top-20"
                            style="box-shadow:0px 0px 30px 15px white">Ich will teilnehmen</i></a>
                     </div>
                 </div>
