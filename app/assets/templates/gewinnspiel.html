@@ -11,8 +11,17 @@
 
      <div class="text-center" ng-hide="current.participates()">
 
-        <a ng-show="current.settings['raffleOpen']" class="btn-large btn-color btn" href="current.participationlink()" target="_blank">Jetzt teilnehmen!</a>
-
+        <a ng-show="current.settings['raffleOpen']" class="btn-large btn-color btn" ng-href="current.participationlink()" target="_blank">Jetzt teilnehmen!</a>
+          
+          <p><i>Für aktive Crowdhörnchen:</i><br>
+Für die Teilnahme an der Großen Doppelverlosung am 24.11. und 06.12. müssen wir dieses Mal zunächst deine Daten überprüfen. Bitte tue dies auf <a ng-href="current.participationlink()" target="_blank">dieser Seite</a>. Deine Teilnahme wird nur auf dieser separaten Seite und NICHT hier im Profil angezeigt. 
+          </p>
+          
+          <p><i>Für alle anderen User:</i><br>
+               Um die Arbeit an unserer neuen Website nicht zu behindern, führen wir die Große Doppelverlosung am 24.11. und 06.12. auf einer separaten Seite und NICHT hier in deinem Profil durch. Bitte melde dich dafür <a ng-href="current.participationlink()" target="_blank">hier</a> an. 
+          </p>
+          
+          
         <alert ng-hide="current.settings['raffleOpen']">Die Anmeldung zur Verlosung ist leider schon geschlossen. Ab morgen kannst du hier an der zweiten Verlosung teilnehmen.
             </alert>
 
@@ -69,7 +78,7 @@
 
         <h3 class="title">&nbsp;</h3>
 
-        <div ng-show="!user.newsletter">
+     <!--   <div ng-show="!user.newsletter">
             <div class="text-center"><h3>Du musst zu jeder weiteren Verlosung hier erneut am Gewinnspiel teilnehmen. Gern erinnern wir dich daran per Mail:</h3></div>
           <div class="form-group text-left">
             <div class="col-sm-offset-1 col-sm-11 text-left">
@@ -84,4 +93,8 @@
         <div ng-show="user.newsletter">
           <alert type="success"><i class="icon-envelope"></i> Wir erinnern dich rechtzeitig per E-Mail wenn eine neue Verlosung ansteht!</alert>
         </div>
+     
+     -->
+     
+     <p>Wir haben dir auch eine ausführliche E-Mail mit den Informationen zur Großen Doppelverlosung zugesandt. Falls sie innerhalb der nächsten Tage nicht ankommt oder deine Teilnahmebestätigung nicht funktioniert, wende dich bitte an support@mein-grundeinkommen.de.</p>
       </div>
