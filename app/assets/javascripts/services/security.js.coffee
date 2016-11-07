@@ -107,8 +107,10 @@ angular.module "Security", ["Devise","Flag","Setting"]
       
       participationlink: ->
         baseurl = 'https://doppelverlosung.meinbge.de/'
-        if service.user.initialWishes && service.user.initialWishes != ""
-          return baseurl + "go/" + service.user.initialWishes
+        console.log "test1: " + service.user.initial_wishes
+        console.log "test2: " + service.user.initialWishes
+        if service.user && service.user.initial_wishes
+          return baseurl + "go/" + service.user.initial_wishes
         else
           return baseurl
       
