@@ -45,16 +45,26 @@
 
 
   <ul ng-if="own_profile">
-    <li ng-if="!current.participates() && current.settings['raffleOpen']">Bitte erst <a href="/boarding?trigger=wants_to_participate">hier</a> an der Verlosung teilnehmen.</li>
+
+	  <li>Diesmal wird die Losnummer nicht in deinem Profil angezeigt. <a href="current.participationlink()" target="_blank">Hier</a> kommst du zur Verlosungsseite und deiner Losnummern.</li>
+	  
+	  <!--    <li ng-if="!current.participates() && current.settings['raffleOpen']">Bitte erst <a href="/boarding?trigger=wants_to_participate">hier</a> an der Verlosung teilnehmen.</li>
 
     <li ng-if="!current.participates() && !current.settings['raffleOpen']">Sobald die nächste Verlosung feststeht, kannst du daran teilnehmen. Deine Losnummer findest du dann hier. Wenn du den Newsletter abonniert hast, informieren wir dich rechtzeitig. Crowdhörnchen nehmen automatisch an jeder Verlosung teil.</li>
 
+	  -->
     <!--<li ng-if="current.participates()" style="margin-top: 10px;" class="alert alert-success" role="alert">Du nimmst an der nächsten Verlosung teil.</li>-->
-    <li ng-if="!current.participates() && current.settings['raffleOpen']" style="margin-top: 10px;" class="alert alert-error" role="alert">Du nimmst <strong>nicht</strong> an der nächsten Verlosung teil.</li>
+    
+	  
+   <!--<li ng-if="!current.participates() && current.settings['raffleOpen']" style="margin-top: 10px;" class="alert alert-error" role="alert">Du nimmst <strong>nicht</strong> an der nächsten Verlosung teil.</li> -->
 
    <!-- <li ng-if="current.hasCode()">Hier findest du deine Losnummer(n):</li>-->
 
+	  
+   <!--	  
    <li ng-if="current.participates() && !current.hasCode()">Deine Losnummer wird dir vor der Verlosung zugewiesen und erscheint dann hier</li>
+	  
+	  -->
 
     <!--<li ng-repeat="chance in current.user.chances" ng-show="chance.code">
       <div class="well big">{{chance.code}}
