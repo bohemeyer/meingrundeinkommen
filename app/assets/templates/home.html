@@ -11,7 +11,7 @@
                 <!--<a ng-if="current.user && current.participates()" href="" disabled="true" class="btn btn-special btn-color">
                     <i class="fa fa-check"></i> Du nimmst teil
                 </a>-->
-                <a ng-if="current.user && !current.participates()" ng-href="current.participationlink()" target="_blank" class="btn btn-special btn-color">
+                <a ng-if="current.user && !current.participates()" ng-href="{{current.participationlink()}}" target="_blank" class="btn btn-special btn-color">
                     Jetzt teilnehmen
                 </a>
                 
@@ -20,7 +20,7 @@
                 </a>-->
 
                 <!--# RAFFLE To open/close a raffle (un)comment the section below -->
-                <a ng-if="!current.user" href="http://doppelverlosung.meinbge.de" target="_blank" class="btn btn-special btn-color">
+                <a ng-if="!current.user" href="https://doppelverlosung.meinbge.de" target="_blank" class="btn btn-special btn-color">
                     Jetzt teilnehmen
                 </a>
             </div>
@@ -554,7 +554,7 @@
                 <!-- <h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Am Samstag wird das 5. <span class="infolink" ng-click="bge_info()">Grundeinkommen</span> <a href="https://www.facebook.com/events/376506499170475/?fref=ts" target="_blank" class="huge">hier</a> verlost.</h1> -->
 
                 <!--# RAFFLE open-->
-                <!--<h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Nächste Verlosung: 24. November</h1>-->
+                <!--<h1 class="title_headline" style="margin-bottom:15px;margin-top:15px;line-height:150%">Nächste Verlosung: 23. November</h1>-->
 
                 <!-- <h3 style="color:white" class="margin-top-20">Wir verlosen das 13. Grundeinkommen auf dem <a
                         href="http://cassiopeia-berlin.de/event/female-focus-festival/" target="_blank">Female Focus
@@ -576,14 +576,14 @@
                                 class="fa fa-check"></i> Du nimmst an der Verlosung teil!</a>
                         -->
                            
-                        <a class="btn-large btn-color" ng-href="current.participationlink()" target="_blank">Ich will teilnehmen!</a>
+                        <a class="btn-large btn-color" ng-href="{{current.participationlink()}}" target="_blank">Ich will teilnehmen!</a>
                         
                     </div>
 
                     <div ng-if="!current.user">
                         <!--<a href="/boarding?trigger=wants_to_participate" class="btn-large btn-color margin-top-20"
                            style="box-shadow:0px 0px 30px 15px white">Ich will teilnehmen</i></a>-->
-                        <a href="http://doppelverlosung.meinbge.de" target="_blank" class="btn-large btn-color margin-top-20"
+                        <a href="https://doppelverlosung.meinbge.de" target="_blank" class="btn-large btn-color margin-top-20"
                            style="box-shadow:0px 0px 30px 15px white">Ich will teilnehmen</i></a>
                     </div>
                 </div>
