@@ -1,5 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar, :wishes, :states, :confirmed_at, :admin, :flags, :payment, :tandems #, :crowdcards
+  attributes :id, :name, :email, :avatar, :newsletter, :chances, :has_crowdbar, :wishes, :states, :confirmed_at, :admin, :flags, :payment, :tandems, :initial_wishes #, :crowdcards
 
   def email
     if (current_user && object == current_user) || (current_user && current_user.admin?)
