@@ -20,6 +20,7 @@
               origin === "https://crowdbar.meinbge.de" ||
               origin === "http://crowdbar-staging.meinbge.de" ||
               origin === "https://crowdbar-staging.meinbge.de" ||
+              origin === "https://doppelverlosung.meinbge.de" ||
               origin === "http://lol:3000";
      };
 
@@ -29,7 +30,7 @@
      function redirectBack(path) {
        var origin = document.referrer.match(/(https?:\/\/.[^\/]+)/)[1];
        if (!isValidOrigin(origin)) {
-         origin = "https://crowdbar.meinbge.de";
+         origin = "https://doppelverlosung.meinbge.de";
        };
        window.location = origin + path;
      }
