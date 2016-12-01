@@ -59,7 +59,7 @@ class Api::HomepagesController < ApplicationController
     #crowdbar
     cb_json = JSON.parse(File.read('public/crowdbar.json'))
 
-    crowdbar_amount = cb_json["total_commission"] * 0.9
+    crowdbar_amount = (164217 + (cb_json["total_commission"] - 164217) * 0.5) * 0.9
 
     total_amount = startnext + crowdfunding_amount + own_funding_paypal + own_funding + crowdbar_amount + crowdcard_amount
 
