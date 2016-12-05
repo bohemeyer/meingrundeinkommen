@@ -17860,7 +17860,7 @@ namespace :squirrels do
 
 		          # OPTIONAL: Business Identifier Code (SWIFT-Code) of the debtor's account
 		          # String, 8 or 11 char
-		          bic:                       #instrument == 'CORE' && !p.account_bic.blank? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]],
+		          bic: "",                      #instrument == 'CORE' && !p.account_bic.blank? ? p.account_bic.upcase : get_bic_for[p.account_iban[4,8]],
 
 		          # International Bank Account Number of the debtor's account
 		          # String, max. 34 chars
