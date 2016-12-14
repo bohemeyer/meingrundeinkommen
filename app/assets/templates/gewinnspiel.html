@@ -1,7 +1,7 @@
 <div class="container">
 
      <div ng-show="!chances_form.editAllChances && current.settings['raffleOpen']">
-      <h3 style="margin-bottom:0;">Die nächsten Grundeinkommen werden am 6.12. verlost
+      <h3 style="margin-bottom:0;">Die nächsten Grundeinkommen werden im Frühjahr 2017 verlost
 
       </h3>
       <a href="/gewinnspielbedingungen">Gewinnspielbedingungen</a>
@@ -11,7 +11,7 @@
 
     <div class="text-center" ng-hide="current.participates()">
 
-       <div ng-show="current.isSquirrel()">
+       <!--<div ng-show="current.isSquirrel()">
           <br><br>
           <p ng-show="current.user.initial_wishes">
            Für die Teilnahme an der Großen Doppelverlosung am 23.11. und 06.12. müssen wir dieses Mal ausnahmsweise deine Teilnahmedaten überprüfen. Bitte tue dies auf <a ng-href="{{current.participationlink()}}" target="_blank">dieser Seite</a>. Deine Teilnahme wird nur auf dieser separaten Seite und NICHT hier im Profil angezeigt.           
@@ -21,17 +21,17 @@
          Du bist nach dem 8.11.2016 Crowdhörnchen geworden? Dann bestätige hier einmalig deine Teilnahme für die kommende Verlosung. Gib dort deine Teilnahmedaten an und benutze dafür die gleiche E-Mail-Adresse wie bei deiner Registrierung. Vielen Dank!
          </p>
 
-        </div>
+        </div>-->
 
-         <p  ng-hide="current.isSquirrel()"><br>
+         <!--<p  ng-hide="current.isSquirrel()"><br>
               Da auf unserer alten Website Fehler aufgetreten sind und unsere neue Website noch letzte Feinschliffe benötigt, erfolgt die Teilnahme an der Großen Doppelverlosung am 23.11. und 06.12. NICHT wie gewohnt hier in deinem Profil, sondern über folgenden Button:
-         </p>
+         </p>-->
 
          <a ng-show="current.settings['raffleOpen']" class="btn-large btn-color btn" ng-href="{{current.participationlink()}}" target="_blank">Jetzt teilnehmen!</a>
          
 
-       <alert ng-hide="current.settings['raffleOpen']">Die Anmeldung zur Verlosung ist leider schon geschlossen. Ab morgen kannst du hier an der zweiten Verlosung teilnehmen.
-           </alert>
+       <!--<alert ng-hide="current.settings['raffleOpen']">Die Anmeldung zur Verlosung ist leider schon geschlossen. Ab morgen kannst du hier an der zweiten Verlosung teilnehmen.
+           </alert>-->
 
     </div>
 
