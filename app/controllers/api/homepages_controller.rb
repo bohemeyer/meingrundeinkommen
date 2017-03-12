@@ -57,7 +57,12 @@ class Api::HomepagesController < ApplicationController
       #crowdbar_amount = crowdbar_yesterday
 
     #crowdbar
-    cb_json = JSON.parse(File.read('public/crowdbar.json'))
+    #cb_json = JSON.parse(File.read('public/crowdbar.json'))
+    # static values as of March 12th, 2017 at 1am
+    cb_json["total_commission"] = 181253.87
+    cb_json["referal_count"] = 370369
+    cb_json["seven_day_commission"] = 1413.23
+    cb_json["seven_day_referal_count"] = 1595
 
     crowdbar_amount = (164217 + (cb_json["total_commission"] - 164217) * 0.5) * 0.9
 
